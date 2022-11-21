@@ -1,0 +1,219 @@
+# edemokracia Application
+
+The edemokracia backend is a multi module project to create karaf backend service.
+It uses PSM (Platform Specific Model) to extract information and create intermediate models which is used by backend runtime.
+The PSM model are created in the `edemokracia-model` project.
+
+The following intermediate models are used:
+
+- PSM
++
+Platform specific model
+
+- ASM
++
+Architecture Specific Model - It is Ecore metamodel based model representation of the PSM model.
+It is used to extract Expression / OpenAPI / RDBMS / Keycloak model.
+
+
+- Measure
++
+Measurement Model - Its extracted from PSM.
+It contains all measurement types and the relations between to be able to make arithmetic operations with it.
+
+
+- Expression
++
+Expression Model - it translates model's JQL (derived expressions, default expressions etc.) to a syntax independent AST, which can be interpreted by the backend service.
+
+
+- Script
++
+Script Model - It contains the JCL scripts (In Designer thats are Operation's body).
+It is used to generate runtime codes custom services.
+
+
+- OpenAPI
++
+OpenAPI Model - It used to create external clients for the backend service.
+It is our REST contract.
+
+
+- RDBMS
++
+RDBMS Model - The persistence database model which describes tables / column / indexes.
+It is used to translates DAO operations to SQL level.
+
+
+- Liquibase
++
+Liquibase Model - Executable DDL model representation of RDBMS model.
+
+
+- Keycloak
++
+Keycloak REALM definitions.
+It used to create JSON files which can be imported to keycloak.
+(Managed realms created with this definitions)
+
+
+## Compiling
+
+To work with the model have to setup the distribution repository in your `~/.m2/settings.xml`
+
+[source,]
+----
+<server>
+    <id>edemokracia-distribution</id>
+    <username>YOURUSER</username>
+    <password>YOURPASS</password>
+</server>
+----
+
+To create and package karaf service, run:
+
+[source,]
+----
+mvn clean install
+----
+
+It uses the model version and frontend version defined in `pom.xml`.
+In development sometimes other version is required (for example locally compiled ESM) On that case `model-version` and `frontend-version` can be overridden.
+
+[source,]
+----
+mvn clean install -Dmodel-version=1.0.0-SNAPSHOT -Dfrontend-version=1.0.0-SNAPSHOT
+----
+
+## Profiles
+
+- `skipDocker`
++
+The docker image is created by default.
+To skip creating the docker image, use the system property: -DskipDocker
+
+- `skipBackendModels`
++
+Use the -skipBackendModels system property to ignore model pipeline for backend.
+When model has no change, it can be ignored, it can save time in building.
+
+Sometimes it's necessary to check which is slow in building.
+Run with:
+
+`-Dprofile -DprofileFormat=HTML`
+
+After it there will be a HTML report in `.profiler` directory.
+
+## Layout
+
+### `model`
+
+The model project.
+It creates the intermediate models from PSM model and stores in `src/main/resources/model` directory.
+This model is packed as OSGi bundle which is used the JUDO runtime.
+It also attach 4 OSGi bundles:
+
+- `script2operation.jar`
++
+The generated Java representation of scripts as OSGi services
+
+- `asm2sdk.jar`
++
+SDK API codes which can be implemented as custom Java operations in `app` or other custom subprojects.
+
+- `asm2sdk-internal.jar`
++
+SDK API wrapper which are technical services to bind the user defined Java custom operations.
+
+- `asm2jaxrsapi.jar`
++
+CXF based JaxRS implementation which delegates operations as REST.
+It is the server side definitions of OpenAPI specified functions.
+
+### `app`
+
+The implementations for model defined custom operations.
+
+### `karaf-features`
+
+The description of the karaf service.
+It aggregates bundle definitions and configurations for the backend service in `src/main/feature/features.xml`.
+
+### `karaf-offline`
+
+The assembled karaf service which can be deployed.
+The `run-offline.sh` script running it.
+
+### `docker`
+
+The docker image builder which is including `karaf-offline`.
+
+[source,]
+----
+mvn clean install -DcreateDocker
+----
+
+## Run service
+
+After the compilation every artifact is created to run karaf service.
+Keycloak service have to be accessed by backend.
+
+### Keycloak
+
+The service uses keycloak to authenticate, to be able to run, keycloak can be started before.
+When docker is installed, run:
+
+[source,]
+----
+./run-keycloak.sh
+----
+
+It imports preconfigured realms from `docker/config/keycloak-realm-config/`
+
+When docker is not installed, run keycloak and import the configs.
+
+By default it is accessible in port 8080, so in browser:
+
+`http://localhost:8080`
+
+### Run with Hsqldb
+
+[source,]
+----
+./run-offline.sh
+----
+
+
+### Run with docker
+
+The script below imports the Docker image to the Docker registry and runs it.
+
+[source,]
+----
+./run-offline-docker.sh
+----
+
+
+### Run with PostgreSQL
+
+When backend running with postgresql, when docker is installed, run:
+
+[source,]
+----
+./run-offline-postgresql.sh
+----
+
+To clean postgresql, remove `.data` directory.
+
+The backend is accessible in port 8181, so in browser:
+
+`http://localhost:8181/(appName)/(actorFqName)`
+
+Example:
+
+`http://localhost:8181/edemokracia/edemokracia\__actor`
+
+## Settings
+
+Settings can be set up as `judo-documentation` describes.
+Some preconfiguration have been made in `run-offline.sh`.

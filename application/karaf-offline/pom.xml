@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>edemokracia-application</artifactId>
+        <groupId>party.mkkp.edemokracia</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>edemokracia-application-karaf-offline</artifactId>
+    <name>edemokracia karaf offline assembly</name>
+    <description>edemokracia karaf offline assembly</description>
+
+    <packaging>karaf-assembly</packaging>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/feature</directory>
+                <filtering>true</filtering>
+                <targetPath>${project.build.directory}/feature</targetPath>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>resources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-maven-plugin</artifactId>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <startupFeatures>
+                        <feature>eventadmin</feature>
+                        <feature>edemokracia-application-judo-platform-prototype</feature>
+                    </startupFeatures>
+                    <bootFeatures>
+                        <feature>minimal</feature>
+                    </bootFeatures>
+                    <javase>11</javase>
+                    <libraries>
+                        <library>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xerces/2.12.1_1;type:=endorsed</library>
+                        <library>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xmlresolver/1.2_5;type:=endorsed</library>
+                    </libraries>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>party.mkkp.edemokracia</groupId>
+            <artifactId>edemokracia-application-karaf-features</artifactId>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>runtime</scope>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>framework</artifactId>
+            <type>kar</type>
+            <version>${karaf-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>standard</artifactId>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <version>${karaf-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>enterprise</artifactId>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>runtime</scope>
+            <version>${karaf-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>spring</artifactId>
+            <classifier>features</classifier>
+            <type>xml</type>
+            <scope>runtime</scope>
+            <version>${karaf-version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>run-karaf</id>
+            <activation>
+                <property>
+                    <name>runKaraf</name>
+                </property>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.karaf.tooling</groupId>
+                        <artifactId>karaf-maven-plugin</artifactId>
+                        <configuration>
+                            <keepRunning>true</keepRunning>
+                            <deployProjectArtifact>false</deployProjectArtifact>
+                            <karafDirectory>${project.build.directory}/judo-platform</karafDirectory>
+                            <karafDistribution>mvn:${project.groupId}/${project.artifactId}/${project.version}/zip</karafDistribution>
+                        </configuration>
+
+                        <executions>
+                            <execution>
+                                <id>run-karaf</id>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <phase>install</phase>
+                                <configuration>
+                                    <karafDirectory>${basedir}/target/karaf</karafDirectory>
+                                    <keepRunning>true</keepRunning>
+                                    <deployProjectArtifact>false</deployProjectArtifact>
+                                    <mainArgs>clean</mainArgs>
+                                    <consoleLogLevel>info</consoleLogLevel>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

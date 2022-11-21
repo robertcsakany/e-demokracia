@@ -1,0 +1,51 @@
+The goal of the migration is to create successful migration from one database state to the other.
+The steps to follow are the following:
+
+== Create the migration scripts
+
+. find out the versions of edemokracia model to migrate from and to
+* note that this is *not* the edemokracia-application-model artifact
+. generate the migration scripts using the maven artifacts
+. create the SQL files, where manual migration is needed
+
+== Test
+
+. make sure you have a working application/database running the old version
+* * in development an easy way is to checkout the "from" tag, then `mvn clean install` and `./run-offline-postgresql.sh`
+. stop the running application instance
+. back up the database
+. execute the migration
+. upgrade the application instance
+* e.g. `git checkout develop && mvn clean install -DskipDocker`
+. start the application
+
+=== If something goes wrong during execution
+
+. stop the database
+. remove the database content
+. start the database
+. restore the dump
+
+== Command examples
+
+Generate migration scripts:
+
+[source,bash]
+----
+mvn judo-rdbms-schema:generate -DbaseModelVersion=1.1.0.20210929_004050_9602796_develop -DupdateModelVersion=1.1.0.20210929_154229_0d13206_develop
+----
+
+Execute migration with the something like following command:
+
+[source,bash]
+----
+mvn judo-rdbms-schema:execute -DbaseModelVersion=1.1.0 -DupdateModelVersion=1.2.0 -DjdbcUrl=jdbc:postgresql://localhost/judo -DdbType=postgresql -DdbUser=judo -DdbPassword=judo
+----
+
+Execute migration using the docker image:
+
+[source,bash]
+----
+docker run --rm edemokracia-application-schema execute --baseModelVersion=1.1.0.20210929_004050_9602796_develop --updateModelVersion=1.2.0.20211021_085156_21efaed_develop --modelName=edemokracia --incrementalDirectory=/ --jdbcUrl=jdbc:postgresql://host.docker.internal/judo --dbType=postgresql --dbUser=judo --dbPassword=judo
+----
+

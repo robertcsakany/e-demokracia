@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>edemokracia-application</artifactId>
+        <groupId>party.mkkp.edemokracia</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>edemokracia-application-schema</artifactId>
+    <name>edemokracia schema migration</name>
+    <description>edemokracia schema migration</description>
+
+    <packaging>bundle</packaging>
+
+    <properties>
+        <modelName>edemokracia</modelName>
+        <updateModelVersion>${project.version}</updateModelVersion>
+        <modelArtifact>edemokracia</modelArtifact>
+        <schemaDialect>postgresql</schemaDialect>
+        <baseModelArtifactVersion>${baseModelVersion}</baseModelArtifactVersion>
+        <updateModelArtifactVersion>${updateModelVersion}</updateModelArtifactVersion>
+        <baseModel>mvn:${project.groupId}:${modelArtifact}:${baseModelArtifactVersion}!model/${modelName}-rdbms_postgresql.model</baseModel>
+        <updateModel>mvn:${project.groupId}:${modelArtifact}:${updateModelArtifactVersion}!model/${modelName}-rdbms_postgresql.model</updateModel>
+        <dbType>postgresql</dbType>
+        <incrementalDirectory>${basedir}/migration</incrementalDirectory>
+        <outputDirectory>${incrementalDirectory}</outputDirectory>
+
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>create-schema-image</id>
+            <activation>
+                <property>
+                    <name>!skipSchema</name>
+                </property>
+            </activation>
+
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <version>2.7.0</version>
+                        <executions>
+                            <execution>
+                                <id>build-schema-migration-docker</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>buildTar</goal>
+                                </goals>
+
+                                <configuration>
+                                    <from>
+                                        <image>adoptopenjdk/openjdk11:alpine-slim</image>
+                                    </from>
+                                    <to>
+                                        <image>${project.artifactId}</image>
+                                    </to>
+                                    <container>
+                                        <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+                                        <mainClass>hu.blackbelt.judo.rdbms.schema.cli.SchemaCli</mainClass>
+                                        <format>Docker</format>
+                                    </container>
+                                    <outputPaths>
+                                        <tar>${basedir}/target/${project.artifactId}-${project.version}_docker_image.tar</tar>
+                                    </outputPaths>
+                                    <extraDirectories>
+                                        <paths>
+                                            <path>${project.basedir}/migration</path>
+                                        </paths>
+                                    </extraDirectories>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-artifacts</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>${basedir}/target/${project.artifactId}-${project.version}_docker_image.tar</file>
+                                            <type>tar</type>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>hu.blackbelt.judo</groupId>
+                <artifactId>judo-rdbms-schema-maven-plugin</artifactId>
+                <version>${judo-rdbms-schema-version}</version>
+                <executions>
+                    <execution></execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>5.1.2</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Judo-Models>name=${model-name}</Judo-Models>
+                        <Main-Class>hu.blackbelt.judo.rdbms.schema.cli.SchemaCli</Main-Class>
+                        <Embed-Dependency>judo-rdbms-schema-cli;inline=true</Embed-Dependency>
+                        <Include-Resource>
+                            {maven-resources},
+                            /=${basedir}/migration
+                        </Include-Resource>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <!-- Too keep the order of build order. Model have to be packed before this module -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>edemokracia-application-model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hu.blackbelt.judo</groupId>
+            <artifactId>judo-rdbms-schema-cli</artifactId>
+            <version>${judo-rdbms-schema-version}</version>
+        </dependency>
+    </dependencies>
+</project>

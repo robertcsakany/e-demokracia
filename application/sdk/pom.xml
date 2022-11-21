@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>edemokracia-application</artifactId>
+        <groupId>party.mkkp.edemokracia</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>edemokracia-application-sdk</artifactId>
+    <name>edemokracia SDK Wrapper</name>
+    <description>edemokracia - SDK Wrapper to be able to use within IDE. It is not deployed, it is for development dependency only</description>
+
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <!--
+                                <artifactItem>
+                                    <groupId>party.mkkp.edemokracia</groupId>
+                                    <artifactId>edemokracia-application-model</artifactId>
+                                    <version>${project.version}</version>
+                                    <classifier>sdk-internal</classifier>
+                                    <type>jar</type>
+                                </artifactItem>
+                                -->
+                                <artifactItem>
+                                    <groupId>party.mkkp.edemokracia</groupId>
+                                    <artifactId>edemokracia-application-model</artifactId>
+                                    <version>${project.version}</version>
+                                    <classifier>sdk</classifier>
+                                    <type>jar</type>
+                                </artifactItem>
+
+                            </artifactItems>
+                            <excludes>**/*.class</excludes>
+                            <outputDirectory>${project.build.directory}/unpacked-source</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/unpacked-source</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+
+        <!--
+        <dependency>
+            <groupId>party.mkkp.edemokracia</groupId>
+            <artifactId>edemokracia-application-model</artifactId>
+            <version>${project.version}</version>
+            <classifier>sdk-internal</classifier>
+            <type>jar</type>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>party.mkkp.edemokracia</groupId>
+            <artifactId>edemokracia-application-model</artifactId>
+            <version>${project.version}</version>
+            <classifier>sdk</classifier>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>hu.blackbelt.judo</groupId>
+            <artifactId>judo-sdk-common</artifactId>
+            <version>${judo-sdk-common-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hu.blackbelt.judo</groupId>
+            <artifactId>judo-dispatcher-api</artifactId>
+            <version>${judo-dispatcher-api-version}</version>
+        </dependency>
+    </dependencies>
+</project>

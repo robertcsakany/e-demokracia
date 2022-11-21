@@ -1,0 +1,16 @@
+*.iml
+.~*
+.DS_Store
+
+**/.data
+**/.idea
+**/.jar
+**/.karaf
+**/.flutter
+**/.vscode
+**/target
+
+application/model
+application/frontend
+
+dump*.tar

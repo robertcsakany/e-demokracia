@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>edemokracia-application</artifactId>
+        <groupId>party.mkkp.edemokracia</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>edemokracia-application-docker</artifactId>
+    <packaging>jar</packaging>
+
+    <name>edemokracia docker</name>
+    <description>edemokracia Docker image in edemokracia-application</description>
+    <properties>
+        <DOCKER_IMAGE_TAGS>dev</DOCKER_IMAGE_TAGS>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>create-docker-image</id>
+            <activation>
+                <property>
+                    <name>!skipDocker</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+
+                    <!-- 1. Unpack offline zip for JIB -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>unpack-offline-overrides</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>party.mkkp.edemokracia</groupId>
+                                            <artifactId>edemokracia-application-karaf-offline</artifactId>
+                                            <type>zip</type>
+                                            <version>${project.version}</version>
+                                            <outputDirectory>target/assembly</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>add-jmx-exporter-agent</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>io.prometheus.jmx</groupId>
+                                            <artifactId>jmx_prometheus_javaagent</artifactId>
+                                            <version>0.15.0</version>
+                                            <outputDirectory>target/assembly</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+
+
+                            <execution>
+                                <id>add-apm-agent</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>co.elastic.apm</groupId>
+                                            <artifactId>elastic-apm-agent</artifactId>
+                                            <version>1.23.0</version>
+                                            <outputDirectory>target/assembly</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>3.0.2</version>
+                        <executions>
+                            <execution>
+                                <id>copy-jmx-config</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>target/assembly</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.basedir}/jmx-exporter</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- 2. Delete earlier created friendly named directory -->
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>remove-docker-base-directory</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                                    <filesets>
+                                        <fileset>
+                                            <directory>${project.basedir}/target/assembly/edemokracia-application</directory>
+                                            <followSymlinks>false</followSymlinks>
+                                        </fileset>
+                                    </filesets>
+                                    <verbose>true</verbose>
+                                </configuration>
+
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- 3. rename unpacked assembly to be able to pack friendly named directory inside docker image -->
+                    <plugin>
+                        <groupId>com.coderplus.maven.plugins</groupId>
+                        <artifactId>copy-rename-maven-plugin</artifactId>
+                        <version>1.0</version>
+                        <executions>
+                            <execution>
+                                <id>rename-jib-image</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>rename</goal>
+                                </goals>
+                                <configuration>
+                                    <sourceFile>${project.basedir}/target/assembly/edemokracia-application-karaf-offline-${project.version}</sourceFile>
+                                    <destinationFile>${project.basedir}/target/assembly/edemokracia-application</destinationFile>
+                                </configuration>
+
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- 4. Create dummy file because JIB needed - to avoid the error there is no files presented -->
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.4</version>
+                        <executions>
+                            <execution>
+                                <phase>process-resources</phase>
+                                <configuration>
+                                    <tasks>
+                                        <echo file="${project.basedir}/target/classes/version.txt">${project.version}</echo>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- 5. Create image -->
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <version>2.7.0</version>
+                        <executions>
+                            <execution>
+                                <id>build-platform-docker</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>buildTar</goal>
+                                </goals>
+
+                                <configuration>
+                                    <from>
+                                        <!-- <image>azul/zulu-openjdk-alpine:8</image> -->
+                                        <!--<image>adoptopenjdk/openjdk11-openj9:alpine-slim</image>-->
+                                        <image>adoptopenjdk/openjdk11:alpine-slim</image>
+
+                                    </from>
+                                    <to>
+                                        <image>${project.parent.artifactId}</image>
+                                        <tags>${DOCKER_IMAGE_TAGS}</tags>
+                                    </to>
+                                    <container>
+                                        <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+                                        <entrypoint>/edemokracia-application/bin/karaf,run</entrypoint>
+                                        <ports>
+                                            <port>8181</port>
+                                            <port>8081</port>
+                                            <port>1099</port>
+                                            <port>44444</port>
+                                            <port>5000</port>
+                                            <port>9090</port>
+                                            <port>5005</port>
+                                        </ports>
+                                        <format>Docker</format>
+                                        <volumes>
+                                            <volume>/edemokracia-application/deploy</volume>
+                                            <volume>/edemokracia-application/data</volume>
+                                        </volumes>
+                                    </container>
+                                    <outputPaths>
+                                        <tar>${basedir}/target/${project.parent.artifactId}-${project.version}_docker_image.tar</tar>
+                                    </outputPaths>
+                                    <extraDirectories>
+                                        <paths>
+                                            <path>${project.basedir}/target/assembly</path>
+                                        </paths>
+                                        <permissions>
+                                            <permission>
+                                                <file>/edemokracia-application/bin/karaf</file>
+                                                <mode>755</mode> <!-- Read/write/execute for owner, read/execute for group/other -->
+                                            </permission>
+                                            <permission>
+                                                <file>/edemokracia-application/bin/setenv</file>
+                                                <mode>755</mode> <!-- Read/write/execute for owner, read/execute for group/other -->
+                                            </permission>
+                                        </permissions>
+                                    </extraDirectories>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- 6. Attach the artifact -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-artifacts</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>${basedir}/target/${project.parent.artifactId}-${project.version}_docker_image.tar</file>
+                                            <type>tar</type>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>party.mkkp.edemokracia</groupId>
+                    <artifactId>edemokracia-application-karaf-offline</artifactId>
+                    <type>zip</type>
+                    <version>${project.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+</project>
