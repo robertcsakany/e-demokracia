@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<namespace:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:accesspoint="http://blackbelt.hu/judo/meta/esm/accesspoint" xmlns:measure="http://blackbelt.hu/judo/meta/esm/measure" xmlns:namespace="http://blackbelt.hu/judo/meta/esm/namespace" xmlns:structure="http://blackbelt.hu/judo/meta/esm/structure" xmlns:type="http://blackbelt.hu/judo/meta/esm/type" xmlns:ui="http://blackbelt.hu/judo/meta/esm/ui" xsi:schemaLocation="http://blackbelt.hu/judo/meta/esm/accesspoint http://blackbelt.hu/judo/meta/esm#//accesspoint http://blackbelt.hu/judo/meta/esm/measure http://blackbelt.hu/judo/meta/esm#//measure http://blackbelt.hu/judo/meta/esm/namespace http://blackbelt.hu/judo/meta/esm#//namespace http://blackbelt.hu/judo/meta/esm/structure http://blackbelt.hu/judo/meta/esm#//structure http://blackbelt.hu/judo/meta/esm/type http://blackbelt.hu/judo/meta/esm#//type http://blackbelt.hu/judo/meta/esm/ui http://blackbelt.hu/judo/meta/esm#//ui" xmi:id="_7D8NwGkNEe25ONJ3V89cVA" name="edemokracia" metaVersion="1.1.1.20221006_164951_f616a248_develop" advanced="true">
+<namespace:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:accesspoint="http://blackbelt.hu/judo/meta/esm/accesspoint" xmlns:measure="http://blackbelt.hu/judo/meta/esm/measure" xmlns:namespace="http://blackbelt.hu/judo/meta/esm/namespace" xmlns:structure="http://blackbelt.hu/judo/meta/esm/structure" xmlns:type="http://blackbelt.hu/judo/meta/esm/type" xmlns:ui="http://blackbelt.hu/judo/meta/esm/ui" xsi:schemaLocation="http://blackbelt.hu/judo/meta/esm/accesspoint http://blackbelt.hu/judo/meta/esm#//accesspoint http://blackbelt.hu/judo/meta/esm/measure http://blackbelt.hu/judo/meta/esm#//measure http://blackbelt.hu/judo/meta/esm/namespace http://blackbelt.hu/judo/meta/esm#//namespace http://blackbelt.hu/judo/meta/esm/structure http://blackbelt.hu/judo/meta/esm#//structure http://blackbelt.hu/judo/meta/esm/type http://blackbelt.hu/judo/meta/esm#//type http://blackbelt.hu/judo/meta/esm/ui http://blackbelt.hu/judo/meta/esm#//ui" xmi:id="_7D8NwGkNEe25ONJ3V89cVA" name="edemokracia" metaVersion="1.1.1.20221123_202758_74311053_develop" advanced="true">
   <elements xsi:type="namespace:Package" xmi:id="_7D8NwWkNEe25ONJ3V89cVA" name="types">
     <elements xsi:type="type:StringType" xmi:id="_7D8NwmkNEe25ONJ3V89cVA" name="String" maxLength="255"/>
     <elements xsi:type="type:NumericType" xmi:id="_7D8Nw2kNEe25ONJ3V89cVA" name="Long" precision="18"/>
@@ -464,7 +464,10 @@
         <inherited xmi:id="_p5C28GksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_p2B_MGksEe25ONJ3V89cVA" target="_BuSFMGkWEe25ONJ3V89cVA"/>
-      <form xmi:id="_p1wSYGksEe25ONJ3V89cVA" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="CENTER" vertical="CENTER" frame="false">
+      <operations xmi:id="_-VOqcGkwEe25ONJ3V89cVA" name="initAdminUser" customImplementation="false" body="// TODO: Create superadmin user&#xA;var edemokracia::admin::AdminPrincipalUser admin = new edemokracia::admin::AdminPrincipalUser(&#xA;&#x9;firstName = &quot;Test&quot;,&#xA;&#x9;lastName = &quot;Elek&quot;,&#xA;&#x9;isAdmin = true,&#xA;&#x9;email = &quot;test@example.org&quot;&#xA;)" stateful="true" operationType="STATIC" binding="" initializer="true">
+        <inherited xmi:id="_-VP4kGkwEe25ONJ3V89cVA"/>
+      </operations>
+      <form xmi:id="_p1wSYGksEe25ONJ3V89cVA" name="Create_User" label="User" layout="VERTICAL" horizontal="CENTER" vertical="CENTER" frame="false">
         <components xsi:type="ui:Group" xmi:id="_RGxSUGk7Ee25ONJ3V89cVA" name="personal" label="Personal" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE">
           <components xsi:type="ui:Group" xmi:id="_mVkAwGk6Ee25ONJ3V89cVA" name="name" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE">
             <components xsi:type="ui:DataField" xmi:id="_B6FGsGkwEe25ONJ3V89cVA" name="firstName" label="FirstName" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_p2JT8GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
@@ -486,7 +489,7 @@
           </components>
         </components>
       </form>
-      <table xmi:id="_p141QGksEe25ONJ3V89cVA" name="TransferObject_Table" label="TransferObject Table">
+      <table xmi:id="_p141QGksEe25ONJ3V89cVA" name="Users_List" label="Users">
         <columns xsi:type="ui:DataColumn" xmi:id="_B6R7AGkwEe25ONJ3V89cVA" name="firstName" label="FirstName" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p2JT8GksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_B63w4GkwEe25ONJ3V89cVA" name="lastName" label="LastName" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p2tUoGksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_B7jtYGkwEe25ONJ3V89cVA" name="phone" label="Phone" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p3JZgGksEe25ONJ3V89cVA"/>
@@ -494,7 +497,7 @@
         <columns xsi:type="ui:DataColumn" xmi:id="_B86YQGkwEe25ONJ3V89cVA" name="isAdmin" label="IsAdmin" iconName="check_box" visible="true" sort="NONE" dataFeature="_p4NJcGksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_B9mUwGkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_p4zmYGksEe25ONJ3V89cVA"/>
       </table>
-      <view xmi:id="_p1nIcGksEe25ONJ3V89cVA" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
+      <view xmi:id="_p1nIcGksEe25ONJ3V89cVA" name="User" label="User" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
         <components xsi:type="ui:Group" xmi:id="_M0pnwGk5Ee25ONJ3V89cVA" name="group" label="Personal" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE">
           <components xsi:type="ui:Group" xmi:id="_-zSJUGk5Ee25ONJ3V89cVA" name="name" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="VERTICAL" row="1" fit="LOOSE">
             <components xsi:type="ui:DataField" xmi:id="_B545cGkwEe25ONJ3V89cVA" name="firstName" label="FirstName" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_p2JT8GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
@@ -528,9 +531,9 @@
         <inherited xmi:id="_p79BAGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_p5-rEGksEe25ONJ3V89cVA" target="_4hFkkGkPEe25ONJ3V89cVA"/>
-      <form xmi:id="_p5sXMGksEe25ONJ3V89cVA" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
-      <table xmi:id="_p51hIGksEe25ONJ3V89cVA" name="TransferObject_Table" label="TransferObject Table"/>
-      <view xmi:id="_p5jNQGksEe25ONJ3V89cVA" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
+      <form xmi:id="_p5sXMGksEe25ONJ3V89cVA" name="Create_Attachment" label="Attachment" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
+      <table xmi:id="_p51hIGksEe25ONJ3V89cVA" name="Attachments_List" label="Attachments"/>
+      <view xmi:id="_p5jNQGksEe25ONJ3V89cVA" name="Attachment" label="Attachment" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
     </elements>
     <elements xsi:type="structure:TransferObjectType" xmi:id="_p8pkkWksEe25ONJ3V89cVA" name="Vote" createable="false" updateable="false" deleteable="false">
       <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qcGgsGksEe25ONJ3V89cVA" lower="0" upper="1" target="_p1aUIGksEe25ONJ3V89cVA" name="user" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="MAPPED" rangeType="ANY" binding="_gil1AWkYEe25ONJ3V89cVA" getterExpression="">
@@ -543,7 +546,7 @@
         <inherited xmi:id="_p-eJgGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_p9TE0GksEe25ONJ3V89cVA" target="_H7Q58GkYEe25ONJ3V89cVA"/>
-      <form xmi:id="_p9AJ4GksEe25ONJ3V89cVA" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
+      <form xmi:id="_p9AJ4GksEe25ONJ3V89cVA" name="Create_Vote" label="Vote" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
         <components xsi:type="ui:DataField" xmi:id="_VQSXUGk5Ee25ONJ3V89cVA" name="created" label="Created" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_p9bnsGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_VQXP0Gk5Ee25ONJ3V89cVA" name="type" label="Type" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_p-OR4GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_VQnugGk5Ee25ONJ3V89cVA" name="user" label="User" iconName="table_rows" col="12" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_qcGgsGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
@@ -555,11 +558,11 @@
           <columns xsi:type="ui:DataColumn" xmi:id="_VQz7wGk5Ee25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_p4zmYGksEe25ONJ3V89cVA"/>
         </components>
       </form>
-      <table xmi:id="_p9JT0GksEe25ONJ3V89cVA" name="TransferObject_Table" label="TransferObject Table">
+      <table xmi:id="_p9JT0GksEe25ONJ3V89cVA" name="Votes_List" label="Votes">
         <columns xsi:type="ui:DataColumn" xmi:id="_VQUMgGk5Ee25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_p9bnsGksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_VQZFAGk5Ee25ONJ3V89cVA" name="type" label="Type" iconName="list" visible="true" sort="NONE" dataFeature="_p-OR4GksEe25ONJ3V89cVA"/>
       </table>
-      <view xmi:id="_p81x0GksEe25ONJ3V89cVA" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
+      <view xmi:id="_p81x0GksEe25ONJ3V89cVA" name="Vote" label="Vote" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
         <components xsi:type="ui:DataField" xmi:id="_VQQiIGk5Ee25ONJ3V89cVA" name="created" label="Created" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_p9bnsGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_VQWBsGk5Ee25ONJ3V89cVA" name="type" label="Type" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_p-OR4GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_VQa6MGk5Ee25ONJ3V89cVA" name="user" label="User" iconName="table_rows" col="12" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_qcGgsGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
@@ -573,7 +576,7 @@
       </view>
     </elements>
     <elements xsi:type="structure:TransferObjectType" xmi:id="_p-1882ksEe25ONJ3V89cVA" name="Comment" createable="false" updateable="false" deleteable="false">
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qbA7kGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_p8pkkWksEe25ONJ3V89cVA" name="votes" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_ycp_IGkeEe25ONJ3V89cVA" getterExpression="">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qbA7kGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_p8pkkWksEe25ONJ3V89cVA" name="votes" createable="true" updateable="true" deleteable="true" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_ycp_IGkeEe25ONJ3V89cVA" getterExpression="">
         <inherited xmi:id="_qbJecGksEe25ONJ3V89cVA"/>
       </relations>
       <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qbmKYGksEe25ONJ3V89cVA" lower="0" upper="1" target="_p1aUIGksEe25ONJ3V89cVA" name="createdBy" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="MAPPED" rangeType="ANY" binding="_08C14GkiEe25ONJ3V89cVA" getterExpression="">
@@ -583,7 +586,7 @@
         <inherited xmi:id="_p_zmQGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_p_cZ4GksEe25ONJ3V89cVA" target="_2N6EMGkTEe25ONJ3V89cVA"/>
-      <form xmi:id="_p_Je8GksEe25ONJ3V89cVA" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
+      <form xmi:id="_p_Je8GksEe25ONJ3V89cVA" name="Create_Comment" label="Comment" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
         <components xsi:type="ui:DataField" xmi:id="_CSYR8GkwEe25ONJ3V89cVA" name="comment" label="Comment" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_p_kVsGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_CTgTUGkwEe25ONJ3V89cVA" name="votes" label="Votes" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qbA7kGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
           <columns xsi:type="ui:DataColumn" xmi:id="_CTsgkGkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_p9bnsGksEe25ONJ3V89cVA"/>
@@ -598,10 +601,10 @@
           <columns xsi:type="ui:DataColumn" xmi:id="_CW8o4GkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_p4zmYGksEe25ONJ3V89cVA"/>
         </components>
       </form>
-      <table xmi:id="_p_So4GksEe25ONJ3V89cVA" name="TransferObject_Table" label="TransferObject Table">
+      <table xmi:id="_p_So4GksEe25ONJ3V89cVA" name="Comments_List" label="Comments">
         <columns xsi:type="ui:DataColumn" xmi:id="_CSpXsGkwEe25ONJ3V89cVA" name="comment" label="Comment" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p_kVsGksEe25ONJ3V89cVA"/>
       </table>
-      <view xmi:id="_p_AVAGksEe25ONJ3V89cVA" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
+      <view xmi:id="_p_AVAGksEe25ONJ3V89cVA" name="Comment_View" label="Comment" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
         <components xsi:type="ui:DataField" xmi:id="_CSMEsGkwEe25ONJ3V89cVA" name="comment" label="Comment" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_p_kVsGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_CS6dcGkwEe25ONJ3V89cVA" name="votes" label="Votes" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qbA7kGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
           <columns xsi:type="ui:DataColumn" xmi:id="_CTHRwGkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_p9bnsGksEe25ONJ3V89cVA"/>
@@ -634,7 +637,7 @@
         <inherited xmi:id="_qB0_gGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_qA2IEGksEe25ONJ3V89cVA" target="_5yNG0GkSEe25ONJ3V89cVA"/>
-      <form xmi:id="_qAjNIGksEe25ONJ3V89cVA" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
+      <form xmi:id="_qAjNIGksEe25ONJ3V89cVA" name="Create_Con" label="Con" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
         <components xsi:type="ui:DataField" xmi:id="_CeFLoGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qA-D4GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_CevS8GkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qBlH4GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_Cfm1oGkwEe25ONJ3V89cVA" name="comments" label="Comments" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qZRPIGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
@@ -653,11 +656,11 @@
           <columns xsi:type="ui:DataColumn" xmi:id="_CkMasGkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_p4zmYGksEe25ONJ3V89cVA"/>
         </components>
       </form>
-      <table xmi:id="_qAs-IGksEe25ONJ3V89cVA" name="TransferObject_Table" label="TransferObject Table">
+      <table xmi:id="_qAs-IGksEe25ONJ3V89cVA" name="Cons_List" label="Cons">
         <columns xsi:type="ui:DataColumn" xmi:id="_CeR_8GkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qA-D4GksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_Ce8HQGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qBlH4GksEe25ONJ3V89cVA"/>
       </table>
-      <view xmi:id="_qAaDMGksEe25ONJ3V89cVA" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
+      <view xmi:id="_qAaDMGksEe25ONJ3V89cVA" name="Con" label="Con" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
         <components xsi:type="ui:DataField" xmi:id="_Cd4-YGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qA-D4GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_CejFsGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qBlH4GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_CfIUgGkwEe25ONJ3V89cVA" name="comments" label="Comments" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qZRPIGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
@@ -678,10 +681,10 @@
       </view>
     </elements>
     <elements xsi:type="structure:TransferObjectType" xmi:id="_qCREY2ksEe25ONJ3V89cVA" name="Issue" createable="false" updateable="false" deleteable="false">
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qXOAsGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_qFjB42ksEe25ONJ3V89cVA" name="debate" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="MAPPED" rangeType="ANY" binding="_wdeTcGkPEe25ONJ3V89cVA" getterExpression="">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qXOAsGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_qFjB42ksEe25ONJ3V89cVA" name="debate" createable="true" updateable="true" deleteable="true" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="MAPPED" rangeType="ANY" binding="_wdeTcGkPEe25ONJ3V89cVA" getterExpression="">
         <inherited xmi:id="_qXY_0GksEe25ONJ3V89cVA"/>
       </relations>
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qXz2kGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_p5aDVGksEe25ONJ3V89cVA" name="attachments" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_ApO68GkREe25ONJ3V89cVA" getterExpression="">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qXz2kGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_p5aDVGksEe25ONJ3V89cVA" name="attachments" createable="true" updateable="true" deleteable="true" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_ApO68GkREe25ONJ3V89cVA" getterExpression="">
         <inherited xmi:id="_qX7yYGksEe25ONJ3V89cVA"/>
       </relations>
       <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qYS-wGksEe25ONJ3V89cVA" lower="0" upper="1" target="_p1aUIGksEe25ONJ3V89cVA" name="owner" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="MAPPED" rangeType="ANY" binding="_YGs74GkaEe25ONJ3V89cVA" getterExpression="">
@@ -703,17 +706,11 @@
         <inherited xmi:id="_qFJZQGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_qC2TMGksEe25ONJ3V89cVA" target="_GDYW0GkOEe25ONJ3V89cVA"/>
-      <form xmi:id="_qCj_UGksEe25ONJ3V89cVA" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
+      <form xmi:id="_qCj_UGksEe25ONJ3V89cVA" name="Create_Issue" label="Issue" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
         <components xsi:type="ui:DataField" xmi:id="_BvaHwGkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qC-PAGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_Bv-vgGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qDkr8GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_Bwfs4GkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qEQBYGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_BxDtkGkwEe25ONJ3V89cVA" name="status" label="Status" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qE5hoGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
-        <components xsi:type="ui:TabularReferenceField" xmi:id="_BygfEGkwEe25ONJ3V89cVA" name="debate" label="Debate" iconName="table_rows" col="12" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_qXOAsGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
-          <columns xsi:type="ui:DataColumn" xmi:id="_Byt6cGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qGVsEGksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_By784GkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qG7h8GksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_BzJ_UGkwEe25ONJ3V89cVA" name="status" label="Status" iconName="list" visible="true" sort="NONE" dataFeature="_qHh-4GksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_BzdhUGkwEe25ONJ3V89cVA" name="closeAt" label="CloseAt" iconName="schedule" visible="true" sort="NONE" dataFeature="_qIIb0GksEe25ONJ3V89cVA"/>
-        </components>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_B0gqMGkwEe25ONJ3V89cVA" name="attachments" label="Attachments" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qXz2kGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
           <columns xsi:type="ui:DataColumn" xmi:id="_B0s3cGkwEe25ONJ3V89cVA" name="link" label="Link" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p6HN8GksEe25ONJ3V89cVA"/>
           <columns xsi:type="ui:DataColumn" xmi:id="_B09WIGkwEe25ONJ3V89cVA" name="file" label="File" iconName="file-document-outline" visible="true" sort="NONE" dataFeature="_p6zKcGksEe25ONJ3V89cVA"/>
@@ -732,23 +729,17 @@
           <columns xsi:type="ui:DataColumn" xmi:id="_B5mlkGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qKOtkGksEe25ONJ3V89cVA"/>
         </components>
       </form>
-      <table xmi:id="_qCtwUGksEe25ONJ3V89cVA" name="TransferObject_Table" label="TransferObject Table">
+      <table xmi:id="_qCtwUGksEe25ONJ3V89cVA" name="Issues_List" label="Issues">
         <columns xsi:type="ui:DataColumn" xmi:id="_Bvkf0GkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_qC-PAGksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_BwJHkGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qDkr8GksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_BwshMGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qEQBYGksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_BxQh4GkwEe25ONJ3V89cVA" name="status" label="Status" iconName="list" visible="true" sort="NONE" dataFeature="_qE5hoGksEe25ONJ3V89cVA"/>
       </table>
-      <view xmi:id="_qCa1YGksEe25ONJ3V89cVA" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
+      <view xmi:id="_qCa1YGksEe25ONJ3V89cVA" name="Issue" label="Issue" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
         <components xsi:type="ui:DataField" xmi:id="_BvJpEGkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qC-PAGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_BvyiQGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qDkr8GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_BwVU0GkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qEQBYGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_Bw7xwGkwEe25ONJ3V89cVA" name="status" label="Status" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qE5hoGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
-        <components xsi:type="ui:TabularReferenceField" xmi:id="_BxdWMGkwEe25ONJ3V89cVA" name="debate" label="Debate" iconName="table_rows" col="12" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_qXOAsGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
-          <columns xsi:type="ui:DataColumn" xmi:id="_BxqKgGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qGVsEGksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_Bx2-0GkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qG7h8GksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_ByDMEGkwEe25ONJ3V89cVA" name="status" label="Status" iconName="list" visible="true" sort="NONE" dataFeature="_qHh-4GksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_ByPZUGkwEe25ONJ3V89cVA" name="closeAt" label="CloseAt" iconName="schedule" visible="true" sort="NONE" dataFeature="_qIIb0GksEe25ONJ3V89cVA"/>
-        </components>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_BzpukGkwEe25ONJ3V89cVA" name="attachments" label="Attachments" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qXz2kGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
           <columns xsi:type="ui:DataColumn" xmi:id="_Bz2i4GkwEe25ONJ3V89cVA" name="link" label="Link" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p6HN8GksEe25ONJ3V89cVA"/>
           <columns xsi:type="ui:DataColumn" xmi:id="_B0DXMGkwEe25ONJ3V89cVA" name="file" label="File" iconName="file-document-outline" visible="true" sort="NONE" dataFeature="_p6zKcGksEe25ONJ3V89cVA"/>
@@ -772,10 +763,10 @@
       <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qU_zIGksEe25ONJ3V89cVA" lower="0" upper="1" target="_qCREY2ksEe25ONJ3V89cVA" name="issue" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="MAPPED" rangeType="ANY" binding="_wdgIoGkPEe25ONJ3V89cVA" getterExpression="">
         <inherited xmi:id="_qVHu8GksEe25ONJ3V89cVA"/>
       </relations>
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qVjz0GksEe25ONJ3V89cVA" lower="0" upper="-1" target="_qNUd0mksEe25ONJ3V89cVA" name="arguments" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_o3vUUGkTEe25ONJ3V89cVA" getterExpression="">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qVjz0GksEe25ONJ3V89cVA" lower="0" upper="-1" target="_qNUd0mksEe25ONJ3V89cVA" name="arguments" createable="true" updateable="true" deleteable="true" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_o3vUUGkTEe25ONJ3V89cVA" getterExpression="">
         <inherited xmi:id="_qVs9wGksEe25ONJ3V89cVA"/>
       </relations>
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qWGmYGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_p-1882ksEe25ONJ3V89cVA" name="comments" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_Q2JHEGkUEe25ONJ3V89cVA" getterExpression="">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qWGmYGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_p-1882ksEe25ONJ3V89cVA" name="comments" createable="true" updateable="true" deleteable="true" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_Q2JHEGkUEe25ONJ3V89cVA" getterExpression="">
         <inherited xmi:id="_qWPJQGksEe25ONJ3V89cVA"/>
       </relations>
       <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qWtqYGksEe25ONJ3V89cVA" lower="0" upper="1" target="_p1aUIGksEe25ONJ3V89cVA" name="createdBy" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="MAPPED" rangeType="ANY" binding="_qO-2QGkiEe25ONJ3V89cVA" getterExpression="">
@@ -794,40 +785,50 @@
         <inherited xmi:id="_qIfBIGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_qGIQsGksEe25ONJ3V89cVA" target="_jjCdUGkPEe25ONJ3V89cVA"/>
-      <form xmi:id="_qF180GksEe25ONJ3V89cVA" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
-        <components xsi:type="ui:DataField" xmi:id="_B_OscGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qGVsEGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
-        <components xsi:type="ui:DataField" xmi:id="_B_1JYGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qG7h8GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
-        <components xsi:type="ui:DataField" xmi:id="_CAa_QGkwEe25ONJ3V89cVA" name="status" label="Status" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qHh-4GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
-        <components xsi:type="ui:DataField" xmi:id="_CBOQgGkwEe25ONJ3V89cVA" name="closeAt" label="CloseAt" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qIIb0GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
-        <components xsi:type="ui:TabularReferenceField" xmi:id="_CC3PQGkwEe25ONJ3V89cVA" name="issue" label="Issue" iconName="table_rows" col="12" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_qU_zIGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
-          <columns xsi:type="ui:DataColumn" xmi:id="_CDEDkGkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_qC-PAGksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_CDQQ0GkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qDkr8GksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_CDceEGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qEQBYGksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_CDorUGkwEe25ONJ3V89cVA" name="status" label="Status" iconName="list" visible="true" sort="NONE" dataFeature="_qE5hoGksEe25ONJ3V89cVA"/>
+      <form xmi:id="_qF180GksEe25ONJ3V89cVA" name="Create_Debate" label="Debate" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
+        <components xsi:type="ui:Group" xmi:id="_IpWBYG3NEe2siJt-xjHAyw" name="Navigations" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE">
+          <components xsi:type="ui:TabularReferenceField" xmi:id="_CHnMYGkwEe25ONJ3V89cVA" name="createdBy" label="CreatedBy" iconName="table_rows" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_qWtqYGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
+            <columns xsi:type="ui:DataColumn" xmi:id="_CH4SIGkwEe25ONJ3V89cVA" name="firstName" label="FirstName" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p2JT8GksEe25ONJ3V89cVA"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_CIEfYGkwEe25ONJ3V89cVA" name="lastName" label="LastName" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p2tUoGksEe25ONJ3V89cVA"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_CIR6wGkwEe25ONJ3V89cVA" name="phone" label="Phone" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p3JZgGksEe25ONJ3V89cVA"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_CIevEGkwEe25ONJ3V89cVA" name="email" label="Email" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p3jCIGksEe25ONJ3V89cVA"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_CIrjYGkwEe25ONJ3V89cVA" name="isAdmin" label="IsAdmin" iconName="check_box" visible="true" sort="NONE" dataFeature="_p4NJcGksEe25ONJ3V89cVA"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_CI4XsGkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_p4zmYGksEe25ONJ3V89cVA"/>
+          </components>
+          <components xsi:type="ui:TabularReferenceField" xmi:id="_CC3PQGkwEe25ONJ3V89cVA" name="issue" label="Issue" iconName="table_rows" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_qU_zIGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
+            <columns xsi:type="ui:DataColumn" xmi:id="_CDEDkGkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_qC-PAGksEe25ONJ3V89cVA"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_CDQQ0GkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qDkr8GksEe25ONJ3V89cVA"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_CDceEGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qEQBYGksEe25ONJ3V89cVA"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_CDorUGkwEe25ONJ3V89cVA" name="status" label="Status" iconName="list" visible="true" sort="NONE" dataFeature="_qE5hoGksEe25ONJ3V89cVA"/>
+          </components>
         </components>
-        <components xsi:type="ui:TabularReferenceField" xmi:id="_CEltkGkwEe25ONJ3V89cVA" name="arguments" label="Arguments" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qVjz0GksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
-          <columns xsi:type="ui:DataColumn" xmi:id="_CEx60GkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qOBocGksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_CE-vIGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qOuMAGksEe25ONJ3V89cVA"/>
+        <components xsi:type="ui:Group" xmi:id="_SLXxQG3NEe2siJt-xjHAyw" name="Details" label="Details" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE">
+          <components xsi:type="ui:DataField" xmi:id="_CAa_QGkwEe25ONJ3V89cVA" name="status" label="Status" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qHh-4GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
+          <components xsi:type="ui:DataField" xmi:id="_B_OscGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qGVsEGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
+          <components xsi:type="ui:DataField" xmi:id="_B_1JYGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" dataFeature="_qG7h8GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
+          <components xsi:type="ui:DataField" xmi:id="_CBOQgGkwEe25ONJ3V89cVA" name="closeAt" label="CloseAt" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qIIb0GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         </components>
-        <components xsi:type="ui:TabularReferenceField" xmi:id="_CFklAGkwEe25ONJ3V89cVA" name="comments" label="Comments" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qWGmYGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
-          <columns xsi:type="ui:DataColumn" xmi:id="_CFwyQGkwEe25ONJ3V89cVA" name="comment" label="Comment" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p_kVsGksEe25ONJ3V89cVA"/>
-        </components>
-        <components xsi:type="ui:TabularReferenceField" xmi:id="_CHnMYGkwEe25ONJ3V89cVA" name="createdBy" label="CreatedBy" iconName="table_rows" col="12" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_qWtqYGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
-          <columns xsi:type="ui:DataColumn" xmi:id="_CH4SIGkwEe25ONJ3V89cVA" name="firstName" label="FirstName" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p2JT8GksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_CIEfYGkwEe25ONJ3V89cVA" name="lastName" label="LastName" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p2tUoGksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_CIR6wGkwEe25ONJ3V89cVA" name="phone" label="Phone" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p3JZgGksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_CIevEGkwEe25ONJ3V89cVA" name="email" label="Email" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p3jCIGksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_CIrjYGkwEe25ONJ3V89cVA" name="isAdmin" label="IsAdmin" iconName="check_box" visible="true" sort="NONE" dataFeature="_p4NJcGksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_CI4XsGkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_p4zmYGksEe25ONJ3V89cVA"/>
+        <components xsi:type="ui:TabBar" xmi:id="_cviTkG3NEe2siJt-xjHAyw" name="tabBar" col="12" stretch="NONE" row="1" fit="LOOSE">
+          <tabs xmi:id="_fsXREG3NEe2siJt-xjHAyw" name="Arguments" label="Arguments" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE">
+            <components xsi:type="ui:TabularReferenceField" xmi:id="_CEltkGkwEe25ONJ3V89cVA" name="arguments" label="Arguments" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qVjz0GksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
+              <columns xsi:type="ui:DataColumn" xmi:id="_CEx60GkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qOBocGksEe25ONJ3V89cVA"/>
+              <columns xsi:type="ui:DataColumn" xmi:id="_CE-vIGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qOuMAGksEe25ONJ3V89cVA"/>
+            </components>
+          </tabs>
+          <tabs xmi:id="_i1wD4G3NEe2siJt-xjHAyw" name="Comments" label="Comments" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE">
+            <components xsi:type="ui:TabularReferenceField" xmi:id="_CFklAGkwEe25ONJ3V89cVA" name="comments" label="Comments" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qWGmYGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
+              <columns xsi:type="ui:DataColumn" xmi:id="_CFwyQGkwEe25ONJ3V89cVA" name="comment" label="Comment" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p_kVsGksEe25ONJ3V89cVA"/>
+            </components>
+          </tabs>
         </components>
       </form>
-      <table xmi:id="_qF_GwGksEe25ONJ3V89cVA" name="TransferObject_Table" label="TransferObject Table">
+      <table xmi:id="_qF_GwGksEe25ONJ3V89cVA" name="Debates_List" label="Debates">
         <columns xsi:type="ui:DataColumn" xmi:id="_B_cH0GkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qGVsEGksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_CAB9sGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qG7h8GksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_CAxkkGkwEe25ONJ3V89cVA" name="status" label="Status" iconName="list" visible="true" sort="NONE" dataFeature="_qHh-4GksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_CBbr4GkwEe25ONJ3V89cVA" name="closeAt" label="CloseAt" iconName="schedule" visible="true" sort="NONE" dataFeature="_qIIb0GksEe25ONJ3V89cVA"/>
       </table>
-      <view xmi:id="_qFsy4GksEe25ONJ3V89cVA" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
+      <view xmi:id="_qFsy4GksEe25ONJ3V89cVA" name="Debate" label="Debate" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
         <components xsi:type="ui:Group" xmi:id="_H6_NUGk9Ee25ONJ3V89cVA" name="navigations" layout="HORIZONTAL" horizontal="CENTER" vertical="CENTER" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE">
           <components xsi:type="ui:TabularReferenceField" xmi:id="_CGB4AGkwEe25ONJ3V89cVA" name="createdBy" label="CreatedBy" iconName="table_rows" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_qWtqYGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
             <columns xsi:type="ui:DataColumn" xmi:id="_CGP6cGkwEe25ONJ3V89cVA" name="firstName" label="FirstName" iconName="text_fields" visible="true" sort="NONE" dataFeature="_p2JT8GksEe25ONJ3V89cVA"/>
@@ -851,7 +852,7 @@
           <components xsi:type="ui:DataField" xmi:id="_CBA1IGkwEe25ONJ3V89cVA" name="closeAt" label="CloseAt" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qIIb0GksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         </components>
         <components xsi:type="ui:TabBar" xmi:id="_OjPTsGk9Ee25ONJ3V89cVA" name="tabBar" col="12" stretch="NONE" row="1" fit="LOOSE">
-          <tabs xmi:id="_Vh2roGk9Ee25ONJ3V89cVA" name="arguments" label="Arguments" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="4" stretch="NONE" row="1" fit="LOOSE">
+          <tabs xmi:id="_Vh2roGk9Ee25ONJ3V89cVA" name="arguments" label="Arguments" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE">
             <components xsi:type="ui:TabularReferenceField" xmi:id="_CD1foGkwEe25ONJ3V89cVA" name="arguments" label="Arguments" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qVjz0GksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
               <columns xsi:type="ui:DataColumn" xmi:id="_CECT8GkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qOBocGksEe25ONJ3V89cVA"/>
               <columns xsi:type="ui:DataColumn" xmi:id="_CEUn0GkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qOuMAGksEe25ONJ3V89cVA"/>
@@ -866,7 +867,7 @@
       </view>
     </elements>
     <elements xsi:type="structure:TransferObjectType" xmi:id="_qI4CsGksEe25ONJ3V89cVA" name="IssueCategory" createable="false" updateable="false" deleteable="false">
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qT2joGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_qI4CsGksEe25ONJ3V89cVA" name="subcategories" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_RvjaUGkfEe25ONJ3V89cVA" getterExpression="">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qT2joGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_qI4CsGksEe25ONJ3V89cVA" name="subcategories" createable="true" updateable="true" deleteable="true" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_RvjaUGkfEe25ONJ3V89cVA" getterExpression="">
         <inherited xmi:id="_qT-fcGksEe25ONJ3V89cVA"/>
       </relations>
       <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qUWS4GksEe25ONJ3V89cVA" lower="0" upper="1" target="_p1aUIGksEe25ONJ3V89cVA" name="owner" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="MAPPED" rangeType="ANY" binding="_A6jkYGklEe25ONJ3V89cVA" getterExpression="">
@@ -879,15 +880,15 @@
         <inherited xmi:id="_qKqLYGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_qJfGsGksEe25ONJ3V89cVA" target="_K7jW8GkfEe25ONJ3V89cVA"/>
-      <form xmi:id="_qJLksGksEe25ONJ3V89cVA" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
-      <table xmi:id="_qJVVsGksEe25ONJ3V89cVA" name="TransferObject_Table" label="TransferObject Table"/>
-      <view xmi:id="_qJBzsGksEe25ONJ3V89cVA" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
+      <form xmi:id="_qJLksGksEe25ONJ3V89cVA" name="Create_Category" label="Category" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
+      <table xmi:id="_qJVVsGksEe25ONJ3V89cVA" name="Categories_List" label="Categories"/>
+      <view xmi:id="_qJBzsGksEe25ONJ3V89cVA" name="Category" label="Category" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
     </elements>
     <elements xsi:type="structure:TransferObjectType" xmi:id="_qLFCImksEe25ONJ3V89cVA" name="Pro" createable="false" updateable="false" deleteable="false">
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qSDM0GksEe25ONJ3V89cVA" lower="0" upper="-1" target="_p-1882ksEe25ONJ3V89cVA" name="comments" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_jSUHcGkUEe25ONJ3V89cVA" getterExpression="">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qSDM0GksEe25ONJ3V89cVA" lower="0" upper="-1" target="_p-1882ksEe25ONJ3V89cVA" name="comments" createable="true" updateable="true" deleteable="true" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_jSUHcGkUEe25ONJ3V89cVA" getterExpression="">
         <inherited xmi:id="_qSLIoGksEe25ONJ3V89cVA"/>
       </relations>
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qSoboGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_p8pkkWksEe25ONJ3V89cVA" name="votes" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_kH11sGkeEe25ONJ3V89cVA" getterExpression="">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qSoboGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_p8pkkWksEe25ONJ3V89cVA" name="votes" createable="true" updateable="true" deleteable="true" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_kH11sGkeEe25ONJ3V89cVA" getterExpression="">
         <inherited xmi:id="_qSxlkGksEe25ONJ3V89cVA"/>
       </relations>
       <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qTNDYGksEe25ONJ3V89cVA" lower="0" upper="1" target="_p1aUIGksEe25ONJ3V89cVA" name="createdBy" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="MAPPED" rangeType="ANY" binding="_fcbdMGkjEe25ONJ3V89cVA" getterExpression="">
@@ -900,7 +901,7 @@
         <inherited xmi:id="_qM8qYGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_qL1QEGksEe25ONJ3V89cVA" target="_3Z7A0GkSEe25ONJ3V89cVA"/>
-      <form xmi:id="_qLaZUGksEe25ONJ3V89cVA" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
+      <form xmi:id="_qLaZUGksEe25ONJ3V89cVA" name="Create_Pro" label="Pro" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
         <components xsi:type="ui:DataField" xmi:id="_CXc_MGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qL_BEGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_CYCOAGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qMsywGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_CY4ikGkwEe25ONJ3V89cVA" name="comments" label="Comments" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qSDM0GksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
@@ -919,11 +920,11 @@
           <columns xsi:type="ui:DataColumn" xmi:id="_CdsKEGkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_p4zmYGksEe25ONJ3V89cVA"/>
         </components>
       </form>
-      <table xmi:id="_qLrfEGksEe25ONJ3V89cVA" name="TransferObject_Table" label="TransferObject Table">
+      <table xmi:id="_qLrfEGksEe25ONJ3V89cVA" name="Pros" label="Pros">
         <columns xsi:type="ui:DataColumn" xmi:id="_CXpzgGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qL_BEGksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_CYObQGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qMsywGksEe25ONJ3V89cVA"/>
       </table>
-      <view xmi:id="_qLQBQGksEe25ONJ3V89cVA" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
+      <view xmi:id="_qLQBQGksEe25ONJ3V89cVA" name="Pro" label="Pro" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
         <components xsi:type="ui:DataField" xmi:id="_CXMggGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qL_BEGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_CX2AwGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qMsywGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_CYbPkGkwEe25ONJ3V89cVA" name="comments" label="Comments" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qSDM0GksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
@@ -944,16 +945,16 @@
       </view>
     </elements>
     <elements xsi:type="structure:TransferObjectType" xmi:id="_qNUd0mksEe25ONJ3V89cVA" name="Argument" createable="false" updateable="false" deleteable="false">
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qPYTUmksEe25ONJ3V89cVA" lower="0" upper="-1" target="_qNUd0mksEe25ONJ3V89cVA" name="arguments" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_D6KOQGkTEe25ONJ3V89cVA" getterExpression="">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qPYTUmksEe25ONJ3V89cVA" lower="0" upper="-1" target="_qNUd0mksEe25ONJ3V89cVA" name="arguments" createable="true" updateable="true" deleteable="true" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_D6KOQGkTEe25ONJ3V89cVA" getterExpression="">
         <inherited xmi:id="_qPnj4GksEe25ONJ3V89cVA"/>
       </relations>
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qP_-YGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_qAQSMGksEe25ONJ3V89cVA" name="cons" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_Qd7Q0GkTEe25ONJ3V89cVA" getterExpression="">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qP_-YGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_qAQSMGksEe25ONJ3V89cVA" name="cons" createable="true" updateable="true" deleteable="true" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_Qd7Q0GkTEe25ONJ3V89cVA" getterExpression="">
         <inherited xmi:id="_qQH6MGksEe25ONJ3V89cVA"/>
       </relations>
       <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qQgUsGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_qLFCImksEe25ONJ3V89cVA" name="pros" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_TcWJwGkTEe25ONJ3V89cVA" getterExpression="">
         <inherited xmi:id="_qQtwEGksEe25ONJ3V89cVA"/>
       </relations>
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qRE8cGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_p-1882ksEe25ONJ3V89cVA" name="comments" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_d6MzQGkUEe25ONJ3V89cVA" getterExpression="">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qRE8cGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_p-1882ksEe25ONJ3V89cVA" name="comments" createable="true" updateable="true" deleteable="true" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_d6MzQGkUEe25ONJ3V89cVA" getterExpression="">
         <inherited xmi:id="_qRM4QGksEe25ONJ3V89cVA"/>
       </relations>
       <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qRkEoGksEe25ONJ3V89cVA" lower="0" upper="1" target="_p1aUIGksEe25ONJ3V89cVA" name="createdBy" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="MAPPED" rangeType="ANY" binding="_BhnZ0GkkEe25ONJ3V89cVA" getterExpression="">
@@ -966,7 +967,7 @@
         <inherited xmi:id="_qO-qsGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_qN5soGksEe25ONJ3V89cVA" target="_ru4WAGkSEe25ONJ3V89cVA"/>
-      <form xmi:id="_qNnYwGksEe25ONJ3V89cVA" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
+      <form xmi:id="_qNnYwGksEe25ONJ3V89cVA" name="Create_Argument" label="Argument" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
         <components xsi:type="ui:DataField" xmi:id="_CJSAUGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qOBocGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_CJ8HoGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qOuMAGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_CLBFsGkwEe25ONJ3V89cVA" name="arguments" label="Arguments" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qPYTUmksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
@@ -993,11 +994,11 @@
           <columns xsi:type="ui:DataColumn" xmi:id="_CR_QYGkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_p4zmYGksEe25ONJ3V89cVA"/>
         </components>
       </form>
-      <table xmi:id="_qNwisGksEe25ONJ3V89cVA" name="TransferObject_Table" label="TransferObject Table">
+      <table xmi:id="_qNwisGksEe25ONJ3V89cVA" name="Arguments_List" label="Arguments">
         <columns xsi:type="ui:DataColumn" xmi:id="_CJifAGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qOBocGksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_CKI78GkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qOuMAGksEe25ONJ3V89cVA"/>
       </table>
-      <view xmi:id="_qNeO0GksEe25ONJ3V89cVA" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
+      <view xmi:id="_qNeO0GksEe25ONJ3V89cVA" name="Argument" label="Argument" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
         <components xsi:type="ui:DataField" xmi:id="_CJEk8GkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qOBocGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:DataField" xmi:id="_CJvTUGkwEe25ONJ3V89cVA" name="description" label="Description" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_qOuMAGksEe25ONJ3V89cVA" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT"/>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_CKVwQGkwEe25ONJ3V89cVA" name="arguments" label="Arguments" iconName="table_rows" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" relationFeature="_qPYTUmksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
@@ -1045,12 +1046,9 @@
         <inherited xmi:id="_to0-kGkwEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_rus0MGkwEe25ONJ3V89cVA" target="_BuSFMGkWEe25ONJ3V89cVA"/>
-      <operations xmi:id="_-VOqcGkwEe25ONJ3V89cVA" name="initAdminUser" customImplementation="false" body="// TODO: Create superadmin user" stateful="true" operationType="STATIC" binding="" initializer="false">
-        <inherited xmi:id="_-VP4kGkwEe25ONJ3V89cVA"/>
-      </operations>
-      <form xmi:id="_ndHDMGkwEe25ONJ3V89cVA" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
-      <table xmi:id="_ndKGgGkwEe25ONJ3V89cVA" name="TransferObject_Table" label="TransferObject Table"/>
-      <view xmi:id="_ndEm8GkwEe25ONJ3V89cVA" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
+      <form xmi:id="_ndHDMGkwEe25ONJ3V89cVA" name="TransferObject_Form" label="Admin" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
+      <table xmi:id="_ndKGgGkwEe25ONJ3V89cVA" name="TransferObject_Table" label="Admins"/>
+      <view xmi:id="_ndEm8GkwEe25ONJ3V89cVA" name="TransferObject_View" label="Admin" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
     </elements>
   </elements>
   <annotations xmi:id="_7D81XmkNEe25ONJ3V89cVA" name="dashboard" className="hu.blackbelt.judo.meta.esm.accesspoint.Access"/>

@@ -11,24 +11,24 @@
 
 	<properties>
 		<judo-channel>develop</judo-channel>
-		<judo-version>1.0.0.20221006_183743_eacecb10_develop</judo-version>
+		<judo-version>1.0.0.20221124_042836_588b1c6c_develop</judo-version>
 
 		<sqlDialects>hsqldb</sqlDialects>
 
-		<judo-esm-archetype-version-defined>1.0.0.20221006_170727_4a982b40_develop</judo-esm-archetype-version-defined>
-        <judo-meta-esm-version-defined>1.1.1.20221006_164951_f616a248_develop</judo-meta-esm-version-defined>
-        <judo-tatami-version-defined>1.1.0.20221006_175159_06db9d1e_develop</judo-tatami-version-defined>
+		<judo-esm-archetype-version-defined>1.0.0.20221123_203333_b8ff8102_develop</judo-esm-archetype-version-defined>
+        <judo-meta-esm-version-defined>1.1.1.20221123_202758_74311053_develop</judo-meta-esm-version-defined>
+        <judo-tatami-version-defined>1.1.0.20221123_204340_30a0c1af_develop</judo-tatami-version-defined>
         <flutter-maven-plugin-version-defined>1.0.2.20220326_002737_efc0629e_develop</flutter-maven-plugin-version-defined>
-        <structured-map-proxy-version-defined>1.2.1.20220927_090501_89bce74f_develop</structured-map-proxy-version-defined>
-        <judo-dao-api-version-defined>1.0.3.20220930_100653_2b31acaa_develop</judo-dao-api-version-defined>
-        <judo-dispatcher-api-version-defined>1.0.3.20220926_012329_fb44a05f_develop</judo-dispatcher-api-version-defined>
-        <judo-sdk-common-version-defined>1.0.2.20221006_173904_714f26de_develop</judo-sdk-common-version-defined>
-        <mapper-version-defined>1.0.4.20220927_072413_239dbbd8_develop</mapper-version-defined>
-        <judo-platform-version-defined>2.0.1.20221006_180456_b7da438f_develop</judo-platform-version-defined>
-        <judo-services-version-defined>1.1.0.20221006_175856_fd6a4102_develop</judo-services-version-defined>
-        <judo-rdbms-schema-version-defined>1.0.0.20221006_174755_3dff4d0c_develop</judo-rdbms-schema-version-defined>
-        <judo-tatami-client-version-defined>1.1.0.20221006_175904_93d01e57_develop</judo-tatami-client-version-defined>
-        <judo-esm-fullstack-project-archetype-version-defined>1.0.0.20221103_095907_ec159a8b_develop</judo-esm-fullstack-project-archetype-version-defined>
+        <structured-map-proxy-version-defined>1.2.0</structured-map-proxy-version-defined>
+        <judo-dao-api-version-defined>1.0.3.20221107_125042_022117fe_develop</judo-dao-api-version-defined>
+        <judo-dispatcher-api-version-defined>1.0.2</judo-dispatcher-api-version-defined>
+        <judo-sdk-common-version-defined>1.0.2</judo-sdk-common-version-defined>
+        <mapper-version-defined>1.0.3</mapper-version-defined>
+        <judo-platform-version-defined>2.0.1.20221124_041727_327bfc20_develop</judo-platform-version-defined>
+        <judo-services-version-defined>1.1.0.20221124_041129_f530c16e_develop</judo-services-version-defined>
+        <judo-rdbms-schema-version-defined>1.0.0.20221123_203438_b4608283_develop</judo-rdbms-schema-version-defined>
+        <judo-tatami-client-version-defined>1.1.0.20221124_035249_3e3095c7_develop</judo-tatami-client-version-defined>
+        <judo-esm-fullstack-project-archetype-version-defined>1.0.0.20221124_042723_a8da4477_develop</judo-esm-fullstack-project-archetype-version-defined>
 
 	</properties>
 
