@@ -31,7 +31,7 @@
         <description xmi:type="description_2:EditionTableDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='MimeTypeTable']"/>
         <target xmi:type="namespace:Model" href="model/edemokracia.model#_7D8NwGkNEe25ONJ3V89cVA"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_CqM0gGkOEe25ONJ3V89cVA" name="Issue Datamodel" repPath="#_CqLmYGkOEe25ONJ3V89cVA" changeId="a3957a66-4f56-4a1e-b8ad-37815f1a6762">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_CqM0gGkOEe25ONJ3V89cVA" name="Issue Datamodel" repPath="#_CqLmYGkOEe25ONJ3V89cVA" changeId="6ca5098e-f89e-45cd-a968-0f1195b64b2a">
         <description xmi:type="description_3:DiagramDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']"/>
         <target xmi:type="namespace:Model" href="model/edemokracia.model#_7D8NwGkNEe25ONJ3V89cVA"/>
       </ownedRepresentationDescriptors>
@@ -147,7 +147,7 @@
         <description xmi:type="description_1:TreeDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='TransferObjectTableTree']"/>
         <target xmi:type="ui:TransferObjectTable" href="model/edemokracia.model#_2OD1MGkTEe25ONJ3V89cVA"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_BLv_4GkWEe25ONJ3V89cVA" name="User Datamodel" repPath="#_BLvY0GkWEe25ONJ3V89cVA" changeId="e116304d-474d-4cea-9170-63a8e09cad5e">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_BLv_4GkWEe25ONJ3V89cVA" name="User Datamodel" repPath="#_BLvY0GkWEe25ONJ3V89cVA" changeId="ce4012af-a6eb-44b1-bd84-7584b71ff506">
         <description xmi:type="description_3:DiagramDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']"/>
         <target xmi:type="namespace:Model" href="model/edemokracia.model#_7D8NwGkNEe25ONJ3V89cVA"/>
       </ownedRepresentationDescriptors>
@@ -183,11 +183,11 @@
         <description xmi:type="description_1:TreeDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='TransferObjectTableTree']"/>
         <target xmi:type="ui:TransferObjectTable" href="model/edemokracia.model#_H7Zc0GkYEe25ONJ3V89cVA"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_fegFUGkZEe25ONJ3V89cVA" name="Debate Datamodel" repPath="#_fee3MGkZEe25ONJ3V89cVA" changeId="9475f2d0-74dc-42d8-8903-41ae95a3e3cf">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_fegFUGkZEe25ONJ3V89cVA" name="Debate Datamodel" repPath="#_fee3MGkZEe25ONJ3V89cVA" changeId="c8f1e71a-369d-42e8-bbef-03bbde4407f2">
         <description xmi:type="description_3:DiagramDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']"/>
         <target xmi:type="namespace:Model" href="model/edemokracia.model#_7D8NwGkNEe25ONJ3V89cVA"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_0KsrDmkdEe25ONJ3V89cVA" name="Simple Vote Datamodel" repPath="#_0KsDsGkdEe25ONJ3V89cVA" changeId="dacb0523-6b3a-4a43-aa9c-7d9045693dd7">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_0KsrDmkdEe25ONJ3V89cVA" name="Simple Vote Datamodel" repPath="#_0KsDsGkdEe25ONJ3V89cVA" changeId="2ad3ff26-3b7c-48e6-b34b-446f2f89eed8">
         <description xmi:type="description_3:DiagramDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']"/>
         <target xmi:type="namespace:Model" href="model/edemokracia.model#_7D8NwGkNEe25ONJ3V89cVA"/>
       </ownedRepresentationDescriptors>
@@ -643,7 +643,7 @@
         <description xmi:type="description_1:TreeDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='TransferObjectTableTree']"/>
         <target xmi:type="ui:TransferObjectTable" href="model/edemokracia.model#_0oTG8G5mEe2wNaja8kBvcQ"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_XpsmoW6HEe2wNaja8kBvcQ" name="Vote Definition Datamodel" repPath="#_Xpr_kG6HEe2wNaja8kBvcQ" changeId="85239e4e-5fe2-4cac-8389-509e716903c6">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_XpsmoW6HEe2wNaja8kBvcQ" name="Vote Definition Datamodel" repPath="#_Xpr_kG6HEe2wNaja8kBvcQ" changeId="ef522d57-2ae1-402a-87ab-7bb6e6058844">
         <description xmi:type="description_3:DiagramDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']"/>
         <target xmi:type="namespace:Model" href="model/edemokracia.model#_7D8NwGkNEe25ONJ3V89cVA"/>
       </ownedRepresentationDescriptors>
@@ -795,7 +795,7 @@
         <description xmi:type="description_1:TreeDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='ClassTree']"/>
         <target xmi:type="structure:TransferObjectType" href="model/edemokracia.model#_GaaTIHW5Ee2LTNnGda5kaw"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Gao8oHW5Ee2LTNnGda5kaw" name="TransferObject View/Edit Page" repPath="#_GaoVkHW5Ee2LTNnGda5kaw" changeId="8d8d46ae-5da9-4505-a1f7-79c5f9f2745f">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Gao8oHW5Ee2LTNnGda5kaw" name="TransferObject View/Edit Page" repPath="#_GaoVkHW5Ee2LTNnGda5kaw" changeId="b49141e1-2cf9-4db5-8f54-5f81fd0c3472">
         <description xmi:type="description_1:TreeDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='TransferObjectViewTree']"/>
         <target xmi:type="ui:TransferObjectView" href="model/edemokracia.model#_GamgYHW5Ee2LTNnGda5kaw"/>
       </ownedRepresentationDescriptors>
@@ -807,7 +807,7 @@
         <description xmi:type="description_1:TreeDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='TransferObjectTableTree']"/>
         <target xmi:type="ui:TransferObjectTable" href="model/edemokracia.model#_Ga4NMHW5Ee2LTNnGda5kaw"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_bjABJnW6Ee2LTNnGda5kaw" name="Area Datamodel" repPath="#_bi_Z8HW6Ee2LTNnGda5kaw" changeId="1f9e3e03-ff31-422b-992c-5c0c44461f6d">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_bjABJnW6Ee2LTNnGda5kaw" name="Area Datamodel" repPath="#_bi_Z8HW6Ee2LTNnGda5kaw" changeId="1dfb1c17-0e38-4328-a418-55a531d4ca8c">
         <description xmi:type="description_3:DiagramDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']"/>
         <target xmi:type="namespace:Model" href="model/edemokracia.model#_7D8NwGkNEe25ONJ3V89cVA"/>
       </ownedRepresentationDescriptors>
@@ -927,7 +927,7 @@
         <description xmi:type="description_3:DiagramDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']"/>
         <target xmi:type="namespace:Package" href="model/edemokracia.model#_TFt7AGkqEe25ONJ3V89cVA"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_NNbwwH2pEe27Ga2Ojs4Fgg" name="Vote Definition Admin Service" repPath="#_NNbJsH2pEe27Ga2Ojs4Fgg" changeId="37520c1e-606e-4fd6-bc7b-fcb48d72e446">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_NNbwwH2pEe27Ga2Ojs4Fgg" name="Vote Definition Admin Service" repPath="#_NNbJsH2pEe27Ga2Ojs4Fgg" changeId="81678f31-6633-4912-8c26-a830e25175a0">
         <description xmi:type="description_3:DiagramDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']"/>
         <target xmi:type="namespace:Package" href="model/edemokracia.model#_TFt7AGkqEe25ONJ3V89cVA"/>
       </ownedRepresentationDescriptors>
@@ -3151,6 +3151,14 @@
                   <styles xmi:type="notation:FontStyle" xmi:id="_bAfe9HW8Ee2LTNnGda5kaw" fontName=".AppleSystemUIFont" fontHeight="8"/>
                   <layoutConstraint xmi:type="notation:Location" xmi:id="_bAfe9XW8Ee2LTNnGda5kaw"/>
                 </children>
+                <children xmi:type="notation:Node" xmi:id="_z9_kMH5VEe2kLcMqsIbMgQ" visible="false" type="3010" element="_z6mR935VEe2kLcMqsIbMgQ">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_z9_kMX5VEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="8"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_z9_kMn5VEe2kLcMqsIbMgQ"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_z9_kM35VEe2kLcMqsIbMgQ" visible="false" type="3010" element="_z6mR-X5VEe2kLcMqsIbMgQ">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_z9_kNH5VEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="8"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_z9_kNX5VEe2kLcMqsIbMgQ"/>
+                </children>
                 <styles xmi:type="notation:SortingStyle" xmi:id="_O3bI8WkaEe25ONJ3V89cVA"/>
                 <styles xmi:type="notation:FilteringStyle" xmi:id="_O3bI8mkaEe25ONJ3V89cVA"/>
                 <styles xmi:type="notation:DrawerStyle" xmi:id="_O3bI82kaEe25ONJ3V89cVA"/>
@@ -3942,7 +3950,7 @@
           <ownedStyle xmi:type="diagram:Square" uid="_O3VCSGkaEe25ONJ3V89cVA" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-2-dir.png" labelAlignment="LEFT" description="_w8l4Z2kPEe25ONJ3V89cVA" labelPosition="node"/>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_4Qzz1nW7Ee2LTNnGda5kaw" name="residentCity : City [0..*]" visible="false" tooltipText=" &#xA; Name: residentCity &#xA; Target: edemokracia::City &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_4Qzz1nW7Ee2LTNnGda5kaw" name="residentCity : City [0..1]" visible="false" tooltipText=" &#xA; Name: residentCity &#xA; Target: edemokracia::City &#xA; Cardinality: [0..1] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_2xogEHW7Ee2LTNnGda5kaw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_2xogEHW7Ee2LTNnGda5kaw"/>
           <ownedStyle xmi:type="diagram:Square" uid="_4Qzz13W7Ee2LTNnGda5kaw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
@@ -3950,7 +3958,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Mz1zCHW8Ee2LTNnGda5kaw" name="activityCounty : City [0..*]" visible="false" tooltipText=" &#xA; Name: activityCounty &#xA; Target: edemokracia::City &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_Mz1zCHW8Ee2LTNnGda5kaw" name="activityCities : City [0..*]" visible="false" tooltipText=" &#xA; Name: activityCities &#xA; Target: edemokracia::City &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_KDzUUHW8Ee2LTNnGda5kaw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_KDzUUHW8Ee2LTNnGda5kaw"/>
           <ownedStyle xmi:type="diagram:Square" uid="_Mz1zCXW8Ee2LTNnGda5kaw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
@@ -3966,10 +3974,26 @@
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_axgnxnW8Ee2LTNnGda5kaw" name="activityDistrict : District [0..*]" visible="false" tooltipText=" &#xA; Name: activityDistrict &#xA; Target: edemokracia::District &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_axgnxnW8Ee2LTNnGda5kaw" name="activityDistricts : District [0..*]" visible="false" tooltipText=" &#xA; Name: activityDistricts &#xA; Target: edemokracia::District &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_YvK8kHW8Ee2LTNnGda5kaw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_YvK8kHW8Ee2LTNnGda5kaw"/>
           <ownedStyle xmi:type="diagram:Square" uid="_axgnx3W8Ee2LTNnGda5kaw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_z6mR935VEe2kLcMqsIbMgQ" name="residentCounty : County [0..1]" visible="false" tooltipText=" &#xA; Name: residentCounty &#xA; Target: edemokracia::County &#xA; Cardinality: [0..1] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+          <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_-zCQkH5UEe2kLcMqsIbMgQ"/>
+          <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_-zCQkH5UEe2kLcMqsIbMgQ"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_z6mR-H5VEe2kLcMqsIbMgQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_z6mR-X5VEe2kLcMqsIbMgQ" name="activityCounties : County [0..*]" visible="false" tooltipText=" &#xA; Name: activityCounties &#xA; Target: edemokracia::County &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+          <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_IdzFsH5VEe2kLcMqsIbMgQ"/>
+          <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_IdzFsH5VEe2kLcMqsIbMgQ"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_z6mR-n5VEe2kLcMqsIbMgQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
             <description xmi:type="style:SquareDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
@@ -4064,7 +4088,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_3:ContainerMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_kSmlgG5TEe2wNaja8kBvcQ" name="subcategories : IssueCategory [0..*]" visible="false" tooltipText=" &#xA; Name: subcategories &#xA; Target: edemokracia::IssueCategory &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: true &#xA; Update is allowed: true &#xA; Delete is allowed: true &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_kSmlgG5TEe2wNaja8kBvcQ" name="subcategories : IssueCategory [0..*]" visible="false" tooltipText=" &#xA; Name: subcategories &#xA; Target: edemokracia::IssueCategory &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_RvjaUGkfEe25ONJ3V89cVA"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_RvjaUGkfEe25ONJ3V89cVA"/>
           <ownedStyle xmi:type="diagram:Square" uid="_kSnMkG5TEe2wNaja8kBvcQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/containment.png" labelAlignment="LEFT" description="_CP8aEGkREe25ONJ3V89cVA" labelPosition="node"/>
@@ -4122,7 +4146,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_3:EdgeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@edgeMappings[name='Relation']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_kS12HG5TEe2wNaja8kBvcQ" sourceNode="_Mpv-IGkfEe25ONJ3V89cVA" targetNode="_Mpv-IGkfEe25ONJ3V89cVA" endLabel="[0..*]&#xA;subcategories&#xA;{C,U,D}">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_kS12HG5TEe2wNaja8kBvcQ" sourceNode="_Mpv-IGkfEe25ONJ3V89cVA" targetNode="_Mpv-IGkfEe25ONJ3V89cVA" endLabel="[0..*]&#xA;subcategories&#xA;">
       <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_RvjaUGkfEe25ONJ3V89cVA"/>
       <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_RvjaUGkfEe25ONJ3V89cVA"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_kS2dIG5TEe2wNaja8kBvcQ" description="_CP9oN2kREe25ONJ3V89cVA" sourceArrow="FillDiamond" size="2" routingStyle="manhattan" strokeColor="114,159,207">
@@ -4669,6 +4693,14 @@
                   <styles xmi:type="notation:FontStyle" xmi:id="_bAdpwXW8Ee2LTNnGda5kaw" fontName=".AppleSystemUIFont" fontHeight="8"/>
                   <layoutConstraint xmi:type="notation:Location" xmi:id="_bAdpwnW8Ee2LTNnGda5kaw"/>
                 </children>
+                <children xmi:type="notation:Node" xmi:id="_CZNGAH5VEe2kLcMqsIbMgQ" visible="false" type="3010" element="_CSnV235VEe2kLcMqsIbMgQ">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_CZNGAX5VEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="8"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_CZNGAn5VEe2kLcMqsIbMgQ"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_KgDRUH5VEe2kLcMqsIbMgQ" visible="false" type="3010" element="_KZQFyn5VEe2kLcMqsIbMgQ">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_KgDRUX5VEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="8"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_KgDRUn5VEe2kLcMqsIbMgQ"/>
+                </children>
                 <styles xmi:type="notation:SortingStyle" xmi:id="_CMRowWkWEe25ONJ3V89cVA"/>
                 <styles xmi:type="notation:FilteringStyle" xmi:id="_CMRowmkWEe25ONJ3V89cVA"/>
                 <styles xmi:type="notation:DrawerStyle" xmi:id="_CMRow2kWEe25ONJ3V89cVA"/>
@@ -4842,6 +4874,67 @@
           <styles xmi:type="notation:ShapeStyle" xmi:id="_NuiWL3W7Ee2LTNnGda5kaw" fontColor="4408901" fontName=".AppleSystemUIFont" fontHeight="10" bold="true"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NuiWMHW7Ee2LTNnGda5kaw" x="796" y="512"/>
         </children>
+        <children xmi:type="notation:Node" xmi:id="_6lf5IH5UEe2kLcMqsIbMgQ" type="2002" element="_6iExsH5UEe2kLcMqsIbMgQ">
+          <children xmi:type="notation:Node" xmi:id="_6ljjgH5UEe2kLcMqsIbMgQ" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_6ljjgX5UEe2kLcMqsIbMgQ" type="7001">
+            <children xmi:type="notation:Node" xmi:id="_6lkxoH5UEe2kLcMqsIbMgQ" type="3009" element="_6iOisn5UEe2kLcMqsIbMgQ">
+              <children xmi:type="notation:Node" xmi:id="_6lkxo35UEe2kLcMqsIbMgQ" visible="false" type="5004"/>
+              <children xmi:type="notation:Node" xmi:id="_6llYsH5UEe2kLcMqsIbMgQ" type="7003">
+                <children xmi:type="notation:Node" xmi:id="_6lmm0H5UEe2kLcMqsIbMgQ" type="3010" element="_6iPJwX5UEe2kLcMqsIbMgQ">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_6lmm0X5UEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="8"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_6lmm0n5UEe2kLcMqsIbMgQ"/>
+                </children>
+                <styles xmi:type="notation:SortingStyle" xmi:id="_6llYsX5UEe2kLcMqsIbMgQ"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_6llYsn5UEe2kLcMqsIbMgQ"/>
+                <styles xmi:type="notation:DrawerStyle" xmi:id="_6llYs35UEe2kLcMqsIbMgQ" collapsed="true"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_6lkxoX5UEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="10"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6lkxon5UEe2kLcMqsIbMgQ" width="200"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_6llYtH5UEe2kLcMqsIbMgQ" visible="false" type="3009" element="_6iPw0X5UEe2kLcMqsIbMgQ">
+              <children xmi:type="notation:Node" xmi:id="_6llYt35UEe2kLcMqsIbMgQ" visible="false" type="5004"/>
+              <children xmi:type="notation:Node" xmi:id="_6llYuH5UEe2kLcMqsIbMgQ" type="7003">
+                <children xmi:type="notation:Node" xmi:id="_6lmm035UEe2kLcMqsIbMgQ" visible="false" type="3010" element="_6iPw1X5UEe2kLcMqsIbMgQ">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_6lmm1H5UEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="8"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_6lmm1X5UEe2kLcMqsIbMgQ"/>
+                </children>
+                <styles xmi:type="notation:SortingStyle" xmi:id="_6llYuX5UEe2kLcMqsIbMgQ"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_6llYun5UEe2kLcMqsIbMgQ"/>
+                <styles xmi:type="notation:DrawerStyle" xmi:id="_6llYu35UEe2kLcMqsIbMgQ"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_6llYtX5UEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="10"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6llYtn5UEe2kLcMqsIbMgQ" y="40" width="200"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_6llYvH5UEe2kLcMqsIbMgQ" type="3009" element="_6iQX4H5UEe2kLcMqsIbMgQ">
+              <children xmi:type="notation:Node" xmi:id="_6ll_wH5UEe2kLcMqsIbMgQ" visible="false" type="5004"/>
+              <children xmi:type="notation:Node" xmi:id="_6ll_wX5UEe2kLcMqsIbMgQ" type="7003">
+                <children xmi:type="notation:Node" xmi:id="_6lmm1n5UEe2kLcMqsIbMgQ" type="3010" element="_6iQX5H5UEe2kLcMqsIbMgQ">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_6lmm135UEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="8" underline="true"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_6lmm2H5UEe2kLcMqsIbMgQ"/>
+                </children>
+                <styles xmi:type="notation:SortingStyle" xmi:id="_6ll_wn5UEe2kLcMqsIbMgQ"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_6ll_w35UEe2kLcMqsIbMgQ"/>
+                <styles xmi:type="notation:DrawerStyle" xmi:id="_6ll_xH5UEe2kLcMqsIbMgQ"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_6llYvX5UEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="8" italic="true"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6llYvn5UEe2kLcMqsIbMgQ" y="80" width="200"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_6ll_xX5UEe2kLcMqsIbMgQ" visible="false" type="3009" element="_6iQ-8H5UEe2kLcMqsIbMgQ">
+              <children xmi:type="notation:Node" xmi:id="_6ll_yH5UEe2kLcMqsIbMgQ" visible="false" type="5004"/>
+              <children xmi:type="notation:Node" xmi:id="_6ll_yX5UEe2kLcMqsIbMgQ" type="7003">
+                <styles xmi:type="notation:SortingStyle" xmi:id="_6ll_yn5UEe2kLcMqsIbMgQ"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_6ll_y35UEe2kLcMqsIbMgQ"/>
+                <styles xmi:type="notation:DrawerStyle" xmi:id="_6ll_zH5UEe2kLcMqsIbMgQ"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_6ll_xn5UEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="10"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6ll_x35UEe2kLcMqsIbMgQ" y="120" width="200"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_6ljjgn5UEe2kLcMqsIbMgQ"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_6ljjg35UEe2kLcMqsIbMgQ"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_6lf5IX5UEe2kLcMqsIbMgQ" fontColor="4408901" fontName=".AppleSystemUIFont" fontHeight="10" bold="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6lf5In5UEe2kLcMqsIbMgQ" x="325" y="512"/>
+        </children>
         <styles xmi:type="notation:DiagramStyle" xmi:id="_BLwm8mkWEe25ONJ3V89cVA"/>
         <edges xmi:type="notation:Connector" xmi:id="_3l6igGkfEe25ONJ3V89cVA" type="NoteAttachment" source="_CMRBvWkWEe25ONJ3V89cVA" target="_2fMyEGkfEe25ONJ3V89cVA" lineWidth="1">
           <styles xmi:type="notation:ArrowStyle" xmi:id="_3l6igWkfEe25ONJ3V89cVA"/>
@@ -4930,6 +5023,54 @@
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_bAeQ2nW8Ee2LTNnGda5kaw" id="(1.0,0.3153526970954357)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_bAeQ23W8Ee2LTNnGda5kaw" id="(0.8235294117647058,0.0)"/>
         </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_6ln08H5UEe2kLcMqsIbMgQ" visible="false" type="4001" element="_6igPjH5UEe2kLcMqsIbMgQ" source="_6lf5IH5UEe2kLcMqsIbMgQ" target="_NuiWJ3W7Ee2LTNnGda5kaw">
+          <children xmi:type="notation:Node" xmi:id="_6locAH5UEe2kLcMqsIbMgQ" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6locAX5UEe2kLcMqsIbMgQ" x="24" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_6locAn5UEe2kLcMqsIbMgQ" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6locA35UEe2kLcMqsIbMgQ" x="41" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_6lpDEH5UEe2kLcMqsIbMgQ" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6lpDEX5UEe2kLcMqsIbMgQ" x="7" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_6ln08X5UEe2kLcMqsIbMgQ" routing="Rectilinear"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_6ln08n5UEe2kLcMqsIbMgQ" fontColor="4408901" fontName=".AppleSystemUIFont" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_6ln0835UEe2kLcMqsIbMgQ" points="[102, 6, -166, 6]$[166, 6, -102, 6]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_6lrfUH5UEe2kLcMqsIbMgQ" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_6lrfUX5UEe2kLcMqsIbMgQ" id="(0.5,0.5)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_CZNtEH5VEe2kLcMqsIbMgQ" type="4001" element="_CS4bpX5VEe2kLcMqsIbMgQ" source="_CMRBtmkWEe25ONJ3V89cVA" target="_6lf5IH5UEe2kLcMqsIbMgQ">
+          <children xmi:type="notation:Node" xmi:id="_CZNtFH5VEe2kLcMqsIbMgQ" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CZNtFX5VEe2kLcMqsIbMgQ" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_CZOUIH5VEe2kLcMqsIbMgQ" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CZOUIX5VEe2kLcMqsIbMgQ" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_CZOUIn5VEe2kLcMqsIbMgQ" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CZOUI35VEe2kLcMqsIbMgQ" x="-2" y="-36"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_CZNtEX5VEe2kLcMqsIbMgQ" routing="Rectilinear"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_CZNtEn5VEe2kLcMqsIbMgQ" fontColor="4408901" fontName=".AppleSystemUIFont" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_CZNtE35VEe2kLcMqsIbMgQ" points="[0, 0, 0, -159]$[0, 159, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CZOUJH5VEe2kLcMqsIbMgQ" id="(0.3317972350230415,1.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CZOUJX5VEe2kLcMqsIbMgQ" id="(0.28921568627450983,0.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_KgDRU35VEe2kLcMqsIbMgQ" type="4001" element="_KZhLlX5VEe2kLcMqsIbMgQ" source="_CMRBtmkWEe25ONJ3V89cVA" target="_6lf5IH5UEe2kLcMqsIbMgQ">
+          <children xmi:type="notation:Node" xmi:id="_KgD4YH5VEe2kLcMqsIbMgQ" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KgD4YX5VEe2kLcMqsIbMgQ" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_KgD4Yn5VEe2kLcMqsIbMgQ" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KgD4Y35VEe2kLcMqsIbMgQ" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_KgD4ZH5VEe2kLcMqsIbMgQ" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KgD4ZX5VEe2kLcMqsIbMgQ" x="-2" y="-36"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_KgDRVH5VEe2kLcMqsIbMgQ" routing="Rectilinear"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_KgDRVX5VEe2kLcMqsIbMgQ" fontColor="4408901" fontName=".AppleSystemUIFont" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_KgDRVn5VEe2kLcMqsIbMgQ" points="[0, 0, 0, -159]$[0, 159, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_KgD4Zn5VEe2kLcMqsIbMgQ" id="(0.7004608294930875,1.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_KgD4Z35VEe2kLcMqsIbMgQ" id="(0.6813725490196079,0.0)"/>
+        </edges>
       </data>
     </ownedAnnotationEntries>
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_BL0RUGkWEe25ONJ3V89cVA" source="DANNOTATION_CUSTOMIZATION_KEY">
@@ -4966,6 +5107,12 @@
             <labelColor xmi:type="description:UserFixedColor" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@userColorsPalettes[name='Palette1']/@entries[name='RelationFont']"/>
           </endLabelStyleDescription>
         </computedStyleDescriptions>
+        <computedStyleDescriptions xmi:type="style:SquareDescription" xmi:id="_6iQX5X5UEe2kLcMqsIbMgQ" labelExpression="aql:self.getMember().getDisplayLabel()" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/initializer.gif" labelAlignment="LEFT" tooltipExpression="aql:self.oclAsType(operation::OperationReference).getMember().getDescription()" labelPosition="node" resizeKind="NSEW">
+          <borderColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelFormat>underline</labelFormat>
+          <labelColor xmi:type="description:UserFixedColor" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@userColorsPalettes[name='Palette1']/@entries[name='EntityMemberFont']"/>
+          <color xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </computedStyleDescriptions>
       </data>
     </ownedAnnotationEntries>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_BLwm82kWEe25ONJ3V89cVA" name="edemokracia">
@@ -4977,7 +5124,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_3:ContainerMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@defaultLayer/@containerMappings[name='diagramTitle']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_CLxScGkWEe25ONJ3V89cVA" name="User" tooltipText=" &#xA; Name: User &#xA; Abstract: false &#xA; Create is allowed: true &#xA; Update is allowed: true &#xA; Delete is allowed: true &#xA;" outgoingEdges="_4Jfq-HW7Ee2LTNnGda5kaw _MscxqHW8Ee2LTNnGda5kaw _Vxhf1HW8Ee2LTNnGda5kaw _aqCG6nW8Ee2LTNnGda5kaw" width="15" childrenPresentation="VerticalStack">
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_CLxScGkWEe25ONJ3V89cVA" name="User" tooltipText=" &#xA; Name: User &#xA; Abstract: false &#xA; Create is allowed: true &#xA; Update is allowed: true &#xA; Delete is allowed: true &#xA;" outgoingEdges="_4Jfq-HW7Ee2LTNnGda5kaw _MscxqHW8Ee2LTNnGda5kaw _Vxhf1HW8Ee2LTNnGda5kaw _aqCG6nW8Ee2LTNnGda5kaw _CS4bpX5VEe2kLcMqsIbMgQ _KZhLlX5VEe2kLcMqsIbMgQ" width="15" childrenPresentation="VerticalStack">
       <target xmi:type="structure:EntityType" href="model/edemokracia.model#_BuSFMGkWEe25ONJ3V89cVA"/>
       <semanticElements xmi:type="structure:EntityType" href="model/edemokracia.model#_BuSFMGkWEe25ONJ3V89cVA"/>
       <decorations xmi:type="viewpoint:Decoration" uid="_CLxScmkWEe25ONJ3V89cVA">
@@ -5078,7 +5225,7 @@
           <ownedStyle xmi:type="diagram:Square" uid="_hrCDwWkYEe25ONJ3V89cVA" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-2-dir.png" labelAlignment="LEFT" description="_hrCDwGkYEe25ONJ3V89cVA" labelPosition="node"/>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_4JUryXW7Ee2LTNnGda5kaw" name="residentCity : City [0..*]" visible="false" tooltipText=" &#xA; Name: residentCity &#xA; Target: edemokracia::City &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_4JUryXW7Ee2LTNnGda5kaw" name="residentCity : City [0..1]" visible="false" tooltipText=" &#xA; Name: residentCity &#xA; Target: edemokracia::City &#xA; Cardinality: [0..1] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_2xogEHW7Ee2LTNnGda5kaw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_2xogEHW7Ee2LTNnGda5kaw"/>
           <ownedStyle xmi:type="diagram:Square" uid="_4JUrynW7Ee2LTNnGda5kaw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
@@ -5086,7 +5233,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_MsRyd3W8Ee2LTNnGda5kaw" name="activityCounty : City [0..*]" visible="false" tooltipText=" &#xA; Name: activityCounty &#xA; Target: edemokracia::City &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_MsRyd3W8Ee2LTNnGda5kaw" name="activityCities : City [0..*]" visible="false" tooltipText=" &#xA; Name: activityCities &#xA; Target: edemokracia::City &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_KDzUUHW8Ee2LTNnGda5kaw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_KDzUUHW8Ee2LTNnGda5kaw"/>
           <ownedStyle xmi:type="diagram:Square" uid="_MsRyeHW8Ee2LTNnGda5kaw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
@@ -5102,10 +5249,26 @@
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_ap3HrHW8Ee2LTNnGda5kaw" name="activityDistrict : District [0..*]" visible="false" tooltipText=" &#xA; Name: activityDistrict &#xA; Target: edemokracia::District &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_ap3HrHW8Ee2LTNnGda5kaw" name="activityDistricts : District [0..*]" visible="false" tooltipText=" &#xA; Name: activityDistricts &#xA; Target: edemokracia::District &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_YvK8kHW8Ee2LTNnGda5kaw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_YvK8kHW8Ee2LTNnGda5kaw"/>
           <ownedStyle xmi:type="diagram:Square" uid="_ap3HrXW8Ee2LTNnGda5kaw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_CSnV235VEe2kLcMqsIbMgQ" name="residentCounty : County [0..1]" visible="false" tooltipText=" &#xA; Name: residentCounty &#xA; Target: edemokracia::County &#xA; Cardinality: [0..1] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+          <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_-zCQkH5UEe2kLcMqsIbMgQ"/>
+          <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_-zCQkH5UEe2kLcMqsIbMgQ"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_CSn84H5VEe2kLcMqsIbMgQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_KZQFyn5VEe2kLcMqsIbMgQ" name="activityCounties : County [0..*]" visible="false" tooltipText=" &#xA; Name: activityCounties &#xA; Target: edemokracia::County &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+          <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_IdzFsH5VEe2kLcMqsIbMgQ"/>
+          <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_IdzFsH5VEe2kLcMqsIbMgQ"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_KZQFy35VEe2kLcMqsIbMgQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
             <description xmi:type="style:SquareDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
@@ -5134,7 +5297,7 @@
         <actualMapping xmi:type="description_3:ContainerMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='QueryCompartment']"/>
       </ownedDiagramElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_NsDp6XW7Ee2LTNnGda5kaw" name="City" tooltipText=" &#xA; Name: City &#xA; Abstract: false &#xA; Create is allowed: true &#xA; Update is allowed: true &#xA; Delete is allowed: true &#xA;" outgoingEdges="_NsSTanW7Ee2LTNnGda5kaw" incomingEdges="_4Jfq-HW7Ee2LTNnGda5kaw _MscxqHW8Ee2LTNnGda5kaw" width="15" childrenPresentation="VerticalStack">
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_NsDp6XW7Ee2LTNnGda5kaw" name="City" tooltipText=" &#xA; Name: City &#xA; Abstract: false &#xA; Create is allowed: true &#xA; Update is allowed: true &#xA; Delete is allowed: true &#xA;" outgoingEdges="_NsSTanW7Ee2LTNnGda5kaw" incomingEdges="_4Jfq-HW7Ee2LTNnGda5kaw _MscxqHW8Ee2LTNnGda5kaw _6igPjH5UEe2kLcMqsIbMgQ" width="15" childrenPresentation="VerticalStack">
       <target xmi:type="structure:EntityType" href="model/edemokracia.model#_knKwMHW6Ee2LTNnGda5kaw"/>
       <semanticElements xmi:type="structure:EntityType" href="model/edemokracia.model#_knKwMHW6Ee2LTNnGda5kaw"/>
       <decorations xmi:type="viewpoint:Decoration" uid="_NsEQ8XW7Ee2LTNnGda5kaw">
@@ -5296,7 +5459,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_3:EdgeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@edgeMappings[name='Relation']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_4Jfq-HW7Ee2LTNnGda5kaw" sourceNode="_CLxScGkWEe25ONJ3V89cVA" targetNode="_NsDp6XW7Ee2LTNnGda5kaw" endLabel="[0..*]&#xA;residentCity&#xA;">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_4Jfq-HW7Ee2LTNnGda5kaw" sourceNode="_CLxScGkWEe25ONJ3V89cVA" targetNode="_NsDp6XW7Ee2LTNnGda5kaw" endLabel="[0..1]&#xA;residentCity&#xA;">
       <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_2xogEHW7Ee2LTNnGda5kaw"/>
       <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_2xogEHW7Ee2LTNnGda5kaw"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_4Jfq-XW7Ee2LTNnGda5kaw" size="2" routingStyle="manhattan" strokeColor="114,159,207">
@@ -5306,7 +5469,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_3:EdgeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@edgeMappings[name='Relation']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_MscxqHW8Ee2LTNnGda5kaw" sourceNode="_CLxScGkWEe25ONJ3V89cVA" targetNode="_NsDp6XW7Ee2LTNnGda5kaw" endLabel="[0..*]&#xA;activityCounty&#xA;">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_MscxqHW8Ee2LTNnGda5kaw" sourceNode="_CLxScGkWEe25ONJ3V89cVA" targetNode="_NsDp6XW7Ee2LTNnGda5kaw" endLabel="[0..*]&#xA;activityCities&#xA;">
       <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_KDzUUHW8Ee2LTNnGda5kaw"/>
       <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_KDzUUHW8Ee2LTNnGda5kaw"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_MscxqXW8Ee2LTNnGda5kaw" size="2" routingStyle="manhattan" strokeColor="114,159,207">
@@ -5326,13 +5489,130 @@
       </ownedStyle>
       <actualMapping xmi:type="description_3:EdgeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@edgeMappings[name='Relation']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_aqCG6nW8Ee2LTNnGda5kaw" sourceNode="_CLxScGkWEe25ONJ3V89cVA" targetNode="_NsEQ-HW7Ee2LTNnGda5kaw" endLabel="[0..*]&#xA;activityDistrict&#xA;">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_aqCG6nW8Ee2LTNnGda5kaw" sourceNode="_CLxScGkWEe25ONJ3V89cVA" targetNode="_NsEQ-HW7Ee2LTNnGda5kaw" endLabel="[0..*]&#xA;activityDistricts&#xA;">
       <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_YvK8kHW8Ee2LTNnGda5kaw"/>
       <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_YvK8kHW8Ee2LTNnGda5kaw"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_aqCt0HW8Ee2LTNnGda5kaw" size="2" routingStyle="manhattan" strokeColor="114,159,207">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@edgeMappings[name='Relation']/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" uid="_aqCt0XW8Ee2LTNnGda5kaw" showIcon="false" labelColor="69,70,67"/>
         <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_aqCt0nW8Ee2LTNnGda5kaw" showIcon="false" labelColor="69,70,67"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_3:EdgeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@edgeMappings[name='Relation']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_6iExsH5UEe2kLcMqsIbMgQ" name="County" tooltipText=" &#xA; Name: County &#xA; Abstract: false &#xA; Create is allowed: true &#xA; Update is allowed: true &#xA; Delete is allowed: true &#xA;" outgoingEdges="_6igPjH5UEe2kLcMqsIbMgQ" incomingEdges="_CS4bpX5VEe2kLcMqsIbMgQ _KZhLlX5VEe2kLcMqsIbMgQ" width="15" childrenPresentation="VerticalStack">
+      <target xmi:type="structure:EntityType" href="model/edemokracia.model#_uBoOUH2jEe2LTNnGda5kaw"/>
+      <semanticElements xmi:type="structure:EntityType" href="model/edemokracia.model#_uBoOUH2jEe2LTNnGda5kaw"/>
+      <decorations xmi:type="viewpoint:Decoration" uid="_6iF_0X5UEe2kLcMqsIbMgQ">
+        <description xmi:type="description_3:MappingBasedDecoration" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@defaultLayer/@decorationDescriptionsSet/@decorationDescriptions[name='C_ClassCreateable']"/>
+      </decorations>
+      <decorations xmi:type="viewpoint:Decoration" uid="_6iF_0n5UEe2kLcMqsIbMgQ">
+        <description xmi:type="description_3:MappingBasedDecoration" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@defaultLayer/@decorationDescriptionsSet/@decorationDescriptions[name='B_ClassUpdateable']"/>
+      </decorations>
+      <decorations xmi:type="viewpoint:Decoration" uid="_6iF_035UEe2kLcMqsIbMgQ">
+        <description xmi:type="description_3:MappingBasedDecoration" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@defaultLayer/@decorationDescriptionsSet/@decorationDescriptions[name='A_ClassDeleteable']"/>
+      </decorations>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_6iF_0H5UEe2kLcMqsIbMgQ" labelSize="10" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/entity.png" labelColor="69,70,67" borderSize="2" borderSizeComputationExpression="2" borderColor="136,138,133" backgroundColor="207,227,232" foregroundColor="189,216,223">
+        <labelFormat>bold</labelFormat>
+        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_3:ContainerMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']"/>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_6iOisn5UEe2kLcMqsIbMgQ" width="20">
+        <target xmi:type="structure:EntityType" href="model/edemokracia.model#_uBoOUH2jEe2LTNnGda5kaw"/>
+        <semanticElements xmi:type="structure:EntityType" href="model/edemokracia.model#_uBoOUH2jEe2LTNnGda5kaw"/>
+        <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_6iPJwH5UEe2kLcMqsIbMgQ"/>
+        <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" uid="_7bfF8H5UEe2kLcMqsIbMgQ" height="-1" width="200"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_6iOis35UEe2kLcMqsIbMgQ" labelSize="10" showIcon="false" borderSize="1" borderSizeComputationExpression="1" borderColor="136,138,133" hideLabelByDefault="true" foregroundColor="207,227,232">
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='AttributeCompartment']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_3:ContainerMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='AttributeCompartment']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_6iPJwX5UEe2kLcMqsIbMgQ" name="name : String" tooltipText=" &#xA; Name: name &#xA; Type: edemokracia::types::String &#xA; Default value:  &#xA; Required: false &#xA; Read-only: false &#xA; Identifier: false &#xA;">
+          <target xmi:type="structure:DataMember" href="model/edemokracia.model#_wKeKIH2jEe2LTNnGda5kaw"/>
+          <semanticElements xmi:type="structure:DataMember" href="model/edemokracia.model#_wKeKIH2jEe2LTNnGda5kaw"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_6iPw0H5UEe2kLcMqsIbMgQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/attribute.png" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='AttributeCompartment']/@subNodeMappings[name='Attribute']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='AttributeCompartment']/@subNodeMappings[name='Attribute']"/>
+        </ownedElements>
+      </ownedDiagramElements>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_6iPw0X5UEe2kLcMqsIbMgQ" visible="false" width="20">
+        <target xmi:type="structure:EntityType" href="model/edemokracia.model#_uBoOUH2jEe2LTNnGda5kaw"/>
+        <semanticElements xmi:type="structure:EntityType" href="model/edemokracia.model#_uBoOUH2jEe2LTNnGda5kaw"/>
+        <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_6iPw1H5UEe2kLcMqsIbMgQ"/>
+        <graphicalFilters xmi:type="diagram:AppliedCompositeFilters" uid="_6lt7kH5UEe2kLcMqsIbMgQ">
+          <compositeFilterDescriptions xmi:type="filter:CompositeFilterDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@filters[name='HideRelationCompartment']"/>
+        </graphicalFilters>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_6iPw0n5UEe2kLcMqsIbMgQ" labelSize="10" showIcon="false" borderSize="1" borderSizeComputationExpression="1" borderColor="136,138,133" hideLabelByDefault="true" foregroundColor="207,227,232">
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_3:ContainerMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_6iPw1X5UEe2kLcMqsIbMgQ" name="cities : City [0..*]" visible="false" tooltipText=" &#xA; Name: cities &#xA; Target: edemokracia::City &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+          <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_xk7V8H2jEe2LTNnGda5kaw"/>
+          <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_xk7V8H2jEe2LTNnGda5kaw"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_6iPw1n5UEe2kLcMqsIbMgQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/containment.png" labelAlignment="LEFT" description="_NsGtNHW7Ee2LTNnGda5kaw" labelPosition="node"/>
+          <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
+        </ownedElements>
+      </ownedDiagramElements>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_6iQX4H5UEe2kLcMqsIbMgQ" width="20">
+        <target xmi:type="structure:EntityType" href="model/edemokracia.model#_uBoOUH2jEe2LTNnGda5kaw"/>
+        <semanticElements xmi:type="structure:EntityType" href="model/edemokracia.model#_uBoOUH2jEe2LTNnGda5kaw"/>
+        <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_6iQX435UEe2kLcMqsIbMgQ"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_6iQX4X5UEe2kLcMqsIbMgQ" showIcon="false" borderSize="1" borderSizeComputationExpression="1" borderColor="136,138,133" hideLabelByDefault="true" foregroundColor="207,227,232">
+          <labelFormat>italic</labelFormat>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='OperationCompartment']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_3:ContainerMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='OperationCompartment']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_6iQX5H5UEe2kLcMqsIbMgQ" name="initAreas()" tooltipText=" &#xA; Name: initAreas &#xA; Input:  &#xA; Output:  &#xA;">
+          <target xmi:type="operation:Operation" href="model/edemokracia.model#_0rwZ0H3sEe2Z3oDlL3R4tA"/>
+          <semanticElements xmi:type="operation:Operation" href="model/edemokracia.model#_0rwZ0H3sEe2Z3oDlL3R4tA"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_6iQX5n5UEe2kLcMqsIbMgQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/initializer.gif" labelAlignment="LEFT" description="_6iQX5X5UEe2kLcMqsIbMgQ" labelPosition="node">
+            <labelFormat>underline</labelFormat>
+          </ownedStyle>
+          <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='OperationCompartment']/@subNodeMappings[name='Operation']"/>
+        </ownedElements>
+      </ownedDiagramElements>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_6iQ-8H5UEe2kLcMqsIbMgQ" visible="false" width="20">
+        <target xmi:type="structure:EntityType" href="model/edemokracia.model#_uBoOUH2jEe2LTNnGda5kaw"/>
+        <semanticElements xmi:type="structure:EntityType" href="model/edemokracia.model#_uBoOUH2jEe2LTNnGda5kaw"/>
+        <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_6iQ-835UEe2kLcMqsIbMgQ"/>
+        <graphicalFilters xmi:type="diagram:AppliedCompositeFilters" uid="_6luioH5UEe2kLcMqsIbMgQ">
+          <compositeFilterDescriptions xmi:type="filter:CompositeFilterDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@filters[name='HideQueryCompartment']"/>
+        </graphicalFilters>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_6iQ-8X5UEe2kLcMqsIbMgQ" labelSize="10" showIcon="false" borderSize="1" borderSizeComputationExpression="1" borderColor="136,138,133" hideLabelByDefault="true" foregroundColor="207,227,232">
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='QueryCompartment']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_3:ContainerMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='QueryCompartment']"/>
+      </ownedDiagramElements>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_6igPjH5UEe2kLcMqsIbMgQ" visible="false" sourceNode="_6iExsH5UEe2kLcMqsIbMgQ" targetNode="_NsDp6XW7Ee2LTNnGda5kaw" endLabel="[0..*]&#xA;cities&#xA;">
+      <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_xk7V8H2jEe2LTNnGda5kaw"/>
+      <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_xk7V8H2jEe2LTNnGda5kaw"/>
+      <graphicalFilters xmi:type="diagram:HideFilter" uid="_8j7UsH5UEe2kLcMqsIbMgQ"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_6igPjX5UEe2kLcMqsIbMgQ" description="_NsSTYXW7Ee2LTNnGda5kaw" sourceArrow="FillDiamond" size="2" routingStyle="manhattan" strokeColor="114,159,207">
+        <beginLabelStyle xmi:type="diagram:BeginLabelStyle" uid="_6igPjn5UEe2kLcMqsIbMgQ" showIcon="false" labelColor="69,70,67"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_6igPj35UEe2kLcMqsIbMgQ" showIcon="false" labelColor="69,70,67"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_3:EdgeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@edgeMappings[name='Relation']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_CS4bpX5VEe2kLcMqsIbMgQ" sourceNode="_CLxScGkWEe25ONJ3V89cVA" targetNode="_6iExsH5UEe2kLcMqsIbMgQ" endLabel="[0..1]&#xA;residentCounty&#xA;">
+      <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_-zCQkH5UEe2kLcMqsIbMgQ"/>
+      <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_-zCQkH5UEe2kLcMqsIbMgQ"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_CS5CoH5VEe2kLcMqsIbMgQ" size="2" routingStyle="manhattan" strokeColor="114,159,207">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@edgeMappings[name='Relation']/@style"/>
+        <beginLabelStyle xmi:type="diagram:BeginLabelStyle" uid="_CS5CoX5VEe2kLcMqsIbMgQ" showIcon="false" labelColor="69,70,67"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_CS5Con5VEe2kLcMqsIbMgQ" showIcon="false" labelColor="69,70,67"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_3:EdgeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@edgeMappings[name='Relation']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_KZhLlX5VEe2kLcMqsIbMgQ" sourceNode="_CLxScGkWEe25ONJ3V89cVA" targetNode="_6iExsH5UEe2kLcMqsIbMgQ" endLabel="[0..*]&#xA;activityCounties&#xA;">
+      <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_IdzFsH5VEe2kLcMqsIbMgQ"/>
+      <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_IdzFsH5VEe2kLcMqsIbMgQ"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_KZhykH5VEe2kLcMqsIbMgQ" size="2" routingStyle="manhattan" strokeColor="114,159,207">
+        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@edgeMappings[name='Relation']/@style"/>
+        <beginLabelStyle xmi:type="diagram:BeginLabelStyle" uid="_KZhykX5VEe2kLcMqsIbMgQ" showIcon="false" labelColor="69,70,67"/>
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_KZhykn5VEe2kLcMqsIbMgQ" showIcon="false" labelColor="69,70,67"/>
       </ownedStyle>
       <actualMapping xmi:type="description_3:EdgeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@edgeMappings[name='Relation']"/>
     </ownedDiagramElements>
@@ -6087,6 +6367,14 @@
                   <styles xmi:type="notation:FontStyle" xmi:id="_bAe34XW8Ee2LTNnGda5kaw" fontName=".AppleSystemUIFont" fontHeight="8"/>
                   <layoutConstraint xmi:type="notation:Location" xmi:id="_bAe34nW8Ee2LTNnGda5kaw"/>
                 </children>
+                <children xmi:type="notation:Node" xmi:id="_CZO7MH5VEe2kLcMqsIbMgQ" visible="false" type="3010" element="_CPPRun5VEe2kLcMqsIbMgQ">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_CZO7MX5VEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="8"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_CZO7Mn5VEe2kLcMqsIbMgQ"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_KgEfcH5VEe2kLcMqsIbMgQ" visible="false" type="3010" element="_KV4ouX5VEe2kLcMqsIbMgQ">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_KgEfcX5VEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="8"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_KgEfcn5VEe2kLcMqsIbMgQ"/>
+                </children>
                 <styles xmi:type="notation:SortingStyle" xmi:id="_j2RAxGkiEe25ONJ3V89cVA"/>
                 <styles xmi:type="notation:FilteringStyle" xmi:id="_j2RAxWkiEe25ONJ3V89cVA"/>
                 <styles xmi:type="notation:DrawerStyle" xmi:id="_j2RAxmkiEe25ONJ3V89cVA"/>
@@ -6609,14 +6897,14 @@
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AV3OtX4oEe26qs0-AXQJQw" y="-10"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_AV3Otn4oEe26qs0-AXQJQw" type="6002">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AV3Ot34oEe26qs0-AXQJQw" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AV3Ot34oEe26qs0-AXQJQw" x="6" y="10"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_AV3OuH4oEe26qs0-AXQJQw" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AV3OuX4oEe26qs0-AXQJQw" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AV3OuX4oEe26qs0-AXQJQw" x="-22" y="22"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_AV3OsX4oEe26qs0-AXQJQw" routing="Rectilinear"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_AV3Osn4oEe26qs0-AXQJQw" fontColor="4408901" fontName=".AppleSystemUIFont" fontHeight="8"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_AV3Os34oEe26qs0-AXQJQw" points="[0, 0, -103, 43]$[51, 0, -52, 43]$[51, -43, -52, 0]$[103, -43, 0, 0]"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_AV3Os34oEe26qs0-AXQJQw" points="[0, -2, -103, 41]$[103, -2, 0, 41]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_AV3Oun4oEe26qs0-AXQJQw" id="(1.0,0.30386740331491713)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_AV3Ou34oEe26qs0-AXQJQw" id="(0.0,0.10909090909090909)"/>
         </edges>
@@ -6802,7 +7090,7 @@
           <ownedStyle xmi:type="diagram:Square" uid="__wcyMG6JEe2wNaja8kBvcQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/containment.png" labelAlignment="LEFT" description="_fegHiWkZEe25ONJ3V89cVA" labelPosition="node"/>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="___sxeH4nEe26qs0-AXQJQw" name="comments : Comment [0..*]" visible="false" tooltipText=" &#xA; Name: comments &#xA; Target: edemokracia::Comment &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: true &#xA; Update is allowed: true &#xA; Delete is allowed: true &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="___sxeH4nEe26qs0-AXQJQw" name="comments : Comment [0..*]" visible="false" tooltipText=" &#xA; Name: comments &#xA; Target: edemokracia::Comment &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#__Dx7wH4nEe26qs0-AXQJQw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#__Dx7wH4nEe26qs0-AXQJQw"/>
           <ownedStyle xmi:type="diagram:Square" uid="___sxeX4nEe26qs0-AXQJQw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/containment.png" labelAlignment="LEFT" description="_fegHiWkZEe25ONJ3V89cVA" labelPosition="node"/>
@@ -7701,7 +7989,7 @@
           <ownedStyle xmi:type="diagram:Square" uid="_j2Id02kiEe25ONJ3V89cVA" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-2-dir.png" labelAlignment="LEFT" description="_fegHhWkZEe25ONJ3V89cVA" labelPosition="node"/>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_4OT5cXW7Ee2LTNnGda5kaw" name="residentCity : City [0..*]" visible="false" tooltipText=" &#xA; Name: residentCity &#xA; Target: edemokracia::City &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_4OT5cXW7Ee2LTNnGda5kaw" name="residentCity : City [0..1]" visible="false" tooltipText=" &#xA; Name: residentCity &#xA; Target: edemokracia::City &#xA; Cardinality: [0..1] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_2xogEHW7Ee2LTNnGda5kaw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_2xogEHW7Ee2LTNnGda5kaw"/>
           <ownedStyle xmi:type="diagram:Square" uid="_4OT5cnW7Ee2LTNnGda5kaw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
@@ -7709,7 +7997,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_MxTcaHW8Ee2LTNnGda5kaw" name="activityCounty : City [0..*]" visible="false" tooltipText=" &#xA; Name: activityCounty &#xA; Target: edemokracia::City &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_MxTcaHW8Ee2LTNnGda5kaw" name="activityCities : City [0..*]" visible="false" tooltipText=" &#xA; Name: activityCities &#xA; Target: edemokracia::City &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_KDzUUHW8Ee2LTNnGda5kaw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_KDzUUHW8Ee2LTNnGda5kaw"/>
           <ownedStyle xmi:type="diagram:Square" uid="_MxTcaXW8Ee2LTNnGda5kaw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
@@ -7725,10 +8013,26 @@
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_au6m1XW8Ee2LTNnGda5kaw" name="activityDistrict : District [0..*]" visible="false" tooltipText=" &#xA; Name: activityDistrict &#xA; Target: edemokracia::District &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_au6m1XW8Ee2LTNnGda5kaw" name="activityDistricts : District [0..*]" visible="false" tooltipText=" &#xA; Name: activityDistricts &#xA; Target: edemokracia::District &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_YvK8kHW8Ee2LTNnGda5kaw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_YvK8kHW8Ee2LTNnGda5kaw"/>
           <ownedStyle xmi:type="diagram:Square" uid="_au7N0HW8Ee2LTNnGda5kaw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_CPPRun5VEe2kLcMqsIbMgQ" name="residentCounty : County [0..1]" visible="false" tooltipText=" &#xA; Name: residentCounty &#xA; Target: edemokracia::County &#xA; Cardinality: [0..1] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+          <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_-zCQkH5UEe2kLcMqsIbMgQ"/>
+          <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_-zCQkH5UEe2kLcMqsIbMgQ"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_CPP4wH5VEe2kLcMqsIbMgQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_KV4ouX5VEe2kLcMqsIbMgQ" name="activityCounties : County [0..*]" visible="false" tooltipText=" &#xA; Name: activityCounties &#xA; Target: edemokracia::County &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+          <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_IdzFsH5VEe2kLcMqsIbMgQ"/>
+          <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_IdzFsH5VEe2kLcMqsIbMgQ"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_KV4oun5VEe2kLcMqsIbMgQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
             <description xmi:type="style:SquareDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
@@ -8189,7 +8493,7 @@
         </ownedElements>
       </ownedDiagramElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_AACvwn4oEe26qs0-AXQJQw" sourceNode="_fefeY2kZEe25ONJ3V89cVA" targetNode="_feffD2kZEe25ONJ3V89cVA" endLabel="[0..*]&#xA;comments&#xA;{C,U,D}">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_AACvwn4oEe26qs0-AXQJQw" sourceNode="_fefeY2kZEe25ONJ3V89cVA" targetNode="_feffD2kZEe25ONJ3V89cVA" endLabel="[0..*]&#xA;comments&#xA;">
       <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#__Dx7wH4nEe26qs0-AXQJQw"/>
       <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#__Dx7wH4nEe26qs0-AXQJQw"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_AACvw34oEe26qs0-AXQJQw" description="_fegHimkZEe25ONJ3V89cVA" sourceArrow="FillDiamond" size="2" routingStyle="manhattan" strokeColor="114,159,207">
@@ -8375,6 +8679,14 @@
                 <children xmi:type="notation:Node" xmi:id="_bAeQ3HW8Ee2LTNnGda5kaw" visible="false" type="3010" element="_a2rbpXW8Ee2LTNnGda5kaw">
                   <styles xmi:type="notation:FontStyle" xmi:id="_bAeQ3XW8Ee2LTNnGda5kaw" fontName=".AppleSystemUIFont" fontHeight="8"/>
                   <layoutConstraint xmi:type="notation:Location" xmi:id="_bAeQ3nW8Ee2LTNnGda5kaw"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_vYdjgH5VEe2kLcMqsIbMgQ" visible="false" type="3010" element="_vVGGeX5VEe2kLcMqsIbMgQ">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_vYdjgX5VEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="8"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_vYdjgn5VEe2kLcMqsIbMgQ"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_vYdjg35VEe2kLcMqsIbMgQ" visible="false" type="3010" element="_vVGGe35VEe2kLcMqsIbMgQ">
+                  <styles xmi:type="notation:FontStyle" xmi:id="_vYdjhH5VEe2kLcMqsIbMgQ" fontName=".AppleSystemUIFont" fontHeight="8"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="_vYdjhX5VEe2kLcMqsIbMgQ"/>
                 </children>
                 <styles xmi:type="notation:SortingStyle" xmi:id="_gS7ZrWkeEe25ONJ3V89cVA"/>
                 <styles xmi:type="notation:FilteringStyle" xmi:id="_gS7ZrmkeEe25ONJ3V89cVA"/>
@@ -8983,7 +9295,7 @@
           <ownedStyle xmi:type="diagram:Square" uid="_gS1TAmkeEe25ONJ3V89cVA" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-2-dir.png" labelAlignment="LEFT" description="_0KsrsmkdEe25ONJ3V89cVA" labelPosition="node"/>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_4V5IKXW7Ee2LTNnGda5kaw" name="residentCity : City [0..*]" visible="false" tooltipText=" &#xA; Name: residentCity &#xA; Target: edemokracia::City &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_4V5IKXW7Ee2LTNnGda5kaw" name="residentCity : City [0..1]" visible="false" tooltipText=" &#xA; Name: residentCity &#xA; Target: edemokracia::City &#xA; Cardinality: [0..1] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_2xogEHW7Ee2LTNnGda5kaw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_2xogEHW7Ee2LTNnGda5kaw"/>
           <ownedStyle xmi:type="diagram:Square" uid="_4V5IKnW7Ee2LTNnGda5kaw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
@@ -8991,7 +9303,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_M46gSXW8Ee2LTNnGda5kaw" name="activityCounty : City [0..*]" visible="false" tooltipText=" &#xA; Name: activityCounty &#xA; Target: edemokracia::City &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_M46gSXW8Ee2LTNnGda5kaw" name="activityCities : City [0..*]" visible="false" tooltipText=" &#xA; Name: activityCities &#xA; Target: edemokracia::City &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_KDzUUHW8Ee2LTNnGda5kaw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_KDzUUHW8Ee2LTNnGda5kaw"/>
           <ownedStyle xmi:type="diagram:Square" uid="_M46gSnW8Ee2LTNnGda5kaw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
@@ -9007,10 +9319,26 @@
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_a2rbpXW8Ee2LTNnGda5kaw" name="activityDistrict : District [0..*]" visible="false" tooltipText=" &#xA; Name: activityDistrict &#xA; Target: edemokracia::District &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_a2rbpXW8Ee2LTNnGda5kaw" name="activityDistricts : District [0..*]" visible="false" tooltipText=" &#xA; Name: activityDistricts &#xA; Target: edemokracia::District &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_YvK8kHW8Ee2LTNnGda5kaw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_YvK8kHW8Ee2LTNnGda5kaw"/>
           <ownedStyle xmi:type="diagram:Square" uid="_a2rbpnW8Ee2LTNnGda5kaw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_vVGGeX5VEe2kLcMqsIbMgQ" name="residentCounty : County [0..1]" visible="false" tooltipText=" &#xA; Name: residentCounty &#xA; Target: edemokracia::County &#xA; Cardinality: [0..1] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+          <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_-zCQkH5UEe2kLcMqsIbMgQ"/>
+          <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_-zCQkH5UEe2kLcMqsIbMgQ"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_vVGGen5VEe2kLcMqsIbMgQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
+            <description xmi:type="style:SquareDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_vVGGe35VEe2kLcMqsIbMgQ" name="activityCounties : County [0..*]" visible="false" tooltipText=" &#xA; Name: activityCounties &#xA; Target: edemokracia::County &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
+          <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_IdzFsH5VEe2kLcMqsIbMgQ"/>
+          <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_IdzFsH5VEe2kLcMqsIbMgQ"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_vVGtgH5VEe2kLcMqsIbMgQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/one-to-one-1-dir.png" labelAlignment="LEFT" labelPosition="node">
             <description xmi:type="style:SquareDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
@@ -20163,7 +20491,7 @@
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PT1Zt3WzEe2LTNnGda5kaw" x="-2" y="-10"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_PT1ZuHWzEe2LTNnGda5kaw" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PT1ZuXWzEe2LTNnGda5kaw" x="-15" y="30"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PT1ZuXWzEe2LTNnGda5kaw" x="-19" y="30"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_PT1ZsXWzEe2LTNnGda5kaw" routing="Rectilinear"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_PT1ZsnWzEe2LTNnGda5kaw" fontColor="4408901" fontName=".AppleSystemUIFont" fontHeight="8" bold="true"/>
@@ -20243,11 +20571,11 @@
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_s_Vct34YEe2cB7_PsKXsHQ" y="10"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_s_VcuH4YEe2cB7_PsKXsHQ" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_s_VcuX4YEe2cB7_PsKXsHQ" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_s_VcuX4YEe2cB7_PsKXsHQ" x="-11" y="-35"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_s_VcsX4YEe2cB7_PsKXsHQ" routing="Rectilinear"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_s_Vcsn4YEe2cB7_PsKXsHQ" fontColor="4408901" fontName=".AppleSystemUIFont" fontHeight="8"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s_Vcs34YEe2cB7_PsKXsHQ" points="[0, 0, 0, 164]$[0, -164, 0, 0]"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s_Vcs34YEe2cB7_PsKXsHQ" points="[-38, -55, -38, 109]$[-38, -109, -38, 55]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_s_Vcun4YEe2cB7_PsKXsHQ" id="(0.5,0.5)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_s_Vcu34YEe2cB7_PsKXsHQ" id="(0.5,0.5)"/>
         </edges>
@@ -20322,9 +20650,14 @@
           <labelColor xmi:type="description:UserFixedColor" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@userColorsPalettes[name='Palette1']/@entries[name='TransferObjectMemberFont']"/>
           <color xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
         </computedStyleDescriptions>
-        <computedStyleDescriptions xmi:type="style:EdgeStyleDescription" xmi:id="_t98cMH4nEe26qs0-AXQJQw" sourceArrow="Diamond" sizeComputationExpression="2" routingStyle="manhattan">
-          <strokeColor xmi:type="description:UserFixedColor" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@userColorsPalettes[name='Palette1']/@entries[name='TransferRelation']"/>
-          <endLabelStyleDescription xmi:type="style:EndLabelStyleDescription" xmi:id="_t98cMX4nEe26qs0-AXQJQw" showIcon="false" labelExpression="aql:self.getMember().getLineDisplayLabel()">
+        <computedStyleDescriptions xmi:type="style:SquareDescription" xmi:id="_LKF3YX5WEe2kLcMqsIbMgQ" labelExpression="aql:self.getMember().getSimpleDisplayLabel()" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/containment.png" labelAlignment="LEFT" tooltipExpression="aql:self.oclAsType(structure::RelationFeatureReference).getMember().getDescription()" labelPosition="node" resizeKind="NSEW">
+          <borderColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <labelColor xmi:type="description:UserFixedColor" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@userColorsPalettes[name='Palette1']/@entries[name='TransferObjectMemberFont']"/>
+          <color xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+        </computedStyleDescriptions>
+        <computedStyleDescriptions xmi:type="style:EdgeStyleDescription" xmi:id="_LL6cVH5WEe2kLcMqsIbMgQ" sourceArrow="FillDiamond" sizeComputationExpression="2" routingStyle="manhattan">
+          <strokeColor xmi:type="description:UserFixedColor" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@userColorsPalettes[name='Palette1']/@entries[name='Relation']"/>
+          <endLabelStyleDescription xmi:type="style:EndLabelStyleDescription" xmi:id="_LL6cVX5WEe2kLcMqsIbMgQ" showIcon="false" labelExpression="aql:self.getMember().getLineDisplayLabel()">
             <labelColor xmi:type="description:UserFixedColor" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@userColorsPalettes[name='Palette1']/@entries[name='TransferRelationFont']"/>
           </endLabelStyleDescription>
         </computedStyleDescriptions>
@@ -20440,7 +20773,7 @@
           <ownedStyle xmi:type="diagram:Square" uid="__r8sv26JEe2wNaja8kBvcQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/containment.png" labelAlignment="LEFT" description="_XpsoWG6HEe2wNaja8kBvcQ" labelPosition="node"/>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@subNodeMappings[name='Relation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_AMG1wH4oEe26qs0-AXQJQw" name="comments : Comment [0..*]" visible="false" tooltipText=" &#xA; Name: comments &#xA; Target: edemokracia::Comment &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: true &#xA; Update is allowed: true &#xA; Delete is allowed: true &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_AMG1wH4oEe26qs0-AXQJQw" name="comments : Comment [0..*]" visible="false" tooltipText=" &#xA; Name: comments &#xA; Target: edemokracia::Comment &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#__Dx7wH4nEe26qs0-AXQJQw"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#__Dx7wH4nEe26qs0-AXQJQw"/>
           <ownedStyle xmi:type="diagram:Square" uid="_AMG1wX4oEe26qs0-AXQJQw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/containment.png" labelAlignment="LEFT" description="_XpsoWG6HEe2wNaja8kBvcQ" labelPosition="node"/>
@@ -20919,7 +21252,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_3:ContainerMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='RelationCompartment']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_u3MbcW6cEe2wNaja8kBvcQ" name="voteSelections : SelectAnswerVoteSelection [0..*]" visible="false" tooltipText=" &#xA; Name: voteSelections &#xA; Target: edemokracia::SelectAnswerVoteSelection &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: true &#xA; Update is allowed: true &#xA; Delete is allowed: true &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_u3MbcW6cEe2wNaja8kBvcQ" name="voteSelections : SelectAnswerVoteSelection [0..*]" visible="false" tooltipText=" &#xA; Name: voteSelections &#xA; Target: edemokracia::SelectAnswerVoteSelection &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_seKHgG6cEe2wNaja8kBvcQ"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_seKHgG6cEe2wNaja8kBvcQ"/>
           <ownedStyle xmi:type="diagram:Square" uid="_u3Mbcm6cEe2wNaja8kBvcQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/containment.png" labelAlignment="LEFT" description="_XpsoWG6HEe2wNaja8kBvcQ" labelPosition="node"/>
@@ -21246,7 +21579,7 @@
         <actualMapping xmi:type="description_3:ContainerMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='EntityLayer']/@containerMappings[name='EntityType']/@subContainerMappings[name='QueryCompartment']"/>
       </ownedDiagramElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_u3YBpm6cEe2wNaja8kBvcQ" sourceNode="_C52hMG6MEe2wNaja8kBvcQ" targetNode="_YwF24G6bEe2wNaja8kBvcQ" endLabel="[0..*]&#xA;voteSelections&#xA;{C,U,D}">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_u3YBpm6cEe2wNaja8kBvcQ" sourceNode="_C52hMG6MEe2wNaja8kBvcQ" targetNode="_YwF24G6bEe2wNaja8kBvcQ" endLabel="[0..*]&#xA;voteSelections&#xA;">
       <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_seKHgG6cEe2wNaja8kBvcQ"/>
       <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_seKHgG6cEe2wNaja8kBvcQ"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_u3YBp26cEe2wNaja8kBvcQ" description="_XpsoWW6HEe2wNaja8kBvcQ" sourceArrow="FillDiamond" size="2" routingStyle="manhattan" strokeColor="114,159,207">
@@ -21625,10 +21958,10 @@
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='ServiceLayer']/@containerMappings[name='TransferObjectType']/@subContainerMappings[name='TransferRelationCompartment']/@subNodeMappings[name='TransferRelation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_s1p8Sn4YEe2cB7_PsKXsHQ" name="voteSelections : SelectAnswerVoteSelection [0..*]" visible="false" tooltipText=" &#xA; Name: voteSelections &#xA; Target: edemokracia::SelectAnswerVoteSelection &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: true &#xA; Update is allowed: true &#xA; Delete is allowed: true &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_s1p8Sn4YEe2cB7_PsKXsHQ" name="voteSelections : SelectAnswerVoteSelection [0..*]" visible="false" tooltipText=" &#xA; Name: voteSelections &#xA; Target: edemokracia::SelectAnswerVoteSelection &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_s1dvAH4YEe2cB7_PsKXsHQ"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_s1dvAH4YEe2cB7_PsKXsHQ"/>
-          <ownedStyle xmi:type="diagram:Square" uid="_t8PMBn4nEe26qs0-AXQJQw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/aggregation.png" labelAlignment="LEFT" description="_s1p8Tn4YEe2cB7_PsKXsHQ" labelPosition="node"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_LKF3Y35WEe2kLcMqsIbMgQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/containment.png" labelAlignment="LEFT" description="_LKF3YX5WEe2kLcMqsIbMgQ" labelPosition="node"/>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='ServiceLayer']/@containerMappings[name='TransferObjectType']/@subContainerMappings[name='TransferRelationCompartment']/@subNodeMappings[name='TransferRelation']"/>
         </ownedElements>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_s1p8TX4YEe2cB7_PsKXsHQ" name="voteEntries : VoteEntry [0..*]" visible="false" tooltipText=" &#xA; Name: voteEntries &#xA; Target: edemokracia::VoteEntry &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: true &#xA; Update is allowed: true &#xA; Delete is allowed: true &#xA;">
@@ -21716,11 +22049,11 @@
       </ownedStyle>
       <actualMapping xmi:type="description_3:EdgeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@defaultLayer/@edgeMappings[name='OperationRelation']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_s3P3tH4YEe2cB7_PsKXsHQ" sourceNode="_PKR1AHWzEe2LTNnGda5kaw" targetNode="_YwF24G6bEe2wNaja8kBvcQ" endLabel="[0..*]&#xA;voteSelections">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_s3P3tH4YEe2cB7_PsKXsHQ" sourceNode="_PKR1AHWzEe2LTNnGda5kaw" targetNode="_YwF24G6bEe2wNaja8kBvcQ" endLabel="[0..*]&#xA;voteSelections&#xA;">
       <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_s1dvAH4YEe2cB7_PsKXsHQ"/>
       <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_s1dvAH4YEe2cB7_PsKXsHQ"/>
-      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_t98cMn4nEe26qs0-AXQJQw" description="_t98cMH4nEe26qs0-AXQJQw" sourceArrow="Diamond" size="2" routingStyle="manhattan" strokeColor="238,201,142">
-        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_t98cM34nEe26qs0-AXQJQw" showIcon="false" labelColor="69,70,67"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_LL6cVn5WEe2kLcMqsIbMgQ" description="_LL6cVH5WEe2kLcMqsIbMgQ" sourceArrow="FillDiamond" size="2" routingStyle="manhattan" strokeColor="114,159,207">
+        <endLabelStyle xmi:type="diagram:EndLabelStyle" uid="_LL6cV35WEe2kLcMqsIbMgQ" showIcon="false" labelColor="69,70,67"/>
       </ownedStyle>
       <actualMapping xmi:type="description_3:EdgeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='ServiceLayer']/@edgeMappings[name='TransferRelation']"/>
     </ownedDiagramElements>
@@ -24309,12 +24642,24 @@
   </tree:DTree>
   <tree:DTree uid="_GaoVkHW5Ee2LTNnGda5kaw">
     <target xmi:type="ui:TransferObjectView" href="model/edemokracia.model#_GamgYHW5Ee2LTNnGda5kaw"/>
-    <ownedTreeItems xmi:type="tree:DTreeItem" uid="_GaoVkXW5Ee2LTNnGda5kaw" name="View / Edit Page (V)   ▶   edemokracia::CreateArgumentInput">
+    <ownedTreeItems xmi:type="tree:DTreeItem" uid="_GaoVkXW5Ee2LTNnGda5kaw" name="View / Edit Page (V)   ▶   edemokracia::CreateArgumentInput" expanded="true">
       <target xmi:type="ui:TransferObjectView" href="model/edemokracia.model#_GamgYHW5Ee2LTNnGda5kaw"/>
-      <ownedTreeItems xmi:type="tree:DTreeItem" uid="_I6nUcH4cEe2j59SYy0JH0Q">
+      <ownedTreeItems xmi:type="tree:DTreeItem" uid="_I6nUcH4cEe2j59SYy0JH0Q" name="Type   ▶   type : CreateArgumentInputType">
         <target xmi:type="ui:DataField" href="model/edemokracia.model#_3mrugH4bEe2j59SYy0JH0Q"/>
         <semanticElements xmi:type="ui:DataField" href="model/edemokracia.model#_3mrugH4bEe2j59SYy0JH0Q"/>
-        <ownedStyle xmi:type="tree:TreeItemStyle" uid="_I6nUcX4cEe2j59SYy0JH0Q" labelColor="209,209,209" backgroundColor="209,209,209"/>
+        <ownedStyle xmi:type="tree:TreeItemStyle" uid="_I6nUcX4cEe2j59SYy0JH0Q" labelSize="10" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/datafield.gif"/>
+        <actualMapping xmi:type="description_1:TreeItemMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='TransferObjectViewTree']/@subItemMappings[name='TransferObjectViewTree%3AComponent']"/>
+      </ownedTreeItems>
+      <ownedTreeItems xmi:type="tree:DTreeItem" uid="_XBrl4H5VEe2kLcMqsIbMgQ" name="Title   ▶   title : String">
+        <target xmi:type="ui:DataField" href="model/edemokracia.model#_3m1fgH4bEe2j59SYy0JH0Q"/>
+        <semanticElements xmi:type="ui:DataField" href="model/edemokracia.model#_3m1fgH4bEe2j59SYy0JH0Q"/>
+        <ownedStyle xmi:type="tree:TreeItemStyle" uid="_XBrl4X5VEe2kLcMqsIbMgQ" labelSize="10" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/datafield.gif"/>
+        <actualMapping xmi:type="description_1:TreeItemMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='TransferObjectViewTree']/@subItemMappings[name='TransferObjectViewTree%3AComponent']"/>
+      </ownedTreeItems>
+      <ownedTreeItems xmi:type="tree:DTreeItem" uid="_XBrl435VEe2kLcMqsIbMgQ" name="Description   ▶   description : String">
+        <target xmi:type="ui:DataField" href="model/edemokracia.model#_3m_QgH4bEe2j59SYy0JH0Q"/>
+        <semanticElements xmi:type="ui:DataField" href="model/edemokracia.model#_3m_QgH4bEe2j59SYy0JH0Q"/>
+        <ownedStyle xmi:type="tree:TreeItemStyle" uid="_XBrl5H5VEe2kLcMqsIbMgQ" labelSize="10" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/datafield.gif"/>
         <actualMapping xmi:type="description_1:TreeItemMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='TransferObjectViewTree']/@subItemMappings[name='TransferObjectViewTree%3AComponent']"/>
       </ownedTreeItems>
       <semanticElements xmi:type="ui:TransferObjectView" href="model/edemokracia.model#_GamgYHW5Ee2LTNnGda5kaw"/>
@@ -24531,6 +24876,21 @@
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_vWOpwX2jEe2LTNnGda5kaw" fontColor="4408901" fontName=".AppleSystemUIFont" fontHeight="10" bold="true"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vWOpwn2jEe2LTNnGda5kaw" x="132" y="112"/>
+        </children>
+        <children xmi:type="notation:Shape" xmi:id="_R6HPIH5VEe2kLcMqsIbMgQ" type="Note" fontName=".AppleSystemUIFont" description="A district budapesten keruletet, videki varosban korzetet jelent" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_R6HPIX5VEe2kLcMqsIbMgQ" source="specificStyles">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_R6HPIn5VEe2kLcMqsIbMgQ" key="verticalAlignment" value="8"/>
+          </eAnnotations>
+          <children xmi:type="notation:BasicDecorationNode" xmi:id="_R6HPJn5VEe2kLcMqsIbMgQ" type="DiagramName">
+            <element xsi:nil="true"/>
+          </children>
+          <children xmi:type="notation:BasicDecorationNode" xmi:id="_R6HPJ35VEe2kLcMqsIbMgQ" type="Description">
+            <element xsi:nil="true"/>
+          </children>
+          <styles xmi:type="notation:TextStyle" xmi:id="_R6HPI35VEe2kLcMqsIbMgQ" textAlignment="Center"/>
+          <styles xmi:type="notation:LineTypeStyle" xmi:id="_R6HPJH5VEe2kLcMqsIbMgQ"/>
+          <element xsi:nil="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_R6HPJX5VEe2kLcMqsIbMgQ" x="648" y="32"/>
         </children>
         <styles xmi:type="notation:DiagramStyle" xmi:id="_bjABhnW6Ee2LTNnGda5kaw"/>
         <edges xmi:type="notation:Edge" xmi:id="_6xrDg3W6Ee2LTNnGda5kaw" type="4001" element="_6rh_RnW6Ee2LTNnGda5kaw" source="_mNDI4HW6Ee2LTNnGda5kaw" target="_t9x6QHW6Ee2LTNnGda5kaw">
@@ -27065,10 +27425,10 @@
           </ownedStyle>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='ServiceLayer']/@containerMappings[name='TransferObjectType']/@subContainerMappings[name='TransferRelationCompartment']/@subNodeMappings[name='TransferRelation']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_s41MKX4YEe2cB7_PsKXsHQ" name="voteSelections : SelectAnswerVoteSelection [0..*]" visible="false" tooltipText=" &#xA; Name: voteSelections &#xA; Target: edemokracia::SelectAnswerVoteSelection &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: true &#xA; Update is allowed: true &#xA; Delete is allowed: true &#xA;">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_s41MKX4YEe2cB7_PsKXsHQ" name="voteSelections : SelectAnswerVoteSelection [0..*]" visible="false" tooltipText=" &#xA; Name: voteSelections &#xA; Target: edemokracia::SelectAnswerVoteSelection &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: false &#xA; Update is allowed: false &#xA; Delete is allowed: false &#xA;">
           <target xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_s1dvAH4YEe2cB7_PsKXsHQ"/>
           <semanticElements xmi:type="structure:OneWayRelationMember" href="model/edemokracia.model#_s1dvAH4YEe2cB7_PsKXsHQ"/>
-          <ownedStyle xmi:type="diagram:Square" uid="_J7UtIn4oEe26qs0-AXQJQw" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/aggregation.png" labelAlignment="LEFT" description="_s41zIn4YEe2cB7_PsKXsHQ" labelPosition="node"/>
+          <ownedStyle xmi:type="diagram:Square" uid="_LNiM_X5WEe2kLcMqsIbMgQ" iconPath="/hu.blackbelt.judo.meta.esm.designer/icons/containment.png" labelAlignment="LEFT" description="_-mN7OH4VEe2cB7_PsKXsHQ" labelPosition="node"/>
           <actualMapping xmi:type="description_3:NodeMapping" href="platform:/plugin/hu.blackbelt.judo.meta.esm.designer/description/esm.odesign#//@ownedViewpoints[name='viewpointModelling']/@ownedRepresentations[name='diagramEntity']/@additionalLayers[name='ServiceLayer']/@containerMappings[name='TransferObjectType']/@subContainerMappings[name='TransferRelationCompartment']/@subNodeMappings[name='TransferRelation']"/>
         </ownedElements>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_s41zIX4YEe2cB7_PsKXsHQ" name="voteEntries : VoteEntry [0..*]" visible="false" tooltipText=" &#xA; Name: voteEntries &#xA; Target: edemokracia::VoteEntry &#xA; Cardinality: [0..*] &#xA; Default value:  &#xA; Read-only: false &#xA; Create is allowed: true &#xA; Update is allowed: true &#xA; Delete is allowed: true &#xA;">

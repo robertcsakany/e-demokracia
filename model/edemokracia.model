@@ -237,7 +237,7 @@
     <relations xsi:type="structure:OneWayRelationMember" xmi:id="_-BhyQG6JEe2wNaja8kBvcQ" lower="0" upper="1" target="_0n43QG5mEe2wNaja8kBvcQ" name="debateVote" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="COMPOSITION" memberType="STORED" rangeType="ANY" binding="_-BhyQG6JEe2wNaja8kBvcQ" getterExpression="">
       <inherited xmi:id="_-BkOgG6JEe2wNaja8kBvcQ"/>
     </relations>
-    <relations xsi:type="structure:OneWayRelationMember" xmi:id="__Dx7wH4nEe26qs0-AXQJQw" lower="0" upper="-1" target="_2N6EMGkTEe25ONJ3V89cVA" name="comments" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="COMPOSITION" memberType="STORED" rangeType="ANY" binding="__Dx7wH4nEe26qs0-AXQJQw" getterExpression="">
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="__Dx7wH4nEe26qs0-AXQJQw" lower="0" upper="-1" target="_2N6EMGkTEe25ONJ3V89cVA" name="comments" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="COMPOSITION" memberType="STORED" rangeType="ANY" binding="__Dx7wH4nEe26qs0-AXQJQw" getterExpression="">
       <inherited xmi:id="__D3bUH4nEe26qs0-AXQJQw"/>
     </relations>
     <attributes xsi:type="structure:DataMember" xmi:id="_XZg4AGkVEe25ONJ3V89cVA" name="title" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_XZg4AGkVEe25ONJ3V89cVA" getterExpression="" identifier="false" memberType="STORED">
@@ -378,17 +378,23 @@
     <relations xsi:type="structure:TwoWayRelationMember" xmi:id="_gilN8GkYEe25ONJ3V89cVA" lower="0" upper="-1" target="_H7Q58GkYEe25ONJ3V89cVA" name="votes" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="STORED" rangeType="ANY" partner="_gil1AWkYEe25ONJ3V89cVA" primary="true">
       <inherited xmi:id="_gil1AGkYEe25ONJ3V89cVA"/>
     </relations>
-    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_2xogEHW7Ee2LTNnGda5kaw" lower="0" upper="-1" target="_knKwMHW6Ee2LTNnGda5kaw" name="residentCity" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="STORED" rangeType="ANY" binding="_2xogEHW7Ee2LTNnGda5kaw" getterExpression="">
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_2xogEHW7Ee2LTNnGda5kaw" lower="0" upper="1" target="_knKwMHW6Ee2LTNnGda5kaw" name="residentCity" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="STORED" rangeType="ANY" binding="_2xogEHW7Ee2LTNnGda5kaw" getterExpression="">
       <inherited xmi:id="_2xq8UHW7Ee2LTNnGda5kaw"/>
     </relations>
-    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_KDzUUHW8Ee2LTNnGda5kaw" lower="0" upper="-1" target="_knKwMHW6Ee2LTNnGda5kaw" name="activityCounty" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="STORED" rangeType="ANY" binding="_KDzUUHW8Ee2LTNnGda5kaw" getterExpression="">
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_KDzUUHW8Ee2LTNnGda5kaw" lower="0" upper="-1" target="_knKwMHW6Ee2LTNnGda5kaw" name="activityCities" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="STORED" rangeType="ANY" binding="_KDzUUHW8Ee2LTNnGda5kaw" getterExpression="">
       <inherited xmi:id="_KD2XoHW8Ee2LTNnGda5kaw"/>
     </relations>
     <relations xsi:type="structure:OneWayRelationMember" xmi:id="_TmoVcHW8Ee2LTNnGda5kaw" lower="0" upper="1" target="_s7U-wHW6Ee2LTNnGda5kaw" name="residentDistrict" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="STORED" rangeType="ANY" binding="_TmoVcHW8Ee2LTNnGda5kaw" getterExpression="">
       <inherited xmi:id="_TmqxsHW8Ee2LTNnGda5kaw"/>
     </relations>
-    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_YvK8kHW8Ee2LTNnGda5kaw" lower="0" upper="-1" target="_s7U-wHW6Ee2LTNnGda5kaw" name="activityDistrict" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="STORED" rangeType="ANY" binding="_YvK8kHW8Ee2LTNnGda5kaw" getterExpression="">
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_YvK8kHW8Ee2LTNnGda5kaw" lower="0" upper="-1" target="_s7U-wHW6Ee2LTNnGda5kaw" name="activityDistricts" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="STORED" rangeType="ANY" binding="_YvK8kHW8Ee2LTNnGda5kaw" getterExpression="">
       <inherited xmi:id="_YvNY0HW8Ee2LTNnGda5kaw"/>
+    </relations>
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_-zCQkH5UEe2kLcMqsIbMgQ" lower="0" upper="1" target="_uBoOUH2jEe2LTNnGda5kaw" name="residentCounty" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="STORED" rangeType="ANY" binding="_-zCQkH5UEe2kLcMqsIbMgQ" getterExpression="">
+      <inherited xmi:id="_-zGiAH5UEe2kLcMqsIbMgQ"/>
+    </relations>
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_IdzFsH5VEe2kLcMqsIbMgQ" lower="0" upper="-1" target="_uBoOUH2jEe2LTNnGda5kaw" name="activityCounties" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="STORED" rangeType="ANY" binding="_IdzFsH5VEe2kLcMqsIbMgQ" getterExpression="">
+      <inherited xmi:id="_Id1h8H5VEe2kLcMqsIbMgQ"/>
     </relations>
     <attributes xsi:type="structure:DataMember" xmi:id="_vX4k8G5gEe2wNaja8kBvcQ" name="userName" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_vX4k8G5gEe2wNaja8kBvcQ" getterExpression="" identifier="true" memberType="STORED">
       <inherited xmi:id="_vX5zEG5gEe2wNaja8kBvcQ"/>
@@ -436,7 +442,7 @@
     <members xmi:id="_YoByMGkYEe25ONJ3V89cVA" name="DOWN" ordinal="2"/>
   </elements>
   <elements xsi:type="structure:EntityType" xmi:id="_K7jW8GkfEe25ONJ3V89cVA" name="IssueCategory" createable="true" updateable="true" deleteable="true">
-    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_RvjaUGkfEe25ONJ3V89cVA" lower="0" upper="-1" target="_K7jW8GkfEe25ONJ3V89cVA" name="subcategories" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="COMPOSITION" memberType="STORED" rangeType="ANY" binding="_RvjaUGkfEe25ONJ3V89cVA" getterExpression="">
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_RvjaUGkfEe25ONJ3V89cVA" lower="0" upper="-1" target="_K7jW8GkfEe25ONJ3V89cVA" name="subcategories" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="COMPOSITION" memberType="STORED" rangeType="ANY" binding="_RvjaUGkfEe25ONJ3V89cVA" getterExpression="">
       <inherited xmi:id="_RvlPgGkfEe25ONJ3V89cVA"/>
     </relations>
     <relations xsi:type="structure:OneWayRelationMember" xmi:id="_A6jkYGklEe25ONJ3V89cVA" lower="0" upper="1" target="_BuSFMGkWEe25ONJ3V89cVA" name="owner" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="edemokracia::User!filter(u | u.email == edemokracia::types::String!getVariable(&quot;PRINCIPAL&quot;, &quot;email&quot;))!any()" rangeExpression="" relationKind="ASSOCIATION" memberType="STORED" rangeType="ANY" binding="_A6jkYGklEe25ONJ3V89cVA" getterExpression="">
@@ -1227,9 +1233,15 @@
     <attributes xsi:type="structure:DataMember" xmi:id="_QG62gHMNEe2wNaja8kBvcQ" name="voteType" dataType="_6eNosHMMEe2wNaja8kBvcQ" defaultExpression="" getterExpression="" identifier="false" memberType="TRANSIENT">
       <inherited xmi:id="_QG950HMNEe2wNaja8kBvcQ"/>
     </attributes>
-    <form xmi:id="_NG8HoG6JEe2wNaja8kBvcQ" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
-    <table xmi:id="_NHAZEG6JEe2wNaja8kBvcQ" name="TransferObject_Table" label="TransferObject Table"/>
-    <view xmi:id="_NG3PIG6JEe2wNaja8kBvcQ" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
+    <form xmi:id="_NG8HoG6JEe2wNaja8kBvcQ" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
+      <components xsi:type="ui:DataField" xmi:id="_yfDhAH5VEe2kLcMqsIbMgQ" name="voteType" label="VoteType" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_QG62gHMNEe2wNaja8kBvcQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+    </form>
+    <table xmi:id="_NHAZEG6JEe2wNaja8kBvcQ" name="TransferObject_Table" label="TransferObject Table">
+      <columns xsi:type="ui:DataColumn" xmi:id="_yfMD4H5VEe2kLcMqsIbMgQ" name="voteType" label="VoteType" iconName="list" visible="true" sort="NONE" dataFeature="_QG62gHMNEe2wNaja8kBvcQ"/>
+    </table>
+    <view xmi:id="_NG3PIG6JEe2wNaja8kBvcQ" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
+      <components xsi:type="ui:DataField" xmi:id="_ye8zUH5VEe2kLcMqsIbMgQ" name="voteType" label="VoteType" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_QG62gHMNEe2wNaja8kBvcQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+    </view>
   </elements>
   <elements xsi:type="structure:EntityType" xmi:id="_4Aej4G6LEe2wNaja8kBvcQ" name="YesNoAbstainVoteDefinition" createable="true" updateable="true" deleteable="true">
     <generalizations xmi:id="_SVnEkG6MEe2wNaja8kBvcQ" target="_0n43QG5mEe2wNaja8kBvcQ"/>
@@ -1243,7 +1255,7 @@
     <view xmi:id="_4Ant0G6LEe2wNaja8kBvcQ" name="Entity_View" label="Entity View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
   </elements>
   <elements xsi:type="structure:EntityType" xmi:id="_-PRocG6LEe2wNaja8kBvcQ" name="SelectAnswerVoteDefinition" createable="true" updateable="true" deleteable="true">
-    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_seKHgG6cEe2wNaja8kBvcQ" lower="0" upper="-1" target="_Xwdl4G6bEe2wNaja8kBvcQ" name="voteSelections" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="COMPOSITION" memberType="STORED" rangeType="ANY" binding="_seKHgG6cEe2wNaja8kBvcQ" getterExpression="">
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_seKHgG6cEe2wNaja8kBvcQ" lower="0" upper="-1" target="_Xwdl4G6bEe2wNaja8kBvcQ" name="voteSelections" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="COMPOSITION" memberType="STORED" rangeType="ANY" binding="_seKHgG6cEe2wNaja8kBvcQ" getterExpression="">
       <inherited xmi:id="_seMjwG6cEe2wNaja8kBvcQ"/>
     </relations>
     <generalizations xmi:id="_VYUnoG6MEe2wNaja8kBvcQ" target="_0n43QG5mEe2wNaja8kBvcQ"/>
@@ -1382,7 +1394,7 @@
     <relations xsi:type="structure:OneWayRelationMember" xmi:id="_PKPYwXWzEe2LTNnGda5kaw" lower="1" upper="1" target="_Xwdl4G6bEe2wNaja8kBvcQ" name="selection" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="TRANSIENT" rangeType="ANY" getterExpression="">
       <inherited xmi:id="_PKPYwnWzEe2LTNnGda5kaw"/>
     </relations>
-    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_s1dvAH4YEe2cB7_PsKXsHQ" lower="0" upper="-1" target="_Xwdl4G6bEe2wNaja8kBvcQ" name="voteSelections" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="TRANSIENT" rangeType="ANY" getterExpression="">
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_s1dvAH4YEe2cB7_PsKXsHQ" lower="0" upper="-1" target="_Xwdl4G6bEe2wNaja8kBvcQ" name="voteSelections" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" rangeType="ANY" binding="_seKHgG6cEe2wNaja8kBvcQ" getterExpression="">
       <inherited xmi:id="_s1e9IH4YEe2cB7_PsKXsHQ"/>
     </relations>
     <relations xsi:type="structure:OneWayRelationMember" xmi:id="_s1gyUH4YEe2cB7_PsKXsHQ" lower="0" upper="-1" target="_1F3JsG6HEe2wNaja8kBvcQ" name="voteEntries" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="TRANSIENT" rangeType="ANY" getterExpression="">
@@ -1458,9 +1470,21 @@
     <attributes xsi:type="structure:DataMember" xmi:id="_Y5rsIH4PEe2cB7_PsKXsHQ" name="closeAt" dataType="_7D8NyWkNEe25ONJ3V89cVA" defaultExpression="" getterExpression="" identifier="false" memberType="TRANSIENT">
       <inherited xmi:id="_Y5uvcH4PEe2cB7_PsKXsHQ"/>
     </attributes>
-    <form xmi:id="_-WSH0HW8Ee2LTNnGda5kaw" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
-    <table xmi:id="_-WXnYHW8Ee2LTNnGda5kaw" name="TransferObject_Table" label="TransferObject Table"/>
-    <view xmi:id="_-WMoQHW8Ee2LTNnGda5kaw" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
+    <form xmi:id="_-WSH0HW8Ee2LTNnGda5kaw" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
+      <components xsi:type="ui:DataField" xmi:id="_ydvSYH5VEe2kLcMqsIbMgQ" name="title" label="Title" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_Dtv7wHW9Ee2LTNnGda5kaw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+      <components xsi:type="ui:DataField" xmi:id="_yeTTEH5VEe2kLcMqsIbMgQ" name="description" label="Description" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_FpEY8HW9Ee2LTNnGda5kaw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+      <components xsi:type="ui:DataField" xmi:id="_yertkH5VEe2kLcMqsIbMgQ" name="closeAt" label="CloseAt" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_Y5rsIH4PEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+    </form>
+    <table xmi:id="_-WXnYHW8Ee2LTNnGda5kaw" name="TransferObject_Table" label="TransferObject Table">
+      <columns xsi:type="ui:DataColumn" xmi:id="_yd6RgH5VEe2kLcMqsIbMgQ" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_Dtv7wHW9Ee2LTNnGda5kaw"/>
+      <columns xsi:type="ui:DataColumn" xmi:id="_yecdAH5VEe2kLcMqsIbMgQ" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_FpEY8HW9Ee2LTNnGda5kaw"/>
+      <columns xsi:type="ui:DataColumn" xmi:id="_ye03gH5VEe2kLcMqsIbMgQ" name="closeAt" label="CloseAt" iconName="schedule" visible="true" sort="NONE" dataFeature="_Y5rsIH4PEe2cB7_PsKXsHQ"/>
+    </table>
+    <view xmi:id="_-WMoQHW8Ee2LTNnGda5kaw" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
+      <components xsi:type="ui:DataField" xmi:id="_ydezsH5VEe2kLcMqsIbMgQ" name="title" label="Title" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_Dtv7wHW9Ee2LTNnGda5kaw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+      <components xsi:type="ui:DataField" xmi:id="_yeHF0H5VEe2kLcMqsIbMgQ" name="description" label="Description" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_FpEY8HW9Ee2LTNnGda5kaw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+      <components xsi:type="ui:DataField" xmi:id="_yek_4H5VEe2kLcMqsIbMgQ" name="closeAt" label="CloseAt" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_Y5rsIH4PEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+    </view>
   </elements>
   <elements xsi:type="structure:EntityType" xmi:id="_uBoOUH2jEe2LTNnGda5kaw" name="County" createable="true" updateable="true" deleteable="true">
     <relations xsi:type="structure:OneWayRelationMember" xmi:id="_xk7V8H2jEe2LTNnGda5kaw" lower="0" upper="-1" target="_knKwMHW6Ee2LTNnGda5kaw" name="cities" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="COMPOSITION" memberType="STORED" rangeType="ANY" binding="_xk7V8H2jEe2LTNnGda5kaw" getterExpression="">
