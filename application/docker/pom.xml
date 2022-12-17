@@ -205,7 +205,7 @@
                                     </to>
                                     <container>
                                         <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
-                                        <entrypoint>/edemokracia-application/bin/karaf,run</entrypoint>
+                                        <entrypoint>/edemokracia-application/bin/karaf,run,clean</entrypoint>
                                         <ports>
                                             <port>8181</port>
                                             <port>8081</port>
