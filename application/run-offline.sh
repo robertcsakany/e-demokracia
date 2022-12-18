@@ -26,4 +26,4 @@ tar xvvzf $CURR_DIR/karaf-offline/target/edemokracia-application-karaf-offline-$
 mv $KARAF_DIR/edemokracia-application-karaf-offline-${VERSION_NUMBER}/* $KARAF_DIR/ || exit $?
 
 export EXTRA_JAVA_OPTS="-Xms1024m -Xmx1024m -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8"
-$KARAF_DIR/bin/karaf run clean debug
+$KARAF_DIR/bin/karaf debug run clean

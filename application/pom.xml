@@ -46,8 +46,8 @@
         <mapper-version>1.0.3</mapper-version>
         
         <judo-tatami-version>1.1.0.20221213_041724_cfe64126_develop </judo-tatami-version>
-        <judo-platform-version>2.0.1.20221213_043124_d3eb3be5_develop</judo-platform-version>
-        <judo-services-version>1.1.0.20221213_042610_31f0e309_develop</judo-services-version>
+        <judo-platform-version>2.0.1-SNAPSHOT</judo-platform-version>
+        <judo-services-version>1.1.0-SNAPSHOT</judo-services-version>
         <judo-rdbms-schema-version>1.0.0.20221209_042125_1618f248_develop</judo-rdbms-schema-version>
         <judo-tatami-client-version>1.1.0.20221213_042608_cb65ced3_develop</judo-tatami-client-version>
         <!-- End of 'pom.xml.judo-properties-definition.fragment.hbs' -->
