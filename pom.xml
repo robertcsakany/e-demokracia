@@ -11,24 +11,24 @@
 
 	<properties>
 		<judo-channel>develop</judo-channel>
-		<judo-version>1.0.0.20221217_041248_d6958fb9_develop</judo-version>
+		<judo-version>1.0.0.20221229_041315_a9705b5d_develop</judo-version>
 
 		<sqlDialects>hsqldb</sqlDialects>
 
 		<judo-esm-archetype-version-defined>1.0.0.20221213_040733_1cd5c56b_develop</judo-esm-archetype-version-defined>
         <judo-meta-esm-version-defined>1.1.1.20221212_161312_094cdd8d_develop</judo-meta-esm-version-defined>
-        <judo-tatami-version-defined>1.1.0.20221213_041724_cfe64126_develop</judo-tatami-version-defined>
+        <judo-tatami-version-defined>1.1.0-SNAPSHOT</judo-tatami-version-defined>
         <flutter-maven-plugin-version-defined>1.0.2.20220326_002737_efc0629e_develop</flutter-maven-plugin-version-defined>
         <structured-map-proxy-version-defined>1.2.0</structured-map-proxy-version-defined>
         <judo-dao-api-version-defined>1.0.3</judo-dao-api-version-defined>
         <judo-dispatcher-api-version-defined>1.0.2</judo-dispatcher-api-version-defined>
         <judo-sdk-common-version-defined>1.0.2</judo-sdk-common-version-defined>
         <mapper-version-defined>1.0.3</mapper-version-defined>
-        <judo-platform-version-defined>2.0.1.20221213_043124_d3eb3be5_develop</judo-platform-version-defined>
-        <judo-services-version-defined>1.1.0.20221213_042610_31f0e309_develop</judo-services-version-defined>
+        <judo-platform-version-defined>2.0.1.20221223_041234_43203d7f_develop</judo-platform-version-defined>
+        <judo-services-version-defined>1.1.0.20221223_040729_a5c2c8f6_develop</judo-services-version-defined>
         <judo-rdbms-schema-version-defined>1.0.0.20221209_042125_1618f248_develop</judo-rdbms-schema-version-defined>
         <judo-tatami-client-version-defined>1.1.0.20221213_042608_cb65ced3_develop</judo-tatami-client-version-defined>
-        <judo-esm-fullstack-project-archetype-version-defined>1.0.0.20221213_084125_ead7b9a9_develop</judo-esm-fullstack-project-archetype-version-defined>
+        <judo-esm-fullstack-project-archetype-version-defined>1.0.0.20221223_042142_aeb1e5aa_develop</judo-esm-fullstack-project-archetype-version-defined>
 
 	</properties>
 

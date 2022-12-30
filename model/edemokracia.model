@@ -455,12 +455,18 @@
       </operations>
       <form xmi:id="_p_Je8GksEe25ONJ3V89cVA" name="Create_Comment" label="Create Comment" iconName="comment-text" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
         <components xsi:type="ui:Group" xmi:id="_v1fnoG5YEe2wNaja8kBvcQ" name="group" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE">
-          <components xsi:type="ui:DataField" xmi:id="_xEywgG5REe2Q6M99rsfqSQ" name="createdByName" label="CreatedByName" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_Q31g0G5REe2Q6M99rsfqSQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
           <components xsi:type="ui:DataField" xmi:id="_BYSQUG5WEe2wNaja8kBvcQ" name="created" label="Created" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_Hq4FMG5VEe2wNaja8kBvcQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:TabularReferenceField" xmi:id="_IgYHIIfuEe2u0fVmwtP5bA" name="createdBy" label="CreatedBy" iconName="table_rows" col="12" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_qbmKYGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
+            <columns xsi:type="ui:DataColumn" xmi:id="_Igfb4IfuEe2u0fVmwtP5bA" name="representation" label="Representation" iconName="text_fields" visible="true" sort="NONE" dataFeature="_QrtE4IdhEe2kLcMqsIbMgQ"/>
+          </components>
+          <components xsi:type="ui:DataField" xmi:id="_BYLioG5WEe2wNaja8kBvcQ" name="comment" label="Comment" iconName="text_fields" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" dataFeature="_HqzzwG5VEe2wNaja8kBvcQ" enumWidget="COMBO" textMultiLine="true" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:DataField" xmi:id="_3kt_oH4bEe2j59SYy0JH0Q" name="upVotes" label="UpVotes" iconName="dialpad" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_DnLWQH2rEe27Ga2Ojs4Fgg" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:DataField" xmi:id="_3k6z8H4bEe2j59SYy0JH0Q" name="downVotes" label="DownVotes" iconName="dialpad" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_F_SdIH2rEe27Ga2Ojs4Fgg" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:TabularReferenceField" xmi:id="_IgOWIIfuEe2u0fVmwtP5bA" name="votes" label="Votes" iconName="table_rows" col="12" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_qbA7kGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
+            <columns xsi:type="ui:DataColumn" xmi:id="_IgO9MIfuEe2u0fVmwtP5bA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_p9bnsGksEe25ONJ3V89cVA"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_IgPkQIfuEe2u0fVmwtP5bA" name="type" label="Type" iconName="list" visible="true" sort="NONE" dataFeature="_p-OR4GksEe25ONJ3V89cVA"/>
+          </components>
         </components>
-        <components xsi:type="ui:DataField" xmi:id="_BYLioG5WEe2wNaja8kBvcQ" name="comment" label="Comment" iconName="text_fields" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" dataFeature="_HqzzwG5VEe2wNaja8kBvcQ" enumWidget="COMBO" textMultiLine="true" textWidget="INPUT" booleanWidget="CHECKBOX"/>
-        <components xsi:type="ui:DataField" xmi:id="_3kt_oH4bEe2j59SYy0JH0Q" name="upVotes" label="UpVotes" iconName="dialpad" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_DnLWQH2rEe27Ga2Ojs4Fgg" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
-        <components xsi:type="ui:DataField" xmi:id="_3k6z8H4bEe2j59SYy0JH0Q" name="downVotes" label="DownVotes" iconName="dialpad" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_F_SdIH2rEe27Ga2Ojs4Fgg" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
       </form>
       <table xmi:id="_p_So4GksEe25ONJ3V89cVA" name="Comments_List" label="Comments" iconName="comment-text">
         <columns xsi:type="ui:DataColumn" xmi:id="_xE0lsG5REe2Q6M99rsfqSQ" name="createdByName" label="CreatedByName" iconName="text_fields" visible="true" sort="NONE" dataFeature="_Q31g0G5REe2Q6M99rsfqSQ"/>
@@ -470,15 +476,23 @@
         <columns xsi:type="ui:DataColumn" xmi:id="_3k-eUH4bEe2j59SYy0JH0Q" name="downVotes" label="DownVotes" iconName="dialpad" visible="true" sort="NONE" dataFeature="_F_SdIH2rEe27Ga2Ojs4Fgg"/>
       </table>
       <view xmi:id="_p_AVAGksEe25ONJ3V89cVA" name="Comment_View" label="View / Edit Comment" iconName="comment-text-multiple" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
-        <components xsi:type="ui:Group" xmi:id="_eX7kkG5YEe2wNaja8kBvcQ" name="group" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE">
-          <components xsi:type="ui:DataField" xmi:id="_xExiYG5REe2Q6M99rsfqSQ" name="createdByName" label="CreatedByName" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_Q31g0G5REe2Q6M99rsfqSQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:Group" xmi:id="_eX7kkG5YEe2wNaja8kBvcQ" name="group" label="Comment" iconName="comment-text-multiple" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="true" col="12" stretch="NONE" row="1" fit="LOOSE">
           <components xsi:type="ui:DataField" xmi:id="_BYP0EG5WEe2wNaja8kBvcQ" name="created" label="Created" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_Hq4FMG5VEe2wNaja8kBvcQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:TabularReferenceField" xmi:id="_IgQyYIfuEe2u0fVmwtP5bA" name="createdBy" label="CreatedBy" iconName="table_rows" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_qbmKYGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
+            <columns xsi:type="ui:DataColumn" xmi:id="_IgXgEIfuEe2u0fVmwtP5bA" name="representation" label="Representation" iconName="text_fields" visible="true" sort="NONE" dataFeature="_QrtE4IdhEe2kLcMqsIbMgQ"/>
+          </components>
+          <components xsi:type="ui:DataField" xmi:id="_BYJGYG5WEe2wNaja8kBvcQ" name="comment" label="Comment" iconName="text_fields" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" dataFeature="_HqzzwG5VEe2wNaja8kBvcQ" enumWidget="COMBO" textMultiLine="true" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:OperationForm" xmi:id="_3lCIsH4bEe2j59SYy0JH0Q" name="voteUp" label="" iconName="thumb-up" col="1" stretch="NONE" row="1" fit="LOOSE" onBlur="false" operation="voteUp"/>
+          <components xsi:type="ui:DataField" xmi:id="_3kpuMH4bEe2j59SYy0JH0Q" name="upVotes" label="" iconName="" col="1" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_DnLWQH2rEe27Ga2Ojs4Fgg" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:Placeholder" xmi:id="_iiiWkIfwEe2u0fVmwtP5bA" name="placeholder_1" col="1" stretch="NONE" row="1" fit="LOOSE" onBlur="false"/>
+          <components xsi:type="ui:OperationForm" xmi:id="_3lHoQH4bEe2j59SYy0JH0Q" name="voteDown" label="" iconName="thumb-down" col="1" stretch="NONE" row="1" fit="LOOSE" onBlur="false" operation="voteDown"/>
+          <components xsi:type="ui:DataField" xmi:id="_3k2igH4bEe2j59SYy0JH0Q" name="downVotes" label="" iconName="" col="1" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_F_SdIH2rEe27Ga2Ojs4Fgg" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:Placeholder" xmi:id="_jPMBMIfwEe2u0fVmwtP5bA" name="placeholder_2" col="1" stretch="NONE" row="1" fit="LOOSE" onBlur="false"/>
+          <components xsi:type="ui:TabularReferenceField" xmi:id="_IgLS0IfuEe2u0fVmwtP5bA" name="votes" label="Votes" iconName="checkbox-multiple-marked" col="2" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_qbA7kGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="false">
+            <columns xsi:type="ui:DataColumn" xmi:id="_IgMg8IfuEe2u0fVmwtP5bA" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_p9bnsGksEe25ONJ3V89cVA"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_IgNIAIfuEe2u0fVmwtP5bA" name="type" label="Type" iconName="list" visible="true" sort="NONE" dataFeature="_p-OR4GksEe25ONJ3V89cVA"/>
+          </components>
         </components>
-        <components xsi:type="ui:DataField" xmi:id="_BYJGYG5WEe2wNaja8kBvcQ" name="comment" label="Comment" iconName="text_fields" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" dataFeature="_HqzzwG5VEe2wNaja8kBvcQ" enumWidget="COMBO" textMultiLine="true" textWidget="INPUT" booleanWidget="CHECKBOX"/>
-        <components xsi:type="ui:DataField" xmi:id="_3kpuMH4bEe2j59SYy0JH0Q" name="upVotes" label="UpVotes" iconName="dialpad" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_DnLWQH2rEe27Ga2Ojs4Fgg" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
-        <components xsi:type="ui:DataField" xmi:id="_3k2igH4bEe2j59SYy0JH0Q" name="downVotes" label="DownVotes" iconName="dialpad" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_F_SdIH2rEe27Ga2Ojs4Fgg" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
-        <components xsi:type="ui:OperationForm" xmi:id="_3lCIsH4bEe2j59SYy0JH0Q" name="voteUp" label="VoteUp" iconName="chevron_right" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" operation="voteUp"/>
-        <components xsi:type="ui:OperationForm" xmi:id="_3lHoQH4bEe2j59SYy0JH0Q" name="voteDown" label="VoteDown" iconName="chevron_right" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" operation="voteDown"/>
       </view>
     </elements>
     <elements xsi:type="structure:TransferObjectType" xmi:id="_qAQSMGksEe25ONJ3V89cVA" name="Con" createable="false" updateable="false" deleteable="false">
@@ -640,7 +654,7 @@
         <inherited xmi:id="_5ujFcIeIEe2kLcMqsIbMgQ"/>
       </operations>
       <operations xmi:id="_DhsGkIehEe2kLcMqsIbMgQ" name="createDebate" customImplementation="false" body="" stateful="true" operationType="MAPPED" binding="createDebate" initializer="false">
-        <input xmi:id="_DhvJ4IehEe2kLcMqsIbMgQ" lower="1" upper="1" target="_-V8woHW8Ee2LTNnGda5kaw" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY"/>
+        <input xmi:id="_DhvJ4IehEe2kLcMqsIbMgQ" lower="1" upper="1" target="_-V8woHW8Ee2LTNnGda5kaw" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY" rangeExpression=""/>
         <output xmi:id="_Dhw_EIehEe2kLcMqsIbMgQ" lower="1" upper="1" target="_jjCdUGkPEe25ONJ3V89cVA" name="output" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY"/>
         <inherited xmi:id="_Dht7wIehEe2kLcMqsIbMgQ"/>
       </operations>
