@@ -45,11 +45,11 @@
         <judo-sdk-common-version>1.0.2</judo-sdk-common-version>
         <mapper-version>1.0.3</mapper-version>
         
-        <judo-tatami-version>1.1.0.20221213_041724_cfe64126_develop </judo-tatami-version>
-        <judo-platform-version>2.0.1-SNAPSHOT</judo-platform-version>
-        <judo-services-version>1.1.0-SNAPSHOT</judo-services-version>
+        <judo-tatami-version>1.1.0.20221228_211531_f8575fdd_feature_JNG_4338_RangeInputTypeInheritanceFix </judo-tatami-version>
+        <judo-platform-version>2.0.1.20221223_041234_43203d7f_develop</judo-platform-version>
+        <judo-services-version>1.1.0.20221223_040729_a5c2c8f6_develop</judo-services-version>
         <judo-rdbms-schema-version>1.0.0.20221209_042125_1618f248_develop</judo-rdbms-schema-version>
-        <judo-tatami-client-version>1.1.0.20221213_042608_cb65ced3_develop</judo-tatami-client-version>
+        <judo-tatami-client-version>1.1.0.20221231_143944_59fc4f84_feature_JNG_4346_DuplicateNameOnRecursiveAggragation</judo-tatami-client-version>
         <!-- End of 'pom.xml.judo-properties-definition.fragment.hbs' -->
 
         <!-- To define create 'pom.xml.properties-definition.fragment.hbs' file -->

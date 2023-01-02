@@ -17,7 +17,7 @@
 
 		<judo-esm-archetype-version-defined>1.0.0.20221213_040733_1cd5c56b_develop</judo-esm-archetype-version-defined>
         <judo-meta-esm-version-defined>1.1.1.20221212_161312_094cdd8d_develop</judo-meta-esm-version-defined>
-        <judo-tatami-version-defined>1.1.0-SNAPSHOT</judo-tatami-version-defined>
+        <judo-tatami-version-defined>1.1.0.20221228_211531_f8575fdd_feature_JNG_4338_RangeInputTypeInheritanceFix</judo-tatami-version-defined>
         <flutter-maven-plugin-version-defined>1.0.2.20220326_002737_efc0629e_develop</flutter-maven-plugin-version-defined>
         <structured-map-proxy-version-defined>1.2.0</structured-map-proxy-version-defined>
         <judo-dao-api-version-defined>1.0.3</judo-dao-api-version-defined>
@@ -27,7 +27,7 @@
         <judo-platform-version-defined>2.0.1.20221223_041234_43203d7f_develop</judo-platform-version-defined>
         <judo-services-version-defined>1.1.0.20221223_040729_a5c2c8f6_develop</judo-services-version-defined>
         <judo-rdbms-schema-version-defined>1.0.0.20221209_042125_1618f248_develop</judo-rdbms-schema-version-defined>
-        <judo-tatami-client-version-defined>1.1.0.20221213_042608_cb65ced3_develop</judo-tatami-client-version-defined>
+        <judo-tatami-client-version-defined>1.1.0.20221231_143944_59fc4f84_feature_JNG_4346_DuplicateNameOnRecursiveAggragation</judo-tatami-client-version-defined>
         <judo-esm-fullstack-project-archetype-version-defined>1.0.0.20221223_042142_aeb1e5aa_develop</judo-esm-fullstack-project-archetype-version-defined>
 
 	</properties>
