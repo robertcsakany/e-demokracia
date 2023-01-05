@@ -27,7 +27,7 @@
         <judo-platform-version-defined>2.0.1.20221223_041234_43203d7f_develop</judo-platform-version-defined>
         <judo-services-version-defined>1.1.0.20221223_040729_a5c2c8f6_develop</judo-services-version-defined>
         <judo-rdbms-schema-version-defined>1.0.0.20221209_042125_1618f248_develop</judo-rdbms-schema-version-defined>
-        <judo-tatami-client-version-defined>1.1.0.20221231_143944_59fc4f84_feature_JNG_4346_DuplicateNameOnRecursiveAggragation</judo-tatami-client-version-defined>
+        <judo-tatami-client-version-defined>1.1.0.20230105_142327_99f17145_develop</judo-tatami-client-version-defined>
         <judo-esm-fullstack-project-archetype-version-defined>1.0.0.20221223_042142_aeb1e5aa_develop</judo-esm-fullstack-project-archetype-version-defined>
 
 	</properties>
