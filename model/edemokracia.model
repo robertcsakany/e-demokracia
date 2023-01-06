@@ -1521,7 +1521,7 @@
         <output xmi:id="_i0Z0II1KEe2VSOmaAz6G9Q" lower="1" upper="1" target="_qCREY2ksEe25ONJ3V89cVA" name="output" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" rangeType="ANY"/>
         <inherited xmi:id="_wJmkoIyPEe2VSOmaAz6G9Q"/>
       </operations>
-      <operations xmi:id="_YngLMI1eEe2J66C5CrhpQw" name="createUser" customImplementation="false" body="" stateful="true" operationType="STATIC" binding="" initializer="false">
+      <operations xmi:id="_YngLMI1eEe2J66C5CrhpQw" name="createUser" customImplementation="false" body="&#xA;&#xA;var edemokracia::admin::AdminPrincipalUser user = edemokracia::admin::AdminPrincipalUser!filter(u | u.userName == input.userName)!any();&#xA;&#xA;if (user!isUndefined()) {&#xA;&#x9;new edemokracia::admin::AdminPrincipalUser(&#xA;&#x9;    userName = input.userName,&#xA;&#x9;    email = input.email,&#xA;&#x9;    lastName = input.lastName,&#xA;&#x9;    firstName = input.firstName,&#xA;&#x9;    isAdmin = input.hasAdminAccess,&#xA;&#x9;    phone = input.phone&#xA;    )&#xA;}&#xA;" stateful="true" operationType="STATIC" binding="" initializer="false">
         <input xmi:id="_WJha8I1gEe2J66C5CrhpQw" lower="1" upper="1" target="_eNSH8I1eEe2J66C5CrhpQw" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY" rangeExpression=""/>
         <output xmi:id="_yJ-1AI1gEe2J66C5CrhpQw" lower="1" upper="1" target="_p1aUIGksEe25ONJ3V89cVA" name="output" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" rangeType="ANY"/>
         <inherited xmi:id="_YniAYI1eEe2J66C5CrhpQw"/>
@@ -1576,12 +1576,50 @@
       <attributes xsi:type="structure:DataMember" xmi:id="_kbxqgI1eEe2J66C5CrhpQw" name="email" dataType="_7D8NzmkNEe25ONJ3V89cVA" required="true" defaultExpression="" getterExpression="" identifier="false" memberType="TRANSIENT">
         <inherited xmi:id="_kby4oI1eEe2J66C5CrhpQw"/>
       </attributes>
-      <attributes xsi:type="structure:DataMember" xmi:id="_uRgZgI1eEe2J66C5CrhpQw" name="isAdmin" dataType="_7D8Nx2kNEe25ONJ3V89cVA" required="true" defaultExpression="" getterExpression="" identifier="false" memberType="TRANSIENT">
+      <attributes xsi:type="structure:DataMember" xmi:id="_uRgZgI1eEe2J66C5CrhpQw" name="hasAdminAccess" dataType="_7D8Nx2kNEe25ONJ3V89cVA" required="true" defaultExpression="false" getterExpression="" identifier="false" memberType="TRANSIENT">
         <inherited xmi:id="_uRhnoI1eEe2J66C5CrhpQw"/>
       </attributes>
-      <form xmi:id="_eNqicI1eEe2J66C5CrhpQw" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
-      <table xmi:id="_eNzsYI1eEe2J66C5CrhpQw" name="TransferObject_Table" label="TransferObject Table"/>
-      <view xmi:id="_eNgxcI1eEe2J66C5CrhpQw" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
+      <attributes xsi:type="structure:DataMember" xmi:id="_a4hfsI1rEe29qs15q2b6yw" name="firstName" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" getterExpression="" identifier="false" memberType="TRANSIENT">
+        <inherited xmi:id="_a4it0I1rEe29qs15q2b6yw"/>
+      </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_e2CeII1rEe29qs15q2b6yw" name="lastName" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" getterExpression="" identifier="false" memberType="TRANSIENT">
+        <inherited xmi:id="_e2ETUI1rEe29qs15q2b6yw"/>
+      </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_jte4wI1sEe29qs15q2b6yw" name="phone" dataType="_7D8Ny2kNEe25ONJ3V89cVA" defaultExpression="" getterExpression="" identifier="false" memberType="TRANSIENT">
+        <inherited xmi:id="_jtff0I1sEe29qs15q2b6yw"/>
+      </attributes>
+      <form xmi:id="_eNqicI1eEe2J66C5CrhpQw" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
+        <components xsi:type="ui:Group" xmi:id="_ngqE4I1rEe29qs15q2b6yw" name="security" label="Security" iconName="security" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="true" col="12" stretch="NONE" row="1" fit="LOOSE">
+          <components xsi:type="ui:DataField" xmi:id="_kCfU4I1rEe29qs15q2b6yw" name="userName" label="UserName" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_g6NoQI1eEe2J66C5CrhpQw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:DataField" xmi:id="_kCmpoI1rEe29qs15q2b6yw" name="hasAdminAccess" label="IsAdmin" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_uRgZgI1eEe2J66C5CrhpQw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        </components>
+        <components xsi:type="ui:Group" xmi:id="_DmCbMI1sEe29qs15q2b6yw" name="personal" label="Personal" iconName="card-account-details" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="true" col="12" stretch="NONE" row="1" fit="LOOSE">
+          <components xsi:type="ui:Group" xmi:id="_NdrOsI1sEe29qs15q2b6yw" name="name" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE">
+            <components xsi:type="ui:DataField" xmi:id="_kCqUAI1rEe29qs15q2b6yw" name="firstName" label="FirstName" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_a4hfsI1rEe29qs15q2b6yw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+            <components xsi:type="ui:DataField" xmi:id="_kCt-YI1rEe29qs15q2b6yw" name="lastName" label="LastName" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_e2CeII1rEe29qs15q2b6yw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+            <components xsi:type="ui:DataField" xmi:id="_kCi_QI1rEe29qs15q2b6yw" name="email" label="Email" iconName="email" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_kbxqgI1eEe2J66C5CrhpQw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+            <components xsi:type="ui:DataField" xmi:id="_pCywkI1sEe29qs15q2b6yw" name="phone" label="Phone" iconName="phone" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_jte4wI1sEe29qs15q2b6yw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          </components>
+        </components>
+        <components xsi:type="ui:Group" xmi:id="_CEJ8QI1tEe29qs15q2b6yw" name="buttons" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE">
+          <components xsi:type="ui:ActionButton" xmi:id="_4t5-kI1sEe29qs15q2b6yw" name="ok" label="OK" iconName="check" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" action="SUBMIT"/>
+          <components xsi:type="ui:ActionButton" xmi:id="_FczTEI1tEe29qs15q2b6yw" name="cancel" label="Cancel" iconName="close-circle-outline" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" action="SUBMIT"/>
+        </components>
+      </form>
+      <table xmi:id="_eNzsYI1eEe2J66C5CrhpQw" name="TransferObject_Table" label="TransferObject Table">
+        <columns xsi:type="ui:DataColumn" xmi:id="_kCgjAI1rEe29qs15q2b6yw" name="userName" label="UserName" iconName="text_fields" visible="true" sort="NONE" dataFeature="_g6NoQI1eEe2J66C5CrhpQw"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_kCkNYI1rEe29qs15q2b6yw" name="email" label="Email" iconName="text_fields" visible="true" sort="NONE" dataFeature="_kbxqgI1eEe2J66C5CrhpQw"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_kCn3wI1rEe29qs15q2b6yw" name="hasAdminAccess" label="IsAdmin" iconName="check_box" visible="true" sort="NONE" dataFeature="_uRgZgI1eEe2J66C5CrhpQw"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_kCriII1rEe29qs15q2b6yw" name="firstName" label="FirstName" iconName="text_fields" visible="true" sort="NONE" dataFeature="_a4hfsI1rEe29qs15q2b6yw"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_kCvMgI1rEe29qs15q2b6yw" name="lastName" label="LastName" iconName="text_fields" visible="true" sort="NONE" dataFeature="_e2CeII1rEe29qs15q2b6yw"/>
+      </table>
+      <view xmi:id="_eNgxcI1eEe2J66C5CrhpQw" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
+        <components xsi:type="ui:DataField" xmi:id="_kCeGwI1rEe29qs15q2b6yw" name="userName" label="UserName" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_g6NoQI1eEe2J66C5CrhpQw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:DataField" xmi:id="_kChxII1rEe29qs15q2b6yw" name="email" label="Email" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_kbxqgI1eEe2J66C5CrhpQw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:DataField" xmi:id="_kClbgI1rEe29qs15q2b6yw" name="hasAdminAccess" label="IsAdmin" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_uRgZgI1eEe2J66C5CrhpQw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:DataField" xmi:id="_kCpF4I1rEe29qs15q2b6yw" name="firstName" label="FirstName" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_a4hfsI1rEe29qs15q2b6yw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:DataField" xmi:id="_kCswQI1rEe29qs15q2b6yw" name="lastName" label="LastName" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_e2CeII1rEe29qs15q2b6yw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+      </view>
     </elements>
   </elements>
   <elements xsi:type="structure:EntityType" xmi:id="_GDYW0GkOEe25ONJ3V89cVA" name="Issue" createable="true" updateable="true" deleteable="true">
