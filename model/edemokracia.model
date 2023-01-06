@@ -1486,7 +1486,7 @@
       <relations xsi:type="structure:OneWayRelationMember" xmi:id="_NS4nwIeJEe2kLcMqsIbMgQ" lower="0" upper="-1" target="_JZFs0I1JEe2VSOmaAz6G9Q" name="attachments" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="TRANSIENT" rangeType="ANY" getterExpression="">
         <inherited xmi:id="_NS514IeJEe2kLcMqsIbMgQ"/>
       </relations>
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_Q505QIeJEe2kLcMqsIbMgQ" lower="0" upper="-1" target="_qI4CsGksEe25ONJ3V89cVA" name="issueCategory" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="TRANSIENT" rangeType="ANY" getterExpression="">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_Q505QIeJEe2kLcMqsIbMgQ" lower="0" upper="-1" target="_qI4CsGksEe25ONJ3V89cVA" name="issueCategories" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="TRANSIENT" rangeType="ANY" getterExpression="">
         <inherited xmi:id="_Q52HYIeJEe2kLcMqsIbMgQ"/>
       </relations>
       <attributes xsi:type="structure:DataMember" xmi:id="_E2dOAIeJEe2kLcMqsIbMgQ" name="description" dataType="_7D8NzGkNEe25ONJ3V89cVA" required="true" defaultExpression="" getterExpression="" identifier="false" memberType="TRANSIENT">
@@ -1495,7 +1495,7 @@
       <attributes xsi:type="structure:DataMember" xmi:id="_E2fDMIeJEe2kLcMqsIbMgQ" name="title" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" getterExpression="" identifier="false" memberType="TRANSIENT">
         <inherited xmi:id="_E2fDMYeJEe2kLcMqsIbMgQ"/>
       </attributes>
-      <attributes xsi:type="structure:DataMember" xmi:id="_a_rr4I1QEe2VSOmaAz6G9Q" name="attachmentEnabsled" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" getterExpression="false" identifier="false" memberType="DERIVED">
+      <attributes xsi:type="structure:DataMember" xmi:id="_a_rr4I1QEe2VSOmaAz6G9Q" name="attachmentsHidden" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" getterExpression="true" identifier="false" memberType="DERIVED">
         <inherited xmi:id="_a_s6AI1QEe2VSOmaAz6G9Q"/>
       </attributes>
       <form xmi:id="_oCqSgIeIEe2kLcMqsIbMgQ" name="CreateIssueInput_Form" label="Create issue" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
@@ -1510,7 +1510,7 @@
         <components xsi:type="ui:TabBar" xmi:id="_v5T5EI1DEe2VSOmaAz6G9Q" name="other" col="12" stretch="NONE" row="11" fit="LOOSE">
           <tabs xmi:id="_manxEI1DEe2VSOmaAz6G9Q" name="attchments" label="Attachments" iconName="paperclip" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="11" fit="LOOSE" hiddenBy="_a_rr4I1QEe2VSOmaAz6G9Q"/>
           <tabs xmi:id="_nqZ98I1DEe2VSOmaAz6G9Q" name="categories" label="Categories" iconName="file-tree" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="11" fit="LOOSE">
-            <components xsi:type="ui:TabularReferenceField" xmi:id="_DezucI1DEe2VSOmaAz6G9Q" name="issueCategory" label="" iconName="" col="12" stretch="NONE" row="10" fit="LOOSE" onBlur="false" relationFeature="_Q505QIeJEe2kLcMqsIbMgQ" targetDefinedTabular="false" smallTable="false">
+            <components xsi:type="ui:TabularReferenceField" xmi:id="_DezucI1DEe2VSOmaAz6G9Q" name="issueCategories" label="" iconName="" col="12" stretch="NONE" row="10" fit="LOOSE" onBlur="false" relationFeature="_Q505QIeJEe2kLcMqsIbMgQ" targetDefinedTabular="false" smallTable="false">
               <columns xsi:type="ui:DataColumn" xmi:id="_De0VgI1DEe2VSOmaAz6G9Q" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qJnCgGksEe25ONJ3V89cVA"/>
               <columns xsi:type="ui:DataColumn" xmi:id="_De1joI1DEe2VSOmaAz6G9Q" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_qKOtkGksEe25ONJ3V89cVA"/>
             </components>
