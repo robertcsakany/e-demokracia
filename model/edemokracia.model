@@ -198,6 +198,7 @@
       <accesses xmi:id="_iuCGQId_Ee2kLcMqsIbMgQ" lower="0" upper="-1" target="_qCREY2ksEe25ONJ3V89cVA" name="issues" createable="false" updateable="true" deleteable="true" targetDefinedCRUD="false" accessType="ALL"/>
       <accesses xmi:id="___A0kIehEe2kLcMqsIbMgQ" lower="0" upper="-1" target="_qFjB42ksEe25ONJ3V89cVA" name="debates" createable="false" updateable="true" deleteable="true" targetDefinedCRUD="false" accessType="ALL"/>
       <accesses xmi:id="_GgaEAIyPEe2VSOmaAz6G9Q" lower="0" upper="1" target="_3MbZEIyNEe2VSOmaAz6G9Q" name="dashboardhome" appliedAnnotations="_7D81XmkNEe25ONJ3V89cVA" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" getterExpression="edemokracia::User!filter(u | u.userName == edemokracia::types::String!getVariable(&quot;ACTOR&quot;, &quot;userName&quot;))!any()" accessType="DERIVED"/>
+      <accesses xmi:id="_l9Zh4JEaEe29qs15q2b6yw" lower="0" upper="-1" target="_-f-eY34XEe2cB7_PsKXsHQ" name="voteDefinitions" createable="false" updateable="true" deleteable="true" targetDefinedCRUD="false" accessType="ALL"/>
       <menuItems xsi:type="ui:MenuItemAccess" xmi:id="_GgcgQIyPEe2VSOmaAz6G9Q" name="dashboard" label="Dashboard" iconName="home" hidden="false" access="_GgaEAIyPEe2VSOmaAz6G9Q"/>
       <menuItems xsi:type="ui:MenuItemAccess" xmi:id="_hvYWQGkuEe25ONJ3V89cVA" name="Users_Menu" label="Users" iconName="account" hidden="false" access="_hvVS8GkuEe25ONJ3V89cVA"/>
       <menuItems xsi:type="ui:MenuItemAccess" xmi:id="_vW3EUG4rEe2siJt-xjHAyw" name="Categories_Menu" label="Categories" iconName="file-tree" hidden="false" menuGroup="_oIKpIId-Ee2kLcMqsIbMgQ" access="_vWzZ8G4rEe2siJt-xjHAyw"/>
@@ -206,6 +207,7 @@
       <menuItems xsi:type="ui:MenuItemAccess" xmi:id="_iuDUYId_Ee2kLcMqsIbMgQ" name="Issues_Menu" label="Issues" iconName="ticket-confirmation" hidden="false" menuGroup="_KI3mAIeNEe2kLcMqsIbMgQ" access="_iuCGQId_Ee2kLcMqsIbMgQ"/>
       <menuItems xsi:type="ui:MenuItemGroup" xmi:id="_KI3mAIeNEe2kLcMqsIbMgQ" name="Issues_and_Debates" label="Issues, Debates" hidden="false" menuItems="_iuDUYId_Ee2kLcMqsIbMgQ ___DQ0IehEe2kLcMqsIbMgQ"/>
       <menuItems xsi:type="ui:MenuItemAccess" xmi:id="___DQ0IehEe2kLcMqsIbMgQ" name="Debate_Menu" label="Debates" iconName="wechat" hidden="false" menuGroup="_KI3mAIeNEe2kLcMqsIbMgQ" access="___A0kIehEe2kLcMqsIbMgQ"/>
+      <menuItems xsi:type="ui:MenuItemAccess" xmi:id="_l9dMQJEaEe29qs15q2b6yw" name="Vote_Menu" label="Votes" iconName="vote" hidden="false" access="_l9Zh4JEaEe29qs15q2b6yw"/>
     </elements>
     <elements xsi:type="structure:TransferObjectType" xmi:id="_p1aUIGksEe25ONJ3V89cVA" name="User" createable="false" updateable="false" deleteable="false">
       <relations xsi:type="structure:OneWayRelationMember" xmi:id="_qcneEGksEe25ONJ3V89cVA" lower="0" upper="-1" target="_p8pkkWksEe25ONJ3V89cVA" name="votes" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="MAPPED" rangeType="ANY" binding="_gilN8GkYEe25ONJ3V89cVA" getterExpression="">
@@ -801,6 +803,9 @@
       <relations xsi:type="structure:OneWayRelationMember" xmi:id="_7XpxEH2fEe2LTNnGda5kaw" lower="0" upper="-1" target="_qLFCImksEe25ONJ3V89cVA" name="pros" createable="false" updateable="true" deleteable="true" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="DERIVED" rangeType="ANY" getterExpression="self.pros">
         <inherited xmi:id="_7XrmQH2fEe2LTNnGda5kaw"/>
       </relations>
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_VIETAI4mEe29qs15q2b6yw" lower="0" upper="1" target="_-f-eY34XEe2cB7_PsKXsHQ" name="voteDefinition" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="DERIVED" rangeType="ANY" getterExpression="self.debateVote">
+        <inherited xmi:id="_VIGvQI4mEe29qs15q2b6yw"/>
+      </relations>
       <attributes xsi:type="structure:DataMember" xmi:id="_7FHekG5UEe2wNaja8kBvcQ" name="closeAt" dataType="_7D8NyWkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_Ay-H8GkgEe25ONJ3V89cVA" getterExpression="" identifier="false" memberType="MAPPED">
         <inherited xmi:id="_7FJ60G5UEe2wNaja8kBvcQ"/>
       </attributes>
@@ -878,6 +883,17 @@
           <columns xsi:type="ui:DataColumn" xmi:id="_tr3V4Ie4Ee2kLcMqsIbMgQ" name="upVotes" label="UpVotes" iconName="dialpad" visible="true" sort="NONE" dataFeature="_1MTkIYeaEe2kLcMqsIbMgQ"/>
           <columns xsi:type="ui:DataColumn" xmi:id="_tr5yIIe4Ee2kLcMqsIbMgQ" name="downVotes" label="DownVotes" iconName="dialpad" visible="true" sort="NONE" dataFeature="_1MdVIYeaEe2kLcMqsIbMgQ"/>
         </components>
+        <components xsi:type="ui:TabularReferenceField" xmi:id="_3F8GsI4mEe29qs15q2b6yw" name="voteDefinition" label="VoteDefinition" iconName="table_rows" col="12" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_VIETAI4mEe29qs15q2b6yw" targetDefinedTabular="false" smallTable="false">
+          <columns xsi:type="ui:DataColumn" xmi:id="_3F-i8I4mEe29qs15q2b6yw" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_-gbxYH4XEe2cB7_PsKXsHQ"/>
+          <columns xsi:type="ui:DataColumn" xmi:id="_3GA_MI4mEe29qs15q2b6yw" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_-gmwgH4XEe2cB7_PsKXsHQ"/>
+          <columns xsi:type="ui:DataColumn" xmi:id="_3GDbcI4mEe29qs15q2b6yw" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_-gyWsH4XEe2cB7_PsKXsHQ"/>
+          <columns xsi:type="ui:DataColumn" xmi:id="_3GF3sI4mEe29qs15q2b6yw" name="status" label="Status" iconName="list" visible="true" sort="NONE" dataFeature="_-g9V0H4XEe2cB7_PsKXsHQ"/>
+          <columns xsi:type="ui:DataColumn" xmi:id="_3GIT8I4mEe29qs15q2b6yw" name="closeAt" label="CloseAt" iconName="schedule" visible="true" sort="NONE" dataFeature="_-hI8AH4XEe2cB7_PsKXsHQ"/>
+          <columns xsi:type="ui:DataColumn" xmi:id="_3GKwMI4mEe29qs15q2b6yw" name="isRatingType" label="IsRatingType" iconName="check_box" visible="true" sort="NONE" dataFeature="_nuvakI4jEe29qs15q2b6yw"/>
+          <columns xsi:type="ui:DataColumn" xmi:id="_3GNMcI4mEe29qs15q2b6yw" name="isSelectAnswerType" label="IsSelectAnswerType" iconName="check_box" visible="true" sort="NONE" dataFeature="_nu2vUI4jEe29qs15q2b6yw"/>
+          <columns xsi:type="ui:DataColumn" xmi:id="_3GPosI4mEe29qs15q2b6yw" name="isYesNoAbstainType" label="IsYesNoAbstainType" iconName="check_box" visible="true" sort="NONE" dataFeature="_nu-rII4jEe29qs15q2b6yw"/>
+          <columns xsi:type="ui:DataColumn" xmi:id="_3GSE8I4mEe29qs15q2b6yw" name="isYesNoType" label="IsYesNoType" iconName="check_box" visible="true" sort="NONE" dataFeature="_nvFY0I4jEe29qs15q2b6yw"/>
+        </components>
       </form>
       <table xmi:id="_qF_GwGksEe25ONJ3V89cVA" name="Debate_Table" label="Debates" iconName="wechat">
         <columns xsi:type="ui:DataColumn" xmi:id="_4ROlMG5VEe2wNaja8kBvcQ" name="closeAt" label="CloseAt" iconName="schedule" visible="true" sort="NONE" dataFeature="_7FHekG5UEe2wNaja8kBvcQ"/>
@@ -897,6 +913,12 @@
             <columns xsi:type="ui:DataColumn" xmi:id="_R8BEUYewEe2kLcMqsIbMgQ" name="representation" label="Representation" iconName="text_fields" visible="true" sort="NONE" dataFeature="_QrtE4IdhEe2kLcMqsIbMgQ"/>
           </components>
           <components xsi:type="ui:DataField" xmi:id="_4RRBcG5VEe2wNaja8kBvcQ" name="description" label="Description" iconName="text_fields" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" dataFeature="_7FMXEG5UEe2wNaja8kBvcQ" enumWidget="COMBO" textMultiLine="true" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:TabularReferenceField" xmi:id="_3Fk6UI4mEe29qs15q2b6yw" name="voteDefinition" label="VoteDefinition" iconName="table_rows" col="12" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_VIETAI4mEe29qs15q2b6yw" targetDefinedTabular="false" smallTable="false">
+            <columns xsi:type="ui:DataColumn" xmi:id="_3FnWkI4mEe29qs15q2b6yw" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_-gbxYH4XEe2cB7_PsKXsHQ"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_3FpLwI4mEe29qs15q2b6yw" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_-gmwgH4XEe2cB7_PsKXsHQ"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_3FtdMI4mEe29qs15q2b6yw" name="status" label="Status" iconName="list" visible="true" sort="NONE" dataFeature="_-g9V0H4XEe2cB7_PsKXsHQ"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_3FwggI4mEe29qs15q2b6yw" name="closeAt" label="CloseAt" iconName="schedule" visible="true" sort="NONE" dataFeature="_-hI8AH4XEe2cB7_PsKXsHQ"/>
+          </components>
           <components xsi:type="ui:OperationForm" xmi:id="_tr8OYIe4Ee2kLcMqsIbMgQ" name="closeDebate" label="Close debate" iconName="wechat" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" operation="closeDebate"/>
         </components>
         <components xsi:type="ui:TabBar" xmi:id="_OjPTsGk9Ee25ONJ3V89cVA" name="tabBar" col="12" stretch="NONE" row="1" fit="LOOSE">
@@ -1245,8 +1267,8 @@
         <inherited xmi:id="_-ah9sH4XEe2cB7_PsKXsHQ"/>
       </attributes>
       <mapping xmi:id="_-Z5EgH4XEe2cB7_PsKXsHQ" target="_tA1hUG6dEe2wNaja8kBvcQ"/>
-      <operations xmi:id="_fNe2YH4YEe2cB7_PsKXsHQ" name="vote" customImplementation="false" body="" stateful="true" operationType="MAPPED" binding="vote" initializer="false">
-        <input xmi:id="_fNgEgH4YEe2cB7_PsKXsHQ" lower="1" upper="1" target="_-1R8gHWyEe2LTNnGda5kaw" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY"/>
+      <operations xmi:id="_fNe2YH4YEe2cB7_PsKXsHQ" name="vote" customImplementation="false" body="" stateful="true" operationType="MAPPED" binding="voteYesNo" initializer="false">
+        <input xmi:id="_fNgEgH4YEe2cB7_PsKXsHQ" lower="1" upper="1" target="_-1R8gHWyEe2LTNnGda5kaw" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY" rangeExpression=""/>
         <inherited xmi:id="_fNfdcH4YEe2cB7_PsKXsHQ"/>
       </operations>
       <form xmi:id="_-Zs3QH4XEe2cB7_PsKXsHQ" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
@@ -1289,7 +1311,7 @@
         <inherited xmi:id="_-b4okH4XEe2cB7_PsKXsHQ"/>
       </attributes>
       <mapping xmi:id="_-bEJMH4XEe2cB7_PsKXsHQ" target="_4Aej4G6LEe2wNaja8kBvcQ"/>
-      <operations xmi:id="_gxwFgH4YEe2cB7_PsKXsHQ" name="vote" customImplementation="false" body="" stateful="true" operationType="MAPPED" binding="vote" initializer="false">
+      <operations xmi:id="_gxwFgH4YEe2cB7_PsKXsHQ" name="vote" customImplementation="false" body="" stateful="true" operationType="MAPPED" binding="voteYesNoAbstain" initializer="false">
         <input xmi:id="_gxx6sH4YEe2cB7_PsKXsHQ" lower="1" upper="1" target="_-1U_0HWyEe2LTNnGda5kaw" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY"/>
         <inherited xmi:id="_gxxToH4YEe2cB7_PsKXsHQ"/>
       </operations>
@@ -1336,7 +1358,7 @@
         <inherited xmi:id="_-dRIoH4XEe2cB7_PsKXsHQ"/>
       </attributes>
       <mapping xmi:id="_-ca0EH4XEe2cB7_PsKXsHQ" target="_-PRocG6LEe2wNaja8kBvcQ"/>
-      <operations xmi:id="__FsxEH5YEe2kLcMqsIbMgQ" name="vote" customImplementation="false" body="" stateful="true" operationType="MAPPED" binding="vote" initializer="false">
+      <operations xmi:id="__FsxEH5YEe2kLcMqsIbMgQ" name="vote" customImplementation="false" body="" stateful="true" operationType="MAPPED" binding="voteSelectAnswer" initializer="false">
         <input xmi:id="_IqQQgH5ZEe2kLcMqsIbMgQ" lower="1" upper="1" target="_Xwdl4G6bEe2wNaja8kBvcQ" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="DERIVED" rangeExpression="self.voteSelections"/>
         <inherited xmi:id="__FumQH5YEe2kLcMqsIbMgQ"/>
       </operations>
@@ -1397,6 +1419,10 @@
         <inherited xmi:id="_-fDRUH4XEe2cB7_PsKXsHQ"/>
       </attributes>
       <mapping xmi:id="_-dzUIH4XEe2cB7_PsKXsHQ" target="_FKa1oG6MEe2wNaja8kBvcQ"/>
+      <operations xmi:id="_RhhvUI4UEe29qs15q2b6yw" name="vote" customImplementation="false" body="" stateful="true" operationType="MAPPED" binding="voteRating" initializer="false">
+        <input xmi:id="_RhjkgI4UEe29qs15q2b6yw" lower="1" upper="1" target="_LEKjoH5YEe2kLcMqsIbMgQ" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY"/>
+        <inherited xmi:id="_RhiWYI4UEe29qs15q2b6yw"/>
+      </operations>
       <form xmi:id="_-dl4wH4XEe2cB7_PsKXsHQ" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
         <components xsi:type="ui:DataField" xmi:id="_DZSukIXrEe2kLcMqsIbMgQ" name="minRateValue" label="MinRateValue" iconName="dialpad" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_-d1wYH4XEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
         <components xsi:type="ui:DataField" xmi:id="_DZY1MIXrEe2kLcMqsIbMgQ" name="maxRateValue" label="MaxRateValue" iconName="dialpad" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_-eFoAH4XEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
@@ -1432,6 +1458,9 @@
       </view>
     </elements>
     <elements xsi:type="structure:TransferObjectType" xmi:id="_-f-eY34XEe2cB7_PsKXsHQ" name="VoteDefinition" createable="false" updateable="false" deleteable="false">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_E2xOwI4mEe29qs15q2b6yw" lower="0" upper="1" target="_qFjB42ksEe25ONJ3V89cVA" name="debate" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="true" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="DERIVED" rangeType="ANY" getterExpression="self!container(edemokracia::Debate)">
+        <inherited xmi:id="_E2yc4I4mEe29qs15q2b6yw"/>
+      </relations>
       <attributes xsi:type="structure:DataMember" xmi:id="_-gbxYH4XEe2cB7_PsKXsHQ" name="title" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_rQEeYG6JEe2wNaja8kBvcQ" getterExpression="" identifier="false" memberType="MAPPED">
         <inherited xmi:id="_-ggC0H4XEe2cB7_PsKXsHQ"/>
       </attributes>
@@ -1447,10 +1476,104 @@
       <attributes xsi:type="structure:DataMember" xmi:id="_-hI8AH4XEe2cB7_PsKXsHQ" name="closeAt" dataType="_7D8NyWkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_XySsgG6IEe2wNaja8kBvcQ" getterExpression="" identifier="false" memberType="MAPPED">
         <inherited xmi:id="_-hN0gH4XEe2cB7_PsKXsHQ"/>
       </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_nuvakI4jEe29qs15q2b6yw" name="isRatingType" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" binding="_3Vr-cI4cEe29qs15q2b6yw" getterExpression="" identifier="false" memberType="MAPPED">
+        <inherited xmi:id="_nuyd4I4jEe29qs15q2b6yw"/>
+      </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_nu2vUI4jEe29qs15q2b6yw" name="isSelectAnswerType" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" binding="_o7zu0I4cEe29qs15q2b6yw" getterExpression="" identifier="false" memberType="MAPPED">
+        <inherited xmi:id="_nu5yoI4jEe29qs15q2b6yw"/>
+      </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_nu-rII4jEe29qs15q2b6yw" name="isYesNoAbstainType" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" binding="_YyAZsI4cEe29qs15q2b6yw" getterExpression="" identifier="false" memberType="MAPPED">
+        <inherited xmi:id="_nvBHYI4jEe29qs15q2b6yw"/>
+      </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_nvFY0I4jEe29qs15q2b6yw" name="isYesNoType" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" binding="_CKyVMI4cEe29qs15q2b6yw" getterExpression="" identifier="false" memberType="MAPPED">
+        <inherited xmi:id="_nvIcII4jEe29qs15q2b6yw"/>
+      </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_maoVEI4oEe29qs15q2b6yw" name="isNotRatingType" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" getterExpression="not self.isRatingType" identifier="false" memberType="DERIVED">
+        <inherited xmi:id="_mapjMI4oEe29qs15q2b6yw"/>
+      </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_zbgxcI4oEe29qs15q2b6yw" name="isNotSelectAnswerType" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" getterExpression="not self.isSelectAnswerType" identifier="false" memberType="DERIVED">
+        <inherited xmi:id="_zbh_kI4oEe29qs15q2b6yw"/>
+      </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_DT-e8I4pEe29qs15q2b6yw" name="isNotYesNoAbstainType" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" getterExpression="not self.isYesNoAbstainType" identifier="false" memberType="DERIVED">
+        <inherited xmi:id="_DT_GAI4pEe29qs15q2b6yw"/>
+      </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_Tt0bMI4pEe29qs15q2b6yw" name="isNotYesNoType" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" getterExpression="not self.isYesNoType" identifier="false" memberType="DERIVED">
+        <inherited xmi:id="_Tt1pUI4pEe29qs15q2b6yw"/>
+      </attributes>
       <mapping xmi:id="_-gZVIH4XEe2cB7_PsKXsHQ" target="_0n43QG5mEe2wNaja8kBvcQ"/>
-      <form xmi:id="_-gL5wH4XEe2cB7_PsKXsHQ" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
-      <table xmi:id="_-gSncH4XEe2cB7_PsKXsHQ" name="TransferObject_Table" label="TransferObject Table"/>
-      <view xmi:id="_-gFzIH4XEe2cB7_PsKXsHQ" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
+      <operations xmi:id="_7fNK0I4XEe29qs15q2b6yw" name="voteRating" customImplementation="false" body="" stateful="true" operationType="MAPPED" binding="voteRating" initializer="false">
+        <input xmi:id="_7fPAAI4XEe29qs15q2b6yw" lower="1" upper="1" target="_LEKjoH5YEe2kLcMqsIbMgQ" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY" rangeExpression=""/>
+        <inherited xmi:id="_7fNx4I4XEe29qs15q2b6yw"/>
+      </operations>
+      <operations xmi:id="_7fPnEI4XEe29qs15q2b6yw" name="voteSelectAnswer" customImplementation="false" body="" stateful="true" operationType="MAPPED" binding="voteSelectAnswer" initializer="false">
+        <input xmi:id="_7fSDUI4XEe29qs15q2b6yw" lower="1" upper="1" target="_Xwdl4G6bEe2wNaja8kBvcQ" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY" rangeExpression=""/>
+        <inherited xmi:id="_7fQ1MI4XEe29qs15q2b6yw"/>
+      </operations>
+      <operations xmi:id="_7fTRcI4XEe29qs15q2b6yw" name="voteYesNo" customImplementation="false" body="" stateful="true" operationType="MAPPED" binding="voteYesNo" initializer="false">
+        <input xmi:id="_7fVGoI4XEe29qs15q2b6yw" lower="1" upper="1" target="_-1R8gHWyEe2LTNnGda5kaw" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY"/>
+        <inherited xmi:id="_7fUfkI4XEe29qs15q2b6yw"/>
+      </operations>
+      <operations xmi:id="_7fWUwI4XEe29qs15q2b6yw" name="voteYesNoAbstain" customImplementation="false" body="" stateful="true" operationType="MAPPED" binding="voteYesNoAbstain" initializer="false">
+        <input xmi:id="_7fYJ8I4XEe29qs15q2b6yw" lower="1" upper="1" target="_-1U_0HWyEe2LTNnGda5kaw" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY"/>
+        <inherited xmi:id="_7fW70I4XEe29qs15q2b6yw"/>
+      </operations>
+      <form xmi:id="_-gL5wH4XEe2cB7_PsKXsHQ" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false">
+        <components xsi:type="ui:DataField" xmi:id="_T5VWYI4jEe29qs15q2b6yw" name="title" label="Title" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_-gbxYH4XEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:DataField" xmi:id="_T5dSMI4jEe29qs15q2b6yw" name="created" label="Created" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_-gmwgH4XEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:DataField" xmi:id="_T5l1EI4jEe29qs15q2b6yw" name="description" label="Description" iconName="text_fields" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_-gyWsH4XEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:DataField" xmi:id="_T5tw4I4jEe29qs15q2b6yw" name="status" label="Status" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_-g9V0H4XEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:DataField" xmi:id="_T55XEI4jEe29qs15q2b6yw" name="closeAt" label="CloseAt" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_-hI8AH4XEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:DataField" xmi:id="_blWDAI4nEe29qs15q2b6yw" name="isRatingType" label="IsRatingType" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_nuvakI4jEe29qs15q2b6yw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:DataField" xmi:id="_blfM8I4nEe29qs15q2b6yw" name="isSelectAnswerType" label="IsSelectAnswerType" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_nu2vUI4jEe29qs15q2b6yw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:DataField" xmi:id="_blnIwI4nEe29qs15q2b6yw" name="isYesNoAbstainType" label="IsYesNoAbstainType" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_nu-rII4jEe29qs15q2b6yw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:DataField" xmi:id="_blvroI4nEe29qs15q2b6yw" name="isYesNoType" label="IsYesNoType" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_nvFY0I4jEe29qs15q2b6yw" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        <components xsi:type="ui:TabularReferenceField" xmi:id="_bmEbwI4nEe29qs15q2b6yw" name="debate" label="Debate" iconName="table_rows" col="12" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_E2xOwI4mEe29qs15q2b6yw" targetDefinedTabular="false" smallTable="false">
+          <columns xsi:type="ui:DataColumn" xmi:id="_bmG4AI4nEe29qs15q2b6yw" name="closeAt" label="CloseAt" iconName="schedule" visible="true" sort="NONE" dataFeature="_7FHekG5UEe2wNaja8kBvcQ"/>
+          <columns xsi:type="ui:DataColumn" xmi:id="_bmJ7UI4nEe29qs15q2b6yw" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_7FMXEG5UEe2wNaja8kBvcQ"/>
+          <columns xsi:type="ui:DataColumn" xmi:id="_bmM-oI4nEe29qs15q2b6yw" name="status" label="Status" iconName="list" visible="true" sort="NONE" dataFeature="_7FRPkG5UEe2wNaja8kBvcQ"/>
+          <columns xsi:type="ui:DataColumn" xmi:id="_bmQB8I4nEe29qs15q2b6yw" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_7FWIEG5UEe2wNaja8kBvcQ"/>
+        </components>
+      </form>
+      <table xmi:id="_-gSncH4XEe2cB7_PsKXsHQ" name="TransferObject_Table" label="TransferObject Table">
+        <columns xsi:type="ui:DataColumn" xmi:id="_T5YZsI4jEe29qs15q2b6yw" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_-gbxYH4XEe2cB7_PsKXsHQ"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_T5g8kI4jEe29qs15q2b6yw" name="created" label="Created" iconName="schedule" visible="true" sort="NONE" dataFeature="_-gmwgH4XEe2cB7_PsKXsHQ"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_T5o4YI4jEe29qs15q2b6yw" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_-gyWsH4XEe2cB7_PsKXsHQ"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_T5z3gI4jEe29qs15q2b6yw" name="status" label="Status" iconName="list" visible="true" sort="NONE" dataFeature="_-g9V0H4XEe2cB7_PsKXsHQ"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_T58aYI4jEe29qs15q2b6yw" name="closeAt" label="CloseAt" iconName="schedule" visible="true" sort="NONE" dataFeature="_-hI8AH4XEe2cB7_PsKXsHQ"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_blZGUI4nEe29qs15q2b6yw" name="isRatingType" label="IsRatingType" iconName="check_box" visible="true" sort="NONE" dataFeature="_nuvakI4jEe29qs15q2b6yw"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_blhCII4nEe29qs15q2b6yw" name="isSelectAnswerType" label="IsSelectAnswerType" iconName="check_box" visible="true" sort="NONE" dataFeature="_nu2vUI4jEe29qs15q2b6yw"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_blqMEI4nEe29qs15q2b6yw" name="isYesNoAbstainType" label="IsYesNoAbstainType" iconName="check_box" visible="true" sort="NONE" dataFeature="_nu-rII4jEe29qs15q2b6yw"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_blyu8I4nEe29qs15q2b6yw" name="isYesNoType" label="IsYesNoType" iconName="check_box" visible="true" sort="NONE" dataFeature="_nvFY0I4jEe29qs15q2b6yw"/>
+      </table>
+      <view xmi:id="_-gFzIH4XEe2cB7_PsKXsHQ" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL">
+        <components xsi:type="ui:Group" xmi:id="_3IYooI4kEe29qs15q2b6yw" name="group" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="true" col="12" stretch="NONE" row="1" fit="LOOSE">
+          <components xsi:type="ui:DataField" xmi:id="_T5STEI4jEe29qs15q2b6yw" name="title" label="Title" iconName="text_fields" col="12" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_-gbxYH4XEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:DataField" xmi:id="_T5260I4jEe29qs15q2b6yw" name="closeAt" label="CloseAt" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_-hI8AH4XEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:DataField" xmi:id="_T5rUoI4jEe29qs15q2b6yw" name="status" label="Status" iconName="list" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_-g9V0H4XEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:TabularReferenceField" xmi:id="_bl1yQI4nEe29qs15q2b6yw" name="debate" label="Debate" iconName="table_rows" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" relationFeature="_E2xOwI4mEe29qs15q2b6yw" targetDefinedTabular="false" smallTable="false">
+            <columns xsi:type="ui:DataColumn" xmi:id="_bl4OgI4nEe29qs15q2b6yw" name="closeAt" label="CloseAt" iconName="schedule" visible="true" sort="NONE" dataFeature="_7FHekG5UEe2wNaja8kBvcQ"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_bl7R0I4nEe29qs15q2b6yw" name="description" label="Description" iconName="text_fields" visible="true" sort="NONE" dataFeature="_7FMXEG5UEe2wNaja8kBvcQ"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_bl-VII4nEe29qs15q2b6yw" name="status" label="Status" iconName="list" visible="true" sort="NONE" dataFeature="_7FRPkG5UEe2wNaja8kBvcQ"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_bmBYcI4nEe29qs15q2b6yw" name="title" label="Title" iconName="text_fields" visible="true" sort="NONE" dataFeature="_7FWIEG5UEe2wNaja8kBvcQ"/>
+          </components>
+          <components xsi:type="ui:DataField" xmi:id="_T5a18I4jEe29qs15q2b6yw" name="created" label="Created" iconName="schedule" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" dataFeature="_-gmwgH4XEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="false" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+          <components xsi:type="ui:DataField" xmi:id="_T5jY0I4jEe29qs15q2b6yw" name="description" label="Description" iconName="text_fields" col="12" stretch="NONE" row="4" fit="LOOSE" onBlur="false" dataFeature="_-gyWsH4XEe2cB7_PsKXsHQ" enumWidget="COMBO" textMultiLine="true" textWidget="INPUT" booleanWidget="CHECKBOX"/>
+        </components>
+        <components xsi:type="ui:TabBar" xmi:id="_i6xVQI4jEe29qs15q2b6yw" name="tabBar" col="12" stretch="NONE" row="1" fit="LOOSE">
+          <tabs xmi:id="_kxgNYI4jEe29qs15q2b6yw" name="yesnovote" label="Yes / No vote" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE" hiddenBy="_Tt0bMI4pEe29qs15q2b6yw">
+            <components xsi:type="ui:OperationForm" xmi:id="_T6ChAI4jEe29qs15q2b6yw" name="voteYesNo" label="VoteYesNo" iconName="chevron_right" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" operation="voteYesNo"/>
+          </tabs>
+          <tabs xmi:id="_z_MfkI4jEe29qs15q2b6yw" name="yesnoabstainvote" label="Yes / No / Abstain vote" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE" hiddenBy="_DT-e8I4pEe29qs15q2b6yw">
+            <components xsi:type="ui:OperationForm" xmi:id="_T6DvII4jEe29qs15q2b6yw" name="voteYesNoAbstain" label="VoteYesNoAbstain" iconName="chevron_right" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" operation="voteYesNoAbstain"/>
+          </tabs>
+          <tabs xmi:id="_1tyvYI4jEe29qs15q2b6yw" name="selectanswervote" label="Select answer vote" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE" hiddenBy="_zbgxcI4oEe29qs15q2b6yw">
+            <components xsi:type="ui:OperationForm" xmi:id="_T6Ar0I4jEe29qs15q2b6yw" name="voteSelectAnswer" label="VoteSelectAnswer" iconName="chevron_right" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" operation="voteSelectAnswer"/>
+          </tabs>
+          <tabs xmi:id="_31NH0I4jEe29qs15q2b6yw" name="ratingvote" label="Rating vote" layout="HORIZONTAL" horizontal="LEFT" vertical="TOP" frame="false" col="12" stretch="NONE" row="1" fit="LOOSE" hiddenBy="_maoVEI4oEe29qs15q2b6yw">
+            <components xsi:type="ui:OperationForm" xmi:id="_T5_dsI4jEe29qs15q2b6yw" name="voteRating" label="VoteRating" iconName="chevron_right" col="4" stretch="NONE" row="1" fit="LOOSE" onBlur="false" operation="voteRating"/>
+          </tabs>
+        </components>
+      </view>
     </elements>
     <elements xsi:type="structure:TransferObjectType" xmi:id="_goyGMH5ZEe2kLcMqsIbMgQ" name="SelectAnswerVoteSelection" createable="false" updateable="false" deleteable="false">
       <attributes xsi:type="structure:DataMember" xmi:id="_gpq3AH5ZEe2kLcMqsIbMgQ" name="title" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_ca44MG6cEe2wNaja8kBvcQ" getterExpression="" identifier="false" memberType="MAPPED">
@@ -1965,7 +2088,35 @@
     <attributes xsi:type="structure:DataMember" xmi:id="_XySsgG6IEe2wNaja8kBvcQ" name="closeAt" dataType="_7D8NyWkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_XySsgG6IEe2wNaja8kBvcQ" getterExpression="" identifier="false" memberType="STORED">
       <inherited xmi:id="_XySsgW6IEe2wNaja8kBvcQ"/>
     </attributes>
+    <attributes xsi:type="structure:DataMember" xmi:id="_CKyVMI4cEe29qs15q2b6yw" name="isYesNoType" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" binding="_CKyVMI4cEe29qs15q2b6yw" getterExpression="self!typeOf(edemokracia::YesNoVoteDefinition)" identifier="false" memberType="DERIVED">
+      <inherited xmi:id="_CK0KYI4cEe29qs15q2b6yw"/>
+    </attributes>
+    <attributes xsi:type="structure:DataMember" xmi:id="_YyAZsI4cEe29qs15q2b6yw" name="isYesNoAbstainType" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" binding="_YyAZsI4cEe29qs15q2b6yw" getterExpression="self!typeOf(edemokracia::YesNoAbstainVoteDefinition)" identifier="false" memberType="DERIVED">
+      <inherited xmi:id="_YyCO4I4cEe29qs15q2b6yw"/>
+    </attributes>
+    <attributes xsi:type="structure:DataMember" xmi:id="_o7zu0I4cEe29qs15q2b6yw" name="isSelectAnswerType" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" binding="_o7zu0I4cEe29qs15q2b6yw" getterExpression="self!typeOf(edemokracia::SelectAnswerVoteDefinition)" identifier="false" memberType="DERIVED">
+      <inherited xmi:id="_o71kAI4cEe29qs15q2b6yw"/>
+    </attributes>
+    <attributes xsi:type="structure:DataMember" xmi:id="_3Vr-cI4cEe29qs15q2b6yw" name="isRatingType" dataType="_7D8Nx2kNEe25ONJ3V89cVA" defaultExpression="" binding="_3Vr-cI4cEe29qs15q2b6yw" getterExpression="self!typeOf(edemokracia::RatingVoteDefinition)" identifier="false" memberType="DERIVED">
+      <inherited xmi:id="_3VuasI4cEe29qs15q2b6yw"/>
+    </attributes>
     <mapping xmi:id="_0n7TgG5mEe2wNaja8kBvcQ" target="_0n43QG5mEe2wNaja8kBvcQ"/>
+    <operations xmi:id="_bc9y0I4WEe29qs15q2b6yw" name="voteYesNo" customImplementation="false" body="if (this.isYesNoType) {&#xA;&#x9;var edemokracia::YesNoVoteDefinition target = this as edemokracia::YesNoVoteDefinition;&#xA;&#x9;var edemokracia::YesNoVoteEntry voteEntry = new edemokracia::YesNoVoteEntry(&#xA;&#x9;&#x9;value = input.value,&#xA;&#x9;&#x9;voteDefinition = target,&#xA;&#x9;&#x9;user = edemokracia::User!filter(u | u.userName == edemokracia::types::String!getVariable(&quot;ACTOR&quot;, &quot;userName&quot;))!any()&#x9;&#xA;&#x9;);&#xA;&#x9;target.voteEntries += voteEntry;&#xA;}&#xA;&#xA;&#xA;" stateful="true" operationType="INSTANCE" binding="" initializer="false">
+      <input xmi:id="_bc9y0Y4WEe29qs15q2b6yw" lower="1" upper="1" target="_-1R8gHWyEe2LTNnGda5kaw" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY" rangeExpression=""/>
+      <inherited xmi:id="_bc9y0o4WEe29qs15q2b6yw"/>
+    </operations>
+    <operations xmi:id="_u2vD4I4WEe29qs15q2b6yw" name="voteYesNoAbstain" customImplementation="false" body="if (this.isYesNoAbstainType) {&#xA;&#x9;var edemokracia::YesNoAbstainVoteDefinition target = this as edemokracia::YesNoAbstainVoteDefinition;&#xA;&#x9;var edemokracia::YesNoAbstainVoteEntry voteEntry = new edemokracia::YesNoAbstainVoteEntry(&#xA;&#x9;&#x9;value = input.value,&#xA;&#x9;&#x9;voteDefinition = target,&#xA;&#x9;&#x9;user = edemokracia::User!filter(u | u.userName == edemokracia::types::String!getVariable(&quot;ACTOR&quot;, &quot;userName&quot;))!any()&#x9;&#xA;&#x9;);&#xA;&#x9;target.voteEntries += voteEntry;&#xA;}&#xA;" stateful="true" operationType="INSTANCE" binding="" initializer="false">
+      <input xmi:id="_u2vD4Y4WEe29qs15q2b6yw" lower="1" upper="1" target="_-1U_0HWyEe2LTNnGda5kaw" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY" rangeExpression=""/>
+      <inherited xmi:id="_u2vD4o4WEe29qs15q2b6yw"/>
+    </operations>
+    <operations xmi:id="_Bwwd4I4XEe29qs15q2b6yw" name="voteSelectAnswer" customImplementation="false" body="if (this.isSelectAnswerType) {&#xA;&#x9;var edemokracia::SelectAnswerVoteDefinition target = this as edemokracia::SelectAnswerVoteDefinition;&#xA;&#xA;&#x9;var edemokracia::SelectAnswerVoteEntry voteEntry = new edemokracia::SelectAnswerVoteEntry(&#xA;&#x9;&#x9;value = input,&#xA;&#x9;&#x9;voteDefinition = target,&#xA;&#x9;&#x9;user = edemokracia::User!filter(u | u.userName == edemokracia::types::String!getVariable(&quot;ACTOR&quot;, &quot;userName&quot;))!any()&#xA;&#x9;);&#xA;&#x9;&#xA;&#x9;target.voteEntries += voteEntry;&#xA;}&#xA;" stateful="true" operationType="INSTANCE" binding="" initializer="false">
+      <input xmi:id="_Bwwd4Y4XEe29qs15q2b6yw" lower="1" upper="1" target="_Xwdl4G6bEe2wNaja8kBvcQ" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="DERIVED" rangeExpression="self!asType(edemokracia::SelectAnswerVoteDefinition).voteSelections"/>
+      <inherited xmi:id="_Bwwd4o4XEe29qs15q2b6yw"/>
+    </operations>
+    <operations xmi:id="_HbnH4I4XEe29qs15q2b6yw" name="voteRating" customImplementation="false" body="var edemokracia::RatingVoteEntry voteEntry = new edemokracia::RatingVoteEntry(&#xA;&#x9;value = input.value,&#xA;&#x9;voteDefinition = this,&#xA;&#x9;user = edemokracia::User!filter(u | u.userName == edemokracia::types::String!getVariable(&quot;ACTOR&quot;, &quot;userName&quot;))!any()&#x9;&#xA;);&#xA;this.voteEntries += voteEntry;&#xA;voteEntry.voteDefinition = this;&#xA;" stateful="true" operationType="INSTANCE" binding="" initializer="false">
+      <input xmi:id="_HbnH4Y4XEe29qs15q2b6yw" lower="1" upper="1" target="_LEKjoH5YEe2kLcMqsIbMgQ" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY" rangeExpression=""/>
+      <inherited xmi:id="_HbnH4o4XEe29qs15q2b6yw"/>
+    </operations>
     <form xmi:id="_0oKkEG5mEe2wNaja8kBvcQ" name="Entity_Form" label="Entity Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
     <table xmi:id="_0oTG8G5mEe2wNaja8kBvcQ" name="Entity_Table" label="Entity Table"/>
     <view xmi:id="_0oFEgG5mEe2wNaja8kBvcQ" name="Entity_View" label="Entity View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
@@ -2026,10 +2177,6 @@
   <elements xsi:type="structure:EntityType" xmi:id="_4Aej4G6LEe2wNaja8kBvcQ" name="YesNoAbstainVoteDefinition" createable="true" updateable="true" deleteable="true">
     <generalizations xmi:id="_SVnEkG6MEe2wNaja8kBvcQ" target="_0n43QG5mEe2wNaja8kBvcQ"/>
     <mapping xmi:id="_4AfyAG6LEe2wNaja8kBvcQ" target="_4Aej4G6LEe2wNaja8kBvcQ"/>
-    <operations xmi:id="_9lQUgHWxEe2LTNnGda5kaw" name="vote" customImplementation="false" body="var edemokracia::YesNoAbstainVoteEntry voteEntry = new edemokracia::YesNoAbstainVoteEntry(&#xA;&#x9;value = input.value,&#xA;&#x9;voteDefinition = this,&#xA;&#x9;user = edemokracia::User!filter(u | u.userName == edemokracia::types::String!getVariable(&quot;PRINCIPAL&quot;, &quot;preferred_username&quot;))!any()&#xA;);&#xA;this.voteEntries += voteEntry;&#xA;voteEntry.voteDefinition = this;" stateful="true" operationType="INSTANCE" binding="" initializer="false">
-      <input xmi:id="_9lQUgXWxEe2LTNnGda5kaw" lower="1" upper="1" target="_-1U_0HWyEe2LTNnGda5kaw" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY" rangeExpression=""/>
-      <inherited xmi:id="_9lQUgnWxEe2LTNnGda5kaw"/>
-    </operations>
     <form xmi:id="_4AtNYG6LEe2wNaja8kBvcQ" name="Entity_Form" label="Entity Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
     <table xmi:id="_4Ays8G6LEe2wNaja8kBvcQ" name="Entity_Table" label="Entity Table"/>
     <view xmi:id="_4Ant0G6LEe2wNaja8kBvcQ" name="Entity_View" label="Entity View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
@@ -2040,10 +2187,6 @@
     </relations>
     <generalizations xmi:id="_VYUnoG6MEe2wNaja8kBvcQ" target="_0n43QG5mEe2wNaja8kBvcQ"/>
     <mapping xmi:id="_-PS2kG6LEe2wNaja8kBvcQ" target="_-PRocG6LEe2wNaja8kBvcQ"/>
-    <operations xmi:id="_3nlfYHW1Ee2LTNnGda5kaw" name="vote" customImplementation="false" body="var edemokracia::SelectAnswerVoteEntry voteEntry = new edemokracia::SelectAnswerVoteEntry(&#xA;&#x9;value = input,&#xA;&#x9;voteDefinition = this,&#xA;&#x9;user = edemokracia::User!filter(u | u.userName == edemokracia::types::String!getVariable(&quot;PRINCIPAL&quot;, &quot;preferred_username&quot;))!any()&#xA;);&#xA;this.voteEntries += voteEntry;&#xA;" stateful="true" operationType="INSTANCE" binding="" initializer="false">
-      <input xmi:id="_-NfzMH5XEe2kLcMqsIbMgQ" lower="1" upper="1" target="_Xwdl4G6bEe2wNaja8kBvcQ" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="DERIVED" rangeExpression="self.voteSelections"/>
-      <inherited xmi:id="_3nmtgHW1Ee2LTNnGda5kaw"/>
-    </operations>
     <form xmi:id="_-PnmsG6LEe2wNaja8kBvcQ" name="Entity_Form" label="Entity Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
     <table xmi:id="_-PtGQG6LEe2wNaja8kBvcQ" name="Entity_Table" label="Entity Table"/>
     <view xmi:id="_-PhgEG6LEe2wNaja8kBvcQ" name="Entity_View" label="Entity View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
@@ -2057,10 +2200,6 @@
     </attributes>
     <generalizations xmi:id="_Z4VPIG6MEe2wNaja8kBvcQ" target="_0n43QG5mEe2wNaja8kBvcQ"/>
     <mapping xmi:id="_FKbcsG6MEe2wNaja8kBvcQ" target="_FKa1oG6MEe2wNaja8kBvcQ"/>
-    <operations xmi:id="_SYE2IH5YEe2kLcMqsIbMgQ" name="vote" customImplementation="false" body="var edemokracia::RatingVoteEntry voteEntry = new edemokracia::RatingVoteEntry(&#xA;&#x9;value = input.value,&#xA;&#x9;voteDefinition = this,&#xA;&#x9;user = edemokracia::User!filter(u | u.userName == edemokracia::types::String!getVariable(&quot;PRINCIPAL&quot;, &quot;preferred_username&quot;))!any()&#x9;&#xA;);&#xA;this.voteEntries += voteEntry;&#xA;voteEntry.voteDefinition = this;" stateful="true" operationType="INSTANCE" binding="" initializer="false">
-      <input xmi:id="_W7U-4H5YEe2kLcMqsIbMgQ" lower="1" upper="1" target="_LEKjoH5YEe2kLcMqsIbMgQ" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY" rangeExpression=""/>
-      <inherited xmi:id="_SYGrUH5YEe2kLcMqsIbMgQ"/>
-    </operations>
     <form xmi:id="_FKr7YG6MEe2wNaja8kBvcQ" name="Entity_Form" label="Entity Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
     <table xmi:id="_FKxa8G6MEe2wNaja8kBvcQ" name="Entity_Table" label="Entity Table"/>
     <view xmi:id="_FKjYgG6MEe2wNaja8kBvcQ" name="Entity_View" label="Entity View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
@@ -2085,10 +2224,6 @@
   <elements xsi:type="structure:EntityType" xmi:id="_tA1hUG6dEe2wNaja8kBvcQ" name="YesNoVoteDefinition" createable="true" updateable="true" deleteable="true">
     <generalizations xmi:id="_tA1hUW6dEe2wNaja8kBvcQ" target="_0n43QG5mEe2wNaja8kBvcQ"/>
     <mapping xmi:id="_tA1hUm6dEe2wNaja8kBvcQ" target="_tA1hUG6dEe2wNaja8kBvcQ"/>
-    <operations xmi:id="_yJUcsHWxEe2LTNnGda5kaw" name="vote" customImplementation="false" body="var edemokracia::YesNoVoteEntry voteEntry = new edemokracia::YesNoVoteEntry(&#xA;&#x9;value = input.value,&#xA;&#x9;voteDefinition = this,&#xA;&#x9;user = edemokracia::User!filter(u | u.userName == edemokracia::types::String!getVariable(&quot;PRINCIPAL&quot;, &quot;preferred_username&quot;))!any()&#x9;&#xA;);&#xA;this.voteEntries += voteEntry;&#xA;voteEntry.voteDefinition = this;" stateful="true" operationType="INSTANCE" binding="" initializer="false">
-      <input xmi:id="_yJUcsXWxEe2LTNnGda5kaw" lower="1" upper="1" target="_-1R8gHWyEe2LTNnGda5kaw" name="input" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" rangeType="ANY" rangeExpression=""/>
-      <inherited xmi:id="_yJUcsnWxEe2LTNnGda5kaw"/>
-    </operations>
     <form xmi:id="_tA1hU26dEe2wNaja8kBvcQ" name="Entity_Form" label="Entity Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
     <table xmi:id="_tA1hVG6dEe2wNaja8kBvcQ" name="Entity_Table" label="Entity Table"/>
     <view xmi:id="_tA1hVW6dEe2wNaja8kBvcQ" name="Entity_View" label="Entity View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
