@@ -69,7 +69,6 @@
                                 </configuration>
                             </execution>
 
-
                             <execution>
                                 <id>add-apm-agent</id>
                                 <phase>prepare-package</phase>
@@ -111,6 +110,24 @@
                                     </resources>
                                 </configuration>
                             </execution>
+
+                            <execution>
+                                <id>copy-overrided-files</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>target/assembly/edemokracia-application-karaf-offline-${project.version}</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.basedir}/overrided</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+
                         </executions>
                     </plugin>
 

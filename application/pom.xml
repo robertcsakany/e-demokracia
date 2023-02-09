@@ -2,6 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- To define create 'pom.xml.project-definition.fragment.hbs' file -->
+    
     <artifactId>edemokracia-application</artifactId>
     <groupId>party.mkkp.edemokracia</groupId>
     <version>1.0.0-SNAPSHOT</version>
@@ -24,7 +25,7 @@
 
         <pax-cdi-version>1.1.3</pax-cdi-version>
         <slf4j-version>1.7.36</slf4j-version>
-        <karaf-version>4.3.4</karaf-version>
+        <karaf-version>4.4.3</karaf-version>
 
         <!-- To redifine create 'pom.xml.model-properties-definition.fragment.hbs' override file -->
         <model-groupId>party.mkkp.edemokracia</model-groupId>
@@ -40,16 +41,19 @@
         <!-- To define create 'pom.xml.judo-properties-definition.fragment.hbs' file -->
         <flutter-maven-plugin-version>1.0.2.20220326_002737_efc0629e_develop</flutter-maven-plugin-version>
         <structured-map-proxy-version>1.2.0</structured-map-proxy-version>
-        <judo-dao-api-version>1.0.3</judo-dao-api-version>
+        <judo-dao-api-version>1.0.4.20230104_113815_13de0045_develop</judo-dao-api-version>
         <judo-dispatcher-api-version>1.0.2</judo-dispatcher-api-version>
-        <judo-sdk-common-version>1.0.2</judo-sdk-common-version>
+        <judo-sdk-common-version>1.0.4.20230207_042417_6df166c2_develop</judo-sdk-common-version>
         <mapper-version>1.0.3</mapper-version>
         
-        <judo-tatami-version>1.1.0.20221228_211531_f8575fdd_feature_JNG_4338_RangeInputTypeInheritanceFix </judo-tatami-version>
-        <judo-platform-version>2.0.1.20221223_041234_43203d7f_develop</judo-platform-version>
-        <judo-services-version>1.1.0.20221223_040729_a5c2c8f6_develop</judo-services-version>
-        <judo-rdbms-schema-version>1.0.0.20221209_042125_1618f248_develop</judo-rdbms-schema-version>
-        <judo-tatami-client-version>1.1.0.20230105_142327_99f17145_develop</judo-tatami-client-version>
+        <judo-tatami-version>1.1.0.20230208_082413_6826233f_develop </judo-tatami-version>
+        <judo-platform-version>2.0.1.20230208_083944_3e2ae6f5_develop</judo-platform-version>
+        <judo-services-version>1.1.0.20230208_083327_4984d1c8_develop</judo-services-version>
+        <judo-rdbms-schema-version>1.0.0.20230208_082051_9d2b3cc9_develop</judo-rdbms-schema-version>
+        <judo-tatami-client-version>1.1.0.20230208_083328_a673e7b9_develop</judo-tatami-client-version>
+        
+        <judo-meta-ui-version>1.0.1.20230207_071531_85a9b1eb_develop</judo-meta-ui-version>
+        <judo-ui-flutter-template-version>1.0.0.20230208_080158_283478a2_develop</judo-ui-flutter-template-version>
         <!-- End of 'pom.xml.judo-properties-definition.fragment.hbs' -->
 
         <!-- To define create 'pom.xml.properties-definition.fragment.hbs' file -->
@@ -61,6 +65,11 @@
 
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
 
                 <plugin>
                     <groupId>org.apache.karaf.tooling</groupId>
@@ -153,15 +162,28 @@
         </profile>
 
         <profile>
-            <id>build-frontend</id>
+            <id>build-frontend-flutter</id>
             <activation>
                 <property>
-                    <name>!skipFrontend</name>
+                        <name>!skipFrontendFlutter</name>
                 </property>
             </activation>
 
             <modules>
-                <module>frontend</module>
+                <module>frontend-flutter</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>build-frontend-react</id>
+            <activation>
+                <property>
+                        <name>!skipFrontendReact</name>
+                </property>
+            </activation>
+
+            <modules>
+                <module>frontend-react</module>
             </modules>
         </profile>
 

@@ -90,6 +90,9 @@
                                     <framework>
                                         <feature>framework</feature>
                                         <feature>shell-compat</feature>
+                                        <feature>scr</feature>
+                                        <feature>eventadmin</feature>
+                                        <feature>webconsole</feature>
                                     </framework>
                                     <features>
                                         <feature>edemokracia-application-judo-platform-prototype</feature>

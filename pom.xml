@@ -30,6 +30,8 @@
         <judo-esm-fullstack-project-template-version-defined>1.0.0.20230208_084929_d40dba31_develop</judo-esm-fullstack-project-template-version-defined>
 		<judo-meta-ui-version-defined>1.0.1.20230207_071531_85a9b1eb_develop</judo-meta-ui-version-defined>
 		<judo-ui-flutter-template-version-defined>1.0.0.20230208_080158_283478a2_develop</judo-ui-flutter-template-version-defined>
+        <judo-tatami-typescript-version-defined>1.0.0.20230209_132613_e45679cf_develop</judo-tatami-typescript-version-defined>
+        <judo-ui-archetype-version-defined>1.0.0.20221003_142712_453def5b_develop</judo-ui-archetype-version-defined>
 	</properties>
 
 	<build>
@@ -387,6 +389,12 @@
 										<judoMetaUIVersion>${judo-meta-ui-version-defined}</judoMetaUIVersion>
 										<judoUiFlutterTemplateVersion>${judo-ui-flutter-template-version-defined}</judoUiFlutterTemplateVersion>
 
+										<judoUIArchetypeVersion>${judo-ui-archetype-version-defined}</judoUIArchetypeVersion>
+										<judoTatamiUI2WebVersion>${judo-tatami-typescript-version-defined}</judoTatamiUI2WebVersion>
+										<judoTatamiUI2TypeScriptMavenPluginVersion>${judo-tatami-typescript-version-defined}</judoTatamiUI2TypeScriptMavenPluginVersion>
+										<judoTatamiUIExternalPackagesVersion>${judo-tatami-typescript-version-defined}</judoTatamiUIExternalPackagesVersion>
+
+										<frontendType>flutter,react</frontendType>
 									</templateParameters>
 		                        </configuration>
 		                    </execution>

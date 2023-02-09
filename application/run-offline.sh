@@ -8,8 +8,6 @@ export JUDO_PLATFORM_LOG_SMTP_SERVER=true
 export JUDO_PLATFORM_RDBMS_DB_DATABASE=edemokracia
 export JUDO_PLATFORM_RDBMS_DB_USER=edemokracia
 export JUDO_PLATFORM_RDBMS_DB_PASSWORD=edemokracia
-export JUDO_PLATFORM_HIKARI_CONNECTION_TIMEOUT=120000
-export JUDO_PLATFORM_NARAYANA_DEFAULT_TIMEOUT=120000
 export JUDO_PLATFORM_FILESTORE=filesystem
 
 VERSION_NUMBER=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout)
