@@ -1,0 +1,12 @@
+part of admin.ui.pages.admin.pro.create_sub_argument.operation_input;
+
+class AdminProCreateSubArgumentOperationInputConfig {
+  AdminProCreateSubArgumentOperationInputOperationCall operationCall;
+  AdminProCreateSubArgumentOperationInputOperationCallSuccess operationCallSuccess;
+  AdminProCreateSubArgumentOperationInputPostTitleChanged postTitleChanged;
+  AdminProCreateSubArgumentOperationInputPostTypeChanged postTypeChanged;
+  AdminProCreateSubArgumentOperationInputPostDescriptionChanged postDescriptionChanged;
+  AdminProCreateSubArgumentOperationInputPageBackAction backAction;
+  AdminProCreateSubArgumentOperationInputPageExtendActions extendActions;
+  AdminProCreateSubArgumentOperationInputPageTitleGenerator titleGenerator;
+}

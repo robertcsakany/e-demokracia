@@ -1,0 +1,122 @@
+///////////////////////////////////////////////////////////////////////////////
+// G E N E R A T E D    S O U R C E
+// ------------------------------
+// Factory expression: #getPagesForRouting(#application)
+// Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
+// Template name: actor/src/pages/hooks.tsx.hbs
+// Hook: Relation View
+
+import { useTranslation } from 'react-i18next';
+import { GridColDef, GridSortModel, GridRowParams, GridRenderCellParams } from '@mui/x-data-grid';
+import { Button } from '@mui/material';
+import { MdiIcon } from '../../../../../../components';
+import { FilterOption, FilterType } from '../../../../../../components-api';
+import {
+  AdminIssueCategoryStored,
+  AdminIssueCategoryMaskBuilder,
+  AdminIssueCategory,
+  AdminUserStored,
+  AdminUserQueryCustomizer,
+  AdminUser,
+  AdminIssueCategoryQueryCustomizer,
+  AdminUserMaskBuilder,
+} from '../../../../../../generated/data-api';
+import { baseColumnConfig } from '../../../../../../config';
+import { fileHandling } from '../../../../../../utilities';
+
+export const useAdminIssueCategorySubcategoriesView = () => {
+  const { t } = useTranslation();
+  const { downloadFile, uploadFile } = fileHandling();
+
+  const queryCustomizer: AdminIssueCategoryQueryCustomizer = {
+    _mask: '{title,description,owner{representation},subcategories{title,description}}',
+  };
+
+  const subcategoriesSortModel: GridSortModel = [{ field: 'title', sort: 'asc' }];
+
+  const subcategoriesColumns: GridColDef<AdminIssueCategoryStored>[] = [
+    {
+      ...baseColumnConfig,
+      field: 'title',
+      headerName: t('edemokracia.admin.IssueCategory.subcategories.Category.subcategories.subcategories.title', {
+        defaultValue: 'Title',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'description',
+      headerName: t('edemokracia.admin.IssueCategory.subcategories.Category.subcategories.subcategories.description', {
+        defaultValue: 'Description',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+  ];
+
+  const subcategoriesRangeFilterOptions: FilterOption[] = [
+    {
+      attributeName: 'title',
+      filterType: FilterType.string,
+    },
+    {
+      attributeName: 'description',
+      filterType: FilterType.string,
+    },
+  ];
+
+  const subcategoriesInitialQueryCustomizer: AdminIssueCategoryQueryCustomizer = {
+    _mask: '{title,description}',
+    _orderBy: subcategoriesSortModel.length
+      ? [
+          {
+            attribute: subcategoriesSortModel[0].field,
+            descending: subcategoriesSortModel[0].sort === 'desc',
+          },
+        ]
+      : [],
+  };
+  const ownerSortModel: GridSortModel = [{ field: 'representation', sort: 'asc' }];
+
+  const ownerColumns: GridColDef<AdminUserStored>[] = [
+    {
+      ...baseColumnConfig,
+      field: 'representation',
+      headerName: t('edemokracia.admin.IssueCategory.subcategories.Category.owner.representation', {
+        defaultValue: 'Representation',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+  ];
+
+  const ownerRangeFilterOptions: FilterOption[] = [
+    {
+      attributeName: 'representation',
+      filterType: FilterType.string,
+    },
+  ];
+
+  const ownerInitialQueryCustomizer: AdminUserQueryCustomizer = {
+    _mask: '{representation}',
+    _orderBy: ownerSortModel.length
+      ? [
+          {
+            attribute: ownerSortModel[0].field,
+            descending: ownerSortModel[0].sort === 'desc',
+          },
+        ]
+      : [],
+  };
+
+  return {
+    queryCustomizer,
+    subcategoriesColumns,
+    subcategoriesRangeFilterOptions,
+    subcategoriesInitialQueryCustomizer,
+    ownerColumns,
+    ownerRangeFilterOptions,
+    ownerInitialQueryCustomizer,
+  };
+};

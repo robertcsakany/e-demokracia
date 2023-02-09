@@ -1,0 +1,28 @@
+{
+    "translation": {
+        "judo.security.login": "Login",
+        "judo.security.logout": "Logout",
+        "judo.pages.back": "Back",
+        "judo.pages.save": "Save",
+        "judo.pages.refresh": "Refresh",
+        "judo.pages.delete": "Delete",
+        "judo.pages.edit": "Edit",
+        "judo.pages.cancel": "Cancel",
+        "judo.pages.create": "Create",
+        "judo.pages.submit": "Submit",
+        "judo.pages.link.create": "Create",
+        "judo.pages.link.set": "Set",
+        "judo.pages.link.unset": "Unset",
+        "judo.pages.link.delete": "Delete",
+        "judo.pages.link.edit": "Edit",
+        "judo.pages.link.view": "View",
+        "judo.pages.table.create": "Create",
+        "judo.pages.table.add": "Add",
+        "judo.pages.table.remove": "Remove",
+        "judo.pages.table.clear": "Clear",
+        "judo.pages.table.delete": "Delete",
+        "judo.pages.table.refresh": "Refresh",
+        "judo.pages.table.column.not-sortable": "This column is not sortable.",
+        "judo.pages.table.set-filters": "Set filters"
+    }
+}

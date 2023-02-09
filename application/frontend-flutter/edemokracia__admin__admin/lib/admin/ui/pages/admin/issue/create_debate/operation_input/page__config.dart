@@ -1,0 +1,12 @@
+part of admin.ui.pages.admin.issue.create_debate.operation_input;
+
+class AdminIssueCreateDebateOperationInputConfig {
+  AdminIssueCreateDebateOperationInputOperationCall operationCall;
+  AdminIssueCreateDebateOperationInputOperationCallSuccess operationCallSuccess;
+  AdminIssueCreateDebateOperationInputPostTitleChanged postTitleChanged;
+  AdminIssueCreateDebateOperationInputPostCloseAtChanged postCloseAtChanged;
+  AdminIssueCreateDebateOperationInputPostDescriptionChanged postDescriptionChanged;
+  AdminIssueCreateDebateOperationInputPageBackAction backAction;
+  AdminIssueCreateDebateOperationInputPageExtendActions extendActions;
+  AdminIssueCreateDebateOperationInputPageTitleGenerator titleGenerator;
+}

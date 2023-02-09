@@ -1,0 +1,8 @@
+part of admin.ui.pages.admin.user.resident_district.update;
+
+class AdminUserResidentDistrictUpdateConfig {
+  AdminUserResidentDistrictUpdatePostNameChanged postNameChanged;
+  AdminUserResidentDistrictUpdatePageBackAction backAction;
+  AdminUserResidentDistrictUpdatePageExtendActions extendActions;
+  AdminUserResidentDistrictUpdatePageTitleGenerator titleGenerator;
+}

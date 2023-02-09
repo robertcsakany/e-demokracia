@@ -1,0 +1,28 @@
+{
+    "translation": {
+        "judo.security.login": "Belépés",
+        "judo.security.logout": "Kilépés",
+        "judo.pages.back": "Vissza",
+        "judo.pages.save": "Mentés",
+        "judo.pages.refresh": "Frissítés",
+        "judo.pages.delete": "Törlés",
+        "judo.pages.edit": "Szerkesztés",
+        "judo.pages.cancel": "Mégsem",
+        "judo.pages.create": "Létrehozás",
+        "judo.pages.submit": "Végrehajtás",
+        "judo.pages.link.create": "Létrehozás",
+        "judo.pages.link.set": "Beállítás",
+        "judo.pages.link.unset": "Eltávolítás",
+        "judo.pages.link.delete": "Törlés",
+        "judo.pages.link.edit": "Szerkesztés",
+        "judo.pages.link.view": "Megtekintés",
+        "judo.pages.table.create": "Létrehozás",
+        "judo.pages.table.add": "Hozzáadás",
+        "judo.pages.table.remove": "Elvétel",
+        "judo.pages.table.clear": "Összes eltávolítása",
+        "judo.pages.table.delete": "Törlés",
+        "judo.pages.table.refresh": "Frissítés",
+        "judo.pages.table.column.not-sortable": "Ez az oszlop nem rendezhető.",
+        "judo.pages.table.set-filters": "Szűrő(k) beállítása"
+    }
+}

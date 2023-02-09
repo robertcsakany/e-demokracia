@@ -1,0 +1,472 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- To define project definition create 'frontend-flutter/actor/pom.xml.project-definition.fragment.override.hbs' file -->
+    <parent>
+        <groupId>party.mkkp.edemokracia</groupId>
+        <artifactId>edemokracia-application-frontend-flutter</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>edemokracia-application-frontend-flutter-edemokracia__admin__admin</artifactId>
+    <name>edemokracia - Admin frontend flutter</name>
+    <description>edemokracia - Admin flutter frontend</description>
+    <!-- End of 'frontend-flutter/actor/pom.xml.project-definition.fragment.override.hbs' -->
+
+    <packaging>bundle</packaging>
+
+    <properties>
+        <!-- To redefine project definition create 'frontend-flutter/actor/pom.xml.properties-definition.fragment.override.hbs' file -->
+        <actor>edemokracia__admin__admin</actor>
+        <actor-shortname>admin</actor-shortname>
+        <actor-name>Admin</actor-name>
+        <actor-fqname>edemokracia::admin::Admin</actor-fqname>
+        
+        <flutter-home>${project.parent.basedir}/.flutter</flutter-home>
+        <override-dir>${project.parent.basedir}/generator-overrides</override-dir>
+        
+        <flutter-version>2.2.3</flutter-version>
+        <!-- End of 'frontend-flutter/actor/pom.xml.properties-definition.fragment.override.hbs' -->
+    </properties>
+
+    <build>
+        <defaultGoal>install</defaultGoal>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>hu.blackbelt</groupId>
+                    <artifactId>flutter-maven-plugin</artifactId>
+                    <version>${flutter-maven-plugin-version}</version>
+                    <configuration>
+                        <installDirectory>${flutter-home}</installDirectory>
+                        <parallel>false</parallel>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+
+        <plugins>
+            <!-- Report active profiles on console. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-help-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>show-profiles</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>active-profiles</goal>
+                        </goals>
+                        <inherited>false</inherited>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>hu.blackbelt</groupId>
+                <artifactId>flutter-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>install-flutter-preclean</id>
+                        <phase>pre-clean</phase>
+                        <goals>
+                            <goal>install-flutter</goal>
+                        </goals>
+                        <configuration>
+                            <flutterVersion>${flutter-version}</flutterVersion>
+                            <flutterChannel>stable</flutterChannel>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>install-flutter-validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>install-flutter</goal>
+                        </goals>
+                        <configuration>
+                            <flutterVersion>${flutter-version}</flutterVersion>
+                            <flutterChannel>stable</flutterChannel>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>flutter-config-enable-web</id>
+                        <phase>validate</phase>
+                        <goals><goal>flutter</goal></goals>
+                        <configuration>
+                            <arguments>config --enable-web</arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>flutter-pub-get</id>
+                        <phase>compile</phase>
+                        <goals><goal>flutter</goal></goals>
+                        <configuration>
+                            <arguments>pub get</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>5.1.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Web-ContextPath>/${model-name}_flutter/${actor}</Web-ContextPath>
+                        <Include-Resource>
+                            /=${project.basedir}/build/web
+                        </Include-Resource>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>force-clean</id>
+            <activation>
+                <property>
+                    <name>forceClean</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>clean-generated-builder</id>
+                                <phase>pre-clean</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <filesets>
+                                        <fileset>
+                                            <directory>${project.basedir}</directory>
+                                            <includes>
+                                                <include>**/*.g.dart</include>
+                                                <include>**/*.gr.dart</include>
+                                            </includes>
+                                            <followSymlinks>false</followSymlinks>
+                                        </fileset>
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>hu.blackbelt</groupId>
+                        <artifactId>flutter-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>flutter-clean</id>
+                                <phase>pre-clean</phase>
+                                <goals><goal>flutter</goal></goals>
+                                <configuration>
+                                    <arguments>clean</arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>flutter-build</id>
+            <activation>
+                <property>
+                    <name>!runServer</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>create-i10n-dirs</id>
+                                <phase>generate-resources</phase>
+                                <configuration>
+                                    <tasks>
+                                        <mkdir dir="${project.basedir}/lib/${actor-shortname}/l10n/arb"/>
+                                        <mkdir dir="${project.basedir}/lib/${actor-shortname}/l10n/dart"/>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>hu.blackbelt.judo.meta</groupId>
+                        <artifactId>judo-ui-generator-maven-plugin</artifactId>
+                        <version>${judo-meta-ui-version}</version>
+                        <executions>
+                            <execution>
+                                <id>execute-ui-test</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <uris>
+                                        <uri>mvn:hu.blackbelt.judo.template:judo-ui-flutter-template:${judo-ui-flutter-template-version}</uri>
+                                        <uri>${override-dir}</uri>
+                                    </uris>
+                                    <type>flutter</type>
+                                    <ui>${project.parent.basedir}/model/${model-name}-ui.model</ui>
+                                    <destination>${basedir}</destination>
+                                    <applications>${actor-fqname}</applications>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>hu.blackbelt.judo.template</groupId>
+                                <artifactId>judo-ui-flutter-template</artifactId>
+                                <version>${judo-ui-flutter-template-version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                    
+                    <plugin>
+                        <groupId>hu.blackbelt</groupId>
+                        <artifactId>flutter-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>install-flutter-preclean</id>
+                                <phase>pre-clean</phase>
+                                <goals>
+                                    <goal>install-flutter</goal>
+                                </goals>
+                                <configuration>
+                                    <flutterVersion>${flutter-version}</flutterVersion>
+                                    <flutterChannel>stable</flutterChannel>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>install-flutter-validate</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>install-flutter</goal>
+                                </goals>
+                                <configuration>
+                                    <flutterVersion>${flutter-version}</flutterVersion>
+                                    <flutterChannel>stable</flutterChannel>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>flutter-config-enable-web</id>
+                                <phase>validate</phase>
+                                <goals><goal>flutter</goal></goals>
+                                <configuration>
+                                    <arguments>config --enable-web</arguments>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>flutter-pub-get</id>
+                                <phase>compile</phase>
+                                <goals><goal>flutter</goal></goals>
+                                <configuration>
+                                    <arguments>pub get</arguments>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>flutter-extract_l10n</id>
+                                <phase>compile</phase>
+                                <goals><goal>flutter</goal></goals>
+                                <configuration>
+                                    <arguments>
+                                        pub run intl_translation:extract_to_arb
+                                        --output-dir=lib/${actor-shortname}/l10n/arb
+                                        lib/${actor-shortname}/l10n/app_localizations.dart
+                                    </arguments>
+                                    <parallel>true</parallel>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>flutter-generate_l10n</id>
+                                <phase>compile</phase>
+                                <goals><goal>flutter</goal></goals>
+                                <configuration>
+                                    <arguments>
+                                        pub run intl_translation:generate_from_arb
+                                        --output-dir=lib/${actor-shortname}/l10n/dart/
+                                        --no-use-deferred-loading
+                                        lib/${actor-shortname}/l10n/app_localizations.dart
+                                        lib/${actor-shortname}/l10n/arb/intl_messages.arb
+                                    </arguments>
+                                    <parallel>true</parallel>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>flutter-buildrunner</id>
+                                <phase>compile</phase>
+                                <goals><goal>flutter</goal></goals>
+                                <configuration>
+                                    <arguments>
+                                        pub run build_runner build
+                                        --delete-conflicting-outputs
+                                    </arguments>
+                                    <parallel>true</parallel>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>flutter-format</id>
+                                <phase>compile</phase>
+                                <goals><goal>flutter</goal></goals>
+                                <configuration>
+                                    <arguments>format lib --line-length=160</arguments>
+                                    <parallel>true</parallel>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+
+        <profile>
+            <id>flutter-server</id>
+            <activation>
+                <property>
+                    <name>runServer</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>hu.blackbelt</groupId>
+                        <artifactId>flutter-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>flutter-server</id>
+                                <phase>compile</phase>
+                                <goals><goal>flutter</goal></goals>
+                                <configuration>
+                                    <!--
+                                    <arguments>
+                                        run -d web-server - - web-port 5555
+                                    </arguments>
+                                    -->
+                                    <arguments>
+                                        run -d chrome
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>create-release-dist</id>
+            <activation>
+                <property>
+                    <name>!skipDist</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>clean-generated-dist</id>
+                                <phase>pre-clean</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <filesets>
+                                        <fileset>
+                                            <directory>${project.basedir}/build</directory>
+                                            <includes>
+                                                <include>**/*</include>
+                                            </includes>
+                                            <followSymlinks>false</followSymlinks>
+                                        </fileset>
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>hu.blackbelt</groupId>
+                        <artifactId>flutter-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>flutter-build-web</id>
+                                <phase>compile</phase>
+                                <goals><goal>flutter</goal></goals>
+                                <configuration>
+                                    <arguments>
+                                        build web
+                                        --release
+                                        --pwa-strategy=none
+                                        --dart-define=USE_REQUEST_BASE_URL=true
+                                    </arguments>
+                                    <parallel>true</parallel>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>com.google.code.maven-replacer-plugin</groupId>
+                        <artifactId>replacer</artifactId>
+                        <version>1.5.2</version>
+                        <executions>
+                            <execution>
+                                <id>frontend-index-url-replace</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>replace</goal>
+                                </goals>
+                                <configuration>
+                                    <basedir>${project.basedir}/build/web</basedir>
+                                    <includes>
+                                        <include>index.html</include>
+                                    </includes>
+                                    <replacements>
+                                        <replacement>
+                                            <token><![CDATA[<base href="/">]]></token>
+                                            <value><![CDATA[<base href="/${model-name}_flutter/${actor}/">]]></value>
+                                        </replacement>
+                                    </replacements>
+                                    <regex>false</regex>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

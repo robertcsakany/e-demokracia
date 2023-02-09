@@ -1,0 +1,139 @@
+# edemokracia-frontend-react
+
+The edemokracia frontend is a multi module project to create React frontend applications.
+The frontend is generated from a given ESM (Editor Specific Model) via UI (User Interface model).
+
+The development cycle is new ESM version is released, the `model` subproject (or the whole project) should be compiled.
+The new version of UI model is stored in side `model` directory and actor subprojects uses that UI model to generate
+React code.
+
+## Compiling
+
+To create and package React applications, run:
+
+[source,]
+----
+mvn clean install
+----
+
+It uses the model version defined in `pom.xml`. In development sometimes other version is required (for example locally
+compiled ESM) On that case `model-version` can be overridden.
+
+[source,]
+----
+mvn clean install -Dmodel-version=1.0.0-SNAPSHOT
+----
+
+The pom.xml contains the model and all actors as a submodule.
+
+- `model`
++
+The model project. It creates the UI model from ESM model and stores it in the model directory(basedir). This UI model
+is used by actors.
+
+- `edemokracia__admin__admin`
++
+Admin actor
+
+The submodules can be compiled / deployed separately.
+
+## Properties parent `pom.xml`
+
+- `model-artifactId`
++
+Maven artifactId of edemokracia-model. Default: edemokracia
+
+- `model-name edemokracia`
++
+Model name in ESM. Default: edemokracia
+
+- `model-version`
++
+Maven version
+
+## Properties in actor submodule's `pom.xml`
+
+- `actor`
++
+Actor fully qualified name, equals with the submodule name by default.
+
+For example: `module\__actors__admin__admin`
+
+- `actor-shortname`
++
+Actor short name which is the plain actor name.
+
+For examole: `admin`
+
+- `actor-name`
++
+Actor short name which is the plain actor name as is.
+
+For example: `Admin`
+
+
+- `node-install-dir`
++
+Where NodeJS is installed. We recommend to use the parent project's directory to use same environment for all actors,
+but it can also be changed by an actor basis.
+
+Default: `${project.parent.basedir}/.nodejs`
+
+- `override-dir`
++
+Where the client override code should be placed. By default all actors use the same override, but it can also be
+configured by an actor basis
+
+Default: `${project.parent.basedir}/generator-overrides`
+
+
+## Profiles
+
+The following profile options can be used as system parameter to setup the build
+
+- `skipFrontendModel`
++
+Skips the transformation of the UI model from the ESM model.
+
+[source,]
+----
+mvn -DskipFrontendModel
+----
+
+- `skipPrepareNodeJS`
++
+Skips the setup of NodeJS (download, install of NodeJS it self, not application dependencies!).
+
+[source,]
+----
+mvn -DskipPrepareNodeJS
+----
+
+- `skipGenerateServices`
++
+Skips the generation of the REST abstraction services (can be used when there are no model changes).
+
+[source,]
+----
+mvn -DskipGenerateServices
+----
+
+- `quick` (Build the apps in a "reckless" mode)
++
+Triggering this flag results in no NPM install step, no code formatting, and no type checking. Yields fastest possible
+build times.
+
+[source,]
+----
+mvn -Dquick
+----
+
+- `local`
++
+Adding this flag results in keeping the `<base href="/">` section of the `index.html` file in tact. Should be used only
+when a developer wants to use NPM scripts, e.g.: `preview`, `watch`, etc when developing on `localhost`.
+
+[source,]
+----
+mvn -Dlocal
+----

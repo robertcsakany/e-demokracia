@@ -1,0 +1,56 @@
+///////////////////////////////////////////////////////////////////////////////
+// G E N E R A T E D    S O U R C E
+// ------------------------------
+// Factory expression: #getActionsForPages(#application)
+// Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
+// Template name: actor/src/pages/actions/action.tsx.hbs
+// Action name: edemokracia::admin::Admin::edemokracia::admin::Admin::users#PageFilter
+// Action owner name: edemokracia::admin::Admin.users#Table
+// Action DataElement name: users
+// Action DataElement owner name: edemokracia::admin::Admin
+// Action DataElement target name: edemokracia::admin::User
+// Owner Page name: edemokracia::admin::Admin.users#Table
+// Action: FilterAction
+
+import { AdminUserQueryCustomizer } from '../../../../../../generated/data-api';
+import { useFilterDialog } from '../../../../../../components';
+import type { Filter, FilterOption } from '../../../../../../components-api';
+import { mapAllFiltersToQueryCustomizerProperties } from '../../../../../../utilities';
+
+export type PageFilterUsersAction = (filterOptions: FilterOption[], filters: Filter[]) => Promise<void>;
+
+export const usePageFilterUsersAction = (
+  setFilters: (filters: Filter[]) => void,
+  setPage: (page: number) => void,
+  setQueryCustomizer: Function,
+  openFilterDialog: (filterOptions: FilterOption[], filters: Filter[]) => Promise<Filter[]>,
+): PageFilterUsersAction => {
+  return async function pageFilterUsersAction(filterOptions: FilterOption[], filters: Filter[]) {
+    const newFilters = await openFilterDialog(filterOptions, filters);
+    const numberOfElements = 10;
+
+    if (newFilters) {
+      setPage(0);
+      setFilters(newFilters);
+
+      setQueryCustomizer((prevQueryCustomizer: AdminUserQueryCustomizer) => {
+        return {
+          ...prevQueryCustomizer,
+          _seek: {
+            limit: numberOfElements + 1,
+          },
+          ...mapAllFiltersToQueryCustomizerProperties(
+            newFilters,
+            'userName',
+            'isAdmin',
+            'firstName',
+            'lastName',
+            'phone',
+            'email',
+            'created',
+          ),
+        };
+      });
+    }
+  };
+};

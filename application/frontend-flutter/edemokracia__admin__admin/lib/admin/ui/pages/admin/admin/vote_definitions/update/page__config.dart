@@ -1,0 +1,12 @@
+part of admin.ui.pages.admin.admin.vote_definitions.update;
+
+class AdminAdminVoteDefinitionsUpdateConfig {
+  AdminAdminVoteDefinitionsUpdatePostTitleChanged postTitleChanged;
+  AdminAdminVoteDefinitionsUpdatePostCloseAtChanged postCloseAtChanged;
+  AdminAdminVoteDefinitionsUpdatePostStatusChanged postStatusChanged;
+  AdminAdminVoteDefinitionsUpdatePostCreatedChanged postCreatedChanged;
+  AdminAdminVoteDefinitionsUpdatePostDescriptionChanged postDescriptionChanged;
+  AdminAdminVoteDefinitionsUpdatePageBackAction backAction;
+  AdminAdminVoteDefinitionsUpdatePageExtendActions extendActions;
+  AdminAdminVoteDefinitionsUpdatePageTitleGenerator titleGenerator;
+}

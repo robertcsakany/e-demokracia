@@ -1,0 +1,28 @@
+{
+  "imports": {
+    "dayjs": "./externals/dayjs@1.11.7/dayjs.min.js",
+    "dayjs/locale/hu": "./externals/dayjs@1.11.7/locale/hu.js",
+    "react/jsx-runtime": "./externals/react/jsx-runtime@18.2.0/umd/react-jsx-runtime.min.js",
+    "react-dom/client": "./externals/react-dom/client@18.2.0/umd/react-dom-client.min.js",
+    "@mui/system": "./externals/@mui/system@5.11.4/umd/mui-system.min.js",
+    "@mui/material/locale": "./externals/@mui/material/locale@5.11.4/umd/mui-material-locale.min.js",
+    "@mui/material": "./externals/@mui/material@5.11.4/umd/mui-material.min.js",
+    "@mui/x-data-grid": "./externals/@mui/x-data-grid@5.17.18/umd/mui-x-data-grid.min.js",
+    "@mui/x-date-pickers": "./externals/@mui/x-date-pickers@5.0.13/umd/mui-x-date-pickers.min.js",
+    "@mui/x-date-pickers/AdapterDayjs": "./externals/@mui/x-date-pickers@5.0.13/umd/mui-x-date-pickers-adapter-day-js.min.js",
+    "@judo/data-api-common": "./externals/@judo/data-api-common@0.4.2/umd/judo-data-api-common.min.js",
+    "axios": "./externals/axios@1.2.1/dist/axios.min.js",
+    "react": "./externals/react@18.2.0/umd/react.production.min.js",
+    "react-dom": "./externals/react-dom@18.2.0/umd/react-dom.production.min.js",
+    "oidc-client-ts": "./externals/oidc-client-ts@2.2.1/umd/oidc-client-ts.min.js",
+    "i18next": "./externals/i18next@22.4.6/dist/umd/i18next.min.js",
+    "react-oidc-context": "./externals/react-oidc-context@2.2.1/umd/react-oidc-context.min.js",
+    "react-is": "./externals/react-is@18.2.0/umd/react-is.min.js",
+    "react-i18next": "./externals/react-i18next@12.1.1/dist/umd/react-i18next.min.js",
+    "@remix-run/router": "./externals/@remix-run/router@1.1.0/dist/router.umd.min.js",
+    "react-router": "./externals/react-router@6.5.0/dist/umd/react-router.production.min.js",
+    "react-router-dom": "./externals/react-router-dom@6.5.0/dist/umd/react-router-dom.production.min.js",
+    "@emotion/react": "./externals/@emotion/react@11.10.5/dist/emotion-react.umd.min.js",
+    "@emotion/styled": "./externals/@emotion/styled@11.10.5/dist/emotion-styled.umd.min.js"
+  }
+}

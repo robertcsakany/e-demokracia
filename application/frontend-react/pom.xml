@@ -1,0 +1,114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- This is generated file. It is composed from template fragment which can be extended -->
+
+    <!-- To redefine create 'frontend-react/pom.xml.project-definition.fragment.hbs' file -->
+    <parent>
+        <artifactId>edemokracia-application</artifactId>
+        <groupId>party.mkkp.edemokracia</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>edemokracia-application-frontend-react</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    
+    <name>edemokracia frontend react reactor</name>
+    <description>edemokracia frontend react reactor in edemokracia-application</description>
+    
+    <!-- End of 'frontend-react/pom.xml.project-definition.fragment.hbs' -->
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <judo-meta-ui-version>1.0.1.20230207_071531_85a9b1eb_develop</judo-meta-ui-version>
+        <judo-ui-archetype-version>1.0.0.20221003_142712_453def5b_develop</judo-ui-archetype-version>
+        <frontend-maven-plugin-version>1.12.1</frontend-maven-plugin-version>
+
+        <judo-tatami-ui2web-version>1.0.0.20230201_150343_5dfa8127_develop</judo-tatami-ui2web-version>
+        <judo-tatami-ui2typescript-maven-plugin-version>1.0.0.20230201_150343_5dfa8127_develop</judo-tatami-ui2typescript-maven-plugin-version>
+        <judo-tatami-ui-external-packages-version>1.0.0.20230201_150343_5dfa8127_develop</judo-tatami-ui-external-packages-version>
+
+        <ui-model>${basedir}/model/edemokracia-ui.model</ui-model>
+
+        <model-name>edemokracia</model-name>
+        <generated-project-directory>${basedir}/edemokracia-ui</generated-project-directory>
+        <node-version>16.15.1</node-version>
+        <pnpm-version>7.13.1</pnpm-version>
+        <node-install-dir>${basedir}/.nodejs</node-install-dir>
+        <!-- To define create 'frontend-react/pom.xml.properties-definition.fragment.hbs' file -->
+        <!-- End of 'frontend-react/pom.xml.properties-definition.fragment.hbs' -->
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>hu.blackbelt.judo.tatami</groupId>
+            <artifactId>judo-tatami-ui2web</artifactId>
+            <version>${judo-tatami-ui2web-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>hu.blackbelt.judo.tatami</groupId>
+            <artifactId>judo-tatami-ui-external-packages</artifactId>
+            <version>${judo-tatami-ui-external-packages-version}</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>build-frontend-react-model</id>
+            <activation>
+                <property>
+                    <name>!skipFrontendModel</name>
+                </property>
+            </activation>
+
+            <modules>
+                <module>model</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>prepare-nodejs</id>
+            <activation>
+                <property>
+                    <name>!skipPrepareNodeJS</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>${frontend-maven-plugin-version}</version>
+                        <executions>
+                            <execution>
+                                <id>install node and pnpm</id>
+                                <goals>
+                                    <goal>install-node-and-pnpm</goal>
+                                </goals>
+                                <phase>generate-resources</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <nodeVersion>v${node-version}</nodeVersion>
+                            <pnpmVersion>${pnpm-version}</pnpmVersion>
+                            <installDirectory>${node-install-dir}</installDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>build-react</id>
+            <activation>
+                <property>
+                    <name>!skipReact</name>
+                </property>
+            </activation>
+
+            <modules>
+                    <module>edemokracia__admin__admin</module>
+            </modules>
+        </profile>
+    </profiles>
+</project>

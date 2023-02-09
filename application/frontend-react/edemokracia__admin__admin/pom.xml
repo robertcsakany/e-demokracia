@@ -1,0 +1,322 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- To define project definition create 'frontend-react/actor/pom.xml.project-definition.fragment.override.hbs' file -->
+    <parent>
+        <groupId>party.mkkp.edemokracia</groupId>
+        <artifactId>edemokracia-application-frontend-react</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>edemokracia-application-frontend-react-edemokracia__admin__admin</artifactId>
+    <name>edemokracia - Admin frontend react</name>
+    <description>edemokracia - Admin react frontend</description>
+    <!-- End of 'frontend-react/actor/pom.xml.project-definition.fragment.override.hbs' -->
+
+    <packaging>bundle</packaging>
+
+    <properties>
+        <!-- To redefine project definition create 'frontend-react/actor/pom.xml.properties-definition.fragment.override.hbs' file -->
+        <actor>edemokracia__admin__admin</actor>
+        <actor-shortname>admin</actor-shortname>
+        <actor-name>Admin</actor-name>
+        <actor-fq-name>edemokracia::admin::Admin</actor-fq-name>
+        
+        <node-install-dir>${project.parent.basedir}/.nodejs</node-install-dir>
+        <override-dir>${project.parent.basedir}/generator-overrides</override-dir>
+        <services-target-folder>${basedir}/src/generated</services-target-folder>
+        <!-- End of 'frontend-react/actor/pom.xml.properties-definition.fragment.override.hbs' -->
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>5.1.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Web-ContextPath>/${model-name}_react/${actor}</Web-ContextPath>
+                        <Include-Resource>
+                            /=${project.basedir}/dist
+                        </Include-Resource>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>generate-frontend-react</id>
+            <activation>
+                <property>
+                    <name>!skipGenerateFrontendReact</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>hu.blackbelt.judo.archetype</groupId>
+                        <artifactId>judo-ui-archetype-maven-plugin</artifactId>
+                        <version>${judo-ui-archetype-version}</version>
+                        <executions>
+                            <execution>
+                                <id>execute-ui-model-from-file</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <ui>${project.parent.basedir}/model/${model-name}-ui.model</ui>
+                                    <uris>
+                                        <uri>mvn:hu.blackbelt.judo.tatami:judo-tatami-ui2web:${judo-tatami-ui2web-version}</uri>
+                                    </uris>
+                                    <helpers>
+                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiNPMHelper</helper>
+                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiPageHelper</helper>
+                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiGeneralHelper</helper>
+                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiI18NHelper</helper>
+                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiTableHelper</helper>
+                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiSecurityHelper</helper>
+                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiServiceHelper</helper>
+                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiWidgetHelper</helper>
+                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiActionsHelper</helper>
+                                    </helpers>
+                                    <type>web-project</type>
+                                    <applications>
+                                        ${actor-fq-name}
+                                    </applications>
+                                    <destination>${basedir}</destination>
+                                    <templateParameters>
+                                        <groupId>${project.groupId}</groupId>
+                                        <artifactId>${project.artifactId}</artifactId>
+                                        <version>${project.version}</version>
+                                        <serviceGeneratorVersion>${project.version}</serviceGeneratorVersion>
+                                        <uiMetaVersion>${judo-meta-ui-version}</uiMetaVersion>
+                                        <nodeInstallDir>${node-install-dir}</nodeInstallDir>
+
+                                        <appModelName>edemokracia</appModelName>
+                                        
+                                        <appVersion>1.0.0</appVersion>
+                                        <nodeVersion>${node-version}</nodeVersion>
+                                        <pnpmVersion>${pnpm-version}</pnpmVersion>
+                                        <externalPackagesVersion>${judo-tatami-ui-external-packages-version}</externalPackagesVersion>
+                                        
+                                        <tablePageLimit>10</tablePageLimit>
+                                    </templateParameters>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>hu.blackbelt.judo.tatami</groupId>
+                                <artifactId>judo-tatami-ui2web</artifactId>
+                                <version>${judo-tatami-ui2web-version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>generate-services</id>
+            <activation>
+                <property>
+                    <name>!skipGenerateServices</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>hu.blackbelt.judo.tatami</groupId>
+                        <artifactId>judo-tatami-ui2typescript-maven-plugin</artifactId>
+                        <version>${judo-tatami-ui2typescript-maven-plugin-version}</version>
+                        <executions>
+                            <execution>
+                                <id>execute-source-code-generation-from-ui-model</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>default-workflow</goal>
+                                </goals>
+                                <configuration>
+                                    <ui>${project.parent.basedir}/model/${model-name}-ui.model</ui>
+                                    <modelName>${model-name}</modelName>
+                                    <destination>${services-target-folder}</destination>
+                                    <mode>raw</mode>
+                                    <onlyActors>${actor-fq-name}</onlyActors>
+                                    
+                                </configuration>
+                            </execution>
+                        </executions>
+
+                        <dependencies>
+                            <dependency>
+                                <groupId>hu.blackbelt.judo.meta</groupId>
+                                <artifactId>hu.blackbelt.judo.meta.ui.model</artifactId>
+                                <version>${judo-meta-ui-version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>build-frontend</id>
+            <activation>
+                <property>
+                    <name>!quick</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>external-packages</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>hu.blackbelt.judo.tatami</groupId>
+                                            <artifactId>judo-tatami-ui-external-packages</artifactId>
+                                            <version>${judo-tatami-ui-external-packages-version}</version>
+                                            <type>jar</type>
+                                            <overWrite>true</overWrite>
+                                        </artifactItem>
+                                    </artifactItems>
+                                    <includes>externals/**</includes>
+                                    <outputDirectory>${project.basedir}</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>${frontend-maven-plugin-version}</version>
+                        <executions>
+                            <execution>
+                                <id>pnpm install</id>
+                                <goals>
+                                    <goal>pnpm</goal>
+                                </goals>
+                                <phase>generate-sources</phase>
+                                <configuration>
+                                    <arguments>install</arguments>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>format code</id>
+                                <goals>
+                                    <goal>pnpm</goal>
+                                </goals>
+                                <phase>generate-sources</phase>
+                                <configuration>
+                                    <arguments>run format</arguments>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>build</id>
+                                <goals>
+                                    <goal>pnpm</goal>
+                                </goals>
+                                <phase>generate-sources</phase>
+                                <configuration>
+                                    <arguments>run build:ci</arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <installDirectory>${node-install-dir}</installDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>build-frontend-quick</id>
+            <activation>
+                <property>
+                    <name>quick</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>${frontend-maven-plugin-version}</version>
+                        <executions>
+                            <execution>
+                                <id>build</id>
+                                <goals>
+                                    <goal>pnpm</goal>
+                                </goals>
+                                <phase>compile</phase>
+                                <configuration>
+                                    <arguments>run build</arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <installDirectory>${node-install-dir}</installDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>replace-base-href</id>
+            <activation>
+                <property>
+                    <name>!local</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.google.code.maven-replacer-plugin</groupId>
+                        <artifactId>replacer</artifactId>
+                        <version>1.5.2</version>
+                        <executions>
+                            <execution>
+                                <id>frontend-index-url-replace</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>replace</goal>
+                                </goals>
+                                <configuration>
+                                    <basedir>${project.basedir}/dist</basedir>
+                                    <includes>
+                                        <include>index.html</include>
+                                    </includes>
+                                    <replacements>
+                                        <replacement>
+                                            <token><![CDATA[<base href="/">]]></token>
+                                            <value><![CDATA[<base href="/${model-name}_react/${actor}/">]]></value>
+                                        </replacement>
+                                    </replacements>
+                                    <regex>false</regex>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

@@ -1,0 +1,9 @@
+part of admin.ui.pages.admin.vote_definition.vote_yes_no.operation_input;
+
+class AdminVoteDefinitionVoteYesNoOperationInputConfig {
+  AdminVoteDefinitionVoteYesNoOperationInputOperationCall operationCall;
+  AdminVoteDefinitionVoteYesNoOperationInputOperationCallSuccess operationCallSuccess;
+  AdminVoteDefinitionVoteYesNoOperationInputPageBackAction backAction;
+  AdminVoteDefinitionVoteYesNoOperationInputPageExtendActions extendActions;
+  AdminVoteDefinitionVoteYesNoOperationInputPageTitleGenerator titleGenerator;
+}

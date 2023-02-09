@@ -1,0 +1,10 @@
+part of admin.ui.pages.admin.con.create_comment.operation_input;
+
+class AdminConCreateCommentOperationInputConfig {
+  AdminConCreateCommentOperationInputOperationCall operationCall;
+  AdminConCreateCommentOperationInputOperationCallSuccess operationCallSuccess;
+  AdminConCreateCommentOperationInputPostCommentChanged postCommentChanged;
+  AdminConCreateCommentOperationInputPageBackAction backAction;
+  AdminConCreateCommentOperationInputPageExtendActions extendActions;
+  AdminConCreateCommentOperationInputPageTitleGenerator titleGenerator;
+}

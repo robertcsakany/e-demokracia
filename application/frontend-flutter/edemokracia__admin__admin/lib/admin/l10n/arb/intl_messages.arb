@@ -1,0 +1,1320 @@
+{
+  "@@last_modified": "2023-02-09T23:24:53.150175",
+  "_ABSTAIN": "ABSTAIN",
+  "@_ABSTAIN": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_ACCESS95DENIED": "Access denied.",
+  "@_ACCESS95DENIED": {
+    "description": "Operation is not exposed to the given actor.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_ACCESS95DENIED95FOR95INSTANCE95OF95BOUND95OPERATION": "Access denied.",
+  "@_ACCESS95DENIED95FOR95INSTANCE95OF95BOUND95OPERATION": {
+    "description": "Instance of bound operation has type that is not exposed to the given actor. (Actor is resolved by access token that will be changed later to be defined by base path of JAX-RS application.)",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_ACCESS95DENIED95INVALID95TYPE": "Access denied.",
+  "@_ACCESS95DENIED95INVALID95TYPE": {
+    "description": "Mapped transfer object type of bound operation does not match type of signed identifier. User might call an operation by identifier of different representation (transfer object type) of the requested instance.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_ACCESS95TOKEN95EXPIRED": "Token expired.",
+  "@_ACCESS95TOKEN95EXPIRED": {
+    "description": "OAuth 2.0 access token expired, need to refresh it.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_ACTIVE": "ACTIVE",
+  "@_ACTIVE": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_API95URL": "API URL",
+  "@_API95URL": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_AUTHENTICATED95ENTITY95NOT95FOUND": "User not exists or disabled.",
+  "@_AUTHENTICATED95ENTITY95NOT95FOUND": {
+    "description": "No user found in da\tase by claims returned in access token. User may deleted/disabled or application has been changed.",
+    "type": "text",
+    "placeholders": {
+      "actor": {}
+    }
+  },
+  "_AUTHENTICATION95REQUIRED": "Authentication required.",
+  "@_AUTHENTICATION95REQUIRED": {
+    "description": "OAuth 2.0 access token to call an operation is not sent or incorrect. The same services are exposed to all actors so token data (Client ID) is used to detect the client application so invalid access tokens (missing &quot;Bearer &quot; prefix, invalid content) are ignored (causing this fault).",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Activity32cities": "Activity cities",
+  "@_Activity32cities": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Activity32counties": "Activity counties",
+  "@_Activity32counties": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Activity32districts": "Activity districts",
+  "@_Activity32districts": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Add": "Add",
+  "@_Add": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Add32Filter": "Add Filter",
+  "@_Add32Filter": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Add32argument": "Add argument",
+  "@_Add32argument": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Add32comment": "Add comment",
+  "@_Add32comment": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Are32you32sure32you32would32like32to32clear32all32elements32in32the32list63": "Are you sure you would like to clear all elements in the list?",
+  "@_Are32you32sure32you32would32like32to32clear32all32elements32in32the32list63": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Areas": "Areas",
+  "@_Areas": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Arguments": "Arguments",
+  "@_Arguments": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Attachments": "Attachments",
+  "@_Attachments": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_BOUND95OPERATION95INSTANCE95NOT95FOUND": "Not found.",
+  "@_BOUND95OPERATION95INSTANCE95NOT95FOUND": {
+    "description": "Instance of bound operation not found in database. It might be deleted.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Back": "Back",
+  "@_Back": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Basic32data": "Basic data",
+  "@_Basic32data": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Buttons": "Buttons",
+  "@_Buttons": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_CLOSED": "CLOSED",
+  "@_CLOSED": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_CON": "CON",
+  "@_CON": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_CONVERSION95FAILED": "Conversion failed.",
+  "@_CONVERSION95FAILED": {
+    "description": "Failed to convert attribute value to the expected type. Path expression is returned in location field.",
+    "type": "text",
+    "placeholders": {
+      "feature": {},
+      "value": {}
+    }
+  },
+  "_CREATED": "CREATED",
+  "@_CREATED": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Cancel": "Cancel",
+  "@_Cancel": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Categories": "Categories",
+  "@_Categories": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Cities": "Cities",
+  "@_Cities": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_City": "City",
+  "@_City": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_City32name": "City name",
+  "@_City32name": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Clear": "Clear",
+  "@_Clear": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Close32at": "Close at",
+  "@_Close32at": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Close32debate": "Close debate",
+  "@_Close32debate": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_CloseAt": "CloseAt",
+  "@_CloseAt": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Comment": "Comment",
+  "@_Comment": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Comments": "Comments",
+  "@_Comments": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Cons": "Cons",
+  "@_Cons": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Contra": "Contra",
+  "@_Contra": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Counties": "Counties",
+  "@_Counties": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_County": "County",
+  "@_County": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_County32name": "County name",
+  "@_County32name": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Create": "Create",
+  "@_Create": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Create324732View32Vote": "Create / View Vote",
+  "@_Create324732View32Vote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Create32Attachment": "Create Attachment",
+  "@_Create32Attachment": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Create32Category": "Create Category",
+  "@_Create32Category": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Create32Vote": "Create Vote",
+  "@_Create32Vote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Create32city": "Create city",
+  "@_Create32city": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Create32county": "Create county",
+  "@_Create32county": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Create32debate": "Create debate",
+  "@_Create32debate": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Create32district": "Create district",
+  "@_Create32district": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Create32issue": "Create issue",
+  "@_Create32issue": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Create32user": "Create user",
+  "@_Create32user": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Created": "Created",
+  "@_Created": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Created32by": "Created by",
+  "@_Created32by": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_CreatedBy": "CreatedBy",
+  "@_CreatedBy": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_CreatedByName": "CreatedByName",
+  "@_CreatedByName": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_DOWN": "DOWN",
+  "@_DOWN": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Dashboard": "Dashboard",
+  "@_Dashboard": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Debate": "Debate",
+  "@_Debate": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Debates": "Debates",
+  "@_Debates": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Delete": "Delete",
+  "@_Delete": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Description": "Description",
+  "@_Description": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_District": "District",
+  "@_District": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_District32name": "District name",
+  "@_District32name": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Districts": "Districts",
+  "@_Districts": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Edit": "Edit",
+  "@_Edit": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Email": "Email",
+  "@_Email": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Entity32Table": "Entity Table",
+  "@_Entity32Table": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Entity32View": "Entity View",
+  "@_Entity32View": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Error": "Error",
+  "@_Error": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_File": "File",
+  "@_File": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_File32uploaded": "File uploaded",
+  "@_File32uploaded": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_First32name": "First name",
+  "@_First32name": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_FirstName": "FirstName",
+  "@_FirstName": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Has32admin32access": "Has admin access",
+  "@_Has32admin32access": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_IDENTIFIER95ATTRIBUTE95UNIQUENESS95VIOLATION": "Identifier attribute is not unique.",
+  "@_IDENTIFIER95ATTRIBUTE95UNIQUENESS95VIOLATION": {
+    "description": "The value is not accepted, because the attribute is marked as identifier and the same value is already presented in other instance.",
+    "type": "text",
+    "placeholders": {
+      "feature": {},
+      "value": {}
+    }
+  },
+  "_IMAGE": "IMAGE",
+  "@_IMAGE": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_INTERNAL95SERVER95ERROR": "Internal server error.",
+  "@_INTERNAL95SERVER95ERROR": {
+    "description": "Internal server error that could not fix by user or client, need to analyze by JUDO developers.",
+    "type": "text",
+    "placeholders": {
+      "exception": {}
+    }
+  },
+  "_INVALID95CONTENT": "Invalid content.",
+  "@_INVALID95CONTENT": {
+    "description": "Content is invalid (collection instead of single value or unknown collection).",
+    "type": "text",
+    "placeholders": {
+      "feature": {}
+    }
+  },
+  "_INVALID95IDENTIFIER": "Invalid identifier.",
+  "@_INVALID95IDENTIFIER": {
+    "description": "Signed identifier (signature) is invalid.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_IsAdmin": "IsAdmin",
+  "@_IsAdmin": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_IsRatingType": "IsRatingType",
+  "@_IsRatingType": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_IsSelectAnswerType": "IsSelectAnswerType",
+  "@_IsSelectAnswerType": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_IsYesNoAbstainType": "IsYesNoAbstainType",
+  "@_IsYesNoAbstainType": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_IsYesNoType": "IsYesNoType",
+  "@_IsYesNoType": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Issue": "Issue",
+  "@_Issue": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Issues": "Issues",
+  "@_Issues": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Issues4432Debates": "Issues, Debates",
+  "@_Issues4432Debates": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_LINK": "LINK",
+  "@_LINK": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Last32name": "Last name",
+  "@_Last32name": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_LastName": "LastName",
+  "@_LastName": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Link": "Link",
+  "@_Link": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Login": "Login",
+  "@_Login": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Logout": "Logout",
+  "@_Logout": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_MAP": "MAP",
+  "@_MAP": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_MAX95LENGTH95VALIDATION95FAILED": "Value is too long.",
+  "@_MAX95LENGTH95VALIDATION95FAILED": {
+    "description": "Length of value is greater than allowed by model.",
+    "type": "text",
+    "placeholders": {
+      "feature": {},
+      "maxLength": {},
+      "value": {}
+    }
+  },
+  "_MISSING95IDENTIFIER95OF95BOUND95OPERATION": "Missing object ID of operation.",
+  "@_MISSING95IDENTIFIER95OF95BOUND95OPERATION": {
+    "description": "Missing signed identifier (HTTP header) of bound operation.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_MISSING95REQUIRED95ATTRIBUTE": "Missing required attribute.",
+  "@_MISSING95REQUIRED95ATTRIBUTE": {
+    "description": "A required attribute (path expression is returned in location field) is missing from request.",
+    "type": "text",
+    "placeholders": {
+      "feature": {}
+    }
+  },
+  "_MISSING95REQUIRED95PARAMETER": "Missing required parameter.",
+  "@_MISSING95REQUIRED95PARAMETER": {
+    "description": "A required single parameter (name is returned in location field) is missing from request.",
+    "type": "text",
+    "placeholders": {
+      "feature": {}
+    }
+  },
+  "_MISSING95REQUIRED95RELATION": "Missing required relation.",
+  "@_MISSING95REQUIRED95RELATION": {
+    "description": "A required single relation (path expression is returned in location field) is missing from request.",
+    "type": "text",
+    "placeholders": {
+      "feature": {}
+    }
+  },
+  "_My32debates": "My debates",
+  "@_My32debates": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_My32issues": "My issues",
+  "@_My32issues": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_NO": "NO",
+  "@_NO": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_NOT95ACCEPTED95BY95RANGE": "Invalid reference.",
+  "@_NOT95ACCEPTED95BY95RANGE": {
+    "description": "Reference is not accepted because of range expression defined for the given relation.",
+    "type": "text",
+    "placeholders": {
+      "identifier": {},
+      "signedIdentifier": {}
+    }
+  },
+  "_NO95VOTE": "NO_VOTE",
+  "@_NO95VOTE": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_NULL95ITEM95IS95NOT95SUPPORTED": "Null item is not supported.",
+  "@_NULL95ITEM95IS95NOT95SUPPORTED": {
+    "description": "Null item is not accepted as collection relation item.",
+    "type": "text",
+    "placeholders": {
+      "feature": {}
+    }
+  },
+  "_NULL95PARAMETER95ITEM95IS95NOT95SUPPORTED": "Null item is not supported.",
+  "@_NULL95PARAMETER95ITEM95IS95NOT95SUPPORTED": {
+    "description": "Null item is not accepted as collection parameter item.",
+    "type": "text",
+    "placeholders": {
+      "feature": {}
+    }
+  },
+  "_Name": "Name",
+  "@_Name": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Next": "Next",
+  "@_Next": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_No": "No",
+  "@_No": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_No32results": "No results",
+  "@_No32results": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_OK": "OK",
+  "@_OK": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Ok": "Ok",
+  "@_Ok": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Owner": "Owner",
+  "@_Owner": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_PATTERN95VALIDATION95FAILED": "Value does not match pattern.",
+  "@_PATTERN95VALIDATION95FAILED": {
+    "description": "Value must match a regular expression defined by model.",
+    "type": "text",
+    "placeholders": {
+      "feature": {},
+      "pattern": {},
+      "value": {}
+    }
+  },
+  "_PENDING": "PENDING",
+  "@_PENDING": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_PERMISSION95DENIED": "Permission denied.",
+  "@_PERMISSION95DENIED": {
+    "description": "Some privileges (CREATE/UPDATE/DELETE) are missing from model element related to the given operation.",
+    "type": "text",
+    "placeholders": {
+      "missingPrivileges": {},
+      "modelElement": {}
+    }
+  },
+  "_PRECISION95VALIDATION95FAILED": "Too many digits.",
+  "@_PRECISION95VALIDATION95FAILED": {
+    "description": "Number of digits of value is greater than defined by model.",
+    "type": "text",
+    "placeholders": {
+      "feature": {},
+      "precision": {},
+      "value": {}
+    }
+  },
+  "_PRO": "PRO",
+  "@_PRO": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Page32loading": "Page loading",
+  "@_Page32loading": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Personal": "Personal",
+  "@_Personal": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Phone": "Phone",
+  "@_Phone": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Please32make32sure32all32fields32are32filled32in32correctly46": "Please make sure all fields are filled in correctly.",
+  "@_Please32make32sure32all32fields32are32filled32in32correctly46": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Previous": "Previous",
+  "@_Previous": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Pro": "Pro",
+  "@_Pro": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Pros": "Pros",
+  "@_Pros": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_RATE": "RATE",
+  "@_RATE": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Rating32vote": "Rating vote",
+  "@_Rating32vote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Refresh": "Refresh",
+  "@_Refresh": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Remove": "Remove",
+  "@_Remove": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Representation": "Representation",
+  "@_Representation": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Resident32city": "Resident city",
+  "@_Resident32city": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Resident32county": "Resident county",
+  "@_Resident32county": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Resident32district": "Resident district",
+  "@_Resident32district": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_SCALE95VALIDATION95FAILED": "Invalid scale.",
+  "@_SCALE95VALIDATION95FAILED": {
+    "description": "Scale of decimal value is not supported.",
+    "type": "text",
+    "placeholders": {
+      "feature": {},
+      "precision": {},
+      "scale": {},
+      "value": {}
+    }
+  },
+  "_SELECT95ANSWER": "SELECT_ANSWER",
+  "@_SELECT95ANSWER": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Save": "Save",
+  "@_Save": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Search": "Search",
+  "@_Search": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Security": "Security",
+  "@_Security": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Select": "Select",
+  "@_Select": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Select32answer32vote": "Select answer vote",
+  "@_Select32answer32vote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Settings": "Settings",
+  "@_Settings": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Something32went32wrong4632Please32contact32with32the32system32admins46": "Something went wrong. Please contact with the system admins.",
+  "@_Something32went32wrong4632Please32contact32with32the32system32admins46": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Sorting": "Sorting",
+  "@_Sorting": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Status": "Status",
+  "@_Status": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Subcategories": "Subcategories",
+  "@_Subcategories": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Successful32operation": "Successful operation",
+  "@_Successful32operation": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_TOO95FEW95ITEMS": "Too few items in relation.",
+  "@_TOO95FEW95ITEMS": {
+    "description": "Relation (path expression is returned in location field) needs a collection, request contains too few items.",
+    "type": "text",
+    "placeholders": {
+      "feature": {},
+      "size": {}
+    }
+  },
+  "_TOO95FEW95PARAMETERS": "Too few items in parameter.",
+  "@_TOO95FEW95PARAMETERS": {
+    "description": "Parameter (name is returned in location field) needs a collection, request contains too few items.",
+    "type": "text",
+    "placeholders": {
+      "feature": {},
+      "size": {}
+    }
+  },
+  "_TOO95MANY95ITEMS": "Too many items in relation.",
+  "@_TOO95MANY95ITEMS": {
+    "description": "Relation (path expression is returned in location field) needs a collection, request container too many items.",
+    "type": "text",
+    "placeholders": {
+      "feature": {},
+      "size": {}
+    }
+  },
+  "_TOO95MANY95PARAMETERS": "Too many items in parameter.",
+  "@_TOO95MANY95PARAMETERS": {
+    "description": "Parameter (name is returned in location field) needs a collection, request container too many items.",
+    "type": "text",
+    "placeholders": {
+      "feature": {},
+      "size": {}
+    }
+  },
+  "_Title": "Title",
+  "@_Title": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_TransferObject32Form": "TransferObject Form",
+  "@_TransferObject32Form": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_TransferObject32Table": "TransferObject Table",
+  "@_TransferObject32Table": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_TransferObject32View": "TransferObject View",
+  "@_TransferObject32View": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Type": "Type",
+  "@_Type": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_UP": "UP",
+  "@_UP": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Unknown": "Unknown",
+  "@_Unknown": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Unselect": "Unselect",
+  "@_Unselect": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_UserName": "UserName",
+  "@_UserName": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Username": "Username",
+  "@_Username": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Users": "Users",
+  "@_Users": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_VIDEO": "VIDEO",
+  "@_VIDEO": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_View": "View",
+  "@_View": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_View324732Edit32Attachment": "View / Edit Attachment",
+  "@_View324732Edit32Attachment": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_View324732Edit32Category": "View / Edit Category",
+  "@_View324732Edit32Category": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_View324732Edit32Comment": "View / Edit Comment",
+  "@_View324732Edit32Comment": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_View324732Edit32Con": "View / Edit Con",
+  "@_View324732Edit32Con": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_View324732Edit32Debate": "View / Edit Debate",
+  "@_View324732Edit32Debate": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_View324732Edit32Issue": "View / Edit Issue",
+  "@_View324732Edit32Issue": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_View324732Edit32Pro": "View / Edit Pro",
+  "@_View324732Edit32Pro": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_View324732Edit32User": "View / Edit User",
+  "@_View324732Edit32User": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Vote32close32at": "Vote close at",
+  "@_Vote32close32at": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Vote32description": "Vote description",
+  "@_Vote32description": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Vote32title": "Vote title",
+  "@_Vote32title": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_VoteDefinition": "VoteDefinition",
+  "@_VoteDefinition": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_VoteRating": "VoteRating",
+  "@_VoteRating": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_VoteSelectAnswer": "VoteSelectAnswer",
+  "@_VoteSelectAnswer": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_VoteType": "VoteType",
+  "@_VoteType": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_VoteYesNo": "VoteYesNo",
+  "@_VoteYesNo": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_VoteYesNoAbstain": "VoteYesNoAbstain",
+  "@_VoteYesNoAbstain": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Votes": "Votes",
+  "@_Votes": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_YES": "YES",
+  "@_YES": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_YES95NO": "YES_NO",
+  "@_YES95NO": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_YES95NO95ABSTAIN": "YES_NO_ABSTAIN",
+  "@_YES95NO95ABSTAIN": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Yes": "Yes",
+  "@_Yes": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Yes324732No324732Abstain32vote": "Yes / No / Abstain vote",
+  "@_Yes324732No324732Abstain32vote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_Yes324732No32vote": "Yes / No vote",
+  "@_Yes324732No32vote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_actionButton": "actionButton",
+  "@_actionButton": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_actionGroup": "actionGroup",
+  "@_actionGroup": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_admin": "admin",
+  "@_admin": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_beginWith": "beginWith",
+  "@_beginWith": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_called32successfully": "called successfully",
+  "@_called32successfully": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_cancel": "cancel",
+  "@_cancel": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_contain": "contain",
+  "@_contain": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_down": "down",
+  "@_down": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_equal": "equal",
+  "@_equal": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_equals": "equals",
+  "@_equals": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_greaterOrEqual": "greaterOrEqual",
+  "@_greaterOrEqual": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_greaterThan": "greaterThan",
+  "@_greaterThan": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_lessOrEqual": "lessOrEqual",
+  "@_lessOrEqual": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_lessThan": "lessThan",
+  "@_lessThan": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_like": "like",
+  "@_like": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_matches": "matches",
+  "@_matches": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_notEqual": "notEqual",
+  "@_notEqual": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_notEquals": "notEquals",
+  "@_notEquals": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_up": "up",
+  "@_up": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  }
+}

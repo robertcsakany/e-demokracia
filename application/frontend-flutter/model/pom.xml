@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- To redefine project definition create 'frontend-flutter/model/pom.xml.project-definition.fragment.override.hbs' file -->
+    <parent>
+        <groupId>party.mkkp.edemokracia</groupId>
+        <artifactId>edemokracia-application-frontend-flutter</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>edemokracia-application-frontend-flutter-model</artifactId>
+    <name>edemokracia - frontend flutter model</name>
+    <description>edemokracia - frontend flutter model</description>
+    <!-- End of 'frontend-flutter/model/pom.xml.project-definition.fragment.override.hbs' -->
+
+    <packaging>pom</packaging>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>hu.blackbelt</groupId>
+                    <artifactId>flutter-maven-plugin</artifactId>
+                    <version>${flutter-maven-plugin-version}</version>
+                    <configuration>
+                        <installDirectory>${flutter-home}</installDirectory>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>hu.blackbelt.judo.tatami</groupId>
+                <artifactId>judo-tatami-client-workflow-maven-plugin</artifactId>
+                <version>${judo-tatami-client-version}</version>
+                <executions>
+                    <execution>
+                        <id>execute-ui-transformation</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>default-workflow</goal>
+                        </goals>
+                        <configuration>
+                            <esm>mvn:${model-groupId}:${model-artifactId}:${model-version}!model/${model-name}-esm.model</esm>
+                            <ignoreUi2FlutterClient>true</ignoreUi2FlutterClient>
+                            <destination>${basedir}</destination>
+                            <saveModels>true</saveModels>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

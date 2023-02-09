@@ -1,0 +1,158 @@
+# edemokracia-frontend-flutter
+
+The edemokracia frontend is a multi module project to create flutter frontend applications.
+The frontend is generated from a given ESM (Editor Specific Model) via UI (User Interface model).
+
+The development cycle is new ESM version is released, the `model` subproject (or
+the whole project) should be compiled. The new version of UI model
+is stored in side `model` directory and actor subprojects uses that UI model to
+generate flutter codes.
+
+## Compiling
+
+To create and package flutter applications, run:
+
+[source,]
+----
+mvn clean install
+----
+
+It uses the model version defined in `pom.xml`. In development
+sometimes other version is required (for example locally compiled ESM)
+On that case `model-version` can be overrided.
+
+[source,]
+----
+mvn clean install -Dmodel-version=1.0.0-SNAPSHOT
+----
+
+
+The pom.xml contains the model and all actors as a submodule.
+
+- `model`
++
+The model project. It creates the UI model from ESM model
+and stores on model directory. (basedir). This UI model is used
+by actors.
+
+- `edemokracia__admin__admin`
++
+Admin actor
+
+
+The submodules can be compiled / deployed separately.
+
+
+## Properties parent `pom.xml`
+
+- `model-artifactId`
++
+Maven artifactId of edemokracia-model. Default: edemokracia
+
+- `model-name edemokracia`
++
+Model name in ESM. Defaulr: edemokracia
+
+- `model-version`
++
+Maven version
+
+## Properties in actor submodule's `pom.xml`
+
+- `actor`
++
+Actor fully qualified name, equals with the submodule name by default in flutter
+compatible way.
+For exmaple: `module\__actors__admin__admin`
+
+
+- `actor-shortname`
++
+Actor short name which is the plain actor name in flutter compatible way.
+For examole: `admin`
+
+
+- `actor-name`
++
+Actor short name which is the plain actor name as it is
+For example: `Admin`
+
+
+- `flutter-home`
++
+Where the flutter is installed. Recommended to use the parent's project
+directory to use same environment for all actors, but it can be changed by actor basis.
+Default: `${project.parent.basedir}/.flutter`
+
+- `override-dir`
++
+The client override codes placed. By default all actors uses same override, but it can be configured by actor bases
+Default: `${project.parent.basedir}/generator-overrides`
+
+
+## Profiles
+
+The following profile options can be used as system parameter to setup the build
+
+- `skipModels` (in model and actor submodules)
++
+It will ignore the ESM2UI steps, so the UI model will not be touched in `model` project.
+
+- `skipDist` (in actor submodules)
++
+It will not make web build for project. When developer use on run method from
+Android Studio or other IDE, its not neccesary to run. (only code generatrion and
+build_runner)
+
+- `forceClean` (in actor submodules)
++
+Without that the `build_runner` will make inremental build, means
+the cached states are reused. When there is a build problem, try this
+option first.
+
+- `runServer` (in actor submodules)
++
+When frontend model frequently changes (Labels, some component placing made in Designer) full compile have not to be made.
+In a separate terminal window exec:
+
+[source,]
+----
+mvn -DskipDist -DrunServer
+----
+
+After in brower go to `http://localhost:5555`. On that case the normal build (with `-DskipDist`) can be made. After page
+refresh new version will be shown.
+
+
+Sometimes it's neccessary to check which is slow in building.
+Run with:
+
+`-Dprofile -DprofileFormat=HTML`
+
+After it there will be a HTML report in `.profiler` directory.
+
+
+## The compile steps on model submodule
+
+1. On install it runs the `Esm2Ui` transformation and stores the `esm` and `ui` model, except `-DskipModels` option given.
+
+## The compile steps on actor submodule
+
+The compile consists the following steps:
+
+1. Clean - it cleans the `target` directory and build/dist (when `-DskipDis` not set). If neccessary install flutter and optionally run `pub clean` when `-DforceClean` set. To ignore it does not run `clean` in maven.
+
+2. Generate - It runs the `Ui2Client` transformation from UI model stored in the `model` submodule.
+
+3. Compile - It runs flutter and makes following flutter steps:
+- `pub get` - Resolving dependencies in `pubspec.yaml`
+- extract l10n - It creates the `l10n/intl_messages.arb` It contains
+the messages extracted from the code.
+- generate l10n - It creates dart code from localized messages.
+- build runner - Flutter code generarors. (mobx, autoinject, autoroute)
+- code format - Format all source codes
+- build web - build web target. In the index.html it replaces basepath which
+will be context path in the backend service. (when `-DskipDist` not set)
+
+4. Package - It packs the `build/web` contents as a OSGi deployable web archive.
+
