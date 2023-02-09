@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>party.mkkp.edemokracia</groupId>
@@ -11,25 +11,25 @@
 
 	<properties>
 		<judo-channel>develop</judo-channel>
-		<judo-version>1.0.0.20221229_041315_a9705b5d_develop</judo-version>
+		<judo-version>1.0.0.20230208_094930_4e1cd202_develop</judo-version>
 
 		<sqlDialects>hsqldb</sqlDialects>
 
-		<judo-esm-archetype-version-defined>1.0.0.20221213_040733_1cd5c56b_develop</judo-esm-archetype-version-defined>
-        <judo-meta-esm-version-defined>1.1.1.20221212_161312_094cdd8d_develop</judo-meta-esm-version-defined>
-        <judo-tatami-version-defined>1.1.0.20221228_211531_f8575fdd_feature_JNG_4338_RangeInputTypeInheritanceFix</judo-tatami-version-defined>
+        <judo-meta-esm-version-defined>1.1.1.20230207_041944_186fd7db_develop</judo-meta-esm-version-defined>
+        <judo-tatami-version-defined>1.1.0.20230208_082413_6826233f_develop</judo-tatami-version-defined>
         <flutter-maven-plugin-version-defined>1.0.2.20220326_002737_efc0629e_develop</flutter-maven-plugin-version-defined>
         <structured-map-proxy-version-defined>1.2.0</structured-map-proxy-version-defined>
-        <judo-dao-api-version-defined>1.0.3</judo-dao-api-version-defined>
+        <judo-dao-api-version-defined>1.0.4.20230104_113815_13de0045_develop</judo-dao-api-version-defined>
         <judo-dispatcher-api-version-defined>1.0.2</judo-dispatcher-api-version-defined>
-        <judo-sdk-common-version-defined>1.0.2</judo-sdk-common-version-defined>
+        <judo-sdk-common-version-defined>1.0.4.20230207_042417_6df166c2_develop</judo-sdk-common-version-defined>
         <mapper-version-defined>1.0.3</mapper-version-defined>
-        <judo-platform-version-defined>2.0.1.20221223_041234_43203d7f_develop</judo-platform-version-defined>
-        <judo-services-version-defined>1.1.0.20221223_040729_a5c2c8f6_develop</judo-services-version-defined>
-        <judo-rdbms-schema-version-defined>1.0.0.20221209_042125_1618f248_develop</judo-rdbms-schema-version-defined>
-        <judo-tatami-client-version-defined>1.1.0.20230105_142327_99f17145_develop</judo-tatami-client-version-defined>
-        <judo-esm-fullstack-project-archetype-version-defined>1.0.0.20221223_042142_aeb1e5aa_develop</judo-esm-fullstack-project-archetype-version-defined>
-
+        <judo-platform-version-defined>2.0.1.20230208_083944_3e2ae6f5_develop</judo-platform-version-defined>
+        <judo-services-version-defined>1.1.0.20230208_083327_4984d1c8_develop</judo-services-version-defined>
+        <judo-rdbms-schema-version-defined>1.0.0.20230208_082051_9d2b3cc9_develop</judo-rdbms-schema-version-defined>
+        <judo-tatami-client-version-defined>1.1.0.20230208_083328_a673e7b9_develop</judo-tatami-client-version-defined>
+        <judo-esm-fullstack-project-template-version-defined>1.0.0.20230208_084929_d40dba31_develop</judo-esm-fullstack-project-template-version-defined>
+		<judo-meta-ui-version-defined>1.0.1.20230207_071531_85a9b1eb_develop</judo-meta-ui-version-defined>
+		<judo-ui-flutter-template-version-defined>1.0.0.20230208_080158_283478a2_develop</judo-ui-flutter-template-version-defined>
 	</properties>
 
 	<build>
@@ -59,43 +59,9 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
-		            <groupId>hu.blackbelt.judo.archetype</groupId>
-		            <artifactId>judo-esm-archetype-maven-plugin</artifactId>
-					<version>${judo-esm-archetype-version-defined}</version>
-				</plugin>
-				
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											hu.blackbelt.judo.tatami
-										</groupId>
-										<artifactId>
-											judo-tatami-workflow-maven-plugin
-										</artifactId>
-										<versionRange>
-											[1.0.0,)
-										</versionRange>
-										<goals>
-											<goal>
-												default-workflow
-											</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
+		            <groupId>hu.blackbelt.judo.meta</groupId>
+		            <artifactId>judo-esm-generator-maven-plugin</artifactId>
+					<version>${judo-meta-esm-version-defined}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -195,7 +161,7 @@
 						                </dependency>
 						              </dependencies>
 						            </property>
-						          </properties>>
+						          </properties>
 								</configuration>
 							</execution>
 						</executions>
@@ -206,7 +172,7 @@
 							<allowIncrementalUpdates>true</allowIncrementalUpdates>
 							<generateBackupPoms>false</generateBackupPoms>
 
-							<rulesUri>https://nexus.judo.technology/repository/judo-versions/version-ruleset-${judo-channel}.xml</rulesUri> -->
+							<rulesUri>https://nexus.judo.technology/repository/judo-versions/version-ruleset-${judo-channel}.xml</rulesUri>
 							<includes>
 								<include>hu.blackbelt.judo:judo-versions</include>
 							</includes>
@@ -268,11 +234,6 @@
                             <file>${project.basedir}/pom.xml</file>
                             <replacements>
                                 <replacement>
-                                    <token><![CDATA[\<judo-esm-archetype-version-defined\>([0-9]+.*)\<\/judo-esm-archetype-version-defined\>]]></token>
-                                    <value><![CDATA[<judo-esm-archetype-version-defined>${judo-esm-archetype-version}</judo-esm-archetype-version-defined>]]></value>
-                                </replacement>
-
-                                <replacement>
                                     <token><![CDATA[\<judo-meta-esm-version-defined\>([0-9]+.*)\<\/judo-meta-esm-version-defined\>]]></token>
                                     <value><![CDATA[<judo-meta-esm-version-defined>${judo-meta-esm-version}</judo-meta-esm-version-defined>]]></value>
                                 </replacement>
@@ -333,8 +294,18 @@
 								</replacement>
 								
 								<replacement>
-								    <token><![CDATA[\<judo-esm-fullstack-project-archetype-version-defined\>([0-9]+.*)<\/judo-esm-fullstack-project-archetype-version-defined\>]]></token>
-								    <value><![CDATA[<judo-esm-fullstack-project-archetype-version-defined>${judo-esm-fullstack-project-archetype-version}</judo-esm-fullstack-project-archetype-version-defined>]]></value>
+								    <token><![CDATA[\<judo-esm-fullstack-project-template-version-defined\>([0-9]+.*)<\/judo-esm-fullstack-project-template-version-defined\>]]></token>
+								    <value><![CDATA[<judo-esm-fullstack-project-template-version-defined>${judo-esm-fullstack-project-template-version}</judo-esm-fullstack-project-template-version-defined>]]></value>
+								</replacement>
+
+								<replacement>
+									<token><![CDATA[\<judo-meta-ui-version-defined\>([0-9]+.*)<\/judo-meta-ui-version-defined\>]]></token>
+									<value><![CDATA[<judo-meta-ui-version-defined>${judo-meta-ui-version}</judo-meta-ui-version-defined>]]></value>
+								</replacement>
+
+								<replacement>
+									<token><![CDATA[\<judo-ui-flutter-template-version-defined\>([0-9]+.*)<\/judo-ui-flutter-template-version-defined\>]]></token>
+									<value><![CDATA[<judo-ui-flutter-template-version-defined>${judo-ui-flutter-template-version}</judo-ui-flutter-template-version-defined>]]></value>
 								</replacement>
 							</replacements>
                             <regex>true</regex>
@@ -368,9 +339,9 @@
 		    <build>
 		        <plugins>
 		            <plugin>
-		                <groupId>hu.blackbelt.judo.archetype</groupId>
-		                <artifactId>judo-esm-archetype-maven-plugin</artifactId>
-		                <version>${judo-esm-archetype-version-defined}</version>
+		                <groupId>hu.blackbelt.judo.meta</groupId>
+		                <artifactId>judo-esm-generator-maven-plugin</artifactId>
+		                <version>${judo-meta-esm-version-defined}</version>
 		                <executions>
 		                    <execution>
 		                        <id>execute-esm-test-model-from-artifact</id>
@@ -380,11 +351,8 @@
 		                        </goals>
 		                        <configuration>
 		                            <uris>
-		                                <uri>mvn:hu.blackbelt.judo.archetype:judo-esm-fullstack-project-archetype:${judo-esm-fullstack-project-archetype-version-defined}</uri>
+		                                <uri>mvn:hu.blackbelt.judo.template:judo-esm-fullstack-project-template:${judo-esm-fullstack-project-template-version-defined}</uri>
 		                            </uris>
-		                            <helpers>
-		                                <helper>hu.blackbelt.judo.esm.fullstack.project.archetype.EsmProjectHelper</helper>
-		                            </helpers>
 		                            <type>fullstack-project</type>
 		                            <esm>
 		                                ${basedir}/model/${project.artifactId}.model
@@ -415,17 +383,20 @@
 		                                <judoServicesVersion>${judo-services-version-defined}</judoServicesVersion>
 		                                <judoRdbmsSchemaVersion>${judo-rdbms-schema-version-defined}</judoRdbmsSchemaVersion>
 		                                <judoTatamiClientVersion>${judo-tatami-client-version-defined}</judoTatamiClientVersion>
-		
-		                            </templateParameters>
+
+										<judoMetaUIVersion>${judo-meta-ui-version-defined}</judoMetaUIVersion>
+										<judoUiFlutterTemplateVersion>${judo-ui-flutter-template-version-defined}</judoUiFlutterTemplateVersion>
+
+									</templateParameters>
 		                        </configuration>
 		                    </execution>
 		                </executions>
 		
 		                <dependencies>
 		                    <dependency>
-		                        <groupId>hu.blackbelt.judo.archetype</groupId>
-		                        <artifactId>judo-esm-fullstack-project-archetype</artifactId>
-		                        <version>${judo-esm-fullstack-project-archetype-version-defined}</version>
+		                        <groupId>hu.blackbelt.judo.template</groupId>		                        
+		                        <artifactId>judo-esm-fullstack-project-template</artifactId>
+		                        <version>${judo-esm-fullstack-project-template-version-defined}</version>
 		                    </dependency>
 		                </dependencies>
 		            </plugin>
