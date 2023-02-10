@@ -6,6 +6,8 @@ import type { SnackbarOrigin } from '@mui/material';
 export interface SnackOptions extends Partial<SnackbarOrigin> {
   variant?: 'error' | 'warning' | 'info' | 'success';
   autoHideDuration?: number;
+  vertical?: 'bottom' | 'top';
+  horizontal?: 'center' | 'left' | 'right';
 }
 
 export type EnqueueSnackbarCallback = (message: string, options?: SnackOptions) => void;

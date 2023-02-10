@@ -23,6 +23,23 @@
         "judo.pages.table.delete": "Törlés",
         "judo.pages.table.refresh": "Frissítés",
         "judo.pages.table.column.not-sortable": "Ez az oszlop nem rendezhető.",
-        "judo.pages.table.set-filters": "Szűrő(k) beállítása"
+        "judo.pages.table.set-filters": "Szűrő(k) beállítása",
+        "judo.modal.filter.label": "Szűrés",
+        "judo.modal.filter.add-new-filter": "Szűrő hozzáadása",
+        "judo.modal.filter.cancel": "Mégsem",
+        "judo.modal.filter.apply": "Alkalmaz",
+        "judo.modal.confirm.confirm": "Igen",
+        "judo.modal.confirm.cancel": "Nem",
+        "judo.modal.close": "Bezárás",
+        "judo.modal.range.label": "Kiválasztás",
+        "judo.modal.range.set-filters": "Szűrő beállítása",
+        "judo.modal.range.cancel": "Mégsem",
+        "judo.modal.range.submit": "Kiválasztás",
+        "judo.form.switch.unknown": "Ismeretlen",
+        "judo.form.switch.true": "Igen",
+        "judo.form.switch.false": "Nem",
+        "judo.component.TrinaryLogic.unknown": "Ismeretlen",
+        "judo.component.TrinaryLogic.true": "Igen",
+        "judo.component.TrinaryLogic.false": "Nem"
     }
 }

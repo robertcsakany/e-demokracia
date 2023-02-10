@@ -11,6 +11,7 @@ import type { ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { To } from 'react-router-dom';
 import { MdiIcon } from './MdiIcon';
+import { StackableDialogProvider } from './StackableDialogProvider';
 
 interface BreadcrumbProviderProps {
   children: ReactNode;
@@ -131,7 +132,7 @@ export const BreadcrumbProvider = ({ children }: BreadcrumbProviderProps) => {
   return (
     <BreadcrumbContextState.Provider value={breadcrumbItems}>
       <JudoNavigationContextState.Provider value={judoNavigationContext}>
-        {children}
+        <StackableDialogProvider>{children}</StackableDialogProvider>
       </JudoNavigationContextState.Provider>
     </BreadcrumbContextState.Provider>
   );

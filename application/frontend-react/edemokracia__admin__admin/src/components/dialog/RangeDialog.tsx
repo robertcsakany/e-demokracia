@@ -19,9 +19,10 @@ import {
 } from '@mui/x-data-grid';
 import { useEffect, useRef, useState } from 'react';
 import type { JudoStored, QueryCustomizer } from '@judo/data-api-common';
+import { useTranslation } from 'react-i18next';
 import type { Filter, FilterOption } from '../../components-api';
 import { errorHandling, processQueryCustomizer } from '../../utilities';
-import { serverTableConfig } from '../../config';
+import { serverTableConfig, rangeDialogConfig } from '../../config';
 import { CustomTablePagination } from '../CustomTablePagination';
 import { useSnackbar } from '../../components';
 import { useFilterDialog } from './hooks';
@@ -52,7 +53,7 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
   filterOptions,
 }: RangeDialogProps<T, U>) => {
   const { openFilterDialog } = useFilterDialog();
-
+  const { t } = useTranslation();
   const descriptionElementRef = useRef<HTMLElement>(null);
   const [enqueueSnackbar] = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -71,7 +72,7 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
   const [queryCustomizer, setQueryCustomizer] = useState<U>({
     ...initalQueryCustomizer,
     _seek: {
-      limit: 6,
+      limit: rangeDialogConfig.numberOfElements + 1,
     },
   });
 
@@ -80,7 +81,7 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
       return {
         ...prevQueryCustomizer,
         _seek: {
-          limit: isNext ? 6 : 5,
+          limit: isNext ? rangeDialogConfig.numberOfElements + 1 : rangeDialogConfig.numberOfElements,
           reverse: !isNext,
           lastItem: isNext ? lastItem : firstItem,
         },
@@ -95,10 +96,10 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
     try {
       const res = await rangeCall(processQueryCustomizer(queryCustomizer));
 
-      if (res.length > 5) {
+      if (res.length > rangeDialogConfig.numberOfElements) {
         setIsNextButtonEnabled(true);
         res.pop();
-      } else if (queryCustomizer._seek?.limit === 6) {
+      } else if (queryCustomizer._seek?.limit === rangeDialogConfig.numberOfElements + 1) {
         setIsNextButtonEnabled(false);
       }
 
@@ -133,7 +134,7 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
         ...prevQueryCustomizer,
         _seek: {
           lastItem: undefined,
-          limit: 6,
+          limit: rangeDialogConfig.numberOfElements + 1,
           reverse: undefined,
         },
         ...tempQueryCustomizer,
@@ -175,7 +176,7 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
   //       ...prevQueryCustomizer,
   //       _seek: {
   //         lastItem: undefined,
-  //         limit: 6,
+  //         limit: rangeDialogConfig.numberOfElements + 1,
   //         reverse: undefined,
   //       },
   //       _orderBy: [{ attribute: field, descending: sort === 'desc' }],
@@ -256,7 +257,9 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
 
   return (
     <Dialog open={open} onClose={cancel} scroll="paper" fullWidth={true} maxWidth={'md'}>
-      <DialogTitle id="scroll-dialog-title">Select</DialogTitle>
+      <DialogTitle id="scroll-dialog-title">
+        {t('judo.modal.range.label', { defaultValue: 'Select' }) as string}
+      </DialogTitle>
       <DialogContent dividers={true}>
         <DialogContentText id="scroll-dialog-description" ref={descriptionElementRef} tabIndex={-1}>
           <DataGrid
@@ -297,7 +300,8 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
                     }}
                     disabled={isLoading}
                   >
-                    Set filters {filters.length !== 0 ? '(' + filters.length + ')' : ''}
+                    {t('judo.modal.range.set-filters', { defaultValue: 'Set filters' }) as string}{' '}
+                    {filters.length !== 0 ? '(' + filters.length + ')' : ''}
                   </Button>
                 </GridToolbarContainer>
               ),
@@ -307,7 +311,7 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
                   isNextButtonEnabled={isNextButtonEnabled}
                   page={page}
                   setPage={setPage}
-                  rowPerPage={5}
+                  rowPerPage={rangeDialogConfig.numberOfElements}
                 />
               ),
             }}
@@ -316,10 +320,10 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
       </DialogContent>
       <DialogActions>
         <Button variant="text" onClick={cancel}>
-          Cancel
+          {t('judo.modal.range.cancel', { defaultValue: 'Cancel' }) as string}
         </Button>
         <Button variant="contained" onClick={ok}>
-          Select
+          {t('judo.modal.range.submit', { defaultValue: 'Select' }) as string}
         </Button>
       </DialogActions>
     </Dialog>

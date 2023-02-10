@@ -1,10 +1,16 @@
+import * as dotenv from 'dotenv';
 import replace from '@rollup/plugin-replace';
 import clear from 'rollup-plugin-clear';
 import copy from 'rollup-plugin-copy';
 import esbuild from 'rollup-plugin-esbuild';
 import { npmExternalsToCopy } from './rollup/utils.js';
 
+dotenv.config();
+
 const ENV = process.env.NODE_ENV;
+const API_DEFAULT_BASE_URL = process.env.API_DEFAULT_BASE_URL;
+const FILE_DEFAULT_BASE_URL = process.env.FILE_DEFAULT_BASE_URL;
+const API_RELATIVE_PATH = process.env.API_RELATIVE_PATH;
 
 export default [
     {
@@ -19,9 +25,9 @@ export default [
                 targets: ['dist'],
             }),
             replace({
-                'process.env.API_DEFAULT_BASE_URL': JSON.stringify(''),
-                'process.env.FILE_DEFAULT_BASE_URL': JSON.stringify(''),
-                'process.env.API_RELATIVE_PATH': JSON.stringify(''),
+                'process.env.API_DEFAULT_BASE_URL': JSON.stringify(API_DEFAULT_BASE_URL || ''),
+                'process.env.FILE_DEFAULT_BASE_URL': JSON.stringify(FILE_DEFAULT_BASE_URL || ''),
+                'process.env.API_RELATIVE_PATH': JSON.stringify(API_RELATIVE_PATH || ''),
             }),
             esbuild({
                 minify: ENV === 'production',
@@ -57,6 +63,7 @@ export default [
             'react-router-dom',
             'react',
             'axios',
+            'dayjs',
             '@mui/material',
             '@mui/x-date-pickers',
             '@mui/x-date-pickers/AdapterDayjs',

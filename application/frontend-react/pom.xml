@@ -24,9 +24,9 @@
         <judo-ui-archetype-version>1.0.0.20221003_142712_453def5b_develop</judo-ui-archetype-version>
         <frontend-maven-plugin-version>1.12.1</frontend-maven-plugin-version>
 
-        <judo-tatami-ui2web-version>1.0.0.20230201_150343_5dfa8127_develop</judo-tatami-ui2web-version>
-        <judo-tatami-ui2typescript-maven-plugin-version>1.0.0.20230201_150343_5dfa8127_develop</judo-tatami-ui2typescript-maven-plugin-version>
-        <judo-tatami-ui-external-packages-version>1.0.0.20230201_150343_5dfa8127_develop</judo-tatami-ui-external-packages-version>
+        <judo-tatami-ui2web-version>1.0.0.20230209_132613_e45679cf_develop</judo-tatami-ui2web-version>
+        <judo-tatami-ui2typescript-maven-plugin-version>1.0.0.20230209_132613_e45679cf_develop</judo-tatami-ui2typescript-maven-plugin-version>
+        <judo-tatami-ui-external-packages-version>1.0.0.20230209_132613_e45679cf_develop</judo-tatami-ui-external-packages-version>
 
         <ui-model>${basedir}/model/edemokracia-ui.model</ui-model>
 

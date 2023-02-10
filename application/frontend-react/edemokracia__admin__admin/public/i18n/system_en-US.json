@@ -23,6 +23,23 @@
         "judo.pages.table.delete": "Delete",
         "judo.pages.table.refresh": "Refresh",
         "judo.pages.table.column.not-sortable": "This column is not sortable.",
-        "judo.pages.table.set-filters": "Set filters"
+        "judo.pages.table.set-filters": "Set filters",
+        "judo.modal.filter.label": "Filter",
+        "judo.modal.filter.add-new-filter": "Add new filter",
+        "judo.modal.filter.cancel": "Cancel",
+        "judo.modal.filter.apply": "Apply",
+        "judo.modal.confirm.confirm": "Yes",
+        "judo.modal.confirm.cancel": "No",
+        "judo.modal.close": "Close",
+        "judo.modal.range.label": "Select",
+        "judo.modal.range.set-filters": "Set filters",
+        "judo.modal.range.cancel": "Cancel",
+        "judo.modal.range.submit": "Select",
+        "judo.form.switch.unknown": "Unknown",
+        "judo.form.switch.true": "Yes",
+        "judo.form.switch.false": "No",
+        "judo.component.TrinaryLogic.unknown": "Unknown",
+        "judo.component.TrinaryLogic.true": "Yes",
+        "judo.component.TrinaryLogic.false": "No"
     }
 }

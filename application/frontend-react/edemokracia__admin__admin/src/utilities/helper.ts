@@ -27,4 +27,22 @@ export const simpleCloneDeep = (input: any): any => {
   return input;
 };
 
+export const stringToBooleanSelect = (booleanString?: string | null): boolean | null => {
+  if (!booleanString || !booleanString.trim()) {
+    return null;
+  } else {
+    return booleanString === 'true';
+  }
+};
+
+export const booleanToStringSelect = (booleanParam?: boolean | null): string | null => {
+  if (booleanParam === null || booleanParam === undefined) {
+    return ' ';
+  } else if (booleanParam) {
+    return 'true';
+  } else {
+    return 'false';
+  }
+};
+
 export const endWithSlash = (input: string): string => (input.endsWith('/') ? input : input + '/');

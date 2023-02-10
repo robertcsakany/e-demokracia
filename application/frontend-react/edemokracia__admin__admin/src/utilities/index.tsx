@@ -8,6 +8,7 @@
 export * from './error-handling';
 export * from './file-handling';
 export * from './filter-helper';
+export * from './form-utils';
 export * from './helper';
 export * from './icon-mapping';
 export * from './interfaces';

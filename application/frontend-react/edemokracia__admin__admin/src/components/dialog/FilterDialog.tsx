@@ -24,6 +24,7 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import type { TransitionProps } from '@mui/material/transitions';
 import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
 import { forwardRef, useEffect, useRef, useState } from 'react';
@@ -289,6 +290,7 @@ const Transition = forwardRef(function Transition(
 export const FilterDialog = ({ filters, filterOptions, resolve, open, handleClose }: FilterDialogProps) => {
   const descriptionElementRef = useRef<HTMLElement>(null);
   const [tempFilters, setTempFilters] = useState<Filter[]>(filters ?? []);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (open) {
@@ -366,7 +368,7 @@ export const FilterDialog = ({ filters, filterOptions, resolve, open, handleClos
     >
       <DialogTitle id="scroll-dialog-title">
         <Typography component="span" color="text.primary" variant="h5">
-          Filters
+          {t('judo.modal.filter.label', { defaultValue: 'Filter' }) as string}
         </Typography>
       </DialogTitle>
       <DialogContent dividers={true}>
@@ -399,6 +401,7 @@ export const FilterDialog = ({ filters, filterOptions, resolve, open, handleClos
                                 attributeName: filterOption.attributeName,
                                 label: filterOption.label,
                                 filterType: filterOption.filterType,
+                                enumValues: filterOption.enumValues,
                               },
                               filterBy: {
                                 operator: getDefaultOperator(filterOption.filterType),
@@ -408,7 +411,7 @@ export const FilterDialog = ({ filters, filterOptions, resolve, open, handleClos
                       };
                     })}
                   >
-                    Add new filter
+                    {t('judo.modal.filter.add-new-filter', { defaultValue: 'Add new filter' }) as string}
                   </DropdownButton>
                 </Grid>
               </Grid>
@@ -418,10 +421,10 @@ export const FilterDialog = ({ filters, filterOptions, resolve, open, handleClos
       </DialogContent>
       <DialogActions>
         <Button fullWidth variant="outlined" onClick={cancel}>
-          Cancel
+          {t('judo.modal.filter.cancel', { defaultValue: 'Cancel' }) as string}
         </Button>
         <Button fullWidth onClick={ok}>
-          Apply {'(' + tempFilters.length + ')'}
+          {t('judo.modal.filter.apply', { defaultValue: 'Apply' }) as string} {'(' + tempFilters.length + ')'}
         </Button>
       </DialogActions>
     </Dialog>

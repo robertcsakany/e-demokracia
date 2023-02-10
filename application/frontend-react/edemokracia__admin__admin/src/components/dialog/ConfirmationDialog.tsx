@@ -7,6 +7,7 @@
 
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material';
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ConfirmationDialogProps } from '../../components-api';
 
 export const ConfirmationDialog = ({
@@ -16,6 +17,7 @@ export const ConfirmationDialog = ({
   open,
   handleClose,
 }: ConfirmationDialogProps) => {
+  const { t } = useTranslation();
   const descriptionElementRef = useRef<HTMLElement>(null);
   useEffect(() => {
     if (open) {
@@ -46,10 +48,10 @@ export const ConfirmationDialog = ({
       </DialogContent>
       <DialogActions>
         <Button variant="text" onClick={cancel}>
-          No
+          {t('judo.modal.confirm.cancel', { defaultValue: 'No' }) as string}
         </Button>
         <Button variant="contained" onClick={ok}>
-          Yes
+          {t('judo.modal.confirm.confirm', { defaultValue: 'Yes' }) as string}
         </Button>
       </DialogActions>
     </Dialog>

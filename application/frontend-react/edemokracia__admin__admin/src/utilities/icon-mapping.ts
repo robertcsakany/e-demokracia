@@ -12,6 +12,8 @@ export const iconMap: Record<string, string> = {
   'supervisor-account': 'account-multiple',
   supervisor_account: 'account-multiple',
   accessibility: 'human',
+  'check-box': 'checkbox-outline',
+  check_box: 'checkbox-outline',
 };
 
 export const mapIcon = (path: string): string => {

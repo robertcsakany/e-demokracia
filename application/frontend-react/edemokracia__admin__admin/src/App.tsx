@@ -13,7 +13,7 @@ import { initReactI18next } from 'react-i18next';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { theme } from './theme';
-import { DialogProvider, StackableDialogProvider, BreadcrumbProvider, SnackProvider, MdiIcon } from './components';
+import { DialogProvider, BreadcrumbProvider, SnackProvider, MdiIcon } from './components';
 import { Layout } from './layout';
 import { menuItems } from './menu-items';
 import { useHeroProps, useLogoProps } from './hooks';
@@ -63,13 +63,11 @@ function App() {
           <PrincipalProvider>
             <SnackProvider>
               <DialogProvider>
-                <StackableDialogProvider>
-                  <BreadcrumbProvider>
-                    {translation ? (
-                      <Layout items={menuItems} drawerWidth={drawerWidth} logo={logoProps} hero={heroProps} />
-                    ) : null}
-                  </BreadcrumbProvider>
-                </StackableDialogProvider>
+                <BreadcrumbProvider>
+                  {translation ? (
+                    <Layout items={menuItems} drawerWidth={drawerWidth} logo={logoProps} hero={heroProps} />
+                  ) : null}
+                </BreadcrumbProvider>
               </DialogProvider>
             </SnackProvider>
           </PrincipalProvider>

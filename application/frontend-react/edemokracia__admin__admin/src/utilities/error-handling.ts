@@ -8,6 +8,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 import { exists } from './helper';
 import type { SnackOptions, EnqueueSnackbarCallback } from '../components';
+import { toastConfig } from '../config';
 
 interface ErrorHandlingOption {
   duration?: number;
@@ -56,12 +57,14 @@ export const errorHandling = (error: any, enqueueSnackbar: EnqueueSnackbarCallba
   if (response?.status === 422) {
     enqueueSnackbar(toClientError(error.response?.data as ServerError).message, {
       variant: 'error',
+      ...toastConfig.error,
     });
   } else if (response?.status === 400) {
     return handleBadRequest(response.data as ServerError[], enqueueSnackbar, options);
   } else {
     enqueueSnackbar(toClientError(response?.data as ServerError).message, {
       variant: 'error',
+      ...toastConfig.error,
     });
   }
 };
@@ -74,6 +77,7 @@ const handleBadRequest = (
   if (exists(errorList[0].location)) {
     enqueueSnackbar('Please make sure all fields are filled in correctly.', {
       variant: 'error',
+      ...toastConfig.error,
       autoHideDuration: options?.duration ?? undefined,
     });
 
@@ -85,6 +89,7 @@ const handleBadRequest = (
   } else {
     enqueueSnackbar(errorList[0].code, {
       variant: 'error',
+      ...toastConfig.error,
       autoHideDuration: options?.duration ?? undefined,
     });
   }
@@ -93,6 +98,7 @@ const handleBadRequest = (
 const generalErrorMessage = (enqueueSnackbar: EnqueueSnackbarCallback) => {
   enqueueSnackbar('Something went wrong. Please contact with the system admins.', {
     variant: 'error',
+    ...toastConfig.error,
   });
 };
 

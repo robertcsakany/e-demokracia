@@ -243,7 +243,16 @@ const baseTheme = createTheme(paletteTheme, {
         root: {
           width: '100%',
           length: '100%',
-          padding: 10,
+          padding: 15,
+        },
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        root: {
+          '> .MuiDialog-container > .MuiPaper-root': {
+            backgroundColor: paletteTheme.palette.background.default,
+          },
         },
       },
     },

@@ -21,3 +21,7 @@ export const pageServerTableConfig: Partial<DataGridProps<any>> = {
   disableSelectionOnClick: true,
   filterMode: 'server',
 };
+
+export const rangeDialogConfig: { numberOfElements: number } = {
+  numberOfElements: 5,
+};
