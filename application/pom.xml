@@ -33,7 +33,7 @@
         <model-name>edemokracia</model-name>
         <model-version>1.0.0-SNAPSHOT</model-version>
         
-        <dialectList>hsqldb</dialectList>
+        <dialectList>postgresql,hsqldb</dialectList>
         <ignoreOpenapi>true</ignoreOpenapi>
         <validateModels>false</validateModels>
         <!-- End of 'pom.xml.model-properties-definition.fragment.hbs' -->
@@ -47,8 +47,8 @@
         <mapper-version>1.0.3</mapper-version>
         
         <judo-tatami-version>1.1.0.20230208_082413_6826233f_develop </judo-tatami-version>
-        <judo-platform-version>2.0.1.20230208_083944_3e2ae6f5_develop</judo-platform-version>
-        <judo-services-version>1.1.0.20230208_083327_4984d1c8_develop</judo-services-version>
+        <judo-platform-version>2.0.1-SNAPSHOT</judo-platform-version>
+        <judo-services-version>1.1.0-SNAPSHOT</judo-services-version>
         <judo-rdbms-schema-version>1.0.0.20230208_082051_9d2b3cc9_develop</judo-rdbms-schema-version>
         <judo-tatami-client-version>1.1.0.20230208_083328_a673e7b9_develop</judo-tatami-client-version>
         

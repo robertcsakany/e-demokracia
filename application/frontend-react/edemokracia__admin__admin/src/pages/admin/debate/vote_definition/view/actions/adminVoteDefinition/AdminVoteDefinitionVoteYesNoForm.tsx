@@ -152,7 +152,39 @@ export function AdminVoteDefinitionVoteYesNoForm({
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>
-        <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch"></Grid>
+        <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
+          <Grid item>
+            <TextField
+              name="value"
+              id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/VoteDefinition.voteYesNo/Input/default/TransferObject_Form/value"
+              label={
+                t('edemokracia.admin.VoteDefinition.voteYesNo.TransferObject.Form.value', {
+                  defaultValue: 'Value',
+                }) as string
+              }
+              value={data.value || ''}
+              error={!!validation.get('value')}
+              helperText={validation.get('value')}
+              onChange={(event) => storeDiff('value', event.target.value as EdemokraciaYesNoVoteValue)}
+              className={false || !editMode ? 'Mui-readOnly' : undefined}
+              InputLabelProps={{ shrink: true }}
+              InputProps={{
+                readOnly: false || !editMode,
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <MdiIcon path="list" />
+                  </InputAdornment>
+                ),
+              }}
+              select
+            >
+              <MenuItem value={'YES'}>
+                {t('enumerations.EdemokraciaYesNoVoteValue.YES', { defaultValue: 'YES' })}
+              </MenuItem>
+              <MenuItem value={'NO'}>{t('enumerations.EdemokraciaYesNoVoteValue.NO', { defaultValue: 'NO' })}</MenuItem>
+            </TextField>
+          </Grid>
+        </Grid>
       </DialogContent>
       <DialogActions>
         <Button variant="text" onClick={() => cancel()} disabled={isLoading}>

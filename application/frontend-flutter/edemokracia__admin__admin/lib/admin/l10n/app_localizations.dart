@@ -374,6 +374,8 @@ class AppLocalizations {
         return AppLocalizations.of(context)._Users();
       case 'VIDEO':
         return AppLocalizations.of(context)._VIDEO();
+      case 'Value':
+        return AppLocalizations.of(context)._Value();
       case 'View':
         return AppLocalizations.of(context)._View();
       case 'View / Edit Attachment':
@@ -2124,6 +2126,16 @@ class AppLocalizations {
     return Intl.message(
       'VIDEO',
       name: '_VIDEO',
+      args: [],
+      desc: '',
+      locale: localeName,
+    );
+  }
+
+  String _Value() {
+    return Intl.message(
+      'Value',
+      name: '_Value',
       args: [],
       desc: '',
       locale: localeName,

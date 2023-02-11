@@ -92,7 +92,9 @@ class _AdminVoteDefinitionVoteYesNoOperationInputPageState extends State<AdminVo
     });
   }
 
-  var inputWidgetKeyMap = {};
+  var inputWidgetKeyMap = {
+    'value': GlobalKey(),
+  };
 
   @override
   Widget build(BuildContext context) {

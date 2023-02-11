@@ -1761,6 +1761,7 @@
         "edemokracia.admin.VoteDefinition.voteRating.TransferObject.Form": "TransferObject Form",
         "edemokracia.admin.VoteDefinition.voteYesNo.Input": "TransferObject Form",
         "edemokracia.admin.VoteDefinition.voteYesNo.TransferObject.Form": "TransferObject Form",
+        "edemokracia.admin.VoteDefinition.voteYesNo.TransferObject.Form.value": "Value",
         "edemokracia.admin.VoteDefinition.voteYesNoAbstain.Input": "TransferObject Form",
         "edemokracia.admin.VoteDefinition.voteYesNoAbstain.TransferObject.Form": "TransferObject Form",
         "enumerations.EdemokraciaAttachmentType.IMAGE": "IMAGE",

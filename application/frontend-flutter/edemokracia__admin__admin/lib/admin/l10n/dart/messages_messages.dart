@@ -230,6 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "_Username": MessageLookupByLibrary.simpleMessage("Username"),
         "_Users": MessageLookupByLibrary.simpleMessage("Users"),
         "_VIDEO": MessageLookupByLibrary.simpleMessage("VIDEO"),
+        "_Value": MessageLookupByLibrary.simpleMessage("Value"),
         "_View": MessageLookupByLibrary.simpleMessage("View"),
         "_View324732Edit32Attachment": MessageLookupByLibrary.simpleMessage("View / Edit Attachment"),
         "_View324732Edit32Category": MessageLookupByLibrary.simpleMessage("View / Edit Category"),

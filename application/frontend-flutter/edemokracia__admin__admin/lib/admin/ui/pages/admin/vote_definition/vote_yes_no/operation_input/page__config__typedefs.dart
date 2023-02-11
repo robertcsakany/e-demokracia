@@ -33,6 +33,9 @@ typedef AdminVoteDefinitionVoteYesNoOperationInputPageExtendActions = List<Widge
   YesNoVoteInputStore targetStore,
 });
 
+typedef AdminVoteDefinitionVoteYesNoOperationInputPostValueChanged = Function(dynamic value,
+    {AdminVoteDefinitionVoteYesNoOperationInputPageStore pageStore, YesNoVoteInputStore targetStore});
+
 typedef AdminVoteDefinitionVoteYesNoOperationInputPageTitleGenerator = String Function(
   BuildContext context,
   AdminVoteDefinitionVoteYesNoOperationInputPageStore pageStore,

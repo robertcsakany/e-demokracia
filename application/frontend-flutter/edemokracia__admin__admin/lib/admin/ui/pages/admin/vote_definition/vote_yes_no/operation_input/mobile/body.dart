@@ -31,7 +31,27 @@ Widget getAdminVoteDefinitionVoteYesNoOperationInputMobilePage(BuildContext cont
                   crossAxisAlignment: CrossAxisAlignment.start,
                   col: 4.0,
                   row: 1.0,
-                  children: [],
+                  children: [
+                    Observer(
+                        builder: (_) => JudoComboBox<EdemokraciaYesNoVoteValue>(
+                              key: inputWidgetKeyMap['value'],
+                              order: 1,
+                              errorMessage: pageStore.validationAttributeErrorMessageMap['value'].message,
+                              col: 4.0,
+                              icon: Icon(getIconByString('list')),
+                              label: AppLocalizations.of(context).lookUpValue(context, 'Value'),
+                              items: EdemokraciaYesNoVoteValue.values,
+                              value: targetStore.value,
+                              onChanged: (value) {
+                                targetStore.setValue(value);
+                                if (pageConfig.postValueChanged != null) {
+                                  pageConfig.postValueChanged(targetStore.value, pageStore: pageStore, targetStore: targetStore);
+                                }
+                              },
+                              dropdownMenuShow: (value) => new DropdownMenuItem<EdemokraciaYesNoVoteValue>(
+                                  value: value, child: new Text(AppLocalizations.of(context).lookUpValue(context, value.toString().split('.').last))),
+                            )),
+                  ],
                 ),
               ],
             ),

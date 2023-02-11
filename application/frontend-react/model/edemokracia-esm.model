@@ -1583,7 +1583,12 @@
         <inherited xmi:id="_gp12IH5ZEe2kLcMqsIbMgQ"/>
       </attributes>
       <mapping xmi:id="_gppB0H5ZEe2kLcMqsIbMgQ" target="_Xwdl4G6bEe2wNaja8kBvcQ"/>
-      <form xmi:id="_gpScgH5ZEe2kLcMqsIbMgQ" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL"/>
+      <form xmi:id="_gpScgH5ZEe2kLcMqsIbMgQ" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL">
+        <components xsi:type="ui:DataField" xmi:id="_XDcnsKlbEe2kkPT1Lcj30A" name="title" label="Title" iconName="text_fields" dataFeature="_gpq3AH5ZEe2kLcMqsIbMgQ"/>
+        <components xsi:type="ui:DataField" xmi:id="_XDcAoKlbEe2kkPT1Lcj30A" name="description" label="Description" iconName="text_fields" dataFeature="_gpyy0H5ZEe2kLcMqsIbMgQ"/>
+        <components xsi:type="ui:ActionButton" xmi:id="_hLU2oKlbEe2kkPT1Lcj30A" name="ok" label="OK"/>
+        <components xsi:type="ui:ActionButton" xmi:id="_nSUDAKlbEe2kkPT1Lcj30A" name="cancel" label="Cancel" action="CANCEL"/>
+      </form>
       <table xmi:id="_gpdboH5ZEe2kLcMqsIbMgQ" name="TransferObject_Table" label="TransferObject Table"/>
       <view xmi:id="_gpIEcH5ZEe2kLcMqsIbMgQ" name="TransferObject_View" label="TransferObject View" layout="VERTICAL"/>
     </elements>
@@ -2292,7 +2297,9 @@
     <attributes xsi:type="structure:DataMember" xmi:id="_-1R8gXWyEe2LTNnGda5kaw" name="value" dataType="_2E9NMG6dEe2wNaja8kBvcQ" defaultExpression="" getterExpression="" memberType="TRANSIENT">
       <inherited xmi:id="_-1R8gnWyEe2LTNnGda5kaw"/>
     </attributes>
-    <form xmi:id="_-1R8g3WyEe2LTNnGda5kaw" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL"/>
+    <form xmi:id="_-1R8g3WyEe2LTNnGda5kaw" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL">
+      <components xsi:type="ui:DataField" xmi:id="_HrXDYKlbEe2kkPT1Lcj30A" name="value" label="Value" iconName="list" dataFeature="_-1R8gXWyEe2LTNnGda5kaw"/>
+    </form>
     <table xmi:id="_-1R8hHWyEe2LTNnGda5kaw" name="TransferObject_Table" label="TransferObject Table"/>
     <view xmi:id="_-1R8hXWyEe2LTNnGda5kaw" name="TransferObject_View" label="TransferObject View" layout="VERTICAL"/>
   </elements>
