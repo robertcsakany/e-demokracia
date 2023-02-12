@@ -20,9 +20,4 @@ class CountyRepository {
         .edemokraciaDefaultTransferobjecttypesCountyRefreshInstanceEdemokraciaCounty(target.internal__signedIdentifier, input: queryCustomizer.toJson());
     return AdminAdminRepositoryStoreMapper.createCountyStoreFromEdemokraciaCounty(countyResponse);
   }
-
-  /// OPERATION initAreas
-  Future<void> edemokraciaCountyInitAreas() async {
-    return await locator<JudoApiClient>().edemokraciaDefaultTransferobjecttypesCountyInitAreas(null, null);
-  }
 }

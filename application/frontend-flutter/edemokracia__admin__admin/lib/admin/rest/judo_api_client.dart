@@ -187,16 +187,6 @@ class JudoApiClient {
     }
   }
 
-  Future<void> edemokraciaDefaultTransferobjecttypesCountyInitAreas(String xJudoSignedIdentifier, dynamic input, {Options options}) async {
-    final path = '/County/initAreas';
-
-    final response = await dioCommand(path, xJudoSignedIdentifier, input, options);
-
-    if (response.data != null && response.data != '') {
-      return json.decode(response.data);
-    }
-  }
-
   Future<dynamic> edemokraciaCreateArgumentInputGetTemplateCreateArgumentInput({Options options}) async {
     final path = '/CreateArgumentInput/~template';
 
