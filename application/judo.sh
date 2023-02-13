@@ -1,13 +1,6 @@
 #!/bin/bash
 APP_NAME=edemokracia
 
-## #####################################
-## Processing arguments
-## #####################################
-CURR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-APP_DIR=$CURR_DIR
-MODEL_DIR="$(cd -P -- "$(dirname -- "${APP_DIR}")" && pwd)"
-
 print-help () {
     echo """
 JUDO runner.
@@ -36,14 +29,18 @@ USAGE: judo.sh COMMANDS... [OPTIONS...]
 
     run                             Run application with postgresql and keycloak.
         -K --skip-keycloak          Skip starting keycloak.
-        -kpg --karaf-hsqldb         Run karaf with hsqldb (default)
-        -khs --karaf-postgres       Run karaf with postgressql
-        -dd --docker-dev            Use docker compose in dev-mode (no HTTPS, keycloak in dev mode and hsqldb)
-        -dp --docker-prod           Use docker compose in prod-mode (HTTPS, production mode keyclak and postgresql)
-        -pp --postgres-port)        Use given port for postgresql (default 5432)
-        -ap --keycloak-port)        Use given port for keycloak (default 8080)
-        -kp --karaf-port)           Use given port for karaf (default 8181)
-
+        -o \"<name>=<value>,<name2>=<value2>, ...\" --options \"<name>=<value>,<name2>=<value2>, ...\"
+                                    Add options (defaults can be defined in judo.properties)
+                                    Available options:
+                                       runtime = karaf | compose
+                                       dbtype = hsqldb | postgresql
+                                       compose_env = compose-develop | compose-postgresql-https | or any directory defined in ${APP_DIR}/docker
+                                       model_dir = model project directory. Default is the application's parent.
+                                       karaf_port = <port>
+                                       postgres_port = <port>
+                                       keycloak_port = <port>
+                                       compose_access_ip = <alternate ip address to access app>
+            
 
 EXAMPLES:
     ./judo.sh prune -f                          Clear untracked data in application/frontend if opening modeling project freezes in designer.
@@ -56,133 +53,64 @@ EXAMPLES:
     ./judo.sh build run -K                      Stop postgressql docker container then build and restart application.
     ./judo.sh build -M -F -BM clean run         Stop postgressql docker container then rebuild app and start application with clean db.
     ./judo.sh build -M -F -BM run -K            Rebuild app and restart application.
+    ./judo.sh run -o \"runtime=compose,compose_env=compose-postgresql-https'\"
+                                                Run application in docker compose using the copmpose-postgresql-https's docker-compose.yaml
 """
 }
-
-[ $# -eq 0 ] && print-help && exit 0
-
-run=0
-dump=0
-build=0
-clean=0
-prune=0
-docker=0
-schema=0
-update=0
-frontend=0
-generate=0
-skipKaraf=0
-skipModel=0
-skipBackend=0
-confirmation=1
-skipFrontend=0
-skipKeycloak=0
-buildAppModule=0
-skipBackendModels=0
-postgres=0
-hsqldb=1
-karaf=1
-compose=0
-compose_env=""
-
-FULL_VERSION_NUMBER="SNAPSHOT"
-POSTGRES_PORT=5432
-KEYCLOAK_PORT=8080
-KARAF_PORT=8181
-
-while [ $# -ne 0 ]; do
-    case "$1" in
-        clean)                          clean=1; shift 1;;
-
-        prune)                          prune=1; shift 1;;
-        -f)                             frontend=1; shift 1;;
-        -y)                             confirmation=0; shift 1;;
-
-        update)                         update=1; shift 1;;
-        generate)                       generate=1; shift 1;;
-        dump)                           dump=1; shift 1;;
-
-        build)                          build=1; shift 1;;
-        -a | --build-app-module)        buildAppModule=1; skipModel=1; shift 1;;
-        -M | --skip-model)              skipModel=1; shift 1;;
-        -B | --skip-backend)            skipBackend=1; shift 1;;
-        -F | --skip-frontend)           skipFrontend=1; shift 1;;
-        -BM | --skip-backendmodels)     skipBackendModels=1; shift 1;;
-        -KA | --skip-karaf)             skipKaraf=1; shift 1;;
-        -d | --docker)                  docker=1; shift 1;;
-        -s | --schema)                  schema=1; shift 1;;
-
-        -v | --version)                 shift 1; export FULL_VERSION_NUMBER=$1; shift 1;;
-
-        run)                            run=1; shift 1;;
-        -K  | --skip-keycloak)          skipKeycloak=1; shift 1;;
-        -kpg | --karaf-hsqldb)          karaf=1; hsqldb=1; postgres=0; shift 1;;
-        -khs | --karaf-postgres)        karaf=1; postgres=1; hsqldb=0; shift 1;;
-        -dd | --docker-dev)             karaf=0; compose=1; compose_env="compose-develop"; shift 1;;
-        -dp | --docker-prod)            karaf=0; compose=1; compose_env="compose-postgresql-https"; shift 1;;
-        -pp | --postgres-port)          shift 1; export POSTGRES_PORT=$1; shift 1;;
-        -ap | --keycloak-port)          shift 1; export KEYCLOAK_PORT=$1; shift 1;;
-        -kp | --karaf-port)             shift 1; export KEYCLOAK_PORT=$1; shift 1;;
-
-        *)
-            echo "Unrecognized option: $1"
-            print-help
-            exit 22
-        ;;
-    esac
-done
-
-
 
 # Args:
 # 1 - host
 # 2 - port
 tcp_port_is_open () {
-   local exit_status_code
-   curl -t '' --connect-timeout 2 -s telnet://"$1:$2" </dev/null
-   exit_status_code=$?
-   case $exit_status_code in
-     49) return 0 ;;
-     7) return 0 ;;
-     *) return "$exit_status_code" ;;
-   esac
+    local exit_status_code
+    curl -t '' --connect-timeout 2 -s telnet://"$1:$2" </dev/null
+    exit_status_code=$?
+    case $exit_status_code in
+        49) return 0 ;;
+        7) return 0 ;;
+        *) return "$exit_status_code" ;;
+    esac
 }
 
 get_platform () {
-  case $(uname | tr '[:upper:]' '[:lower:]') in
-    linux*)
-      platform=linux
-      ;;
-    darwin*)
-      platform=osx
-      ;;
-    msys*)
-      platform=windows
-      ;;
-    *)
-      platform=notset
-      ;;
-  esac
-  echo "$platform"
+    case $(uname | tr '[:upper:]' '[:lower:]') in
+        linux*)
+            platform=linux
+            ;;
+        darwin*)
+            platform=osx
+            ;;
+        msys*)
+            platform=windows
+            ;;
+        *)
+            platform=notset
+            ;;
+    esac
+    echo "$platform"
 }
 
-get_ip () {
-  platform=$(get_platform)
-  if [[ $platform == 'linux' ]]; then
-    ip=$(hostname -I)
-  elif [[ $platform == 'osx' ]]; then
-    ip=$(ipconfig getifaddr en0)
-  else
-    echo "OS is not supported"
-    exit 1
-  fi
-  echo "$ip"
+get_arch () {
+    echo "$(uname -m)"
+}
+
+get_compose_access_ip () {
+    platform=$(get_platform)
+    if [[ $platform == 'linux' ]]; then
+        ip=$(hostname -I)
+    elif [[ $platform == 'osx' ]]; then
+        ip=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}')
+    else
+        echo "OS is not supported"
+        exit 1
+    fi
+    echo "${compose_access_ip:-$ip}"
 }
 
 get_dashed_ip () {
-  ip=$(get_ip)
-  ipdash=$(echo "${ip}" |  tr . -)
-  echo "$ipdash"
+    ip=$(get_compose_access_ip)
+    ipdash=$(echo "${ip}" |  tr . -)
+    echo "$ipdash"
 }
 
 
@@ -200,7 +128,7 @@ dump_postgresql () {
 }
 
 install_maven_wrapper () {
-    mvn wrapper:wrapper -Dmaven=3.8.6
+    mvn wrapper:wrapper -Dmaven=3.8.6 || exit $?
     sed -i '' 's/https:\/\/nexus\.judo\.technology\/repository\/maven-judong\//https:\/\/repo\.maven\.apache\.org\/maven2/g' ${APP_DIR}/.mvn/wrapper/maven-wrapper.properties
 }
 
@@ -237,6 +165,44 @@ prune_frontend () {
     fi
 }
 
+
+# Args:
+# 1 - instance name
+stop_docker_instance () {
+    INSTANCE_NAME=$1
+
+    # Test running instance is presented or doesn't
+    INSTANCE_RUNNING=$(docker ps | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
+
+    if [ ! -z "$INSTANCE_RUNNING" ]; then
+      echo "Instance is running, stopping..."
+      docker stop $INSTANCE_NAME
+    fi
+
+}
+
+# Args:
+# 1 - instance name
+remove_docker_instance () {
+    INSTANCE_NAME=$1
+
+    # Test running instance is presented or doesn't
+    INSTANCE_RUNNING=$(docker ps | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
+    INSTANCE_EXIST=$(docker ps -a | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
+
+
+    if [ ! -z "$INSTANCE_RUNNING" ]; then
+      echo "Instance is running, stopping..."
+      docker stop $INSTANCE_NAME
+    fi
+
+
+    if [ ! -z "$INSTANCE_EXIST" ]; then
+      echo "Instance exists, remove..."
+      docker rm $INSTANCE_NAME
+    fi
+}
+
 # Args:
 # 1 - instance name
 stop_and_remove_docker_instance () {
@@ -270,7 +236,8 @@ start_keycloak () {
     tcp_port_is_open 127.0.0.1 $KEYCLOAK_PORT
     if [ $? -ne 0 ] 
     then
-        echo "Could not start Keycloak. Port is already used: ${KEYCLOAK_PORT}" 
+        echo "Could not start Keycloak. Port is already used: ${KEYCLOAK_PORT}"
+        exit 1
     fi
 
     docker run -d \
@@ -279,7 +246,8 @@ start_keycloak () {
         -e KEYCLOAK_ADMIN_PASSWORD=judo \
         -p $KEYCLOAK_PORT:$KEYCLOAK_PORT \
         -it $keycloak_image \
-        start-dev --http-port=$KEYCLOAK_PORT --http-relative-path /auth
+        start-dev --http-port=$KEYCLOAK_PORT --http-relative-path /auth || exit $?
+ 
 }
 
 # Args:
@@ -292,7 +260,8 @@ start_postgres () {
     tcp_port_is_open 127.0.0.1 $POSTGRES_PORT
     if [ $? -ne 0 ] 
     then
-        echo "Could not start Postgresql. Port is already used: ${POSTGRES_PORT}" 
+        echo "Could not start Postgresql. Port is already used: ${POSTGRES_PORT}"
+        exit 1
     fi
 
     [ -d ${APP_DIR}/.data/postgres/logs ] || mkdir -p ${APP_DIR}/.data/postgres/logs
@@ -307,22 +276,23 @@ start_postgres () {
         -e POSTGRES_PASSWORD=$APP_NAME \
         -p $POSTGRES_PORT:5432 \
         postgres:latest \
-        -c max_connections=40 \
-        -c shared_buffers=512MB \
-        -c effective_cache_size=1536MB \
-        -c maintenance_work_mem=128MB \
-        -c checkpoint_completion_target=0.7 \
-        -c wal_buffers=16MB \
-        -c default_statistics_target=100 \
-        -c random_page_cost=1.1 \
-        -c effective_io_concurrency=200 \
-        -c work_mem=3276kB \
-        -c min_wal_size=1GB \
-        -c max_wal_size=4GB \
-        -c max_worker_processes=16 \
-        -c max_parallel_workers_per_gather=4 \
-        -c max_parallel_workers=16 \
-        -c max_parallel_maintenance_workers=4
+#        -c max_connections=40 \
+#        -c shared_buffers=512MB \
+#        -c effective_cache_size=1536MB \
+#        -c maintenance_work_mem=128MB \
+#        -c checkpoint_completion_target=0.7 \
+#        -c wal_buffers=16MB \
+#        -c default_statistics_target=100 \
+#        -c random_page_cost=1.1 \
+#        -c effective_io_concurrency=200 \
+#        -c work_mem=3276kB \
+#        -c min_wal_size=1GB \
+#        -c max_wal_size=4GB \
+#        -c max_worker_processes=16 \
+#        -c max_parallel_workers_per_gather=4 \
+#        -c max_parallel_workers=16 \
+#        -c max_parallel_maintenance_workers=4 \
+        || exit $?
 }
 
 # Args:
@@ -406,12 +376,14 @@ Access in PROD mode:
 
     load_application_image
     docker compose -f ${APP_DIR}/docker/${compose_env}/docker-compose.yml up
-    docker compose -f ${APP_DIR}/docker/${compose_env}/docker-compose.yml down --volumes
+    # docker compose -f ${APP_DIR}/docker/${compose_env}/docker-compose.yml down --volumes
 }
 
 load_application_image () {
+    arch=$(get_arch)
+
     PROJECT_VERSION=$(${APP_DIR}/mvnw org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout -f ${APP_DIR})
-    docker load --input ${APP_DIR}/docker/target/${APP_NAME}-application-${PROJECT_VERSION}_docker_image.tar || exit
+    docker load --input ${APP_DIR}/docker/target/${APP_NAME}-application-${PROJECT_VERSION}_docker_image_${arch}.tar || exit $?
 }
 
 build () {
@@ -430,18 +402,121 @@ build () {
         if [ $skipBackendModels -eq 1 ]; then
             args="$args -DskipBackendModels"
         fi
-        if [ $skipKaraf -eq 1 ]; then
+        if [ $karafBuilding -eq 0 ]; then
             args="$args -DskipKaraf"
         fi
-        if [ $docker -eq 0 ]; then
+        if [ $dockerBuilding -eq 0 ]; then
             args="$args -DskipDocker"
         fi
-        if [ $schema -eq 0 ]; then
+        if [ $schemaBuilding -eq 0 ]; then
             args="$args -DskipSchema"
         fi
         ${APP_DIR}/mvnw clean install -f $APP_DIR $args || exit
     fi
 }
+
+## #####################################
+## Processing arguments
+## #####################################
+CURR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+APP_DIR=$CURR_DIR
+MODEL_DIR="$(cd -P -- "$(dirname -- "${APP_DIR}")" && pwd)"
+
+if [ -f "${APP_DIR}/judo.properties" ]; then
+	source ${APP_DIR}/judo.properties
+fi
+MODEL_DIR=$(cd "$(dirname "${model_dir:-$MODEL_DIR}")"; pwd)/$(basename "${model_dir:-$MODEL_DIR}")
+
+[ $# -eq 0 ] && print-help && exit 0
+
+run=0
+dump=0
+build=0
+clean=0
+prune=0
+schemaBuilding=0
+update=0
+frontend=0
+generate=0
+karafBuilding=1
+skipModel=0
+skipBackend=0
+confirmation=1
+skipFrontend=0
+skipKeycloak=0
+buildAppModule=0
+skipBackendModels=0
+
+
+FULL_VERSION_NUMBER="SNAPSHOT"
+
+while [ $# -ne 0 ]; do
+    case "$1" in
+        clean)                          clean=1; shift 1;;
+
+        prune)                          prune=1; shift 1;;
+        -f)                             frontend=1; shift 1;;
+        -y)                             confirmation=0; shift 1;;
+
+        update)                         update=1; shift 1;;
+        generate)                       generate=1; shift 1;;
+        dump)                           dump=1; shift 1;;
+
+        build)                          build=1; shift 1;;
+        -a | --build-app-module)        buildAppModule=1; skipModel=1; shift 1;;
+        -M | --skip-model)              skipModel=1; shift 1;;
+        -B | --skip-backend)            skipBackend=1; shift 1;;
+        -F | --skip-frontend)           skipFrontend=1; shift 1;;
+        -BM | --skip-backendmodels)     skipBackendModels=1; shift 1;;
+        -KA | --skip-karaf)             karafBuilding=0; shift 1;;
+        -d | --docker)                  dockerBuilding=1; shift 1;;
+        -s | --schema)                  schemaBuilding=1; shift 1;;
+
+        -v | --version)                 shift 1; export FULL_VERSION_NUMBER=$1; shift 1;;
+
+        run)                            run=1; shift 1;;
+        -K  | --skip-keycloak)          skipKeycloak=1; shift 1;;
+
+        -o | --options)                 shift 1; while read -d, -r pair; do IFS='=' read -r key val <<<"$pair"; eval "$key"="$val"; done <<<"$1,"; shift 1;;
+
+        *)
+            echo "Unrecognized option: $1"
+            print-help
+            exit 22
+        ;;
+    esac
+done
+
+case $runtime in
+
+  compose)
+    karaf=0
+    compose=1
+    dockerBuilding=1
+    compose_env=${compose_env:-compose-develop}
+    ;;
+
+  karaf | *)
+	karaf=1
+    dockerBuilding=0
+    KARAF_PORT=${karaf_port:-8181}
+    POSTGRES_PORT=${postgres_port:-5432}
+    KEYCLOAK_PORT=${keycloak_port:-8080}
+    ;;
+esac
+
+case $dbtype in
+
+  postgresql)
+    postgres=1
+    hsqldb=0;
+    ;;
+
+  hsqldb | *)
+	postgres=0
+	hsqldb=1
+    ;;
+esac
 
 if [ ! -f "${APP_DIR}/mvnw" ]; then
     echo "Installing maven wrappper"

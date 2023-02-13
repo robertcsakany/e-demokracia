@@ -18,7 +18,7 @@
 
     <profiles>
         <profile>
-            <id>create-docker-image</id>
+            <id>prepare-docker-image</id>
             <activation>
                 <property>
                     <name>!skipDocker</name>
@@ -196,14 +196,38 @@
                         </executions>
                     </plugin>
 
+
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>party.mkkp.edemokracia</groupId>
+                    <artifactId>edemokracia-application-karaf-offline</artifactId>
+                    <type>zip</type>
+                    <version>${project.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+
+        <profile>
+            <id>create-docker-image-amd64</id>
+            <activation>
+                <property>
+                    <name>!skipDocker</name>
+                </property>
+				<os><arch>x86</arch></os>
+            </activation>
+            <build>
+                <plugins>
                     <!-- 5. Create image -->
                     <plugin>
                         <groupId>com.google.cloud.tools</groupId>
                         <artifactId>jib-maven-plugin</artifactId>
-                        <version>2.7.0</version>
+                        <version>3.3.1</version>
                         <executions>
                             <execution>
-                                <id>build-platform-docker</id>
+                                <id>build-platform-docker-amd64</id>
                                 <phase>package</phase>
                                 <goals>
                                     <goal>buildTar</goal>
@@ -213,8 +237,13 @@
                                     <from>
                                         <!-- <image>azul/zulu-openjdk-alpine:8</image> -->
                                         <!--<image>adoptopenjdk/openjdk11-openj9:alpine-slim</image>-->
-                                        <image>adoptopenjdk/openjdk11:alpine-slim</image>
-
+                                        <image>adoptopenjdk/openjdk11:debianslim-jre</image>
+                                        <platforms>
+                                            <platform>
+                                                <architecture>amd64</architecture>
+                                                <os>linux</os>
+                                            </platform>
+                                        </platforms>
                                     </from>
                                     <to>
                                         <image>${project.parent.artifactId}</image>
@@ -239,7 +268,7 @@
                                         </volumes>
                                     </container>
                                     <outputPaths>
-                                        <tar>${basedir}/target/${project.parent.artifactId}-${project.version}_docker_image.tar</tar>
+                                        <tar>${basedir}/target/${project.parent.artifactId}-${project.version}_docker_image_amd64.tar</tar>
                                     </outputPaths>
                                     <extraDirectories>
                                         <paths>
@@ -268,7 +297,7 @@
                         <version>3.0.0</version>
                         <executions>
                             <execution>
-                                <id>attach-artifacts</id>
+                                <id>attach-artifacts-amd64</id>
                                 <phase>package</phase>
                                 <goals>
                                     <goal>attach-artifact</goal>
@@ -276,7 +305,8 @@
                                 <configuration>
                                     <artifacts>
                                         <artifact>
-                                            <file>${basedir}/target/${project.parent.artifactId}-${project.version}_docker_image.tar</file>
+                                            <file>${basedir}/target/${project.parent.artifactId}-${project.version}_docker_image_amd64.tar</file>
+                                            <classifier>amd64</classifier>
                                             <type>tar</type>
                                         </artifact>
                                     </artifacts>
@@ -286,14 +316,115 @@
                     </plugin>
                 </plugins>
             </build>
-            <dependencies>
-                <dependency>
-                    <groupId>party.mkkp.edemokracia</groupId>
-                    <artifactId>edemokracia-application-karaf-offline</artifactId>
-                    <type>zip</type>
-                    <version>${project.version}</version>
-                </dependency>
-            </dependencies>
+        </profile>
+ 
+         <profile>
+            <id>create-docker-image-arm64</id>
+            <activation>
+                <property>
+                    <name>!skipDocker</name>
+                </property>
+				<os><arch>aarch64</arch></os>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- 5. Create image -->
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <version>3.3.1</version>
+                        <executions>
+                            <execution>
+                                <id>build-platform-docker-arm64</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>buildTar</goal>
+                                </goals>
+
+                                <configuration>
+                                    <from>
+                                        <!-- <image>azul/zulu-openjdk-alpine:8</image> -->
+                                        <!--<image>adoptopenjdk/openjdk11-openj9:alpine-slim</image>-->
+                                        <image>adoptopenjdk/openjdk11:debianslim-jre</image>
+                                        <platforms>
+                                            <platform>
+                                                <architecture>arm64</architecture>
+                                                <os>linux</os>
+                                            </platform>
+                                        </platforms>
+                                    </from>
+                                    <to>
+                                        <image>${project.parent.artifactId}</image>
+                                        <tags>${DOCKER_IMAGE_TAGS}</tags>
+                                    </to>
+                                    <container>
+                                        <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+                                        <entrypoint>/edemokracia-application/bin/karaf,run,clean</entrypoint>
+                                        <ports>
+                                            <port>8181</port>
+                                            <port>8081</port>
+                                            <port>1099</port>
+                                            <port>44444</port>
+                                            <port>5000</port>
+                                            <port>9090</port>
+                                            <port>5005</port>
+                                        </ports>
+                                        <format>Docker</format>
+                                        <volumes>
+                                            <volume>/edemokracia-application/deploy</volume>
+                                            <volume>/edemokracia-application/data</volume>
+                                        </volumes>
+                                    </container>
+                                    <outputPaths>
+                                        <tar>${basedir}/target/${project.parent.artifactId}-${project.version}_docker_image_arm64.tar</tar>
+                                    </outputPaths>
+                                    <extraDirectories>
+                                        <paths>
+                                            <path>${project.basedir}/target/assembly</path>
+                                        </paths>
+                                        <permissions>
+                                            <permission>
+                                                <file>/edemokracia-application/bin/karaf</file>
+                                                <mode>755</mode> <!-- Read/write/execute for owner, read/execute for group/other -->
+                                            </permission>
+                                            <permission>
+                                                <file>/edemokracia-application/bin/setenv</file>
+                                                <mode>755</mode> <!-- Read/write/execute for owner, read/execute for group/other -->
+                                            </permission>
+                                        </permissions>
+                                    </extraDirectories>
+                                </configuration>
+                            </execution>
+
+                        </executions>
+                    </plugin>
+
+                    <!-- 6. Attach the artifact -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-artifacts-arm64</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>${basedir}/target/${project.parent.artifactId}-${project.version}_docker_image_arm64.tar</file>
+                                            <classifier>arm64</classifier>
+                                            <type>tar</type>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 </project>

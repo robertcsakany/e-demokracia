@@ -21,106 +21,6 @@ routes.push({
     </Suspense>
   ),
 });
-const ConCreatedByView = lazy(() => import('./pages/con/created_by/view/index'));
-
-routes.push({
-  path: 'con/created_by/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <ConCreatedByView />
-    </Suspense>
-  ),
-});
-const AdminConCommentsView = lazy(() => import('./pages/admin/con/comments/view/index'));
-
-routes.push({
-  path: 'admin/con/comments/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminConCommentsView />
-    </Suspense>
-  ),
-});
-const AdminCommentVotesTable = lazy(() => import('./pages/admin/comment/votes/table/index'));
-
-routes.push({
-  path: 'admin/comment/votes/table/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminCommentVotesTable />
-    </Suspense>
-  ),
-});
-const AdminConProsView = lazy(() => import('./pages/admin/con/pros/view/index'));
-
-routes.push({
-  path: 'admin/con/pros/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminConProsView />
-    </Suspense>
-  ),
-});
-const AdminProVotesTable = lazy(() => import('./pages/admin/pro/votes/table/index'));
-
-routes.push({
-  path: 'admin/pro/votes/table/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminProVotesTable />
-    </Suspense>
-  ),
-});
-const AdminVoteDefinitionDebateView = lazy(() => import('./pages/admin/vote_definition/debate/view/index'));
-
-routes.push({
-  path: 'admin/vote_definition/debate/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminVoteDefinitionDebateView />
-    </Suspense>
-  ),
-});
-const AdminAdminCountiesView = lazy(() => import('./pages/admin/admin/counties/view/index'));
-
-routes.push({
-  path: 'admin/admin/counties/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminAdminCountiesView />
-    </Suspense>
-  ),
-});
-const AdminAdminCountiesTable = lazy(() => import('./pages/admin/admin/counties/table/index'));
-
-routes.push({
-  path: 'admin/admin/counties/table',
-  element: (
-    <Suspense>
-      <AdminAdminCountiesTable />
-    </Suspense>
-  ),
-});
-const AdminAdminDashboardhomeView = lazy(() => import('./pages/admin/admin/dashboardhome/view/index'));
-
-routes.push({
-  path: 'admin/admin/dashboardhome/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminAdminDashboardhomeView />
-    </Suspense>
-  ),
-});
-const DebateCreatedByView = lazy(() => import('./pages/debate/created_by/view/index'));
-
-routes.push({
-  path: 'debate/created_by/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <DebateCreatedByView />
-    </Suspense>
-  ),
-});
 const IssueCategorySubcategoriesView = lazy(() => import('./pages/issue_category/subcategories/view/index'));
 
 routes.push({
@@ -128,196 +28,6 @@ routes.push({
   element: (
     <Suspense>
       <IssueCategorySubcategoriesView />
-    </Suspense>
-  ),
-});
-const AdminConCreatedByView = lazy(() => import('./pages/admin/con/created_by/view/index'));
-
-routes.push({
-  path: 'admin/con/created_by/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminConCreatedByView />
-    </Suspense>
-  ),
-});
-const AdminUserVotesTable = lazy(() => import('./pages/admin/user/votes/table/index'));
-
-routes.push({
-  path: 'admin/user/votes/table/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminUserVotesTable />
-    </Suspense>
-  ),
-});
-const DebateProsView = lazy(() => import('./pages/debate/pros/view/index'));
-
-routes.push({
-  path: 'debate/pros/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <DebateProsView />
-    </Suspense>
-  ),
-});
-const AdminIssueCommentsView = lazy(() => import('./pages/admin/issue/comments/view/index'));
-
-routes.push({
-  path: 'admin/issue/comments/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminIssueCommentsView />
-    </Suspense>
-  ),
-});
-const AdminDebateConsView = lazy(() => import('./pages/admin/debate/cons/view/index'));
-
-routes.push({
-  path: 'admin/debate/cons/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminDebateConsView />
-    </Suspense>
-  ),
-});
-const AdminConVotesTable = lazy(() => import('./pages/admin/con/votes/table/index'));
-
-routes.push({
-  path: 'admin/con/votes/table/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminConVotesTable />
-    </Suspense>
-  ),
-});
-const AdminDebateVoteDefinitionView = lazy(() => import('./pages/admin/debate/vote_definition/view/index'));
-
-routes.push({
-  path: 'admin/debate/vote_definition/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminDebateVoteDefinitionView />
-    </Suspense>
-  ),
-});
-const AdminAdminCategoriesView = lazy(() => import('./pages/admin/admin/categories/view/index'));
-
-routes.push({
-  path: 'admin/admin/categories/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminAdminCategoriesView />
-    </Suspense>
-  ),
-});
-const AdminAdminCategoriesTable = lazy(() => import('./pages/admin/admin/categories/table/index'));
-
-routes.push({
-  path: 'admin/admin/categories/table',
-  element: (
-    <Suspense>
-      <AdminAdminCategoriesTable />
-    </Suspense>
-  ),
-});
-const AdminProProsView = lazy(() => import('./pages/admin/pro/pros/view/index'));
-
-routes.push({
-  path: 'admin/pro/pros/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminProProsView />
-    </Suspense>
-  ),
-});
-const AdminProConsView = lazy(() => import('./pages/admin/pro/cons/view/index'));
-
-routes.push({
-  path: 'admin/pro/cons/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminProConsView />
-    </Suspense>
-  ),
-});
-const IssueAttachmentsView = lazy(() => import('./pages/issue/attachments/view/index'));
-
-routes.push({
-  path: 'issue/attachments/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <IssueAttachmentsView />
-    </Suspense>
-  ),
-});
-const AdminDebateIssueView = lazy(() => import('./pages/admin/debate/issue/view/index'));
-
-routes.push({
-  path: 'admin/debate/issue/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminDebateIssueView />
-    </Suspense>
-  ),
-});
-const AdminDebateCreatedByView = lazy(() => import('./pages/admin/debate/created_by/view/index'));
-
-routes.push({
-  path: 'admin/debate/created_by/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminDebateCreatedByView />
-    </Suspense>
-  ),
-});
-const AdminIssueCategoriesView = lazy(() => import('./pages/admin/issue/categories/view/index'));
-
-routes.push({
-  path: 'admin/issue/categories/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminIssueCategoriesView />
-    </Suspense>
-  ),
-});
-const UserResidentCityView = lazy(() => import('./pages/user/resident_city/view/index'));
-
-routes.push({
-  path: 'user/resident_city/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <UserResidentCityView />
-    </Suspense>
-  ),
-});
-const IssueOwnerView = lazy(() => import('./pages/issue/owner/view/index'));
-
-routes.push({
-  path: 'issue/owner/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <IssueOwnerView />
-    </Suspense>
-  ),
-});
-const IssueCommentsView = lazy(() => import('./pages/issue/comments/view/index'));
-
-routes.push({
-  path: 'issue/comments/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <IssueCommentsView />
-    </Suspense>
-  ),
-});
-const ProProsView = lazy(() => import('./pages/pro/pros/view/index'));
-
-routes.push({
-  path: 'pro/pros/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <ProProsView />
     </Suspense>
   ),
 });
@@ -331,153 +41,13 @@ routes.push({
     </Suspense>
   ),
 });
-const AdminIssueCreatedByView = lazy(() => import('./pages/admin/issue/created_by/view/index'));
+const ConVotesView = lazy(() => import('./pages/con/votes/view/index'));
 
 routes.push({
-  path: 'admin/issue/created_by/view/:signedIdentifier',
+  path: 'con/votes/view/:signedIdentifier',
   element: (
     <Suspense>
-      <AdminIssueCreatedByView />
-    </Suspense>
-  ),
-});
-const AdminIssueCategorySubcategoriesView = lazy(() => import('./pages/admin/issue_category/subcategories/view/index'));
-
-routes.push({
-  path: 'admin/issue_category/subcategories/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminIssueCategorySubcategoriesView />
-    </Suspense>
-  ),
-});
-const DebateConsView = lazy(() => import('./pages/debate/cons/view/index'));
-
-routes.push({
-  path: 'debate/cons/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <DebateConsView />
-    </Suspense>
-  ),
-});
-const ProCreatedByView = lazy(() => import('./pages/pro/created_by/view/index'));
-
-routes.push({
-  path: 'pro/created_by/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <ProCreatedByView />
-    </Suspense>
-  ),
-});
-const AdminAdminIssuesView = lazy(() => import('./pages/admin/admin/issues/view/index'));
-
-routes.push({
-  path: 'admin/admin/issues/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminAdminIssuesView />
-    </Suspense>
-  ),
-});
-const AdminAdminIssuesTable = lazy(() => import('./pages/admin/admin/issues/table/index'));
-
-routes.push({
-  path: 'admin/admin/issues/table',
-  element: (
-    <Suspense>
-      <AdminAdminIssuesTable />
-    </Suspense>
-  ),
-});
-const CommentCreatedByView = lazy(() => import('./pages/comment/created_by/view/index'));
-
-routes.push({
-  path: 'comment/created_by/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <CommentCreatedByView />
-    </Suspense>
-  ),
-});
-const DebateDebateVoteView = lazy(() => import('./pages/debate/debate_vote/view/index'));
-
-routes.push({
-  path: 'debate/debate_vote/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <DebateDebateVoteView />
-    </Suspense>
-  ),
-});
-const IssueCategoriesView = lazy(() => import('./pages/issue/categories/view/index'));
-
-routes.push({
-  path: 'issue/categories/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <IssueCategoriesView />
-    </Suspense>
-  ),
-});
-const AdminDebateCommentsView = lazy(() => import('./pages/admin/debate/comments/view/index'));
-
-routes.push({
-  path: 'admin/debate/comments/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminDebateCommentsView />
-    </Suspense>
-  ),
-});
-const AdminIssueAttachmentsView = lazy(() => import('./pages/admin/issue/attachments/view/index'));
-
-routes.push({
-  path: 'admin/issue/attachments/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminIssueAttachmentsView />
-    </Suspense>
-  ),
-});
-const ProCommentsView = lazy(() => import('./pages/pro/comments/view/index'));
-
-routes.push({
-  path: 'pro/comments/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <ProCommentsView />
-    </Suspense>
-  ),
-});
-const AdminIssueOwnerView = lazy(() => import('./pages/admin/issue/owner/view/index'));
-
-routes.push({
-  path: 'admin/issue/owner/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminIssueOwnerView />
-    </Suspense>
-  ),
-});
-const UserActivityCountiesView = lazy(() => import('./pages/user/activity_counties/view/index'));
-
-routes.push({
-  path: 'user/activity_counties/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <UserActivityCountiesView />
-    </Suspense>
-  ),
-});
-const IssueCategoryOwnerView = lazy(() => import('./pages/issue_category/owner/view/index'));
-
-routes.push({
-  path: 'issue_category/owner/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <IssueCategoryOwnerView />
+      <ConVotesView />
     </Suspense>
   ),
 });
@@ -491,103 +61,13 @@ routes.push({
     </Suspense>
   ),
 });
-const AdminCountyCitiesView = lazy(() => import('./pages/admin/county/cities/view/index'));
+const AdminProVotesTable = lazy(() => import('./pages/admin/pro/votes/table/index'));
 
 routes.push({
-  path: 'admin/county/cities/view/:signedIdentifier',
+  path: 'admin/pro/votes/table/:signedIdentifier',
   element: (
     <Suspense>
-      <AdminCountyCitiesView />
-    </Suspense>
-  ),
-});
-const AdminProCreatedByView = lazy(() => import('./pages/admin/pro/created_by/view/index'));
-
-routes.push({
-  path: 'admin/pro/created_by/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminProCreatedByView />
-    </Suspense>
-  ),
-});
-const UserResidentDistrictView = lazy(() => import('./pages/user/resident_district/view/index'));
-
-routes.push({
-  path: 'user/resident_district/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <UserResidentDistrictView />
-    </Suspense>
-  ),
-});
-const ConProsView = lazy(() => import('./pages/con/pros/view/index'));
-
-routes.push({
-  path: 'con/pros/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <ConProsView />
-    </Suspense>
-  ),
-});
-const ConConsView = lazy(() => import('./pages/con/cons/view/index'));
-
-routes.push({
-  path: 'con/cons/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <ConConsView />
-    </Suspense>
-  ),
-});
-const AdminIssueDebatesView = lazy(() => import('./pages/admin/issue/debates/view/index'));
-
-routes.push({
-  path: 'admin/issue/debates/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminIssueDebatesView />
-    </Suspense>
-  ),
-});
-const VoteDefinitionVoteEntriesView = lazy(() => import('./pages/vote_definition/vote_entries/view/index'));
-
-routes.push({
-  path: 'vote_definition/vote_entries/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <VoteDefinitionVoteEntriesView />
-    </Suspense>
-  ),
-});
-const AdminCommentCreatedByView = lazy(() => import('./pages/admin/comment/created_by/view/index'));
-
-routes.push({
-  path: 'admin/comment/created_by/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminCommentCreatedByView />
-    </Suspense>
-  ),
-});
-const DebateIssueView = lazy(() => import('./pages/debate/issue/view/index'));
-
-routes.push({
-  path: 'debate/issue/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <DebateIssueView />
-    </Suspense>
-  ),
-});
-const ConCommentsView = lazy(() => import('./pages/con/comments/view/index'));
-
-routes.push({
-  path: 'con/comments/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <ConCommentsView />
+      <AdminProVotesTable />
     </Suspense>
   ),
 });
@@ -601,63 +81,13 @@ routes.push({
     </Suspense>
   ),
 });
-const AdminAdminDebatesView = lazy(() => import('./pages/admin/admin/debates/view/index'));
+const UserResidentCountyView = lazy(() => import('./pages/user/resident_county/view/index'));
 
 routes.push({
-  path: 'admin/admin/debates/view/:signedIdentifier',
+  path: 'user/resident_county/view/:signedIdentifier',
   element: (
     <Suspense>
-      <AdminAdminDebatesView />
-    </Suspense>
-  ),
-});
-const AdminAdminDebatesTable = lazy(() => import('./pages/admin/admin/debates/table/index'));
-
-routes.push({
-  path: 'admin/admin/debates/table',
-  element: (
-    <Suspense>
-      <AdminAdminDebatesTable />
-    </Suspense>
-  ),
-});
-const AdminDashboardIssuesView = lazy(() => import('./pages/admin/dashboard/issues/view/index'));
-
-routes.push({
-  path: 'admin/dashboard/issues/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminDashboardIssuesView />
-    </Suspense>
-  ),
-});
-const ProConsView = lazy(() => import('./pages/pro/cons/view/index'));
-
-routes.push({
-  path: 'pro/cons/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <ProConsView />
-    </Suspense>
-  ),
-});
-const AdminSimpleVoteUserView = lazy(() => import('./pages/admin/simple_vote/user/view/index'));
-
-routes.push({
-  path: 'admin/simple_vote/user/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminSimpleVoteUserView />
-    </Suspense>
-  ),
-});
-const AdminIssueCategoryOwnerView = lazy(() => import('./pages/admin/issue_category/owner/view/index'));
-
-routes.push({
-  path: 'admin/issue_category/owner/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <AdminIssueCategoryOwnerView />
+      <UserResidentCountyView />
     </Suspense>
   ),
 });
@@ -671,33 +101,43 @@ routes.push({
     </Suspense>
   ),
 });
-const AdminDebateProsView = lazy(() => import('./pages/admin/debate/pros/view/index'));
+const AdminDebateVoteDefinitionView = lazy(() => import('./pages/admin/debate/vote_definition/view/index'));
 
 routes.push({
-  path: 'admin/debate/pros/view/:signedIdentifier',
+  path: 'admin/debate/vote_definition/view/:signedIdentifier',
   element: (
     <Suspense>
-      <AdminDebateProsView />
+      <AdminDebateVoteDefinitionView />
     </Suspense>
   ),
 });
-const ConVotesView = lazy(() => import('./pages/con/votes/view/index'));
+const AdminIssueCategorySubcategoriesView = lazy(() => import('./pages/admin/issue_category/subcategories/view/index'));
 
 routes.push({
-  path: 'con/votes/view/:signedIdentifier',
+  path: 'admin/issue_category/subcategories/view/:signedIdentifier',
   element: (
     <Suspense>
-      <ConVotesView />
+      <AdminIssueCategorySubcategoriesView />
     </Suspense>
   ),
 });
-const AdminUserActivityCitiesView = lazy(() => import('./pages/admin/user/activity_cities/view/index'));
+const ConProsView = lazy(() => import('./pages/con/pros/view/index'));
 
 routes.push({
-  path: 'admin/user/activity_cities/view/:signedIdentifier',
+  path: 'con/pros/view/:signedIdentifier',
   element: (
     <Suspense>
-      <AdminUserActivityCitiesView />
+      <ConProsView />
+    </Suspense>
+  ),
+});
+const DebateProsView = lazy(() => import('./pages/debate/pros/view/index'));
+
+routes.push({
+  path: 'debate/pros/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <DebateProsView />
     </Suspense>
   ),
 });
@@ -711,23 +151,53 @@ routes.push({
     </Suspense>
   ),
 });
-const AdminUserActivityCountiesView = lazy(() => import('./pages/admin/user/activity_counties/view/index'));
+const AdminCommentVotesTable = lazy(() => import('./pages/admin/comment/votes/table/index'));
 
 routes.push({
-  path: 'admin/user/activity_counties/view/:signedIdentifier',
+  path: 'admin/comment/votes/table/:signedIdentifier',
   element: (
     <Suspense>
-      <AdminUserActivityCountiesView />
+      <AdminCommentVotesTable />
     </Suspense>
   ),
 });
-const AdminCityDistrictsView = lazy(() => import('./pages/admin/city/districts/view/index'));
+const AdminProConsView = lazy(() => import('./pages/admin/pro/cons/view/index'));
 
 routes.push({
-  path: 'admin/city/districts/view/:signedIdentifier',
+  path: 'admin/pro/cons/view/:signedIdentifier',
   element: (
     <Suspense>
-      <AdminCityDistrictsView />
+      <AdminProConsView />
+    </Suspense>
+  ),
+});
+const AdminConVotesTable = lazy(() => import('./pages/admin/con/votes/table/index'));
+
+routes.push({
+  path: 'admin/con/votes/table/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminConVotesTable />
+    </Suspense>
+  ),
+});
+const AdminDebateIssueView = lazy(() => import('./pages/admin/debate/issue/view/index'));
+
+routes.push({
+  path: 'admin/debate/issue/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminDebateIssueView />
+    </Suspense>
+  ),
+});
+const AdminConCommentsView = lazy(() => import('./pages/admin/con/comments/view/index'));
+
+routes.push({
+  path: 'admin/con/comments/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminConCommentsView />
     </Suspense>
   ),
 });
@@ -741,63 +211,33 @@ routes.push({
     </Suspense>
   ),
 });
-const SimpleVoteUserView = lazy(() => import('./pages/simple_vote/user/view/index'));
+const AdminCommentCreatedByView = lazy(() => import('./pages/admin/comment/created_by/view/index'));
 
 routes.push({
-  path: 'simple_vote/user/view/:signedIdentifier',
+  path: 'admin/comment/created_by/view/:signedIdentifier',
   element: (
     <Suspense>
-      <SimpleVoteUserView />
+      <AdminCommentCreatedByView />
     </Suspense>
   ),
 });
-const AdminConConsView = lazy(() => import('./pages/admin/con/cons/view/index'));
+const AdminUserVotesTable = lazy(() => import('./pages/admin/user/votes/table/index'));
 
 routes.push({
-  path: 'admin/con/cons/view/:signedIdentifier',
+  path: 'admin/user/votes/table/:signedIdentifier',
   element: (
     <Suspense>
-      <AdminConConsView />
+      <AdminUserVotesTable />
     </Suspense>
   ),
 });
-const CountyCitiesView = lazy(() => import('./pages/county/cities/view/index'));
+const AdminIssueCreatedByView = lazy(() => import('./pages/admin/issue/created_by/view/index'));
 
 routes.push({
-  path: 'county/cities/view/:signedIdentifier',
+  path: 'admin/issue/created_by/view/:signedIdentifier',
   element: (
     <Suspense>
-      <CountyCitiesView />
-    </Suspense>
-  ),
-});
-const IssueDebatesView = lazy(() => import('./pages/issue/debates/view/index'));
-
-routes.push({
-  path: 'issue/debates/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <IssueDebatesView />
-    </Suspense>
-  ),
-});
-const IssueCreatedByView = lazy(() => import('./pages/issue/created_by/view/index'));
-
-routes.push({
-  path: 'issue/created_by/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <IssueCreatedByView />
-    </Suspense>
-  ),
-});
-const VoteEntryVoteDefinitionView = lazy(() => import('./pages/vote_entry/vote_definition/view/index'));
-
-routes.push({
-  path: 'vote_entry/vote_definition/view/:signedIdentifier',
-  element: (
-    <Suspense>
-      <VoteEntryVoteDefinitionView />
+      <AdminIssueCreatedByView />
     </Suspense>
   ),
 });
@@ -811,23 +251,93 @@ routes.push({
     </Suspense>
   ),
 });
-const AdminAdminUsersView = lazy(() => import('./pages/admin/admin/users/view/index'));
+const VoteEntryUserView = lazy(() => import('./pages/vote_entry/user/view/index'));
 
 routes.push({
-  path: 'admin/admin/users/view/:signedIdentifier',
+  path: 'vote_entry/user/view/:signedIdentifier',
   element: (
     <Suspense>
-      <AdminAdminUsersView />
+      <VoteEntryUserView />
     </Suspense>
   ),
 });
-const AdminAdminUsersTable = lazy(() => import('./pages/admin/admin/users/table/index'));
+const UserVotesView = lazy(() => import('./pages/user/votes/view/index'));
 
 routes.push({
-  path: 'admin/admin/users/table',
+  path: 'user/votes/view/:signedIdentifier',
   element: (
     <Suspense>
-      <AdminAdminUsersTable />
+      <UserVotesView />
+    </Suspense>
+  ),
+});
+const AdminUserVotesView = lazy(() => import('./pages/admin/user/votes/view/index'));
+
+routes.push({
+  path: 'admin/user/votes/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminUserVotesView />
+    </Suspense>
+  ),
+});
+const IssueCategoryOwnerView = lazy(() => import('./pages/issue_category/owner/view/index'));
+
+routes.push({
+  path: 'issue_category/owner/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <IssueCategoryOwnerView />
+    </Suspense>
+  ),
+});
+const AdminAdminDashboardhomeView = lazy(() => import('./pages/admin/admin/dashboardhome/view/index'));
+
+routes.push({
+  path: 'admin/admin/dashboardhome/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminAdminDashboardhomeView />
+    </Suspense>
+  ),
+});
+const AdminProCreatedByView = lazy(() => import('./pages/admin/pro/created_by/view/index'));
+
+routes.push({
+  path: 'admin/pro/created_by/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminProCreatedByView />
+    </Suspense>
+  ),
+});
+const AdminConCreatedByView = lazy(() => import('./pages/admin/con/created_by/view/index'));
+
+routes.push({
+  path: 'admin/con/created_by/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminConCreatedByView />
+    </Suspense>
+  ),
+});
+const AdminCityDistrictsView = lazy(() => import('./pages/admin/city/districts/view/index'));
+
+routes.push({
+  path: 'admin/city/districts/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminCityDistrictsView />
+    </Suspense>
+  ),
+});
+const ProCreatedByView = lazy(() => import('./pages/pro/created_by/view/index'));
+
+routes.push({
+  path: 'pro/created_by/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ProCreatedByView />
     </Suspense>
   ),
 });
@@ -851,23 +361,123 @@ routes.push({
     </Suspense>
   ),
 });
-const AdminUserResidentDistrictView = lazy(() => import('./pages/admin/user/resident_district/view/index'));
+const IssueOwnerView = lazy(() => import('./pages/issue/owner/view/index'));
 
 routes.push({
-  path: 'admin/user/resident_district/view/:signedIdentifier',
+  path: 'issue/owner/view/:signedIdentifier',
   element: (
     <Suspense>
-      <AdminUserResidentDistrictView />
+      <IssueOwnerView />
     </Suspense>
   ),
 });
-const AdminConVotesView = lazy(() => import('./pages/admin/con/votes/view/index'));
+const ProCommentsView = lazy(() => import('./pages/pro/comments/view/index'));
 
 routes.push({
-  path: 'admin/con/votes/view/:signedIdentifier',
+  path: 'pro/comments/view/:signedIdentifier',
   element: (
     <Suspense>
-      <AdminConVotesView />
+      <ProCommentsView />
+    </Suspense>
+  ),
+});
+const AdminIssueOwnerView = lazy(() => import('./pages/admin/issue/owner/view/index'));
+
+routes.push({
+  path: 'admin/issue/owner/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminIssueOwnerView />
+    </Suspense>
+  ),
+});
+const AdminDebateCommentsView = lazy(() => import('./pages/admin/debate/comments/view/index'));
+
+routes.push({
+  path: 'admin/debate/comments/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminDebateCommentsView />
+    </Suspense>
+  ),
+});
+const CountyCitiesView = lazy(() => import('./pages/county/cities/view/index'));
+
+routes.push({
+  path: 'county/cities/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <CountyCitiesView />
+    </Suspense>
+  ),
+});
+const AdminAdminIssuesView = lazy(() => import('./pages/admin/admin/issues/view/index'));
+
+routes.push({
+  path: 'admin/admin/issues/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminAdminIssuesView />
+    </Suspense>
+  ),
+});
+const AdminAdminIssuesTable = lazy(() => import('./pages/admin/admin/issues/table/index'));
+
+routes.push({
+  path: 'admin/admin/issues/table',
+  element: (
+    <Suspense>
+      <AdminAdminIssuesTable />
+    </Suspense>
+  ),
+});
+const AdminVoteDefinitionDebateView = lazy(() => import('./pages/admin/vote_definition/debate/view/index'));
+
+routes.push({
+  path: 'admin/vote_definition/debate/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminVoteDefinitionDebateView />
+    </Suspense>
+  ),
+});
+const DebateCreatedByView = lazy(() => import('./pages/debate/created_by/view/index'));
+
+routes.push({
+  path: 'debate/created_by/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <DebateCreatedByView />
+    </Suspense>
+  ),
+});
+const AdminAdminCountiesView = lazy(() => import('./pages/admin/admin/counties/view/index'));
+
+routes.push({
+  path: 'admin/admin/counties/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminAdminCountiesView />
+    </Suspense>
+  ),
+});
+const AdminAdminCountiesTable = lazy(() => import('./pages/admin/admin/counties/table/index'));
+
+routes.push({
+  path: 'admin/admin/counties/table',
+  element: (
+    <Suspense>
+      <AdminAdminCountiesTable />
+    </Suspense>
+  ),
+});
+const UserResidentCityView = lazy(() => import('./pages/user/resident_city/view/index'));
+
+routes.push({
+  path: 'user/resident_city/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <UserResidentCityView />
     </Suspense>
   ),
 });
@@ -881,33 +491,143 @@ routes.push({
     </Suspense>
   ),
 });
-const ProVotesView = lazy(() => import('./pages/pro/votes/view/index'));
+const DebateConsView = lazy(() => import('./pages/debate/cons/view/index'));
 
 routes.push({
-  path: 'pro/votes/view/:signedIdentifier',
+  path: 'debate/cons/view/:signedIdentifier',
   element: (
     <Suspense>
-      <ProVotesView />
+      <DebateConsView />
     </Suspense>
   ),
 });
-const UserVotesView = lazy(() => import('./pages/user/votes/view/index'));
+const ConCreatedByView = lazy(() => import('./pages/con/created_by/view/index'));
 
 routes.push({
-  path: 'user/votes/view/:signedIdentifier',
+  path: 'con/created_by/view/:signedIdentifier',
   element: (
     <Suspense>
-      <UserVotesView />
+      <ConCreatedByView />
     </Suspense>
   ),
 });
-const UserResidentCountyView = lazy(() => import('./pages/user/resident_county/view/index'));
+const CommentCreatedByView = lazy(() => import('./pages/comment/created_by/view/index'));
 
 routes.push({
-  path: 'user/resident_county/view/:signedIdentifier',
+  path: 'comment/created_by/view/:signedIdentifier',
   element: (
     <Suspense>
-      <UserResidentCountyView />
+      <CommentCreatedByView />
+    </Suspense>
+  ),
+});
+const DebateIssueView = lazy(() => import('./pages/debate/issue/view/index'));
+
+routes.push({
+  path: 'debate/issue/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <DebateIssueView />
+    </Suspense>
+  ),
+});
+const AdminSimpleVoteUserView = lazy(() => import('./pages/admin/simple_vote/user/view/index'));
+
+routes.push({
+  path: 'admin/simple_vote/user/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminSimpleVoteUserView />
+    </Suspense>
+  ),
+});
+const UserResidentDistrictView = lazy(() => import('./pages/user/resident_district/view/index'));
+
+routes.push({
+  path: 'user/resident_district/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <UserResidentDistrictView />
+    </Suspense>
+  ),
+});
+const AdminUserResidentDistrictView = lazy(() => import('./pages/admin/user/resident_district/view/index'));
+
+routes.push({
+  path: 'admin/user/resident_district/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminUserResidentDistrictView />
+    </Suspense>
+  ),
+});
+const VoteDefinitionVoteEntriesView = lazy(() => import('./pages/vote_definition/vote_entries/view/index'));
+
+routes.push({
+  path: 'vote_definition/vote_entries/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <VoteDefinitionVoteEntriesView />
+    </Suspense>
+  ),
+});
+const AdminIssueAttachmentsView = lazy(() => import('./pages/admin/issue/attachments/view/index'));
+
+routes.push({
+  path: 'admin/issue/attachments/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminIssueAttachmentsView />
+    </Suspense>
+  ),
+});
+const SimpleVoteUserView = lazy(() => import('./pages/simple_vote/user/view/index'));
+
+routes.push({
+  path: 'simple_vote/user/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <SimpleVoteUserView />
+    </Suspense>
+  ),
+});
+const UserActivityCountiesView = lazy(() => import('./pages/user/activity_counties/view/index'));
+
+routes.push({
+  path: 'user/activity_counties/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <UserActivityCountiesView />
+    </Suspense>
+  ),
+});
+const AdminConVotesView = lazy(() => import('./pages/admin/con/votes/view/index'));
+
+routes.push({
+  path: 'admin/con/votes/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminConVotesView />
+    </Suspense>
+  ),
+});
+const ConCommentsView = lazy(() => import('./pages/con/comments/view/index'));
+
+routes.push({
+  path: 'con/comments/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ConCommentsView />
+    </Suspense>
+  ),
+});
+const AdminConConsView = lazy(() => import('./pages/admin/con/cons/view/index'));
+
+routes.push({
+  path: 'admin/con/cons/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminConConsView />
     </Suspense>
   ),
 });
@@ -921,13 +641,43 @@ routes.push({
     </Suspense>
   ),
 });
-const VoteEntryUserView = lazy(() => import('./pages/vote_entry/user/view/index'));
+const AdminConProsView = lazy(() => import('./pages/admin/con/pros/view/index'));
 
 routes.push({
-  path: 'vote_entry/user/view/:signedIdentifier',
+  path: 'admin/con/pros/view/:signedIdentifier',
   element: (
     <Suspense>
-      <VoteEntryUserView />
+      <AdminConProsView />
+    </Suspense>
+  ),
+});
+const AdminIssueDebatesView = lazy(() => import('./pages/admin/issue/debates/view/index'));
+
+routes.push({
+  path: 'admin/issue/debates/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminIssueDebatesView />
+    </Suspense>
+  ),
+});
+const AdminUserActivityCountiesView = lazy(() => import('./pages/admin/user/activity_counties/view/index'));
+
+routes.push({
+  path: 'admin/user/activity_counties/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminUserActivityCountiesView />
+    </Suspense>
+  ),
+});
+const AdminUserActivityCitiesView = lazy(() => import('./pages/admin/user/activity_cities/view/index'));
+
+routes.push({
+  path: 'admin/user/activity_cities/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminUserActivityCitiesView />
     </Suspense>
   ),
 });
@@ -941,13 +691,83 @@ routes.push({
     </Suspense>
   ),
 });
-const AdminUserVotesView = lazy(() => import('./pages/admin/user/votes/view/index'));
+const AdminAdminCategoriesView = lazy(() => import('./pages/admin/admin/categories/view/index'));
 
 routes.push({
-  path: 'admin/user/votes/view/:signedIdentifier',
+  path: 'admin/admin/categories/view/:signedIdentifier',
   element: (
     <Suspense>
-      <AdminUserVotesView />
+      <AdminAdminCategoriesView />
+    </Suspense>
+  ),
+});
+const AdminAdminCategoriesTable = lazy(() => import('./pages/admin/admin/categories/table/index'));
+
+routes.push({
+  path: 'admin/admin/categories/table',
+  element: (
+    <Suspense>
+      <AdminAdminCategoriesTable />
+    </Suspense>
+  ),
+});
+const AdminAdminDebatesView = lazy(() => import('./pages/admin/admin/debates/view/index'));
+
+routes.push({
+  path: 'admin/admin/debates/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminAdminDebatesView />
+    </Suspense>
+  ),
+});
+const AdminAdminDebatesTable = lazy(() => import('./pages/admin/admin/debates/table/index'));
+
+routes.push({
+  path: 'admin/admin/debates/table',
+  element: (
+    <Suspense>
+      <AdminAdminDebatesTable />
+    </Suspense>
+  ),
+});
+const AdminDebateConsView = lazy(() => import('./pages/admin/debate/cons/view/index'));
+
+routes.push({
+  path: 'admin/debate/cons/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminDebateConsView />
+    </Suspense>
+  ),
+});
+const IssueAttachmentsView = lazy(() => import('./pages/issue/attachments/view/index'));
+
+routes.push({
+  path: 'issue/attachments/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <IssueAttachmentsView />
+    </Suspense>
+  ),
+});
+const IssueDebatesView = lazy(() => import('./pages/issue/debates/view/index'));
+
+routes.push({
+  path: 'issue/debates/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <IssueDebatesView />
+    </Suspense>
+  ),
+});
+const IssueCategoriesView = lazy(() => import('./pages/issue/categories/view/index'));
+
+routes.push({
+  path: 'issue/categories/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <IssueCategoriesView />
     </Suspense>
   ),
 });
@@ -961,6 +781,106 @@ routes.push({
     </Suspense>
   ),
 });
+const AdminIssueCategoriesView = lazy(() => import('./pages/admin/issue/categories/view/index'));
+
+routes.push({
+  path: 'admin/issue/categories/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminIssueCategoriesView />
+    </Suspense>
+  ),
+});
+const IssueCreatedByView = lazy(() => import('./pages/issue/created_by/view/index'));
+
+routes.push({
+  path: 'issue/created_by/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <IssueCreatedByView />
+    </Suspense>
+  ),
+});
+const AdminDashboardIssuesView = lazy(() => import('./pages/admin/dashboard/issues/view/index'));
+
+routes.push({
+  path: 'admin/dashboard/issues/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminDashboardIssuesView />
+    </Suspense>
+  ),
+});
+const AdminDebateCreatedByView = lazy(() => import('./pages/admin/debate/created_by/view/index'));
+
+routes.push({
+  path: 'admin/debate/created_by/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminDebateCreatedByView />
+    </Suspense>
+  ),
+});
+const AdminAdminUsersView = lazy(() => import('./pages/admin/admin/users/view/index'));
+
+routes.push({
+  path: 'admin/admin/users/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminAdminUsersView />
+    </Suspense>
+  ),
+});
+const AdminAdminUsersTable = lazy(() => import('./pages/admin/admin/users/table/index'));
+
+routes.push({
+  path: 'admin/admin/users/table',
+  element: (
+    <Suspense>
+      <AdminAdminUsersTable />
+    </Suspense>
+  ),
+});
+const ConConsView = lazy(() => import('./pages/con/cons/view/index'));
+
+routes.push({
+  path: 'con/cons/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ConConsView />
+    </Suspense>
+  ),
+});
+const IssueCommentsView = lazy(() => import('./pages/issue/comments/view/index'));
+
+routes.push({
+  path: 'issue/comments/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <IssueCommentsView />
+    </Suspense>
+  ),
+});
+const ProVotesView = lazy(() => import('./pages/pro/votes/view/index'));
+
+routes.push({
+  path: 'pro/votes/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ProVotesView />
+    </Suspense>
+  ),
+});
+const AdminCountyCitiesView = lazy(() => import('./pages/admin/county/cities/view/index'));
+
+routes.push({
+  path: 'admin/county/cities/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminCountyCitiesView />
+    </Suspense>
+  ),
+});
 const UserActivityCitiesView = lazy(() => import('./pages/user/activity_cities/view/index'));
 
 routes.push({
@@ -968,6 +888,86 @@ routes.push({
   element: (
     <Suspense>
       <UserActivityCitiesView />
+    </Suspense>
+  ),
+});
+const ProProsView = lazy(() => import('./pages/pro/pros/view/index'));
+
+routes.push({
+  path: 'pro/pros/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ProProsView />
+    </Suspense>
+  ),
+});
+const DebateDebateVoteView = lazy(() => import('./pages/debate/debate_vote/view/index'));
+
+routes.push({
+  path: 'debate/debate_vote/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <DebateDebateVoteView />
+    </Suspense>
+  ),
+});
+const VoteEntryVoteDefinitionView = lazy(() => import('./pages/vote_entry/vote_definition/view/index'));
+
+routes.push({
+  path: 'vote_entry/vote_definition/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <VoteEntryVoteDefinitionView />
+    </Suspense>
+  ),
+});
+const AdminProProsView = lazy(() => import('./pages/admin/pro/pros/view/index'));
+
+routes.push({
+  path: 'admin/pro/pros/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminProProsView />
+    </Suspense>
+  ),
+});
+const AdminIssueCommentsView = lazy(() => import('./pages/admin/issue/comments/view/index'));
+
+routes.push({
+  path: 'admin/issue/comments/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminIssueCommentsView />
+    </Suspense>
+  ),
+});
+const ProConsView = lazy(() => import('./pages/pro/cons/view/index'));
+
+routes.push({
+  path: 'pro/cons/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ProConsView />
+    </Suspense>
+  ),
+});
+const AdminDebateProsView = lazy(() => import('./pages/admin/debate/pros/view/index'));
+
+routes.push({
+  path: 'admin/debate/pros/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminDebateProsView />
+    </Suspense>
+  ),
+});
+const AdminIssueCategoryOwnerView = lazy(() => import('./pages/admin/issue_category/owner/view/index'));
+
+routes.push({
+  path: 'admin/issue_category/owner/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <AdminIssueCategoryOwnerView />
     </Suspense>
   ),
 });

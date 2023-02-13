@@ -85,11 +85,16 @@ services:
     volumes:
       - certs:/etc/ssl/traefik
 
+networks:
+  edemokracia:
+    name: edemokracia
+    external: true  
+
 volumes:
   certs:
   db:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: ${POSTGRES_DATA}
+#    driver: local
+#    driver_opts:
+#      o: bind
+#      type: none
+#      device: ${POSTGRES_DATA}
