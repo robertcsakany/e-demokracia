@@ -68,12 +68,40 @@ EXAMPLES:
 tcp_port_is_open () {
     local exit_status_code
     curl -t '' --connect-timeout 2 -s telnet://"$1:$2" </dev/null
-    exit_status_code=$?
+    local exit_status_code=$?
     case $exit_status_code in
         49) return 0 ;;
         7) return 1 ;;
         *) return "$exit_status_code" ;;
     esac
+}
+
+# Args:
+# 1 - host
+# 2 - port
+# 3 - timeout
+wait_for_port () {
+    local host=$1
+    local port=$2
+    local timeout=$3
+    local port_closed=1
+
+    echo "Wait for port $port on $host."
+    until [ $port_closed -eq 0 ] 
+    do
+        tcp_port_is_open $host $port
+        port_closed=$?
+        timeout=$(($timeout - 1))
+        if [ $timeout -eq 0 ]
+        then
+            echo ""
+            echo "Wait for port $port on $host timed out."
+            exit 1
+        fi
+        echo -n "."
+        sleep 1
+    done
+    echo ""
 }
 
 get_platform () {
@@ -99,7 +127,7 @@ get_arch () {
 }
 
 get_compose_access_ip () {
-    platform=$(get_platform)
+    local platform=$(get_platform)
     if [[ $platform == 'linux' ]]; then
         ip=$(hostname -I)
     elif [[ $platform == 'osx' ]]; then
@@ -112,22 +140,31 @@ get_compose_access_ip () {
 }
 
 get_dashed_ip () {
-    ip=$(get_compose_access_ip)
-    ipdash=$(echo "${ip}" |  tr . -)
+    local ip=$(get_compose_access_ip)
+    local ipdash=$(echo "${ip}" |  tr . -)
     echo "$ipdash"
 }
 
 
 # Args:
 # 1 - instance name
-dump_postgresql () {
-    INSTANCE_NAME=$1
+import_postgres () {
+    local dumps=`ls ${APP_DIR}/${APP_NAME}_dump_*.tar.gz`
+    dumps=dumps=$(echo $dumps | xargs -n1 | sort | xargs)
+    dumps=$str|tr ' ' '\n'|tac|tr '\n' ' '
+    local lastdump=${dumps[${#dumps[@]}-1]}
+    echo "$lastdump"
+}
 
-    TIMESTAMP=$( date +%Y%m%d_%H%M%S )
+# Args:
+# 1 - instance name
+dump_postgresql () {
+    local INSTANCE_NAME=$1
+    local TIMESTAMP=$( date +%Y%m%d_%H%M%S )
 
     echo "Dumping database..."
-    DUMP_FILE=dump_$TIMESTAMP.tar
-    docker exec -i ${INSTANCE_NAME} /bin/bash -c "PGPASSWORD=${APP_NAME} pg_dump --username=${APP_NAME} --format=tar ${APP_NAME}" > $DUMP_FILE || exit
+    local DUMP_FILE=${APP_NAME}_dump_$TIMESTAMP.tar.gz
+    docker exec -i ${INSTANCE_NAME} /bin/bash -c "PGPASSWORD=${APP_NAME} pg_dump --username=${APP_NAME} -F c ${APP_NAME}" > $DUMP_FILE || exit
     echo "Database dumped to $DUMP_FILE"
 }
 
@@ -169,10 +206,10 @@ prune_frontend () {
 # Args:
 # 1 - instance name
 stop_docker_instance () {
-    INSTANCE_NAME=$1
+    local INSTANCE_NAME=$1
 
     # Test running instance is presented or doesn't
-    INSTANCE_RUNNING=$(docker ps | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
+    local INSTANCE_RUNNING=$(docker ps | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
 
     if [ ! -z "$INSTANCE_RUNNING" ]; then
       echo "Instance $INSTANCE_NAME is running, stopping..."
@@ -184,10 +221,10 @@ stop_docker_instance () {
 # Args:
 # 1 - instance name
 remove_docker_instance () {
-    INSTANCE_NAME=$1
+    local INSTANCE_NAME=$1
     stop_docker_instance $INSTANCE_NAME
 
-    INSTANCE_EXIST=$(docker ps -a | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
+    local INSTANCE_EXIST=$(docker ps -a | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
 
     if [ ! -z "$INSTANCE_EXIST" ]; then
       echo "Instance $INSTANCE_NAME exists, remove..."
@@ -198,10 +235,10 @@ remove_docker_instance () {
 # Args:
 # 1 - instance name
 start_docker_instance () {
-    INSTANCE_NAME=$1
+    local INSTANCE_NAME=$1
 
-    INSTANCE_EXIST=$(docker ps -a | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
-    INSTANCE_RUNNING=$(docker ps | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
+    local INSTANCE_EXIST=$(docker ps -a | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
+    local INSTANCE_RUNNING=$(docker ps | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
 
     if [ ! -z "$INSTANCE_EXIST" ]; then
       if [ -z "$INSTANCE_RUNNING" ]; then
@@ -216,10 +253,10 @@ start_docker_instance () {
 # 1 - instance name
 # 2 - port
 start_keycloak () {
-    INSTANCE_NAME=$1
-    KEYCLOAK_PORT=$2
+    local INSTANCE_NAME=$1
+    local KEYCLOAK_PORT=$2
 
-    INSTANCE_EXIST=$(docker ps -a | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
+    local INSTANCE_EXIST=$(docker ps -a | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
 
     if [ -z "$INSTANCE_EXIST" ]; then
       echo "Instance $INSTANCE_NAME is not existing, starting..."
@@ -247,10 +284,10 @@ start_keycloak () {
 # 1 - instance name
 # 2 - port
 start_postgres () {
-    INSTANCE_NAME=$1
-    POSTGRES_PORT=$2
+    local INSTANCE_NAME=$1
+    local POSTGRES_PORT=$2
 
-    INSTANCE_EXIST=$(docker ps -a | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
+    local INSTANCE_EXIST=$(docker ps -a | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
 
     if [ -z "$INSTANCE_EXIST" ]; then
         echo "Instance $INSTANCE_NAME is not existing, starting..."
@@ -282,10 +319,10 @@ start_postgres () {
 # 4 - postgres port (optional)
 
 start_karaf () {
-    DB_TYPE=$1
-    KARAF_PORT=$2
-    KEYCLOAK_PORT=$3
-    POSTGRES_PORT=$4
+    local DB_TYPE=$1
+    local KARAF_PORT=$2
+    local KEYCLOAK_PORT=$3
+    local POSTGRES_PORT=$4
 
     tcp_port_is_open 127.0.0.1 $KARAF_PORT
     if [ $? -eq 0 ] 
@@ -314,9 +351,9 @@ start_karaf () {
     export JUDO_PLATFORM_FILESTORE=filesystem
     export JUDO_PLATFORM_KEYCLOAK_AUTH_SERVER_URL=http://localhost:${KEYCLOAK_PORT}/auth
     
-    VERSION_NUMBER=$(${APP_DIR}/mvnw org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout)
+    local VERSION_NUMBER=$(${APP_DIR}/mvnw org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout)
 
-    KARAF_DIR=${APP_DIR}/.karaf
+    local KARAF_DIR=${APP_DIR}/.karaf
 
     rm -rf $KARAF_DIR && \
     mkdir $KARAF_DIR && \
@@ -341,8 +378,8 @@ start_karaf () {
 # Args:
 # 1 - volume name
 create_docker_volume () {
-    VOLUME_NAME=$1
-    VOLUME_EXIST=$(docker volume ls | grep $VOLUME_NAME | sed -e 's/^[[:space:]]*//')
+    local VOLUME_NAME=$1
+    local VOLUME_EXIST=$(docker volume ls | grep $VOLUME_NAME | sed -e 's/^[[:space:]]*//')
     if [ -z "$VOLUME_EXIST" ]; then
         echo "Create $VOLUME_NAME volume"
         docker volume create $VOLUME_NAME
@@ -352,8 +389,8 @@ create_docker_volume () {
 # Args:
 # 1 - volume name
 delete_docker_volume () {
-    VOLUME_NAME=$1
-    VOLUME_EXIST=$(docker volume ls | grep $VOLUME_NAME | sed -e 's/^[[:space:]]*//')
+    local VOLUME_NAME=$1
+    local VOLUME_EXIST=$(docker volume ls | grep $VOLUME_NAME | sed -e 's/^[[:space:]]*//')
     if [ ! -z "$VOLUME_EXIST" ]; then
         echo "Remove $VOLUME_NAME volume"
         docker volume create $VOLUME_NAME
@@ -363,8 +400,8 @@ delete_docker_volume () {
 # Args:
 # 1 - volume name
 create_docker_network () {
-    NETWORK_NAME=$1
-    NETWORK_EXIST=$(docker network ls | grep $NETWORK_NAME | sed -e 's/^[[:space:]]*//')
+    local NETWORK_NAME=$1
+    local NETWORK_EXIST=$(docker network ls | grep $NETWORK_NAME | sed -e 's/^[[:space:]]*//')
     if [ -z "$NETWORK_EXIST" ]; then
         echo "Create $NETWORK_NAME network"
         docker network create $NETWORK_NAME
@@ -386,7 +423,8 @@ delete_docker_network () {
 # Args:
 # 1 - compsose env
 start_compose () {
-    compose_env=$1
+    local compose_env=$1
+
     export EXTERNAL_IP_DASH=$(get_dashed_ip)
     export POSTGRES_DATA=${APP_DIR}/.data/postgres/data
 
@@ -414,9 +452,9 @@ Access in PROD mode:
 }
 
 load_application_image () {
-    arch=$(get_arch)
+    local arch=$(get_arch)
 
-    PROJECT_VERSION=$(${APP_DIR}/mvnw org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout -f ${APP_DIR})
+    local PROJECT_VERSION=$(${APP_DIR}/mvnw org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout -f ${APP_DIR})
     docker load --input ${APP_DIR}/docker/target/${APP_NAME}-application-${PROJECT_VERSION}_docker_image_${arch}.tar || exit $?
 }
 
@@ -455,6 +493,8 @@ build () {
 CURR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 APP_DIR=$CURR_DIR
 MODEL_DIR="$(cd -P -- "$(dirname -- "${APP_DIR}")" && pwd)"
+
+import_postgres
 
 [ $# -eq 0 ] && print-help && exit 0
 
@@ -575,7 +615,10 @@ if [ ! -f "${APP_DIR}/mvnw" ]; then
 fi
 
 if [ $dump -eq 1 ]; then
+    start_postgres postgres-${APP_NAME} ${POSTGRES_PORT:-5432}
+    wait_for_port 127.0.0.1 ${POSTGRES_PORT:-5432} 30
     dump_postgresql postgres-${APP_NAME}
+    stop_docker_instance postgres-${APP_NAME}
 fi
 
 if [ $prune -eq 1 ]; then
