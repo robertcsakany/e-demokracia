@@ -67,7 +67,7 @@ tcp_port_is_open () {
     exit_status_code=$?
     case $exit_status_code in
         49) return 0 ;;
-        7) return 0 ;;
+        7) return 1 ;;
         *) return "$exit_status_code" ;;
     esac
 }
@@ -175,7 +175,7 @@ stop_docker_instance () {
     INSTANCE_RUNNING=$(docker ps | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
 
     if [ ! -z "$INSTANCE_RUNNING" ]; then
-      echo "Instance is running, stopping..."
+      echo "Instance $INSTANCE_NAME is running, stopping..."
       docker stop $INSTANCE_NAME
     fi
 
@@ -185,45 +185,32 @@ stop_docker_instance () {
 # 1 - instance name
 remove_docker_instance () {
     INSTANCE_NAME=$1
+    stop_docker_instance $INSTANCE_NAME
 
-    # Test running instance is presented or doesn't
-    INSTANCE_RUNNING=$(docker ps | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
     INSTANCE_EXIST=$(docker ps -a | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
 
-
-    if [ ! -z "$INSTANCE_RUNNING" ]; then
-      echo "Instance is running, stopping..."
-      docker stop $INSTANCE_NAME
-    fi
-
-
     if [ ! -z "$INSTANCE_EXIST" ]; then
-      echo "Instance exists, remove..."
+      echo "Instance $INSTANCE_NAME exists, remove..."
       docker rm $INSTANCE_NAME
     fi
 }
 
 # Args:
 # 1 - instance name
-stop_and_remove_docker_instance () {
+start_docker_instance () {
     INSTANCE_NAME=$1
 
-    # Test running instance is presented or doesn't
-    INSTANCE_RUNNING=$(docker ps | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
     INSTANCE_EXIST=$(docker ps -a | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
-
-
-    if [ ! -z "$INSTANCE_RUNNING" ]; then
-      echo "Instance is running, stopping..."
-      docker stop $INSTANCE_NAME
-    fi
-
+    INSTANCE_RUNNING=$(docker ps | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
 
     if [ ! -z "$INSTANCE_EXIST" ]; then
-      echo "Instance exists, remove..."
-      docker rm $INSTANCE_NAME
+      if [ -z "$INSTANCE_RUNNING" ]; then
+        echo "Instance $INSTANCE_NAME is not running, starting..."
+        docker start $INSTANCE_NAME
+      fi
     fi
 }
+
 
 # Args:
 # 1 - instance name
@@ -231,23 +218,29 @@ stop_and_remove_docker_instance () {
 start_keycloak () {
     INSTANCE_NAME=$1
     KEYCLOAK_PORT=$2
-    keycloak_image=quay.io/keycloak/keycloak:latest
 
-    tcp_port_is_open 127.0.0.1 $KEYCLOAK_PORT
-    if [ $? -ne 0 ] 
-    then
-        echo "Could not start Keycloak. Port is already used: ${KEYCLOAK_PORT}"
-        exit 1
+    INSTANCE_EXIST=$(docker ps -a | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
+
+    if [ -z "$INSTANCE_EXIST" ]; then
+      echo "Instance $INSTANCE_NAME is not existing, starting..."
+      keycloak_image=quay.io/keycloak/keycloak:latest
+      tcp_port_is_open 127.0.0.1 $KEYCLOAK_PORT
+      if [ $? -eq 0 ] 
+      then
+          echo "Could not start Keycloak. Port is already used: ${KEYCLOAK_PORT}"
+          exit 1
+      fi
+
+      docker run -d \
+          --name ${INSTANCE_NAME} \
+          -e KEYCLOAK_ADMIN=admin \
+          -e KEYCLOAK_ADMIN_PASSWORD=judo \
+          -p $KEYCLOAK_PORT:$KEYCLOAK_PORT \
+          -it $keycloak_image \
+          start-dev --http-port=$KEYCLOAK_PORT --http-relative-path /auth || exit $?
+    else
+        start_docker_instance $INSTANCE_NAME
     fi
-
-    docker run -d \
-        --name ${INSTANCE_NAME} \
-        -e KEYCLOAK_ADMIN=admin \
-        -e KEYCLOAK_ADMIN_PASSWORD=judo \
-        -p $KEYCLOAK_PORT:$KEYCLOAK_PORT \
-        -it $keycloak_image \
-        start-dev --http-port=$KEYCLOAK_PORT --http-relative-path /auth || exit $?
- 
 }
 
 # Args:
@@ -257,42 +250,33 @@ start_postgres () {
     INSTANCE_NAME=$1
     POSTGRES_PORT=$2
 
-    tcp_port_is_open 127.0.0.1 $POSTGRES_PORT
-    if [ $? -ne 0 ] 
-    then
-        echo "Could not start Postgresql. Port is already used: ${POSTGRES_PORT}"
-        exit 1
+    INSTANCE_EXIST=$(docker ps -a | grep $INSTANCE_NAME | sed -e 's/^[[:space:]]*//')
+
+    if [ -z "$INSTANCE_EXIST" ]; then
+        echo "Instance $INSTANCE_NAME is not existing, starting..."
+        tcp_port_is_open 127.0.0.1 $POSTGRES_PORT
+        if [ $? -eq 0 ] 
+        then
+            echo "Could not start Postgresql. Port is already used: ${POSTGRES_PORT}"
+            exit 1
+        fi
+
+        [ -d ${APP_DIR}/.data/postgres/logs ] || mkdir -p ${APP_DIR}/.data/postgres/logs
+        [ -d ${APP_DIR}/.data/postgres/data ] || mkdir -p ${APP_DIR}/.data/postgres/data
+
+        docker run -d \
+            -v ${APP_DIR}/.data/postgres/logs:/logs \
+            -v ${APP_DIR}/.data/postgres/data:/var/lib/postgresql/pgdata \
+            --name $INSTANCE_NAME \
+            -e PGDATA=/var/lib/postgresql/pgdata \
+            -e POSTGRES_USER=$APP_NAME \
+            -e POSTGRES_PASSWORD=$APP_NAME \
+            -p $POSTGRES_PORT:5432 \
+            postgres:latest \
+            || exit $?
+    else
+        start_docker_instance $INSTANCE_NAME
     fi
-
-    [ -d ${APP_DIR}/.data/postgres/logs ] || mkdir -p ${APP_DIR}/.data/postgres/logs
-    [ -d ${APP_DIR}/.data/postgres/data ] || mkdir -p ${APP_DIR}/.data/postgres/data
-
-    docker run -d \
-        -v ${APP_DIR}/.data/postgres/logs:/logs \
-        -v ${APP_DIR}/.data/postgres/data:/var/lib/postgresql/pgdata \
-        --name $INSTANCE_NAME \
-        -e PGDATA=/var/lib/postgresql/pgdata \
-        -e POSTGRES_USER=$APP_NAME \
-        -e POSTGRES_PASSWORD=$APP_NAME \
-        -p $POSTGRES_PORT:5432 \
-        postgres:latest \
-#        -c max_connections=40 \
-#        -c shared_buffers=512MB \
-#        -c effective_cache_size=1536MB \
-#        -c maintenance_work_mem=128MB \
-#        -c checkpoint_completion_target=0.7 \
-#        -c wal_buffers=16MB \
-#        -c default_statistics_target=100 \
-#        -c random_page_cost=1.1 \
-#        -c effective_io_concurrency=200 \
-#        -c work_mem=3276kB \
-#        -c min_wal_size=1GB \
-#        -c max_wal_size=4GB \
-#        -c max_worker_processes=16 \
-#        -c max_parallel_workers_per_gather=4 \
-#        -c max_parallel_workers=16 \
-#        -c max_parallel_maintenance_workers=4 \
-        || exit $?
 }
 
 # Args:
@@ -308,9 +292,10 @@ start_karaf () {
     POSTGRES_PORT=$4
 
     tcp_port_is_open 127.0.0.1 $KARAF_PORT
-    if [ $? -ne 0 ] 
+    if [ $? -eq 0 ] 
     then
         echo "Could not start karaf. Port is already used: ${KARAF_PORT}" 
+        exit 1
     fi
     export JUDO_PLATFORM_RDBMS_DIALECT=$DB_TYPE
 
@@ -530,7 +515,8 @@ fi
 if [ $prune -eq 1 ]; then
     prune_frontend
 elif [ $clean -eq 1 ]; then
-    stop_and_remove_docker_instance postgres-${APP_NAME}
+    remove_docker_instance postgres-${APP_NAME}
+    remove_docker_instance keycloak-${APP_NAME}
     delete_postgresql_data
 fi
 
@@ -551,21 +537,23 @@ fi
 if [ $run -eq 1 ]; then
     if [ $karaf -eq 1 ]; then
         if [ $postgres -eq 1 ]; then
-            stop_and_remove_docker_instance postgres-${APP_NAME} 
-        fi
-        stop_and_remove_docker_instance keycloak-${APP_NAME} 
-        if [ $postgres -eq 1 ]; then
             start_postgres postgres-${APP_NAME} $POSTGRES_PORT
         fi
 
         start_keycloak keycloak-${APP_NAME} $KEYCLOAK_PORT
         if [ $hsqldb -eq 1 ]; then
             db_type=hsqldb
-            start_karaf $db_type $KARAF_PORT $KEYCLOAK_PORT $POSTGRES_PORT
+            start_karaf $db_type $KARAF_PORT $KEYCLOAK_PORT
         elif [ $postgres -eq 1 ]; then
             db_type=postgresql
-            start_karaf $db_type $KARAF_PORT $KEYCLOAK_PORT
+            start_karaf $db_type $KARAF_PORT $KEYCLOAK_PORT $POSTGRES_PORT
         fi
+
+        if [ $postgres -eq 1 ]; then
+            stop_docker_instance postgres-${APP_NAME}
+        fi
+        stop_docker_instance keycloak-${APP_NAME}
+
     elif [ $compose -eq 1 ]; then
        dashed_domain=$(get_dashed_ip)
        start_compose $compose_env
