@@ -211,12 +211,12 @@
 
 
         <profile>
-            <id>create-docker-image-amd64</id>
+            <id>create-docker-image-x86_64</id>
             <activation>
                 <property>
                     <name>!skipDocker</name>
                 </property>
-				<os><arch>x86</arch></os>
+				<os><arch>x86_64</arch></os>
             </activation>
             <build>
                 <plugins>
@@ -227,7 +227,7 @@
                         <version>3.3.1</version>
                         <executions>
                             <execution>
-                                <id>build-platform-docker-amd64</id>
+                                <id>build-platform-docker-x86_64</id>
                                 <phase>package</phase>
                                 <goals>
                                     <goal>buildTar</goal>
@@ -268,7 +268,7 @@
                                         </volumes>
                                     </container>
                                     <outputPaths>
-                                        <tar>${basedir}/target/${project.parent.artifactId}-${project.version}_docker_image_amd64.tar</tar>
+                                        <tar>${basedir}/target/${project.parent.artifactId}-${project.version}_docker_image_x86_64.tar</tar>
                                     </outputPaths>
                                     <extraDirectories>
                                         <paths>
@@ -297,7 +297,7 @@
                         <version>3.0.0</version>
                         <executions>
                             <execution>
-                                <id>attach-artifacts-amd64</id>
+                                <id>attach-artifacts-x86_64</id>
                                 <phase>package</phase>
                                 <goals>
                                     <goal>attach-artifact</goal>
@@ -305,8 +305,8 @@
                                 <configuration>
                                     <artifacts>
                                         <artifact>
-                                            <file>${basedir}/target/${project.parent.artifactId}-${project.version}_docker_image_amd64.tar</file>
-                                            <classifier>amd64</classifier>
+                                            <file>${basedir}/target/${project.parent.artifactId}-${project.version}_docker_image_x86_64.tar</file>
+                                            <classifier>x86_64</classifier>
                                             <type>tar</type>
                                         </artifact>
                                     </artifacts>

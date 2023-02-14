@@ -16,7 +16,8 @@ USAGE: judo.sh COMMANDS... [OPTIONS...]
     update                          Update dependency versions in JUDO project.
     generate                        Generate application based on model in JUDO project.
     dump                            Dump postgresql db data before clearing and starting application.
-
+    import                          Import postgresql db data
+        -dn --dump-name             Import dump name when it's not deifined loaded the last one
     build                           Build project.
         -a --build-app-module       Build app module only.
         -M --skip-model             Skip model building.
@@ -147,13 +148,18 @@ get_dashed_ip () {
 
 
 # Args:
-# 1 - instance name
+# 2 - instance name
+# 1 - dump
 import_postgres () {
-    local dumps=`ls ${APP_DIR}/${APP_NAME}_dump_*.tar.gz`
-    dumps=dumps=$(echo $dumps | xargs -n1 | sort | xargs)
-    dumps=$str|tr ' ' '\n'|tac|tr '\n' ' '
-    local lastdump=${dumps[${#dumps[@]}-1]}
-    echo "$lastdump"
+    local INSTANCE_NAME=$1
+    local image_name=$2
+    if [ -z $image_name ]; then
+      local dumps=($(ls ${APP_DIR}/${APP_NAME}_dump_*.tar.gz))
+      dumps=$dumps | xargs -n1 | sort | xargs
+      image_name=${dumps[${#dumps[@]} - 1]}
+    fi
+    echo "Loading dump: $image_name"
+    docker exec -i ${INSTANCE_NAME} pg_restore -Fc --clean -U ${APP_NAME} -d ${APP_NAME} < ${image_name}
 }
 
 # Args:
@@ -494,7 +500,6 @@ CURR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 APP_DIR=$CURR_DIR
 MODEL_DIR="$(cd -P -- "$(dirname -- "${APP_DIR}")" && pwd)"
 
-import_postgres
 
 [ $# -eq 0 ] && print-help && exit 0
 
@@ -515,7 +520,8 @@ skipFrontend=0
 skipKeycloak=0
 buildAppModule=0
 skipBackendModels=0
-
+import=0
+dumpName=''
 
 FULL_VERSION_NUMBER="SNAPSHOT"
 original_args=( "$@" )
@@ -552,6 +558,8 @@ while [ $# -ne 0 ]; do
         update)                         update=1; shift 1;;
         generate)                       generate=1; shift 1;;
         dump)                           dump=1; shift 1;;
+        import)                         import=1; shift 1;;
+        -dn | --dump-name)              shift 1; export dumpName=$1; shift 1;;
 
         build)                          build=1; shift 1;;
         -a | --build-app-module)        buildAppModule=1; skipModel=1; shift 1;;
@@ -618,6 +626,15 @@ if [ $dump -eq 1 ]; then
     start_postgres postgres-${APP_NAME} ${POSTGRES_PORT:-5432}
     wait_for_port 127.0.0.1 ${POSTGRES_PORT:-5432} 30
     dump_postgresql postgres-${APP_NAME}
+    stop_docker_instance postgres-${APP_NAME}
+fi
+
+if [ $import -eq 1 ]; then
+    remove_docker_instance postgres-${APP_NAME}
+    remove_docker_volume ${APP_NAME}_db
+    start_postgres postgres-${APP_NAME} ${POSTGRES_PORT:-5432}
+    wait_for_port 127.0.0.1 ${POSTGRES_PORT:-5432} 30
+    import_postgres postgres-${APP_NAME}
     stop_docker_instance postgres-${APP_NAME}
 fi
 
