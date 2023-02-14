@@ -6,6 +6,7 @@ print-help () {
 JUDO runner.
 
 USAGE: judo.sh COMMANDS... [OPTIONS...]
+    env <env>                       Use alternate env (custom properties file). Default judo is used.
     clean                           Stop postgressql docker container and clear data.
 
     prune                           Stop postgressql docker container and delete untracked files in this repository.
@@ -56,6 +57,8 @@ EXAMPLES:
     ./judo.sh build -M -F -BM run -K            Rebuild app and restart application.
     ./judo.sh run -o \"runtime=compose,compose_env=compose-postgresql-https'\"
                                                 Run application in docker compose using the copmpose-postgresql-https's docker-compose.yaml
+    ./judo.sh env alternate build               Build app module with alternate env. (have to be descibed in alternate.properties)
+
 """
 }
 
@@ -453,11 +456,6 @@ CURR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 APP_DIR=$CURR_DIR
 MODEL_DIR="$(cd -P -- "$(dirname -- "${APP_DIR}")" && pwd)"
 
-if [ -f "${APP_DIR}/judo.properties" ]; then
-	source ${APP_DIR}/judo.properties
-fi
-MODEL_DIR=$(cd "$(dirname "${model_dir:-$MODEL_DIR}")"; pwd)/$(basename "${model_dir:-$MODEL_DIR}")
-
 [ $# -eq 0 ] && print-help && exit 0
 
 run=0
@@ -480,9 +478,31 @@ skipBackendModels=0
 
 
 FULL_VERSION_NUMBER="SNAPSHOT"
+original_args=( "$@" )
 
 while [ $# -ne 0 ]; do
     case "$1" in
+        env)  shift 1; profile=$1; shift 1;;
+        *)    shift 1;
+        ;;
+    esac
+done
+
+if [ ! -z $profile ]; then
+  if [ ! -f "${APP_DIR}/${profile}.properties" ]; then
+        echo "$profile properties missing"
+        exit 1
+  fi
+  source ${APP_DIR}/${profile}.properties
+elif [ -f "${APP_DIR}/judo.properties" ]; then
+	source ${APP_DIR}/judo.properties
+fi
+MODEL_DIR=$(cd "$(dirname "${model_dir:-$MODEL_DIR}")"; pwd)/$(basename "${model_dir:-$MODEL_DIR}")
+
+set -- "${original_args[@]}"
+while [ $# -ne 0 ]; do
+    case "$1" in
+        env)                            shift 1; shift 1;;
         clean)                          clean=1; shift 1;;
 
         prune)                          prune=1; shift 1;;
