@@ -16,7 +16,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.yml:/etc/traefik/traefik.yml
       - ./tls.yml:/etc/traefik/tls.yml
-      - certs:/etc/ssl/traefik
+      - edemokracia_certs:/etc/ssl/traefik
 
   auth:
     image: quay.io/keycloak/keycloak:latest
@@ -75,7 +75,7 @@ services:
     ports:
       - '5432:5432'
     volumes: 
-      - db:/var/lib/postgresql/data
+      - edemokracia_db:/var/lib/postgresql/data
       
   reverse-proxy-https-helper:
     image: alpine
@@ -83,7 +83,7 @@ services:
       && wget traefik.me/cert.pem -O cert.pem
       && wget traefik.me/privkey.pem -O privkey.pem"
     volumes:
-      - certs:/etc/ssl/traefik
+      - edemokracia_certs:/etc/ssl/traefik
 
 networks:
   edemokracia:
@@ -91,10 +91,7 @@ networks:
     external: true  
 
 volumes:
-  certs:
-  db:
-#    driver: local
-#    driver_opts:
-#      o: bind
-#      type: none
-#      device: ${POSTGRES_DATA}
+  edemokracia_certs:
+    external: true
+  edemokracia_db:
+    external: true

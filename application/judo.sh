@@ -40,6 +40,7 @@ USAGE: judo.sh COMMANDS... [OPTIONS...]
                                        postgres_port = <port>
                                        keycloak_port = <port>
                                        compose_access_ip = <alternate ip address to access app>
+                                       karaf_enable_admin_user = 1
             
 
 EXAMPLES:
@@ -99,7 +100,7 @@ get_compose_access_ip () {
     if [[ $platform == 'linux' ]]; then
         ip=$(hostname -I)
     elif [[ $platform == 'osx' ]]; then
-        ip=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}')
+        ip=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' | head -n 1)
     else
         echo "OS is not supported"
         exit 1
@@ -130,10 +131,6 @@ dump_postgresql () {
 install_maven_wrapper () {
     mvn wrapper:wrapper -Dmaven=3.8.6 || exit $?
     sed -i '' 's/https:\/\/nexus\.judo\.technology\/repository\/maven-judong\//https:\/\/repo\.maven\.apache\.org\/maven2/g' ${APP_DIR}/.mvn/wrapper/maven-wrapper.properties
-}
-
-delete_postgresql_data () {
-   [ -d ${APP_DIR}/.data ] && sudo rm -rf ${APP_DIR}/.data
 }
 
 prune_frontend () {
@@ -261,12 +258,8 @@ start_postgres () {
             exit 1
         fi
 
-        [ -d ${APP_DIR}/.data/postgres/logs ] || mkdir -p ${APP_DIR}/.data/postgres/logs
-        [ -d ${APP_DIR}/.data/postgres/data ] || mkdir -p ${APP_DIR}/.data/postgres/data
-
         docker run -d \
-            -v ${APP_DIR}/.data/postgres/logs:/logs \
-            -v ${APP_DIR}/.data/postgres/data:/var/lib/postgresql/pgdata \
+            -v ${APP_NAME}_db:/var/lib/postgresql/pgdata \
             --name $INSTANCE_NAME \
             -e PGDATA=/var/lib/postgresql/pgdata \
             -e POSTGRES_USER=$APP_NAME \
@@ -333,8 +326,59 @@ start_karaf () {
     # replace repository URL
     sed -i '' "s/org\.osgi\.service\.http\.port[ ]*=[ ]*8181/org\.osgi\.service\.http\.port = ${KARAF_PORT}/g" ${KARAF_DIR}/etc/org.ops4j.pax.web.cfg
 
+    if [ ! -z $karaf_enable_admin_user ]; then
+        sed -i '' "s/#karaf[ ]*=[ ]/karaf = /g" ${KARAF_DIR}/etc/users.properties
+        sed -i '' "s/#_g_/_g_/g" ${KARAF_DIR}/etc/users.properties
+    fi
+
     $KARAF_DIR/bin/karaf debug run clean || exit
 }
+
+
+# Args:
+# 1 - volume name
+create_docker_volume () {
+    VOLUME_NAME=$1
+    VOLUME_EXIST=$(docker volume ls | grep $VOLUME_NAME | sed -e 's/^[[:space:]]*//')
+    if [ -z "$VOLUME_EXIST" ]; then
+        echo "Create $VOLUME_NAME volume"
+        docker volume create $VOLUME_NAME
+    fi
+}
+
+# Args:
+# 1 - volume name
+delete_docker_volume () {
+    VOLUME_NAME=$1
+    VOLUME_EXIST=$(docker volume ls | grep $VOLUME_NAME | sed -e 's/^[[:space:]]*//')
+    if [ ! -z "$VOLUME_EXIST" ]; then
+        echo "Remove $VOLUME_NAME volume"
+        docker volume create $VOLUME_NAME
+    fi
+}
+
+# Args:
+# 1 - volume name
+create_docker_network () {
+    NETWORK_NAME=$1
+    NETWORK_EXIST=$(docker network ls | grep $NETWORK_NAME | sed -e 's/^[[:space:]]*//')
+    if [ -z "$NETWORK_EXIST" ]; then
+        echo "Create $NETWORK_NAME network"
+        docker network create $NETWORK_NAME
+    fi
+}
+
+# Args:
+# 1 - volume name
+delete_docker_network () {
+    VOLUME_NAME=$1
+    NETWORK_EXIST=$(docker network ls | grep $NETWORK_NAME | sed -e 's/^[[:space:]]*//')
+    if [ ! -z "$NETWORK_EXIST" ]; then
+        echo "Remove $NETWORK_NAME network"
+        docker network create $NETWORK_NAME
+    fi
+}
+
 
 # Args:
 # 1 - compsose env
@@ -348,20 +392,22 @@ start_compose () {
 Access in DEV mode:
      App      - http://app.traefik.me/apps
      Keycloak - http://auth.traefik.me
-
+     Proxy    - http://proxy.traefik.me
 """
     elif [[ $compose_env == 'compose-postgresql-https' ]]; then
       echo """
 Access in PROD mode:
      App      - https://app-${EXTERNAL_IP_DASH}.traefik.me/apps
      Keycloak - https://auth-${EXTERNAL_IP_DASH}.traefik.me
-
+     Proxy    - https://proxy-${EXTERNAL_IP_DASH}.traefik.me
 """
     fi
 
+    create_docker_network ${APP_NAME}
+    create_docker_volume ${APP_NAME}_certs
+    create_docker_volume ${APP_NAME}_db
     load_application_image
     docker compose -f ${APP_DIR}/docker/${compose_env}/docker-compose.yml up
-    # docker compose -f ${APP_DIR}/docker/${compose_env}/docker-compose.yml down --volumes
 }
 
 load_application_image () {
@@ -376,10 +422,10 @@ build () {
     [ $skipModel -eq 1 ] || ${APP_DIR}/mvnw clean install -f $MODEL_DIR|| exit
 
     if [ $skipBackend -eq 1 -a $skipFrontend -eq 0 ]; then
-        ${APP_DIR}/mvnw clean install -f ${APP_DIR}/frontend-react || exit
-        ${APP_DIR}/mvnw clean install -f ${APP_DIR}/frontend-flutter || exit
+        ${APP_DIR}/mvnw install -f ${APP_DIR}/frontend-react || exit
+        ${APP_DIR}/mvnw install -f ${APP_DIR}/frontend-flutter || exit
     elif [ $skipBackend -eq 0 -a $buildAppModule -eq 1 ]; then
-        ${APP_DIR}/mvnw clean install -f ${APP_DIR}/app || exit
+        ${APP_DIR}/mvnw install -f ${APP_DIR}/app || exit
     elif [ $skipBackend -eq 0 ]; then
         if [ $skipFrontend -eq 1 ]; then
             args="-DskipFrontendReact -DskipFrontendFlutter"
@@ -396,7 +442,7 @@ build () {
         if [ $schemaBuilding -eq 0 ]; then
             args="$args -DskipSchema"
         fi
-        ${APP_DIR}/mvnw clean install -f $APP_DIR $args || exit
+        ${APP_DIR}/mvnw install -f $APP_DIR $args || exit
     fi
 }
 
@@ -517,7 +563,9 @@ if [ $prune -eq 1 ]; then
 elif [ $clean -eq 1 ]; then
     remove_docker_instance postgres-${APP_NAME}
     remove_docker_instance keycloak-${APP_NAME}
-    delete_postgresql_data
+    remove_docker_network ${APP_NAME}
+    remove_docker_volume ${APP_NAME}_certs
+    remove_docker_volume ${APP_NAME}_db
 fi
 
 if [ $update -eq 1 ]; then
