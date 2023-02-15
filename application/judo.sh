@@ -197,7 +197,6 @@ prune_frontend () {
         else
             echo "Pruning repository started..."
             ./application/stop-postgres.sh
-            [ -d ${APP_DIR}/.data ] && sudo rm -rf ${APP_DIR}/.data
             git clean -dfx
             [ -d ${APP_DIR}/frontend/.flutter ] && rm -rf ${APP_DIR}/frontend/.flutter
             echo "Pruning repository finished."
@@ -432,7 +431,6 @@ start_compose () {
     local compose_env=$1
 
     export EXTERNAL_IP_DASH=$(get_dashed_ip)
-    export POSTGRES_DATA=${APP_DIR}/.data/postgres/data
 
     if [[ $compose_env == 'compose-develop' ]]; then
       echo """
