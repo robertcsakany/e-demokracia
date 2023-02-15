@@ -394,7 +394,7 @@ create_docker_volume () {
 
 # Args:
 # 1 - volume name
-delete_docker_volume () {
+remove_docker_volume () {
     local VOLUME_NAME=$1
     local VOLUME_EXIST=$(docker volume ls | grep $VOLUME_NAME | sed -e 's/^[[:space:]]*//')
     if [ ! -z "$VOLUME_EXIST" ]; then
@@ -416,7 +416,7 @@ create_docker_network () {
 
 # Args:
 # 1 - volume name
-delete_docker_network () {
+remove_docker_network () {
     VOLUME_NAME=$1
     NETWORK_EXIST=$(docker network ls | grep $NETWORK_NAME | sed -e 's/^[[:space:]]*//')
     if [ ! -z "$NETWORK_EXIST" ]; then
