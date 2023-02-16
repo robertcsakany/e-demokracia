@@ -59,6 +59,7 @@ services:
       - JUDO_PLATFORM_RDBMS_DB_USER=edemokracia
       - JUDO_PLATFORM_RDBMS_DB_PASSWORD=edemokracia
       - JUDO_PLATFORM_FILESTORE=filesystem
+      - JUDO_PLATFORM_FILESTORE_DIRECTORY=/filestore
       - JUDO_PLATFORM_KEYCLOAK_AUTH_SERVER_URL=http://auth:8080
       - JUDO_PLATFORM_KEYCLOAK_AUTH_PUBLIC_URL=https://auth-${EXTERNAL_IP_DASH}.traefik.me
       - JUDO_PLATFORM_MARK_SELECTED_RANGE_ITEMS=true
@@ -76,6 +77,7 @@ services:
       - '5432:5432'
     volumes: 
       - edemokracia_db:/var/lib/postgresql/data
+      - edemokracia_filestore:/filestore
       
   reverse-proxy-https-helper:
     image: alpine
@@ -94,4 +96,6 @@ volumes:
   edemokracia_certs:
     external: true
   edemokracia_db:
+    external: true
+  edemokracia_filestore:
     external: true

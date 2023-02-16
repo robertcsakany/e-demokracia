@@ -353,7 +353,7 @@ start_karaf () {
     export JUDO_PLATFORM_RDBMS_DB_DATABASE=$APP_NAME
     export JUDO_PLATFORM_RDBMS_DB_USER=$APP_NAME
     export JUDO_PLATFORM_RDBMS_DB_PASSWORD=$APP_NAME
-    export JUDO_PLATFORM_FILESTORE=filesystem
+    export JUDO_PLATFORM_FILESTORE=rdbms
     export JUDO_PLATFORM_KEYCLOAK_AUTH_SERVER_URL=http://localhost:${KEYCLOAK_PORT}/auth
     
     local VERSION_NUMBER=$(${APP_DIR}/mvnw org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout)
@@ -451,6 +451,7 @@ Access in PROD mode:
     create_docker_network ${APP_NAME}
     create_docker_volume ${APP_NAME}_certs
     create_docker_volume ${APP_NAME}_db
+    create_docker_volume ${APP_NAME}_filestore
     load_application_image
     docker compose -f ${APP_DIR}/docker/${compose_env}/docker-compose.yml up
 }
@@ -644,6 +645,7 @@ elif [ $clean -eq 1 ]; then
     remove_docker_network ${APP_NAME}
     remove_docker_volume ${APP_NAME}_certs
     remove_docker_volume ${APP_NAME}_db
+    remove_docker_volume ${APP_NAME}_filestore
 fi
 
 if [ $update -eq 1 ]; then
