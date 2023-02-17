@@ -547,7 +547,7 @@ MODEL_DIR=$(cd "$(dirname "${model_dir:-$MODEL_DIR}")"; pwd)/$(basename "${model
 set -- "${original_args[@]}"
 while [ $# -ne 0 ]; do
     case "$1" in
-        env)                            shift 1; shift 1;;
+        env)                            shift 2;;
         clean)                          clean=1; shift 1;;
 
         prune)                          prune=1; shift 1;;
