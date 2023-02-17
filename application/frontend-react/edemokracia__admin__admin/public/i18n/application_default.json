@@ -1,5 +1,6 @@
 {
     "translation": {
+        "applications.Admin": "Admin",
         "application.model.name": "Edemokracia",
         "edemokracia.City.districts.Entity.View": "Entity View",
         "edemokracia.City.districts.View": "Entity View",

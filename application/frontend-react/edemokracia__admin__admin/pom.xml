@@ -37,7 +37,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Web-ContextPath>/${model-name}_react/${actor}</Web-ContextPath>
+                        <Web-ContextPath>/${model-name}/${actor}</Web-ContextPath>
                         <Include-Resource>
                             /=${project.basedir}/dist
                         </Include-Resource>
@@ -58,9 +58,9 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>hu.blackbelt.judo.archetype</groupId>
-                        <artifactId>judo-ui-archetype-maven-plugin</artifactId>
-                        <version>${judo-ui-archetype-version}</version>
+                        <groupId>hu.blackbelt.judo.meta</groupId>
+                        <artifactId>judo-ui-generator-maven-plugin</artifactId>
+                        <version>${judo-meta-ui-version}</version>
                         <executions>
                             <execution>
                                 <id>execute-ui-model-from-file</id>
@@ -73,17 +73,6 @@
                                     <uris>
                                         <uri>mvn:hu.blackbelt.judo.tatami:judo-tatami-ui2web:${judo-tatami-ui2web-version}</uri>
                                     </uris>
-                                    <helpers>
-                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiNPMHelper</helper>
-                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiPageHelper</helper>
-                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiGeneralHelper</helper>
-                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiI18NHelper</helper>
-                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiTableHelper</helper>
-                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiSecurityHelper</helper>
-                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiServiceHelper</helper>
-                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiWidgetHelper</helper>
-                                        <helper>hu.blackbelt.judo.tatami.ui2web.UiActionsHelper</helper>
-                                    </helpers>
                                     <type>web-project</type>
                                     <applications>
                                         ${actor-fq-name}
@@ -109,13 +98,6 @@
                                 </configuration>
                             </execution>
                         </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>hu.blackbelt.judo.tatami</groupId>
-                                <artifactId>judo-tatami-ui2web</artifactId>
-                                <version>${judo-tatami-ui2web-version}</version>
-                            </dependency>
-                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
@@ -151,14 +133,6 @@
                                 </configuration>
                             </execution>
                         </executions>
-
-                        <dependencies>
-                            <dependency>
-                                <groupId>hu.blackbelt.judo.meta</groupId>
-                                <artifactId>hu.blackbelt.judo.meta.ui.model</artifactId>
-                                <version>${judo-meta-ui-version}</version>
-                            </dependency>
-                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
@@ -307,7 +281,7 @@
                                     <replacements>
                                         <replacement>
                                             <token><![CDATA[<base href="/">]]></token>
-                                            <value><![CDATA[<base href="/${model-name}_react/${actor}/">]]></value>
+                                            <value><![CDATA[<base href="/${model-name}/${actor}/">]]></value>
                                         </replacement>
                                     </replacements>
                                     <regex>false</regex>

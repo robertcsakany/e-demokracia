@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Issue.attachments#View
@@ -15,6 +14,7 @@ import {
   Box,
   Button,
   Card,
+  CardContent,
   Container,
   Grid,
   InputAdornment,
@@ -23,6 +23,9 @@ import {
   Typography,
   Paper,
   Divider,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@mui/material';
 import {
   DataGrid,
@@ -185,7 +188,7 @@ export default function AdminIssueAttachmentsView() {
         )}
         {!editMode && (
           <Grid item>
-            <Button onClick={() => deleteData()} disabled={isLoading}>
+            <Button onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
               <MdiIcon path="delete" />
               {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
@@ -193,7 +196,7 @@ export default function AdminIssueAttachmentsView() {
         )}
         {!editMode && (
           <Grid item>
-            <Button onClick={() => setEditMode(true)} disabled={isLoading}>
+            <Button onClick={() => setEditMode(true)} disabled={isLoading || !data.__updateable}>
               <MdiIcon path="pencil" />
               {t('judo.pages.edit', { defaultValue: 'Edit' })}
             </Button>
@@ -225,140 +228,156 @@ export default function AdminIssueAttachmentsView() {
       </PageHeader>
       <Container component="main" maxWidth="xl">
         <Box sx={mainContainerPadding}>
-          <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
-            <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-              <Grid item xs={12} sm={4.0}>
-                <TextField
-                  name="type"
-                  id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/View/default/Attachment/group/type"
-                  label={
-                    t('edemokracia.admin.Issue.attachments.Attachment.group.type', { defaultValue: 'Type' }) as string
-                  }
-                  value={data.type || ''}
-                  error={!!validation.get('type')}
-                  helperText={validation.get('type')}
-                  onChange={(event) => storeDiff('type', event.target.value as EdemokraciaAttachmentType)}
-                  className={false || !editMode ? 'Mui-readOnly' : undefined}
-                  InputLabelProps={{ shrink: true }}
-                  InputProps={{
-                    readOnly: false || !editMode,
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <MdiIcon path="list" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  select
-                >
-                  <MenuItem value={'LINK'}>
-                    {t('enumerations.EdemokraciaAttachmentType.LINK', { defaultValue: 'LINK' })}
-                  </MenuItem>
-                  <MenuItem value={'IMAGE'}>
-                    {t('enumerations.EdemokraciaAttachmentType.IMAGE', { defaultValue: 'IMAGE' })}
-                  </MenuItem>
-                  <MenuItem value={'VIDEO'}>
-                    {t('enumerations.EdemokraciaAttachmentType.VIDEO', { defaultValue: 'VIDEO' })}
-                  </MenuItem>
-                  <MenuItem value={'MAP'}>
-                    {t('enumerations.EdemokraciaAttachmentType.MAP', { defaultValue: 'MAP' })}
-                  </MenuItem>
-                </TextField>
-              </Grid>
-
-              <Grid item xs={12} sm={4.0}>
-                {editMode ? (
+          <Grid
+            container
+            xs={12}
+            sm={12}
+            spacing={2}
+            direction="column"
+            alignItems="stretch"
+            justifyContent="flex-start"
+          >
+            <Grid item xs={12} sm={12}>
+              <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                <Grid item xs={12} sm={12} md={4.0}>
                   <TextField
-                    name="file"
-                    id="BinaryTypeInput@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/View/default/Attachment/group/file"
+                    name="type"
+                    id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/View/default/Attachment/group/type"
                     label={
-                      t('edemokracia.admin.Issue.attachments.Attachment.group.file', { defaultValue: 'File' }) as string
+                      t('edemokracia.admin.Issue.attachments.Attachment.group.type', { defaultValue: 'Type' }) as string
                     }
-                    type="file"
-                    error={!!validation.get('file')}
-                    helperText={validation.get('file')}
-                    onChange={async (event: any) => {
-                      try {
-                        const uploadedData = await uploadFile(
-                          data,
-                          'file',
-                          event.target.files,
-                          '/admin/IssueAttachment/file',
-                        );
-                        if (uploadedData) {
-                          if (uploadedData.error) {
-                            enqueueSnackbar(
-                              t('judo.files.upload-error', { defaultValue: uploadedData.error }) as string,
-                              {
-                                variant: 'error',
-                                ...toastConfig.error,
-                              },
-                            );
-                            console.error(uploadedData);
-                            return;
-                          }
-                          storeDiff('file', uploadedData.token);
-                          enqueueSnackbar(
-                            t('judo.files.upload-success', { defaultValue: 'File uploaded successfully.' }) as string,
-                            {
-                              variant: 'success',
-                              ...toastConfig.success,
-                            },
-                          );
-                        }
-                      } catch (err) {
-                        enqueueSnackbar(
-                          t('judo.files.upload-error', {
-                            defaultValue: 'An error occurred during file upload!',
-                          }) as string,
-                          {
-                            variant: 'error',
-                            ...toastConfig.error,
-                          },
-                        );
-                        console.error(err);
-                      }
-                    }}
+                    value={data.type || ''}
+                    error={!!validation.get('type')}
+                    helperText={validation.get('type')}
+                    onChange={(event) => storeDiff('type', event.target.value as EdemokraciaAttachmentType)}
                     className={false || !editMode ? 'Mui-readOnly' : undefined}
                     InputLabelProps={{ shrink: true }}
                     InputProps={{
                       readOnly: false || !editMode,
                       startAdornment: (
                         <InputAdornment position="start">
-                          <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
+                          <MdiIcon path="list" />
+                        </InputAdornment>
+                      ),
+                    }}
+                    select
+                  >
+                    <MenuItem value={'LINK'}>
+                      {t('enumerations.EdemokraciaAttachmentType.LINK', { defaultValue: 'LINK' })}
+                    </MenuItem>
+                    <MenuItem value={'IMAGE'}>
+                      {t('enumerations.EdemokraciaAttachmentType.IMAGE', { defaultValue: 'IMAGE' })}
+                    </MenuItem>
+                    <MenuItem value={'VIDEO'}>
+                      {t('enumerations.EdemokraciaAttachmentType.VIDEO', { defaultValue: 'VIDEO' })}
+                    </MenuItem>
+                    <MenuItem value={'MAP'}>
+                      {t('enumerations.EdemokraciaAttachmentType.MAP', { defaultValue: 'MAP' })}
+                    </MenuItem>
+                  </TextField>
+                </Grid>
+
+                <Grid item xs={12} sm={12} md={4.0}>
+                  {editMode ? (
+                    <TextField
+                      name="file"
+                      id="BinaryTypeInput@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/View/default/Attachment/group/file"
+                      label={
+                        t('edemokracia.admin.Issue.attachments.Attachment.group.file', {
+                          defaultValue: 'File',
+                        }) as string
+                      }
+                      type="file"
+                      error={!!validation.get('file')}
+                      helperText={validation.get('file')}
+                      onChange={async (event: any) => {
+                        try {
+                          const uploadedData = await uploadFile(
+                            data,
+                            'file',
+                            event.target.files,
+                            '/admin/IssueAttachment/file',
+                          );
+                          if (uploadedData) {
+                            if (uploadedData.error) {
+                              enqueueSnackbar(
+                                t('judo.files.upload-error', { defaultValue: uploadedData.error }) as string,
+                                {
+                                  variant: 'error',
+                                  ...toastConfig.error,
+                                },
+                              );
+                              console.error(uploadedData);
+                              return;
+                            }
+                            storeDiff('file', uploadedData.token);
+                            enqueueSnackbar(
+                              t('judo.files.upload-success', { defaultValue: 'File uploaded successfully.' }) as string,
+                              {
+                                variant: 'success',
+                                ...toastConfig.success,
+                              },
+                            );
+                          }
+                        } catch (err) {
+                          enqueueSnackbar(
+                            t('judo.files.upload-error', {
+                              defaultValue: 'An error occurred during file upload!',
+                            }) as string,
+                            {
+                              variant: 'error',
+                              ...toastConfig.error,
+                            },
+                          );
+                          console.error(err);
+                        }
+                      }}
+                      className={false || !editMode ? 'Mui-readOnly' : undefined}
+                      InputLabelProps={{ shrink: true }}
+                      InputProps={{
+                        readOnly: false || !editMode,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  ) : (
+                    <Button variant="contained" disabled={!data?.file} onClick={() => downloadFile(data, 'file')}>
+                      <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
+                      {
+                        t('edemokracia.admin.Issue.attachments.Attachment.group.file', {
+                          defaultValue: 'File',
+                        }) as string
+                      }
+                    </Button>
+                  )}
+                </Grid>
+
+                <Grid item xs={12} sm={12} md={4.0}>
+                  <TextField
+                    name="link"
+                    id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/View/default/Attachment/group/link"
+                    label={
+                      t('edemokracia.admin.Issue.attachments.Attachment.group.link', { defaultValue: 'Link' }) as string
+                    }
+                    value={data.link}
+                    error={!!validation.get('link')}
+                    helperText={validation.get('link')}
+                    onChange={(event) => storeDiff('link', event.target.value)}
+                    className={false || !editMode ? 'Mui-readOnly' : undefined}
+                    InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      readOnly: false || !editMode,
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <MdiIcon path="text_fields" />
                         </InputAdornment>
                       ),
                     }}
                   />
-                ) : (
-                  <Button variant="contained" disabled={!data?.file} onClick={() => downloadFile(data, 'file')}>
-                    <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
-                    {t('edemokracia.admin.Issue.attachments.Attachment.group.file', { defaultValue: 'File' }) as string}
-                  </Button>
-                )}
-              </Grid>
-
-              <Grid item xs={12} sm={4.0}>
-                <TextField
-                  name="link"
-                  id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/View/default/Attachment/group/link"
-                  label={
-                    t('edemokracia.admin.Issue.attachments.Attachment.group.link', { defaultValue: 'Link' }) as string
-                  }
-                  value={data.link}
-                  error={!!validation.get('link')}
-                  helperText={validation.get('link')}
-                  onChange={(event) => storeDiff('link', event.target.value)}
-                  className={false || !editMode ? 'Mui-readOnly' : undefined}
-                  InputLabelProps={{ shrink: true }}
-                  InputProps={{
-                    readOnly: false || !editMode,
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <MdiIcon path="text_fields" />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

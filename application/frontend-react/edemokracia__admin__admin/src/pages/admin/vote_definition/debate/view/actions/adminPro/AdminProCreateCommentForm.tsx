@@ -1,11 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx.hbs
 // Action name: edemokracia::admin::Admin::edemokracia::admin::Pro::createComment#ButtonCallOperation
-// Owner Page name: edemokracia::admin::VoteDefinition.debate#View
 // Action: CallOperationAction
 
 import { useState, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
@@ -26,6 +24,7 @@ import {
   MenuItem,
   Typography,
   Card,
+  CardContent,
 } from '@mui/material';
 import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
 import {
@@ -148,54 +147,64 @@ export function AdminProCreateCommentForm({ successCallback, cancel, owner }: Ad
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>
-        <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
-          <Grid container item xs={12} sm={12.0} direction="column" alignItems="stretch" justifyContent="flex-start">
+        <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
+          <Grid item xs={12} sm={12}>
             <Card>
-              <Grid container item alignItems="center" justifyContent="flex-start">
-                <MdiIcon path="forum" />
-                <Typography variant="h6" component="h1">
-                  {t('edemokracia.admin.Pro.createComment.CreateCommentInput.Form.comment.comment.Label', {
-                    defaultValue: 'Add comment',
-                  })}
-                </Typography>
-              </Grid>
+              <CardContent>
+                <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                  <Grid item xs={12} sm={12}>
+                    <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                      <MdiIcon path="forum" />
+                      <Typography variant="h6" component="h1">
+                        {t('edemokracia.admin.Pro.createComment.CreateCommentInput.Form.comment.comment.Label', {
+                          defaultValue: 'Add comment',
+                        })}
+                      </Typography>
+                    </Grid>
+                  </Grid>
 
-              <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    name="comment"
-                    id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Pro.createComment/Input/default/CreateCommentInput_Form/comment/LabelWrapper/comment/comment"
-                    label={
-                      t('edemokracia.admin.Pro.createComment.CreateCommentInput.Form.comment.comment.comment', {
-                        defaultValue: 'Comment',
-                      }) as string
-                    }
-                    value={data.comment}
-                    multiline
-                    minRows={4.0}
-                    error={!!validation.get('comment')}
-                    helperText={validation.get('comment')}
-                    onChange={(event) => storeDiff('comment', event.target.value)}
-                    className={false || !editMode ? 'Mui-readOnly' : undefined}
-                    InputLabelProps={{ shrink: true }}
-                    InputProps={{
-                      readOnly: false || !editMode,
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <MdiIcon path="text_fields" />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
+                  <Grid item xs={12} sm={12}>
+                    <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                      <Grid item xs={12} sm={12}>
+                        <TextField
+                          name="comment"
+                          id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Pro.createComment/Input/default/CreateCommentInput_Form/comment/LabelWrapper/comment/comment"
+                          label={
+                            t('edemokracia.admin.Pro.createComment.CreateCommentInput.Form.comment.comment.comment', {
+                              defaultValue: 'Comment',
+                            }) as string
+                          }
+                          value={data.comment}
+                          multiline
+                          minRows={4.0}
+                          error={!!validation.get('comment')}
+                          helperText={validation.get('comment')}
+                          onChange={(event) => storeDiff('comment', event.target.value)}
+                          className={false || !editMode ? 'Mui-readOnly' : undefined}
+                          InputLabelProps={{ shrink: true }}
+                          InputProps={{
+                            readOnly: false || !editMode,
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <MdiIcon path="text_fields" />
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                      </Grid>
+                    </Grid>
+                  </Grid>
                 </Grid>
-              </Grid>
+              </CardContent>
             </Card>
           </Grid>
 
-          <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-            <Grid item xs={12} sm={4.0}></Grid>
+          <Grid item xs={12} sm={12}>
+            <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+              <Grid item xs={12} sm={12} md={4.0}></Grid>
 
-            <Grid item xs={12} sm={4.0}></Grid>
+              <Grid item xs={12} sm={12} md={4.0}></Grid>
+            </Grid>
           </Grid>
         </Grid>
       </DialogContent>

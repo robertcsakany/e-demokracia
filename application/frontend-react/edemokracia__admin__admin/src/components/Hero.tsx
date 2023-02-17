@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression:
 // Path expression: 'src/components/Hero.tsx'
 // Template name: actor/src/components/Hero.tsx.hbs
 
@@ -15,7 +14,6 @@ export function Hero(props: HeroProps) {
       <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}>
         {props.preferredUsername && <Typography sx={{ fontWeight: 'bold' }}>{props.preferredUsername}</Typography>}
         {props.email && <Typography sx={{ fontWeight: 'light' }}>{props.email}</Typography>}
-        <Typography sx={{ fontWeight: 'bold', color: 'secondary.main' }}>{props.actorName}</Typography>
       </Box>
     </Box>
   );

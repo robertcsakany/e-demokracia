@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Dashboard.issues#View
@@ -15,6 +14,7 @@ import {
   Box,
   Button,
   Card,
+  CardContent,
   Container,
   Grid,
   InputAdornment,
@@ -23,6 +23,9 @@ import {
   Typography,
   Paper,
   Divider,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@mui/material';
 import {
   DataGrid,
@@ -174,6 +177,7 @@ export default function AdminDashboardIssuesView() {
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminIssueAttachmentStored) => rowDeleteAttachmentsAction(data, row, () => fetchData()),
+      disabled: (row: AdminIssueAttachmentStored) => !row.__deleteable,
     },
   ];
   const categoriesRowActions: TableRowAction<AdminIssueCategoryStored>[] = [];
@@ -241,174 +245,192 @@ export default function AdminDashboardIssuesView() {
       </PageHeader>
       <Container component="main" maxWidth="xl">
         <Box sx={mainContainerPadding}>
-          <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
-            <Grid container item xs={12} sm={12.0} direction="column" alignItems="stretch" justifyContent="flex-start">
+          <Grid
+            container
+            xs={12}
+            sm={12}
+            spacing={2}
+            direction="column"
+            alignItems="stretch"
+            justifyContent="flex-start"
+          >
+            <Grid item xs={12} sm={12}>
               <Card>
-                <Grid container item alignItems="center" justifyContent="flex-start">
-                  <MdiIcon path="clipboard" />
-                  <Typography variant="h6" component="h1">
-                    {t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.Label', { defaultValue: 'Issue' })}
-                  </Typography>
-                </Grid>
+                <CardContent>
+                  <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                        <MdiIcon path="clipboard" />
+                        <Typography variant="h6" component="h1">
+                          {t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.Label', {
+                            defaultValue: 'Issue',
+                          })}
+                        </Typography>
+                      </Grid>
+                    </Grid>
 
-                <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid item xs={12} sm={4.0}>
-                    <TextField
-                      name="title"
-                      id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.issues/View/default/Issue_View/issue/LabelWrapper/issue/title"
-                      label={
-                        t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.title', {
-                          defaultValue: 'Title',
-                        }) as string
-                      }
-                      value={data.title}
-                      error={!!validation.get('title')}
-                      helperText={validation.get('title')}
-                      onChange={(event) => storeDiff('title', event.target.value)}
-                      className={false || !editMode ? 'Mui-readOnly' : undefined}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        readOnly: false || !editMode,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="text_fields" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <TextField
+                            name="title"
+                            id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.issues/View/default/Issue_View/issue/LabelWrapper/issue/title"
+                            label={
+                              t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.title', {
+                                defaultValue: 'Title',
+                              }) as string
+                            }
+                            value={data.title}
+                            error={!!validation.get('title')}
+                            helperText={validation.get('title')}
+                            onChange={(event) => storeDiff('title', event.target.value)}
+                            className={false || !editMode ? 'Mui-readOnly' : undefined}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              readOnly: false || !editMode,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="text_fields" />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={4.0}>
-                    <TextField
-                      name="status"
-                      id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Dashboard.issues/View/default/Issue_View/issue/LabelWrapper/issue/status"
-                      label={
-                        t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.status', {
-                          defaultValue: 'Status',
-                        }) as string
-                      }
-                      value={data.status || ''}
-                      error={!!validation.get('status')}
-                      helperText={validation.get('status')}
-                      onChange={(event) => storeDiff('status', event.target.value as EdemokraciaIssueStatus)}
-                      className={false || !editMode ? 'Mui-readOnly' : undefined}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        readOnly: false || !editMode,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="list" />
-                          </InputAdornment>
-                        ),
-                      }}
-                      select
-                    >
-                      <MenuItem value={'CREATED'}>
-                        {t('enumerations.EdemokraciaIssueStatus.CREATED', { defaultValue: 'CREATED' })}
-                      </MenuItem>
-                      <MenuItem value={'PENDING'}>
-                        {t('enumerations.EdemokraciaIssueStatus.PENDING', { defaultValue: 'PENDING' })}
-                      </MenuItem>
-                      <MenuItem value={'ACTIVE'}>
-                        {t('enumerations.EdemokraciaIssueStatus.ACTIVE', { defaultValue: 'ACTIVE' })}
-                      </MenuItem>
-                      <MenuItem value={'CLOSED'}>
-                        {t('enumerations.EdemokraciaIssueStatus.CLOSED', { defaultValue: 'CLOSED' })}
-                      </MenuItem>
-                    </TextField>
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <TextField
+                            name="status"
+                            id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Dashboard.issues/View/default/Issue_View/issue/LabelWrapper/issue/status"
+                            label={
+                              t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.status', {
+                                defaultValue: 'Status',
+                              }) as string
+                            }
+                            value={data.status || ''}
+                            error={!!validation.get('status')}
+                            helperText={validation.get('status')}
+                            onChange={(event) => storeDiff('status', event.target.value as EdemokraciaIssueStatus)}
+                            className={false || !editMode ? 'Mui-readOnly' : undefined}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              readOnly: false || !editMode,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="list" />
+                                </InputAdornment>
+                              ),
+                            }}
+                            select
+                          >
+                            <MenuItem value={'CREATED'}>
+                              {t('enumerations.EdemokraciaIssueStatus.CREATED', { defaultValue: 'CREATED' })}
+                            </MenuItem>
+                            <MenuItem value={'PENDING'}>
+                              {t('enumerations.EdemokraciaIssueStatus.PENDING', { defaultValue: 'PENDING' })}
+                            </MenuItem>
+                            <MenuItem value={'ACTIVE'}>
+                              {t('enumerations.EdemokraciaIssueStatus.ACTIVE', { defaultValue: 'ACTIVE' })}
+                            </MenuItem>
+                            <MenuItem value={'CLOSED'}>
+                              {t('enumerations.EdemokraciaIssueStatus.CLOSED', { defaultValue: 'CLOSED' })}
+                            </MenuItem>
+                          </TextField>
+                        </Grid>
 
-                  <Grid item xs={12} sm={4.0}>
-                    <DateTimePicker
-                      renderInput={(props: any) => (
-                        <TextField
-                          {...props}
-                          error={!!validation.get('created')}
-                          helperText={validation.get('created')}
-                        />
-                      )}
-                      label={
-                        t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.created', {
-                          defaultValue: 'Created',
-                        }) as string
-                      }
-                      value={data.created ?? null}
-                      className={true || !editMode ? 'Mui-readOnly' : undefined}
-                      readOnly={true || !editMode}
-                      onChange={(newValue: any) => storeDiff('created', newValue)}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="schedule" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <DateTimePicker
+                            renderInput={(props: any) => (
+                              <TextField
+                                {...props}
+                                error={!!validation.get('created')}
+                                helperText={validation.get('created')}
+                              />
+                            )}
+                            label={
+                              t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.created', {
+                                defaultValue: 'Created',
+                              }) as string
+                            }
+                            value={data.created ?? null}
+                            className={true || !editMode ? 'Mui-readOnly' : undefined}
+                            readOnly={true || !editMode}
+                            onChange={(newValue: any) => storeDiff('created', newValue)}
+                            InputProps={{
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="schedule" />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12}>
-                    <TextField
-                      name="description"
-                      id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Dashboard.issues/View/default/Issue_View/issue/LabelWrapper/issue/description"
-                      label={
-                        t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.description', {
-                          defaultValue: 'Description',
-                        }) as string
-                      }
-                      value={data.description}
-                      multiline
-                      minRows={4.0}
-                      error={!!validation.get('description')}
-                      helperText={validation.get('description')}
-                      onChange={(event) => storeDiff('description', event.target.value)}
-                      className={false || !editMode ? 'Mui-readOnly' : undefined}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        readOnly: false || !editMode,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="text_fields" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12}>
+                          <TextField
+                            name="description"
+                            id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Dashboard.issues/View/default/Issue_View/issue/LabelWrapper/issue/description"
+                            label={
+                              t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.description', {
+                                defaultValue: 'Description',
+                              }) as string
+                            }
+                            value={data.description}
+                            multiline
+                            minRows={4.0}
+                            error={!!validation.get('description')}
+                            helperText={validation.get('description')}
+                            onChange={(event) => storeDiff('description', event.target.value)}
+                            className={false || !editMode ? 'Mui-readOnly' : undefined}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              readOnly: false || !editMode,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="text_fields" />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={4.0}>
-                    <Button
-                      onClick={() => AdminIssueCreateDebateAction(data, () => fetchData())}
-                      disabled={isLoading || editMode}
-                    >
-                      <MdiIcon path="wechat" />
-                      {t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.createDebate', {
-                        defaultValue: 'Create debate',
-                      })}
-                    </Button>
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <Button
+                            onClick={() => AdminIssueCreateDebateAction(data, () => fetchData())}
+                            disabled={isLoading || editMode}
+                          >
+                            <MdiIcon path="wechat" />
+                            {t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.createDebate', {
+                              defaultValue: 'Create debate',
+                            })}
+                          </Button>
+                        </Grid>
 
-                  <Grid item xs={12}>
-                    <AggregationInput
-                      name="owner"
-                      id="Link@edemokracia/admin/Admin/edemokracia/admin/Dashboard.issues/View/default/Issue_View/issue/LabelWrapper/issue/owner"
-                      label={
-                        t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.owner', {
-                          defaultValue: 'Owner',
-                        }) as string
-                      }
-                      labelList={[data.owner?.representation?.toString() ?? '']}
-                      value={data.owner}
-                      error={!!validation.get('owner')}
-                      helperText={validation.get('owner')}
-                      icon={<MdiIcon path="account" />}
-                      readonly={false || !editMode}
-                      onView={async () => linkViewOwnerAction(data?.owner!)}
-                    />
+                        <Grid item xs={12} sm={12}>
+                          <AggregationInput
+                            name="owner"
+                            id="Link@edemokracia/admin/Admin/edemokracia/admin/Dashboard.issues/View/default/Issue_View/issue/LabelWrapper/issue/owner"
+                            label={
+                              t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.owner', {
+                                defaultValue: 'Owner',
+                              }) as string
+                            }
+                            labelList={[data.owner?.representation?.toString() ?? '']}
+                            value={data.owner}
+                            error={!!validation.get('owner')}
+                            helperText={validation.get('owner')}
+                            icon={<MdiIcon path="account" />}
+                            readonly={false || !editMode}
+                            onView={async () => linkViewOwnerAction(data?.owner!)}
+                          />
+                        </Grid>
+                      </Grid>
+                    </Grid>
                   </Grid>
-                </Grid>
+                </CardContent>
               </Card>
             </Grid>
 
-            <Grid container item>
+            <Grid container item xs={12} sm={12}>
               <ModeledTabs
                 activeIndex={0}
                 childTabs={[
@@ -434,166 +456,170 @@ export default function AdminDashboardIssuesView() {
                   },
                 ]}
               >
-                <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={12.0}
-                    direction="column"
-                    alignItems="stretch"
-                    justifyContent="flex-start"
-                  >
-                    <Grid item>
-                      <DataGrid
-                        {...baseTableConfig}
-                        getRowId={(row: { __identifier: string }) => row.__identifier}
-                        loading={isLoading}
-                        rows={data?.attachments ?? []}
-                        columns={[
-                          ...attachmentsColumns,
-                          ...columnsActionCalculator(attachmentsRowActions, { shownActions: 2 }),
-                        ]}
-                        disableSelectionOnClick
-                        onRowClick={(params: GridRowParams<AdminIssueAttachmentStored>) =>
-                          rowViewAttachmentsAction(params.row)
-                        }
-                        sortModel={attachmentsSortModel}
-                        onSortModelChange={(newModel: GridSortModel) => {
-                          setAttachmentsSortModel(newModel);
-                        }}
-                        components={{
-                          Toolbar: () => (
-                            <GridToolbarContainer>
-                              <Button
-                                onClick={() => tableCreateAttachmentsAction(data, () => fetchData())}
-                                disabled={isLoading || editMode}
-                              >
-                                <MdiIcon path="note_add" />
-                                {t('judo.pages.table.create', { defaultValue: 'Create' })}
-                              </Button>
-                            </GridToolbarContainer>
-                          ),
-                        }}
-                      />
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                            <DataGrid
+                              {...baseTableConfig}
+                              getRowId={(row: { __identifier: string }) => row.__identifier}
+                              loading={isLoading}
+                              rows={data?.attachments ?? []}
+                              columns={[
+                                ...attachmentsColumns,
+                                ...columnsActionCalculator(attachmentsRowActions, { shownActions: 2 }),
+                              ]}
+                              disableSelectionOnClick
+                              onRowClick={(params: GridRowParams<AdminIssueAttachmentStored>) =>
+                                rowViewAttachmentsAction(params.row)
+                              }
+                              sortModel={attachmentsSortModel}
+                              onSortModelChange={(newModel: GridSortModel) => {
+                                setAttachmentsSortModel(newModel);
+                              }}
+                              components={{
+                                Toolbar: () => (
+                                  <GridToolbarContainer>
+                                    <Button
+                                      onClick={() => tableCreateAttachmentsAction(data, () => fetchData())}
+                                      disabled={isLoading || editMode}
+                                    >
+                                      <MdiIcon path="note_add" />
+                                      {t('judo.pages.table.create', { defaultValue: 'Create' })}
+                                    </Button>
+                                  </GridToolbarContainer>
+                                ),
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
 
-                <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={12.0}
-                    direction="column"
-                    alignItems="stretch"
-                    justifyContent="flex-start"
-                  >
-                    <Grid item>
-                      <DataGrid
-                        {...baseTableConfig}
-                        getRowId={(row: { __identifier: string }) => row.__identifier}
-                        loading={isLoading}
-                        rows={data?.categories ?? []}
-                        columns={[
-                          ...categoriesColumns,
-                          ...columnsActionCalculator(categoriesRowActions, { shownActions: 2 }),
-                        ]}
-                        disableSelectionOnClick
-                        onRowClick={(params: GridRowParams<AdminIssueCategoryStored>) =>
-                          rowViewCategoriesAction(params.row)
-                        }
-                        sortModel={categoriesSortModel}
-                        onSortModelChange={(newModel: GridSortModel) => {
-                          setCategoriesSortModel(newModel);
-                        }}
-                        components={{
-                          Toolbar: () => <div>{/* No actions defined */}</div>,
-                        }}
-                      />
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                            <DataGrid
+                              {...baseTableConfig}
+                              getRowId={(row: { __identifier: string }) => row.__identifier}
+                              loading={isLoading}
+                              rows={data?.categories ?? []}
+                              columns={[
+                                ...categoriesColumns,
+                                ...columnsActionCalculator(categoriesRowActions, { shownActions: 2 }),
+                              ]}
+                              disableSelectionOnClick
+                              onRowClick={(params: GridRowParams<AdminIssueCategoryStored>) =>
+                                rowViewCategoriesAction(params.row)
+                              }
+                              sortModel={categoriesSortModel}
+                              onSortModelChange={(newModel: GridSortModel) => {
+                                setCategoriesSortModel(newModel);
+                              }}
+                              components={{
+                                Toolbar: () => <div>{/* No actions defined */}</div>,
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
 
-                <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={12.0}
-                    direction="column"
-                    alignItems="stretch"
-                    justifyContent="flex-start"
-                  >
-                    <Grid item>
-                      <DataGrid
-                        {...baseTableConfig}
-                        getRowId={(row: { __identifier: string }) => row.__identifier}
-                        loading={isLoading}
-                        rows={data?.debates ?? []}
-                        columns={[
-                          ...debatesColumns,
-                          ...columnsActionCalculator(debatesRowActions, { shownActions: 2 }),
-                        ]}
-                        disableSelectionOnClick
-                        onRowClick={(params: GridRowParams<AdminIssueDebateStored>) => rowViewDebatesAction(params.row)}
-                        sortModel={debatesSortModel}
-                        onSortModelChange={(newModel: GridSortModel) => {
-                          setDebatesSortModel(newModel);
-                        }}
-                        components={{
-                          Toolbar: () => <div>{/* No actions defined */}</div>,
-                        }}
-                      />
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                            <DataGrid
+                              {...baseTableConfig}
+                              getRowId={(row: { __identifier: string }) => row.__identifier}
+                              loading={isLoading}
+                              rows={data?.debates ?? []}
+                              columns={[
+                                ...debatesColumns,
+                                ...columnsActionCalculator(debatesRowActions, { shownActions: 2 }),
+                              ]}
+                              disableSelectionOnClick
+                              onRowClick={(params: GridRowParams<AdminIssueDebateStored>) =>
+                                rowViewDebatesAction(params.row)
+                              }
+                              sortModel={debatesSortModel}
+                              onSortModelChange={(newModel: GridSortModel) => {
+                                setDebatesSortModel(newModel);
+                              }}
+                              components={{
+                                Toolbar: () => <div>{/* No actions defined */}</div>,
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
 
-                <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                    <Grid item xs={12} sm={4.0}>
-                      <Button
-                        onClick={() => AdminIssueCreateCommentAction(data, () => fetchData())}
-                        disabled={isLoading || editMode}
-                      >
-                        <MdiIcon path="comment-text-multiple" />
-                        {t(
-                          'edemokracia.admin.Dashboard.issues.Issue.View.other.comments.comments.actions.createComment',
-                          { defaultValue: 'Add comment' },
-                        )}
-                      </Button>
-                    </Grid>
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <Button
+                            onClick={() => AdminIssueCreateCommentAction(data, () => fetchData())}
+                            disabled={isLoading || editMode}
+                          >
+                            <MdiIcon path="comment-text-multiple" />
+                            {t(
+                              'edemokracia.admin.Dashboard.issues.Issue.View.other.comments.comments.actions.createComment',
+                              { defaultValue: 'Add comment' },
+                            )}
+                          </Button>
+                        </Grid>
 
-                    <Grid
-                      container
-                      item
-                      xs={12}
-                      sm={12.0}
-                      direction="column"
-                      alignItems="stretch"
-                      justifyContent="flex-start"
-                    >
-                      <Grid item>
-                        <DataGrid
-                          {...baseTableConfig}
-                          getRowId={(row: { __identifier: string }) => row.__identifier}
-                          loading={isLoading}
-                          rows={data?.comments ?? []}
-                          columns={[
-                            ...commentsColumns,
-                            ...columnsActionCalculator(commentsRowActions, { shownActions: 2 }),
-                          ]}
-                          disableSelectionOnClick
-                          onRowClick={(params: GridRowParams<AdminCommentStored>) => rowViewCommentsAction(params.row)}
-                          sortModel={commentsSortModel}
-                          onSortModelChange={(newModel: GridSortModel) => {
-                            setCommentsSortModel(newModel);
-                          }}
-                          components={{
-                            Toolbar: () => <div>{/* No actions defined */}</div>,
-                          }}
-                        />
+                        <Grid item xs={12} sm={12}>
+                          <Grid
+                            container
+                            direction="column"
+                            alignItems="stretch"
+                            justifyContent="flex-start"
+                            spacing={2}
+                          >
+                            <Grid item xs={12} sm={12}>
+                              <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                                <DataGrid
+                                  {...baseTableConfig}
+                                  getRowId={(row: { __identifier: string }) => row.__identifier}
+                                  loading={isLoading}
+                                  rows={data?.comments ?? []}
+                                  columns={[
+                                    ...commentsColumns,
+                                    ...columnsActionCalculator(commentsRowActions, { shownActions: 2 }),
+                                  ]}
+                                  disableSelectionOnClick
+                                  onRowClick={(params: GridRowParams<AdminCommentStored>) =>
+                                    rowViewCommentsAction(params.row)
+                                  }
+                                  sortModel={commentsSortModel}
+                                  onSortModelChange={(newModel: GridSortModel) => {
+                                    setCommentsSortModel(newModel);
+                                  }}
+                                  components={{
+                                    Toolbar: () => <div>{/* No actions defined */}</div>,
+                                  }}
+                                />
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
                       </Grid>
                     </Grid>
                   </Grid>

@@ -40,6 +40,7 @@
         "judo.form.switch.false": "Nem",
         "judo.component.TrinaryLogic.unknown": "Ismeretlen",
         "judo.component.TrinaryLogic.true": "Igen",
-        "judo.component.TrinaryLogic.false": "Nem"
+        "judo.component.TrinaryLogic.false": "Nem",
+        "judo.applications.available_applications": "Választható alkalmazások"
     }
 }

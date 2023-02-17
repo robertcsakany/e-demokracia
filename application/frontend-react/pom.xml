@@ -20,13 +20,12 @@
     <packaging>pom</packaging>
 
     <properties>
-        <judo-meta-ui-version>1.0.1.20230207_071531_85a9b1eb_develop</judo-meta-ui-version>
-        <judo-ui-archetype-version>1.0.0.20221003_142712_453def5b_develop</judo-ui-archetype-version>
+        <judo-meta-ui-version>1.0.1.20230213_193724_b9e98a1c_develop</judo-meta-ui-version>
         <frontend-maven-plugin-version>1.12.1</frontend-maven-plugin-version>
 
-        <judo-tatami-ui2web-version>1.0.0.20230209_132613_e45679cf_develop</judo-tatami-ui2web-version>
-        <judo-tatami-ui2typescript-maven-plugin-version>1.0.0.20230209_132613_e45679cf_develop</judo-tatami-ui2typescript-maven-plugin-version>
-        <judo-tatami-ui-external-packages-version>1.0.0.20230209_132613_e45679cf_develop</judo-tatami-ui-external-packages-version>
+        <judo-tatami-ui2web-version>1.0.0.20230215_122636_6c5daf88_develop</judo-tatami-ui2web-version>
+        <judo-tatami-ui2typescript-maven-plugin-version>1.0.0.20230215_122636_6c5daf88_develop</judo-tatami-ui2typescript-maven-plugin-version>
+        <judo-tatami-ui-external-packages-version>1.0.0.20230215_122636_6c5daf88_develop</judo-tatami-ui-external-packages-version>
 
         <ui-model>${basedir}/model/edemokracia-ui.model</ui-model>
 
@@ -44,6 +43,11 @@
             <groupId>hu.blackbelt.judo.tatami</groupId>
             <artifactId>judo-tatami-ui2web</artifactId>
             <version>${judo-tatami-ui2web-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>hu.blackbelt.judo.meta</groupId>
+            <artifactId>judo-ui-generator-maven-plugin</artifactId>
+            <version>${judo-meta-ui-version}</version>
         </dependency>
         <dependency>
             <groupId>hu.blackbelt.judo.tatami</groupId>

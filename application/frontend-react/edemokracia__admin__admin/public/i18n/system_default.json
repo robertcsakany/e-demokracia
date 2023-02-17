@@ -40,6 +40,7 @@
         "judo.form.switch.false": "No",
         "judo.component.TrinaryLogic.unknown": "Unknown",
         "judo.component.TrinaryLogic.true": "Yes",
-        "judo.component.TrinaryLogic.false": "No"
+        "judo.component.TrinaryLogic.false": "No",
+        "judo.applications.available_applications": "Available applications"
     }
 }

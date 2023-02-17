@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression:
 // Path expression: 'src/utilities/table-row-actions.tsx'
 // Template name: actor/src/utilities/table-row-actions.tsx.hbs
 
@@ -11,6 +10,7 @@ export interface TableRowAction<R> {
   label: string;
   action: (row: R) => void;
   icon: ReactNode;
+  disabled?: (row: R) => boolean;
 }
 
 export interface ColumnsActionsOptions {
