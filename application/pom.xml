@@ -46,10 +46,10 @@
         <judo-sdk-common-version>1.0.4.20230207_042417_6df166c2_develop</judo-sdk-common-version>
         <mapper-version>1.0.3</mapper-version>
         
-        <judo-tatami-version>1.1.0.20230210_151336_fe2ffc46_develop </judo-tatami-version>
+        <judo-tatami-version>1.1.0-SNAPSHOT </judo-tatami-version>
         <judo-platform-version>2.0.1.20230211_092717_19dec3c8_feature_JNG_3862_KeycloakPublicUrl</judo-platform-version>
-        <judo-services-version>1.1.0.20230211_091606_ee055539_feature_JNG_3862_KeycloakPublicUrl</judo-services-version>
-        <judo-rdbms-schema-version>1.0.0.20230208_082051_9d2b3cc9_develop</judo-rdbms-schema-version>
+        <judo-services-version>1.1.0-SNAPSHOT</judo-services-version>
+        <judo-rdbms-schema-version>1.0.0-SNAPSHOT</judo-rdbms-schema-version>
         <judo-tatami-client-version>1.1.0.20230210_153711_a5c4dc08_develop</judo-tatami-client-version>
         
         <judo-meta-ui-version>1.0.1.20230207_071531_85a9b1eb_develop</judo-meta-ui-version>

@@ -18,6 +18,8 @@ USAGE: judo.sh COMMANDS... [OPTIONS...]
     dump                            Dump postgresql db data before clearing and starting application.
     import                          Import postgresql db data
         -dn --dump-name             Import dump name when it's not deifined loaded the last one
+    schema-upgrade                  It can be used with persitent db (postgresql) only. It uses the current running database to
+                                    generate the difference and after it applied.
     build                           Build project.
         -a --build-app-module       Build app module only.
         -M --skip-model             Skip model building.
@@ -172,6 +174,11 @@ dump_postgresql () {
     local DUMP_FILE=${APP_NAME}_dump_$TIMESTAMP.tar.gz
     docker exec -i ${INSTANCE_NAME} /bin/bash -c "PGPASSWORD=${APP_NAME} pg_dump --username=${APP_NAME} -F c ${APP_NAME}" > $DUMP_FILE || exit
     echo "Database dumped to $DUMP_FILE"
+}
+
+upgrade_postgresql () {
+    # mvn judo-rdbms-schema:generate -DjdbcUrl=jdbc:postgresql://localhost:5432/edemokracia -DdbUser=edemokracia -DdbPassword=edemokracia  -DupdateModelVersion=1.0.0-2 -X
+
 }
 
 install_maven_wrapper () {
