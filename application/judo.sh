@@ -178,7 +178,7 @@ dump_postgresql () {
 
 upgrade_postgresql () {
     # mvn judo-rdbms-schema:generate -DjdbcUrl=jdbc:postgresql://localhost:5432/edemokracia -DdbUser=edemokracia -DdbPassword=edemokracia  -DupdateModelVersion=1.0.0-2 -X
-
+	echo test
 }
 
 install_maven_wrapper () {
