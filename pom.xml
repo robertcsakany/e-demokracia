@@ -24,7 +24,7 @@
         <judo-dispatcher-api-version-defined>1.0.2</judo-dispatcher-api-version-defined>
         <judo-sdk-common-version-defined>1.0.4.20230207_042417_6df166c2_develop</judo-sdk-common-version-defined>
         <mapper-version-defined>1.0.3</mapper-version-defined>
-        <judo-platform-version-defined>2.0.1.20230215_041551_4270ca99_develop</judo-platform-version-defined>
+        <judo-platform-version-defined>2.0.1-SNAPSHOT</judo-platform-version-defined>
         <judo-services-version-defined>1.1.0-SNAPSHOT</judo-services-version-defined>
         <judo-rdbms-schema-version-defined>1.0.0-SNAPSHOT</judo-rdbms-schema-version-defined>
         <judo-tatami-client-version-defined>1.1.0.20230214_040835_02267141_develop</judo-tatami-client-version-defined>

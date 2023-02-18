@@ -666,22 +666,17 @@ if [ $prune -eq 1 ]; then
     prune_frontend
 elif [ $clean -eq 1 ]; then
 
-    # local dumps=($(ls ${APP_DIR}/docker))
-    # find ./docker -type f -name 'docker-compose.yml' | sed -r 's|/[^/]+$||' |sort |uniq
-    # find ./docker -type f -name 'docker-compose.yml' | sed -r 's|/[^/]+$||' | sed 's/.*\///'
-    ## now loop through the above array
-    for compose_name in $(find ./docker -type f -name 'docker-compose.yml' | sed -r 's|/[^/]+$||' | sed 's/.*\///')
+    for compose_name in $(get_compose_envs)
     do
-        echo "$compose_name"
-        # or do whatever with individual element of the array
+        stop_compose $compose_name
     done
 
-#    remove_docker_instance postgres-${APP_NAME}
-#    remove_docker_instance keycloak-${APP_NAME}
-#    remove_docker_network ${APP_NAME}
-#    remove_docker_volume ${APP_NAME}_certs
-#    remove_docker_volume ${APP_NAME}_db
-#    remove_docker_volume ${APP_NAME}_filestore
+    remove_docker_instance postgres-${APP_NAME}
+    remove_docker_instance keycloak-${APP_NAME}
+    remove_docker_network ${APP_NAME}
+    remove_docker_volume ${APP_NAME}_certs
+    remove_docker_volume ${APP_NAME}_db
+    remove_docker_volume ${APP_NAME}_filestore
 fi
 
 if [ $update -eq 1 ]; then

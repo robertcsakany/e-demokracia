@@ -47,7 +47,7 @@
         <mapper-version>1.0.3</mapper-version>
         
         <judo-tatami-version>1.1.0-SNAPSHOT </judo-tatami-version>
-        <judo-platform-version>2.0.1.20230215_041551_4270ca99_develop</judo-platform-version>
+        <judo-platform-version>2.0.1-SNAPSHOT</judo-platform-version>
         <judo-services-version>1.1.0-SNAPSHOT</judo-services-version>
         <judo-rdbms-schema-version>1.0.0-SNAPSHOT</judo-rdbms-schema-version>
         <judo-tatami-client-version>1.1.0.20230214_040835_02267141_develop</judo-tatami-client-version>
