@@ -47,13 +47,13 @@
         <mapper-version>1.0.3</mapper-version>
         
         <judo-tatami-version>1.1.0-SNAPSHOT </judo-tatami-version>
-        <judo-platform-version>2.0.1.20230211_092717_19dec3c8_feature_JNG_3862_KeycloakPublicUrl</judo-platform-version>
+        <judo-platform-version>2.0.1.20230215_041551_4270ca99_develop</judo-platform-version>
         <judo-services-version>1.1.0-SNAPSHOT</judo-services-version>
         <judo-rdbms-schema-version>1.0.0-SNAPSHOT</judo-rdbms-schema-version>
-        <judo-tatami-client-version>1.1.0.20230210_153711_a5c4dc08_develop</judo-tatami-client-version>
+        <judo-tatami-client-version>1.1.0.20230214_040835_02267141_develop</judo-tatami-client-version>
         
-        <judo-meta-ui-version>1.0.1.20230207_071531_85a9b1eb_develop</judo-meta-ui-version>
-        <judo-ui-flutter-template-version>1.0.0.20230208_080158_283478a2_develop</judo-ui-flutter-template-version>
+        <judo-meta-ui-version>1.0.1.20230213_193724_b9e98a1c_develop</judo-meta-ui-version>
+        <judo-ui-flutter-template-version>1.0.0.20230214_040838_fa0b654c_develop</judo-ui-flutter-template-version>
         <!-- End of 'pom.xml.judo-properties-definition.fragment.hbs' -->
 
         <!-- To define create 'pom.xml.properties-definition.fragment.hbs' file -->
@@ -165,7 +165,7 @@
             <id>build-frontend-flutter</id>
             <activation>
                 <property>
-                        <name>!skipFrontendFlutter</name>
+                        <name>buildFrontendFlutter</name>
                 </property>
             </activation>
 

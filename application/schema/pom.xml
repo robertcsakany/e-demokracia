@@ -24,13 +24,16 @@
         <baseModel>mvn:${project.groupId}:${modelArtifact}:${baseModelArtifactVersion}!model/${modelName}-rdbms_postgresql.model</baseModel>
         <updateModel>mvn:${project.groupId}:${modelArtifact}:${updateModelArtifactVersion}!model/${modelName}-rdbms_postgresql.model</updateModel>
         -->
-        <updateModelArtifactVersion>${project.version}</updateModelArtifactVersion>
-        <updateModel>mvn:${project.groupId}:${modelArtifact}:${updateModelArtifactVersion}!model/${modelName}-rdbms_postgresql.model</updateModel>
         
         <dbType>postgresql</dbType>
         <incrementalDirectory>${basedir}/migration</incrementalDirectory>
         <outputDirectory>${incrementalDirectory}</outputDirectory>
+
+        <updateModelArtifactVersion>${project.version}</updateModelArtifactVersion>
+        <updateModel>mvn:${project.groupId}:${modelArtifact}:${updateModelArtifactVersion}!model/${modelName}-rdbms_postgresql.model</updateModel>
+ 
     </properties>
+
     <profiles>
         <profile>
             <id>create-schema-image</id>

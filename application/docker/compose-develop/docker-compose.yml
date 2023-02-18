@@ -2,7 +2,7 @@
 services:
   proxy:
     restart: unless-stopped
-    image: traefik:v2.0.2
+    image: traefik:v2.9.7
     command: --providers.docker=true
     ports:
       - "80:80"
@@ -34,7 +34,7 @@ services:
       - JUDO_PLATFORM_IDENTIFIER_SIGNER_SECRET=tJ0lt0h9X2WvVydp4SoDIahBdBcctMxlTn6UJ1xTbQYltBF//qPLmyZPU6X02ETnsP/X7G3IDhGttNXISwyi1uJk5haBj3MI88baDxckmOKpAd6Fy93KSZJgPoGuICD0bPYKeXMSSqEKypt4NkY0NiNL2aLVwL3UDCWHsWQsCfk=
       - JUDO_PLATFORM_KEYCLOAK_DEFAULT_PASSWORD_POLICY=SAME_USERNAME
       - JUDO_PLATFORM_LOG_SMTP_SERVER=true
-      - JUDO_PLATFORM_FILESTORE=filesystem
+      - JUDO_PLATFORM_FILESTORE=rdbms
       - JUDO_PLATFORM_KEYCLOAK_AUTH_SERVER_URL=http://auth:8080
       - JUDO_PLATFORM_KEYCLOAK_AUTH_PUBLIC_URL=http://auth.traefik.me
       - JUDO_PLATFORM_MARK_SELECTED_RANGE_ITEMS=true

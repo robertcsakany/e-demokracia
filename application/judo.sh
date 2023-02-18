@@ -60,7 +60,7 @@ EXAMPLES:
     ./judo.sh build -M -F -BM run -K            Rebuild app and restart application.
     ./judo.sh run -o \"runtime=compose,compose_env=compose-postgresql-https'\"
                                                 Run application in docker compose using the copmpose-postgresql-https's docker-compose.yaml
-    ./judo.sh env alternate build               Build app module with alternate env. (have to be descibed in alternate.properties)
+    ./judo.sh env compose-dev build run         Build and run application with compose-dev env. (have to be descibed in compose-dev.properties)
 
 """
 }
@@ -360,7 +360,7 @@ start_karaf () {
     export JUDO_PLATFORM_RDBMS_DB_DATABASE=$APP_NAME
     export JUDO_PLATFORM_RDBMS_DB_USER=$APP_NAME
     export JUDO_PLATFORM_RDBMS_DB_PASSWORD=$APP_NAME
-    export JUDO_PLATFORM_FILESTORE=filesystem
+    export JUDO_PLATFORM_FILESTORE=rdbms
     export JUDO_PLATFORM_KEYCLOAK_AUTH_SERVER_URL=http://localhost:${KEYCLOAK_PORT}/auth
     
     local VERSION_NUMBER=$(${APP_DIR}/mvnw org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout)
@@ -405,7 +405,7 @@ remove_docker_volume () {
     local VOLUME_EXIST=$(docker volume ls | grep $VOLUME_NAME | sed -e 's/^[[:space:]]*//')
     if [ ! -z "$VOLUME_EXIST" ]; then
         echo "Remove $VOLUME_NAME volume"
-        docker volume create $VOLUME_NAME
+        docker volume remove $VOLUME_NAME
     fi
 }
 
@@ -423,11 +423,11 @@ create_docker_network () {
 # Args:
 # 1 - volume name
 remove_docker_network () {
-    VOLUME_NAME=$1
+    NETWORK_NAME=$1
     NETWORK_EXIST=$(docker network ls | grep $NETWORK_NAME | sed -e 's/^[[:space:]]*//')
     if [ ! -z "$NETWORK_EXIST" ]; then
         echo "Remove $NETWORK_NAME network"
-        docker network create $NETWORK_NAME
+        docker network remove $NETWORK_NAME
     fi
 }
 
@@ -458,9 +458,28 @@ Access in PROD mode:
     create_docker_network ${APP_NAME}
     create_docker_volume ${APP_NAME}_certs
     create_docker_volume ${APP_NAME}_db
+    create_docker_volume ${APP_NAME}_filestore
     load_application_image
     docker compose -f ${APP_DIR}/docker/${compose_env}/docker-compose.yml up
 }
+
+# Args:
+# 1 - compsose env
+stop_compose () {
+    local compose_env=$1
+    docker compose -f ${APP_DIR}/docker/${compose_env}/docker-compose.yml down --volumes
+}
+
+# Args:
+get_compose_envs () {
+    for compose_name in $(find ./docker -type f -name 'docker-compose.yml' | sed -r 's|/[^/]+$||' | sed 's/.*\///')
+    do
+        echo "$compose_name"
+        # or do whatever with individual element of the array
+    done
+#    $(find ${APP_DIR}/docker -type f -name 'docker-compose.yml' | sed -r 's|/[^/]+$||' | sed 's/.*\///')
+}
+
 
 load_application_image () {
     local arch=$(get_arch)
@@ -553,7 +572,7 @@ MODEL_DIR=$(cd "$(dirname "${model_dir:-$MODEL_DIR}")"; pwd)/$(basename "${model
 set -- "${original_args[@]}"
 while [ $# -ne 0 ]; do
     case "$1" in
-        env)                            shift 1; shift 1;;
+        env)                            shift 2;;
         clean)                          clean=1; shift 1;;
 
         prune)                          prune=1; shift 1;;
@@ -646,11 +665,23 @@ fi
 if [ $prune -eq 1 ]; then
     prune_frontend
 elif [ $clean -eq 1 ]; then
-    remove_docker_instance postgres-${APP_NAME}
-    remove_docker_instance keycloak-${APP_NAME}
-    remove_docker_network ${APP_NAME}
-    remove_docker_volume ${APP_NAME}_certs
-    remove_docker_volume ${APP_NAME}_db
+
+    # local dumps=($(ls ${APP_DIR}/docker))
+    # find ./docker -type f -name 'docker-compose.yml' | sed -r 's|/[^/]+$||' |sort |uniq
+    # find ./docker -type f -name 'docker-compose.yml' | sed -r 's|/[^/]+$||' | sed 's/.*\///'
+    ## now loop through the above array
+    for compose_name in $(find ./docker -type f -name 'docker-compose.yml' | sed -r 's|/[^/]+$||' | sed 's/.*\///')
+    do
+        echo "$compose_name"
+        # or do whatever with individual element of the array
+    done
+
+#    remove_docker_instance postgres-${APP_NAME}
+#    remove_docker_instance keycloak-${APP_NAME}
+#    remove_docker_network ${APP_NAME}
+#    remove_docker_volume ${APP_NAME}_certs
+#    remove_docker_volume ${APP_NAME}_db
+#    remove_docker_volume ${APP_NAME}_filestore
 fi
 
 if [ $update -eq 1 ]; then

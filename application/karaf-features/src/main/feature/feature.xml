@@ -33,7 +33,6 @@
         
         <bundle>mvn:party.mkkp.edemokracia/edemokracia-application-app/${project.version}</bundle>
         
-        <bundle>mvn:party.mkkp.edemokracia/edemokracia-application-frontend-flutter-edemokracia__admin__admin/${project.version}</bundle>
         <bundle>mvn:party.mkkp.edemokracia/edemokracia-application-frontend-react-edemokracia__admin__admin/${project.version}</bundle>
         
         <!-- End of 'karaf-features/src/main/feature/feature.xml.model-bundles.fragment.hbs' -->
