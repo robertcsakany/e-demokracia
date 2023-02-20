@@ -28,7 +28,7 @@
         <judo-services-version-defined>1.1.0-SNAPSHOT</judo-services-version-defined>
         <judo-rdbms-schema-version-defined>1.0.0-SNAPSHOT</judo-rdbms-schema-version-defined>
         <judo-tatami-client-version-defined>1.1.0.20230214_040835_02267141_develop</judo-tatami-client-version-defined>
-        <judo-esm-fullstack-project-template-version-defined>1.0.0.20230216_080814_1121505f_develop</judo-esm-fullstack-project-template-version-defined>
+        <judo-esm-fullstack-project-template-version-defined>1.0.0-SNAPSHOT</judo-esm-fullstack-project-template-version-defined>
 		<judo-meta-ui-version-defined>1.0.1.20230213_193724_b9e98a1c_develop</judo-meta-ui-version-defined>
 		<judo-ui-flutter-template-version-defined>1.0.0.20230214_040838_fa0b654c_develop</judo-ui-flutter-template-version-defined>
         <judo-tatami-typescript-version-defined>1.0.0.20230215_122636_6c5daf88_develop</judo-tatami-typescript-version-defined>
