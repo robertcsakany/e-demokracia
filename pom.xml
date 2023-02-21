@@ -117,7 +117,8 @@
                                 <configuration>
                                     <modelName>${project.artifactId}</modelName>
                                     <destination>${basedir}/target/classes/model</destination>
-                                    <esm>${basedir}/model/${project.artifactId}.model</esm>
+                                    <esm>{basedir}/target/classes/model/${project.artifactId}.model</esm>
+                                    <modelVersion>${project.version}</modelVersion>
                                     <ignorePsm2Measure>false</ignorePsm2Measure>
                                     <ignorePsm2Asm>false</ignorePsm2Asm>
                                     <ignoreAsm2Openapi>true</ignoreAsm2Openapi>
