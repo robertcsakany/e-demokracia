@@ -50,9 +50,9 @@
         <judo-platform-version>2.0.1-SNAPSHOT</judo-platform-version>
         <judo-services-version>1.1.0-SNAPSHOT</judo-services-version>
         <judo-rdbms-schema-version>1.0.0-SNAPSHOT</judo-rdbms-schema-version>
-        <judo-tatami-client-version>1.1.0.20230214_040835_02267141_develop</judo-tatami-client-version>
+        <judo-tatami-client-version>1.1.0-SNAPSHOT</judo-tatami-client-version>
         
-        <judo-meta-ui-version>1.0.1.20230213_193724_b9e98a1c_develop</judo-meta-ui-version>
+        <judo-meta-ui-version>1.1.0.20230222_232226_e8c8b156_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-ui-version>
         <judo-ui-flutter-template-version>1.0.0.20230214_040838_fa0b654c_develop</judo-ui-flutter-template-version>
         <!-- End of 'pom.xml.judo-properties-definition.fragment.hbs' -->
 

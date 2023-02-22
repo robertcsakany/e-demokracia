@@ -20,11 +20,11 @@
     <packaging>pom</packaging>
 
     <properties>
-        <judo-meta-ui-version>1.0.1.20230213_193724_b9e98a1c_develop</judo-meta-ui-version>
+        <judo-meta-ui-version>1.1.0.20230222_232226_e8c8b156_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-ui-version>
         <frontend-maven-plugin-version>1.12.1</frontend-maven-plugin-version>
 
-        <judo-tatami-ui2web-version>1.0.0.20230215_122636_6c5daf88_develop</judo-tatami-ui2web-version>
-        <judo-tatami-ui2typescript-maven-plugin-version>1.0.0.20230215_122636_6c5daf88_develop</judo-tatami-ui2typescript-maven-plugin-version>
+        <judo-tatami-ui2web-version>1.0.0.20230222_232625_bb02a632_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-tatami-ui2web-version>
+        <judo-tatami-ui2typescript-maven-plugin-version>1.0.0.20230222_232625_bb02a632_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-tatami-ui2typescript-maven-plugin-version>
         <judo-tatami-ui-external-packages-version>1.0.0.20230215_122636_6c5daf88_develop</judo-tatami-ui-external-packages-version>
 
         <ui-model>${basedir}/model/edemokracia-ui.model</ui-model>

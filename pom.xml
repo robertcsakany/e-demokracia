@@ -16,7 +16,7 @@
 		<sqlDialects>postgresql,hsqldb</sqlDialects>
 
 
-        <judo-meta-esm-version-defined>1.1.1.20230209_195143_5d0ca1c7_develop</judo-meta-esm-version-defined>
+        <judo-meta-esm-version-defined>1.2.0-SNAPSHOT</judo-meta-esm-version-defined>
         <judo-tatami-version-defined>1.1.0-SNAPSHOT</judo-tatami-version-defined>
         <flutter-maven-plugin-version-defined>1.0.2.20220326_002737_efc0629e_develop</flutter-maven-plugin-version-defined>
         <structured-map-proxy-version-defined>1.2.0</structured-map-proxy-version-defined>
@@ -27,11 +27,11 @@
         <judo-platform-version-defined>2.0.1-SNAPSHOT</judo-platform-version-defined>
         <judo-services-version-defined>1.1.0-SNAPSHOT</judo-services-version-defined>
         <judo-rdbms-schema-version-defined>1.0.0-SNAPSHOT</judo-rdbms-schema-version-defined>
-        <judo-tatami-client-version-defined>1.1.0.20230214_040835_02267141_develop</judo-tatami-client-version-defined>
+        <judo-tatami-client-version-defined>1.1.0-SNAPSHOT</judo-tatami-client-version-defined>
         <judo-esm-fullstack-project-template-version-defined>1.0.0-SNAPSHOT</judo-esm-fullstack-project-template-version-defined>
-		<judo-meta-ui-version-defined>1.0.1.20230213_193724_b9e98a1c_develop</judo-meta-ui-version-defined>
+		<judo-meta-ui-version-defined>1.1.0.20230222_232226_e8c8b156_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-ui-version-defined>
 		<judo-ui-flutter-template-version-defined>1.0.0.20230214_040838_fa0b654c_develop</judo-ui-flutter-template-version-defined>
-        <judo-tatami-typescript-version-defined>1.0.0.20230215_122636_6c5daf88_develop</judo-tatami-typescript-version-defined>
+        <judo-tatami-typescript-version-defined>1.0.0.20230222_232625_bb02a632_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-tatami-typescript-version-defined>
 
         <judo-ui-archetype-version-defined>1.0.0.20221003_142712_453def5b_develop</judo-ui-archetype-version-defined>
         <frontendType>react</frontendType>
@@ -117,7 +117,7 @@
                                 <configuration>
                                     <modelName>${project.artifactId}</modelName>
                                     <destination>${basedir}/target/classes/model</destination>
-                                    <esm>{basedir}/target/classes/model/${project.artifactId}.model</esm>
+                                    <esm>${basedir}/target/classes/model/${project.artifactId}.model</esm>
                                     <modelVersion>${project.version}</modelVersion>
                                     <ignorePsm2Measure>false</ignorePsm2Measure>
                                     <ignorePsm2Asm>false</ignorePsm2Asm>
