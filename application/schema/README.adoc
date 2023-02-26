@@ -28,6 +28,13 @@ The steps to follow are the following:
 
 == Command examples
 
+Auto generation execution migration scripts:
+
+[source,bash]
+----
+mvn judo-rdbms-schema:apply -DjdbcUrl=jdbc:postgresql://localhost:5432/edemokracia -DdbType=postgresql -DdbUser=edemokracia -DdbPassword=edemokracia
+----
+
 Generate migration scripts:
 
 [source,bash]
@@ -39,13 +46,13 @@ Execute migration with the something like following command:
 
 [source,bash]
 ----
-mvn judo-rdbms-schema:execute -DbaseModelVersion=1.1.0 -DupdateModelVersion=1.2.0 -DjdbcUrl=jdbc:postgresql://localhost/judo -DdbType=postgresql -DdbUser=judo -DdbPassword=judo
+mvn judo-rdbms-schema:execute -DbaseModelVersion=1.1.0 -DupdateModelVersion=1.2.0 -DjdbcUrl=jdbc:postgresql://localhost/edemokracia -DdbType=postgresql -DdbUser=edemokracia -DdbPassword=edemokracia
 ----
 
 Execute migration using the docker image:
 
 [source,bash]
 ----
-docker run --rm edemokracia-application-schema execute --baseModelVersion=1.1.0.20210929_004050_9602796_develop --updateModelVersion=1.2.0.20211021_085156_21efaed_develop --modelName=edemokracia --incrementalDirectory=/ --jdbcUrl=jdbc:postgresql://host.docker.internal/judo --dbType=postgresql --dbUser=judo --dbPassword=judo
+docker run --rm edemokracia-application-schema execute --baseModelVersion=1.1.0.20210929_004050_9602796_develop --updateModelVersion=1.2.0.20211021_085156_21efaed_develop --modelName=edemokracia --incrementalDirectory=/ --jdbcUrl=jdbc:postgresql://host.docker.internal/edemokracia --dbType=postgresql --dbUser=edemokracia --dbPassword=edemokracia
 ----
 

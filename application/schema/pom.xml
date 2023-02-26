@@ -15,21 +15,10 @@
 
     <properties>
         <modelName>edemokracia</modelName>
-        <updateModelVersion>${project.version}</updateModelVersion>
-        <modelArtifact>edemokracia</modelArtifact>
-        <schemaDialect>postgresql</schemaDialect>
-        <!--
-        <baseModelArtifactVersion>${baseModelVersion}</baseModelArtifactVersion>
-        <updateModelArtifactVersion>${updateModelVersion}</updateModelArtifactVersion>
-        <baseModel>mvn:${project.groupId}:${modelArtifact}:${baseModelArtifactVersion}!model/${modelName}-rdbms_postgresql.model</baseModel>
-        <updateModel>mvn:${project.groupId}:${modelArtifact}:${updateModelArtifactVersion}!model/${modelName}-rdbms_postgresql.model</updateModel>
-        -->
-        <dbType>postgresql</dbType>
         <incrementalDirectory>${basedir}/migration</incrementalDirectory>
         <outputDirectory>${incrementalDirectory}</outputDirectory>
-
         <updateModelArtifactVersion>${project.version}</updateModelArtifactVersion>
-        <updateModel>mvn:${project.groupId}:${modelArtifact}:${updateModelArtifactVersion}!model/${modelName}-rdbms_postgresql.model</updateModel>
+        <updateModel>mvn:party.mkkp.edemokracia:edemokracia:${model-version}!model/${modelName}-rdbms_postgresql.model</updateModel>
     </properties>
 
     <profiles>

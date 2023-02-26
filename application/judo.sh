@@ -176,9 +176,13 @@ dump_postgresql () {
     echo "Database dumped to $DUMP_FILE"
 }
 
-upgrade_postgresql () {
-    # mvn judo-rdbms-schema:generate -DjdbcUrl=jdbc:postgresql://localhost:5432/edemokracia -DdbUser=edemokracia -DdbPassword=edemokracia  -DupdateModelVersion=1.0.0-2 -X
-	echo test
+upgrade_postgresql_schema () {
+    ${APP_DIR}/mvnw judo-rdbms-schema:apply \
+    -DjdbcUrl=jdbc:postgresql://127.0.0.1:5432/${APP_NAME} \
+    -DdbType=postgresql \
+    -DdbUser=${APP_NAME} \
+    -DdbPassword=${APP_NAME} \
+    -f ${APP_DIR}/schema 
 }
 
 install_maven_wrapper () {
@@ -546,6 +550,7 @@ buildAppModule=0
 skipBackendModels=0
 import=0
 dumpName=''
+schemaUpgrade=0
 
 FULL_VERSION_NUMBER="SNAPSHOT"
 original_args=( "$@" )
@@ -584,7 +589,7 @@ while [ $# -ne 0 ]; do
         dump)                           dump=1; shift 1;;
         import)                         import=1; shift 1;;
         -dn | --dump-name)              shift 1; export dumpName=$1; shift 1;;
-
+        schema-upgrade)                 schemaUpgrade=1; shift 1;;
         build)                          build=1; shift 1;;
         -a | --build-app-module)        buildAppModule=1; skipModel=1; shift 1;;
         -M | --skip-model)              skipModel=1; shift 1;;
@@ -660,6 +665,15 @@ if [ $import -eq 1 ]; then
     wait_for_port 127.0.0.1 ${POSTGRES_PORT:-5432} 30
     import_postgres postgres-${APP_NAME}
     stop_docker_instance postgres-${APP_NAME}
+    start_postgres postgres-${APP_NAME} ${POSTGRES_PORT:-5432}
+fi
+
+if [ $schemaUpgrade -eq 1 ]; then
+    if [ $postgres -eq 1 ]; then
+        start_postgres postgres-${APP_NAME} $POSTGRES_PORT
+        wait_for_port 127.0.0.1 ${POSTGRES_PORT:-5432} 30
+        upgrade_postgresql_schema
+    fi
 fi
 
 if [ $prune -eq 1 ]; then
