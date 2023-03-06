@@ -1,15 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx.hbs
 // Action name: edemokracia::admin::Admin::edemokracia::admin::Issue::attachments#TableCreate
-// Action owner name: edemokracia::admin::Dashboard.issues#View
-// Action DataElement name: attachments
-// Action DataElement owner name: edemokracia::admin::Issue
-// Action DataElement target name: edemokracia::admin::IssueAttachment
-// Owner Page name: edemokracia::admin::Dashboard.issues#View
 // Action: CreateAction
 
 import { useState, useCallback } from 'react';
@@ -18,6 +12,7 @@ import { Button, DialogActions, DialogContent, DialogContentText, DialogTitle, G
 import type { DialogOption } from '../../../../../../../components';
 import { useSnackbar, useDialog } from '../../../../../../../components';
 import { FilterOption, FilterType } from '../../../../../../../components-api';
+import { errorHandling } from '../../../../../../../utilities';
 
 import {
   EdemokraciaAttachmentType,
@@ -40,6 +35,7 @@ export type TableCreateAttachmentsAction = () => (
 
 export const useTableCreateAttachmentsAction: TableCreateAttachmentsAction = () => {
   const [createDialog, closeDialog] = useDialog();
+  const [enqueueSnackbar] = useSnackbar();
 
   return function tableCreateAttachmentsAction(
     owner: AdminIssueStored,

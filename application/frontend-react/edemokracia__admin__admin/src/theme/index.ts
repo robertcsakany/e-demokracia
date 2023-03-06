@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression:
 // Path expression: 'src/theme/index.ts'
 // Template name: actor/src/theme/index.ts.hbs
 
@@ -108,9 +107,6 @@ const baseTheme = createTheme(paletteTheme, {
           '&.Mui-focused': {
             background: 'inherit',
           },
-          '&:hover:not(.Mui-disabled):not(.Mui-focused)': {
-            background: alpha(paletteTheme.palette.secondary.main, 0.1),
-          },
           '&:hover:not(.Mui-disabled):before': {
             borderBottom: 'none',
           },
@@ -139,8 +135,14 @@ const baseTheme = createTheme(paletteTheme, {
           '&:not(.Mui-readOnly):not(.Mui-disabled)': {
             boxShadow: '0px 0px 8px 2px rgba(0,0,0,0.05)',
             borderRadius: `8px 8px 0 0`,
+            background: paletteTheme.palette.background.default,
           },
         },
+      },
+    },
+    MuiRadio: {
+      defaultProps: {
+        color: 'secondary',
       },
     },
     MuiSelect: {
@@ -167,7 +169,6 @@ const baseTheme = createTheme(paletteTheme, {
         rounded: {
           boxShadow: '0px 0px 8px 1px rgba(0,0,0,0.05)',
           borderRadius: 16,
-          padding: 8,
         },
       },
     },
@@ -243,7 +244,6 @@ const baseTheme = createTheme(paletteTheme, {
         root: {
           width: '100%',
           length: '100%',
-          padding: 15,
         },
       },
     },
@@ -252,6 +252,15 @@ const baseTheme = createTheme(paletteTheme, {
         root: {
           '> .MuiDialog-container > .MuiPaper-root': {
             backgroundColor: paletteTheme.palette.background.default,
+          },
+        },
+      },
+    },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          '.MuiListSubheader-root': {
+            color: paletteTheme.palette.subtitleColor.main,
           },
         },
       },

@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression:
 // Path expression: 'src/components/AggregationInput.tsx'
 // Template name: actor/src/components/AggregationInput.tsx.hbs
 

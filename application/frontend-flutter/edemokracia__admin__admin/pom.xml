@@ -121,7 +121,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Web-ContextPath>/${model-name}_flutter/${actor}</Web-ContextPath>
+                        <Web-ContextPath>/${model-name}/${actor}</Web-ContextPath>
                         <Include-Resource>
                             /=${project.basedir}/build/web
                         </Include-Resource>
@@ -457,7 +457,7 @@
                                     <replacements>
                                         <replacement>
                                             <token><![CDATA[<base href="/">]]></token>
-                                            <value><![CDATA[<base href="/${model-name}_flutter/${actor}/">]]></value>
+                                            <value><![CDATA[<base href="/${model-name}/${actor}/">]]></value>
                                         </replacement>
                                     </replacements>
                                     <regex>false</regex>

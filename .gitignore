@@ -10,6 +10,6 @@
 **/.vscode
 **/target
 
-application/model
+application/model/models
 
 dump*.tar

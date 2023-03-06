@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Con.pros#View
@@ -15,6 +14,7 @@ import {
   Box,
   Button,
   Card,
+  CardContent,
   Container,
   Grid,
   InputAdornment,
@@ -23,6 +23,9 @@ import {
   Typography,
   Paper,
   Divider,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@mui/material';
 import {
   DataGrid,
@@ -175,6 +178,7 @@ export default function AdminConProsView() {
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminConStored) => rowDeleteConsAction(data, row, () => fetchData()),
+      disabled: (row: AdminConStored) => !row.__deleteable,
     },
     {
       label: t('edemokracia.admin.Con.pros.View.edemokracia.admin.Con.voteUp', { defaultValue: '' }) as string,
@@ -206,6 +210,7 @@ export default function AdminConProsView() {
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminProStored) => rowDeleteProsAction(data, row, () => fetchData()),
+      disabled: (row: AdminProStored) => !row.__deleteable,
     },
     {
       label: t('edemokracia.admin.Con.pros.View.edemokracia.admin.Pro.voteUp', { defaultValue: '' }) as string,
@@ -321,7 +326,7 @@ export default function AdminConProsView() {
         )}
         {!editMode && (
           <Grid item>
-            <Button onClick={() => deleteData()} disabled={isLoading}>
+            <Button onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
               <MdiIcon path="delete" />
               {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
@@ -329,7 +334,7 @@ export default function AdminConProsView() {
         )}
         {!editMode && (
           <Grid item>
-            <Button onClick={() => setEditMode(true)} disabled={isLoading}>
+            <Button onClick={() => setEditMode(true)} disabled={isLoading || !data.__updateable}>
               <MdiIcon path="pencil" />
               {t('judo.pages.edit', { defaultValue: 'Edit' })}
             </Button>
@@ -361,189 +366,213 @@ export default function AdminConProsView() {
       </PageHeader>
       <Container component="main" maxWidth="xl">
         <Box sx={mainContainerPadding}>
-          <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
-            <Grid container item xs={12} sm={12.0} direction="column" alignItems="stretch" justifyContent="flex-start">
+          <Grid
+            container
+            xs={12}
+            sm={12}
+            spacing={2}
+            direction="column"
+            alignItems="stretch"
+            justifyContent="flex-start"
+          >
+            <Grid item xs={12} sm={12}>
               <Card>
-                <Grid container item alignItems="center" justifyContent="flex-start">
-                  <MdiIcon path="chat-plus" />
-                  <Typography variant="h6" component="h1">
-                    {t('edemokracia.admin.Con.pros.Pro.View.pro.pro.Label', { defaultValue: 'Pro' })}
-                  </Typography>
-                </Grid>
+                <CardContent>
+                  <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                        <MdiIcon path="chat-plus" />
+                        <Typography variant="h6" component="h1">
+                          {t('edemokracia.admin.Con.pros.Pro.View.pro.pro.Label', { defaultValue: 'Pro' })}
+                        </Typography>
+                      </Grid>
+                    </Grid>
 
-                <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid item xs={12} sm={6.0}>
-                    <TextField
-                      name="title"
-                      id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Con.pros/View/default/Pro_View/pro/LabelWrapper/pro/title"
-                      label={
-                        t('edemokracia.admin.Con.pros.Pro.View.pro.pro.title', { defaultValue: 'Title' }) as string
-                      }
-                      value={data.title}
-                      error={!!validation.get('title')}
-                      helperText={validation.get('title')}
-                      onChange={(event) => storeDiff('title', event.target.value)}
-                      className={false || !editMode ? 'Mui-readOnly' : undefined}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        readOnly: false || !editMode,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="text_fields" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12} md={6.0}>
+                          <TextField
+                            name="title"
+                            id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Con.pros/View/default/Pro_View/pro/LabelWrapper/pro/title"
+                            label={
+                              t('edemokracia.admin.Con.pros.Pro.View.pro.pro.title', {
+                                defaultValue: 'Title',
+                              }) as string
+                            }
+                            value={data.title}
+                            error={!!validation.get('title')}
+                            helperText={validation.get('title')}
+                            onChange={(event) => storeDiff('title', event.target.value)}
+                            className={false || !editMode ? 'Mui-readOnly' : undefined}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              readOnly: false || !editMode,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="text_fields" />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={3.0}>
-                    <DateTimePicker
-                      renderInput={(props: any) => (
-                        <TextField
-                          {...props}
-                          error={!!validation.get('created')}
-                          helperText={validation.get('created')}
-                        />
-                      )}
-                      label={
-                        t('edemokracia.admin.Con.pros.Pro.View.pro.pro.created', { defaultValue: 'Created' }) as string
-                      }
-                      value={data.created ?? null}
-                      className={false || !editMode ? 'Mui-readOnly' : undefined}
-                      readOnly={false || !editMode}
-                      onChange={(newValue: any) => storeDiff('created', newValue)}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="schedule" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={3.0}>
+                          <DateTimePicker
+                            renderInput={(props: any) => (
+                              <TextField
+                                {...props}
+                                error={!!validation.get('created')}
+                                helperText={validation.get('created')}
+                              />
+                            )}
+                            label={
+                              t('edemokracia.admin.Con.pros.Pro.View.pro.pro.created', {
+                                defaultValue: 'Created',
+                              }) as string
+                            }
+                            value={data.created ?? null}
+                            className={false || !editMode ? 'Mui-readOnly' : undefined}
+                            readOnly={false || !editMode}
+                            onChange={(newValue: any) => storeDiff('created', newValue)}
+                            InputProps={{
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="schedule" />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={3.0}>
-                    <AggregationInput
-                      name="createdBy"
-                      id="Link@edemokracia/admin/Admin/edemokracia/admin/Con.pros/View/default/Pro_View/pro/LabelWrapper/pro/createdBy"
-                      label={
-                        t('edemokracia.admin.Con.pros.Pro.View.pro.pro.createdBy', {
-                          defaultValue: 'Created by',
-                        }) as string
-                      }
-                      labelList={[data.createdBy?.representation?.toString() ?? '']}
-                      value={data.createdBy}
-                      error={!!validation.get('createdBy')}
-                      helperText={validation.get('createdBy')}
-                      icon={<MdiIcon path="table_rows" />}
-                      readonly={true || !editMode}
-                      onView={async () => linkViewCreatedByAction(data?.createdBy!)}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={3.0}>
+                          <AggregationInput
+                            name="createdBy"
+                            id="Link@edemokracia/admin/Admin/edemokracia/admin/Con.pros/View/default/Pro_View/pro/LabelWrapper/pro/createdBy"
+                            label={
+                              t('edemokracia.admin.Con.pros.Pro.View.pro.pro.createdBy', {
+                                defaultValue: 'Created by',
+                              }) as string
+                            }
+                            labelList={[data.createdBy?.representation?.toString() ?? '']}
+                            value={data.createdBy}
+                            error={!!validation.get('createdBy')}
+                            helperText={validation.get('createdBy')}
+                            icon={<MdiIcon path="table_rows" />}
+                            readonly={true || !editMode}
+                            onView={async () => linkViewCreatedByAction(data?.createdBy!)}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12}>
-                    <TextField
-                      name="description"
-                      id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Con.pros/View/default/Pro_View/pro/LabelWrapper/pro/description"
-                      label={
-                        t('edemokracia.admin.Con.pros.Pro.View.pro.pro.description', {
-                          defaultValue: 'Description',
-                        }) as string
-                      }
-                      value={data.description}
-                      multiline
-                      minRows={4.0}
-                      error={!!validation.get('description')}
-                      helperText={validation.get('description')}
-                      onChange={(event) => storeDiff('description', event.target.value)}
-                      className={false || !editMode ? 'Mui-readOnly' : undefined}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        readOnly: false || !editMode,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="text_fields" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12}>
+                          <TextField
+                            name="description"
+                            id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Con.pros/View/default/Pro_View/pro/LabelWrapper/pro/description"
+                            label={
+                              t('edemokracia.admin.Con.pros.Pro.View.pro.pro.description', {
+                                defaultValue: 'Description',
+                              }) as string
+                            }
+                            value={data.description}
+                            multiline
+                            minRows={4.0}
+                            error={!!validation.get('description')}
+                            helperText={validation.get('description')}
+                            onChange={(event) => storeDiff('description', event.target.value)}
+                            className={false || !editMode ? 'Mui-readOnly' : undefined}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              readOnly: false || !editMode,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="text_fields" />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={1.0}>
-                    <Button
-                      onClick={() => AdminProVoteUpAction(data, () => fetchData())}
-                      disabled={isLoading || editMode}
-                    >
-                      <MdiIcon path="thumb-up" />
-                      {t('edemokracia.admin.Con.pros.Pro.View.pro.pro.voteUp', { defaultValue: '' })}
-                    </Button>
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={1.0}>
+                          <Button
+                            onClick={() => AdminProVoteUpAction(data, () => fetchData())}
+                            disabled={isLoading || editMode}
+                          >
+                            <MdiIcon path="thumb-up" />
+                            {t('edemokracia.admin.Con.pros.Pro.View.pro.pro.voteUp', { defaultValue: '' })}
+                          </Button>
+                        </Grid>
 
-                  <Grid item xs={12} sm={1.0}>
-                    <TextField
-                      name="upVotes"
-                      id="NumericInput@edemokracia/admin/Admin/edemokracia/admin/Con.pros/View/default/Pro_View/pro/LabelWrapper/pro/upVotes"
-                      label={t('edemokracia.admin.Con.pros.Pro.View.pro.pro.upVotes', { defaultValue: '' }) as string}
-                      type="number"
-                      value={data.upVotes}
-                      error={!!validation.get('upVotes')}
-                      helperText={validation.get('upVotes')}
-                      onChange={(event) => storeDiff('upVotes', Number(event.target.value))}
-                      className={true || !editMode ? 'Mui-readOnly' : undefined}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        readOnly: true || !editMode,
-                      }}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={1.0}>
+                          <TextField
+                            name="upVotes"
+                            id="NumericInput@edemokracia/admin/Admin/edemokracia/admin/Con.pros/View/default/Pro_View/pro/LabelWrapper/pro/upVotes"
+                            label={
+                              t('edemokracia.admin.Con.pros.Pro.View.pro.pro.upVotes', { defaultValue: '' }) as string
+                            }
+                            type="number"
+                            value={data.upVotes}
+                            error={!!validation.get('upVotes')}
+                            helperText={validation.get('upVotes')}
+                            onChange={(event) => storeDiff('upVotes', Number(event.target.value))}
+                            className={true || !editMode ? 'Mui-readOnly' : undefined}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              readOnly: true || !editMode,
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={1.0}>
-                    <Grid container sx={{ height: dividerHeight }}></Grid>
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={1.0}>
+                          <Grid container sx={{ height: dividerHeight }}></Grid>
+                        </Grid>
 
-                  <Grid item xs={12} sm={1.0}>
-                    <Button
-                      onClick={() => AdminProVoteDownAction(data, () => fetchData())}
-                      disabled={isLoading || editMode}
-                    >
-                      <MdiIcon path="thumb-down" />
-                      {t('edemokracia.admin.Con.pros.Pro.View.pro.pro.voteDown', { defaultValue: '' })}
-                    </Button>
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={1.0}>
+                          <Button
+                            onClick={() => AdminProVoteDownAction(data, () => fetchData())}
+                            disabled={isLoading || editMode}
+                          >
+                            <MdiIcon path="thumb-down" />
+                            {t('edemokracia.admin.Con.pros.Pro.View.pro.pro.voteDown', { defaultValue: '' })}
+                          </Button>
+                        </Grid>
 
-                  <Grid item xs={12} sm={1.0}>
-                    <TextField
-                      name="downVotes"
-                      id="NumericInput@edemokracia/admin/Admin/edemokracia/admin/Con.pros/View/default/Pro_View/pro/LabelWrapper/pro/downVotes"
-                      label={t('edemokracia.admin.Con.pros.Pro.View.pro.pro.downVotes', { defaultValue: '' }) as string}
-                      type="number"
-                      value={data.downVotes}
-                      error={!!validation.get('downVotes')}
-                      helperText={validation.get('downVotes')}
-                      onChange={(event) => storeDiff('downVotes', Number(event.target.value))}
-                      className={true || !editMode ? 'Mui-readOnly' : undefined}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        readOnly: true || !editMode,
-                      }}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={1.0}>
+                          <TextField
+                            name="downVotes"
+                            id="NumericInput@edemokracia/admin/Admin/edemokracia/admin/Con.pros/View/default/Pro_View/pro/LabelWrapper/pro/downVotes"
+                            label={
+                              t('edemokracia.admin.Con.pros.Pro.View.pro.pro.downVotes', { defaultValue: '' }) as string
+                            }
+                            type="number"
+                            value={data.downVotes}
+                            error={!!validation.get('downVotes')}
+                            helperText={validation.get('downVotes')}
+                            onChange={(event) => storeDiff('downVotes', Number(event.target.value))}
+                            className={true || !editMode ? 'Mui-readOnly' : undefined}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              readOnly: true || !editMode,
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={1.0}>
-                    <Grid container sx={{ height: dividerHeight }}></Grid>
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={1.0}>
+                          <Grid container sx={{ height: dividerHeight }}></Grid>
+                        </Grid>
 
-                  <Grid item xs={12} sm={2.0}>
-                    <Button onClick={() => buttonNavigateVotesAction(data)} disabled={isLoading || editMode}>
-                      <MdiIcon path="checkbox-multiple-marked" />
-                      {t('edemokracia.admin.Con.pros.Pro.View.pro.pro.votes', { defaultValue: 'Votes' })}
-                    </Button>
+                        <Grid item xs={12} sm={12} md={2.0}>
+                          <Button onClick={() => buttonNavigateVotesAction(data)} disabled={isLoading || editMode}>
+                            <MdiIcon path="checkbox-multiple-marked" />
+                            {t('edemokracia.admin.Con.pros.Pro.View.pro.pro.votes', { defaultValue: 'Votes' })}
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </Grid>
                   </Grid>
-                </Grid>
+                </CardContent>
               </Card>
             </Grid>
 
-            <Grid container item>
+            <Grid container item xs={12} sm={12}>
               <ModeledTabs
                 activeIndex={0}
                 childTabs={[
@@ -559,142 +588,151 @@ export default function AdminConProsView() {
                   },
                 ]}
               >
-                <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                    <Grid item xs={12} sm={4.0}>
-                      <Button
-                        onClick={() => AdminProCreateSubArgumentAction(data, () => fetchData())}
-                        disabled={isLoading || editMode}
-                      >
-                        <MdiIcon path="account-voice" />
-                        {t('edemokracia.admin.Con.pros.Pro.View.tabBar.arguments.arguments.actions.createSubArgument', {
-                          defaultValue: 'Add argument',
-                        })}
-                      </Button>
-                    </Grid>
-                  </Grid>
-
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={6.0}
-                    direction="column"
-                    alignItems="stretch"
-                    justifyContent="flex-start"
-                  >
-                    <Grid container item alignItems="center" justifyContent="flex-start">
-                      <MdiIcon path="chat-plus" />
-                      <Typography variant="h6" component="h1">
-                        {t('edemokracia.admin.Con.pros.Pro.View.tabBar.arguments.arguments.pros.pros.Label', {
-                          defaultValue: 'Pros',
-                        })}
-                      </Typography>
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <Button
+                            onClick={() => AdminProCreateSubArgumentAction(data, () => fetchData())}
+                            disabled={isLoading || editMode}
+                          >
+                            <MdiIcon path="account-voice" />
+                            {t(
+                              'edemokracia.admin.Con.pros.Pro.View.tabBar.arguments.arguments.actions.createSubArgument',
+                              { defaultValue: 'Add argument' },
+                            )}
+                          </Button>
+                        </Grid>
+                      </Grid>
                     </Grid>
 
-                    <Grid item>
-                      <DataGrid
-                        {...baseTableConfig}
-                        getRowId={(row: { __identifier: string }) => row.__identifier}
-                        loading={isLoading}
-                        rows={data?.pros ?? []}
-                        columns={[...prosColumns, ...columnsActionCalculator(prosRowActions, { shownActions: 2 })]}
-                        disableSelectionOnClick
-                        onRowClick={(params: GridRowParams<AdminProStored>) => rowViewProsAction(params.row)}
-                        sortModel={prosSortModel}
-                        onSortModelChange={(newModel: GridSortModel) => {
-                          setProsSortModel(newModel);
-                        }}
-                        components={{
-                          Toolbar: () => <div>{/* No actions defined */}</div>,
-                        }}
-                      />
-                    </Grid>
-                  </Grid>
+                    <Grid item xs={12} sm={12} md={6.0}>
+                      <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                            <MdiIcon path="chat-plus" />
+                            <Typography variant="h6" component="h1">
+                              {t('edemokracia.admin.Con.pros.Pro.View.tabBar.arguments.arguments.pros.pros.Label', {
+                                defaultValue: 'Pros',
+                              })}
+                            </Typography>
+                          </Grid>
+                        </Grid>
 
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={6.0}
-                    direction="column"
-                    alignItems="stretch"
-                    justifyContent="flex-start"
-                  >
-                    <Grid container item alignItems="center" justifyContent="flex-start">
-                      <MdiIcon path="chat-minus" />
-                      <Typography variant="h6" component="h1">
-                        {t('edemokracia.admin.Con.pros.Pro.View.tabBar.arguments.arguments.cons.cons.Label', {
-                          defaultValue: 'Cons',
-                        })}
-                      </Typography>
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                            <DataGrid
+                              {...baseTableConfig}
+                              getRowId={(row: { __identifier: string }) => row.__identifier}
+                              loading={isLoading}
+                              rows={data?.pros ?? []}
+                              columns={[
+                                ...prosColumns,
+                                ...columnsActionCalculator(prosRowActions, { shownActions: 2 }),
+                              ]}
+                              disableSelectionOnClick
+                              onRowClick={(params: GridRowParams<AdminProStored>) => rowViewProsAction(params.row)}
+                              sortModel={prosSortModel}
+                              onSortModelChange={(newModel: GridSortModel) => {
+                                setProsSortModel(newModel);
+                              }}
+                              components={{
+                                Toolbar: () => <div>{/* No actions defined */}</div>,
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
 
-                    <Grid item>
-                      <DataGrid
-                        {...baseTableConfig}
-                        getRowId={(row: { __identifier: string }) => row.__identifier}
-                        loading={isLoading}
-                        rows={data?.cons ?? []}
-                        columns={[...consColumns, ...columnsActionCalculator(consRowActions, { shownActions: 2 })]}
-                        disableSelectionOnClick
-                        onRowClick={(params: GridRowParams<AdminConStored>) => rowViewConsAction(params.row)}
-                        sortModel={consSortModel}
-                        onSortModelChange={(newModel: GridSortModel) => {
-                          setConsSortModel(newModel);
-                        }}
-                        components={{
-                          Toolbar: () => <div>{/* No actions defined */}</div>,
-                        }}
-                      />
+                    <Grid item xs={12} sm={12} md={6.0}>
+                      <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                            <MdiIcon path="chat-minus" />
+                            <Typography variant="h6" component="h1">
+                              {t('edemokracia.admin.Con.pros.Pro.View.tabBar.arguments.arguments.cons.cons.Label', {
+                                defaultValue: 'Cons',
+                              })}
+                            </Typography>
+                          </Grid>
+                        </Grid>
+
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                            <DataGrid
+                              {...baseTableConfig}
+                              getRowId={(row: { __identifier: string }) => row.__identifier}
+                              loading={isLoading}
+                              rows={data?.cons ?? []}
+                              columns={[
+                                ...consColumns,
+                                ...columnsActionCalculator(consRowActions, { shownActions: 2 }),
+                              ]}
+                              disableSelectionOnClick
+                              onRowClick={(params: GridRowParams<AdminConStored>) => rowViewConsAction(params.row)}
+                              sortModel={consSortModel}
+                              onSortModelChange={(newModel: GridSortModel) => {
+                                setConsSortModel(newModel);
+                              }}
+                              components={{
+                                Toolbar: () => <div>{/* No actions defined */}</div>,
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
 
-                <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid container item xs={12} sm={4.0} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                    <Grid item xs={12}>
-                      <Button
-                        onClick={() => AdminProCreateCommentAction(data, () => fetchData())}
-                        disabled={isLoading || editMode}
-                      >
-                        <MdiIcon path="comment-text-multiple" />
-                        {t('edemokracia.admin.Con.pros.Pro.View.tabBar.comments.comments.actions.createComment', {
-                          defaultValue: 'Add comment',
-                        })}
-                      </Button>
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12} md={4.0}>
+                      <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                          <Button
+                            onClick={() => AdminProCreateCommentAction(data, () => fetchData())}
+                            disabled={isLoading || editMode}
+                          >
+                            <MdiIcon path="comment-text-multiple" />
+                            {t('edemokracia.admin.Con.pros.Pro.View.tabBar.comments.comments.actions.createComment', {
+                              defaultValue: 'Add comment',
+                            })}
+                          </Button>
+                        </Grid>
+                      </Grid>
                     </Grid>
-                  </Grid>
 
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={12.0}
-                    direction="column"
-                    alignItems="stretch"
-                    justifyContent="flex-start"
-                  >
-                    <Grid item>
-                      <DataGrid
-                        {...baseTableConfig}
-                        getRowId={(row: { __identifier: string }) => row.__identifier}
-                        loading={isLoading}
-                        rows={data?.comments ?? []}
-                        columns={[
-                          ...commentsColumns,
-                          ...columnsActionCalculator(commentsRowActions, { shownActions: 2 }),
-                        ]}
-                        disableSelectionOnClick
-                        onRowClick={(params: GridRowParams<AdminCommentStored>) => rowViewCommentsAction(params.row)}
-                        sortModel={commentsSortModel}
-                        onSortModelChange={(newModel: GridSortModel) => {
-                          setCommentsSortModel(newModel);
-                        }}
-                        components={{
-                          Toolbar: () => <div>{/* No actions defined */}</div>,
-                        }}
-                      />
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                            <DataGrid
+                              {...baseTableConfig}
+                              getRowId={(row: { __identifier: string }) => row.__identifier}
+                              loading={isLoading}
+                              rows={data?.comments ?? []}
+                              columns={[
+                                ...commentsColumns,
+                                ...columnsActionCalculator(commentsRowActions, { shownActions: 2 }),
+                              ]}
+                              disableSelectionOnClick
+                              onRowClick={(params: GridRowParams<AdminCommentStored>) =>
+                                rowViewCommentsAction(params.row)
+                              }
+                              sortModel={commentsSortModel}
+                              onSortModelChange={(newModel: GridSortModel) => {
+                                setCommentsSortModel(newModel);
+                              }}
+                              components={{
+                                Toolbar: () => <div>{/* No actions defined */}</div>,
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>

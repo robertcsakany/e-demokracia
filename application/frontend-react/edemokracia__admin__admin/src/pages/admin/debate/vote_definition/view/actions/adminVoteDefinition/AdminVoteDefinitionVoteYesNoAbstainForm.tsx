@@ -1,11 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx.hbs
 // Action name: edemokracia::admin::Admin::edemokracia::admin::VoteDefinition::voteYesNoAbstain#ButtonCallOperation
-// Owner Page name: edemokracia::admin::Debate.voteDefinition#View
 // Action: CallOperationAction
 
 import { useState, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
@@ -26,6 +24,7 @@ import {
   MenuItem,
   Typography,
   Card,
+  CardContent,
 } from '@mui/material';
 import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
 import {
@@ -157,7 +156,15 @@ export function AdminVoteDefinitionVoteYesNoAbstainForm({
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>
-        <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch"></Grid>
+        <Grid
+          container
+          xs={12}
+          sm={12}
+          spacing={2}
+          direction="column"
+          alignItems="stretch"
+          justifyContent="flex-start"
+        ></Grid>
       </DialogContent>
       <DialogActions>
         <Button variant="text" onClick={() => cancel()} disabled={isLoading}>

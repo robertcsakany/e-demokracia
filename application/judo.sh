@@ -18,6 +18,8 @@ USAGE: judo.sh COMMANDS... [OPTIONS...]
     dump                            Dump postgresql db data before clearing and starting application.
     import                          Import postgresql db data
         -dn --dump-name             Import dump name when it's not deifined loaded the last one
+    schema-upgrade                  It can be used with persitent db (postgresql) only. It uses the current running database to
+                                    generate the difference and after it applied.
     build                           Build project.
         -a --build-app-module       Build app module only.
         -M --skip-model             Skip model building.
@@ -58,7 +60,7 @@ EXAMPLES:
     ./judo.sh build -M -F -BM run -K            Rebuild app and restart application.
     ./judo.sh run -o \"runtime=compose,compose_env=compose-postgresql-https'\"
                                                 Run application in docker compose using the copmpose-postgresql-https's docker-compose.yaml
-    ./judo.sh env alternate build               Build app module with alternate env. (have to be descibed in alternate.properties)
+    ./judo.sh env compose-dev build run         Build and run application with compose-dev env. (have to be descibed in compose-dev.properties)
 
 """
 }
@@ -172,6 +174,15 @@ dump_postgresql () {
     local DUMP_FILE=${APP_NAME}_dump_$TIMESTAMP.tar.gz
     docker exec -i ${INSTANCE_NAME} /bin/bash -c "PGPASSWORD=${APP_NAME} pg_dump --username=${APP_NAME} -F c ${APP_NAME}" > $DUMP_FILE || exit
     echo "Database dumped to $DUMP_FILE"
+}
+
+upgrade_postgresql_schema () {
+    ${APP_DIR}/mvnw judo-rdbms-schema:apply \
+    -DjdbcUrl=jdbc:postgresql://127.0.0.1:5432/${APP_NAME} \
+    -DdbType=postgresql \
+    -DdbUser=${APP_NAME} \
+    -DdbPassword=${APP_NAME} \
+    -f ${APP_DIR}/schema 
 }
 
 install_maven_wrapper () {
@@ -398,7 +409,7 @@ remove_docker_volume () {
     local VOLUME_EXIST=$(docker volume ls | grep $VOLUME_NAME | sed -e 's/^[[:space:]]*//')
     if [ ! -z "$VOLUME_EXIST" ]; then
         echo "Remove $VOLUME_NAME volume"
-        docker volume create $VOLUME_NAME
+        docker volume remove $VOLUME_NAME
     fi
 }
 
@@ -416,11 +427,11 @@ create_docker_network () {
 # Args:
 # 1 - volume name
 remove_docker_network () {
-    VOLUME_NAME=$1
+    NETWORK_NAME=$1
     NETWORK_EXIST=$(docker network ls | grep $NETWORK_NAME | sed -e 's/^[[:space:]]*//')
     if [ ! -z "$NETWORK_EXIST" ]; then
         echo "Remove $NETWORK_NAME network"
-        docker network create $NETWORK_NAME
+        docker network remove $NETWORK_NAME
     fi
 }
 
@@ -455,6 +466,24 @@ Access in PROD mode:
     load_application_image
     docker compose -f ${APP_DIR}/docker/${compose_env}/docker-compose.yml up
 }
+
+# Args:
+# 1 - compsose env
+stop_compose () {
+    local compose_env=$1
+    docker compose -f ${APP_DIR}/docker/${compose_env}/docker-compose.yml down --volumes
+}
+
+# Args:
+get_compose_envs () {
+    for compose_name in $(find ./docker -type f -name 'docker-compose.yml' | sed -r 's|/[^/]+$||' | sed 's/.*\///')
+    do
+        echo "$compose_name"
+        # or do whatever with individual element of the array
+    done
+#    $(find ${APP_DIR}/docker -type f -name 'docker-compose.yml' | sed -r 's|/[^/]+$||' | sed 's/.*\///')
+}
+
 
 load_application_image () {
     local arch=$(get_arch)
@@ -521,6 +550,7 @@ buildAppModule=0
 skipBackendModels=0
 import=0
 dumpName=''
+schemaUpgrade=0
 
 FULL_VERSION_NUMBER="SNAPSHOT"
 original_args=( "$@" )
@@ -559,7 +589,7 @@ while [ $# -ne 0 ]; do
         dump)                           dump=1; shift 1;;
         import)                         import=1; shift 1;;
         -dn | --dump-name)              shift 1; export dumpName=$1; shift 1;;
-
+        schema-upgrade)                 schemaUpgrade=1; shift 1;;
         build)                          build=1; shift 1;;
         -a | --build-app-module)        buildAppModule=1; skipModel=1; shift 1;;
         -M | --skip-model)              skipModel=1; shift 1;;
@@ -635,11 +665,26 @@ if [ $import -eq 1 ]; then
     wait_for_port 127.0.0.1 ${POSTGRES_PORT:-5432} 30
     import_postgres postgres-${APP_NAME}
     stop_docker_instance postgres-${APP_NAME}
+    start_postgres postgres-${APP_NAME} ${POSTGRES_PORT:-5432}
+fi
+
+if [ $schemaUpgrade -eq 1 ]; then
+    if [ $postgres -eq 1 ]; then
+        start_postgres postgres-${APP_NAME} $POSTGRES_PORT
+        wait_for_port 127.0.0.1 ${POSTGRES_PORT:-5432} 30
+        upgrade_postgresql_schema
+    fi
 fi
 
 if [ $prune -eq 1 ]; then
     prune_frontend
 elif [ $clean -eq 1 ]; then
+
+    for compose_name in $(get_compose_envs)
+    do
+        stop_compose $compose_name
+    done
+
     remove_docker_instance postgres-${APP_NAME}
     remove_docker_instance keycloak-${APP_NAME}
     remove_docker_network ${APP_NAME}

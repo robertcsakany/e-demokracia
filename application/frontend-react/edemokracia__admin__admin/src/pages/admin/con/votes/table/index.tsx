@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Con.votes#Table
@@ -12,7 +11,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Paper, Box, Grid, Button, Container } from '@mui/material';
+import { Paper, Card, CardContent, Box, Grid, Button, Container } from '@mui/material';
 import type { GridRowModel, GridRowParams, GridSortModel } from '@mui/x-data-grid';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import { JudoIdentifiable } from '@judo/data-api-common';
@@ -180,42 +179,44 @@ export default function AdminConVotesTable() {
         <Box sx={mainContainerPadding}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Paper variant="elevation">
-                <DataGrid
-                  {...pageServerTableConfig}
-                  getRowId={(row: { __identifier: string }) => row.__identifier}
-                  loading={isLoading}
-                  rows={data}
-                  rowCount={rowCount}
-                  sortModel={sortModel}
-                  onSortModelChange={handleSortModelChange}
-                  columns={[...columns, ...columnsActionCalculator(rowActions, { shownActions: 2 })]}
-                  onRowClick={(params: GridRowParams<AdminSimpleVoteStored>) => rowViewVotesAction(params.row)}
-                  components={{
-                    Toolbar: () => (
-                      <GridToolbarContainer>
-                        <Button
-                          variant="outlined"
-                          onClick={async () => pageFilterVotesAction(filterOptions, filters)}
-                          disabled={isLoading}
-                        >
-                          {t('judo.pages.table.set-filters', { defaultValue: 'Set filters' }) +
-                            (filters.length !== 0 ? ' (' + filters.length + ')' : '')}
-                        </Button>
-                      </GridToolbarContainer>
-                    ),
-                    Pagination: () => (
-                      <CustomTablePagination
-                        pageChange={handlePageChange}
-                        isNextButtonEnabled={isNextButtonEnabled}
-                        page={page}
-                        setPage={setPage}
-                        rowPerPage={10}
-                      />
-                    ),
-                  }}
-                />
-              </Paper>
+              <Card>
+                <CardContent>
+                  <DataGrid
+                    {...pageServerTableConfig}
+                    getRowId={(row: { __identifier: string }) => row.__identifier}
+                    loading={isLoading}
+                    rows={data}
+                    rowCount={rowCount}
+                    sortModel={sortModel}
+                    onSortModelChange={handleSortModelChange}
+                    columns={[...columns, ...columnsActionCalculator(rowActions, { shownActions: 2 })]}
+                    onRowClick={(params: GridRowParams<AdminSimpleVoteStored>) => rowViewVotesAction(params.row)}
+                    components={{
+                      Toolbar: () => (
+                        <GridToolbarContainer>
+                          <Button
+                            variant="outlined"
+                            onClick={async () => pageFilterVotesAction(filterOptions, filters)}
+                            disabled={isLoading}
+                          >
+                            {t('judo.pages.table.set-filters', { defaultValue: 'Set filters' }) +
+                              (filters.length !== 0 ? ' (' + filters.length + ')' : '')}
+                          </Button>
+                        </GridToolbarContainer>
+                      ),
+                      Pagination: () => (
+                        <CustomTablePagination
+                          pageChange={handlePageChange}
+                          isNextButtonEnabled={isNextButtonEnabled}
+                          page={page}
+                          setPage={setPage}
+                          rowPerPage={10}
+                        />
+                      ),
+                    }}
+                  />
+                </CardContent>
+              </Card>
             </Grid>
           </Grid>
         </Box>

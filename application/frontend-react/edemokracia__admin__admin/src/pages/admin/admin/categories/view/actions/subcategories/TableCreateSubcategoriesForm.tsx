@@ -1,11 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx.hbs
 // Action name: edemokracia::admin::Admin::edemokracia::admin::IssueCategory::subcategories#TableCreate
-// Owner Page name: edemokracia::admin::Admin.categories#View
 // Action: CreateAction
 
 import { useState, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
@@ -26,7 +24,11 @@ import {
   MenuItem,
   Typography,
   Card,
+  CardContent,
   Divider,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@mui/material';
 import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
 import {
@@ -250,8 +252,8 @@ export function TableCreateSubcategoriesForm({ successCallback, cancel, owner }:
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>
-        <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
-          <Grid item>
+        <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
+          <Grid item xs={12} sm={12}>
             <TextField
               name="title"
               id="TextInput@edemokracia/admin/Admin/edemokracia/admin/IssueCategory.subcategories/Create/default/Create_Category/title"
@@ -277,7 +279,7 @@ export function TableCreateSubcategoriesForm({ successCallback, cancel, owner }:
             />
           </Grid>
 
-          <Grid item>
+          <Grid item xs={12} sm={12}>
             <TextField
               name="description"
               id="TextInput@edemokracia/admin/Admin/edemokracia/admin/IssueCategory.subcategories/Create/default/Create_Category/description"
@@ -303,7 +305,7 @@ export function TableCreateSubcategoriesForm({ successCallback, cancel, owner }:
             />
           </Grid>
 
-          <Grid item>
+          <Grid item xs={12} sm={12}>
             <AggregationInput
               name="owner"
               id="Link@edemokracia/admin/Admin/edemokracia/admin/IssueCategory.subcategories/Create/default/Create_Category/owner"
@@ -341,35 +343,42 @@ export function TableCreateSubcategoriesForm({ successCallback, cancel, owner }:
             />
           </Grid>
 
-          <Grid container item xs={12} sm={12.0} direction="column" alignItems="stretch" justifyContent="flex-start">
-            <Grid container item alignItems="center" justifyContent="flex-start">
-              <MdiIcon path="file-tree" />
-              <Typography variant="h6" component="h1">
-                {t('edemokracia.admin.IssueCategory.subcategories.Create.Category.subcategories.subcategories.Label', {
-                  defaultValue: 'Subcategories',
-                })}
-              </Typography>
-            </Grid>
+          <Grid item xs={12} sm={12}>
+            <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+              <Grid item xs={12} sm={12}>
+                <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                  <MdiIcon path="file-tree" />
+                  <Typography variant="h6" component="h1">
+                    {t(
+                      'edemokracia.admin.IssueCategory.subcategories.Create.Category.subcategories.subcategories.Label',
+                      { defaultValue: 'Subcategories' },
+                    )}
+                  </Typography>
+                </Grid>
+              </Grid>
 
-            <Grid item>
-              <DataGrid
-                {...baseTableConfig}
-                getRowId={(row: { __identifier: string }) => row.__identifier}
-                loading={isLoading}
-                rows={data?.subcategories ?? []}
-                columns={[
-                  ...subcategoriesColumns,
-                  ...columnsActionCalculator(subcategoriesRowActions, { shownActions: 2 }),
-                ]}
-                disableSelectionOnClick
-                sortModel={subcategoriesSortModel}
-                onSortModelChange={(newModel: GridSortModel) => {
-                  setSubcategoriesSortModel(newModel);
-                }}
-                components={{
-                  Toolbar: () => <div>{/* No actions defined */}</div>,
-                }}
-              />
+              <Grid item xs={12} sm={12}>
+                <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                  <DataGrid
+                    {...baseTableConfig}
+                    getRowId={(row: { __identifier: string }) => row.__identifier}
+                    loading={isLoading}
+                    rows={data?.subcategories ?? []}
+                    columns={[
+                      ...subcategoriesColumns,
+                      ...columnsActionCalculator(subcategoriesRowActions, { shownActions: 2 }),
+                    ]}
+                    disableSelectionOnClick
+                    sortModel={subcategoriesSortModel}
+                    onSortModelChange={(newModel: GridSortModel) => {
+                      setSubcategoriesSortModel(newModel);
+                    }}
+                    components={{
+                      Toolbar: () => <div>{/* No actions defined */}</div>,
+                    }}
+                  />
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>

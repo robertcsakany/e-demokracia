@@ -1,15 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx.hbs
 // Action name: edemokracia::admin::Admin::edemokracia::admin::Issue::createComment#ButtonCallOperation
-// Action owner name: edemokracia::admin::Admin.dashboardhome#Dashboard
-// Action DataElement name: createComment
-// Action DataElement owner name: edemokracia::admin::Issue
-// Action DataElement target name:
-// Owner Page name: edemokracia::admin::Admin.dashboardhome#Dashboard
 // Action: CallOperationAction
 // Is Access: yes
 // Is Mapped: yes

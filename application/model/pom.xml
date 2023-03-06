@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>edemokracia-application</artifactId>
+        <groupId>party.mkkp.edemokracia</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>edemokracia-application-model</artifactId>
+
+    <name>edemokracia transformed models</name>
+    <description>edemokracia transformed models</description>
+
+    <packaging>bundle</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes/model</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/models</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>**/*.model</include>
+                                        <include>**/*.yaml</include>
+                                        <include>**/*.json</include>
+                                        <include>**/*.changelog.xml</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>5.1.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Judo-Models>name=${model-name};version=${model-version}</Judo-Models>
+                        <Include-Resource>
+                            {maven-resources},
+                            /model=${basedir}/target/classes/model
+                        </Include-Resource>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>create-models</id>
+            <activation>
+                <property>
+                    <name>!skipModels</name>
+                </property>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>hu.blackbelt.judo.tatami</groupId>
+                        <artifactId>judo-tatami-workflow-maven-plugin</artifactId>
+                        <version>${judo-tatami-version}</version>
+                        <executions>
+                            <execution>
+                                <id>transform-esm-file</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>default-workflow</goal>
+                                </goals>
+                                <configuration>
+                                    <esm>mvn:${model-groupId}:${model-artifactId}:${model-version}!model/${model-name}-esm.model</esm>
+                                    <psm>mvn:${model-groupId}:${model-artifactId}:${model-version}!model/${model-name}-psm.model</psm>
+                                    <asm>mvn:${model-groupId}:${model-artifactId}:${model-version}!model/${model-name}-asm.model</asm>
+                                    <psm2AsmTrace>mvn:${model-groupId}:${model-artifactId}:${model-version}!model/${model-name}-psm2asm.model</psm2AsmTrace>
+                                    <modelVersion>${model-version}</modelVersion>
+                                    <modelName>${model-name}</modelName>
+                                    <destination>${project.basedir}/models</destination>
+                                    <dialectList>${dialectList}</dialectList>
+                                    <validateModels>${validateModels}</validateModels>
+                                    <ignoreAsm2Openapi>${ignoreOpenapi}</ignoreAsm2Openapi>
+                                    <ignoreAsm2Rdbms>false</ignoreAsm2Rdbms>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-artifacts</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>${project.basedir}/models/${model-name}-asm2sdk.jar</file>
+                                            <type>jar</type>
+                                            <classifier>sdk</classifier>
+                                        </artifact>
+                                        <artifact>
+                                            <file>${project.basedir}/models/${model-name}-asm2sdk-internal.jar</file>
+                                            <type>jar</type>
+                                            <classifier>sdk-internal</classifier>
+                                        </artifact>
+                                        <artifact>
+                                            <file>${project.basedir}/models/${model-name}-asm2jaxrsapi.jar</file>
+                                            <type>jar</type>
+                                            <classifier>jaxrsapi</classifier>
+                                        </artifact>
+                                        <artifact>
+                                            <file>${project.basedir}/models/${model-name}-script2operation.jar</file>
+                                            <type>jar</type>
+                                            <classifier>script2operation</classifier>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

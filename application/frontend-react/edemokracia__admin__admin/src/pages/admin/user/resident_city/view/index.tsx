@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::User.residentCity#View
@@ -15,6 +14,7 @@ import {
   Box,
   Button,
   Card,
+  CardContent,
   Container,
   Grid,
   InputAdornment,
@@ -23,6 +23,9 @@ import {
   Typography,
   Paper,
   Divider,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@mui/material';
 import {
   DataGrid,
@@ -124,6 +127,7 @@ export default function AdminUserResidentCityView() {
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminDistrictStored) => rowDeleteDistrictsAction(data, row, () => fetchData()),
+      disabled: (row: AdminDistrictStored) => !row.__deleteable,
     },
   ];
   const title: string = data.representation as string;
@@ -189,7 +193,7 @@ export default function AdminUserResidentCityView() {
         )}
         {!editMode && (
           <Grid item>
-            <Button onClick={() => setEditMode(true)} disabled={isLoading}>
+            <Button onClick={() => setEditMode(true)} disabled={isLoading || !data.__updateable}>
               <MdiIcon path="pencil" />
               {t('judo.pages.edit', { defaultValue: 'Edit' })}
             </Button>
@@ -221,8 +225,16 @@ export default function AdminUserResidentCityView() {
       </PageHeader>
       <Container component="main" maxWidth="xl">
         <Box sx={mainContainerPadding}>
-          <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
-            <Grid item>
+          <Grid
+            container
+            xs={12}
+            sm={12}
+            spacing={2}
+            direction="column"
+            alignItems="stretch"
+            justifyContent="flex-start"
+          >
+            <Grid item xs={12} sm={12}>
               <TextField
                 name="name"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/User.residentCity/View/default/City_View/name"
@@ -244,43 +256,52 @@ export default function AdminUserResidentCityView() {
               />
             </Grid>
 
-            <Grid container item xs={12} sm={12.0} direction="column" alignItems="stretch" justifyContent="flex-start">
-              <Grid container item alignItems="center" justifyContent="flex-start">
-                <MdiIcon path="home-city" />
-                <Typography variant="h6" component="h1">
-                  {t('edemokracia.admin.User.residentCity.City.View.districts.districts.Label', {
-                    defaultValue: 'Districts',
-                  })}
-                </Typography>
-              </Grid>
+            <Grid item xs={12} sm={12}>
+              <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                    <MdiIcon path="home-city" />
+                    <Typography variant="h6" component="h1">
+                      {t('edemokracia.admin.User.residentCity.City.View.districts.districts.Label', {
+                        defaultValue: 'Districts',
+                      })}
+                    </Typography>
+                  </Grid>
+                </Grid>
 
-              <Grid item>
-                <DataGrid
-                  {...baseTableConfig}
-                  getRowId={(row: { __identifier: string }) => row.__identifier}
-                  loading={isLoading}
-                  rows={data?.districts ?? []}
-                  columns={[...districtsColumns, ...columnsActionCalculator(districtsRowActions, { shownActions: 2 })]}
-                  disableSelectionOnClick
-                  onRowClick={(params: GridRowParams<AdminDistrictStored>) => rowViewDistrictsAction(params.row)}
-                  sortModel={districtsSortModel}
-                  onSortModelChange={(newModel: GridSortModel) => {
-                    setDistrictsSortModel(newModel);
-                  }}
-                  components={{
-                    Toolbar: () => (
-                      <GridToolbarContainer>
-                        <Button
-                          onClick={() => tableCreateDistrictsAction(data, () => fetchData())}
-                          disabled={isLoading || editMode}
-                        >
-                          <MdiIcon path="note_add" />
-                          {t('judo.pages.table.create', { defaultValue: 'Create' })}
-                        </Button>
-                      </GridToolbarContainer>
-                    ),
-                  }}
-                />
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                    <DataGrid
+                      {...baseTableConfig}
+                      getRowId={(row: { __identifier: string }) => row.__identifier}
+                      loading={isLoading}
+                      rows={data?.districts ?? []}
+                      columns={[
+                        ...districtsColumns,
+                        ...columnsActionCalculator(districtsRowActions, { shownActions: 2 }),
+                      ]}
+                      disableSelectionOnClick
+                      onRowClick={(params: GridRowParams<AdminDistrictStored>) => rowViewDistrictsAction(params.row)}
+                      sortModel={districtsSortModel}
+                      onSortModelChange={(newModel: GridSortModel) => {
+                        setDistrictsSortModel(newModel);
+                      }}
+                      components={{
+                        Toolbar: () => (
+                          <GridToolbarContainer>
+                            <Button
+                              onClick={() => tableCreateDistrictsAction(data, () => fetchData())}
+                              disabled={isLoading || editMode}
+                            >
+                              <MdiIcon path="note_add" />
+                              {t('judo.pages.table.create', { defaultValue: 'Create' })}
+                            </Button>
+                          </GridToolbarContainer>
+                        ),
+                      }}
+                    />
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

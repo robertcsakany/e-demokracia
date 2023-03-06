@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::User.residentDistrict#View
@@ -15,6 +14,7 @@ import {
   Box,
   Button,
   Card,
+  CardContent,
   Container,
   Grid,
   InputAdornment,
@@ -23,6 +23,9 @@ import {
   Typography,
   Paper,
   Divider,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@mui/material';
 import {
   DataGrid,
@@ -165,7 +168,7 @@ export default function AdminUserResidentDistrictView() {
         )}
         {!editMode && (
           <Grid item>
-            <Button onClick={() => setEditMode(true)} disabled={isLoading}>
+            <Button onClick={() => setEditMode(true)} disabled={isLoading || !data.__updateable}>
               <MdiIcon path="pencil" />
               {t('judo.pages.edit', { defaultValue: 'Edit' })}
             </Button>
@@ -197,8 +200,16 @@ export default function AdminUserResidentDistrictView() {
       </PageHeader>
       <Container component="main" maxWidth="xl">
         <Box sx={mainContainerPadding}>
-          <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
-            <Grid item>
+          <Grid
+            container
+            xs={12}
+            sm={12}
+            spacing={2}
+            direction="column"
+            alignItems="stretch"
+            justifyContent="flex-start"
+          >
+            <Grid item xs={12} sm={12}>
               <TextField
                 name="name"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/User.residentDistrict/View/default/District_View/name"

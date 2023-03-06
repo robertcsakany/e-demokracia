@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Debate.comments#View
@@ -15,6 +14,7 @@ import {
   Box,
   Button,
   Card,
+  CardContent,
   Container,
   Grid,
   InputAdornment,
@@ -23,6 +23,9 @@ import {
   Typography,
   Paper,
   Divider,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@mui/material';
 import {
   DataGrid,
@@ -196,7 +199,7 @@ export default function AdminDebateCommentsView() {
         )}
         {!editMode && (
           <Grid item>
-            <Button onClick={() => deleteData()} disabled={isLoading}>
+            <Button onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
               <MdiIcon path="delete" />
               {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
@@ -204,7 +207,7 @@ export default function AdminDebateCommentsView() {
         )}
         {!editMode && (
           <Grid item>
-            <Button onClick={() => setEditMode(true)} disabled={isLoading}>
+            <Button onClick={() => setEditMode(true)} disabled={isLoading || !data.__updateable}>
               <MdiIcon path="pencil" />
               {t('judo.pages.edit', { defaultValue: 'Edit' })}
             </Button>
@@ -236,171 +239,195 @@ export default function AdminDebateCommentsView() {
       </PageHeader>
       <Container component="main" maxWidth="xl">
         <Box sx={mainContainerPadding}>
-          <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
-            <Grid container item xs={12} sm={12.0} direction="column" alignItems="stretch" justifyContent="flex-start">
+          <Grid
+            container
+            xs={12}
+            sm={12}
+            spacing={2}
+            direction="column"
+            alignItems="stretch"
+            justifyContent="flex-start"
+          >
+            <Grid item xs={12} sm={12}>
               <Card>
-                <Grid container item alignItems="center" justifyContent="flex-start">
-                  <MdiIcon path="comment-text-multiple" />
-                  <Typography variant="h6" component="h1">
-                    {t('edemokracia.admin.Debate.comments.Comment.View.group.group.Label', { defaultValue: 'Comment' })}
-                  </Typography>
-                </Grid>
+                <CardContent>
+                  <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                        <MdiIcon path="comment-text-multiple" />
+                        <Typography variant="h6" component="h1">
+                          {t('edemokracia.admin.Debate.comments.Comment.View.group.group.Label', {
+                            defaultValue: 'Comment',
+                          })}
+                        </Typography>
+                      </Grid>
+                    </Grid>
 
-                <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid item xs={12} sm={4.0}>
-                    <DateTimePicker
-                      renderInput={(props: any) => (
-                        <TextField
-                          {...props}
-                          error={!!validation.get('created')}
-                          helperText={validation.get('created')}
-                        />
-                      )}
-                      label={
-                        t('edemokracia.admin.Debate.comments.Comment.View.group.group.created', {
-                          defaultValue: 'Created',
-                        }) as string
-                      }
-                      value={data.created ?? null}
-                      className={true || !editMode ? 'Mui-readOnly' : undefined}
-                      readOnly={true || !editMode}
-                      onChange={(newValue: any) => storeDiff('created', newValue)}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="schedule" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <DateTimePicker
+                            renderInput={(props: any) => (
+                              <TextField
+                                {...props}
+                                error={!!validation.get('created')}
+                                helperText={validation.get('created')}
+                              />
+                            )}
+                            label={
+                              t('edemokracia.admin.Debate.comments.Comment.View.group.group.created', {
+                                defaultValue: 'Created',
+                              }) as string
+                            }
+                            value={data.created ?? null}
+                            className={true || !editMode ? 'Mui-readOnly' : undefined}
+                            readOnly={true || !editMode}
+                            onChange={(newValue: any) => storeDiff('created', newValue)}
+                            InputProps={{
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="schedule" />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={4.0}>
-                    <AggregationInput
-                      name="createdBy"
-                      id="Link@edemokracia/admin/Admin/edemokracia/admin/Debate.comments/View/default/Comment_View/group/LabelWrapper/group/createdBy"
-                      label={
-                        t('edemokracia.admin.Debate.comments.Comment.View.group.group.createdBy', {
-                          defaultValue: 'CreatedBy',
-                        }) as string
-                      }
-                      labelList={[data.createdBy?.representation?.toString() ?? '']}
-                      value={data.createdBy}
-                      error={!!validation.get('createdBy')}
-                      helperText={validation.get('createdBy')}
-                      icon={<MdiIcon path="table_rows" />}
-                      readonly={true || !editMode}
-                      onView={async () => linkViewCreatedByAction(data?.createdBy!)}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <AggregationInput
+                            name="createdBy"
+                            id="Link@edemokracia/admin/Admin/edemokracia/admin/Debate.comments/View/default/Comment_View/group/LabelWrapper/group/createdBy"
+                            label={
+                              t('edemokracia.admin.Debate.comments.Comment.View.group.group.createdBy', {
+                                defaultValue: 'CreatedBy',
+                              }) as string
+                            }
+                            labelList={[data.createdBy?.representation?.toString() ?? '']}
+                            value={data.createdBy}
+                            error={!!validation.get('createdBy')}
+                            helperText={validation.get('createdBy')}
+                            icon={<MdiIcon path="table_rows" />}
+                            readonly={true || !editMode}
+                            onView={async () => linkViewCreatedByAction(data?.createdBy!)}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12}>
-                    <TextField
-                      name="comment"
-                      id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Debate.comments/View/default/Comment_View/group/LabelWrapper/group/comment"
-                      label={
-                        t('edemokracia.admin.Debate.comments.Comment.View.group.group.comment', {
-                          defaultValue: 'Comment',
-                        }) as string
-                      }
-                      value={data.comment}
-                      multiline
-                      minRows={4.0}
-                      error={!!validation.get('comment')}
-                      helperText={validation.get('comment')}
-                      onChange={(event) => storeDiff('comment', event.target.value)}
-                      className={false || !editMode ? 'Mui-readOnly' : undefined}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        readOnly: false || !editMode,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="text_fields" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12}>
+                          <TextField
+                            name="comment"
+                            id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Debate.comments/View/default/Comment_View/group/LabelWrapper/group/comment"
+                            label={
+                              t('edemokracia.admin.Debate.comments.Comment.View.group.group.comment', {
+                                defaultValue: 'Comment',
+                              }) as string
+                            }
+                            value={data.comment}
+                            multiline
+                            minRows={4.0}
+                            error={!!validation.get('comment')}
+                            helperText={validation.get('comment')}
+                            onChange={(event) => storeDiff('comment', event.target.value)}
+                            className={false || !editMode ? 'Mui-readOnly' : undefined}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              readOnly: false || !editMode,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="text_fields" />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={1.0}>
-                    <Button
-                      onClick={() => AdminCommentVoteUpAction(data, () => fetchData())}
-                      disabled={isLoading || editMode}
-                    >
-                      <MdiIcon path="thumb-up" />
-                      {t('edemokracia.admin.Debate.comments.Comment.View.group.group.voteUp', { defaultValue: '' })}
-                    </Button>
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={1.0}>
+                          <Button
+                            onClick={() => AdminCommentVoteUpAction(data, () => fetchData())}
+                            disabled={isLoading || editMode}
+                          >
+                            <MdiIcon path="thumb-up" />
+                            {t('edemokracia.admin.Debate.comments.Comment.View.group.group.voteUp', {
+                              defaultValue: '',
+                            })}
+                          </Button>
+                        </Grid>
 
-                  <Grid item xs={12} sm={1.0}>
-                    <TextField
-                      name="upVotes"
-                      id="NumericInput@edemokracia/admin/Admin/edemokracia/admin/Debate.comments/View/default/Comment_View/group/LabelWrapper/group/upVotes"
-                      label={
-                        t('edemokracia.admin.Debate.comments.Comment.View.group.group.upVotes', {
-                          defaultValue: '',
-                        }) as string
-                      }
-                      type="number"
-                      value={data.upVotes}
-                      error={!!validation.get('upVotes')}
-                      helperText={validation.get('upVotes')}
-                      onChange={(event) => storeDiff('upVotes', Number(event.target.value))}
-                      className={true || !editMode ? 'Mui-readOnly' : undefined}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        readOnly: true || !editMode,
-                      }}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={1.0}>
+                          <TextField
+                            name="upVotes"
+                            id="NumericInput@edemokracia/admin/Admin/edemokracia/admin/Debate.comments/View/default/Comment_View/group/LabelWrapper/group/upVotes"
+                            label={
+                              t('edemokracia.admin.Debate.comments.Comment.View.group.group.upVotes', {
+                                defaultValue: '',
+                              }) as string
+                            }
+                            type="number"
+                            value={data.upVotes}
+                            error={!!validation.get('upVotes')}
+                            helperText={validation.get('upVotes')}
+                            onChange={(event) => storeDiff('upVotes', Number(event.target.value))}
+                            className={true || !editMode ? 'Mui-readOnly' : undefined}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              readOnly: true || !editMode,
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={1.0}>
-                    <Grid container sx={{ height: dividerHeight }}></Grid>
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={1.0}>
+                          <Grid container sx={{ height: dividerHeight }}></Grid>
+                        </Grid>
 
-                  <Grid item xs={12} sm={1.0}>
-                    <Button
-                      onClick={() => AdminCommentVoteDownAction(data, () => fetchData())}
-                      disabled={isLoading || editMode}
-                    >
-                      <MdiIcon path="thumb-down" />
-                      {t('edemokracia.admin.Debate.comments.Comment.View.group.group.voteDown', { defaultValue: '' })}
-                    </Button>
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={1.0}>
+                          <Button
+                            onClick={() => AdminCommentVoteDownAction(data, () => fetchData())}
+                            disabled={isLoading || editMode}
+                          >
+                            <MdiIcon path="thumb-down" />
+                            {t('edemokracia.admin.Debate.comments.Comment.View.group.group.voteDown', {
+                              defaultValue: '',
+                            })}
+                          </Button>
+                        </Grid>
 
-                  <Grid item xs={12} sm={1.0}>
-                    <TextField
-                      name="downVotes"
-                      id="NumericInput@edemokracia/admin/Admin/edemokracia/admin/Debate.comments/View/default/Comment_View/group/LabelWrapper/group/downVotes"
-                      label={
-                        t('edemokracia.admin.Debate.comments.Comment.View.group.group.downVotes', {
-                          defaultValue: '',
-                        }) as string
-                      }
-                      type="number"
-                      value={data.downVotes}
-                      error={!!validation.get('downVotes')}
-                      helperText={validation.get('downVotes')}
-                      onChange={(event) => storeDiff('downVotes', Number(event.target.value))}
-                      className={true || !editMode ? 'Mui-readOnly' : undefined}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        readOnly: true || !editMode,
-                      }}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={1.0}>
+                          <TextField
+                            name="downVotes"
+                            id="NumericInput@edemokracia/admin/Admin/edemokracia/admin/Debate.comments/View/default/Comment_View/group/LabelWrapper/group/downVotes"
+                            label={
+                              t('edemokracia.admin.Debate.comments.Comment.View.group.group.downVotes', {
+                                defaultValue: '',
+                              }) as string
+                            }
+                            type="number"
+                            value={data.downVotes}
+                            error={!!validation.get('downVotes')}
+                            helperText={validation.get('downVotes')}
+                            onChange={(event) => storeDiff('downVotes', Number(event.target.value))}
+                            className={true || !editMode ? 'Mui-readOnly' : undefined}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              readOnly: true || !editMode,
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={1.0}>
-                    <Grid container sx={{ height: dividerHeight }}></Grid>
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={1.0}>
+                          <Grid container sx={{ height: dividerHeight }}></Grid>
+                        </Grid>
 
-                  <Grid item xs={12} sm={2.0}>
-                    <Button onClick={() => buttonNavigateVotesAction(data)} disabled={isLoading || editMode}>
-                      <MdiIcon path="checkbox-multiple-marked" />
-                      {t('edemokracia.admin.Debate.comments.Comment.View.group.group.votes', { defaultValue: 'Votes' })}
-                    </Button>
+                        <Grid item xs={12} sm={12} md={2.0}>
+                          <Button onClick={() => buttonNavigateVotesAction(data)} disabled={isLoading || editMode}>
+                            <MdiIcon path="checkbox-multiple-marked" />
+                            {t('edemokracia.admin.Debate.comments.Comment.View.group.group.votes', {
+                              defaultValue: 'Votes',
+                            })}
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </Grid>
                   </Grid>
-                </Grid>
+                </CardContent>
               </Card>
             </Grid>
           </Grid>

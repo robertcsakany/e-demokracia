@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.counties#View
@@ -15,6 +14,7 @@ import {
   Box,
   Button,
   Card,
+  CardContent,
   Container,
   Grid,
   InputAdornment,
@@ -23,6 +23,9 @@ import {
   Typography,
   Paper,
   Divider,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@mui/material';
 import {
   DataGrid,
@@ -125,6 +128,7 @@ export default function AdminAdminCountiesView() {
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminCityStored) => rowDeleteCitiesAction(data, row, () => fetchData()),
+      disabled: (row: AdminCityStored) => !row.__deleteable,
     },
   ];
   const title: string = data.representation as string;
@@ -204,7 +208,7 @@ export default function AdminAdminCountiesView() {
         )}
         {!editMode && (
           <Grid item>
-            <Button onClick={() => deleteData()} disabled={isLoading}>
+            <Button onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
               <MdiIcon path="delete" />
               {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
@@ -212,7 +216,7 @@ export default function AdminAdminCountiesView() {
         )}
         {!editMode && (
           <Grid item>
-            <Button onClick={() => setEditMode(true)} disabled={isLoading}>
+            <Button onClick={() => setEditMode(true)} disabled={isLoading || !data.__updateable}>
               <MdiIcon path="pencil" />
               {t('judo.pages.edit', { defaultValue: 'Edit' })}
             </Button>
@@ -244,8 +248,16 @@ export default function AdminAdminCountiesView() {
       </PageHeader>
       <Container component="main" maxWidth="xl">
         <Box sx={mainContainerPadding}>
-          <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
-            <Grid item>
+          <Grid
+            container
+            xs={12}
+            sm={12}
+            spacing={2}
+            direction="column"
+            alignItems="stretch"
+            justifyContent="flex-start"
+          >
+            <Grid item xs={12} sm={12}>
               <TextField
                 name="name"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.counties/View/default/County_View/name"
@@ -269,41 +281,49 @@ export default function AdminAdminCountiesView() {
               />
             </Grid>
 
-            <Grid container item xs={12} sm={12.0} direction="column" alignItems="stretch" justifyContent="flex-start">
-              <Grid container item alignItems="center" justifyContent="flex-start">
-                <MdiIcon path="city" />
-                <Typography variant="h6" component="h1">
-                  {t('edemokracia.admin.Admin.counties.County.View.cities.cities.Label', { defaultValue: 'Cities' })}
-                </Typography>
-              </Grid>
+            <Grid item xs={12} sm={12}>
+              <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                    <MdiIcon path="city" />
+                    <Typography variant="h6" component="h1">
+                      {t('edemokracia.admin.Admin.counties.County.View.cities.cities.Label', {
+                        defaultValue: 'Cities',
+                      })}
+                    </Typography>
+                  </Grid>
+                </Grid>
 
-              <Grid item>
-                <DataGrid
-                  {...baseTableConfig}
-                  getRowId={(row: { __identifier: string }) => row.__identifier}
-                  loading={isLoading}
-                  rows={data?.cities ?? []}
-                  columns={[...citiesColumns, ...columnsActionCalculator(citiesRowActions, { shownActions: 2 })]}
-                  disableSelectionOnClick
-                  onRowClick={(params: GridRowParams<AdminCityStored>) => rowViewCitiesAction(params.row)}
-                  sortModel={citiesSortModel}
-                  onSortModelChange={(newModel: GridSortModel) => {
-                    setCitiesSortModel(newModel);
-                  }}
-                  components={{
-                    Toolbar: () => (
-                      <GridToolbarContainer>
-                        <Button
-                          onClick={() => tableCreateCitiesAction(data, () => fetchData())}
-                          disabled={isLoading || editMode}
-                        >
-                          <MdiIcon path="note_add" />
-                          {t('judo.pages.table.create', { defaultValue: 'Create' })}
-                        </Button>
-                      </GridToolbarContainer>
-                    ),
-                  }}
-                />
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                    <DataGrid
+                      {...baseTableConfig}
+                      getRowId={(row: { __identifier: string }) => row.__identifier}
+                      loading={isLoading}
+                      rows={data?.cities ?? []}
+                      columns={[...citiesColumns, ...columnsActionCalculator(citiesRowActions, { shownActions: 2 })]}
+                      disableSelectionOnClick
+                      onRowClick={(params: GridRowParams<AdminCityStored>) => rowViewCitiesAction(params.row)}
+                      sortModel={citiesSortModel}
+                      onSortModelChange={(newModel: GridSortModel) => {
+                        setCitiesSortModel(newModel);
+                      }}
+                      components={{
+                        Toolbar: () => (
+                          <GridToolbarContainer>
+                            <Button
+                              onClick={() => tableCreateCitiesAction(data, () => fetchData())}
+                              disabled={isLoading || editMode}
+                            >
+                              <MdiIcon path="note_add" />
+                              {t('judo.pages.table.create', { defaultValue: 'Create' })}
+                            </Button>
+                          </GridToolbarContainer>
+                        ),
+                      }}
+                    />
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::IssueCategory.subcategories#View
@@ -15,6 +14,7 @@ import {
   Box,
   Button,
   Card,
+  CardContent,
   Container,
   Grid,
   InputAdornment,
@@ -23,6 +23,9 @@ import {
   Typography,
   Paper,
   Divider,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@mui/material';
 import {
   DataGrid,
@@ -136,6 +139,7 @@ export default function AdminIssueCategorySubcategoriesView() {
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminIssueCategoryStored) => rowDeleteSubcategoriesAction(data, row, () => fetchData()),
+      disabled: (row: AdminIssueCategoryStored) => !row.__deleteable,
     },
   ];
   const title: string = t('edemokracia.admin.IssueCategory.subcategories.View', {
@@ -217,7 +221,7 @@ export default function AdminIssueCategorySubcategoriesView() {
         )}
         {!editMode && (
           <Grid item>
-            <Button onClick={() => deleteData()} disabled={isLoading}>
+            <Button onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
               <MdiIcon path="delete" />
               {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
@@ -225,7 +229,7 @@ export default function AdminIssueCategorySubcategoriesView() {
         )}
         {!editMode && (
           <Grid item>
-            <Button onClick={() => setEditMode(true)} disabled={isLoading}>
+            <Button onClick={() => setEditMode(true)} disabled={isLoading || !data.__updateable}>
               <MdiIcon path="pencil" />
               {t('judo.pages.edit', { defaultValue: 'Edit' })}
             </Button>
@@ -257,8 +261,16 @@ export default function AdminIssueCategorySubcategoriesView() {
       </PageHeader>
       <Container component="main" maxWidth="xl">
         <Box sx={mainContainerPadding}>
-          <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
-            <Grid item>
+          <Grid
+            container
+            xs={12}
+            sm={12}
+            spacing={2}
+            direction="column"
+            alignItems="stretch"
+            justifyContent="flex-start"
+          >
+            <Grid item xs={12} sm={12}>
               <TextField
                 name="title"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/IssueCategory.subcategories/View/default/Category/title"
@@ -282,7 +294,7 @@ export default function AdminIssueCategorySubcategoriesView() {
               />
             </Grid>
 
-            <Grid item>
+            <Grid item xs={12} sm={12}>
               <TextField
                 name="description"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/IssueCategory.subcategories/View/default/Category/description"
@@ -308,7 +320,7 @@ export default function AdminIssueCategorySubcategoriesView() {
               />
             </Grid>
 
-            <Grid item>
+            <Grid item xs={12} sm={12}>
               <AggregationInput
                 name="owner"
                 id="Link@edemokracia/admin/Admin/edemokracia/admin/IssueCategory.subcategories/View/default/Category/owner"
@@ -325,48 +337,54 @@ export default function AdminIssueCategorySubcategoriesView() {
               />
             </Grid>
 
-            <Grid container item xs={12} sm={12.0} direction="column" alignItems="stretch" justifyContent="flex-start">
-              <Grid container item alignItems="center" justifyContent="flex-start">
-                <MdiIcon path="file-tree" />
-                <Typography variant="h6" component="h1">
-                  {t('edemokracia.admin.IssueCategory.subcategories.Category.subcategories.subcategories.Label', {
-                    defaultValue: 'Subcategories',
-                  })}
-                </Typography>
-              </Grid>
+            <Grid item xs={12} sm={12}>
+              <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                    <MdiIcon path="file-tree" />
+                    <Typography variant="h6" component="h1">
+                      {t('edemokracia.admin.IssueCategory.subcategories.Category.subcategories.subcategories.Label', {
+                        defaultValue: 'Subcategories',
+                      })}
+                    </Typography>
+                  </Grid>
+                </Grid>
 
-              <Grid item>
-                <DataGrid
-                  {...baseTableConfig}
-                  getRowId={(row: { __identifier: string }) => row.__identifier}
-                  loading={isLoading}
-                  rows={data?.subcategories ?? []}
-                  columns={[
-                    ...subcategoriesColumns,
-                    ...columnsActionCalculator(subcategoriesRowActions, { shownActions: 2 }),
-                  ]}
-                  disableSelectionOnClick
-                  onRowClick={(params: GridRowParams<AdminIssueCategoryStored>) =>
-                    rowViewSubcategoriesAction(params.row)
-                  }
-                  sortModel={subcategoriesSortModel}
-                  onSortModelChange={(newModel: GridSortModel) => {
-                    setSubcategoriesSortModel(newModel);
-                  }}
-                  components={{
-                    Toolbar: () => (
-                      <GridToolbarContainer>
-                        <Button
-                          onClick={() => tableCreateSubcategoriesAction(data, () => fetchData())}
-                          disabled={isLoading || editMode}
-                        >
-                          <MdiIcon path="note_add" />
-                          {t('judo.pages.table.create', { defaultValue: 'Create' })}
-                        </Button>
-                      </GridToolbarContainer>
-                    ),
-                  }}
-                />
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                    <DataGrid
+                      {...baseTableConfig}
+                      getRowId={(row: { __identifier: string }) => row.__identifier}
+                      loading={isLoading}
+                      rows={data?.subcategories ?? []}
+                      columns={[
+                        ...subcategoriesColumns,
+                        ...columnsActionCalculator(subcategoriesRowActions, { shownActions: 2 }),
+                      ]}
+                      disableSelectionOnClick
+                      onRowClick={(params: GridRowParams<AdminIssueCategoryStored>) =>
+                        rowViewSubcategoriesAction(params.row)
+                      }
+                      sortModel={subcategoriesSortModel}
+                      onSortModelChange={(newModel: GridSortModel) => {
+                        setSubcategoriesSortModel(newModel);
+                      }}
+                      components={{
+                        Toolbar: () => (
+                          <GridToolbarContainer>
+                            <Button
+                              onClick={() => tableCreateSubcategoriesAction(data, () => fetchData())}
+                              disabled={isLoading || editMode}
+                            >
+                              <MdiIcon path="note_add" />
+                              {t('judo.pages.table.create', { defaultValue: 'Create' })}
+                            </Button>
+                          </GridToolbarContainer>
+                        ),
+                      }}
+                    />
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

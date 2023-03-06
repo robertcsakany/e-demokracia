@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.dashboardhome#Dashboard
@@ -15,6 +14,7 @@ import {
   Box,
   Button,
   Card,
+  CardContent,
   Container,
   Grid,
   InputAdornment,
@@ -23,6 +23,9 @@ import {
   Typography,
   Paper,
   Divider,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@mui/material';
 import {
   DataGrid,
@@ -251,12 +254,20 @@ export default function AdminAdminDashboardhomeDashboard() {
       </PageHeader>
       <Container component="main" maxWidth="xl">
         <Box sx={mainContainerPadding}>
-          <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
-            <Grid item>
+          <Grid
+            container
+            xs={12}
+            sm={12}
+            spacing={2}
+            direction="column"
+            alignItems="stretch"
+            justifyContent="flex-start"
+          >
+            <Grid item xs={12} sm={12}>
               <Typography>{data.welcome}</Typography>
             </Grid>
 
-            <Grid item>
+            <Grid item xs={12}>
               <Grid container xs={12} spacing={2}>
                 <Grid item>
                   <Button
@@ -286,7 +297,7 @@ export default function AdminAdminDashboardhomeDashboard() {
               </Grid>
             </Grid>
 
-            <Grid container item>
+            <Grid container item xs={12} sm={12}>
               <ModeledTabs
                 activeIndex={0}
                 childTabs={[
@@ -302,67 +313,68 @@ export default function AdminAdminDashboardhomeDashboard() {
                   },
                 ]}
               >
-                <Grid container item xs={12} sm={4.0} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={12.0}
-                    direction="column"
-                    alignItems="stretch"
-                    justifyContent="flex-start"
-                  >
-                    <Grid item>
-                      <DataGrid
-                        {...baseTableConfig}
-                        getRowId={(row: { __identifier: string }) => row.__identifier}
-                        loading={isLoading}
-                        rows={data?.issues ?? []}
-                        columns={[...issuesColumns, ...columnsActionCalculator(issuesRowActions, { shownActions: 2 })]}
-                        disableSelectionOnClick
-                        onRowClick={(params: GridRowParams<AdminIssueStored>) => rowViewIssuesAction(params.row)}
-                        sortModel={issuesSortModel}
-                        onSortModelChange={(newModel: GridSortModel) => {
-                          setIssuesSortModel(newModel);
-                        }}
-                        components={{
-                          Toolbar: () => <div>{/* No actions defined */}</div>,
-                        }}
-                      />
+                <Grid item xs={12} sm={12} md={4.0}>
+                  <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                            <DataGrid
+                              {...baseTableConfig}
+                              getRowId={(row: { __identifier: string }) => row.__identifier}
+                              loading={isLoading}
+                              rows={data?.issues ?? []}
+                              columns={[
+                                ...issuesColumns,
+                                ...columnsActionCalculator(issuesRowActions, { shownActions: 2 }),
+                              ]}
+                              disableSelectionOnClick
+                              onRowClick={(params: GridRowParams<AdminIssueStored>) => rowViewIssuesAction(params.row)}
+                              sortModel={issuesSortModel}
+                              onSortModelChange={(newModel: GridSortModel) => {
+                                setIssuesSortModel(newModel);
+                              }}
+                              components={{
+                                Toolbar: () => <div>{/* No actions defined */}</div>,
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
 
-                <Grid container item xs={12} sm={4.0} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={12.0}
-                    direction="column"
-                    alignItems="stretch"
-                    justifyContent="flex-start"
-                  >
-                    <Grid item>
-                      <DataGrid
-                        {...baseTableConfig}
-                        getRowId={(row: { __identifier: string }) => row.__identifier}
-                        loading={isLoading}
-                        rows={data?.debates ?? []}
-                        columns={[
-                          ...debatesColumns,
-                          ...columnsActionCalculator(debatesRowActions, { shownActions: 2 }),
-                        ]}
-                        disableSelectionOnClick
-                        onRowClick={(params: GridRowParams<AdminDebateStored>) => rowViewDebatesAction(params.row)}
-                        sortModel={debatesSortModel}
-                        onSortModelChange={(newModel: GridSortModel) => {
-                          setDebatesSortModel(newModel);
-                        }}
-                        components={{
-                          Toolbar: () => <div>{/* No actions defined */}</div>,
-                        }}
-                      />
+                <Grid item xs={12} sm={12} md={4.0}>
+                  <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                            <DataGrid
+                              {...baseTableConfig}
+                              getRowId={(row: { __identifier: string }) => row.__identifier}
+                              loading={isLoading}
+                              rows={data?.debates ?? []}
+                              columns={[
+                                ...debatesColumns,
+                                ...columnsActionCalculator(debatesRowActions, { shownActions: 2 }),
+                              ]}
+                              disableSelectionOnClick
+                              onRowClick={(params: GridRowParams<AdminDebateStored>) =>
+                                rowViewDebatesAction(params.row)
+                              }
+                              sortModel={debatesSortModel}
+                              onSortModelChange={(newModel: GridSortModel) => {
+                                setDebatesSortModel(newModel);
+                              }}
+                              components={{
+                                Toolbar: () => <div>{/* No actions defined */}</div>,
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>

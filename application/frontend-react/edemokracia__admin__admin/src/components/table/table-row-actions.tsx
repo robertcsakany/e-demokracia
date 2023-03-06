@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression:
 // Path expression: 'src/components/table/table-row-actions.tsx'
 // Template name: actor/src/components/table/table-row-actions.tsx.hbs
 
@@ -54,7 +53,11 @@ const standaloneActions: ColumnActionsProvider<unknown> = (
       type: 'actions',
       renderCell: (params: GridRenderCellParams) => {
         return (
-          <Button variant="text" onClick={() => action.action(params.row)}>
+          <Button
+            variant="text"
+            disabled={action.disabled ? action.disabled(params.row) : false}
+            onClick={() => action.action(params.row)}
+          >
             {action.icon}
             {(options?.showLabel ?? true) && action.label}
           </Button>
@@ -84,6 +87,7 @@ const dropdownActions: ColumnActionsProvider<unknown> = (actions: TableRowAction
                 label: action.label,
                 startIcon: action.icon,
                 onClick: () => action.action(params.row),
+                disabled: action.disabled ? action.disabled(params.row) : false,
               };
             })}
           >

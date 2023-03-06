@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Dashboard.debates#View
@@ -15,6 +14,7 @@ import {
   Box,
   Button,
   Card,
+  CardContent,
   Container,
   Grid,
   InputAdornment,
@@ -23,6 +23,9 @@ import {
   Typography,
   Paper,
   Divider,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@mui/material';
 import {
   DataGrid,
@@ -197,6 +200,7 @@ export default function AdminDashboardDebatesView() {
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminConStored) => rowDeleteConsAction(data, row, () => fetchData()),
+      disabled: (row: AdminConStored) => !row.__deleteable,
     },
     {
       label: t('edemokracia.admin.Dashboard.debates.View.edemokracia.admin.Con.voteUp', { defaultValue: '' }) as string,
@@ -230,6 +234,7 @@ export default function AdminDashboardDebatesView() {
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminProStored) => rowDeleteProsAction(data, row, () => fetchData()),
+      disabled: (row: AdminProStored) => !row.__deleteable,
     },
     {
       label: t('edemokracia.admin.Dashboard.debates.View.edemokracia.admin.Pro.voteUp', { defaultValue: '' }) as string,
@@ -263,6 +268,7 @@ export default function AdminDashboardDebatesView() {
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminCommentStored) => rowDeleteCommentsAction(data, row, () => fetchData()),
+      disabled: (row: AdminCommentStored) => !row.__deleteable,
     },
     {
       label: t('edemokracia.admin.Dashboard.debates.View.edemokracia.admin.Comment.voteUp', {
@@ -326,219 +332,235 @@ export default function AdminDashboardDebatesView() {
       </PageHeader>
       <Container component="main" maxWidth="xl">
         <Box sx={mainContainerPadding}>
-          <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
-            <Grid container item xs={12} sm={12.0} direction="column" alignItems="stretch" justifyContent="flex-start">
+          <Grid
+            container
+            xs={12}
+            sm={12}
+            spacing={2}
+            direction="column"
+            alignItems="stretch"
+            justifyContent="flex-start"
+          >
+            <Grid item xs={12} sm={12}>
               <Card>
-                <Grid container item alignItems="center" justifyContent="flex-start">
-                  <MdiIcon path="wechat" />
-                  <Typography variant="h6" component="h1">
-                    {t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.Label', {
-                      defaultValue: 'Debate',
-                    })}
-                  </Typography>
-                </Grid>
+                <CardContent>
+                  <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                        <MdiIcon path="wechat" />
+                        <Typography variant="h6" component="h1">
+                          {t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.Label', {
+                            defaultValue: 'Debate',
+                          })}
+                        </Typography>
+                      </Grid>
+                    </Grid>
 
-                <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid item xs={12} sm={8.0}>
-                    <TextField
-                      name="title"
-                      id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.debates/View/default/Debate_View/debate/LabelWrapper/debate/title"
-                      label={
-                        t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.title', {
-                          defaultValue: 'Title',
-                        }) as string
-                      }
-                      value={data.title}
-                      error={!!validation.get('title')}
-                      helperText={validation.get('title')}
-                      onChange={(event) => storeDiff('title', event.target.value)}
-                      className={false || !editMode ? 'Mui-readOnly' : undefined}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        readOnly: false || !editMode,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="text_fields" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12} md={8.0}>
+                          <TextField
+                            name="title"
+                            id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.debates/View/default/Debate_View/debate/LabelWrapper/debate/title"
+                            label={
+                              t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.title', {
+                                defaultValue: 'Title',
+                              }) as string
+                            }
+                            value={data.title}
+                            error={!!validation.get('title')}
+                            helperText={validation.get('title')}
+                            onChange={(event) => storeDiff('title', event.target.value)}
+                            className={false || !editMode ? 'Mui-readOnly' : undefined}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              readOnly: false || !editMode,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="text_fields" />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={2.0}>
-                    <TextField
-                      name="status"
-                      id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Dashboard.debates/View/default/Debate_View/debate/LabelWrapper/debate/status"
-                      label={
-                        t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.status', {
-                          defaultValue: 'Status',
-                        }) as string
-                      }
-                      value={data.status || ''}
-                      error={!!validation.get('status')}
-                      helperText={validation.get('status')}
-                      onChange={(event) => storeDiff('status', event.target.value as EdemokraciaDebateStatus)}
-                      className={false || !editMode ? 'Mui-readOnly' : undefined}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        readOnly: false || !editMode,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="list" />
-                          </InputAdornment>
-                        ),
-                      }}
-                      select
-                    >
-                      <MenuItem value={'CREATED'}>
-                        {t('enumerations.EdemokraciaDebateStatus.CREATED', { defaultValue: 'CREATED' })}
-                      </MenuItem>
-                      <MenuItem value={'PENDING'}>
-                        {t('enumerations.EdemokraciaDebateStatus.PENDING', { defaultValue: 'PENDING' })}
-                      </MenuItem>
-                      <MenuItem value={'ACTIVE'}>
-                        {t('enumerations.EdemokraciaDebateStatus.ACTIVE', { defaultValue: 'ACTIVE' })}
-                      </MenuItem>
-                      <MenuItem value={'CLOSED'}>
-                        {t('enumerations.EdemokraciaDebateStatus.CLOSED', { defaultValue: 'CLOSED' })}
-                      </MenuItem>
-                    </TextField>
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={2.0}>
+                          <TextField
+                            name="status"
+                            id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Dashboard.debates/View/default/Debate_View/debate/LabelWrapper/debate/status"
+                            label={
+                              t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.status', {
+                                defaultValue: 'Status',
+                              }) as string
+                            }
+                            value={data.status || ''}
+                            error={!!validation.get('status')}
+                            helperText={validation.get('status')}
+                            onChange={(event) => storeDiff('status', event.target.value as EdemokraciaDebateStatus)}
+                            className={false || !editMode ? 'Mui-readOnly' : undefined}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              readOnly: false || !editMode,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="list" />
+                                </InputAdornment>
+                              ),
+                            }}
+                            select
+                          >
+                            <MenuItem value={'CREATED'}>
+                              {t('enumerations.EdemokraciaDebateStatus.CREATED', { defaultValue: 'CREATED' })}
+                            </MenuItem>
+                            <MenuItem value={'PENDING'}>
+                              {t('enumerations.EdemokraciaDebateStatus.PENDING', { defaultValue: 'PENDING' })}
+                            </MenuItem>
+                            <MenuItem value={'ACTIVE'}>
+                              {t('enumerations.EdemokraciaDebateStatus.ACTIVE', { defaultValue: 'ACTIVE' })}
+                            </MenuItem>
+                            <MenuItem value={'CLOSED'}>
+                              {t('enumerations.EdemokraciaDebateStatus.CLOSED', { defaultValue: 'CLOSED' })}
+                            </MenuItem>
+                          </TextField>
+                        </Grid>
 
-                  <Grid item xs={12} sm={2.0}>
-                    <DateTimePicker
-                      renderInput={(props: any) => (
-                        <TextField
-                          {...props}
-                          error={!!validation.get('closeAt')}
-                          helperText={validation.get('closeAt')}
-                        />
-                      )}
-                      label={
-                        t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.closeAt', {
-                          defaultValue: 'Close at',
-                        }) as string
-                      }
-                      value={data.closeAt ?? null}
-                      className={false || !editMode ? 'Mui-readOnly' : undefined}
-                      readOnly={false || !editMode}
-                      onChange={(newValue: any) => storeDiff('closeAt', newValue)}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="schedule" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={2.0}>
+                          <DateTimePicker
+                            renderInput={(props: any) => (
+                              <TextField
+                                {...props}
+                                error={!!validation.get('closeAt')}
+                                helperText={validation.get('closeAt')}
+                              />
+                            )}
+                            label={
+                              t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.closeAt', {
+                                defaultValue: 'Close at',
+                              }) as string
+                            }
+                            value={data.closeAt ?? null}
+                            className={false || !editMode ? 'Mui-readOnly' : undefined}
+                            readOnly={false || !editMode}
+                            onChange={(newValue: any) => storeDiff('closeAt', newValue)}
+                            InputProps={{
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="schedule" />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={8.0}>
-                    <AggregationInput
-                      name="issue"
-                      id="Link@edemokracia/admin/Admin/edemokracia/admin/Dashboard.debates/View/default/Debate_View/debate/LabelWrapper/debate/issue"
-                      label={
-                        t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.issue', {
-                          defaultValue: 'Issue',
-                        }) as string
-                      }
-                      labelList={[data.issue?.representation?.toString() ?? '']}
-                      value={data.issue}
-                      error={!!validation.get('issue')}
-                      helperText={validation.get('issue')}
-                      icon={<MdiIcon path="file-document" />}
-                      readonly={true || !editMode}
-                      onView={async () => linkViewIssueAction(data?.issue!)}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={8.0}>
+                          <AggregationInput
+                            name="issue"
+                            id="Link@edemokracia/admin/Admin/edemokracia/admin/Dashboard.debates/View/default/Debate_View/debate/LabelWrapper/debate/issue"
+                            label={
+                              t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.issue', {
+                                defaultValue: 'Issue',
+                              }) as string
+                            }
+                            labelList={[data.issue?.representation?.toString() ?? '']}
+                            value={data.issue}
+                            error={!!validation.get('issue')}
+                            helperText={validation.get('issue')}
+                            icon={<MdiIcon path="file-document" />}
+                            readonly={true || !editMode}
+                            onView={async () => linkViewIssueAction(data?.issue!)}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={4.0}>
-                    <AggregationInput
-                      name="createdBy"
-                      id="Link@edemokracia/admin/Admin/edemokracia/admin/Dashboard.debates/View/default/Debate_View/debate/LabelWrapper/debate/createdBy"
-                      label={
-                        t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.createdBy', {
-                          defaultValue: 'Created by',
-                        }) as string
-                      }
-                      labelList={[data.createdBy?.representation?.toString() ?? '']}
-                      value={data.createdBy}
-                      error={!!validation.get('createdBy')}
-                      helperText={validation.get('createdBy')}
-                      icon={<MdiIcon path="account" />}
-                      readonly={true || !editMode}
-                      onView={async () => linkViewCreatedByAction(data?.createdBy!)}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <AggregationInput
+                            name="createdBy"
+                            id="Link@edemokracia/admin/Admin/edemokracia/admin/Dashboard.debates/View/default/Debate_View/debate/LabelWrapper/debate/createdBy"
+                            label={
+                              t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.createdBy', {
+                                defaultValue: 'Created by',
+                              }) as string
+                            }
+                            labelList={[data.createdBy?.representation?.toString() ?? '']}
+                            value={data.createdBy}
+                            error={!!validation.get('createdBy')}
+                            helperText={validation.get('createdBy')}
+                            icon={<MdiIcon path="account" />}
+                            readonly={true || !editMode}
+                            onView={async () => linkViewCreatedByAction(data?.createdBy!)}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12}>
-                    <TextField
-                      name="description"
-                      id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Dashboard.debates/View/default/Debate_View/debate/LabelWrapper/debate/description"
-                      label={
-                        t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.description', {
-                          defaultValue: 'Description',
-                        }) as string
-                      }
-                      value={data.description}
-                      multiline
-                      minRows={4.0}
-                      error={!!validation.get('description')}
-                      helperText={validation.get('description')}
-                      onChange={(event) => storeDiff('description', event.target.value)}
-                      className={false || !editMode ? 'Mui-readOnly' : undefined}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        readOnly: false || !editMode,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="text_fields" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12}>
+                          <TextField
+                            name="description"
+                            id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Dashboard.debates/View/default/Debate_View/debate/LabelWrapper/debate/description"
+                            label={
+                              t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.description', {
+                                defaultValue: 'Description',
+                              }) as string
+                            }
+                            value={data.description}
+                            multiline
+                            minRows={4.0}
+                            error={!!validation.get('description')}
+                            helperText={validation.get('description')}
+                            onChange={(event) => storeDiff('description', event.target.value)}
+                            className={false || !editMode ? 'Mui-readOnly' : undefined}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              readOnly: false || !editMode,
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="text_fields" />
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12}>
-                    <AggregationInput
-                      name="voteDefinition"
-                      id="Link@edemokracia/admin/Admin/edemokracia/admin/Dashboard.debates/View/default/Debate_View/debate/LabelWrapper/debate/voteDefinition"
-                      label={
-                        t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.voteDefinition', {
-                          defaultValue: 'VoteDefinition',
-                        }) as string
-                      }
-                      labelList={[
-                        data.voteDefinition?.title?.toString() ?? '',
-                        data.voteDefinition?.created?.toString() ?? '',
-                        data.voteDefinition?.status?.toString() ?? '',
-                        data.voteDefinition?.closeAt?.toString() ?? '',
-                      ]}
-                      value={data.voteDefinition}
-                      error={!!validation.get('voteDefinition')}
-                      helperText={validation.get('voteDefinition')}
-                      icon={<MdiIcon path="table_rows" />}
-                      readonly={true || !editMode}
-                      onView={async () => linkViewVoteDefinitionAction(data?.voteDefinition!)}
-                    />
-                  </Grid>
+                        <Grid item xs={12} sm={12}>
+                          <AggregationInput
+                            name="voteDefinition"
+                            id="Link@edemokracia/admin/Admin/edemokracia/admin/Dashboard.debates/View/default/Debate_View/debate/LabelWrapper/debate/voteDefinition"
+                            label={
+                              t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.voteDefinition', {
+                                defaultValue: 'VoteDefinition',
+                              }) as string
+                            }
+                            labelList={[
+                              data.voteDefinition?.title?.toString() ?? '',
+                              data.voteDefinition?.created?.toString() ?? '',
+                              data.voteDefinition?.status?.toString() ?? '',
+                              data.voteDefinition?.closeAt?.toString() ?? '',
+                            ]}
+                            value={data.voteDefinition}
+                            error={!!validation.get('voteDefinition')}
+                            helperText={validation.get('voteDefinition')}
+                            icon={<MdiIcon path="table_rows" />}
+                            readonly={true || !editMode}
+                            onView={async () => linkViewVoteDefinitionAction(data?.voteDefinition!)}
+                          />
+                        </Grid>
 
-                  <Grid item xs={12} sm={4.0}>
-                    <Button
-                      onClick={() => AdminDebateCloseDebateAction(data, () => fetchData())}
-                      disabled={isLoading || editMode}
-                    >
-                      <MdiIcon path="wechat" />
-                      {t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.closeDebate', {
-                        defaultValue: 'Close debate',
-                      })}
-                    </Button>
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <Button
+                            onClick={() => AdminDebateCloseDebateAction(data, () => fetchData())}
+                            disabled={isLoading || editMode}
+                          >
+                            <MdiIcon path="wechat" />
+                            {t('edemokracia.admin.Dashboard.debates.Debate.View.debate.debate.closeDebate', {
+                              defaultValue: 'Close debate',
+                            })}
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </Grid>
                   </Grid>
-                </Grid>
+                </CardContent>
               </Card>
             </Grid>
 
-            <Grid container item>
+            <Grid container item xs={12} sm={12}>
               <ModeledTabs
                 activeIndex={0}
                 childTabs={[
@@ -554,146 +576,154 @@ export default function AdminDashboardDebatesView() {
                   },
                 ]}
               >
-                <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                    <Grid item xs={12} sm={4.0}>
-                      <Button
-                        onClick={() => AdminDebateCreateArgumentAction(data, () => fetchData())}
-                        disabled={isLoading || editMode}
-                      >
-                        <MdiIcon path="account-voice" />
-                        {t(
-                          'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.arguments.arguments.actions.createArgument',
-                          { defaultValue: 'Add argument' },
-                        )}
-                      </Button>
-                    </Grid>
-                  </Grid>
-
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={6.0}
-                    direction="column"
-                    alignItems="stretch"
-                    justifyContent="flex-start"
-                  >
-                    <Grid container item alignItems="center" justifyContent="flex-start">
-                      <MdiIcon path="chat-plus" />
-                      <Typography variant="h6" component="h1">
-                        {t(
-                          'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.arguments.arguments.pros.pros.Label',
-                          { defaultValue: 'Pro' },
-                        )}
-                      </Typography>
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <Button
+                            onClick={() => AdminDebateCreateArgumentAction(data, () => fetchData())}
+                            disabled={isLoading || editMode}
+                          >
+                            <MdiIcon path="account-voice" />
+                            {t(
+                              'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.arguments.arguments.actions.createArgument',
+                              { defaultValue: 'Add argument' },
+                            )}
+                          </Button>
+                        </Grid>
+                      </Grid>
                     </Grid>
 
-                    <Grid item>
-                      <DataGrid
-                        {...baseTableConfig}
-                        getRowId={(row: { __identifier: string }) => row.__identifier}
-                        loading={isLoading}
-                        rows={data?.pros ?? []}
-                        columns={[...prosColumns, ...columnsActionCalculator(prosRowActions, { shownActions: 2 })]}
-                        disableSelectionOnClick
-                        onRowClick={(params: GridRowParams<AdminProStored>) => rowViewProsAction(params.row)}
-                        sortModel={prosSortModel}
-                        onSortModelChange={(newModel: GridSortModel) => {
-                          setProsSortModel(newModel);
-                        }}
-                        components={{
-                          Toolbar: () => <div>{/* No actions defined */}</div>,
-                        }}
-                      />
-                    </Grid>
-                  </Grid>
+                    <Grid item xs={12} sm={12} md={6.0}>
+                      <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                            <MdiIcon path="chat-plus" />
+                            <Typography variant="h6" component="h1">
+                              {t(
+                                'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.arguments.arguments.pros.pros.Label',
+                                { defaultValue: 'Pro' },
+                              )}
+                            </Typography>
+                          </Grid>
+                        </Grid>
 
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={6.0}
-                    direction="column"
-                    alignItems="stretch"
-                    justifyContent="flex-start"
-                  >
-                    <Grid container item alignItems="center" justifyContent="flex-start">
-                      <MdiIcon path="chat-minus" />
-                      <Typography variant="h6" component="h1">
-                        {t(
-                          'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.arguments.arguments.cons.cons.Label',
-                          { defaultValue: 'Contra' },
-                        )}
-                      </Typography>
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                            <DataGrid
+                              {...baseTableConfig}
+                              getRowId={(row: { __identifier: string }) => row.__identifier}
+                              loading={isLoading}
+                              rows={data?.pros ?? []}
+                              columns={[
+                                ...prosColumns,
+                                ...columnsActionCalculator(prosRowActions, { shownActions: 2 }),
+                              ]}
+                              disableSelectionOnClick
+                              onRowClick={(params: GridRowParams<AdminProStored>) => rowViewProsAction(params.row)}
+                              sortModel={prosSortModel}
+                              onSortModelChange={(newModel: GridSortModel) => {
+                                setProsSortModel(newModel);
+                              }}
+                              components={{
+                                Toolbar: () => <div>{/* No actions defined */}</div>,
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
 
-                    <Grid item>
-                      <DataGrid
-                        {...baseTableConfig}
-                        getRowId={(row: { __identifier: string }) => row.__identifier}
-                        loading={isLoading}
-                        rows={data?.cons ?? []}
-                        columns={[...consColumns, ...columnsActionCalculator(consRowActions, { shownActions: 2 })]}
-                        disableSelectionOnClick
-                        onRowClick={(params: GridRowParams<AdminConStored>) => rowViewConsAction(params.row)}
-                        sortModel={consSortModel}
-                        onSortModelChange={(newModel: GridSortModel) => {
-                          setConsSortModel(newModel);
-                        }}
-                        components={{
-                          Toolbar: () => <div>{/* No actions defined */}</div>,
-                        }}
-                      />
+                    <Grid item xs={12} sm={12} md={6.0}>
+                      <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                            <MdiIcon path="chat-minus" />
+                            <Typography variant="h6" component="h1">
+                              {t(
+                                'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.arguments.arguments.cons.cons.Label',
+                                { defaultValue: 'Contra' },
+                              )}
+                            </Typography>
+                          </Grid>
+                        </Grid>
+
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                            <DataGrid
+                              {...baseTableConfig}
+                              getRowId={(row: { __identifier: string }) => row.__identifier}
+                              loading={isLoading}
+                              rows={data?.cons ?? []}
+                              columns={[
+                                ...consColumns,
+                                ...columnsActionCalculator(consRowActions, { shownActions: 2 }),
+                              ]}
+                              disableSelectionOnClick
+                              onRowClick={(params: GridRowParams<AdminConStored>) => rowViewConsAction(params.row)}
+                              sortModel={consSortModel}
+                              onSortModelChange={(newModel: GridSortModel) => {
+                                setConsSortModel(newModel);
+                              }}
+                              components={{
+                                Toolbar: () => <div>{/* No actions defined */}</div>,
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
 
-                <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                  <Grid container item xs={12} alignItems="flex-start" justifyContent="flex-start" spacing={2}>
-                    <Grid item xs={12} sm={4.0}>
-                      <Button
-                        onClick={() => AdminDebateCreateCommentAction(data, () => fetchData())}
-                        disabled={isLoading || editMode}
-                      >
-                        <MdiIcon path="comment-text-multiple" />
-                        {t(
-                          'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.comments.comments.actions.createComment',
-                          { defaultValue: 'Add comment' },
-                        )}
-                      </Button>
+                <Grid item xs={12} sm={12}>
+                  <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <Button
+                            onClick={() => AdminDebateCreateCommentAction(data, () => fetchData())}
+                            disabled={isLoading || editMode}
+                          >
+                            <MdiIcon path="comment-text-multiple" />
+                            {t(
+                              'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.comments.comments.actions.createComment',
+                              { defaultValue: 'Add comment' },
+                            )}
+                          </Button>
+                        </Grid>
+                      </Grid>
                     </Grid>
-                  </Grid>
 
-                  <Grid
-                    container
-                    item
-                    xs={12}
-                    sm={12.0}
-                    direction="column"
-                    alignItems="stretch"
-                    justifyContent="flex-start"
-                  >
-                    <Grid item>
-                      <DataGrid
-                        {...baseTableConfig}
-                        getRowId={(row: { __identifier: string }) => row.__identifier}
-                        loading={isLoading}
-                        rows={data?.comments ?? []}
-                        columns={[
-                          ...commentsColumns,
-                          ...columnsActionCalculator(commentsRowActions, { shownActions: 2 }),
-                        ]}
-                        disableSelectionOnClick
-                        onRowClick={(params: GridRowParams<AdminCommentStored>) => rowViewCommentsAction(params.row)}
-                        sortModel={commentsSortModel}
-                        onSortModelChange={(newModel: GridSortModel) => {
-                          setCommentsSortModel(newModel);
-                        }}
-                        components={{
-                          Toolbar: () => <div>{/* No actions defined */}</div>,
-                        }}
-                      />
+                    <Grid item xs={12} sm={12}>
+                      <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                            <DataGrid
+                              {...baseTableConfig}
+                              getRowId={(row: { __identifier: string }) => row.__identifier}
+                              loading={isLoading}
+                              rows={data?.comments ?? []}
+                              columns={[
+                                ...commentsColumns,
+                                ...columnsActionCalculator(commentsRowActions, { shownActions: 2 }),
+                              ]}
+                              disableSelectionOnClick
+                              onRowClick={(params: GridRowParams<AdminCommentStored>) =>
+                                rowViewCommentsAction(params.row)
+                              }
+                              sortModel={commentsSortModel}
+                              onSortModelChange={(newModel: GridSortModel) => {
+                                setCommentsSortModel(newModel);
+                              }}
+                              components={{
+                                Toolbar: () => <div>{/* No actions defined */}</div>,
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>

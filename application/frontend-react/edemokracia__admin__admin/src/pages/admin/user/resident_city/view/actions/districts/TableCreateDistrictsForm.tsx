@@ -1,11 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx.hbs
 // Action name: edemokracia::admin::Admin::edemokracia::admin::City::districts#TableCreate
-// Owner Page name: edemokracia::admin::User.residentCity#View
 // Action: CreateAction
 
 import { useState, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
@@ -26,7 +24,11 @@ import {
   MenuItem,
   Typography,
   Card,
+  CardContent,
   Divider,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@mui/material';
 import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
 import {
@@ -144,8 +146,8 @@ export function TableCreateDistrictsForm({ successCallback, cancel, owner }: Tab
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>
-        <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch">
-          <Grid item>
+        <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
+          <Grid item xs={12} sm={12}>
             <TextField
               name="name"
               id="TextInput@edemokracia/admin/Admin/edemokracia/admin/City.districts/Create/default/District_Form/name"
