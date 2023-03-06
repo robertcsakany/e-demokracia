@@ -11,26 +11,26 @@
 
 	<properties>
 		<judo-channel>develop</judo-channel>
-		<judo-version>1.0.0.20230216_040917_adb7df0b_develop</judo-version>
+		<judo-version>1.0.0.20230305_040726_bbe8242a_develop</judo-version>
 
 		<sqlDialects>postgresql,hsqldb</sqlDialects>
 
 
-        <judo-meta-esm-version-defined>1.2.0-SNAPSHOT</judo-meta-esm-version-defined>
-        <judo-tatami-version-defined>1.1.0-SNAPSHOT</judo-tatami-version-defined>
+        <judo-meta-esm-version-defined>1.2.0.20230301_112820_1c86025d_develop</judo-meta-esm-version-defined>
+        <judo-tatami-version-defined>1.1.0.20230302_041736_eedbde9f_develop</judo-tatami-version-defined>
         <flutter-maven-plugin-version-defined>1.0.2.20220326_002737_efc0629e_develop</flutter-maven-plugin-version-defined>
         <structured-map-proxy-version-defined>1.2.0</structured-map-proxy-version-defined>
-        <judo-dao-api-version-defined>1.0.4.20230104_113815_13de0045_develop</judo-dao-api-version-defined>
+        <judo-dao-api-version-defined>1.0.4.20230223_142100_ea2fecf6_develop</judo-dao-api-version-defined>
         <judo-dispatcher-api-version-defined>1.0.2</judo-dispatcher-api-version-defined>
-        <judo-sdk-common-version-defined>1.0.4.20230207_042417_6df166c2_develop</judo-sdk-common-version-defined>
+        <judo-sdk-common-version-defined>1.0.4.20230301_080350_d4f94c18_develop</judo-sdk-common-version-defined>
         <mapper-version-defined>1.0.3</mapper-version-defined>
-        <judo-platform-version-defined>2.0.1-SNAPSHOT</judo-platform-version-defined>
-        <judo-services-version-defined>1.1.0-SNAPSHOT</judo-services-version-defined>
-        <judo-rdbms-schema-version-defined>1.0.0-SNAPSHOT</judo-rdbms-schema-version-defined>
-        <judo-tatami-client-version-defined>1.1.0-SNAPSHOT</judo-tatami-client-version-defined>
-        <judo-esm-fullstack-project-template-version-defined>1.0.0-SNAPSHOT</judo-esm-fullstack-project-template-version-defined>
-		<judo-meta-ui-version-defined>1.1.0.20230222_232226_e8c8b156_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-ui-version-defined>
-		<judo-ui-flutter-template-version-defined>1.0.0.20230214_040838_fa0b654c_develop</judo-ui-flutter-template-version-defined>
+        <judo-platform-version-defined>2.0.1.20230303_044032_c5eefb85_develop</judo-platform-version-defined>
+        <judo-services-version-defined>1.1.0.20230303_043437_1064fbe0_develop</judo-services-version-defined>
+        <judo-rdbms-schema-version-defined>1.0.0.20230301_081440_f8420a07_develop</judo-rdbms-schema-version-defined>
+        <judo-tatami-client-version-defined>1.1.0.20230302_042657_cbb8e035_develop</judo-tatami-client-version-defined>
+        <judo-esm-fullstack-project-template-version-defined>1.0.0.20230303_045041_8ad72144_develop</judo-esm-fullstack-project-template-version-defined>
+		<judo-meta-ui-version-defined>1.1.0.20230301_040932_6f0a751c_develop</judo-meta-ui-version-defined>
+		<judo-ui-flutter-template-version-defined>1.0.0.20230301_041503_b6c23e8f_develop</judo-ui-flutter-template-version-defined>
         <judo-tatami-typescript-version-defined>1.0.0.20230222_232625_bb02a632_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-tatami-typescript-version-defined>
 
         <judo-ui-archetype-version-defined>1.0.0.20221003_142712_453def5b_develop</judo-ui-archetype-version-defined>
