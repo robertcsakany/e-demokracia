@@ -9,6 +9,10 @@ specifiers:
   '@mui/material': 5.11.4
   '@mui/x-data-grid': 5.17.18
   '@mui/x-date-pickers': 5.0.13
+  '@pandino/loader-configuration-dom': 0.8.26
+  '@pandino/pandino': 0.8.26
+  '@pandino/pandino-api': 0.8.26
+  '@pandino/react-hooks': 0.8.26
   '@remix-run/router': 1.1.0
   '@rollup/plugin-commonjs': 24.0.0
   '@rollup/plugin-node-resolve': 15.0.1
@@ -46,6 +50,9 @@ dependencies:
   '@mui/material': 5.11.4_lskpmcsdi7ipu6qpuapyu56ihm
   '@mui/x-data-grid': 5.17.18_3sld6g3d73vxspzi5cx2xwhaya
   '@mui/x-date-pickers': 5.0.13_dd6xbejtdystigvbxpvulfxoou
+  '@pandino/loader-configuration-dom': 0.8.26
+  '@pandino/pandino': 0.8.26
+  '@pandino/react-hooks': 0.8.26
   '@remix-run/router': 1.1.0
   axios: 1.2.1
   dayjs: 1.11.7
@@ -61,6 +68,7 @@ dependencies:
 
 devDependencies:
   '@judo/data-api-common': 0.4.2
+  '@pandino/pandino-api': 0.8.26
   '@rollup/plugin-commonjs': 24.0.0_rollup@3.7.5
   '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.5
   '@rollup/plugin-replace': 5.0.2_rollup@3.7.5
@@ -975,6 +983,26 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
+
+  /@pandino/loader-configuration-dom/0.8.26:
+    resolution: {integrity: sha512-vdh7dytSF8gbGpYXuAcwUoaK5KTR/8qRmF0m+822VhE/WmXbBMPeTPcsDdbZt3r/47JocWx2VcQa9B6bPuvgHA==}
+    engines: {node: '>=14.9.0'}
+    dev: false
+
+  /@pandino/pandino-api/0.8.26:
+    resolution: {integrity: sha512-vKsT2C+AL2M/CkD0I2duwEjXI2jWDOmG4nDEV/7GlKjaRWjkGFVMgnjYaEPKqTjqA2pUK+ofKdaUfVPSN6DZLw==}
+    engines: {node: '>=14.9.0'}
+    dev: true
+
+  /@pandino/pandino/0.8.26:
+    resolution: {integrity: sha512-PekDzJyK3vfDK9IPgz71oj+yFeTajKGB8DVHZXZ0Icow3Sum8woNIcPrsjv7DPSblmB65B0bQGEUj2SMRfzQqg==}
+    engines: {node: '>=14.9.0'}
+    dev: false
+
+  /@pandino/react-hooks/0.8.26:
+    resolution: {integrity: sha512-iXY8I2JxjO5vExgqeeK89kAq2gXHDFSvZzFj2Ztp1pUqWETaaFvaVMO/2YWN+XuxcFGcVEYvXgjX4NOSrwZKDw==}
+    engines: {node: '>=14.9.0'}
+    dev: false
 
   /@popperjs/core/2.11.6:
     resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}

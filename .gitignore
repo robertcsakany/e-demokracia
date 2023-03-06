@@ -11,5 +11,5 @@
 **/target
 
 application/model/models
-
+application/.nodejs
 dump*.tar

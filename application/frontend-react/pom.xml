@@ -20,39 +20,37 @@
     <packaging>pom</packaging>
 
     <properties>
-        <judo-meta-ui-version>1.1.0.20230222_232226_e8c8b156_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-ui-version>
+        <judo-meta-ui-version>1.1.0.20230301_040932_6f0a751c_develop</judo-meta-ui-version>
         <frontend-maven-plugin-version>1.12.1</frontend-maven-plugin-version>
-
-        <judo-tatami-ui2web-version>1.0.0.20230222_232625_bb02a632_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-tatami-ui2web-version>
-        <judo-tatami-ui2typescript-maven-plugin-version>1.0.0.20230222_232625_bb02a632_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-tatami-ui2typescript-maven-plugin-version>
-        <judo-tatami-ui-external-packages-version>1.0.0.20230215_122636_6c5daf88_develop</judo-tatami-ui-external-packages-version>
-
         <ui-model>${basedir}/model/edemokracia-ui.model</ui-model>
 
-        <model-name>edemokracia</model-name>
-        <generated-project-directory>${basedir}/edemokracia-ui</generated-project-directory>
+        <judo-ui-react-template-version>1.0.0.20230302_115751_80fc8c97_develop</judo-ui-react-template-version>
+        <judo-ui-typescript-rest-template-version>1.0.0.20230302_040753_fc1838dc_develop</judo-ui-typescript-rest-template-version>
+
         <node-version>16.15.1</node-version>
         <pnpm-version>7.13.1</pnpm-version>
-        <node-install-dir>${basedir}/.nodejs</node-install-dir>
+
+        <node-install-dir>${maven.multiModuleProjectDirectory}/.nodejs</node-install-dir>
+
         <!-- To define create 'frontend-react/pom.xml.properties-definition.fragment.hbs' file -->
         <!-- End of 'frontend-react/pom.xml.properties-definition.fragment.hbs' -->
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>hu.blackbelt.judo.tatami</groupId>
-            <artifactId>judo-tatami-ui2web</artifactId>
-            <version>${judo-tatami-ui2web-version}</version>
-        </dependency>
-        <dependency>
             <groupId>hu.blackbelt.judo.meta</groupId>
             <artifactId>judo-ui-generator-maven-plugin</artifactId>
             <version>${judo-meta-ui-version}</version>
         </dependency>
         <dependency>
-            <groupId>hu.blackbelt.judo.tatami</groupId>
-            <artifactId>judo-tatami-ui-external-packages</artifactId>
-            <version>${judo-tatami-ui-external-packages-version}</version>
+            <groupId>hu.blackbelt.judo.generator</groupId>
+            <artifactId>judo-ui-react</artifactId>
+            <version>${judo-ui-react-template-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>hu.blackbelt.judo.generator</groupId>
+            <artifactId>judo-ui-react-external-packages</artifactId>
+            <version>${judo-ui-react-template-version}</version>
         </dependency>
     </dependencies>
 

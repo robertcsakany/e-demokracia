@@ -17,15 +17,21 @@
 
     <properties>
         <!-- To redefine project definition create 'frontend-react/actor/pom.xml.properties-definition.fragment.override.hbs' file -->
+        <model-name>edemokracia</model-name>
         <actor>edemokracia__admin__admin</actor>
         <actor-shortname>admin</actor-shortname>
         <actor-name>Admin</actor-name>
         <actor-fq-name>edemokracia::admin::Admin</actor-fq-name>
         
-        <node-install-dir>${project.parent.basedir}/.nodejs</node-install-dir>
         <override-dir>${project.parent.basedir}/generator-overrides</override-dir>
-        <services-target-folder>${basedir}/src/generated</services-target-folder>
+        
+        
+        <tablePageLimit>10</tablePageLimit>
+        <appVersion>1.0.0</appVersion>
+        
+        
         <!-- End of 'frontend-react/actor/pom.xml.properties-definition.fragment.override.hbs' -->
+        <ui-model>${project.parent.basedir}/model/${model-name}-ui.model</ui-model>
     </properties>
 
     <build>
@@ -57,47 +63,49 @@
             </activation>
             <build>
                 <plugins>
+
                     <plugin>
                         <groupId>hu.blackbelt.judo.meta</groupId>
                         <artifactId>judo-ui-generator-maven-plugin</artifactId>
                         <version>${judo-meta-ui-version}</version>
                         <executions>
                             <execution>
-                                <id>execute-ui-model-from-file</id>
+                                <id>execute-ui-generation</id>
                                 <phase>generate-sources</phase>
                                 <goals>
                                     <goal>generate</goal>
                                 </goals>
                                 <configuration>
-                                    <ui>${project.parent.basedir}/model/${model-name}-ui.model</ui>
                                     <uris>
-                                        <uri>mvn:hu.blackbelt.judo.tatami:judo-tatami-ui2web:${judo-tatami-ui2web-version}</uri>
+                                        <uri>mvn:hu.blackbelt.judo.generator:judo-ui-react:${judo-ui-react-template-version}</uri>
+                                        <uri>${override-dir}/ui-react</uri>
                                     </uris>
-                                    <type>web-project</type>
+                                    <type>ui-react</type>
                                     <applications>
                                         ${actor-fq-name}
                                     </applications>
+                                    <ui>${ui-model}</ui>
                                     <destination>${basedir}</destination>
                                     <templateParameters>
-                                        <groupId>${project.groupId}</groupId>
-                                        <artifactId>${project.artifactId}</artifactId>
-                                        <version>${project.version}</version>
-                                        <serviceGeneratorVersion>${project.version}</serviceGeneratorVersion>
                                         <uiMetaVersion>${judo-meta-ui-version}</uiMetaVersion>
                                         <nodeInstallDir>${node-install-dir}</nodeInstallDir>
 
-                                        <appModelName>edemokracia</appModelName>
+                                        <appModelName>${model-name}</appModelName>
+                                        <appScope>${appScope}</appScope>
+                                        <appVersion>${appVersion}</appVersion>
                                         
-                                        <appVersion>1.0.0</appVersion>
-                                        <nodeVersion>${node-version}</nodeVersion>
-                                        <pnpmVersion>${pnpm-version}</pnpmVersion>
-                                        <externalPackagesVersion>${judo-tatami-ui-external-packages-version}</externalPackagesVersion>
-                                        
-                                        <tablePageLimit>10</tablePageLimit>
+                                        <tablePageLimit>${tablePageLimit}</tablePageLimit>
                                     </templateParameters>
                                 </configuration>
                             </execution>
                         </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>hu.blackbelt.judo.generator</groupId>
+                                <artifactId>judo-ui-react</artifactId>
+                                <version>${judo-ui-react-template-version}</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
@@ -113,26 +121,55 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>hu.blackbelt.judo.tatami</groupId>
-                        <artifactId>judo-tatami-ui2typescript-maven-plugin</artifactId>
-                        <version>${judo-tatami-ui2typescript-maven-plugin-version}</version>
+                        <groupId>hu.blackbelt.judo.meta</groupId>
+                        <artifactId>judo-ui-generator-maven-plugin</artifactId>
+                        <version>${judo-meta-ui-version}</version>
                         <executions>
                             <execution>
-                                <id>execute-source-code-generation-from-ui-model</id>
+                                <id>execute-ui-services-generation</id>
                                 <phase>generate-sources</phase>
                                 <goals>
-                                    <goal>default-workflow</goal>
+                                    <goal>generate</goal>
                                 </goals>
                                 <configuration>
-                                    <ui>${project.parent.basedir}/model/${model-name}-ui.model</ui>
-                                    <modelName>${model-name}</modelName>
-                                    <destination>${services-target-folder}</destination>
-                                    <mode>raw</mode>
-                                    <onlyActors>${actor-fq-name}</onlyActors>
-                                    
+                                    <uris>
+                                        <uri>mvn:hu.blackbelt.judo.generator:judo-ui-typescript-rest-api:${judo-ui-typescript-rest-template-version}</uri>
+                                        <uri>mvn:hu.blackbelt.judo.generator:judo-ui-typescript-rest-service:${judo-ui-typescript-rest-template-version}</uri>
+                                        <uri>mvn:hu.blackbelt.judo.generator:judo-ui-typescript-rest-axios:${judo-ui-typescript-rest-template-version}</uri>
+                                        <uri>${override-dir}/ui-typescript</uri>
+                                    </uris>
+                                    <type>ui-typescript-rest</type>
+                                    <applications>
+                                        ${actor-fq-name}
+                                    </applications>
+                                    <ui>${ui-model}</ui>
+                                    <destination>${basedir}/src/generated</destination>
                                 </configuration>
                             </execution>
+
                         </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>hu.blackbelt.judo.generator</groupId>
+                                <artifactId>judo-ui-typescript-rest-commons</artifactId>
+                                <version>${judo-ui-typescript-rest-template-version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>hu.blackbelt.judo.generator</groupId>
+                                <artifactId>judo-ui-typescript-rest-api</artifactId>
+                                <version>${judo-ui-typescript-rest-template-version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>hu.blackbelt.judo.generator</groupId>
+                                <artifactId>judo-ui-typescript-rest-service</artifactId>
+                                <version>${judo-ui-typescript-rest-template-version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>hu.blackbelt.judo.generator</groupId>
+                                <artifactId>judo-ui-typescript-rest-axios</artifactId>
+                                <version>${judo-ui-typescript-rest-template-version}</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
@@ -147,9 +184,11 @@
             </activation>
             <build>
                 <plugins>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.3.0</version>
                         <executions>
                             <execution>
                                 <id>external-packages</id>
@@ -160,18 +199,25 @@
                                 <configuration>
                                     <artifactItems>
                                         <artifactItem>
-                                            <groupId>hu.blackbelt.judo.tatami</groupId>
-                                            <artifactId>judo-tatami-ui-external-packages</artifactId>
-                                            <version>${judo-tatami-ui-external-packages-version}</version>
+                                            <groupId>hu.blackbelt.judo.generator</groupId>
+                                            <artifactId>judo-ui-react-external-packages</artifactId>
+                                            <version>${judo-ui-react-template-version}</version>
                                             <type>jar</type>
                                             <overWrite>true</overWrite>
                                         </artifactItem>
                                     </artifactItems>
                                     <includes>externals/**</includes>
-                                    <outputDirectory>${project.basedir}</outputDirectory>
+                                    <outputDirectory>${basedir}/src/generated</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>hu.blackbelt.judo.generator</groupId>
+                                <artifactId>judo-ui-react-external-packages</artifactId>
+                                <version>${judo-ui-react-template-version}</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
 
                     <plugin>
@@ -214,6 +260,7 @@
                         </executions>
                         <configuration>
                             <installDirectory>${node-install-dir}</installDirectory>
+                            <workingDirectory>${basedir}</workingDirectory>
                         </configuration>
                     </plugin>
                 </plugins>

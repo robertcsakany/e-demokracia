@@ -41,19 +41,19 @@
         <!-- To define create 'pom.xml.judo-properties-definition.fragment.hbs' file -->
         <flutter-maven-plugin-version>1.0.2.20220326_002737_efc0629e_develop</flutter-maven-plugin-version>
         <structured-map-proxy-version>1.2.0</structured-map-proxy-version>
-        <judo-dao-api-version>1.0.4.20230104_113815_13de0045_develop</judo-dao-api-version>
+        <judo-dao-api-version>1.0.4.20230223_142100_ea2fecf6_develop</judo-dao-api-version>
         <judo-dispatcher-api-version>1.0.2</judo-dispatcher-api-version>
-        <judo-sdk-common-version>1.0.4.20230207_042417_6df166c2_develop</judo-sdk-common-version>
+        <judo-sdk-common-version>1.0.4.20230301_080350_d4f94c18_develop</judo-sdk-common-version>
         <mapper-version>1.0.3</mapper-version>
         
-        <judo-tatami-version>1.1.0-SNAPSHOT </judo-tatami-version>
-        <judo-platform-version>2.0.1-SNAPSHOT</judo-platform-version>
-        <judo-services-version>1.1.0-SNAPSHOT</judo-services-version>
-        <judo-rdbms-schema-version>1.0.0-SNAPSHOT</judo-rdbms-schema-version>
-        <judo-tatami-client-version>1.1.0-SNAPSHOT</judo-tatami-client-version>
+        <judo-tatami-version>1.1.0.20230302_041736_eedbde9f_develop </judo-tatami-version>
+        <judo-platform-version>2.0.1.20230303_044032_c5eefb85_develop</judo-platform-version>
+        <judo-services-version>1.1.0.20230303_043437_1064fbe0_develop</judo-services-version>
+        <judo-rdbms-schema-version>1.0.0.20230301_081440_f8420a07_develop</judo-rdbms-schema-version>
+        <judo-tatami-client-version>1.1.0.20230302_042657_cbb8e035_develop</judo-tatami-client-version>
         
-        <judo-meta-ui-version>1.1.0.20230222_232226_e8c8b156_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-ui-version>
-        <judo-ui-flutter-template-version>1.0.0.20230214_040838_fa0b654c_develop</judo-ui-flutter-template-version>
+        <judo-meta-ui-version>1.1.0.20230301_040932_6f0a751c_develop</judo-meta-ui-version>
+        <judo-ui-flutter-template-version>1.0.0.20230301_041503_b6c23e8f_develop</judo-ui-flutter-template-version>
         <!-- End of 'pom.xml.judo-properties-definition.fragment.hbs' -->
 
         <!-- To define create 'pom.xml.properties-definition.fragment.hbs' file -->

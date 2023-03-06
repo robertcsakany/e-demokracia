@@ -7,8 +7,12 @@
 import { createRoot } from 'react-dom/client';
 import axios from 'axios';
 import { HashRouter, Route, Routes } from 'react-router-dom';
+import Pandino from '@pandino/pandino';
+import loaderConfiguration from '@pandino/loader-configuration-dom';
+import { PandinoProvider } from '@pandino/react-hooks';
 import { AuthProvider } from 'react-oidc-context';
 import { axiosRequestInterceptor, Auth, storeMeta, getUser, appBaseUri } from './auth';
+import { applicationCustomizer } from './custom';
 import { accessServiceImpl, judoAxiosProvider } from './generated/data-axios';
 import App from './App';
 import { routes } from './routes';
@@ -19,6 +23,15 @@ const API_DEFAULT_BASE_URL: string = process.env.API_DEFAULT_BASE_URL || window.
 const API_RELATIVE_PATH: string = process.env.API_RELATIVE_PATH || '/api';
 // precedence: explicit file -> explicit api -> window.location.origin
 const FILE_DEFAULT_BASE_URL: string = process.env.FILE_DEFAULT_BASE_URL || API_DEFAULT_BASE_URL;
+
+const pandino = new Pandino({
+  ...loaderConfiguration,
+});
+
+await pandino.init();
+await pandino.start();
+
+await applicationCustomizer.customize(pandino.getBundleContext());
 
 judoAxiosProvider.init({
   axios,
@@ -40,18 +53,20 @@ const oidcConfig = {
 };
 
 root.render(
-  <AuthProvider {...oidcConfig}>
-    <Auth>
-      <HashRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            {routes.map((route) => (
-              <Route key={route.path} path={route.path} element={route.element} />
-            ))}
-          </Route>
-        </Routes>
-      </HashRouter>
-      ,
-    </Auth>
-  </AuthProvider>,
+  <PandinoProvider ctx={pandino.getBundleContext()}>
+    <AuthProvider {...oidcConfig}>
+      <Auth>
+        <HashRouter>
+          <Routes>
+            <Route path="/" element={<App />}>
+              {routes.map((route) => (
+                <Route key={route.path} path={route.path} element={route.element} />
+              ))}
+            </Route>
+          </Routes>
+        </HashRouter>
+        ,
+      </Auth>
+    </AuthProvider>
+  </PandinoProvider>,
 );

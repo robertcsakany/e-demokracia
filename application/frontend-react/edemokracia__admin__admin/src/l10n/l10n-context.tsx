@@ -5,6 +5,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import { OBJECTCLASS, ServiceReference } from '@pandino/pandino-api';
+import { useTrackService, useBundleContext } from '@pandino/react-hooks';
 
 export interface L10NContext {
   locale: string;
@@ -13,23 +15,41 @@ export interface L10NContext {
 
 const L10NContext = createContext<L10NContext>({} as unknown as L10NContext);
 
+export interface L10NTranslations {
+  systemTranslations: Record<string, string>;
+  applicationTranslations: Record<string, string>;
+}
+
+export const L10N_TRANSLATION_PROVIDER_INTERFACE_KEY = 'L10NTranslationProvider';
+
+export interface L10NTranslationProvider {
+  provideTranslations(locale: string): Promise<L10NTranslations>;
+}
 export const L10NProvider = ({ children }: { children: ReactNode }) => {
   const defaultLocale = '' || 'default';
   const [locale, setLocale] = useState<string>(defaultLocale);
   const [translation, setTranslation] = useState<any>(null);
+  const [filter, setFilter] = useState<string>(`(${OBJECTCLASS}=${L10N_TRANSLATION_PROVIDER_INTERFACE_KEY})`);
+  const { service: translationProvider } = useTrackService<L10NTranslationProvider>(filter);
 
   useEffect(() => {
     (async () => {
       let dataSystem: { translation: any } = { translation: {} };
       let dataApplication: { translation: any } = { translation: {} };
 
-      try {
-        const responseSystem = await fetch(`i18n/system_${locale}.json`);
-        dataSystem = await responseSystem.json();
-        const responseApplication = await fetch(`i18n/application_${locale}.json`);
-        dataApplication = await responseApplication.json();
-      } catch (error) {
-        console.error(`Error fetching i18n resources: ${error}`);
+      if (translationProvider) {
+        const { systemTranslations, applicationTranslations } = await translationProvider.provideTranslations(locale);
+        dataSystem = { translation: systemTranslations };
+        dataApplication = { translation: applicationTranslations };
+      } else {
+        try {
+          const responseSystem = await fetch(`i18n/system_${locale}.json`);
+          dataSystem = await responseSystem.json();
+          const responseApplication = await fetch(`i18n/application_${locale}.json`);
+          dataApplication = await responseApplication.json();
+        } catch (error) {
+          console.error(`Error fetching i18n resources: ${error}`);
+        }
       }
 
       setTranslation({
@@ -52,7 +72,7 @@ export const L10NProvider = ({ children }: { children: ReactNode }) => {
         },
       });
     })();
-  }, [locale]);
+  }, [locale, translationProvider]);
 
   return (
     <L10NContext.Provider value={{ locale, setLocale }}>

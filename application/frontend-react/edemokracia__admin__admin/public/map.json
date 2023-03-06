@@ -1,5 +1,9 @@
 {
   "imports": {
+    "@pandino/loader-configuration-dom": "./externals/@pandino/loader-configuration-dom@0.8.26/dist/system/loader-configuration-dom.min.js",
+    "@pandino/pandino": "./externals/@pandino/pandino@0.8.26/dist/system/pandino.min.js",
+    "@pandino/pandino-api": "./externals/@pandino/pandino-api@0.8.26/dist/system/pandino-api.min.js",
+    "@pandino/react-hooks": "./externals/@pandino/react-hooks@0.8.26/dist/system/react-hooks.min.js",
     "dayjs": "./externals/dayjs@1.11.7/dayjs.min.js",
     "dayjs/locale/hu": "./externals/dayjs@1.11.7/locale/hu.js",
     "react/jsx-runtime": "./externals/react/jsx-runtime@18.2.0/umd/react-jsx-runtime.min.js",

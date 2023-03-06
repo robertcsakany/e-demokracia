@@ -45,7 +45,7 @@ USAGE: judo.sh COMMANDS... [OPTIONS...]
                                        keycloak_port = <port>
                                        compose_access_ip = <alternate ip address to access app>
                                        karaf_enable_admin_user = 1
-            
+
 
 EXAMPLES:
     ./judo.sh prune -f                          Clear untracked data in application/frontend if opening modeling project freezes in designer.
@@ -90,7 +90,7 @@ wait_for_port () {
     local port_closed=1
 
     echo "Wait for port $port on $host."
-    until [ $port_closed -eq 0 ] 
+    until [ $port_closed -eq 0 ]
     do
         tcp_port_is_open $host $port
         port_closed=$?
@@ -182,7 +182,7 @@ upgrade_postgresql_schema () {
     -DdbType=postgresql \
     -DdbUser=${APP_NAME} \
     -DdbPassword=${APP_NAME} \
-    -f ${APP_DIR}/schema 
+    -f ${APP_DIR}/schema
 }
 
 install_maven_wrapper () {
@@ -278,7 +278,7 @@ start_keycloak () {
       echo "Instance $INSTANCE_NAME is not existing, starting..."
       keycloak_image=quay.io/keycloak/keycloak:latest
       tcp_port_is_open 127.0.0.1 $KEYCLOAK_PORT
-      if [ $? -eq 0 ] 
+      if [ $? -eq 0 ]
       then
           echo "Could not start Keycloak. Port is already used: ${KEYCLOAK_PORT}"
           exit 1
@@ -308,7 +308,7 @@ start_postgres () {
     if [ -z "$INSTANCE_EXIST" ]; then
         echo "Instance $INSTANCE_NAME is not existing, starting..."
         tcp_port_is_open 127.0.0.1 $POSTGRES_PORT
-        if [ $? -eq 0 ] 
+        if [ $? -eq 0 ]
         then
             echo "Could not start Postgresql. Port is already used: ${POSTGRES_PORT}"
             exit 1
@@ -341,9 +341,9 @@ start_karaf () {
     local POSTGRES_PORT=$4
 
     tcp_port_is_open 127.0.0.1 $KARAF_PORT
-    if [ $? -eq 0 ] 
+    if [ $? -eq 0 ]
     then
-        echo "Could not start karaf. Port is already used: ${KARAF_PORT}" 
+        echo "Could not start karaf. Port is already used: ${KARAF_PORT}"
         exit 1
     fi
     export JUDO_PLATFORM_RDBMS_DIALECT=$DB_TYPE
@@ -366,7 +366,7 @@ start_karaf () {
     export JUDO_PLATFORM_RDBMS_DB_PASSWORD=$APP_NAME
     export JUDO_PLATFORM_FILESTORE=rdbms
     export JUDO_PLATFORM_KEYCLOAK_AUTH_SERVER_URL=http://localhost:${KEYCLOAK_PORT}/auth
-    
+
     local VERSION_NUMBER=$(${APP_DIR}/mvnw org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout)
 
     local KARAF_DIR=${APP_DIR}/.karaf

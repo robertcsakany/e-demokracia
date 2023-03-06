@@ -23,7 +23,7 @@
         <actor-fqname>edemokracia::admin::Admin</actor-fqname>
         
         <flutter-home>${project.parent.basedir}/.flutter</flutter-home>
-        <override-dir>${project.parent.basedir}/generator-overrides</override-dir>
+        <override-dir>${project.parent.basedir}/generator-overrides/ui-flutter</override-dir>
         
         <flutter-version>2.2.3</flutter-version>
         <!-- End of 'frontend-flutter/actor/pom.xml.properties-definition.fragment.override.hbs' -->

@@ -18,7 +18,7 @@
         <incrementalDirectory>${basedir}/migration</incrementalDirectory>
         <outputDirectory>${incrementalDirectory}</outputDirectory>
         <updateModelArtifactVersion>${project.version}</updateModelArtifactVersion>
-        <updateModel>mvn:party.mkkp.edemokracia:edemokracia:${model-version}!model/${modelName}-rdbms_postgresql.model</updateModel>
+        <updateModel>mvn:party.mkkp.edemokracia.edemokracia:edemokracia:${model-version}!model/${modelName}-rdbms_postgresql.model</updateModel>
     </properties>
 
     <profiles>

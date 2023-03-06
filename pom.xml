@@ -36,6 +36,9 @@
         <judo-ui-archetype-version-defined>1.0.0.20221003_142712_453def5b_develop</judo-ui-archetype-version-defined>
         <frontendType>react</frontendType>
 
+        <judo-ui-react-template-version>1.0.0.20230302_115751_80fc8c97_develop</judo-ui-react-template-version>
+        <judo-ui-typescript-rest-template-version>1.0.0.20230302_040753_fc1838dc_develop</judo-ui-typescript-rest-template-version>
+
 	</properties>
 
 	<build>
@@ -398,6 +401,9 @@
 										<judoTatamiUI2WebVersion>${judo-tatami-typescript-version-defined}</judoTatamiUI2WebVersion>
 										<judoTatamiUI2TypeScriptMavenPluginVersion>${judo-tatami-typescript-version-defined}</judoTatamiUI2TypeScriptMavenPluginVersion>
 										<judoTatamiUIExternalPackagesVersion>${judo-tatami-typescript-version-defined}</judoTatamiUIExternalPackagesVersion>
+
+                                        <judoUiReactTemplateVersion>${judo-ui-react-template-version}</judoUiReactTemplateVersion>
+                                        <judoUiTypescriptRestTemplateVersion>${judo-ui-typescript-rest-template-version}</judoUiTypescriptRestTemplateVersion>
 
 										<frontendType>${frontendType}</frontendType>
 									</templateParameters>

@@ -20,6 +20,9 @@
     "@mui/material": "5.11.4",
     "@mui/x-data-grid": "5.17.18",
     "@mui/x-date-pickers": "5.0.13",
+    "@pandino/loader-configuration-dom": "0.8.26",
+    "@pandino/pandino": "0.8.26",
+    "@pandino/react-hooks": "0.8.26",
     "@remix-run/router": "1.1.0",
     "axios": "1.2.1",
     "dayjs": "1.11.7",
@@ -35,6 +38,7 @@
   },
   "devDependencies": {
     "@judo/data-api-common": "0.4.2",
+    "@pandino/pandino-api": "0.8.26",
     "@rollup/plugin-commonjs": "24.0.0",
     "@rollup/plugin-node-resolve": "15.0.1",
     "@rollup/plugin-replace": "5.0.2",
