@@ -241,6 +241,7 @@ export default function AdminIssueAttachmentsView() {
               <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
                 <Grid item xs={12} sm={12} md={4.0}>
                   <TextField
+                    required
                     name="type"
                     id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/View/default/Attachment/group/type"
                     label={

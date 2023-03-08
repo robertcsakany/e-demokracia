@@ -273,6 +273,7 @@ export default function AdminDashboardIssuesView() {
                       <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                         <Grid item xs={12} sm={12} md={4.0}>
                           <TextField
+                            required
                             name="title"
                             id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.issues/View/default/Issue_View/issue/LabelWrapper/issue/title"
                             label={
@@ -299,6 +300,7 @@ export default function AdminDashboardIssuesView() {
 
                         <Grid item xs={12} sm={12} md={4.0}>
                           <TextField
+                            required
                             name="status"
                             id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Dashboard.issues/View/default/Issue_View/issue/LabelWrapper/issue/status"
                             label={
@@ -367,6 +369,7 @@ export default function AdminDashboardIssuesView() {
 
                         <Grid item xs={12} sm={12}>
                           <TextField
+                            required
                             name="description"
                             id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Dashboard.issues/View/default/Issue_View/issue/LabelWrapper/issue/description"
                             label={

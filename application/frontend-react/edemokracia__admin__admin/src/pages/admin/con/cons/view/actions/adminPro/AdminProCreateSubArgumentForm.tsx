@@ -166,6 +166,7 @@ export function AdminProCreateSubArgumentForm({ successCallback, cancel, owner }
                     <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                       <Grid item xs={12} sm={12} md={8.0}>
                         <TextField
+                          required
                           name="title"
                           id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Pro.createSubArgument/Input/default/CreateArgumentInput_Form/group/LabelWrapper/group/title"
                           label={
@@ -192,6 +193,7 @@ export function AdminProCreateSubArgumentForm({ successCallback, cancel, owner }
 
                       <Grid item xs={12} sm={12} md={4.0}>
                         <TextField
+                          required
                           name="type"
                           id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Pro.createSubArgument/Input/default/CreateArgumentInput_Form/group/LabelWrapper/group/type"
                           label={
@@ -228,6 +230,7 @@ export function AdminProCreateSubArgumentForm({ successCallback, cancel, owner }
 
                       <Grid item xs={12} sm={12}>
                         <TextField
+                          required
                           name="description"
                           id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Pro.createSubArgument/Input/default/CreateArgumentInput_Form/group/LabelWrapper/group/description"
                           label={

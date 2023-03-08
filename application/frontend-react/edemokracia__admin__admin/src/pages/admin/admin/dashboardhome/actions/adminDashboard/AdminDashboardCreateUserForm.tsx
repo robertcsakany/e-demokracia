@@ -168,6 +168,7 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
                     <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                       <Grid item xs={12} sm={12} md={4.0}>
                         <TextField
+                          required
                           name="userName"
                           id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.createUser/Input/default/TransferObject_Form/security/LabelWrapper/security/userName"
                           label={
@@ -194,6 +195,7 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
 
                       <Grid item xs={12} sm={12} md={4.0}>
                         <TextField
+                          required
                           name="hasAdminAccess"
                           id="Switch@edemokracia/admin/Admin/edemokracia/admin/Dashboard.createUser/Input/default/TransferObject_Form/security/LabelWrapper/security/hasAdminAccess"
                           label={
@@ -259,6 +261,7 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
                         <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
                           <Grid item xs={12} sm={12} md={4.0}>
                             <TextField
+                              required
                               name="firstName"
                               id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.createUser/Input/default/TransferObject_Form/personal/LabelWrapper/personal/name/firstName"
                               label={
@@ -286,6 +289,7 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
 
                           <Grid item xs={12} sm={12} md={4.0}>
                             <TextField
+                              required
                               name="lastName"
                               id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.createUser/Input/default/TransferObject_Form/personal/LabelWrapper/personal/name/lastName"
                               label={
@@ -313,6 +317,7 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
 
                           <Grid item xs={12} sm={12} md={4.0}>
                             <TextField
+                              required
                               name="email"
                               id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.createUser/Input/default/TransferObject_Form/personal/LabelWrapper/personal/name/email"
                               label={

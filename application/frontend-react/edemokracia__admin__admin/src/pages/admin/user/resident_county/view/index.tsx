@@ -236,6 +236,7 @@ export default function AdminUserResidentCountyView() {
           >
             <Grid item xs={12} sm={12}>
               <TextField
+                required
                 name="name"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/User.residentCounty/View/default/County_View/name"
                 label={

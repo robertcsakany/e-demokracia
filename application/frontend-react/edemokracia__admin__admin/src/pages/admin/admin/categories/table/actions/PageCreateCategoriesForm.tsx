@@ -251,6 +251,7 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
         <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
           <Grid item xs={12} sm={12}>
             <TextField
+              required
               name="title"
               id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.categories/Create/default/Create_Category/title"
               label={t('edemokracia.admin.Admin.categories.Create.Category.title', { defaultValue: 'Title' }) as string}
@@ -273,6 +274,7 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
 
           <Grid item xs={12} sm={12}>
             <TextField
+              required
               name="description"
               id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.categories/Create/default/Create_Category/description"
               label={

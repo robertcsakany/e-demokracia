@@ -255,6 +255,7 @@ export default function AdminAdminVoteDefinitionsView() {
                   <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                     <Grid item xs={12} sm={12}>
                       <TextField
+                        required
                         name="title"
                         id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.voteDefinitions/View/default/TransferObject_View/group/title"
                         label={
@@ -283,6 +284,7 @@ export default function AdminAdminVoteDefinitionsView() {
                       <DateTimePicker
                         renderInput={(props: any) => (
                           <TextField
+                            required
                             {...props}
                             error={!!validation.get('closeAt')}
                             helperText={validation.get('closeAt')}
@@ -309,6 +311,7 @@ export default function AdminAdminVoteDefinitionsView() {
 
                     <Grid item xs={12} sm={12}>
                       <TextField
+                        required
                         name="status"
                         id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Admin.voteDefinitions/View/default/TransferObject_View/group/status"
                         label={
@@ -360,6 +363,7 @@ export default function AdminAdminVoteDefinitionsView() {
                       <DateTimePicker
                         renderInput={(props: any) => (
                           <TextField
+                            required
                             {...props}
                             error={!!validation.get('created')}
                             helperText={validation.get('created')}
@@ -386,6 +390,7 @@ export default function AdminAdminVoteDefinitionsView() {
 
                     <Grid item xs={12} sm={12}>
                       <TextField
+                        required
                         name="description"
                         id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Admin.voteDefinitions/View/default/TransferObject_View/group/description"
                         label={

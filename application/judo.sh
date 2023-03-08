@@ -713,7 +713,10 @@ if [ $run -eq 1 ]; then
             start_postgres postgres-${APP_NAME} $POSTGRES_PORT
         fi
 
-        start_keycloak keycloak-${APP_NAME} $KEYCLOAK_PORT
+        if [ $skipKeycloak -eq 0 ]; then
+            start_keycloak keycloak-${APP_NAME} $KEYCLOAK_PORT
+        fi
+
         if [ $hsqldb -eq 1 ]; then
             db_type=hsqldb
             start_karaf $db_type $KARAF_PORT $KEYCLOAK_PORT

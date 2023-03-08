@@ -167,6 +167,7 @@ export function AdminConCreateCommentForm({ successCallback, cancel, owner }: Ad
                     <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                       <Grid item xs={12} sm={12}>
                         <TextField
+                          required
                           name="comment"
                           id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Con.createComment/Input/default/CreateCommentInput_Form/comment/LabelWrapper/comment/comment"
                           label={

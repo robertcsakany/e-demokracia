@@ -167,6 +167,7 @@ export default function AdminConVotesView() {
                   <DateTimePicker
                     renderInput={(props: any) => (
                       <TextField
+                        required
                         {...props}
                         error={!!validation.get('created')}
                         helperText={validation.get('created')}
@@ -189,6 +190,7 @@ export default function AdminConVotesView() {
 
                 <Grid item xs={12} sm={12} md={4.0}>
                   <TextField
+                    required
                     name="type"
                     id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Con.votes/View/default/Vote/group/type"
                     label={t('edemokracia.admin.Con.votes.Vote.group.type', { defaultValue: 'Type' }) as string}

@@ -271,6 +271,7 @@ export default function AdminAdminCategoriesView() {
           >
             <Grid item xs={12} sm={12}>
               <TextField
+                required
                 name="title"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.categories/View/default/Category/title"
                 label={t('edemokracia.admin.Admin.categories.Category.title', { defaultValue: 'Title' }) as string}
@@ -293,6 +294,7 @@ export default function AdminAdminCategoriesView() {
 
             <Grid item xs={12} sm={12}>
               <TextField
+                required
                 name="description"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.categories/View/default/Category/description"
                 label={

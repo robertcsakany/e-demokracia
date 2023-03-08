@@ -234,6 +234,7 @@ export default function AdminCityDistrictsView() {
           >
             <Grid item xs={12} sm={12}>
               <TextField
+                required
                 name="name"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/City.districts/View/default/District_View/name"
                 label={

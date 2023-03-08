@@ -149,6 +149,7 @@ export function TableCreateCitiesForm({ successCallback, cancel, owner }: TableC
         <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
           <Grid item xs={12} sm={12}>
             <TextField
+              required
               name="name"
               id="TextInput@edemokracia/admin/Admin/edemokracia/admin/County.cities/Create/default/City_Form/name"
               label={t('edemokracia.admin.County.cities.City.Form.name', { defaultValue: 'City name' }) as string}

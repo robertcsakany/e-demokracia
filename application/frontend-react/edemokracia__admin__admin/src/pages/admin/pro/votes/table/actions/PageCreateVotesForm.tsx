@@ -153,7 +153,12 @@ export function PageCreateVotesForm({ successCallback, cancel, owner }: PageCrea
               <Grid item xs={12} sm={12} md={4.0}>
                 <DateTimePicker
                   renderInput={(props: any) => (
-                    <TextField {...props} error={!!validation.get('created')} helperText={validation.get('created')} />
+                    <TextField
+                      required
+                      {...props}
+                      error={!!validation.get('created')}
+                      helperText={validation.get('created')}
+                    />
                   )}
                   label={
                     t('edemokracia.admin.Pro.votes.Create.Vote.group.created', { defaultValue: 'Created' }) as string
@@ -174,6 +179,7 @@ export function PageCreateVotesForm({ successCallback, cancel, owner }: PageCrea
 
               <Grid item xs={12} sm={12} md={4.0}>
                 <TextField
+                  required
                   name="type"
                   id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Pro.votes/Create/default/Create_Vote/group/type"
                   label={t('edemokracia.admin.Pro.votes.Create.Vote.group.type', { defaultValue: 'Type' }) as string}

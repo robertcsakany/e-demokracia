@@ -155,6 +155,7 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
             <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
               <Grid item xs={12} sm={12} md={4.0}>
                 <TextField
+                  required
                   name="type"
                   id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/Create/default/Create_Attachment/group/type"
                   label={

@@ -169,6 +169,7 @@ export function AdminIssueCreateDebateForm({ successCallback, cancel, owner }: A
                     <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                       <Grid item xs={12} sm={12} md={8.0}>
                         <TextField
+                          required
                           name="title"
                           id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Issue.createDebate/Input/default/CreateDebateInput_Form/debate/LabelWrapper/debate/title"
                           label={
@@ -197,6 +198,7 @@ export function AdminIssueCreateDebateForm({ successCallback, cancel, owner }: A
                         <DateTimePicker
                           renderInput={(props: any) => (
                             <TextField
+                              required
                               {...props}
                               error={!!validation.get('closeAt')}
                               helperText={validation.get('closeAt')}
@@ -223,6 +225,7 @@ export function AdminIssueCreateDebateForm({ successCallback, cancel, owner }: A
 
                       <Grid item xs={12} sm={12}>
                         <TextField
+                          required
                           name="description"
                           id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Issue.createDebate/Input/default/CreateDebateInput_Form/debate/LabelWrapper/debate/description"
                           label={

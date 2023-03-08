@@ -240,6 +240,7 @@ export default function AdminIssueCommentsView() {
 
                         <Grid item xs={12} sm={12}>
                           <TextField
+                            required
                             name="comment"
                             id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Issue.comments/View/default/Comment_View/group/LabelWrapper/group/comment"
                             label={

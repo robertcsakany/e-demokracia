@@ -272,6 +272,7 @@ export default function AdminIssueCategorySubcategoriesView() {
           >
             <Grid item xs={12} sm={12}>
               <TextField
+                required
                 name="title"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/IssueCategory.subcategories/View/default/Category/title"
                 label={
@@ -296,6 +297,7 @@ export default function AdminIssueCategorySubcategoriesView() {
 
             <Grid item xs={12} sm={12}>
               <TextField
+                required
                 name="description"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/IssueCategory.subcategories/View/default/Category/description"
                 label={

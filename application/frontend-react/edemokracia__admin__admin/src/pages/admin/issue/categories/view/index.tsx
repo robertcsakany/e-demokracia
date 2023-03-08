@@ -198,6 +198,7 @@ export default function AdminIssueCategoriesView() {
           >
             <Grid item xs={12} sm={12}>
               <TextField
+                required
                 name="title"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Issue.categories/View/default/Category/title"
                 label={t('edemokracia.admin.Issue.categories.Category.title', { defaultValue: 'Title' }) as string}
@@ -220,6 +221,7 @@ export default function AdminIssueCategoriesView() {
 
             <Grid item xs={12} sm={12}>
               <TextField
+                required
                 name="description"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Issue.categories/View/default/Category/description"
                 label={

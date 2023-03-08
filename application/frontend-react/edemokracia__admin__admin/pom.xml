@@ -93,6 +93,7 @@
                                         <appModelName>${model-name}</appModelName>
                                         <appScope>${appScope}</appScope>
                                         <appVersion>${appVersion}</appVersion>
+                                        <nodeVersion>${node-version}</nodeVersion>
                                         
                                         <tablePageLimit>${tablePageLimit}</tablePageLimit>
                                     </templateParameters>
@@ -207,7 +208,7 @@
                                         </artifactItem>
                                     </artifactItems>
                                     <includes>externals/**</includes>
-                                    <outputDirectory>${basedir}/src/generated</outputDirectory>
+                                    <outputDirectory>${basedir}</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>

@@ -211,6 +211,7 @@ export default function AdminUserResidentDistrictView() {
           >
             <Grid item xs={12} sm={12}>
               <TextField
+                required
                 name="name"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/User.residentDistrict/View/default/District_View/name"
                 label={

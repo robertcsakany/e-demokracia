@@ -324,6 +324,7 @@ export default function AdminAdminUsersView() {
                       <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                         <Grid item xs={12} sm={12} md={4.0}>
                           <TextField
+                            required
                             name="userName"
                             id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.users/View/default/User_View/Security/LabelWrapper/Security/userName"
                             label={
@@ -350,6 +351,7 @@ export default function AdminAdminUsersView() {
 
                         <Grid item xs={12} sm={12} md={4.0}>
                           <TextField
+                            required
                             name="isAdmin"
                             id="Switch@edemokracia/admin/Admin/edemokracia/admin/Admin.users/View/default/User_View/Security/LabelWrapper/Security/isAdmin"
                             label={
@@ -448,6 +450,7 @@ export default function AdminAdminUsersView() {
                           >
                             <Grid item xs={12} sm={12} md={4.0}>
                               <TextField
+                                required
                                 name="firstName"
                                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.users/View/default/User_View/personal/LabelWrapper/personal/name/firstName"
                                 label={
@@ -474,6 +477,7 @@ export default function AdminAdminUsersView() {
 
                             <Grid item xs={12} sm={12} md={4.0}>
                               <TextField
+                                required
                                 name="lastName"
                                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.users/View/default/User_View/personal/LabelWrapper/personal/name/lastName"
                                 label={
@@ -510,6 +514,7 @@ export default function AdminAdminUsersView() {
                           >
                             <Grid item xs={12} sm={12} md={4.0}>
                               <TextField
+                                required
                                 name="email"
                                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.users/View/default/User_View/personal/LabelWrapper/personal/contact/email"
                                 label={

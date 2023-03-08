@@ -28,7 +28,7 @@
         <judo-services-version-defined>1.1.0.20230303_043437_1064fbe0_develop</judo-services-version-defined>
         <judo-rdbms-schema-version-defined>1.0.0.20230301_081440_f8420a07_develop</judo-rdbms-schema-version-defined>
         <judo-tatami-client-version-defined>1.1.0.20230302_042657_cbb8e035_develop</judo-tatami-client-version-defined>
-        <judo-esm-fullstack-project-template-version-defined>1.0.0.20230303_045041_8ad72144_develop</judo-esm-fullstack-project-template-version-defined>
+        <judo-esm-fullstack-project-template-version-defined>1.0.0.20230307_165052_5e0864e8_develop</judo-esm-fullstack-project-template-version-defined>
 		<judo-meta-ui-version-defined>1.1.0.20230301_040932_6f0a751c_develop</judo-meta-ui-version-defined>
 		<judo-ui-flutter-template-version-defined>1.0.0.20230301_041503_b6c23e8f_develop</judo-ui-flutter-template-version-defined>
         <judo-tatami-typescript-version-defined>1.0.0.20230222_232625_bb02a632_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-tatami-typescript-version-defined>
@@ -36,7 +36,7 @@
         <judo-ui-archetype-version-defined>1.0.0.20221003_142712_453def5b_develop</judo-ui-archetype-version-defined>
         <frontendType>react</frontendType>
 
-        <judo-ui-react-template-version>1.0.0.20230302_115751_80fc8c97_develop</judo-ui-react-template-version>
+        <judo-ui-react-template-version>1.0.0.20230307_185814_67fe9ab9_develop</judo-ui-react-template-version>
         <judo-ui-typescript-rest-template-version>1.0.0.20230302_040753_fc1838dc_develop</judo-ui-typescript-rest-template-version>
 
 	</properties>

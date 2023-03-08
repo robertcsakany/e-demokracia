@@ -362,6 +362,7 @@ export default function AdminVoteDefinitionDebateView() {
                       <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                         <Grid item xs={12} sm={12} md={8.0}>
                           <TextField
+                            required
                             name="title"
                             id="TextInput@edemokracia/admin/Admin/edemokracia/admin/VoteDefinition.debate/View/default/Debate_View/debate/LabelWrapper/debate/title"
                             label={
@@ -388,6 +389,7 @@ export default function AdminVoteDefinitionDebateView() {
 
                         <Grid item xs={12} sm={12} md={2.0}>
                           <TextField
+                            required
                             name="status"
                             id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/VoteDefinition.debate/View/default/Debate_View/debate/LabelWrapper/debate/status"
                             label={
@@ -430,6 +432,7 @@ export default function AdminVoteDefinitionDebateView() {
                           <DateTimePicker
                             renderInput={(props: any) => (
                               <TextField
+                                required
                                 {...props}
                                 error={!!validation.get('closeAt')}
                                 helperText={validation.get('closeAt')}
@@ -494,6 +497,7 @@ export default function AdminVoteDefinitionDebateView() {
 
                         <Grid item xs={12} sm={12}>
                           <TextField
+                            required
                             name="description"
                             id="TextArea@edemokracia/admin/Admin/edemokracia/admin/VoteDefinition.debate/View/default/Debate_View/debate/LabelWrapper/debate/description"
                             label={

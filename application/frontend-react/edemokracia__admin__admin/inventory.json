@@ -1,0 +1,105 @@
+{
+  "@emotion/react": {
+    "dist/emotion-react.umd.min.js": {"tags": ["importMap", "npm"], "exports": "@emotion/react"}
+  },
+  "@emotion/styled": {
+    "dist/emotion-styled.umd.min.js": {"tags": ["importMap", "npm"], "exports": "@emotion/styled"}
+  },
+  "@fontsource/roboto": {
+    "300.css": {"tags": ["css", "npm"]},
+    "400.css": {"tags": ["css", "npm"]},
+    "500.css": {"tags": ["css", "npm"]},
+    "700.css": {"tags": ["css", "npm"]},
+    "files/roboto-all-300-normal.woff": {"tags": ["font", "npm"]},
+    "files/roboto-all-400-normal.woff": {"tags": ["font", "npm"]},
+    "files/roboto-all-500-normal.woff": {"tags": ["font", "npm"]},
+    "files/roboto-all-700-normal.woff": {"tags": ["font", "npm"]},
+    "files/roboto-latin-300-normal.woff2": {"tags": ["font", "npm"]},
+    "files/roboto-latin-400-normal.woff2": {"tags": ["font", "npm"]},
+    "files/roboto-latin-500-normal.woff2": {"tags": ["font", "npm"]},
+    "files/roboto-latin-700-normal.woff2": {"tags": ["font", "npm"]}
+  },
+  "@judo/data-api-common": {
+    "umd/judo-data-api-common.min.js": {"tags": ["importMap", "external"], "exports": "@judo/data-api-common"}
+  },
+  "@mdi/font": {
+    "css/materialdesignicons.min.css": {"tags": ["css", "npm"]},
+    "fonts/materialdesignicons-webfont.eot": {"tags": ["font", "npm"]},
+    "fonts/materialdesignicons-webfont.ttf": {"tags": ["font", "npm"]},
+    "fonts/materialdesignicons-webfont.woff": {"tags": ["font", "npm"]},
+    "fonts/materialdesignicons-webfont.woff2": {"tags": ["font", "npm"]}
+  },
+  "@mui/material": {
+    "umd/mui-material.min.js": {"tags": ["importMap", "external"], "exports": "@mui/material"}
+  },
+  "@mui/material/locale": {
+    "umd/mui-material-locale.min.js": {"tags": ["importMap", "external"], "exports": "@mui/material/locale"}
+  },
+  "@mui/system": {
+    "umd/mui-system.min.js": {"tags": ["importMap", "external"], "exports": "@mui/system"}
+  },
+  "@mui/x-data-grid": {
+    "umd/mui-x-data-grid.min.js": {"tags": ["importMap", "external"], "exports": "@mui/x-data-grid"}
+  },
+  "@mui/x-date-pickers": {
+    "umd/mui-x-date-pickers.min.js": {"tags": ["importMap", "external"], "exports": "@mui/x-date-pickers"},
+    "umd/mui-x-date-pickers-adapter-day-js.min.js": {"tags": ["importMap", "external"], "exports": "@mui/x-date-pickers/AdapterDayjs"}
+  },
+  "@pandino/loader-configuration-dom": {
+    "dist/system/loader-configuration-dom.min.js": {"tags": ["importMap", "npm"], "exports": "@pandino/loader-configuration-dom"}
+  },
+  "@pandino/pandino": {
+    "dist/system/pandino.min.js": {"tags": ["importMap", "npm"], "exports": "@pandino/pandino"}
+  },
+  "@pandino/pandino-api": {
+    "dist/system/pandino-api.min.js": {"tags": ["importMap", "npm"], "exports": "@pandino/pandino-api"}
+  },
+  "@pandino/react-hooks": {
+    "dist/system/react-hooks.min.js": {"tags": ["importMap", "npm"], "exports": "@pandino/react-hooks"}
+  },
+  "@remix-run/router": {
+    "dist/router.umd.min.js": {"tags": ["importMap", "npm"], "exports": "@remix-run/router"}
+  },
+  "axios": {
+    "dist/axios.min.js": {"tags": ["importMap", "npm"], "exports": "axios"}
+  },
+  "dayjs": {
+    "dayjs.min.js": {"tags": ["importMap", "npm"], "exports": "dayjs"},
+    "locale/en.js": {"tags": ["importMap", "npm"], "exports": "dayjs/locale/en"},
+    "locale/hu.js": {"tags": ["importMap", "npm"], "exports": "dayjs/locale/hu"}
+  },
+  "i18next": {
+    "dist/umd/i18next.min.js": {"tags": ["importMap", "npm"], "exports": "i18next"}
+  },
+  "oidc-client-ts": {
+    "umd/oidc-client-ts.min.js": {"tags": ["importMap", "external"], "exports": "oidc-client-ts"}
+  },
+  "react": {
+    "umd/react.production.min.js": {"tags": ["importMap", "npm"], "exports": "react"}
+  },
+  "react-dom": {
+    "umd/react-dom.production.min.js": {"tags": ["importMap", "npm"], "exports": "react-dom"}
+  },
+  "react-dom/client": {
+    "umd/react-dom-client.min.js": {"tags": ["importMap", "external"], "exports": "react-dom/client"}
+  },
+  "react-i18next": {
+    "dist/umd/react-i18next.min.js": {"tags": ["importMap", "npm"], "exports": "react-i18next"}
+  },
+  "react-is": {
+    "umd/react-is.min.js": {"tags": ["importMap", "external"], "exports": "react-is"}
+  },
+  "react-router": {
+    "dist/umd/react-router.production.min.js": {"tags": ["importMap", "npm"], "exports": "react-router"}
+  },
+  "react-router-dom": {
+    "dist/umd/react-router-dom.production.min.js": {"tags": ["importMap", "npm"], "exports": "react-router-dom"}
+  },
+  "react/jsx-runtime": {
+    "umd/react-jsx-runtime.min.js": {"tags": ["importMap", "external"], "exports": "react/jsx-runtime"}
+  },
+  "systemjs": {
+    "dist/system.min.js": {"tags": ["script", "npm"]},
+    "dist/extras/amd.min.js": {"tags": ["script", "npm"]}
+  }
+}

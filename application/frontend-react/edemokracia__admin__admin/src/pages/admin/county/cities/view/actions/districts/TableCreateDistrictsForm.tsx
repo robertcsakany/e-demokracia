@@ -149,6 +149,7 @@ export function TableCreateDistrictsForm({ successCallback, cancel, owner }: Tab
         <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
           <Grid item xs={12} sm={12}>
             <TextField
+              required
               name="name"
               id="TextInput@edemokracia/admin/Admin/edemokracia/admin/City.districts/Create/default/District_Form/name"
               label={t('edemokracia.admin.City.districts.District.Form.name', { defaultValue: 'Name' }) as string}

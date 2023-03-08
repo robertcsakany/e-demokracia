@@ -394,6 +394,7 @@ export default function AdminDebateConsView() {
                       <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                         <Grid item xs={12} sm={12} md={6.0}>
                           <TextField
+                            required
                             name="title"
                             id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Debate.cons/View/default/Con_View/con/LabelWrapper/con/title"
                             label={
@@ -422,6 +423,7 @@ export default function AdminDebateConsView() {
                           <DateTimePicker
                             renderInput={(props: any) => (
                               <TextField
+                                required
                                 {...props}
                                 error={!!validation.get('created')}
                                 helperText={validation.get('created')}
@@ -467,6 +469,7 @@ export default function AdminDebateConsView() {
 
                         <Grid item xs={12} sm={12}>
                           <TextField
+                            required
                             name="description"
                             id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Debate.cons/View/default/Con_View/con/LabelWrapper/con/description"
                             label={

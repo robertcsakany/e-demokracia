@@ -142,6 +142,7 @@ export function PageCreateCountiesForm({ successCallback, cancel }: PageCreateCo
         <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
           <Grid item xs={12} sm={12}>
             <TextField
+              required
               name="name"
               id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.counties/Create/default/County_Form/name"
               label={t('edemokracia.admin.Admin.counties.County.Form.name', { defaultValue: 'County name' }) as string}

@@ -236,6 +236,7 @@ export default function AdminUserActivityCitiesView() {
           >
             <Grid item xs={12} sm={12}>
               <TextField
+                required
                 name="name"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/User.activityCities/View/default/City_View/name"
                 label={

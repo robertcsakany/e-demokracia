@@ -260,6 +260,7 @@ export default function AdminCountyCitiesView() {
           >
             <Grid item xs={12} sm={12}>
               <TextField
+                required
                 name="name"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/County.cities/View/default/City_View/name"
                 label={t('edemokracia.admin.County.cities.City.View.name', { defaultValue: 'City name' }) as string}

@@ -236,6 +236,7 @@ export default function AdminUserResidentCityView() {
           >
             <Grid item xs={12} sm={12}>
               <TextField
+                required
                 name="name"
                 id="TextInput@edemokracia/admin/Admin/edemokracia/admin/User.residentCity/View/default/City_View/name"
                 label={t('edemokracia.admin.User.residentCity.City.View.name', { defaultValue: 'City name' }) as string}
