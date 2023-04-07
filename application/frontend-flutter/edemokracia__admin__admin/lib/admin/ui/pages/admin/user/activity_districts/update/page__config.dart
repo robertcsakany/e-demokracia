@@ -1,8 +1,0 @@
-part of admin.ui.pages.admin.user.activity_districts.update;
-
-class AdminUserActivityDistrictsUpdateConfig {
-  AdminUserActivityDistrictsUpdatePostNameChanged postNameChanged;
-  AdminUserActivityDistrictsUpdatePageBackAction backAction;
-  AdminUserActivityDistrictsUpdatePageExtendActions extendActions;
-  AdminUserActivityDistrictsUpdatePageTitleGenerator titleGenerator;
-}

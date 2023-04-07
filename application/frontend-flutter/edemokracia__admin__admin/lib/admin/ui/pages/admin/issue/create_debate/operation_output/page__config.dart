@@ -1,7 +1,0 @@
-part of admin.ui.pages.admin.issue.create_debate.operation_output;
-
-class AdminIssueCreateDebateOperationOutputConfig {
-  AdminIssueCreateDebateOperationOutputPageBackAction backAction;
-  AdminIssueCreateDebateOperationOutputPageExtendActions extendActions;
-  AdminIssueCreateDebateOperationOutputPageTitleGenerator titleGenerator;
-}

@@ -1,9 +1,0 @@
-part of admin.ui.pages.admin.vote_definition.vote_yes_no_abstain.operation_input;
-
-class AdminVoteDefinitionVoteYesNoAbstainOperationInputConfig {
-  AdminVoteDefinitionVoteYesNoAbstainOperationInputOperationCall operationCall;
-  AdminVoteDefinitionVoteYesNoAbstainOperationInputOperationCallSuccess operationCallSuccess;
-  AdminVoteDefinitionVoteYesNoAbstainOperationInputPageBackAction backAction;
-  AdminVoteDefinitionVoteYesNoAbstainOperationInputPageExtendActions extendActions;
-  AdminVoteDefinitionVoteYesNoAbstainOperationInputPageTitleGenerator titleGenerator;
-}
