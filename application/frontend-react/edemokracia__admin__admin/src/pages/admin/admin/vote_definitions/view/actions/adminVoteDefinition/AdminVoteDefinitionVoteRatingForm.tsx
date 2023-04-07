@@ -6,49 +6,42 @@
 // Action name: edemokracia::admin::Admin::edemokracia::admin::VoteDefinition::voteRating#ButtonCallOperation
 // Action: CallOperationAction
 
-import { useState, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, useCallback, Dispatch, SetStateAction, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Button,
-  IconButton,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Paper,
-  Box,
-  Container,
   Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Card,
+  DialogContent,
+  DialogTitle,
   CardContent,
+  IconButton,
+  Button,
+  DialogContentText,
+  DialogActions,
+  Card,
 } from '@mui/material';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
 import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
-  GridSelectionModel,
-  GridToolbarContainer,
-  GridRenderCellParams,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
   GridColDef,
 } from '@mui/x-data-grid';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { JudoIdentifiable } from '@judo/data-api-common';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
+import { MdiIcon, ModeledTabs } from '../../../../../../../components';
+import { columnsActionCalculator } from '../../../../../../../components/table';
+import { useRangeDialog } from '../../../../../../../components/dialog';
 import {
-  MdiIcon,
-  ModeledTabs,
-  TrinaryLogicCombobox,
   AggregationInput,
-  useSnackbar,
-  useRangeDialog,
-  columnsActionCalculator,
-} from '../../../../../../../components';
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../../../components/widgets';
 import { FilterOption, FilterType } from '../../../../../../../components-api';
 import {
   AdminVoteDefinitionQueryCustomizer,
@@ -60,7 +53,8 @@ import {
 } from '../../../../../../../generated/data-api';
 import { ratingVoteInputServiceImpl, adminVoteDefinitionServiceImpl } from '../../../../../../../generated/data-axios';
 import {
-  errorHandling,
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -69,6 +63,7 @@ import {
   booleanToStringSelect,
 } from '../../../../../../../utilities';
 import { baseTableConfig, baseColumnConfig, toastConfig } from '../../../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../../../custom';
 
 export interface AdminVoteDefinitionVoteRatingFormProps {
   successCallback: () => void;
@@ -85,13 +80,23 @@ export function AdminVoteDefinitionVoteRatingForm({
   const { openRangeDialog } = useRangeDialog();
   const { downloadFile, uploadFile } = fileHandling();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleActionError = useErrorHandler<RatingVoteInput>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=CallOperation)(component=AdminVoteDefinitionVoteRatingForm))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<RatingVoteInput>({} as unknown as RatingVoteInput);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
-  const [editMode] = useState<boolean>(true);
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [validation, setValidation] = useState<Map<keyof RatingVoteInput, string>>(new Map());
+  const [editMode, setEditMode] = useState<boolean>(true);
+  const [payloadDiff] = useState<Record<keyof RatingVoteInput, any>>(
+    {} as unknown as Record<keyof RatingVoteInput, any>,
+  );
+  const storeDiff: (attributeName: keyof RatingVoteInput, value: any) => void = useCallback(
+    (attributeName: keyof RatingVoteInput, value: any) => {
+      payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -105,7 +110,7 @@ export function AdminVoteDefinitionVoteRatingForm({
       const res = await ratingVoteInputServiceImpl.getTemplate();
       setData(res);
     } catch (e) {
-      console.error(e);
+      handleFetchError(e);
     } finally {
       setIsLoading(false);
     }
@@ -124,7 +129,7 @@ export function AdminVoteDefinitionVoteRatingForm({
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar, { setValidation });
+      handleActionError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
@@ -135,6 +140,7 @@ export function AdminVoteDefinitionVoteRatingForm({
       <DialogTitle>
         {title}
         <IconButton
+          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteRatingButtonCallOperation-dialog-close"
           aria-label="close"
           onClick={() => cancel()}
           sx={{
@@ -159,10 +165,20 @@ export function AdminVoteDefinitionVoteRatingForm({
         ></Grid>
       </DialogContent>
       <DialogActions>
-        <Button variant="text" onClick={() => cancel()} disabled={isLoading}>
+        <Button
+          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteRatingButtonCallOperation-action-form-action-cancel"
+          variant="text"
+          onClick={() => cancel()}
+          disabled={isLoading}
+        >
           {t('judo.pages.cancel', { defaultValue: 'Cancel' }) as string}
         </Button>
-        <Button variant="contained" onClick={() => submit()} disabled={isLoading}>
+        <Button
+          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteRatingButtonCallOperation-action-form-action-submit"
+          variant="contained"
+          onClick={() => submit()}
+          disabled={isLoading}
+        >
           {t('judo.pages.submit', { defaultValue: 'Submit' }) as string}
         </Button>
       </DialogActions>

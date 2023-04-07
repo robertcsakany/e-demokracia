@@ -18,10 +18,15 @@ export interface PageDialogProviderContext {
 }
 
 export interface ConfirmDialogProviderContext {
-  openConfirmDialog: (confirmationMessage: string | ReactNode, title?: string | ReactNode) => Promise<boolean>;
+  openConfirmDialog: (
+    id: string,
+    confirmationMessage: string | ReactNode,
+    title?: string | ReactNode,
+  ) => Promise<boolean>;
 }
 
 export interface OpenRangeDialogProps<T extends JudoStored<T>, U extends QueryCustomizer<T>> {
+  id: string;
   columns: GridColumns<T>;
   defaultSortField: GridSortItem;
   rangeCall: (queryCustomizer: U) => Promise<Array<T>>;
@@ -38,5 +43,5 @@ export interface RangeDialogProviderContext {
 }
 
 export interface FilterDialogProviderContext {
-  openFilterDialog: (filterOptions: FilterOption[], filters?: Filter[]) => Promise<Filter[]>;
+  openFilterDialog: (id: string, filterOptions: FilterOption[], filters?: Filter[]) => Promise<Filter[]>;
 }

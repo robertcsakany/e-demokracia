@@ -6,10 +6,9 @@
 
 import type { GridColDef } from '@mui/x-data-grid';
 import { ColumnsActionsOptions, TableRowAction } from './table-row-actions';
-import type { FilterOption } from '../components-api';
 
-export type ColumnActionsProvider<R> = (actions: TableRowAction<R>[], options?: ColumnsActionsOptions) => GridColDef[];
-
-export type AlternativeApplicationGenerator = (translateFn: Function) => Record<string, string>;
-
-export type HandleApplicationChange = (applicationKey: string) => void;
+export type ColumnActionsProvider<R> = (
+  id: string,
+  actions: TableRowAction<R>[],
+  options?: ColumnsActionsOptions,
+) => GridColDef[];

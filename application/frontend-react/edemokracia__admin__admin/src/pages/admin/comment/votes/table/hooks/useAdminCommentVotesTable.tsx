@@ -43,6 +43,7 @@ export const useAdminCommentVotesTable = () => {
 
   const filterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminCommentVotesTableDefaultVotesVotesListCreatedFilter',
       attributeName: 'created',
       label: t('edemokracia.admin.Comment.votes.votes.Votes.List.created.Filter', {
         defaultValue: 'Created',
@@ -50,6 +51,7 @@ export const useAdminCommentVotesTable = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminCommentVotesTableDefaultVotesVotesListTypeFilter',
       attributeName: 'type',
       label: t('edemokracia.admin.Comment.votes.votes.Votes.List.type.Filter', { defaultValue: 'Type' }) as string,
       filterType: FilterType.enumeration,

@@ -7,6 +7,7 @@
 import type { ReactNode } from 'react';
 
 export interface TableRowAction<R> {
+  id: string;
   label: string;
   action: (row: R) => void;
   icon: ReactNode;

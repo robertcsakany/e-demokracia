@@ -8,51 +8,43 @@
 // Page DataElement name: voteDefinitions
 // Page DataElement owner name: edemokracia::admin::Admin
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Box, Container, Grid, CardContent, Button, TextField, MenuItem, InputAdornment, Card } from '@mui/material';
 import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Paper,
-  Divider,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from '@mui/material';
-import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
-  GridToolbarContainer,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
+  GridColDef,
 } from '@mui/x-data-grid';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
+import { DateTimePicker } from '@mui/x-date-pickers';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
 import type { Dayjs } from 'dayjs';
 import {
-  columnsActionCalculator,
   MdiIcon,
   ModeledTabs,
   PageHeader,
   DropdownButton,
   CustomBreadcrumb,
-  TrinaryLogicCombobox,
   useJudoNavigation,
-  useRangeDialog,
-  AggregationInput,
-  useSnackbar,
 } from '../../../../../components';
+import { columnsActionCalculator } from '../../../../../components/table';
+import { useRangeDialog } from '../../../../../components/dialog';
 import {
-  errorHandling,
+  AggregationInput,
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../components/widgets';
+import {
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -60,7 +52,9 @@ import {
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../utilities';
+import { useConfirmationBeforeChange } from '../../../../../hooks';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   AdminVoteDefinitionQueryCustomizer,
   AdminVoteDefinitionStored,
@@ -109,21 +103,39 @@ export default function AdminAdminVoteDefinitionsView() {
   const { downloadFile, uploadFile } = fileHandling();
   const { queryCustomizer } = useAdminAdminVoteDefinitionsView();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleUpdateError = useErrorHandler<AdminVoteDefinitionStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminAdminVoteDefinitionsView))`,
+  );
+  const handleDeleteError = useErrorHandler<AdminVoteDefinitionStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Delete)(component=AdminAdminVoteDefinitionsView))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<AdminVoteDefinitionStored>({} as unknown as AdminVoteDefinitionStored);
-  const [payloadDiff, setPayloadDiff] = useState<Record<string, any>>({});
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof AdminVoteDefinitionStored, any>>(
+    {} as unknown as Record<keyof AdminVoteDefinitionStored, any>,
+  );
+  const storeDiff: (attributeName: keyof AdminVoteDefinitionStored, value: any) => void = useCallback(
+    (attributeName: keyof AdminVoteDefinitionStored, value: any) => {
       payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminVoteDefinitionStored, string>>(new Map());
 
   const title: string = t('edemokracia.admin.Admin.voteDefinitions.View', { defaultValue: 'TransferObject View' });
+
+  useConfirmationBeforeChange(
+    editMode,
+    t('judo.form.navigation.confirmation', {
+      defaultValue: 'You have potential unsaved changes in your form, are you sure you would like to navigate away?',
+    }),
+  );
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -140,9 +152,9 @@ export default function AdminAdminVoteDefinitionsView() {
         __signedIdentifier: res.__signedIdentifier,
         __version: res.__version,
         __entityType: res.__entityType,
-      });
+      } as Record<keyof AdminVoteDefinitionStored, any>);
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleFetchError(error);
     } finally {
       setIsLoading(false);
     }
@@ -159,7 +171,7 @@ export default function AdminAdminVoteDefinitionsView() {
         setEditMode(false);
       }
     } catch (error) {
-      errorHandling(error, enqueueSnackbar, { setValidation });
+      handleUpdateError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
@@ -173,7 +185,7 @@ export default function AdminAdminVoteDefinitionsView() {
 
       back();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleDeleteError(error, undefined, data);
     } finally {
       setIsLoading(false);
     }
@@ -184,39 +196,16 @@ export default function AdminAdminVoteDefinitionsView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<string, string>());
+    setValidation(new Map<keyof AdminVoteDefinitionStored, string>());
   }, [editMode]);
 
   return (
     <>
       <PageHeader title={title}>
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
-          </Grid>
-        )}
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
-              <MdiIcon path="delete" />
-              {t('judo.pages.delete', { defaultValue: 'Delete' })}
-            </Button>
-          </Grid>
-        )}
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => setEditMode(true)} disabled={isLoading || !data.__updateable}>
-              <MdiIcon path="pencil" />
-              {t('judo.pages.edit', { defaultValue: 'Edit' })}
-            </Button>
-          </Grid>
-        )}
         {editMode && (
           <Grid item>
             <Button
+              id="page-action-edit-cancel"
               variant="outlined"
               onClick={() => {
                 setEditMode(false);
@@ -231,9 +220,25 @@ export default function AdminAdminVoteDefinitionsView() {
         )}
         {editMode && (
           <Grid item>
-            <Button onClick={() => saveData()} disabled={isLoading}>
+            <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
               <MdiIcon path="content-save" />
               {t('judo.pages.save', { defaultValue: 'Save' })}
+            </Button>
+          </Grid>
+        )}
+        {!editMode && (
+          <Grid item>
+            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
+              <MdiIcon path="refresh" />
+              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
+            </Button>
+          </Grid>
+        )}
+        {!editMode && (
+          <Grid item>
+            <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
+              <MdiIcon path="delete" />
+              {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
           </Grid>
         )}
@@ -250,27 +255,30 @@ export default function AdminAdminVoteDefinitionsView() {
             justifyContent="flex-start"
           >
             <Grid item xs={12} sm={12}>
-              <Card>
+              <Card id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewGroup">
                 <CardContent>
                   <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                     <Grid item xs={12} sm={12}>
                       <TextField
                         required
                         name="title"
-                        id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.voteDefinitions/View/default/TransferObject_View/group/title"
+                        id="TextInputedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewGroupTitle"
                         label={
                           t('edemokracia.admin.Admin.voteDefinitions.TransferObject.View.group.title', {
                             defaultValue: 'Title',
                           }) as string
                         }
                         value={data.title}
+                        className={!editMode ? 'JUDO-viewMode' : undefined}
+                        disabled={false}
                         error={!!validation.get('title')}
                         helperText={validation.get('title')}
-                        onChange={(event) => storeDiff('title', event.target.value)}
-                        className={false || !editMode ? 'Mui-readOnly' : undefined}
+                        onChange={(event) => {
+                          setEditMode(true);
+                          storeDiff('title', event.target.value);
+                        }}
                         InputLabelProps={{ shrink: true }}
                         InputProps={{
-                          readOnly: false || !editMode,
                           startAdornment: (
                             <InputAdornment position="start">
                               <MdiIcon path="text_fields" />
@@ -282,10 +290,14 @@ export default function AdminAdminVoteDefinitionsView() {
 
                     <Grid item xs={12} sm={12}>
                       <DateTimePicker
+                        ampm={false}
+                        ampmInClock={false}
                         renderInput={(props: any) => (
                           <TextField
                             required
                             {...props}
+                            id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewGroupCloseAt"
+                            className={!editMode ? 'JUDO-viewMode' : undefined}
                             error={!!validation.get('closeAt')}
                             helperText={validation.get('closeAt')}
                           />
@@ -296,9 +308,11 @@ export default function AdminAdminVoteDefinitionsView() {
                           }) as string
                         }
                         value={data.closeAt ?? null}
-                        className={false || !editMode ? 'Mui-readOnly' : undefined}
-                        readOnly={false || !editMode}
-                        onChange={(newValue: any) => storeDiff('closeAt', newValue)}
+                        disabled={false}
+                        onChange={(newValue: any) => {
+                          setEditMode(true);
+                          storeDiff('closeAt', newValue);
+                        }}
                         InputProps={{
                           startAdornment: (
                             <InputAdornment position="start">
@@ -313,20 +327,23 @@ export default function AdminAdminVoteDefinitionsView() {
                       <TextField
                         required
                         name="status"
-                        id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Admin.voteDefinitions/View/default/TransferObject_View/group/status"
+                        id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewGroupStatus"
                         label={
                           t('edemokracia.admin.Admin.voteDefinitions.TransferObject.View.group.status', {
                             defaultValue: 'Status',
                           }) as string
                         }
                         value={data.status || ''}
+                        className={!editMode ? 'JUDO-viewMode' : undefined}
+                        disabled={false}
                         error={!!validation.get('status')}
                         helperText={validation.get('status')}
-                        onChange={(event) => storeDiff('status', event.target.value as EdemokraciaVoteStatus)}
-                        className={false || !editMode ? 'Mui-readOnly' : undefined}
+                        onChange={(event) => {
+                          setEditMode(true);
+                          storeDiff('status', event.target.value as EdemokraciaVoteStatus);
+                        }}
                         InputLabelProps={{ shrink: true }}
                         InputProps={{
-                          readOnly: false || !editMode,
                           startAdornment: (
                             <InputAdornment position="start">
                               <MdiIcon path="list" />
@@ -335,36 +352,61 @@ export default function AdminAdminVoteDefinitionsView() {
                         }}
                         select
                       >
-                        <MenuItem value={'CREATED'}>
+                        <MenuItem
+                          id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteStatusCREATED"
+                          value={'CREATED'}
+                        >
                           {t('enumerations.EdemokraciaVoteStatus.CREATED', { defaultValue: 'CREATED' })}
                         </MenuItem>
-                        <MenuItem value={'PENDING'}>
+                        <MenuItem
+                          id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteStatusPENDING"
+                          value={'PENDING'}
+                        >
                           {t('enumerations.EdemokraciaVoteStatus.PENDING', { defaultValue: 'PENDING' })}
                         </MenuItem>
-                        <MenuItem value={'ACTIVE'}>
+                        <MenuItem
+                          id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteStatusACTIVE"
+                          value={'ACTIVE'}
+                        >
                           {t('enumerations.EdemokraciaVoteStatus.ACTIVE', { defaultValue: 'ACTIVE' })}
                         </MenuItem>
-                        <MenuItem value={'CLOSED'}>
+                        <MenuItem
+                          id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteStatusCLOSED"
+                          value={'CLOSED'}
+                        >
                           {t('enumerations.EdemokraciaVoteStatus.CLOSED', { defaultValue: 'CLOSED' })}
                         </MenuItem>
                       </TextField>
                     </Grid>
 
                     <Grid item xs={12} sm={12}>
-                      <Button onClick={() => buttonNavigateDebateAction(data)} disabled={isLoading || editMode}>
-                        <MdiIcon path="table_rows" />
+                      <AssociationButton
+                        id="NavigationToPageActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionDebateButtonNavigate"
+                        editMode={editMode}
+                        navigateAction={(target) => buttonNavigateDebateAction(data, target)}
+                        fetchCall={async () =>
+                          await adminVoteDefinitionServiceImpl.getDebate(data, {
+                            _mask: '{}',
+                          })
+                        }
+                      >
                         {t('edemokracia.admin.Admin.voteDefinitions.TransferObject.View.group.debate', {
                           defaultValue: 'Debate',
                         })}
-                      </Button>
+                        <MdiIcon path="arrow-right" />
+                      </AssociationButton>
                     </Grid>
 
                     <Grid item xs={12} sm={12}>
                       <DateTimePicker
+                        ampm={false}
+                        ampmInClock={false}
                         renderInput={(props: any) => (
                           <TextField
                             required
                             {...props}
+                            id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewGroupCreated"
+                            className={!editMode ? 'JUDO-viewMode' : undefined}
                             error={!!validation.get('created')}
                             helperText={validation.get('created')}
                           />
@@ -375,9 +417,11 @@ export default function AdminAdminVoteDefinitionsView() {
                           }) as string
                         }
                         value={data.created ?? null}
-                        className={false || !editMode ? 'Mui-readOnly' : undefined}
-                        readOnly={false || !editMode}
-                        onChange={(newValue: any) => storeDiff('created', newValue)}
+                        disabled={false}
+                        onChange={(newValue: any) => {
+                          setEditMode(true);
+                          storeDiff('created', newValue);
+                        }}
                         InputProps={{
                           startAdornment: (
                             <InputAdornment position="start">
@@ -392,22 +436,25 @@ export default function AdminAdminVoteDefinitionsView() {
                       <TextField
                         required
                         name="description"
-                        id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Admin.voteDefinitions/View/default/TransferObject_View/group/description"
+                        id="TextAreaedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewGroupDescription"
                         label={
                           t('edemokracia.admin.Admin.voteDefinitions.TransferObject.View.group.description', {
                             defaultValue: 'Description',
                           }) as string
                         }
                         value={data.description}
+                        className={!editMode ? 'JUDO-viewMode' : undefined}
+                        disabled={false}
                         multiline
                         minRows={4.0}
                         error={!!validation.get('description')}
                         helperText={validation.get('description')}
-                        onChange={(event) => storeDiff('description', event.target.value)}
-                        className={false || !editMode ? 'Mui-readOnly' : undefined}
+                        onChange={(event) => {
+                          setEditMode(true);
+                          storeDiff('description', event.target.value);
+                        }}
                         InputLabelProps={{ shrink: true }}
                         InputProps={{
-                          readOnly: false || !editMode,
                           startAdornment: (
                             <InputAdornment position="start">
                               <MdiIcon path="text_fields" />
@@ -423,25 +470,26 @@ export default function AdminAdminVoteDefinitionsView() {
 
             <Grid container item xs={12} sm={12}>
               <ModeledTabs
+                id="TabControlleredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBar"
                 activeIndex={0}
                 childTabs={[
                   {
-                    id: 'yesnovote',
+                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarYesnovote',
                     name: 'yesnovote',
                     label: 'Yes / No vote',
                   },
                   {
-                    id: 'yesnoabstainvote',
+                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarYesnoabstainvote',
                     name: 'yesnoabstainvote',
                     label: 'Yes / No / Abstain vote',
                   },
                   {
-                    id: 'selectanswervote',
+                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarSelectanswervote',
                     name: 'selectanswervote',
                     label: 'Select answer vote',
                   },
                   {
-                    id: 'ratingvote',
+                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarRatingvote',
                     name: 'ratingvote',
                     label: 'Rating vote',
                   },
@@ -449,9 +497,17 @@ export default function AdminAdminVoteDefinitionsView() {
               >
                 {!data.isNotYesNoType && (
                   <Grid item xs={12} sm={12}>
-                    <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid
+                      id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarYesnovoteYesnovote"
+                      container
+                      direction="row"
+                      alignItems="flex-start"
+                      justifyContent="flex-start"
+                      spacing={2}
+                    >
                       <Grid item xs={12} sm={12} md={4.0}>
                         <Button
+                          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoButtonCallOperation"
                           onClick={() => AdminVoteDefinitionVoteYesNoAction(data, () => fetchData())}
                           disabled={isLoading || editMode}
                         >
@@ -467,9 +523,17 @@ export default function AdminAdminVoteDefinitionsView() {
                 )}
                 {!data.isNotYesNoAbstainType && (
                   <Grid item xs={12} sm={12}>
-                    <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid
+                      id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarYesnoabstainvoteYesnoabstainvote"
+                      container
+                      direction="row"
+                      alignItems="flex-start"
+                      justifyContent="flex-start"
+                      spacing={2}
+                    >
                       <Grid item xs={12} sm={12} md={4.0}>
                         <Button
+                          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoAbstainButtonCallOperation"
                           onClick={() => AdminVoteDefinitionVoteYesNoAbstainAction(data, () => fetchData())}
                           disabled={isLoading || editMode}
                         >
@@ -485,9 +549,17 @@ export default function AdminAdminVoteDefinitionsView() {
                 )}
                 {!data.isNotSelectAnswerType && (
                   <Grid item xs={12} sm={12}>
-                    <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid
+                      id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarSelectanswervoteSelectanswervote"
+                      container
+                      direction="row"
+                      alignItems="flex-start"
+                      justifyContent="flex-start"
+                      spacing={2}
+                    >
                       <Grid item xs={12} sm={12} md={4.0}>
                         <Button
+                          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteSelectAnswerButtonCallOperation"
                           onClick={() => AdminVoteDefinitionVoteSelectAnswerAction(data, () => fetchData())}
                           disabled={isLoading || editMode}
                         >
@@ -503,9 +575,17 @@ export default function AdminAdminVoteDefinitionsView() {
                 )}
                 {!data.isNotRatingType && (
                   <Grid item xs={12} sm={12}>
-                    <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                    <Grid
+                      id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarRatingvoteRatingvote"
+                      container
+                      direction="row"
+                      alignItems="flex-start"
+                      justifyContent="flex-start"
+                      spacing={2}
+                    >
                       <Grid item xs={12} sm={12} md={4.0}>
                         <Button
+                          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteRatingButtonCallOperation"
                           onClick={() => AdminVoteDefinitionVoteRatingAction(data, () => fetchData())}
                           disabled={isLoading || editMode}
                         >

@@ -8,51 +8,43 @@
 // Page DataElement name: residentDistrict
 // Page DataElement owner name: edemokracia::admin::User
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Box, Container, Grid, CardContent, Button, TextField, Card, InputAdornment } from '@mui/material';
 import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Paper,
-  Divider,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from '@mui/material';
-import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
-  GridToolbarContainer,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
+  GridColDef,
 } from '@mui/x-data-grid';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
 import {
-  columnsActionCalculator,
   MdiIcon,
   ModeledTabs,
   PageHeader,
   DropdownButton,
   CustomBreadcrumb,
-  TrinaryLogicCombobox,
   useJudoNavigation,
-  useRangeDialog,
-  AggregationInput,
-  useSnackbar,
 } from '../../../../../components';
+import { useConfirmationBeforeChange } from '../../../../../hooks';
+import { columnsActionCalculator } from '../../../../../components/table';
+import { useRangeDialog } from '../../../../../components/dialog';
 import {
-  errorHandling,
+  AggregationInput,
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../components/widgets';
+import {
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -61,6 +53,7 @@ import {
   booleanToStringSelect,
 } from '../../../../../utilities';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   AdminUserStored,
   AdminDistrict,
@@ -91,21 +84,36 @@ export default function AdminUserResidentDistrictView() {
   const { downloadFile, uploadFile } = fileHandling();
   const { queryCustomizer } = useAdminUserResidentDistrictView();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleUpdateError = useErrorHandler<AdminDistrictStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminUserResidentDistrictView))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<AdminDistrictStored>({} as unknown as AdminDistrictStored);
-  const [payloadDiff, setPayloadDiff] = useState<Record<string, any>>({});
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof AdminDistrictStored, any>>(
+    {} as unknown as Record<keyof AdminDistrictStored, any>,
+  );
+  const storeDiff: (attributeName: keyof AdminDistrictStored, value: any) => void = useCallback(
+    (attributeName: keyof AdminDistrictStored, value: any) => {
       payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminDistrictStored, string>>(new Map());
 
   const title: string = data.representation as string;
+
+  useConfirmationBeforeChange(
+    editMode,
+    t('judo.form.navigation.confirmation', {
+      defaultValue: 'You have potential unsaved changes in your form, are you sure you would like to navigate away?',
+    }),
+  );
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -122,9 +130,9 @@ export default function AdminUserResidentDistrictView() {
         __signedIdentifier: res.__signedIdentifier,
         __version: res.__version,
         __entityType: res.__entityType,
-      });
+      } as Record<keyof AdminDistrictStored, any>);
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleFetchError(error);
     } finally {
       setIsLoading(false);
     }
@@ -141,7 +149,7 @@ export default function AdminUserResidentDistrictView() {
         setEditMode(false);
       }
     } catch (error) {
-      errorHandling(error, enqueueSnackbar, { setValidation });
+      handleUpdateError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
@@ -152,31 +160,16 @@ export default function AdminUserResidentDistrictView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<string, string>());
+    setValidation(new Map<keyof AdminDistrictStored, string>());
   }, [editMode]);
 
   return (
     <>
       <PageHeader title={title}>
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
-          </Grid>
-        )}
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => setEditMode(true)} disabled={isLoading || !data.__updateable}>
-              <MdiIcon path="pencil" />
-              {t('judo.pages.edit', { defaultValue: 'Edit' })}
-            </Button>
-          </Grid>
-        )}
         {editMode && (
           <Grid item>
             <Button
+              id="page-action-edit-cancel"
               variant="outlined"
               onClick={() => {
                 setEditMode(false);
@@ -191,9 +184,17 @@ export default function AdminUserResidentDistrictView() {
         )}
         {editMode && (
           <Grid item>
-            <Button onClick={() => saveData()} disabled={isLoading}>
+            <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
               <MdiIcon path="content-save" />
               {t('judo.pages.save', { defaultValue: 'Save' })}
+            </Button>
+          </Grid>
+        )}
+        {!editMode && (
+          <Grid item>
+            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
+              <MdiIcon path="refresh" />
+              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
             </Button>
           </Grid>
         )}
@@ -213,20 +214,23 @@ export default function AdminUserResidentDistrictView() {
               <TextField
                 required
                 name="name"
-                id="TextInput@edemokracia/admin/Admin/edemokracia/admin/User.residentDistrict/View/default/District_View/name"
+                id="TextInputedemokraciaAdminAdminEdemokraciaAdminUserResidentDistrictViewDefaultDistrictViewName"
                 label={
                   t('edemokracia.admin.User.residentDistrict.District.View.name', {
                     defaultValue: 'District name',
                   }) as string
                 }
                 value={data.name}
+                className={!editMode ? 'JUDO-viewMode' : undefined}
+                disabled={false}
                 error={!!validation.get('name')}
                 helperText={validation.get('name')}
-                onChange={(event) => storeDiff('name', event.target.value)}
-                className={false || !editMode ? 'Mui-readOnly' : undefined}
+                onChange={(event) => {
+                  setEditMode(true);
+                  storeDiff('name', event.target.value);
+                }}
                 InputLabelProps={{ shrink: true }}
                 InputProps={{
-                  readOnly: false || !editMode,
                   startAdornment: (
                     <InputAdornment position="start">
                       <MdiIcon path="text_fields" />

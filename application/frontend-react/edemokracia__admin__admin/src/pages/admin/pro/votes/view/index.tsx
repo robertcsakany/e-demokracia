@@ -8,51 +8,44 @@
 // Page DataElement name: votes
 // Page DataElement owner name: edemokracia::admin::Pro
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Box, Container, Grid, CardContent, Button, TextField, MenuItem, InputAdornment, Card } from '@mui/material';
 import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Paper,
-  Divider,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from '@mui/material';
-import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
-  GridToolbarContainer,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
+  GridColDef,
 } from '@mui/x-data-grid';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
+import { DateTimePicker } from '@mui/x-date-pickers';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
 import {
-  columnsActionCalculator,
   MdiIcon,
   ModeledTabs,
   PageHeader,
   DropdownButton,
   CustomBreadcrumb,
-  TrinaryLogicCombobox,
   useJudoNavigation,
-  useRangeDialog,
-  AggregationInput,
-  useSnackbar,
 } from '../../../../../components';
+import { useConfirmationBeforeChange } from '../../../../../hooks';
+import { columnsActionCalculator } from '../../../../../components/table';
+import { useRangeDialog } from '../../../../../components/dialog';
 import {
-  errorHandling,
+  AggregationInput,
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../components/widgets';
+import {
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -61,6 +54,7 @@ import {
   booleanToStringSelect,
 } from '../../../../../utilities';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   AdminProStored,
   EdemokraciaSimpleVoteType,
@@ -93,21 +87,39 @@ export default function AdminProVotesView() {
   const { downloadFile, uploadFile } = fileHandling();
   const { queryCustomizer } = useAdminProVotesView();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleUpdateError = useErrorHandler<AdminSimpleVoteStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminProVotesView))`,
+  );
+  const handleDeleteError = useErrorHandler<AdminSimpleVoteStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Delete)(component=AdminProVotesView))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<AdminSimpleVoteStored>({} as unknown as AdminSimpleVoteStored);
-  const [payloadDiff, setPayloadDiff] = useState<Record<string, any>>({});
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof AdminSimpleVoteStored, any>>(
+    {} as unknown as Record<keyof AdminSimpleVoteStored, any>,
+  );
+  const storeDiff: (attributeName: keyof AdminSimpleVoteStored, value: any) => void = useCallback(
+    (attributeName: keyof AdminSimpleVoteStored, value: any) => {
       payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminSimpleVoteStored, string>>(new Map());
 
   const title: string = t('edemokracia.admin.Pro.votes.View', { defaultValue: 'Create / View Vote' });
+
+  useConfirmationBeforeChange(
+    editMode,
+    t('judo.form.navigation.confirmation', {
+      defaultValue: 'You have potential unsaved changes in your form, are you sure you would like to navigate away?',
+    }),
+  );
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -124,9 +136,9 @@ export default function AdminProVotesView() {
         __signedIdentifier: res.__signedIdentifier,
         __version: res.__version,
         __entityType: res.__entityType,
-      });
+      } as Record<keyof AdminSimpleVoteStored, any>);
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleFetchError(error);
     } finally {
       setIsLoading(false);
     }
@@ -143,7 +155,7 @@ export default function AdminProVotesView() {
         setEditMode(false);
       }
     } catch (error) {
-      errorHandling(error, enqueueSnackbar, { setValidation });
+      handleUpdateError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
@@ -157,7 +169,7 @@ export default function AdminProVotesView() {
 
       back();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleDeleteError(error, undefined, data);
     } finally {
       setIsLoading(false);
     }
@@ -168,39 +180,16 @@ export default function AdminProVotesView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<string, string>());
+    setValidation(new Map<keyof AdminSimpleVoteStored, string>());
   }, [editMode]);
 
   return (
     <>
       <PageHeader title={title}>
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
-          </Grid>
-        )}
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
-              <MdiIcon path="delete" />
-              {t('judo.pages.delete', { defaultValue: 'Delete' })}
-            </Button>
-          </Grid>
-        )}
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => setEditMode(true)} disabled={isLoading || !data.__updateable}>
-              <MdiIcon path="pencil" />
-              {t('judo.pages.edit', { defaultValue: 'Edit' })}
-            </Button>
-          </Grid>
-        )}
         {editMode && (
           <Grid item>
             <Button
+              id="page-action-edit-cancel"
               variant="outlined"
               onClick={() => {
                 setEditMode(false);
@@ -215,9 +204,25 @@ export default function AdminProVotesView() {
         )}
         {editMode && (
           <Grid item>
-            <Button onClick={() => saveData()} disabled={isLoading}>
+            <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
               <MdiIcon path="content-save" />
               {t('judo.pages.save', { defaultValue: 'Save' })}
+            </Button>
+          </Grid>
+        )}
+        {!editMode && (
+          <Grid item>
+            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
+              <MdiIcon path="refresh" />
+              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
+            </Button>
+          </Grid>
+        )}
+        {!editMode && (
+          <Grid item>
+            <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
+              <MdiIcon path="delete" />
+              {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
           </Grid>
         )}
@@ -234,22 +239,35 @@ export default function AdminProVotesView() {
             justifyContent="flex-start"
           >
             <Grid item xs={12} sm={12}>
-              <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+              <Grid
+                id="FlexedemokraciaAdminAdminEdemokraciaAdminProVotesViewDefaultVoteGroup"
+                container
+                direction="row"
+                alignItems="flex-start"
+                justifyContent="flex-start"
+                spacing={2}
+              >
                 <Grid item xs={12} sm={12} md={4.0}>
                   <DateTimePicker
+                    ampm={false}
+                    ampmInClock={false}
                     renderInput={(props: any) => (
                       <TextField
                         required
                         {...props}
+                        id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminProVotesViewDefaultVoteGroupCreated"
+                        className={!editMode ? 'JUDO-viewMode' : undefined}
                         error={!!validation.get('created')}
                         helperText={validation.get('created')}
                       />
                     )}
                     label={t('edemokracia.admin.Pro.votes.Vote.group.created', { defaultValue: 'Created' }) as string}
                     value={data.created ?? null}
-                    className={false || !editMode ? 'Mui-readOnly' : undefined}
-                    readOnly={false || !editMode}
-                    onChange={(newValue: any) => storeDiff('created', newValue)}
+                    disabled={false}
+                    onChange={(newValue: any) => {
+                      setEditMode(true);
+                      storeDiff('created', newValue);
+                    }}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -264,16 +282,19 @@ export default function AdminProVotesView() {
                   <TextField
                     required
                     name="type"
-                    id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Pro.votes/View/default/Vote/group/type"
+                    id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminProVotesViewDefaultVoteGroupType"
                     label={t('edemokracia.admin.Pro.votes.Vote.group.type', { defaultValue: 'Type' }) as string}
                     value={data.type || ''}
+                    className={!editMode ? 'JUDO-viewMode' : undefined}
+                    disabled={false}
                     error={!!validation.get('type')}
                     helperText={validation.get('type')}
-                    onChange={(event) => storeDiff('type', event.target.value as EdemokraciaSimpleVoteType)}
-                    className={false || !editMode ? 'Mui-readOnly' : undefined}
+                    onChange={(event) => {
+                      setEditMode(true);
+                      storeDiff('type', event.target.value as EdemokraciaSimpleVoteType);
+                    }}
                     InputLabelProps={{ shrink: true }}
                     InputProps={{
-                      readOnly: false || !editMode,
                       startAdornment: (
                         <InputAdornment position="start">
                           <MdiIcon path="list" />
@@ -282,10 +303,10 @@ export default function AdminProVotesView() {
                     }}
                     select
                   >
-                    <MenuItem value={'UP'}>
+                    <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaSimpleVoteTypeUP" value={'UP'}>
                       {t('enumerations.EdemokraciaSimpleVoteType.UP', { defaultValue: 'UP' })}
                     </MenuItem>
-                    <MenuItem value={'DOWN'}>
+                    <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaSimpleVoteTypeDOWN" value={'DOWN'}>
                       {t('enumerations.EdemokraciaSimpleVoteType.DOWN', { defaultValue: 'DOWN' })}
                     </MenuItem>
                   </TextField>
@@ -294,7 +315,14 @@ export default function AdminProVotesView() {
             </Grid>
 
             <Grid item xs={12} sm={12}>
-              <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}></Grid>
+              <Grid
+                id="FlexedemokraciaAdminAdminEdemokraciaAdminProVotesViewDefaultVoteGroup2"
+                container
+                direction="row"
+                alignItems="flex-start"
+                justifyContent="flex-start"
+                spacing={2}
+              ></Grid>
             </Grid>
           </Grid>
         </Box>

@@ -86,6 +86,7 @@ export const useAdminAdminUsersTable = () => {
 
   const filterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminUsersTableDefaultUsersUserTableUserNameFilter',
       attributeName: 'userName',
       label: t('edemokracia.admin.Admin.users.users.User.Table.userName.Filter', {
         defaultValue: 'Username',
@@ -93,6 +94,7 @@ export const useAdminAdminUsersTable = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminUsersTableDefaultUsersUserTableIsAdminFilter',
       attributeName: 'isAdmin',
       label: t('edemokracia.admin.Admin.users.users.User.Table.isAdmin.Filter', {
         defaultValue: 'Has admin access',
@@ -100,6 +102,7 @@ export const useAdminAdminUsersTable = () => {
       filterType: FilterType.boolean,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminUsersTableDefaultUsersUserTableFirstNameFilter',
       attributeName: 'firstName',
       label: t('edemokracia.admin.Admin.users.users.User.Table.firstName.Filter', {
         defaultValue: 'First name',
@@ -107,6 +110,7 @@ export const useAdminAdminUsersTable = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminUsersTableDefaultUsersUserTableLastNameFilter',
       attributeName: 'lastName',
       label: t('edemokracia.admin.Admin.users.users.User.Table.lastName.Filter', {
         defaultValue: 'Last name',
@@ -114,16 +118,19 @@ export const useAdminAdminUsersTable = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminUsersTableDefaultUsersUserTablePhoneFilter',
       attributeName: 'phone',
       label: t('edemokracia.admin.Admin.users.users.User.Table.phone.Filter', { defaultValue: 'Phone' }) as string,
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminUsersTableDefaultUsersUserTableEmailFilter',
       attributeName: 'email',
       label: t('edemokracia.admin.Admin.users.users.User.Table.email.Filter', { defaultValue: 'Email' }) as string,
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminUsersTableDefaultUsersUserTableCreatedFilter',
       attributeName: 'created',
       label: t('edemokracia.admin.Admin.users.users.User.Table.created.Filter', { defaultValue: 'Created' }) as string,
       filterType: FilterType.dateTime,

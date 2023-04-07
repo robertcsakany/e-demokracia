@@ -6,49 +6,49 @@
 // Action name: edemokracia::admin::Admin::edemokracia::admin::Dashboard::createUser#ButtonCallOperation
 // Action: CallOperationAction
 
-import { useState, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, useCallback, Dispatch, SetStateAction, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Button,
-  IconButton,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Paper,
-  Box,
-  Container,
   Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Card,
+  DialogTitle,
   CardContent,
+  FormGroup,
+  MenuItem,
+  Card,
+  Typography,
+  DialogContent,
+  IconButton,
+  Button,
+  FormControlLabel,
+  Checkbox,
+  DialogContentText,
+  TextField,
+  DialogActions,
+  InputAdornment,
 } from '@mui/material';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
 import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
-  GridSelectionModel,
-  GridToolbarContainer,
-  GridRenderCellParams,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
   GridColDef,
 } from '@mui/x-data-grid';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { JudoIdentifiable } from '@judo/data-api-common';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
+import { MdiIcon, ModeledTabs } from '../../../../../../components';
+import { columnsActionCalculator } from '../../../../../../components/table';
+import { useRangeDialog } from '../../../../../../components/dialog';
 import {
-  MdiIcon,
-  ModeledTabs,
-  TrinaryLogicCombobox,
   AggregationInput,
-  useSnackbar,
-  useRangeDialog,
-  columnsActionCalculator,
-} from '../../../../../../components';
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../../components/widgets';
 import { FilterOption, FilterType } from '../../../../../../components-api';
 import {
   AdminCreateUserInputQueryCustomizer,
@@ -63,7 +63,8 @@ import {
 } from '../../../../../../generated/data-api';
 import { adminCreateUserInputServiceImpl, adminDashboardServiceImpl } from '../../../../../../generated/data-axios';
 import {
-  errorHandling,
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -72,6 +73,7 @@ import {
   booleanToStringSelect,
 } from '../../../../../../utilities';
 import { baseTableConfig, baseColumnConfig, toastConfig } from '../../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../../custom';
 
 export interface AdminDashboardCreateUserFormProps {
   successCallback: (result?: AdminUserStored) => void;
@@ -83,13 +85,23 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
   const { openRangeDialog } = useRangeDialog();
   const { downloadFile, uploadFile } = fileHandling();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleActionError = useErrorHandler<AdminCreateUserInput>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=CallOperation)(component=AdminDashboardCreateUserForm))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<AdminCreateUserInput>({} as unknown as AdminCreateUserInput);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
-  const [editMode] = useState<boolean>(true);
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [validation, setValidation] = useState<Map<keyof AdminCreateUserInput, string>>(new Map());
+  const [editMode, setEditMode] = useState<boolean>(true);
+  const [payloadDiff] = useState<Record<keyof AdminCreateUserInput, any>>(
+    {} as unknown as Record<keyof AdminCreateUserInput, any>,
+  );
+  const storeDiff: (attributeName: keyof AdminCreateUserInput, value: any) => void = useCallback(
+    (attributeName: keyof AdminCreateUserInput, value: any) => {
+      payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -103,7 +115,7 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
       const res = await adminCreateUserInputServiceImpl.getTemplate();
       setData(res);
     } catch (e) {
-      console.error(e);
+      handleFetchError(e);
     } finally {
       setIsLoading(false);
     }
@@ -124,7 +136,7 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
         successCallback(res);
       }
     } catch (error) {
-      errorHandling(error, enqueueSnackbar, { setValidation });
+      handleActionError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
@@ -135,6 +147,7 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
       <DialogTitle>
         {title}
         <IconButton
+          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardEdemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserButtonCallOperation-dialog-close"
           aria-label="close"
           onClick={() => cancel()}
           sx={{
@@ -150,13 +163,17 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
       <DialogContent dividers>
         <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
           <Grid item xs={12} sm={12}>
-            <Card>
+            <Card id="FlexedemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserInputDefaultTransferObjectFormSecurityLabelWrapper">
               <CardContent>
                 <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                   <Grid item xs={12} sm={12}>
                     <Grid container direction="row" alignItems="center" justifyContent="flex-start">
                       <MdiIcon path="security" />
-                      <Typography variant="h6" component="h1">
+                      <Typography
+                        id="LabeledemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserInputDefaultTransferObjectFormSecurityLabelWrapperSecurityLabel"
+                        variant="h6"
+                        component="h1"
+                      >
                         {t('edemokracia.admin.Dashboard.createUser.TransferObject.Form.security.security.Label', {
                           defaultValue: 'Security',
                         })}
@@ -165,25 +182,35 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
                   </Grid>
 
                   <Grid item xs={12} sm={12}>
-                    <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                    <Grid
+                      id="FlexedemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserInputDefaultTransferObjectFormSecurityLabelWrapperSecurity"
+                      container
+                      direction="row"
+                      alignItems="stretch"
+                      justifyContent="flex-start"
+                      spacing={2}
+                    >
                       <Grid item xs={12} sm={12} md={4.0}>
                         <TextField
                           required
                           name="userName"
-                          id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.createUser/Input/default/TransferObject_Form/security/LabelWrapper/security/userName"
+                          id="TextInputedemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserInputDefaultTransferObjectFormSecurityLabelWrapperSecurityUserName"
                           label={
                             t('edemokracia.admin.Dashboard.createUser.TransferObject.Form.security.security.userName', {
                               defaultValue: 'UserName',
                             }) as string
                           }
                           value={data.userName}
+                          className={!editMode ? 'JUDO-viewMode' : undefined}
+                          disabled={false}
                           error={!!validation.get('userName')}
                           helperText={validation.get('userName')}
-                          onChange={(event) => storeDiff('userName', event.target.value)}
-                          className={false || !editMode ? 'Mui-readOnly' : undefined}
+                          onChange={(event) => {
+                            setEditMode(true);
+                            storeDiff('userName', event.target.value);
+                          }}
                           InputLabelProps={{ shrink: true }}
                           InputProps={{
-                            readOnly: false || !editMode,
                             startAdornment: (
                               <InputAdornment position="start">
                                 <MdiIcon path="text_fields" />
@@ -194,44 +221,27 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
                       </Grid>
 
                       <Grid item xs={12} sm={12} md={4.0}>
-                        <TextField
-                          required
-                          name="hasAdminAccess"
-                          id="Switch@edemokracia/admin/Admin/edemokracia/admin/Dashboard.createUser/Input/default/TransferObject_Form/security/LabelWrapper/security/hasAdminAccess"
-                          label={
-                            t(
-                              'edemokracia.admin.Dashboard.createUser.TransferObject.Form.security.security.hasAdminAccess',
-                              { defaultValue: 'IsAdmin' },
-                            ) as string
-                          }
-                          select
-                          value={booleanToStringSelect(data.hasAdminAccess)}
-                          error={!!validation.get('hasAdminAccess')}
-                          helperText={validation.get('hasAdminAccess')}
-                          onChange={(event) => {
-                            storeDiff('hasAdminAccess', stringToBooleanSelect(event.target.value));
-                          }}
-                          className={false || !editMode ? 'Mui-readOnly' : undefined}
-                          InputLabelProps={{ shrink: true }}
-                          InputProps={{
-                            readOnly: false || !editMode,
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <MdiIcon path="list" />
-                              </InputAdornment>
-                            ),
-                          }}
-                        >
-                          <MenuItem value={'true'}>
-                            {t('judo.form.switch.true', { defaultValue: 'Yes' }) as string}
-                          </MenuItem>
-                          <MenuItem value={'false'}>
-                            {t('judo.form.switch.false', { defaultValue: 'No' }) as string}
-                          </MenuItem>
-                          <MenuItem value={' '}>
-                            {t('judo.form.switch.unknown', { defaultValue: 'Unknown' }) as string}
-                          </MenuItem>
-                        </TextField>
+                        <FormGroup>
+                          <FormControlLabel
+                            sx={{ marginTop: '6px' }}
+                            disabled={false}
+                            control={
+                              <Checkbox
+                                value={data.hasAdminAccess}
+                                onChange={(event) => {
+                                  setEditMode(true);
+                                  storeDiff('hasAdminAccess', event.target.value);
+                                }}
+                              />
+                            }
+                            label={
+                              t(
+                                'edemokracia.admin.Dashboard.createUser.TransferObject.Form.security.security.hasAdminAccess',
+                                { defaultValue: 'IsAdmin' },
+                              ) as string
+                            }
+                          />
+                        </FormGroup>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -241,13 +251,17 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
           </Grid>
 
           <Grid item xs={12} sm={12}>
-            <Card>
+            <Card id="FlexedemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserInputDefaultTransferObjectFormPersonalLabelWrapper">
               <CardContent>
                 <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                   <Grid item xs={12} sm={12}>
                     <Grid container direction="row" alignItems="center" justifyContent="flex-start">
                       <MdiIcon path="card-account-details" />
-                      <Typography variant="h6" component="h1">
+                      <Typography
+                        id="LabeledemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserInputDefaultTransferObjectFormPersonalLabelWrapperPersonalLabel"
+                        variant="h6"
+                        component="h1"
+                      >
                         {t('edemokracia.admin.Dashboard.createUser.TransferObject.Form.personal.personal.Label', {
                           defaultValue: 'Personal',
                         })}
@@ -256,14 +270,28 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
                   </Grid>
 
                   <Grid item xs={12} sm={12}>
-                    <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                    <Grid
+                      id="FlexedemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserInputDefaultTransferObjectFormPersonalLabelWrapperPersonal"
+                      container
+                      direction="row"
+                      alignItems="stretch"
+                      justifyContent="flex-start"
+                      spacing={2}
+                    >
                       <Grid item xs={12} sm={12}>
-                        <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+                        <Grid
+                          id="FlexedemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserInputDefaultTransferObjectFormPersonalLabelWrapperPersonalName"
+                          container
+                          direction="row"
+                          alignItems="flex-start"
+                          justifyContent="flex-start"
+                          spacing={2}
+                        >
                           <Grid item xs={12} sm={12} md={4.0}>
                             <TextField
                               required
                               name="firstName"
-                              id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.createUser/Input/default/TransferObject_Form/personal/LabelWrapper/personal/name/firstName"
+                              id="TextInputedemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserInputDefaultTransferObjectFormPersonalLabelWrapperPersonalNameFirstName"
                               label={
                                 t(
                                   'edemokracia.admin.Dashboard.createUser.TransferObject.Form.personal.personal.name.firstName',
@@ -271,13 +299,16 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
                                 ) as string
                               }
                               value={data.firstName}
+                              className={!editMode ? 'JUDO-viewMode' : undefined}
+                              disabled={false}
                               error={!!validation.get('firstName')}
                               helperText={validation.get('firstName')}
-                              onChange={(event) => storeDiff('firstName', event.target.value)}
-                              className={false || !editMode ? 'Mui-readOnly' : undefined}
+                              onChange={(event) => {
+                                setEditMode(true);
+                                storeDiff('firstName', event.target.value);
+                              }}
                               InputLabelProps={{ shrink: true }}
                               InputProps={{
-                                readOnly: false || !editMode,
                                 startAdornment: (
                                   <InputAdornment position="start">
                                     <MdiIcon path="text_fields" />
@@ -291,7 +322,7 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
                             <TextField
                               required
                               name="lastName"
-                              id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.createUser/Input/default/TransferObject_Form/personal/LabelWrapper/personal/name/lastName"
+                              id="TextInputedemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserInputDefaultTransferObjectFormPersonalLabelWrapperPersonalNameLastName"
                               label={
                                 t(
                                   'edemokracia.admin.Dashboard.createUser.TransferObject.Form.personal.personal.name.lastName',
@@ -299,13 +330,16 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
                                 ) as string
                               }
                               value={data.lastName}
+                              className={!editMode ? 'JUDO-viewMode' : undefined}
+                              disabled={false}
                               error={!!validation.get('lastName')}
                               helperText={validation.get('lastName')}
-                              onChange={(event) => storeDiff('lastName', event.target.value)}
-                              className={false || !editMode ? 'Mui-readOnly' : undefined}
+                              onChange={(event) => {
+                                setEditMode(true);
+                                storeDiff('lastName', event.target.value);
+                              }}
                               InputLabelProps={{ shrink: true }}
                               InputProps={{
-                                readOnly: false || !editMode,
                                 startAdornment: (
                                   <InputAdornment position="start">
                                     <MdiIcon path="text_fields" />
@@ -319,7 +353,7 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
                             <TextField
                               required
                               name="email"
-                              id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.createUser/Input/default/TransferObject_Form/personal/LabelWrapper/personal/name/email"
+                              id="TextInputedemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserInputDefaultTransferObjectFormPersonalLabelWrapperPersonalNameEmail"
                               label={
                                 t(
                                   'edemokracia.admin.Dashboard.createUser.TransferObject.Form.personal.personal.name.email',
@@ -327,13 +361,16 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
                                 ) as string
                               }
                               value={data.email}
+                              className={!editMode ? 'JUDO-viewMode' : undefined}
+                              disabled={false}
                               error={!!validation.get('email')}
                               helperText={validation.get('email')}
-                              onChange={(event) => storeDiff('email', event.target.value)}
-                              className={false || !editMode ? 'Mui-readOnly' : undefined}
+                              onChange={(event) => {
+                                setEditMode(true);
+                                storeDiff('email', event.target.value);
+                              }}
                               InputLabelProps={{ shrink: true }}
                               InputProps={{
-                                readOnly: false || !editMode,
                                 startAdornment: (
                                   <InputAdornment position="start">
                                     <MdiIcon path="email" />
@@ -346,7 +383,7 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
                           <Grid item xs={12} sm={12} md={4.0}>
                             <TextField
                               name="phone"
-                              id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.createUser/Input/default/TransferObject_Form/personal/LabelWrapper/personal/name/phone"
+                              id="TextInputedemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserInputDefaultTransferObjectFormPersonalLabelWrapperPersonalNamePhone"
                               label={
                                 t(
                                   'edemokracia.admin.Dashboard.createUser.TransferObject.Form.personal.personal.name.phone',
@@ -354,13 +391,16 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
                                 ) as string
                               }
                               value={data.phone}
+                              className={!editMode ? 'JUDO-viewMode' : undefined}
+                              disabled={false}
                               error={!!validation.get('phone')}
                               helperText={validation.get('phone')}
-                              onChange={(event) => storeDiff('phone', event.target.value)}
-                              className={false || !editMode ? 'Mui-readOnly' : undefined}
+                              onChange={(event) => {
+                                setEditMode(true);
+                                storeDiff('phone', event.target.value);
+                              }}
                               InputLabelProps={{ shrink: true }}
                               InputProps={{
-                                readOnly: false || !editMode,
                                 startAdornment: (
                                   <InputAdornment position="start">
                                     <MdiIcon path="phone" />
@@ -379,7 +419,14 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
           </Grid>
 
           <Grid item xs={12} sm={12}>
-            <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+            <Grid
+              id="FlexedemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserInputDefaultTransferObjectFormButtons"
+              container
+              direction="row"
+              alignItems="flex-start"
+              justifyContent="flex-start"
+              spacing={2}
+            >
               <Grid item xs={12} sm={12} md={4.0}></Grid>
 
               <Grid item xs={12} sm={12} md={4.0}></Grid>
@@ -388,10 +435,20 @@ export function AdminDashboardCreateUserForm({ successCallback, cancel }: AdminD
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button variant="text" onClick={() => cancel()} disabled={isLoading}>
+        <Button
+          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardEdemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserButtonCallOperation-action-form-action-cancel"
+          variant="text"
+          onClick={() => cancel()}
+          disabled={isLoading}
+        >
           {t('judo.pages.cancel', { defaultValue: 'Cancel' }) as string}
         </Button>
-        <Button variant="contained" onClick={() => submit()} disabled={isLoading}>
+        <Button
+          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardEdemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserButtonCallOperation-action-form-action-submit"
+          variant="contained"
+          onClick={() => submit()}
+          disabled={isLoading}
+        >
           {
             t(
               'edemokracia.admin.Dashboard.createUser.Input.edemokracia.admin.Dashboard.createUser.input.ButtonSaveInput',

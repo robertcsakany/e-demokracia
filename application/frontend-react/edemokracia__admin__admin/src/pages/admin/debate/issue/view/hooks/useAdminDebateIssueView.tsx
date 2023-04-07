@@ -77,6 +77,7 @@ export const useAdminDebateIssueView = () => {
       renderCell: (params: GridRenderCellParams<any, AdminIssueAttachmentStored>) => {
         return params.row.file ? (
           <Button
+            id="ColumnedemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherAttachmentsAttachmentsAttachmentsLabelWrapperAttachmentsFile-download"
             size="small"
             variant="contained"
             onClick={(event: any) => {
@@ -119,6 +120,7 @@ export const useAdminDebateIssueView = () => {
 
   const attachmentsRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherAttachmentsAttachmentsAttachmentsLabelWrapperAttachmentsLinkFilter',
       attributeName: 'link',
       label: t(
         'edemokracia.admin.Debate.issue.Issue.View.other.attachments.attachments.attachments.attachments.link.Filter',
@@ -127,6 +129,7 @@ export const useAdminDebateIssueView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherAttachmentsAttachmentsAttachmentsLabelWrapperAttachmentsTypeFilter',
       attributeName: 'type',
       label: t(
         'edemokracia.admin.Debate.issue.Issue.View.other.attachments.attachments.attachments.attachments.type.Filter',
@@ -175,6 +178,7 @@ export const useAdminDebateIssueView = () => {
 
   const categoriesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherCategoriesCategoriesCategoriesLabelWrapperCategoriesTitleFilter',
       attributeName: 'title',
       label: t(
         'edemokracia.admin.Debate.issue.Issue.View.other.categories.categories.categories.categories.title.Filter',
@@ -183,6 +187,7 @@ export const useAdminDebateIssueView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherCategoriesCategoriesCategoriesLabelWrapperCategoriesDescriptionFilter',
       attributeName: 'description',
       label: t(
         'edemokracia.admin.Debate.issue.Issue.View.other.categories.categories.categories.categories.description.Filter',
@@ -260,6 +265,7 @@ export const useAdminDebateIssueView = () => {
 
   const commentsRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsCommentFilter',
       attributeName: 'comment',
       label: t(
         'edemokracia.admin.Debate.issue.Issue.View.other.comments.comments.actions.comments.comments.comment.Filter',
@@ -268,6 +274,7 @@ export const useAdminDebateIssueView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsCreatedFilter',
       attributeName: 'created',
       label: t(
         'edemokracia.admin.Debate.issue.Issue.View.other.comments.comments.actions.comments.comments.created.Filter',
@@ -276,6 +283,7 @@ export const useAdminDebateIssueView = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsCreatedByNameFilter',
       attributeName: 'createdByName',
       label: t(
         'edemokracia.admin.Debate.issue.Issue.View.other.comments.comments.actions.comments.comments.createdByName.Filter',
@@ -284,6 +292,7 @@ export const useAdminDebateIssueView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsUpVotesFilter',
       attributeName: 'upVotes',
       label: t(
         'edemokracia.admin.Debate.issue.Issue.View.other.comments.comments.actions.comments.comments.upVotes.Filter',
@@ -292,6 +301,7 @@ export const useAdminDebateIssueView = () => {
       filterType: FilterType.numeric,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsDownVotesFilter',
       attributeName: 'downVotes',
       label: t(
         'edemokracia.admin.Debate.issue.Issue.View.other.comments.comments.actions.comments.comments.downVotes.Filter',
@@ -359,6 +369,7 @@ export const useAdminDebateIssueView = () => {
 
   const debatesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebatesStatusFilter',
       attributeName: 'status',
       label: t('edemokracia.admin.Debate.issue.Issue.View.other.debates.debates.debates.debates.status.Filter', {
         defaultValue: 'Status',
@@ -367,6 +378,7 @@ export const useAdminDebateIssueView = () => {
       enumValues: ['CREATED', 'PENDING', 'ACTIVE', 'CLOSED'],
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebatesTitleFilter',
       attributeName: 'title',
       label: t('edemokracia.admin.Debate.issue.Issue.View.other.debates.debates.debates.debates.title.Filter', {
         defaultValue: 'Title',
@@ -374,6 +386,7 @@ export const useAdminDebateIssueView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebatesCloseAtFilter',
       attributeName: 'closeAt',
       label: t('edemokracia.admin.Debate.issue.Issue.View.other.debates.debates.debates.debates.closeAt.Filter', {
         defaultValue: 'CloseAt',
@@ -381,6 +394,7 @@ export const useAdminDebateIssueView = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebatesDescriptionFilter',
       attributeName: 'description',
       label: t('edemokracia.admin.Debate.issue.Issue.View.other.debates.debates.debates.debates.description.Filter', {
         defaultValue: 'Description',
@@ -416,6 +430,7 @@ export const useAdminDebateIssueView = () => {
 
   const ownerRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewIssueLabelWrapperIssueOwnerRepresentationFilter',
       attributeName: 'representation',
       label: t('edemokracia.admin.Debate.issue.Issue.View.issue.issue.owner.representation.Filter', {
         defaultValue: 'Representation',

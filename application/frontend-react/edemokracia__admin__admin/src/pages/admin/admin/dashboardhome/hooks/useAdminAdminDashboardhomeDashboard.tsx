@@ -75,6 +75,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
 
   const debatesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMydebatesMydebatesDebatesLabelWrapperDebatesTitleFilter',
       attributeName: 'title',
       label: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.title.Filter',
@@ -83,6 +84,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMydebatesMydebatesDebatesLabelWrapperDebatesCloseAtFilter',
       attributeName: 'closeAt',
       label: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.closeAt.Filter',
@@ -91,6 +93,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMydebatesMydebatesDebatesLabelWrapperDebatesStatusFilter',
       attributeName: 'status',
       label: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.status.Filter',
@@ -153,6 +156,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
 
   const issuesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMyissuesMyissuesIssuesLabelWrapperIssuesTitleFilter',
       attributeName: 'title',
       label: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myissues.myissues.issues.issues.title.Filter',
@@ -161,6 +165,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMyissuesMyissuesIssuesLabelWrapperIssuesCreatedFilter',
       attributeName: 'created',
       label: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myissues.myissues.issues.issues.created.Filter',
@@ -169,6 +174,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMyissuesMyissuesIssuesLabelWrapperIssuesStatusFilter',
       attributeName: 'status',
       label: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myissues.myissues.issues.issues.status.Filter',

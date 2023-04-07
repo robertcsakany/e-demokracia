@@ -1,4 +1,4 @@
-import { mapIcon, mapMimeTypeIcon } from '../utilities';
+import { mapIcon, mapMimeTypeIcon } from '../utilities/icons';
 
 export interface MdiIconProps {
   path: string;

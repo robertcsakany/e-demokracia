@@ -6,49 +6,45 @@
 // Action name: edemokracia::admin::Admin::edemokracia::admin::Dashboard::createIssue#ButtonCallOperation
 // Action: CallOperationAction
 
-import { useState, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, useCallback, Dispatch, SetStateAction, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Button,
-  IconButton,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Paper,
-  Box,
-  Container,
   Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Card,
+  DialogContent,
+  DialogTitle,
   CardContent,
+  IconButton,
+  Button,
+  DialogContentText,
+  TextField,
+  DialogActions,
+  Card,
+  Typography,
+  InputAdornment,
 } from '@mui/material';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
 import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
-  GridSelectionModel,
-  GridToolbarContainer,
-  GridRenderCellParams,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
   GridColDef,
 } from '@mui/x-data-grid';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { JudoIdentifiable } from '@judo/data-api-common';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
+import { MdiIcon, ModeledTabs } from '../../../../../../components';
+import { columnsActionCalculator } from '../../../../../../components/table';
+import { useRangeDialog } from '../../../../../../components/dialog';
 import {
-  MdiIcon,
-  ModeledTabs,
-  TrinaryLogicCombobox,
   AggregationInput,
-  useSnackbar,
-  useRangeDialog,
-  columnsActionCalculator,
-} from '../../../../../../components';
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../../components/widgets';
 import { FilterOption, FilterType } from '../../../../../../components-api';
 import {
   AdminDashboardQueryCustomizer,
@@ -63,7 +59,8 @@ import {
 } from '../../../../../../generated/data-api';
 import { adminCreateIssueInputServiceImpl, adminDashboardServiceImpl } from '../../../../../../generated/data-axios';
 import {
-  errorHandling,
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -72,6 +69,7 @@ import {
   booleanToStringSelect,
 } from '../../../../../../utilities';
 import { baseTableConfig, baseColumnConfig, toastConfig } from '../../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../../custom';
 
 export interface AdminDashboardCreateIssueFormProps {
   successCallback: (result?: AdminIssueStored) => void;
@@ -83,13 +81,23 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
   const { openRangeDialog } = useRangeDialog();
   const { downloadFile, uploadFile } = fileHandling();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleActionError = useErrorHandler<AdminCreateIssueInput>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=CallOperation)(component=AdminDashboardCreateIssueForm))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<AdminCreateIssueInput>({} as unknown as AdminCreateIssueInput);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
-  const [editMode] = useState<boolean>(true);
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [validation, setValidation] = useState<Map<keyof AdminCreateIssueInput, string>>(new Map());
+  const [editMode, setEditMode] = useState<boolean>(true);
+  const [payloadDiff] = useState<Record<keyof AdminCreateIssueInput, any>>(
+    {} as unknown as Record<keyof AdminCreateIssueInput, any>,
+  );
+  const storeDiff: (attributeName: keyof AdminCreateIssueInput, value: any) => void = useCallback(
+    (attributeName: keyof AdminCreateIssueInput, value: any) => {
+      payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -103,7 +111,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       const res = await adminCreateIssueInputServiceImpl.getTemplate();
       setData(res);
     } catch (e) {
-      console.error(e);
+      handleFetchError(e);
     } finally {
       setIsLoading(false);
     }
@@ -124,7 +132,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         successCallback(res);
       }
     } catch (error) {
-      errorHandling(error, enqueueSnackbar, { setValidation });
+      handleActionError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
@@ -135,6 +143,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       <DialogTitle>
         {title}
         <IconButton
+          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardEdemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueButtonCallOperation-dialog-close"
           aria-label="close"
           onClick={() => cancel()}
           sx={{
@@ -150,13 +159,17 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       <DialogContent dividers>
         <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
           <Grid item xs={12} sm={12}>
-            <Card>
+            <Card id="FlexedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapper">
               <CardContent>
                 <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                   <Grid item xs={12} sm={12}>
                     <Grid container direction="row" alignItems="center" justifyContent="flex-start">
                       <MdiIcon path="clipboard" />
-                      <Typography variant="h6" component="h1">
+                      <Typography
+                        id="LabeledemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueLabel"
+                        variant="h6"
+                        component="h1"
+                      >
                         {t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.Label', {
                           defaultValue: 'Create issue',
                         })}
@@ -165,25 +178,35 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
                   </Grid>
 
                   <Grid item xs={12} sm={12}>
-                    <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                    <Grid
+                      id="FlexedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssue"
+                      container
+                      direction="row"
+                      alignItems="stretch"
+                      justifyContent="flex-start"
+                      spacing={2}
+                    >
                       <Grid item xs={12} sm={12} md={4.0}>
                         <TextField
                           required
                           name="title"
-                          id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Dashboard.createIssue/Input/default/CreateIssueInput_Form/issue/LabelWrapper/issue/title"
+                          id="TextInputedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueTitle"
                           label={
                             t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.title', {
                               defaultValue: 'Title',
                             }) as string
                           }
                           value={data.title}
+                          className={!editMode ? 'JUDO-viewMode' : undefined}
+                          disabled={false}
                           error={!!validation.get('title')}
                           helperText={validation.get('title')}
-                          onChange={(event) => storeDiff('title', event.target.value)}
-                          className={false || !editMode ? 'Mui-readOnly' : undefined}
+                          onChange={(event) => {
+                            setEditMode(true);
+                            storeDiff('title', event.target.value);
+                          }}
                           InputLabelProps={{ shrink: true }}
                           InputProps={{
-                            readOnly: false || !editMode,
                             startAdornment: (
                               <InputAdornment position="start">
                                 <MdiIcon path="text_fields" />
@@ -197,22 +220,25 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
                         <TextField
                           required
                           name="description"
-                          id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Dashboard.createIssue/Input/default/CreateIssueInput_Form/issue/LabelWrapper/issue/description"
+                          id="TextAreaedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueDescription"
                           label={
                             t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.description', {
                               defaultValue: 'Description',
                             }) as string
                           }
                           value={data.description}
+                          className={!editMode ? 'JUDO-viewMode' : undefined}
+                          disabled={false}
                           multiline
                           minRows={4.0}
                           error={!!validation.get('description')}
                           helperText={validation.get('description')}
-                          onChange={(event) => storeDiff('description', event.target.value)}
-                          className={false || !editMode ? 'Mui-readOnly' : undefined}
+                          onChange={(event) => {
+                            setEditMode(true);
+                            storeDiff('description', event.target.value);
+                          }}
                           InputLabelProps={{ shrink: true }}
                           InputProps={{
-                            readOnly: false || !editMode,
                             startAdornment: (
                               <InputAdornment position="start">
                                 <MdiIcon path="text_fields" />
@@ -229,7 +255,14 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
           </Grid>
 
           <Grid item xs={12} sm={12}>
-            <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+            <Grid
+              id="FlexedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormGroup"
+              container
+              direction="row"
+              alignItems="flex-start"
+              justifyContent="flex-start"
+              spacing={2}
+            >
               <Grid item xs={12} sm={12} md={4.0}></Grid>
 
               <Grid item xs={12} sm={12} md={4.0}></Grid>
@@ -238,7 +271,12 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button variant="text" onClick={() => cancel()} disabled={isLoading}>
+        <Button
+          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardEdemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueButtonCallOperation-action-form-action-cancel"
+          variant="text"
+          onClick={() => cancel()}
+          disabled={isLoading}
+        >
           {
             t(
               'edemokracia.admin.Dashboard.createIssue.Input.edemokracia.admin.Dashboard.createIssue.input.ButtonBack',
@@ -246,7 +284,12 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
             ) as string
           }
         </Button>
-        <Button variant="contained" onClick={() => submit()} disabled={isLoading}>
+        <Button
+          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardEdemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueButtonCallOperation-action-form-action-submit"
+          variant="contained"
+          onClick={() => submit()}
+          disabled={isLoading}
+        >
           {
             t(
               'edemokracia.admin.Dashboard.createIssue.Input.edemokracia.admin.Dashboard.createIssue.input.ButtonSaveInput',

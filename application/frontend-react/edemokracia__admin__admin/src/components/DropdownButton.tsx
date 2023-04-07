@@ -10,6 +10,7 @@ import type { ReactNode, KeyboardEvent, SyntheticEvent } from 'react';
 import { MdiIcon } from './MdiIcon';
 
 interface DropdownMenuItem {
+  id: string;
   disabled?: boolean;
   visible?: boolean;
   label?: string;
@@ -20,7 +21,7 @@ interface DropdownMenuItem {
 
 interface DropdownButtonProps {
   children?: ReactNode;
-  id?: string | undefined;
+  id: string;
   menuItems: DropdownMenuItem[];
   disabled?: boolean;
   showDropdownIcon?: boolean;
@@ -107,7 +108,7 @@ export function DropdownButton({
                       return (
                         <MenuItem
                           key={menuItem.label ?? '' + index}
-                          id={menuItem.label ?? '' + index}
+                          id={menuItem.id}
                           disabled={menuItem.disabled ?? false}
                           onClick={(event) => {
                             handleClose(event);

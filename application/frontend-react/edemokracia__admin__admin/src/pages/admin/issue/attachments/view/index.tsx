@@ -8,51 +8,43 @@
 // Page DataElement name: attachments
 // Page DataElement owner name: edemokracia::admin::Issue
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Box, Container, Grid, CardContent, Button, TextField, MenuItem, InputAdornment, Card } from '@mui/material';
 import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Paper,
-  Divider,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from '@mui/material';
-import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
-  GridToolbarContainer,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
+  GridColDef,
 } from '@mui/x-data-grid';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
 import {
-  columnsActionCalculator,
   MdiIcon,
   ModeledTabs,
   PageHeader,
   DropdownButton,
   CustomBreadcrumb,
-  TrinaryLogicCombobox,
   useJudoNavigation,
-  useRangeDialog,
-  AggregationInput,
-  useSnackbar,
 } from '../../../../../components';
+import { useConfirmationBeforeChange } from '../../../../../hooks';
+import { columnsActionCalculator } from '../../../../../components/table';
+import { useRangeDialog } from '../../../../../components/dialog';
 import {
-  errorHandling,
+  AggregationInput,
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../components/widgets';
+import {
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -61,6 +53,7 @@ import {
   booleanToStringSelect,
 } from '../../../../../utilities';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   EdemokraciaAttachmentType,
   AdminIssueAttachment,
@@ -97,21 +90,39 @@ export default function AdminIssueAttachmentsView() {
   const { downloadFile, uploadFile } = fileHandling();
   const { queryCustomizer } = useAdminIssueAttachmentsView();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleUpdateError = useErrorHandler<AdminIssueAttachmentStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminIssueAttachmentsView))`,
+  );
+  const handleDeleteError = useErrorHandler<AdminIssueAttachmentStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Delete)(component=AdminIssueAttachmentsView))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<AdminIssueAttachmentStored>({} as unknown as AdminIssueAttachmentStored);
-  const [payloadDiff, setPayloadDiff] = useState<Record<string, any>>({});
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof AdminIssueAttachmentStored, any>>(
+    {} as unknown as Record<keyof AdminIssueAttachmentStored, any>,
+  );
+  const storeDiff: (attributeName: keyof AdminIssueAttachmentStored, value: any) => void = useCallback(
+    (attributeName: keyof AdminIssueAttachmentStored, value: any) => {
       payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminIssueAttachmentStored, string>>(new Map());
 
   const title: string = t('edemokracia.admin.Issue.attachments.View', { defaultValue: 'View / Edit Attachment' });
+
+  useConfirmationBeforeChange(
+    editMode,
+    t('judo.form.navigation.confirmation', {
+      defaultValue: 'You have potential unsaved changes in your form, are you sure you would like to navigate away?',
+    }),
+  );
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -128,9 +139,9 @@ export default function AdminIssueAttachmentsView() {
         __signedIdentifier: res.__signedIdentifier,
         __version: res.__version,
         __entityType: res.__entityType,
-      });
+      } as Record<keyof AdminIssueAttachmentStored, any>);
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleFetchError(error);
     } finally {
       setIsLoading(false);
     }
@@ -147,7 +158,7 @@ export default function AdminIssueAttachmentsView() {
         setEditMode(false);
       }
     } catch (error) {
-      errorHandling(error, enqueueSnackbar, { setValidation });
+      handleUpdateError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
@@ -161,7 +172,7 @@ export default function AdminIssueAttachmentsView() {
 
       back();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleDeleteError(error, undefined, data);
     } finally {
       setIsLoading(false);
     }
@@ -172,39 +183,16 @@ export default function AdminIssueAttachmentsView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<string, string>());
+    setValidation(new Map<keyof AdminIssueAttachmentStored, string>());
   }, [editMode]);
 
   return (
     <>
       <PageHeader title={title}>
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
-          </Grid>
-        )}
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
-              <MdiIcon path="delete" />
-              {t('judo.pages.delete', { defaultValue: 'Delete' })}
-            </Button>
-          </Grid>
-        )}
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => setEditMode(true)} disabled={isLoading || !data.__updateable}>
-              <MdiIcon path="pencil" />
-              {t('judo.pages.edit', { defaultValue: 'Edit' })}
-            </Button>
-          </Grid>
-        )}
         {editMode && (
           <Grid item>
             <Button
+              id="page-action-edit-cancel"
               variant="outlined"
               onClick={() => {
                 setEditMode(false);
@@ -219,9 +207,25 @@ export default function AdminIssueAttachmentsView() {
         )}
         {editMode && (
           <Grid item>
-            <Button onClick={() => saveData()} disabled={isLoading}>
+            <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
               <MdiIcon path="content-save" />
               {t('judo.pages.save', { defaultValue: 'Save' })}
+            </Button>
+          </Grid>
+        )}
+        {!editMode && (
+          <Grid item>
+            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
+              <MdiIcon path="refresh" />
+              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
+            </Button>
+          </Grid>
+        )}
+        {!editMode && (
+          <Grid item>
+            <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
+              <MdiIcon path="delete" />
+              {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
           </Grid>
         )}
@@ -238,23 +242,33 @@ export default function AdminIssueAttachmentsView() {
             justifyContent="flex-start"
           >
             <Grid item xs={12} sm={12}>
-              <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+              <Grid
+                id="FlexedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentGroup"
+                container
+                direction="row"
+                alignItems="flex-start"
+                justifyContent="flex-start"
+                spacing={2}
+              >
                 <Grid item xs={12} sm={12} md={4.0}>
                   <TextField
                     required
                     name="type"
-                    id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/View/default/Attachment/group/type"
+                    id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentGroupType"
                     label={
                       t('edemokracia.admin.Issue.attachments.Attachment.group.type', { defaultValue: 'Type' }) as string
                     }
                     value={data.type || ''}
+                    className={!editMode ? 'JUDO-viewMode' : undefined}
+                    disabled={false}
                     error={!!validation.get('type')}
                     helperText={validation.get('type')}
-                    onChange={(event) => storeDiff('type', event.target.value as EdemokraciaAttachmentType)}
-                    className={false || !editMode ? 'Mui-readOnly' : undefined}
+                    onChange={(event) => {
+                      setEditMode(true);
+                      storeDiff('type', event.target.value as EdemokraciaAttachmentType);
+                    }}
                     InputLabelProps={{ shrink: true }}
                     InputProps={{
-                      readOnly: false || !editMode,
                       startAdornment: (
                         <InputAdornment position="start">
                           <MdiIcon path="list" />
@@ -263,16 +277,16 @@ export default function AdminIssueAttachmentsView() {
                     }}
                     select
                   >
-                    <MenuItem value={'LINK'}>
+                    <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaAttachmentTypeLINK" value={'LINK'}>
                       {t('enumerations.EdemokraciaAttachmentType.LINK', { defaultValue: 'LINK' })}
                     </MenuItem>
-                    <MenuItem value={'IMAGE'}>
+                    <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaAttachmentTypeIMAGE" value={'IMAGE'}>
                       {t('enumerations.EdemokraciaAttachmentType.IMAGE', { defaultValue: 'IMAGE' })}
                     </MenuItem>
-                    <MenuItem value={'VIDEO'}>
+                    <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaAttachmentTypeVIDEO" value={'VIDEO'}>
                       {t('enumerations.EdemokraciaAttachmentType.VIDEO', { defaultValue: 'VIDEO' })}
                     </MenuItem>
-                    <MenuItem value={'MAP'}>
+                    <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaAttachmentTypeMAP" value={'MAP'}>
                       {t('enumerations.EdemokraciaAttachmentType.MAP', { defaultValue: 'MAP' })}
                     </MenuItem>
                   </TextField>
@@ -282,7 +296,7 @@ export default function AdminIssueAttachmentsView() {
                   {editMode ? (
                     <TextField
                       name="file"
-                      id="BinaryTypeInput@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/View/default/Attachment/group/file"
+                      id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentGroupFile"
                       label={
                         t('edemokracia.admin.Issue.attachments.Attachment.group.file', {
                           defaultValue: 'File',
@@ -291,6 +305,8 @@ export default function AdminIssueAttachmentsView() {
                       type="file"
                       error={!!validation.get('file')}
                       helperText={validation.get('file')}
+                      className={!editMode ? 'JUDO-viewMode' : undefined}
+                      disabled={false}
                       onChange={async (event: any) => {
                         try {
                           const uploadedData = await uploadFile(
@@ -311,6 +327,7 @@ export default function AdminIssueAttachmentsView() {
                               console.error(uploadedData);
                               return;
                             }
+                            setEditMode(true);
                             storeDiff('file', uploadedData.token);
                             enqueueSnackbar(
                               t('judo.files.upload-success', { defaultValue: 'File uploaded successfully.' }) as string,
@@ -333,10 +350,8 @@ export default function AdminIssueAttachmentsView() {
                           console.error(err);
                         }
                       }}
-                      className={false || !editMode ? 'Mui-readOnly' : undefined}
                       InputLabelProps={{ shrink: true }}
                       InputProps={{
-                        readOnly: false || !editMode,
                         startAdornment: (
                           <InputAdornment position="start">
                             <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
@@ -345,7 +360,12 @@ export default function AdminIssueAttachmentsView() {
                       }}
                     />
                   ) : (
-                    <Button variant="contained" disabled={!data?.file} onClick={() => downloadFile(data, 'file')}>
+                    <Button
+                      id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentGroupFile-download"
+                      variant="contained"
+                      disabled={!data?.file}
+                      onClick={() => downloadFile(data, 'file')}
+                    >
                       <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
                       {
                         t('edemokracia.admin.Issue.attachments.Attachment.group.file', {
@@ -359,18 +379,21 @@ export default function AdminIssueAttachmentsView() {
                 <Grid item xs={12} sm={12} md={4.0}>
                   <TextField
                     name="link"
-                    id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/View/default/Attachment/group/link"
+                    id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentGroupLink"
                     label={
                       t('edemokracia.admin.Issue.attachments.Attachment.group.link', { defaultValue: 'Link' }) as string
                     }
                     value={data.link}
+                    className={!editMode ? 'JUDO-viewMode' : undefined}
+                    disabled={false}
                     error={!!validation.get('link')}
                     helperText={validation.get('link')}
-                    onChange={(event) => storeDiff('link', event.target.value)}
-                    className={false || !editMode ? 'Mui-readOnly' : undefined}
+                    onChange={(event) => {
+                      setEditMode(true);
+                      storeDiff('link', event.target.value);
+                    }}
                     InputLabelProps={{ shrink: true }}
                     InputProps={{
-                      readOnly: false || !editMode,
                       startAdornment: (
                         <InputAdornment position="start">
                           <MdiIcon path="text_fields" />

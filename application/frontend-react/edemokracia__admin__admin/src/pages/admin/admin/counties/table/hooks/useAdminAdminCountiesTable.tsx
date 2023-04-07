@@ -32,6 +32,7 @@ export const useAdminAdminCountiesTable = () => {
 
   const filterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCountiesTableDefaultCountiesCountyTableNameFilter',
       attributeName: 'name',
       label: t('edemokracia.admin.Admin.counties.counties.County.Table.name.Filter', {
         defaultValue: 'Name',

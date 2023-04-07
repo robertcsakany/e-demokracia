@@ -7,20 +7,20 @@
 // Action: FilterAction
 
 import { AdminSimpleVoteQueryCustomizer } from '../../../../../../generated/data-api';
-import { useFilterDialog } from '../../../../../../components';
+import { useFilterDialog } from '../../../../../../components/dialog';
 import type { Filter, FilterOption } from '../../../../../../components-api';
 import { mapAllFiltersToQueryCustomizerProperties } from '../../../../../../utilities';
 
-export type PageFilterVotesAction = (filterOptions: FilterOption[], filters: Filter[]) => Promise<void>;
+export type PageFilterVotesAction = (id: string, filterOptions: FilterOption[], filters: Filter[]) => Promise<void>;
 
 export const usePageFilterVotesAction = (
   setFilters: (filters: Filter[]) => void,
   setPage: (page: number) => void,
   setQueryCustomizer: Function,
-  openFilterDialog: (filterOptions: FilterOption[], filters: Filter[]) => Promise<Filter[]>,
+  openFilterDialog: (id: string, filterOptions: FilterOption[], filters: Filter[]) => Promise<Filter[]>,
 ): PageFilterVotesAction => {
-  return async function pageFilterVotesAction(filterOptions: FilterOption[], filters: Filter[]) {
-    const newFilters = await openFilterDialog(filterOptions, filters);
+  return async function pageFilterVotesAction(id: string, filterOptions: FilterOption[], filters: Filter[]) {
+    const newFilters = await openFilterDialog(id, filterOptions, filters);
     const numberOfElements = 10;
 
     if (newFilters) {

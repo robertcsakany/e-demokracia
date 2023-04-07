@@ -1,4 +1,4 @@
-import {readFileSync, readdirSync} from 'node:fs';
+import {readFileSync, readdirSync, existsSync} from 'node:fs';
 import {normalize, join} from 'node:path';
 
 const dependencyCache = {};
@@ -61,27 +61,51 @@ export function createImportMap(inventory) {
 
 export function copyTasks(inventory, prefix = 'dist/externals/') {
     const tasks = [];
+    const mapSuffix = '.map';
+    const isMinifiedJS = /\.min\.[m|c]?js$/;
 
     for (const packageName in inventory) {
         for (const fileName in inventory[packageName]) {
             const f = inventory[packageName][fileName];
             const targetSuffix = fileName.includes('/') ? '/' + fileName.substring(0, fileName.lastIndexOf('/')) : '';
+            const dest = `${prefix}${packageName}@${f.version}${targetSuffix}`;
+
             if (f.tags.includes('npm')) {
-                tasks.push({
-                    src: `node_modules/${packageName}/${fileName}`,
-                    dest: `${prefix}${packageName}@${f.version}${targetSuffix}`,
-                });
+                const src = `node_modules/${packageName}/${fileName}`;
+                tasks.push({ src, dest });
+
+                if (fileName.match(isMinifiedJS) && existsSync(src + mapSuffix)) {
+                    tasks.push({ src: src + mapSuffix, dest });
+                }
             }
+
             if (f.tags.includes('external')) {
-                tasks.push({
-                    src: `externals/` + packageName + '@' + f.version + '/' + fileName,
-                    dest: `${prefix}${packageName}@${f.version}${targetSuffix}`,
-                });
+                const src = `externals/${packageName}@${f.version}/${fileName}`;
+                tasks.push({ src, dest });
+
+                if (fileName.match(isMinifiedJS) && existsSync(src + mapSuffix)) {
+                    tasks.push({ src: src + mapSuffix, dest });
+                }
             }
         }
     }
 
     return tasks;
+}
+
+export function getExternals(inventory) {
+    const excludes = new Set();
+
+    for (const packageName in inventory) {
+        for (const fileName in inventory[packageName]) {
+            const f = inventory[packageName][fileName];
+            if (f.tags.includes('importMap')) {
+                excludes.add(f.exports);
+            }
+        }
+    }
+
+    return Array.from(excludes);
 }
 
 export function getCSSLinks(inventory, prefix = 'dist/externals/') {

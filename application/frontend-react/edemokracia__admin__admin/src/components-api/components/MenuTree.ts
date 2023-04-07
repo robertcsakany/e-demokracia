@@ -5,6 +5,7 @@
 // Template name: actor/src/components-api/components/MenuTree.ts.hbs
 
 export type MenuItem = {
+  id: string;
   icon?: string;
   label: string;
   to?: string;

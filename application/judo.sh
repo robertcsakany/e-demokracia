@@ -125,6 +125,14 @@ get_platform () {
     echo "$platform"
 }
 
+get_sed_edit_option () {
+    local sed_opt="-i"
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      sed_opt="-i ''"
+    fi
+    echo "$sed_opt"
+}
+
 get_arch () {
     echo "$(uname -m)"
 }
@@ -148,6 +156,15 @@ get_dashed_ip () {
     echo "$ipdash"
 }
 
+get_java_home () {
+  local java_home=$(echo "$JAVA_HOME")
+  if [ -z $java_home ]; then
+      local java_props=$(java -XshowSettings:properties -version 2>&1 > /dev/null | grep 'java.home')
+      IFS='=' read -ra java_homes <<< "$java_props"
+      java_home=$(echo "${java_homes[1]}" | xargs)
+  fi
+  echo "$java_home"
+}
 
 # Args:
 # 2 - instance name
@@ -187,7 +204,7 @@ upgrade_postgresql_schema () {
 
 install_maven_wrapper () {
     mvn wrapper:wrapper -Dmaven=3.8.6 || exit $?
-    sed -i '' 's/https:\/\/nexus\.judo\.technology\/repository\/maven-judong\//https:\/\/repo\.maven\.apache\.org\/maven2/g' ${APP_DIR}/.mvn/wrapper/maven-wrapper.properties
+    sed $(get_sed_edit_option) 's/https:\/\/nexus\.judo\.technology\/repository\/maven-judong\//https:\/\/repo\.maven\.apache\.org\/maven2/g' ${APP_DIR}/.mvn/wrapper/maven-wrapper.properties
 }
 
 prune_frontend () {
@@ -380,11 +397,11 @@ start_karaf () {
     export EXTRA_JAVA_OPTS="-Xms1024m -Xmx1024m -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8"
 
     # replace repository URL
-    sed -i '' "s/org\.osgi\.service\.http\.port[ ]*=[ ]*8181/org\.osgi\.service\.http\.port = ${KARAF_PORT}/g" ${KARAF_DIR}/etc/org.ops4j.pax.web.cfg
+    sed $(get_sed_edit_option) "s/org\.osgi\.service\.http\.port[ ]*=[ ]*8181/org\.osgi\.service\.http\.port = ${KARAF_PORT}/g" ${KARAF_DIR}/etc/org.ops4j.pax.web.cfg
 
     if [ ! -z $karaf_enable_admin_user ]; then
-        sed -i '' "s/#karaf[ ]*=[ ]/karaf = /g" ${KARAF_DIR}/etc/users.properties
-        sed -i '' "s/#_g_/_g_/g" ${KARAF_DIR}/etc/users.properties
+        sed $(get_sed_edit_option) "s/#karaf[ ]*=[ ]/karaf = /g" ${KARAF_DIR}/etc/users.properties
+        sed $(get_sed_edit_option) "s/#_g_/_g_/g" ${KARAF_DIR}/etc/users.properties
     fi
 
     $KARAF_DIR/bin/karaf debug run clean || exit
@@ -528,6 +545,8 @@ CURR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 APP_DIR=$CURR_DIR
 MODEL_DIR="$(cd -P -- "$(dirname -- "${APP_DIR}")" && pwd)"
 
+echo "Java home: $(get_java_home)"
+export JAVA_HOME=$(get_java_home)
 
 [ $# -eq 0 ] && print-help && exit 0
 

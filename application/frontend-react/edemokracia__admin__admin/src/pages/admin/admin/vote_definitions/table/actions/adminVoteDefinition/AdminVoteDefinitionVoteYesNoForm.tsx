@@ -6,49 +6,45 @@
 // Action name: edemokracia::admin::Admin::edemokracia::admin::VoteDefinition::voteYesNo#ButtonCallOperation
 // Action: CallOperationAction
 
-import { useState, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, useCallback, Dispatch, SetStateAction, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Button,
-  IconButton,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Paper,
-  Box,
-  Container,
   Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Card,
+  DialogContent,
+  DialogTitle,
   CardContent,
+  IconButton,
+  Button,
+  DialogContentText,
+  TextField,
+  DialogActions,
+  MenuItem,
+  InputAdornment,
+  Card,
 } from '@mui/material';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
 import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
-  GridSelectionModel,
-  GridToolbarContainer,
-  GridRenderCellParams,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
   GridColDef,
 } from '@mui/x-data-grid';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { JudoIdentifiable } from '@judo/data-api-common';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
+import { MdiIcon, ModeledTabs } from '../../../../../../../components';
+import { columnsActionCalculator } from '../../../../../../../components/table';
+import { useRangeDialog } from '../../../../../../../components/dialog';
 import {
-  MdiIcon,
-  ModeledTabs,
-  TrinaryLogicCombobox,
   AggregationInput,
-  useSnackbar,
-  useRangeDialog,
-  columnsActionCalculator,
-} from '../../../../../../../components';
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../../../components/widgets';
 import { FilterOption, FilterType } from '../../../../../../../components-api';
 import {
   AdminVoteDefinitionQueryCustomizer,
@@ -61,7 +57,8 @@ import {
 } from '../../../../../../../generated/data-api';
 import { yesNoVoteInputServiceImpl, adminVoteDefinitionServiceImpl } from '../../../../../../../generated/data-axios';
 import {
-  errorHandling,
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -70,6 +67,7 @@ import {
   booleanToStringSelect,
 } from '../../../../../../../utilities';
 import { baseTableConfig, baseColumnConfig, toastConfig } from '../../../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../../../custom';
 
 export interface AdminVoteDefinitionVoteYesNoFormProps {
   successCallback: () => void;
@@ -86,13 +84,21 @@ export function AdminVoteDefinitionVoteYesNoForm({
   const { openRangeDialog } = useRangeDialog();
   const { downloadFile, uploadFile } = fileHandling();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleActionError = useErrorHandler<YesNoVoteInput>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=CallOperation)(component=AdminVoteDefinitionVoteYesNoForm))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<YesNoVoteInput>({} as unknown as YesNoVoteInput);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
-  const [editMode] = useState<boolean>(true);
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [validation, setValidation] = useState<Map<keyof YesNoVoteInput, string>>(new Map());
+  const [editMode, setEditMode] = useState<boolean>(true);
+  const [payloadDiff] = useState<Record<keyof YesNoVoteInput, any>>({} as unknown as Record<keyof YesNoVoteInput, any>);
+  const storeDiff: (attributeName: keyof YesNoVoteInput, value: any) => void = useCallback(
+    (attributeName: keyof YesNoVoteInput, value: any) => {
+      payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -106,7 +112,7 @@ export function AdminVoteDefinitionVoteYesNoForm({
       const res = await yesNoVoteInputServiceImpl.getTemplate();
       setData(res);
     } catch (e) {
-      console.error(e);
+      handleFetchError(e);
     } finally {
       setIsLoading(false);
     }
@@ -125,7 +131,7 @@ export function AdminVoteDefinitionVoteYesNoForm({
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar, { setValidation });
+      handleActionError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
@@ -136,6 +142,7 @@ export function AdminVoteDefinitionVoteYesNoForm({
       <DialogTitle>
         {title}
         <IconButton
+          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoButtonCallOperation-dialog-close"
           aria-label="close"
           onClick={() => cancel()}
           sx={{
@@ -153,20 +160,23 @@ export function AdminVoteDefinitionVoteYesNoForm({
           <Grid item xs={12} sm={12}>
             <TextField
               name="value"
-              id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/VoteDefinition.voteYesNo/Input/default/TransferObject_Form/value"
+              id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoInputDefaultTransferObjectFormValue"
               label={
                 t('edemokracia.admin.VoteDefinition.voteYesNo.TransferObject.Form.value', {
                   defaultValue: 'Value',
                 }) as string
               }
               value={data.value || ''}
+              className={!editMode ? 'JUDO-viewMode' : undefined}
+              disabled={false}
               error={!!validation.get('value')}
               helperText={validation.get('value')}
-              onChange={(event) => storeDiff('value', event.target.value as EdemokraciaYesNoVoteValue)}
-              className={false || !editMode ? 'Mui-readOnly' : undefined}
+              onChange={(event) => {
+                setEditMode(true);
+                storeDiff('value', event.target.value as EdemokraciaYesNoVoteValue);
+              }}
               InputLabelProps={{ shrink: true }}
               InputProps={{
-                readOnly: false || !editMode,
                 startAdornment: (
                   <InputAdornment position="start">
                     <MdiIcon path="list" />
@@ -175,19 +185,31 @@ export function AdminVoteDefinitionVoteYesNoForm({
               }}
               select
             >
-              <MenuItem value={'YES'}>
+              <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaYesNoVoteValueYES" value={'YES'}>
                 {t('enumerations.EdemokraciaYesNoVoteValue.YES', { defaultValue: 'YES' })}
               </MenuItem>
-              <MenuItem value={'NO'}>{t('enumerations.EdemokraciaYesNoVoteValue.NO', { defaultValue: 'NO' })}</MenuItem>
+              <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaYesNoVoteValueNO" value={'NO'}>
+                {t('enumerations.EdemokraciaYesNoVoteValue.NO', { defaultValue: 'NO' })}
+              </MenuItem>
             </TextField>
           </Grid>
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button variant="text" onClick={() => cancel()} disabled={isLoading}>
+        <Button
+          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoButtonCallOperation-action-form-action-cancel"
+          variant="text"
+          onClick={() => cancel()}
+          disabled={isLoading}
+        >
           {t('judo.pages.cancel', { defaultValue: 'Cancel' }) as string}
         </Button>
-        <Button variant="contained" onClick={() => submit()} disabled={isLoading}>
+        <Button
+          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoButtonCallOperation-action-form-action-submit"
+          variant="contained"
+          onClick={() => submit()}
+          disabled={isLoading}
+        >
           {t('judo.pages.submit', { defaultValue: 'Submit' }) as string}
         </Button>
       </DialogActions>

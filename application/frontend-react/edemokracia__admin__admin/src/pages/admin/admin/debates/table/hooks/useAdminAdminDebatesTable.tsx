@@ -63,6 +63,7 @@ export const useAdminAdminDebatesTable = () => {
 
   const filterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableCloseAtFilter',
       attributeName: 'closeAt',
       label: t('edemokracia.admin.Admin.debates.debates.Debate.Table.closeAt.Filter', {
         defaultValue: 'CloseAt',
@@ -70,6 +71,7 @@ export const useAdminAdminDebatesTable = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableDescriptionFilter',
       attributeName: 'description',
       label: t('edemokracia.admin.Admin.debates.debates.Debate.Table.description.Filter', {
         defaultValue: 'Description',
@@ -77,6 +79,7 @@ export const useAdminAdminDebatesTable = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableStatusFilter',
       attributeName: 'status',
       label: t('edemokracia.admin.Admin.debates.debates.Debate.Table.status.Filter', {
         defaultValue: 'Status',
@@ -85,6 +88,7 @@ export const useAdminAdminDebatesTable = () => {
       enumValues: ['CREATED', 'PENDING', 'ACTIVE', 'CLOSED'],
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableTitleFilter',
       attributeName: 'title',
       label: t('edemokracia.admin.Admin.debates.debates.Debate.Table.title.Filter', {
         defaultValue: 'Title',

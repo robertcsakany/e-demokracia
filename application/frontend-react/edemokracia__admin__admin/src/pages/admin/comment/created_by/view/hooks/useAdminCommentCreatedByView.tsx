@@ -58,6 +58,7 @@ export const useAdminCommentCreatedByView = () => {
 
   const activityCitiesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminCommentCreatedByViewDefaultUserViewAreasLabelWrapperAreasActivityActivityCitiesActivityCitiesActivityCitiesLabelWrapperActivityCitiesRepresentationFilter',
       attributeName: 'representation',
       label: t(
         'edemokracia.admin.Comment.createdBy.User.View.Areas.Areas.activity.activity.cities.activity.cities.activityCities.activityCities.representation.Filter',
@@ -95,6 +96,7 @@ export const useAdminCommentCreatedByView = () => {
 
   const activityDistrictsRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminCommentCreatedByViewDefaultUserViewAreasLabelWrapperAreasActivityActivityDistrictsActivityDistrictsActivityDistrictsLabelWrapperActivityDistrictsRepresentationFilter',
       attributeName: 'representation',
       label: t(
         'edemokracia.admin.Comment.createdBy.User.View.Areas.Areas.activity.activity.districts.activity.districts.activityDistricts.activityDistricts.representation.Filter',
@@ -132,6 +134,7 @@ export const useAdminCommentCreatedByView = () => {
 
   const activityCountiesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminCommentCreatedByViewDefaultUserViewAreasLabelWrapperAreasActivityTabActivityCountiesTabActivityCountiesActivityCountiesLabelWrapperActivityCountiesRepresentationFilter',
       attributeName: 'representation',
       label: t(
         'edemokracia.admin.Comment.createdBy.User.View.Areas.Areas.activity.tab.activity.counties.tab.activity.counties.activityCounties.activityCounties.representation.Filter',
@@ -168,6 +171,7 @@ export const useAdminCommentCreatedByView = () => {
 
   const residentCityRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminCommentCreatedByViewDefaultUserViewAreasLabelWrapperAreasResidencyResidentCityRepresentationFilter',
       attributeName: 'representation',
       label: t(
         'edemokracia.admin.Comment.createdBy.User.View.Areas.Areas.Residency.residentCity.representation.Filter',
@@ -205,6 +209,7 @@ export const useAdminCommentCreatedByView = () => {
 
   const residentCountyRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminCommentCreatedByViewDefaultUserViewAreasLabelWrapperAreasResidencyResidentCountyRepresentationFilter',
       attributeName: 'representation',
       label: t(
         'edemokracia.admin.Comment.createdBy.User.View.Areas.Areas.Residency.residentCounty.representation.Filter',
@@ -242,6 +247,7 @@ export const useAdminCommentCreatedByView = () => {
 
   const residentDistrictRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminCommentCreatedByViewDefaultUserViewAreasLabelWrapperAreasResidencyResidentDistrictRepresentationFilter',
       attributeName: 'representation',
       label: t(
         'edemokracia.admin.Comment.createdBy.User.View.Areas.Areas.Residency.residentDistrict.representation.Filter',

@@ -7,8 +7,9 @@
 // Action: DeleteAction
 
 import type { JudoIdentifiable } from '@judo/data-api-common';
-import { useSnackbar } from '../../../../../../components';
-import { errorHandling } from '../../../../../../utilities';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../../../../utilities';
 import {
   AdminProStored,
   AdminProQueryCustomizer,
@@ -25,7 +26,10 @@ export type PageDeleteProsAction = () => (
 ) => Promise<void>;
 
 export const usePageDeleteProsAction: PageDeleteProsAction = () => {
-  const [enqueueSnackbar] = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
+  const handleActionError = useErrorHandler<JudoIdentifiable<AdminCon>>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=RowDeleteAction))`,
+  );
 
   return async function pageDeleteProsAction(
     owner: JudoIdentifiable<AdminCon>,
@@ -33,11 +37,11 @@ export const usePageDeleteProsAction: PageDeleteProsAction = () => {
     successCallback: () => void,
   ) {
     try {
-      await adminConServiceForProsImpl.deletePros(owner, selected);
+      await adminProServiceImpl.delete(selected);
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleActionError(error);
     }
   };
 };

@@ -74,6 +74,7 @@ export const useAdminProConsView = () => {
 
   const consRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProConsViewDefaultConViewTabBarArgumentsArgumentsConsLabelWrapperConsTitleFilter',
       attributeName: 'title',
       label: t('edemokracia.admin.Pro.cons.Con.View.tabBar.arguments.arguments.cons.cons.title.Filter', {
         defaultValue: 'Title',
@@ -81,6 +82,7 @@ export const useAdminProConsView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProConsViewDefaultConViewTabBarArgumentsArgumentsConsLabelWrapperConsUpVotesFilter',
       attributeName: 'upVotes',
       label: t('edemokracia.admin.Pro.cons.Con.View.tabBar.arguments.arguments.cons.cons.upVotes.Filter', {
         defaultValue: 'up',
@@ -88,6 +90,7 @@ export const useAdminProConsView = () => {
       filterType: FilterType.numeric,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProConsViewDefaultConViewTabBarArgumentsArgumentsConsLabelWrapperConsDownVotesFilter',
       attributeName: 'downVotes',
       label: t('edemokracia.admin.Pro.cons.Con.View.tabBar.arguments.arguments.cons.cons.downVotes.Filter', {
         defaultValue: 'down',
@@ -141,6 +144,7 @@ export const useAdminProConsView = () => {
 
   const prosRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProConsViewDefaultConViewTabBarArgumentsArgumentsProsLabelWrapperProsTitleFilter',
       attributeName: 'title',
       label: t('edemokracia.admin.Pro.cons.Con.View.tabBar.arguments.arguments.pros.pros.title.Filter', {
         defaultValue: 'Title',
@@ -148,6 +152,7 @@ export const useAdminProConsView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProConsViewDefaultConViewTabBarArgumentsArgumentsProsLabelWrapperProsUpVotesFilter',
       attributeName: 'upVotes',
       label: t('edemokracia.admin.Pro.cons.Con.View.tabBar.arguments.arguments.pros.pros.upVotes.Filter', {
         defaultValue: 'up',
@@ -155,6 +160,7 @@ export const useAdminProConsView = () => {
       filterType: FilterType.numeric,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProConsViewDefaultConViewTabBarArgumentsArgumentsProsLabelWrapperProsDownVotesFilter',
       attributeName: 'downVotes',
       label: t('edemokracia.admin.Pro.cons.Con.View.tabBar.arguments.arguments.pros.pros.downVotes.Filter', {
         defaultValue: 'down',
@@ -226,6 +232,7 @@ export const useAdminProConsView = () => {
 
   const commentsRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProConsViewDefaultConViewTabBarCommentsCommentsCommentsLabelWrapperCommentsCreatedFilter',
       attributeName: 'created',
       label: t('edemokracia.admin.Pro.cons.Con.View.tabBar.comments.comments.comments.comments.created.Filter', {
         defaultValue: 'Created',
@@ -233,6 +240,7 @@ export const useAdminProConsView = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProConsViewDefaultConViewTabBarCommentsCommentsCommentsLabelWrapperCommentsCommentFilter',
       attributeName: 'comment',
       label: t('edemokracia.admin.Pro.cons.Con.View.tabBar.comments.comments.comments.comments.comment.Filter', {
         defaultValue: 'Comment',
@@ -240,6 +248,7 @@ export const useAdminProConsView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProConsViewDefaultConViewTabBarCommentsCommentsCommentsLabelWrapperCommentsCreatedByNameFilter',
       attributeName: 'createdByName',
       label: t('edemokracia.admin.Pro.cons.Con.View.tabBar.comments.comments.comments.comments.createdByName.Filter', {
         defaultValue: 'Created by',
@@ -247,6 +256,7 @@ export const useAdminProConsView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProConsViewDefaultConViewTabBarCommentsCommentsCommentsLabelWrapperCommentsUpVotesFilter',
       attributeName: 'upVotes',
       label: t('edemokracia.admin.Pro.cons.Con.View.tabBar.comments.comments.comments.comments.upVotes.Filter', {
         defaultValue: 'up',
@@ -254,6 +264,7 @@ export const useAdminProConsView = () => {
       filterType: FilterType.numeric,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProConsViewDefaultConViewTabBarCommentsCommentsCommentsLabelWrapperCommentsDownVotesFilter',
       attributeName: 'downVotes',
       label: t('edemokracia.admin.Pro.cons.Con.View.tabBar.comments.comments.comments.comments.downVotes.Filter', {
         defaultValue: 'down',

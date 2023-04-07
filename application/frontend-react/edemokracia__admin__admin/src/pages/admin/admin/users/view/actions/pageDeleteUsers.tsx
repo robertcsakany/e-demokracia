@@ -7,15 +7,19 @@
 // Action: DeleteAction
 
 import type { JudoIdentifiable } from '@judo/data-api-common';
-import { useSnackbar } from '../../../../../../components';
-import { errorHandling } from '../../../../../../utilities';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../../../../utilities';
 import { AdminUserStored, AdminUserQueryCustomizer, AdminUser } from '../../../../../../generated/data-api';
 import { adminAdminServiceForUsersImpl, adminUserServiceImpl } from '../../../../../../generated/data-axios';
 
 export type PageDeleteUsersAction = () => (selected: AdminUserStored, successCallback: () => void) => Promise<void>;
 
 export const usePageDeleteUsersAction: PageDeleteUsersAction = () => {
-  const [enqueueSnackbar] = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
+  const handleActionError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=RowDeleteAction))`,
+  );
 
   return async function pageDeleteUsersAction(selected: AdminUserStored, successCallback: () => void) {
     try {
@@ -23,7 +27,7 @@ export const usePageDeleteUsersAction: PageDeleteUsersAction = () => {
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleActionError(error);
     }
   };
 };

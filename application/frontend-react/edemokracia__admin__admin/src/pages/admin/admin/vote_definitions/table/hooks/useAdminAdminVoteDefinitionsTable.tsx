@@ -142,6 +142,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
 
   const filterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableTitleFilter',
       attributeName: 'title',
       label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.title.Filter', {
         defaultValue: 'Title',
@@ -149,6 +150,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableCreatedFilter',
       attributeName: 'created',
       label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.created.Filter', {
         defaultValue: 'Created',
@@ -156,6 +158,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableDescriptionFilter',
       attributeName: 'description',
       label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.description.Filter', {
         defaultValue: 'Description',
@@ -163,6 +166,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableStatusFilter',
       attributeName: 'status',
       label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.status.Filter', {
         defaultValue: 'Status',
@@ -171,6 +175,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       enumValues: ['CREATED', 'PENDING', 'ACTIVE', 'CLOSED'],
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableCloseAtFilter',
       attributeName: 'closeAt',
       label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.closeAt.Filter', {
         defaultValue: 'CloseAt',
@@ -178,6 +183,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableIsRatingTypeFilter',
       attributeName: 'isRatingType',
       label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.isRatingType.Filter', {
         defaultValue: 'IsRatingType',
@@ -185,6 +191,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       filterType: FilterType.trinaryLogic,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableIsSelectAnswerTypeFilter',
       attributeName: 'isSelectAnswerType',
       label: t(
         'edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.isSelectAnswerType.Filter',
@@ -193,6 +200,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       filterType: FilterType.trinaryLogic,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableIsYesNoAbstainTypeFilter',
       attributeName: 'isYesNoAbstainType',
       label: t(
         'edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.isYesNoAbstainType.Filter',
@@ -201,6 +209,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       filterType: FilterType.trinaryLogic,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableIsYesNoTypeFilter',
       attributeName: 'isYesNoType',
       label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.isYesNoType.Filter', {
         defaultValue: 'IsYesNoType',

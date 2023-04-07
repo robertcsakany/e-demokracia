@@ -68,17 +68,20 @@ export const useAdminAdminIssuesTable = () => {
 
   const filterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableDefaultIssuesIssueTableTitleFilter',
       attributeName: 'title',
       label: t('edemokracia.admin.Admin.issues.issues.Issue.Table.title.Filter', { defaultValue: 'Title' }) as string,
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableDefaultIssuesIssueTableStatusFilter',
       attributeName: 'status',
       label: t('edemokracia.admin.Admin.issues.issues.Issue.Table.status.Filter', { defaultValue: 'Status' }) as string,
       filterType: FilterType.enumeration,
       enumValues: ['CREATED', 'PENDING', 'ACTIVE', 'CLOSED'],
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableDefaultIssuesIssueTableCreatedFilter',
       attributeName: 'created',
       label: t('edemokracia.admin.Admin.issues.issues.Issue.Table.created.Filter', {
         defaultValue: 'Created',
@@ -86,6 +89,7 @@ export const useAdminAdminIssuesTable = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableDefaultIssuesIssueTableDescriptionFilter',
       attributeName: 'description',
       label: t('edemokracia.admin.Admin.issues.issues.Issue.Table.description.Filter', {
         defaultValue: 'Description',
@@ -93,6 +97,7 @@ export const useAdminAdminIssuesTable = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableDefaultIssuesIssueTableRepresentationFilter',
       attributeName: 'representation',
       label: t('edemokracia.admin.Admin.issues.issues.Issue.Table.representation.Filter', {
         defaultValue: 'Representation',

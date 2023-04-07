@@ -32,10 +32,10 @@ export interface NavigatorProps {
 function ActionItem(props: MenuItem) {
   const { t } = useTranslation();
   const { clearNavigate } = useJudoNavigation();
-  const { label, to, icon } = props;
+  const { id, label, to, icon } = props;
 
   return (
-    <ListItemButton onClick={() => to && clearNavigate(to)}>
+    <ListItemButton id={id} onClick={() => to && clearNavigate(to)}>
       {icon ? (
         <ListItemIcon>
           <MdiIcon path={icon} />
@@ -60,7 +60,7 @@ export function Navigator(props: DrawerProps & NavigatorProps) {
       <Logo {...logoProps} />
       <Hero {...heroProps} />
       <Divider variant="middle" />
-      <List component="nav">
+      <List id="application-navigator" component="nav">
         {items.map((item) =>
           item.items && item.items.length ? (
             <List
@@ -84,7 +84,7 @@ export function Navigator(props: DrawerProps & NavigatorProps) {
       {items.length ? <Divider variant="middle" /> : null}
       <List>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => doLogout()}>
+          <ListItemButton id="navigator-logout" onClick={() => doLogout()}>
             <ListItemIcon>
               <MdiIcon path="logout" />
             </ListItemIcon>

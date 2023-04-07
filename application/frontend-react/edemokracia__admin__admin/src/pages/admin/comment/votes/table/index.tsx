@@ -14,22 +14,24 @@ import { useTranslation } from 'react-i18next';
 import { Paper, Card, CardContent, Box, Grid, Button, Container } from '@mui/material';
 import type { GridRowModel, GridRowParams, GridSortModel } from '@mui/x-data-grid';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
+import { OBJECTCLASS } from '@pandino/pandino-api';
 import { JudoIdentifiable } from '@judo/data-api-common';
+import { useSnackbar } from 'notistack';
 import {
   MdiIcon,
   PageHeader,
   CustomBreadcrumb,
   CustomTablePagination,
   useJudoNavigation,
-  useFilterDialog,
-  columnsActionCalculator,
-  useSnackbar,
 } from '../../../../../components';
+import { columnsActionCalculator } from '../../../../../components/table';
+import { useFilterDialog } from '../../../../../components/dialog';
 import type { Filter } from '../../../../../components-api';
 import type { PersistedTableData, TableRowAction } from '../../../../../utilities';
 import { pageServerTableConfig, toastConfig } from '../../../../../config';
 import {
-  errorHandling,
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   mapAllFiltersToQueryCustomizerProperties,
   processQueryCustomizer,
@@ -74,7 +76,10 @@ export default function AdminCommentVotesTable() {
   const rowDeleteVotesAction = useRowDeleteVotesAction();
   const rowEditVotesAction = useRowEditVotesAction();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [rowCount, setRowCount] = useState<number>(0);
   const [sortModel, setSortModel] = useState<GridSortModel>(
@@ -151,7 +156,7 @@ export default function AdminCommentVotesTable() {
       setLastItem(res[res.length - 1]);
       setRowCount(res.length || 0);
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleFetchError(error);
     } finally {
       setIsLoading(false);
     }
@@ -175,6 +180,7 @@ export default function AdminCommentVotesTable() {
 
   const rowActions: TableRowAction<AdminSimpleVoteStored>[] = [
     {
+      id: 'DeleteActionedemokraciaAdminAdminEdemokraciaAdminCommentVotesTableEdemokraciaAdminAdminEdemokraciaAdminCommentVotesRowDelete',
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminSimpleVoteStored) =>
@@ -189,7 +195,25 @@ export default function AdminCommentVotesTable() {
     <>
       <PageHeader title={title}>
         <Grid item>
-          <Button onClick={() => pageRefreshVotesAction(() => fetchData())} disabled={isLoading}>
+          <Button
+            id="page-action-create"
+            onClick={() =>
+              pageCreateVotesAction({ __signedIdentifier: signedIdentifier } as JudoIdentifiable<AdminComment>, () =>
+                fetchData(),
+              )
+            }
+            disabled={isLoading}
+          >
+            <MdiIcon path="file_document_plus" />
+            {t('judo.pages.table.create', { defaultValue: 'Create' })}
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button
+            id="page-action-refresh"
+            onClick={() => pageRefreshVotesAction(() => fetchData())}
+            disabled={isLoading}
+          >
             <MdiIcon path="refresh" />
             {t('judo.pages.table.refresh', { defaultValue: 'Refresh' })}
           </Button>
@@ -200,7 +224,7 @@ export default function AdminCommentVotesTable() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Card>
-                <CardContent>
+                <CardContent id="PageDefinitionedemokraciaAdminAdminEdemokraciaAdminCommentVotesTable-data-grid">
                   <DataGrid
                     {...pageServerTableConfig}
                     getRowId={(row: { __identifier: string }) => row.__identifier}
@@ -209,14 +233,28 @@ export default function AdminCommentVotesTable() {
                     rowCount={rowCount}
                     sortModel={sortModel}
                     onSortModelChange={handleSortModelChange}
-                    columns={[...columns, ...columnsActionCalculator(rowActions, { shownActions: 2 })]}
+                    columns={[
+                      ...columns,
+                      ...columnsActionCalculator(
+                        'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCommentVotes',
+                        rowActions,
+                        { shownActions: 2 },
+                      ),
+                    ]}
                     onRowClick={(params: GridRowParams<AdminSimpleVoteStored>) => rowViewVotesAction(params.row)}
                     components={{
                       Toolbar: () => (
                         <GridToolbarContainer>
                           <Button
+                            id="FilterActionedemokraciaAdminAdminEdemokraciaAdminCommentVotesTableEdemokraciaAdminAdminEdemokraciaAdminCommentVotesPageFilter"
                             variant="outlined"
-                            onClick={async () => pageFilterVotesAction(filterOptions, filters)}
+                            onClick={async () =>
+                              pageFilterVotesAction(
+                                'FilterActionedemokraciaAdminAdminEdemokraciaAdminCommentVotesTableEdemokraciaAdminAdminEdemokraciaAdminCommentVotesPageFilter-filter',
+                                filterOptions,
+                                filters,
+                              )
+                            }
                             disabled={isLoading}
                           >
                             {t('judo.pages.table.set-filters', { defaultValue: 'Set filters' }) +

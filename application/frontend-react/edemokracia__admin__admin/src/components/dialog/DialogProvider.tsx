@@ -56,6 +56,7 @@ export const DialogProvider = ({ children }: DialogProviderProps) => {
   };
 
   const handleOpenRangeDialog = async <T extends JudoStored<T>, U extends QueryCustomizer<T>>({
+    id,
     columns,
     defaultSortField,
     rangeCall,
@@ -69,6 +70,7 @@ export const DialogProvider = ({ children }: DialogProviderProps) => {
     return new Promise<T[] | T>((resolve) => {
       setRangeDialog(
         <RangeDialog<T, U>
+          id={id}
           handleClose={handleCloseRangeDialog}
           open={true}
           resolve={resolve}
@@ -97,12 +99,17 @@ export const DialogProvider = ({ children }: DialogProviderProps) => {
     return false;
   };
 
-  const handleOpenConfirmDialog = async (confirmationMessage: string | ReactNode, title?: string | ReactNode) => {
+  const handleOpenConfirmDialog = async (
+    id: string,
+    confirmationMessage: string | ReactNode,
+    title?: string | ReactNode,
+  ) => {
     setIsOpenConfirmDialog(true);
 
     return new Promise<boolean>((resolve) => {
       setConfirmDialog(
         <ConfirmationDialog
+          id={id}
           confirmationMessage={confirmationMessage}
           title={title}
           handleClose={handleCloseConfirmDialog}
@@ -126,12 +133,13 @@ export const DialogProvider = ({ children }: DialogProviderProps) => {
     return false;
   };
 
-  const handleOpenFilterDialog = async (filterOptions: FilterOption[], filters?: Filter[]) => {
+  const handleOpenFilterDialog = async (id: string, filterOptions: FilterOption[], filters?: Filter[]) => {
     setIsOpenFilterDialog(true);
 
     return new Promise<Filter[]>((resolve) => {
       setFilterDialog(
         <FilterDialog
+          id={id}
           filters={filters}
           filterOptions={filterOptions}
           handleClose={handleCloseFilterDialog}

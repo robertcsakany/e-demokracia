@@ -6,52 +6,48 @@
 // Action name: edemokracia::admin::Admin::edemokracia::admin::Admin::categories#PageCreate
 // Action: CreateAction
 
-import { useState, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, useCallback, Dispatch, SetStateAction, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Button,
-  IconButton,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Paper,
-  Box,
-  Container,
   Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Card,
+  DialogContent,
+  DialogTitle,
   CardContent,
-  Divider,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
+  IconButton,
+  Button,
+  DialogContentText,
+  TextField,
+  DialogActions,
+  Card,
+  Typography,
+  InputAdornment,
 } from '@mui/material';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
 import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
+  DataGrid,
   GridToolbarContainer,
-  GridRenderCellParams,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
   GridColDef,
 } from '@mui/x-data-grid';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { JudoIdentifiable } from '@judo/data-api-common';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
+import { v1 as uuidv1 } from 'uuid';
+import { MdiIcon, ModeledTabs } from '../../../../../../components';
+import { columnsActionCalculator } from '../../../../../../components/table';
+import { useRangeDialog } from '../../../../../../components/dialog';
 import {
-  MdiIcon,
-  ModeledTabs,
-  TrinaryLogicCombobox,
   AggregationInput,
-  useSnackbar,
-  useRangeDialog,
-  columnsActionCalculator,
-} from '../../../../../../components';
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../../components/widgets';
 import { FilterOption, FilterType } from '../../../../../../components-api';
 import {
   AdminIssueCategoryStored,
@@ -68,7 +64,8 @@ import {
   adminIssueCategoryServiceImpl,
 } from '../../../../../../generated/data-axios';
 import {
-  errorHandling,
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -77,6 +74,7 @@ import {
   booleanToStringSelect,
 } from '../../../../../../utilities';
 import { baseTableConfig, baseColumnConfig, toastConfig, dividerHeight } from '../../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../../custom';
 
 export interface PageCreateCategoriesFormProps {
   successCallback: (result: AdminIssueCategoryStored) => void;
@@ -88,13 +86,25 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
   const { openRangeDialog } = useRangeDialog();
   const { downloadFile, uploadFile } = fileHandling();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleCreateError = useErrorHandler<AdminIssueCategory>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Create)(component=PageCreateCategoriesForm))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [data, setData] = useState<AdminIssueCategory>({} as unknown as AdminIssueCategory);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
-  const [editMode] = useState<boolean>(true);
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [data, setData] = useState<AdminIssueCategory>({
+    __referenceId: uuidv1(),
+  } as unknown as AdminIssueCategory);
+  const [validation, setValidation] = useState<Map<keyof AdminIssueCategory, string>>(new Map());
+  const [editMode, setEditMode] = useState<boolean>(true);
+  const [payloadDiff] = useState<Record<keyof AdminIssueCategory, any>>(
+    {} as unknown as Record<keyof AdminIssueCategory, any>,
+  );
+  const storeDiff: (attributeName: keyof AdminIssueCategory, value: any) => void = useCallback(
+    (attributeName: keyof AdminIssueCategory, value: any) => {
+      payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -102,10 +112,7 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
   const title: string = t('edemokracia.admin.Admin.categories.Create', { defaultValue: 'Create Category' });
 
   const [subcategoriesSortModel, setSubcategoriesSortModel] = useState<GridSortModel>([
-    {
-      field: 'title',
-      sort: 'asc',
-    },
+    { field: 'title', sort: 'asc' },
   ]);
 
   const subcategoriesColumns: GridColDef<AdminIssueCategoryStored>[] = [
@@ -131,6 +138,7 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
 
   const subcategoriesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategorySubcategoriesLabelWrapperSubcategoriesTitleFilter',
       attributeName: 'title',
       label: t('edemokracia.admin.Admin.categories.Create.Category.subcategories.subcategories.title.Filter', {
         defaultValue: 'Title',
@@ -138,6 +146,7 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategorySubcategoriesLabelWrapperSubcategoriesDescriptionFilter',
       attributeName: 'description',
       label: t('edemokracia.admin.Admin.categories.Create.Category.subcategories.subcategories.description.Filter', {
         defaultValue: 'Description',
@@ -157,12 +166,23 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
         ]
       : [],
   };
-  const [ownerSortModel, setOwnerSortModel] = useState<GridSortModel>([
-    {
-      field: 'representation',
-      sort: 'asc',
-    },
-  ]);
+  const subcategoriesRangeCall = async () =>
+    openRangeDialog<AdminIssueCategoryStored, AdminIssueCategoryQueryCustomizer>({
+      id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategories',
+      columns: subcategoriesColumns,
+      defaultSortField: subcategoriesSortModel[0],
+      rangeCall: async (queryCustomizer) =>
+        await adminIssueCategoryServiceImpl.getRangeForSubcategories(
+          undefined,
+          processQueryCustomizer(queryCustomizer),
+        ),
+      single: false,
+      alreadySelectedItems: subcategoriesSelectionModel,
+      filterOptions: subcategoriesRangeFilterOptions,
+      initialQueryCustomizer: subcategoriesInitialQueryCustomizer,
+    });
+  const [subcategoriesSelectionModel, setSubcategoriesSelectionModel] = useState<GridSelectionModel>([]);
+  const [ownerSortModel, setOwnerSortModel] = useState<GridSortModel>([{ field: 'representation', sort: 'asc' }]);
 
   const ownerColumns: GridColDef<AdminUserStored>[] = [
     {
@@ -178,6 +198,7 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
 
   const ownerRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategoryOwnerRepresentationFilter',
       attributeName: 'representation',
       label: t('edemokracia.admin.Admin.categories.Create.Category.owner.representation.Filter', {
         defaultValue: 'Representation',
@@ -197,15 +218,29 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
         ]
       : [],
   };
+  const ownerRangeCall = async () =>
+    openRangeDialog<AdminUserStored, AdminUserQueryCustomizer>({
+      id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategoryOwner',
+      columns: ownerColumns,
+      defaultSortField: ownerSortModel[0],
+      rangeCall: async (queryCustomizer) =>
+        await adminIssueCategoryServiceImpl.getRangeForOwner(undefined, processQueryCustomizer(queryCustomizer)),
+      single: false,
+      alreadySelectedItems: ownerSelectionModel,
+      filterOptions: ownerRangeFilterOptions,
+      initialQueryCustomizer: ownerInitialQueryCustomizer,
+    });
+  const [ownerSelectionModel, setOwnerSelectionModel] = useState<GridSelectionModel>([]);
   const subcategoriesRowActions: TableRowAction<AdminIssueCategoryStored>[] = [];
   const fetchData = async () => {
     setIsLoading(true);
 
     try {
       const res = await adminIssueCategoryServiceImpl.getTemplate();
-      setData(res);
+      setData((prevData) => ({ ...prevData, ...res }));
+    } catch (error) {
+      handleFetchError(error);
     } finally {
-      // ignore potential errors for now
       setIsLoading(false);
     }
   };
@@ -224,7 +259,7 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
         successCallback(res);
       }
     } catch (error) {
-      errorHandling(error, enqueueSnackbar, { setValidation });
+      handleCreateError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
@@ -235,6 +270,7 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
       <DialogTitle>
         {title}
         <IconButton
+          id="CreateActionedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesTableEdemokraciaAdminAdminEdemokraciaAdminAdminCategoriesPageCreate-dialog-close"
           aria-label="close"
           onClick={() => cancel()}
           sx={{
@@ -253,16 +289,19 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
             <TextField
               required
               name="title"
-              id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.categories/Create/default/Create_Category/title"
+              id="TextInputedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategoryTitle"
               label={t('edemokracia.admin.Admin.categories.Create.Category.title', { defaultValue: 'Title' }) as string}
               value={data.title}
+              className={!editMode ? 'JUDO-viewMode' : undefined}
+              disabled={false}
               error={!!validation.get('title')}
               helperText={validation.get('title')}
-              onChange={(event) => storeDiff('title', event.target.value)}
-              className={false || !editMode ? 'Mui-readOnly' : undefined}
+              onChange={(event) => {
+                setEditMode(true);
+                storeDiff('title', event.target.value);
+              }}
               InputLabelProps={{ shrink: true }}
               InputProps={{
-                readOnly: false || !editMode,
                 startAdornment: (
                   <InputAdornment position="start">
                     <MdiIcon path="text_fields" />
@@ -276,20 +315,23 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
             <TextField
               required
               name="description"
-              id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Admin.categories/Create/default/Create_Category/description"
+              id="TextInputedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategoryDescription"
               label={
                 t('edemokracia.admin.Admin.categories.Create.Category.description', {
                   defaultValue: 'Description',
                 }) as string
               }
               value={data.description}
+              className={!editMode ? 'JUDO-viewMode' : undefined}
+              disabled={false}
               error={!!validation.get('description')}
               helperText={validation.get('description')}
-              onChange={(event) => storeDiff('description', event.target.value)}
-              className={false || !editMode ? 'Mui-readOnly' : undefined}
+              onChange={(event) => {
+                setEditMode(true);
+                storeDiff('description', event.target.value);
+              }}
               InputLabelProps={{ shrink: true }}
               InputProps={{
-                readOnly: false || !editMode,
                 startAdornment: (
                   <InputAdornment position="start">
                     <MdiIcon path="text_fields" />
@@ -302,23 +344,22 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
           <Grid item xs={12} sm={12}>
             <AggregationInput
               name="owner"
-              id="Link@edemokracia/admin/Admin/edemokracia/admin/Admin.categories/Create/default/Create_Category/owner"
+              id="LinkedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategoryOwner"
               label={t('edemokracia.admin.Admin.categories.Create.Category.owner', { defaultValue: 'Owner' }) as string}
               labelList={[data.owner?.representation?.toString() ?? '']}
               value={data.owner}
               error={!!validation.get('owner')}
               helperText={validation.get('owner')}
               icon={<MdiIcon path="account" />}
-              readonly={false || !editMode}
+              disabled={false}
+              editMode={editMode}
               onSet={async () => {
                 const res = await openRangeDialog<AdminUserStored, AdminUserQueryCustomizer>({
+                  id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategoryOwner',
                   columns: ownerColumns,
                   defaultSortField: ([{ field: 'representation', sort: 'asc' }] as GridSortItem[])[0],
                   rangeCall: async (queryCustomizer) =>
-                    await adminIssueCategoryServiceImpl.getRangeForOwner(
-                      undefined,
-                      processQueryCustomizer(queryCustomizer),
-                    ),
+                    await adminIssueCategoryServiceImpl.getRangeForOwner(data, processQueryCustomizer(queryCustomizer)),
                   single: true,
                   alreadySelectedItems: data.owner?.__identifier as GridRowId,
                   filterOptions: ownerRangeFilterOptions,
@@ -327,18 +368,33 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
 
                 if (res === undefined) return;
 
+                setEditMode(true);
                 storeDiff('owner', res as AdminUserStored);
               }}
-              onUnset={async () => alert('UnsetAction on Link Component not implemented yet')}
+              onUnset={async () => {
+                setEditMode(true);
+                storeDiff('owner', null);
+              }}
             />
           </Grid>
 
           <Grid item xs={12} sm={12}>
-            <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+            <Grid
+              id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategorySubcategoriesLabelWrapper"
+              container
+              direction="column"
+              alignItems="stretch"
+              justifyContent="flex-start"
+              spacing={2}
+            >
               <Grid item xs={12} sm={12}>
                 <Grid container direction="row" alignItems="center" justifyContent="flex-start">
                   <MdiIcon path="file-tree" />
-                  <Typography variant="h6" component="h1">
+                  <Typography
+                    id="LabeledemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategorySubcategoriesLabelWrapperSubcategoriesLabel"
+                    variant="h6"
+                    component="h1"
+                  >
                     {t('edemokracia.admin.Admin.categories.Create.Category.subcategories.subcategories.Label', {
                       defaultValue: 'Subcategories',
                     })}
@@ -347,7 +403,13 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
               </Grid>
 
               <Grid item xs={12} sm={12}>
-                <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                <Grid
+                  id="TableedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategorySubcategoriesLabelWrapperSubcategories"
+                  container
+                  direction="column"
+                  alignItems="stretch"
+                  justifyContent="flex-start"
+                >
                   <DataGrid
                     {...baseTableConfig}
                     getRowId={(row: { __identifier: string }) => row.__identifier}
@@ -355,7 +417,11 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
                     rows={data?.subcategories ?? []}
                     columns={[
                       ...subcategoriesColumns,
-                      ...columnsActionCalculator(subcategoriesRowActions, { shownActions: 2 }),
+                      ...columnsActionCalculator(
+                        'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategories',
+                        subcategoriesRowActions,
+                        { shownActions: 2 },
+                      ),
                     ]}
                     disableSelectionOnClick
                     sortModel={subcategoriesSortModel}
@@ -363,7 +429,11 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
                       setSubcategoriesSortModel(newModel);
                     }}
                     components={{
-                      Toolbar: () => <div>{/* No actions defined */}</div>,
+                      Toolbar: () => (
+                        <GridToolbarContainer>
+                          <div>{/* Placeholder */}</div>
+                        </GridToolbarContainer>
+                      ),
                     }}
                   />
                 </Grid>
@@ -373,10 +443,20 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button variant="text" onClick={() => cancel()} disabled={isLoading}>
+        <Button
+          id="CreateActionedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesTableEdemokraciaAdminAdminEdemokraciaAdminAdminCategoriesPageCreate-action-form-action-cancel"
+          variant="text"
+          onClick={() => cancel()}
+          disabled={isLoading}
+        >
           {t('judo.pages.cancel', { defaultValue: 'Cancel' })}
         </Button>
-        <Button variant="contained" onClick={() => saveData()} disabled={isLoading}>
+        <Button
+          id="CreateActionedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesTableEdemokraciaAdminAdminEdemokraciaAdminAdminCategoriesPageCreate-action-form-action-create"
+          variant="contained"
+          onClick={() => saveData()}
+          disabled={isLoading}
+        >
           {t('judo.pages.create', { defaultValue: 'Create' })}
         </Button>
       </DialogActions>

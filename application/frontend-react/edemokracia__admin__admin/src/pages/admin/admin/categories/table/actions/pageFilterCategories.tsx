@@ -7,20 +7,24 @@
 // Action: FilterAction
 
 import { AdminIssueCategoryQueryCustomizer } from '../../../../../../generated/data-api';
-import { useFilterDialog } from '../../../../../../components';
+import { useFilterDialog } from '../../../../../../components/dialog';
 import type { Filter, FilterOption } from '../../../../../../components-api';
 import { mapAllFiltersToQueryCustomizerProperties } from '../../../../../../utilities';
 
-export type PageFilterCategoriesAction = (filterOptions: FilterOption[], filters: Filter[]) => Promise<void>;
+export type PageFilterCategoriesAction = (
+  id: string,
+  filterOptions: FilterOption[],
+  filters: Filter[],
+) => Promise<void>;
 
 export const usePageFilterCategoriesAction = (
   setFilters: (filters: Filter[]) => void,
   setPage: (page: number) => void,
   setQueryCustomizer: Function,
-  openFilterDialog: (filterOptions: FilterOption[], filters: Filter[]) => Promise<Filter[]>,
+  openFilterDialog: (id: string, filterOptions: FilterOption[], filters: Filter[]) => Promise<Filter[]>,
 ): PageFilterCategoriesAction => {
-  return async function pageFilterCategoriesAction(filterOptions: FilterOption[], filters: Filter[]) {
-    const newFilters = await openFilterDialog(filterOptions, filters);
+  return async function pageFilterCategoriesAction(id: string, filterOptions: FilterOption[], filters: Filter[]) {
+    const newFilters = await openFilterDialog(id, filterOptions, filters);
     const numberOfElements = 10;
 
     if (newFilters) {

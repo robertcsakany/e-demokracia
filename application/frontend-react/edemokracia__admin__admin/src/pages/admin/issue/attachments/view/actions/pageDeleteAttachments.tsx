@@ -7,8 +7,9 @@
 // Action: DeleteAction
 
 import type { JudoIdentifiable } from '@judo/data-api-common';
-import { useSnackbar } from '../../../../../../components';
-import { errorHandling } from '../../../../../../utilities';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../../../../utilities';
 import {
   AdminIssueAttachment,
   AdminIssue,
@@ -28,7 +29,10 @@ export type PageDeleteAttachmentsAction = () => (
 ) => Promise<void>;
 
 export const usePageDeleteAttachmentsAction: PageDeleteAttachmentsAction = () => {
-  const [enqueueSnackbar] = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
+  const handleActionError = useErrorHandler<JudoIdentifiable<AdminIssue>>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=RowDeleteAction))`,
+  );
 
   return async function pageDeleteAttachmentsAction(
     owner: JudoIdentifiable<AdminIssue>,
@@ -36,11 +40,11 @@ export const usePageDeleteAttachmentsAction: PageDeleteAttachmentsAction = () =>
     successCallback: () => void,
   ) {
     try {
-      await adminIssueServiceForAttachmentsImpl.deleteAttachments(owner, selected);
+      await adminIssueAttachmentServiceImpl.delete(selected);
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleActionError(error);
     }
   };
 };

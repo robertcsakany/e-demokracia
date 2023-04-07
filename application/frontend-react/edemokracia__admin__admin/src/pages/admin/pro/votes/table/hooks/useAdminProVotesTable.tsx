@@ -43,11 +43,13 @@ export const useAdminProVotesTable = () => {
 
   const filterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProVotesTableDefaultVotesVotesListCreatedFilter',
       attributeName: 'created',
       label: t('edemokracia.admin.Pro.votes.votes.Votes.List.created.Filter', { defaultValue: 'Created' }) as string,
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProVotesTableDefaultVotesVotesListTypeFilter',
       attributeName: 'type',
       label: t('edemokracia.admin.Pro.votes.votes.Votes.List.type.Filter', { defaultValue: 'Type' }) as string,
       filterType: FilterType.enumeration,

@@ -88,6 +88,7 @@ export const useAdminDashboardDebatesView = () => {
 
   const consRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardDebatesViewDefaultDebateViewTabBarArgumentsArgumentsConsLabelWrapperConsTitleFilter',
       attributeName: 'title',
       label: t('edemokracia.admin.Dashboard.debates.Debate.View.tabBar.arguments.arguments.cons.cons.title.Filter', {
         defaultValue: 'Title',
@@ -95,6 +96,7 @@ export const useAdminDashboardDebatesView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardDebatesViewDefaultDebateViewTabBarArgumentsArgumentsConsLabelWrapperConsUpVotesFilter',
       attributeName: 'upVotes',
       label: t('edemokracia.admin.Dashboard.debates.Debate.View.tabBar.arguments.arguments.cons.cons.upVotes.Filter', {
         defaultValue: 'up',
@@ -102,6 +104,7 @@ export const useAdminDashboardDebatesView = () => {
       filterType: FilterType.numeric,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardDebatesViewDefaultDebateViewTabBarArgumentsArgumentsConsLabelWrapperConsDownVotesFilter',
       attributeName: 'downVotes',
       label: t(
         'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.arguments.arguments.cons.cons.downVotes.Filter',
@@ -156,6 +159,7 @@ export const useAdminDashboardDebatesView = () => {
 
   const prosRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardDebatesViewDefaultDebateViewTabBarArgumentsArgumentsProsLabelWrapperProsTitleFilter',
       attributeName: 'title',
       label: t('edemokracia.admin.Dashboard.debates.Debate.View.tabBar.arguments.arguments.pros.pros.title.Filter', {
         defaultValue: 'Title',
@@ -163,6 +167,7 @@ export const useAdminDashboardDebatesView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardDebatesViewDefaultDebateViewTabBarArgumentsArgumentsProsLabelWrapperProsUpVotesFilter',
       attributeName: 'upVotes',
       label: t('edemokracia.admin.Dashboard.debates.Debate.View.tabBar.arguments.arguments.pros.pros.upVotes.Filter', {
         defaultValue: 'up',
@@ -170,6 +175,7 @@ export const useAdminDashboardDebatesView = () => {
       filterType: FilterType.numeric,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardDebatesViewDefaultDebateViewTabBarArgumentsArgumentsProsLabelWrapperProsDownVotesFilter',
       attributeName: 'downVotes',
       label: t(
         'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.arguments.arguments.pros.pros.downVotes.Filter',
@@ -247,6 +253,7 @@ export const useAdminDashboardDebatesView = () => {
 
   const commentsRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardDebatesViewDefaultDebateViewTabBarCommentsCommentsCommentsLabelWrapperCommentsCreatedFilter',
       attributeName: 'created',
       label: t(
         'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.comments.comments.comments.comments.created.Filter',
@@ -255,6 +262,7 @@ export const useAdminDashboardDebatesView = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardDebatesViewDefaultDebateViewTabBarCommentsCommentsCommentsLabelWrapperCommentsCommentFilter',
       attributeName: 'comment',
       label: t(
         'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.comments.comments.comments.comments.comment.Filter',
@@ -263,6 +271,7 @@ export const useAdminDashboardDebatesView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardDebatesViewDefaultDebateViewTabBarCommentsCommentsCommentsLabelWrapperCommentsCreatedByNameFilter',
       attributeName: 'createdByName',
       label: t(
         'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.comments.comments.comments.comments.createdByName.Filter',
@@ -271,6 +280,7 @@ export const useAdminDashboardDebatesView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardDebatesViewDefaultDebateViewTabBarCommentsCommentsCommentsLabelWrapperCommentsUpVotesFilter',
       attributeName: 'upVotes',
       label: t(
         'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.comments.comments.comments.comments.upVotes.Filter',
@@ -279,6 +289,7 @@ export const useAdminDashboardDebatesView = () => {
       filterType: FilterType.numeric,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardDebatesViewDefaultDebateViewTabBarCommentsCommentsCommentsLabelWrapperCommentsDownVotesFilter',
       attributeName: 'downVotes',
       label: t(
         'edemokracia.admin.Dashboard.debates.Debate.View.tabBar.comments.comments.comments.comments.downVotes.Filter',

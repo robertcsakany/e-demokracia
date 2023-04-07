@@ -9,11 +9,19 @@ import type { HeroProps } from '../components-api';
 
 export function Hero(props: HeroProps) {
   return (
-    <Box sx={{ p: 2, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-      <img src={props.imgSrc} alt="hero" style={{ width: '4rem', marginRight: '.5rem' }} />
+    <Box id="application-hero" sx={{ p: 2, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      <img id="application-hero-image" src={props.imgSrc} alt="hero" style={{ width: '4rem', marginRight: '.5rem' }} />
       <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}>
-        {props.preferredUsername && <Typography sx={{ fontWeight: 'bold' }}>{props.preferredUsername}</Typography>}
-        {props.email && <Typography sx={{ fontWeight: 'light' }}>{props.email}</Typography>}
+        {props.preferredUsername && (
+          <Typography id="application-hero-preferred-username" sx={{ fontWeight: 'bold' }}>
+            {props.preferredUsername}
+          </Typography>
+        )}
+        {props.email && (
+          <Typography id="application-hero-email" sx={{ fontWeight: 'light' }}>
+            {props.email}
+          </Typography>
+        )}
       </Box>
     </Box>
   );

@@ -58,6 +58,7 @@ export const useAdminSimpleVoteUserView = () => {
 
   const activityCitiesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminSimpleVoteUserViewDefaultUserViewAreasLabelWrapperAreasActivityActivityCitiesActivityCitiesActivityCitiesLabelWrapperActivityCitiesRepresentationFilter',
       attributeName: 'representation',
       label: t(
         'edemokracia.admin.SimpleVote.user.User.View.Areas.Areas.activity.activity.cities.activity.cities.activityCities.activityCities.representation.Filter',
@@ -95,6 +96,7 @@ export const useAdminSimpleVoteUserView = () => {
 
   const activityDistrictsRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminSimpleVoteUserViewDefaultUserViewAreasLabelWrapperAreasActivityActivityDistrictsActivityDistrictsActivityDistrictsLabelWrapperActivityDistrictsRepresentationFilter',
       attributeName: 'representation',
       label: t(
         'edemokracia.admin.SimpleVote.user.User.View.Areas.Areas.activity.activity.districts.activity.districts.activityDistricts.activityDistricts.representation.Filter',
@@ -132,6 +134,7 @@ export const useAdminSimpleVoteUserView = () => {
 
   const activityCountiesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminSimpleVoteUserViewDefaultUserViewAreasLabelWrapperAreasActivityTabActivityCountiesTabActivityCountiesActivityCountiesLabelWrapperActivityCountiesRepresentationFilter',
       attributeName: 'representation',
       label: t(
         'edemokracia.admin.SimpleVote.user.User.View.Areas.Areas.activity.tab.activity.counties.tab.activity.counties.activityCounties.activityCounties.representation.Filter',
@@ -168,6 +171,7 @@ export const useAdminSimpleVoteUserView = () => {
 
   const residentCityRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminSimpleVoteUserViewDefaultUserViewAreasLabelWrapperAreasResidencyResidentCityRepresentationFilter',
       attributeName: 'representation',
       label: t('edemokracia.admin.SimpleVote.user.User.View.Areas.Areas.Residency.residentCity.representation.Filter', {
         defaultValue: 'City',
@@ -203,6 +207,7 @@ export const useAdminSimpleVoteUserView = () => {
 
   const residentCountyRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminSimpleVoteUserViewDefaultUserViewAreasLabelWrapperAreasResidencyResidentCountyRepresentationFilter',
       attributeName: 'representation',
       label: t(
         'edemokracia.admin.SimpleVote.user.User.View.Areas.Areas.Residency.residentCounty.representation.Filter',
@@ -240,6 +245,7 @@ export const useAdminSimpleVoteUserView = () => {
 
   const residentDistrictRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminSimpleVoteUserViewDefaultUserViewAreasLabelWrapperAreasResidencyResidentDistrictRepresentationFilter',
       attributeName: 'representation',
       label: t(
         'edemokracia.admin.SimpleVote.user.User.View.Areas.Areas.Residency.residentDistrict.representation.Filter',

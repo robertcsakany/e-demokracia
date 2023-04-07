@@ -6,6 +6,7 @@
 // Action name: edemokracia::admin::Admin::edemokracia::admin::Con::votes#ButtonNavigate
 // Action: NavigateToPageAction
 
+import { JudoIdentifiable } from '@judo/data-api-common';
 import { useJudoNavigation } from '../../../../../../../components';
 import {
   AdminCon,
@@ -15,12 +16,12 @@ import {
   AdminSimpleVoteQueryCustomizer,
 } from '../../../../../../../generated/data-api';
 
-export type ButtonNavigateVotesAction = () => (owner: AdminConStored) => Promise<void>;
+export type ButtonNavigateVotesAction = () => (owner: JudoIdentifiable<AdminCon>) => Promise<void>;
 
 export const useButtonNavigateVotesAction: ButtonNavigateVotesAction = () => {
   const { navigate } = useJudoNavigation();
 
-  return async function (owner: AdminConStored) {
+  return async function (owner: JudoIdentifiable<AdminCon>) {
     navigate(`admin/con/votes/table/${owner.__signedIdentifier}`);
   };
 };

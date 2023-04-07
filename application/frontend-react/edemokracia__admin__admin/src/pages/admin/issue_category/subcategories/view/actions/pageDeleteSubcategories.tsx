@@ -7,8 +7,9 @@
 // Action: DeleteAction
 
 import type { JudoIdentifiable } from '@judo/data-api-common';
-import { useSnackbar } from '../../../../../../components';
-import { errorHandling } from '../../../../../../utilities';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../../../../utilities';
 import {
   AdminIssueCategoryStored,
   AdminIssueCategory,
@@ -26,7 +27,10 @@ export type PageDeleteSubcategoriesAction = () => (
 ) => Promise<void>;
 
 export const usePageDeleteSubcategoriesAction: PageDeleteSubcategoriesAction = () => {
-  const [enqueueSnackbar] = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
+  const handleActionError = useErrorHandler<JudoIdentifiable<AdminIssueCategory>>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=RowDeleteAction))`,
+  );
 
   return async function pageDeleteSubcategoriesAction(
     owner: JudoIdentifiable<AdminIssueCategory>,
@@ -34,11 +38,11 @@ export const usePageDeleteSubcategoriesAction: PageDeleteSubcategoriesAction = (
     successCallback: () => void,
   ) {
     try {
-      await adminIssueCategoryServiceForSubcategoriesImpl.deleteSubcategories(owner, selected);
+      await adminIssueCategoryServiceImpl.delete(selected);
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleActionError(error);
     }
   };
 };

@@ -9,10 +9,13 @@
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid } from '@mui/material';
-import type { DialogOption } from '../../../../../../../components';
-import { useSnackbar, useDialog } from '../../../../../../../components';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { JudoIdentifiable } from '@judo/data-api-common';
+import type { DialogOption } from '../../../../../../../components/dialog';
+import { useDialog } from '../../../../../../../components/dialog';
 import { FilterOption, FilterType } from '../../../../../../../components-api';
-import { errorHandling } from '../../../../../../../utilities';
+import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../../../../../utilities';
 
 import {
   AdminCityQueryCustomizer,
@@ -25,16 +28,16 @@ import { adminCountyServiceForCitiesImpl, adminCityServiceImpl } from '../../../
 import { TableCreateCitiesForm } from './TableCreateCitiesForm';
 
 export type TableCreateCitiesAction = () => (
-  owner: AdminCountyStored,
+  owner: JudoIdentifiable<AdminCounty>,
   successCallback: (result: AdminCityStored) => void,
 ) => void;
 
 export const useTableCreateCitiesAction: TableCreateCitiesAction = () => {
   const [createDialog, closeDialog] = useDialog();
-  const [enqueueSnackbar] = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   return function tableCreateCitiesAction(
-    owner: AdminCountyStored,
+    owner: JudoIdentifiable<AdminCounty>,
     successCallback: (result: AdminCityStored) => void,
   ) {
     createDialog({

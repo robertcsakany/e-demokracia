@@ -5,6 +5,7 @@
 // Template name: actor/src/custom/index.tsx.hbs
 
 import { DefaultApplicationCustomizer } from './application-customizer';
+export * from './custom-element-types';
 export * from './interfaces';
 
 export const applicationCustomizer = new DefaultApplicationCustomizer();

@@ -10,9 +10,11 @@
 
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSnackbar } from 'notistack';
 import { Paper, Card, CardContent, Box, Grid, Button, Container } from '@mui/material';
 import type { GridRowModel, GridRowParams, GridSortModel } from '@mui/x-data-grid';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
+import { OBJECTCLASS } from '@pandino/pandino-api';
 import type { JudoIdentifiable } from '@judo/data-api-common';
 import type { Filter } from '../../../../../components-api';
 import {
@@ -21,12 +23,12 @@ import {
   CustomBreadcrumb,
   CustomTablePagination,
   useJudoNavigation,
-  useFilterDialog,
-  columnsActionCalculator,
-  useSnackbar,
 } from '../../../../../components';
+import { columnsActionCalculator } from '../../../../../components/table';
+import { useFilterDialog } from '../../../../../components/dialog';
 import {
-  errorHandling,
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   mapAllFiltersToQueryCustomizerProperties,
   processQueryCustomizer,
@@ -77,7 +79,10 @@ export default function AdminAdminVoteDefinitionsTable() {
   const AdminVoteDefinitionVoteSelectAnswerAction = useAdminVoteDefinitionVoteSelectAnswerAction();
   const rowViewVoteDefinitionsAction = useRowViewVoteDefinitionsAction();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [rowCount, setRowCount] = useState<number>(0);
   const [sortModel, setSortModel] = useState<GridSortModel>(
@@ -164,7 +169,7 @@ export default function AdminAdminVoteDefinitionsTable() {
       setLastItem(res[res.length - 1]);
       setRowCount(res.length || 0);
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleFetchError(error);
     } finally {
       setIsLoading(false);
     }
@@ -193,12 +198,14 @@ export default function AdminAdminVoteDefinitionsTable() {
 
   const rowActions: TableRowAction<AdminVoteDefinitionStored>[] = [
     {
+      id: 'DeleteActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableEdemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsRowDelete',
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminVoteDefinitionStored) => rowDeleteVoteDefinitionsAction(row, () => fetchData()),
       disabled: (row: AdminVoteDefinitionStored) => !row.__deleteable,
     },
     {
+      id: 'CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoButtonCallOperation',
       label: t('edemokracia.admin.Admin.voteDefinitions.Table.edemokracia.admin.VoteDefinition.voteYesNo', {
         defaultValue: 'VoteYesNo',
       }) as string,
@@ -206,6 +213,7 @@ export default function AdminAdminVoteDefinitionsTable() {
       action: async (row: AdminVoteDefinitionStored) => AdminVoteDefinitionVoteYesNoAction(row, () => fetchData()),
     },
     {
+      id: 'CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoAbstainButtonCallOperation',
       label: t('edemokracia.admin.Admin.voteDefinitions.Table.edemokracia.admin.VoteDefinition.voteYesNoAbstain', {
         defaultValue: 'VoteYesNoAbstain',
       }) as string,
@@ -214,6 +222,7 @@ export default function AdminAdminVoteDefinitionsTable() {
         AdminVoteDefinitionVoteYesNoAbstainAction(row, () => fetchData()),
     },
     {
+      id: 'CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteSelectAnswerButtonCallOperation',
       label: t('edemokracia.admin.Admin.voteDefinitions.Table.edemokracia.admin.VoteDefinition.voteSelectAnswer', {
         defaultValue: 'VoteSelectAnswer',
       }) as string,
@@ -222,6 +231,7 @@ export default function AdminAdminVoteDefinitionsTable() {
         AdminVoteDefinitionVoteSelectAnswerAction(row, () => fetchData()),
     },
     {
+      id: 'CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteRatingButtonCallOperation',
       label: t('edemokracia.admin.Admin.voteDefinitions.Table.edemokracia.admin.VoteDefinition.voteRating', {
         defaultValue: 'VoteRating',
       }) as string,
@@ -234,7 +244,11 @@ export default function AdminAdminVoteDefinitionsTable() {
     <>
       <PageHeader title={title}>
         <Grid item>
-          <Button onClick={() => pageRefreshVoteDefinitionsAction(() => fetchData())} disabled={isLoading}>
+          <Button
+            id="page-action-refresh"
+            onClick={() => pageRefreshVoteDefinitionsAction(() => fetchData())}
+            disabled={isLoading}
+          >
             <MdiIcon path="refresh" />
             {t('judo.pages.table.refresh', { defaultValue: 'Refresh' })}
           </Button>
@@ -245,7 +259,7 @@ export default function AdminAdminVoteDefinitionsTable() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Card>
-                <CardContent>
+                <CardContent id="PageDefinitionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTable-data-grid">
                   <DataGrid
                     {...pageServerTableConfig}
                     getRowId={(row: { __identifier: string }) => row.__identifier}
@@ -254,7 +268,14 @@ export default function AdminAdminVoteDefinitionsTable() {
                     rowCount={rowCount}
                     sortModel={sortModel}
                     onSortModelChange={handleSortModelChange}
-                    columns={[...columns, ...columnsActionCalculator(rowActions, { shownActions: 2 })]}
+                    columns={[
+                      ...columns,
+                      ...columnsActionCalculator(
+                        'RelationTypeedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitions',
+                        rowActions,
+                        { shownActions: 2 },
+                      ),
+                    ]}
                     onRowClick={(params: GridRowParams<AdminVoteDefinitionStored>) =>
                       rowViewVoteDefinitionsAction(params.row)
                     }
@@ -262,8 +283,15 @@ export default function AdminAdminVoteDefinitionsTable() {
                       Toolbar: () => (
                         <GridToolbarContainer>
                           <Button
+                            id="FilterActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableEdemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsPageFilter"
                             variant="outlined"
-                            onClick={async () => pageFilterVoteDefinitionsAction(filterOptions, filters)}
+                            onClick={async () =>
+                              pageFilterVoteDefinitionsAction(
+                                'FilterActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableEdemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsPageFilter-filter',
+                                filterOptions,
+                                filters,
+                              )
+                            }
                             disabled={isLoading}
                           >
                             {t('judo.pages.table.set-filters', { defaultValue: 'Set filters' }) +

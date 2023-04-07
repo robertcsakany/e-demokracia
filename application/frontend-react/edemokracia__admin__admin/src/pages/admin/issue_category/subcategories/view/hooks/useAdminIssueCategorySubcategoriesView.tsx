@@ -56,6 +56,7 @@ export const useAdminIssueCategorySubcategoriesView = () => {
 
   const subcategoriesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategorySubcategoriesLabelWrapperSubcategoriesTitleFilter',
       attributeName: 'title',
       label: t('edemokracia.admin.IssueCategory.subcategories.Category.subcategories.subcategories.title.Filter', {
         defaultValue: 'Title',
@@ -63,6 +64,7 @@ export const useAdminIssueCategorySubcategoriesView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategorySubcategoriesLabelWrapperSubcategoriesDescriptionFilter',
       attributeName: 'description',
       label: t(
         'edemokracia.admin.IssueCategory.subcategories.Category.subcategories.subcategories.description.Filter',
@@ -99,6 +101,7 @@ export const useAdminIssueCategorySubcategoriesView = () => {
 
   const ownerRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryOwnerRepresentationFilter',
       attributeName: 'representation',
       label: t('edemokracia.admin.IssueCategory.subcategories.Category.owner.representation.Filter', {
         defaultValue: 'Representation',

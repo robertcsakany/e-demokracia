@@ -12,6 +12,8 @@ export const TRINARY_LOGIC = new Map<boolean | null, string>([
 
 export interface TrinaryLogicProps {
   readOnly?: boolean;
+  disabled?: boolean;
+  editMode?: boolean;
   value?: boolean | null;
   id?: string;
   label: string;

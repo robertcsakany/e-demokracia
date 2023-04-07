@@ -10,9 +10,11 @@
 
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSnackbar } from 'notistack';
 import { Paper, Card, CardContent, Box, Grid, Button, Container } from '@mui/material';
 import type { GridRowModel, GridRowParams, GridSortModel } from '@mui/x-data-grid';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
+import { OBJECTCLASS } from '@pandino/pandino-api';
 import type { JudoIdentifiable } from '@judo/data-api-common';
 import type { Filter } from '../../../../../components-api';
 import {
@@ -21,12 +23,12 @@ import {
   CustomBreadcrumb,
   CustomTablePagination,
   useJudoNavigation,
-  useFilterDialog,
-  columnsActionCalculator,
-  useSnackbar,
 } from '../../../../../components';
+import { columnsActionCalculator } from '../../../../../components/table';
+import { useFilterDialog } from '../../../../../components/dialog';
 import {
-  errorHandling,
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   mapAllFiltersToQueryCustomizerProperties,
   processQueryCustomizer,
@@ -69,7 +71,10 @@ export default function AdminAdminIssuesTable() {
   const rowViewIssuesAction = useRowViewIssuesAction();
   const rowDeleteIssuesAction = useRowDeleteIssuesAction();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [rowCount, setRowCount] = useState<number>(0);
   const [sortModel, setSortModel] = useState<GridSortModel>(
@@ -143,7 +148,7 @@ export default function AdminAdminIssuesTable() {
       setLastItem(res[res.length - 1]);
       setRowCount(res.length || 0);
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleFetchError(error);
     } finally {
       setIsLoading(false);
     }
@@ -167,12 +172,14 @@ export default function AdminAdminIssuesTable() {
 
   const rowActions: TableRowAction<AdminIssueStored>[] = [
     {
+      id: 'DeleteActionedemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableEdemokraciaAdminAdminEdemokraciaAdminAdminIssuesRowDelete',
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminIssueStored) => rowDeleteIssuesAction(row, () => fetchData()),
       disabled: (row: AdminIssueStored) => !row.__deleteable,
     },
     {
+      id: 'CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableEdemokraciaAdminAdminEdemokraciaAdminIssueCreateDebateButtonCallOperation',
       label: t('edemokracia.admin.Admin.issues.Table.edemokracia.admin.Issue.createDebate', {
         defaultValue: 'Create debate',
       }) as string,
@@ -180,6 +187,7 @@ export default function AdminAdminIssuesTable() {
       action: async (row: AdminIssueStored) => AdminIssueCreateDebateAction(row, () => fetchData()),
     },
     {
+      id: 'CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableEdemokraciaAdminAdminEdemokraciaAdminIssueCreateCommentButtonCallOperation',
       label: t('edemokracia.admin.Admin.issues.Table.edemokracia.admin.Issue.createComment', {
         defaultValue: 'Add comment',
       }) as string,
@@ -192,7 +200,11 @@ export default function AdminAdminIssuesTable() {
     <>
       <PageHeader title={title}>
         <Grid item>
-          <Button onClick={() => pageRefreshIssuesAction(() => fetchData())} disabled={isLoading}>
+          <Button
+            id="page-action-refresh"
+            onClick={() => pageRefreshIssuesAction(() => fetchData())}
+            disabled={isLoading}
+          >
             <MdiIcon path="refresh" />
             {t('judo.pages.table.refresh', { defaultValue: 'Refresh' })}
           </Button>
@@ -203,7 +215,7 @@ export default function AdminAdminIssuesTable() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Card>
-                <CardContent>
+                <CardContent id="PageDefinitionedemokraciaAdminAdminEdemokraciaAdminAdminIssuesTable-data-grid">
                   <DataGrid
                     {...pageServerTableConfig}
                     getRowId={(row: { __identifier: string }) => row.__identifier}
@@ -212,14 +224,28 @@ export default function AdminAdminIssuesTable() {
                     rowCount={rowCount}
                     sortModel={sortModel}
                     onSortModelChange={handleSortModelChange}
-                    columns={[...columns, ...columnsActionCalculator(rowActions, { shownActions: 2 })]}
+                    columns={[
+                      ...columns,
+                      ...columnsActionCalculator(
+                        'RelationTypeedemokraciaAdminAdminEdemokraciaAdminAdminIssues',
+                        rowActions,
+                        { shownActions: 2 },
+                      ),
+                    ]}
                     onRowClick={(params: GridRowParams<AdminIssueStored>) => rowViewIssuesAction(params.row)}
                     components={{
                       Toolbar: () => (
                         <GridToolbarContainer>
                           <Button
+                            id="FilterActionedemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableEdemokraciaAdminAdminEdemokraciaAdminAdminIssuesPageFilter"
                             variant="outlined"
-                            onClick={async () => pageFilterIssuesAction(filterOptions, filters)}
+                            onClick={async () =>
+                              pageFilterIssuesAction(
+                                'FilterActionedemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableEdemokraciaAdminAdminEdemokraciaAdminAdminIssuesPageFilter-filter',
+                                filterOptions,
+                                filters,
+                              )
+                            }
                             disabled={isLoading}
                           >
                             {t('judo.pages.table.set-filters', { defaultValue: 'Set filters' }) +

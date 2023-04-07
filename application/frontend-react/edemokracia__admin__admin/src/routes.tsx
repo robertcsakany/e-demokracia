@@ -844,6 +844,32 @@ routes.push({
     </Suspense>
   ),
 });
+export const ROUTE_ADMIN_DASHBOARD_CREATEISSUE_OUTPUT_INTERFACE_KEY = 'AdminDashboardCreateissueOutputRoute';
+const AdminDashboardCreateissueOutput = lazy(() => import('./pages/admin/dashboard/createissue/output/index'));
+
+routes.push({
+  path: 'admin/dashboard/createissue/output/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_DASHBOARD_CREATEISSUE_OUTPUT_INTERFACE_KEY})`}>
+        <AdminDashboardCreateissueOutput />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
+export const ROUTE_ADMIN_DASHBOARD_CREATEUSER_OUTPUT_INTERFACE_KEY = 'AdminDashboardCreateuserOutputRoute';
+const AdminDashboardCreateuserOutput = lazy(() => import('./pages/admin/dashboard/createuser/output/index'));
+
+routes.push({
+  path: 'admin/dashboard/createuser/output/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_DASHBOARD_CREATEUSER_OUTPUT_INTERFACE_KEY})`}>
+        <AdminDashboardCreateuserOutput />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
 export const ROUTE_ADMIN_DASHBOARD_DEBATES_VIEW_INTERFACE_KEY = 'AdminDashboardDebatesViewRoute';
 const AdminDashboardDebatesView = lazy(() => import('./pages/admin/dashboard/debates/view/index'));
 
@@ -866,6 +892,19 @@ routes.push({
     <Suspense>
       <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_DASHBOARD_ISSUES_VIEW_INTERFACE_KEY})`}>
         <AdminDashboardIssuesView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
+export const ROUTE_ADMIN_DEBATE_CLOSEDEBATE_OUTPUT_INTERFACE_KEY = 'AdminDebateClosedebateOutputRoute';
+const AdminDebateClosedebateOutput = lazy(() => import('./pages/admin/debate/closedebate/output/index'));
+
+routes.push({
+  path: 'admin/debate/closedebate/output/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_DEBATE_CLOSEDEBATE_OUTPUT_INTERFACE_KEY})`}>
+        <AdminDebateClosedebateOutput />
       </ComponentProxy>
     </Suspense>
   ),
@@ -983,6 +1022,19 @@ routes.push({
     <Suspense>
       <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_ISSUE_COMMENTS_VIEW_INTERFACE_KEY})`}>
         <AdminIssueCommentsView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
+export const ROUTE_ADMIN_ISSUE_CREATEDEBATE_OUTPUT_INTERFACE_KEY = 'AdminIssueCreatedebateOutputRoute';
+const AdminIssueCreatedebateOutput = lazy(() => import('./pages/admin/issue/createdebate/output/index'));
+
+routes.push({
+  path: 'admin/issue/createdebate/output/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_ISSUE_CREATEDEBATE_OUTPUT_INTERFACE_KEY})`}>
+        <AdminIssueCreatedebateOutput />
       </ComponentProxy>
     </Suspense>
   ),

@@ -7,8 +7,9 @@
 // Action: DeleteAction
 
 import type { JudoIdentifiable } from '@judo/data-api-common';
-import { useSnackbar } from '../../../../../../../components';
-import { errorHandling } from '../../../../../../../utilities';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../../../../../utilities';
 import {
   AdminProStored,
   AdminCon,
@@ -25,7 +26,10 @@ export type RowDeleteConsAction = () => (
 ) => Promise<void>;
 
 export const useRowDeleteConsAction: RowDeleteConsAction = () => {
-  const [enqueueSnackbar] = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
+  const handleActionError = useErrorHandler<JudoIdentifiable<AdminPro>>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=RowDeleteAction))`,
+  );
 
   return async function rowDeleteConsAction(
     owner: JudoIdentifiable<AdminPro>,
@@ -33,11 +37,11 @@ export const useRowDeleteConsAction: RowDeleteConsAction = () => {
     successCallback: () => void,
   ) {
     try {
-      await adminProServiceForConsImpl.deleteCons(owner, selected);
+      await adminConServiceImpl.delete(selected);
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleActionError(error);
     }
   };
 };

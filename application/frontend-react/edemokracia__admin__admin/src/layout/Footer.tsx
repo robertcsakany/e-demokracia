@@ -8,7 +8,7 @@ import { Link, Typography } from '@mui/material';
 
 export function Footer() {
   return (
-    <Typography variant="body2" color="text.secondary" align="center">
+    <Typography id="application-footer" variant="body2" color="text.secondary" align="center">
       Edemokracia - {new Date().getFullYear()}.
     </Typography>
   );

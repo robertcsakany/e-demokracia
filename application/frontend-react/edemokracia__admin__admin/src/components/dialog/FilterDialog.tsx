@@ -41,7 +41,7 @@ import { dateToJudoDateString, exists } from '../../utilities';
 import { mainContainerPadding } from '../../theme';
 import { _BooleanOperation, _EnumerationOperation, _NumericOperation, _StringOperation } from '@judo/data-api-common';
 import { DropdownButton } from '../DropdownButton';
-import { TrinaryLogicCombobox } from '../TrinaryLogicCombobox';
+import { TrinaryLogicCombobox } from '../widgets/TrinaryLogicCombobox';
 import { MdiIcon } from '../MdiIcon';
 
 const getDefaultOperator = (filterType: FilterType) => {
@@ -107,7 +107,7 @@ const getOperatorsByFilter = (filter: Filter): string[] => {
   }
 };
 
-const FilterOperator = ({ filter, setFilterOperator }: FilterOperatorProps) => {
+const FilterOperator = ({ filter, operatorId, valueId, setFilterOperator }: FilterOperatorProps) => {
   const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setFilterOperator(filter, getOperationEnumValue(filter, event.target.value));
   };
@@ -115,14 +115,14 @@ const FilterOperator = ({ filter, setFilterOperator }: FilterOperatorProps) => {
   return (
     <TextField
       name={'operation'}
-      id={'operation'}
+      id={operatorId}
       label={'Operation'}
       select
       value={filter.filterBy.operator}
       onChange={onChangeHandler}
     >
       {getOperatorsByFilter(filter).map((item) => (
-        <MenuItem key={item} value={item}>
+        <MenuItem id={valueId} key={item} value={item}>
           {/* TODO: do not forget localization here*/}
           {item}
         </MenuItem>
@@ -259,17 +259,31 @@ const FilterInput = ({ filter, setFilterValue }: FilterInputProps) => {
   );
 };
 
-const FilterRow = ({ filter, closeHandler, setFilterOperator, setFilterValue }: FilterProps) => {
+const FilterRow = ({ id, filter, closeHandler, setFilterOperator, setFilterValue }: FilterProps) => {
   return (
     <Grid item container spacing={2} alignItems={'center'}>
       <Grid item xs={4}>
-        {filter && <FilterOperator filter={filter} setFilterOperator={setFilterOperator} />}
+        {filter && (
+          <FilterOperator
+            operatorId={`${id}-operator`}
+            valueId={`${id}-value`}
+            filter={filter}
+            setFilterOperator={setFilterOperator}
+          />
+        )}
       </Grid>
       <Grid item xs={7}>
-        {filter && <FilterInput filter={filter} setFilterValue={setFilterValue} />}
+        {filter && (
+          <FilterInput
+            operatorId={`${id}-operator`}
+            valueId={`${id}-value`}
+            filter={filter}
+            setFilterValue={setFilterValue}
+          />
+        )}
       </Grid>
       <Grid item xs={1}>
-        <IconButton onClick={() => closeHandler(filter)}>
+        <IconButton id={`${id}-close`} onClick={() => closeHandler(filter)}>
           <MdiIcon path="close" />
         </IconButton>
       </Grid>
@@ -286,7 +300,7 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-export const FilterDialog = ({ filters, filterOptions, resolve, open, handleClose }: FilterDialogProps) => {
+export const FilterDialog = ({ id, filters, filterOptions, resolve, open, handleClose }: FilterDialogProps) => {
   const descriptionElementRef = useRef<HTMLElement>(null);
   const [tempFilters, setTempFilters] = useState<Filter[]>(filters ?? []);
   const { t } = useTranslation();
@@ -344,8 +358,13 @@ export const FilterDialog = ({ filters, filterOptions, resolve, open, handleClos
     resolve(tempFilters);
   };
 
+  const clear = () => {
+    setTempFilters([]);
+  };
+
   return (
     <Dialog
+      id={id}
       open={open}
       onClose={cancel}
       scroll="paper"
@@ -365,7 +384,7 @@ export const FilterDialog = ({ filters, filterOptions, resolve, open, handleClos
         },
       }}
     >
-      <DialogTitle id="scroll-dialog-title">
+      <DialogTitle id={`${id}-dialog-title`}>
         <Typography component="span" color="text.primary" variant="h5">
           {t('judo.modal.filter.label', { defaultValue: 'Filter' }) as string}
         </Typography>
@@ -377,6 +396,7 @@ export const FilterDialog = ({ filters, filterOptions, resolve, open, handleClos
               <Grid container spacing={2}>
                 {tempFilters.map((filter) => (
                   <FilterRow
+                    id={filter.id}
                     key={filter.id}
                     filter={filter}
                     closeHandler={filterCloseHandler}
@@ -386,17 +406,22 @@ export const FilterDialog = ({ filters, filterOptions, resolve, open, handleClos
                 ))}
                 <Grid item container>
                   <DropdownButton
+                    id={`${id}-dropdown`}
                     fullWidth={true}
                     showDropdownIcon={false}
                     menuItems={filterOptions.map((filterOption) => {
                       return {
+                        id: filterOption.id,
                         label: filterOption.label ?? filterOption.attributeName,
                         onClick: () =>
                           setTempFilters((prevTempFilters) => [
                             ...prevTempFilters,
                             {
-                              id: prevTempFilters.length,
+                              id: filterOption.id,
+                              operationId: `${filterOption.id}-operation`,
+                              valueId: `${filterOption.id}-value`,
                               filterOption: {
+                                id: `${filterOption.id}-option`,
                                 attributeName: filterOption.attributeName,
                                 label: filterOption.label,
                                 filterType: filterOption.filterType,
@@ -419,10 +444,15 @@ export const FilterDialog = ({ filters, filterOptions, resolve, open, handleClos
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button fullWidth variant="outlined" onClick={cancel}>
+        <Button id={`${id}-action-cancel`} fullWidth variant="outlined" onClick={cancel}>
           {t('judo.modal.filter.cancel', { defaultValue: 'Cancel' }) as string}
         </Button>
-        <Button fullWidth onClick={ok}>
+        {tempFilters.length > 0 && (
+          <Button id={`${id}-action-clear-all`} fullWidth variant="outlined" onClick={clear}>
+            {t('judo.modal.filter.clear-all', { defaultValue: 'Clear all' }) as string}
+          </Button>
+        )}
+        <Button id={`${id}-action-apply`} fullWidth onClick={ok}>
           {t('judo.modal.filter.apply', { defaultValue: 'Apply' }) as string} {'(' + tempFilters.length + ')'}
         </Button>
       </DialogActions>

@@ -43,6 +43,7 @@ export const useAdminAdminCategoriesTable = () => {
 
   const filterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesTableDefaultCategoriesCategoriesListTitleFilter',
       attributeName: 'title',
       label: t('edemokracia.admin.Admin.categories.categories.Categories.List.title.Filter', {
         defaultValue: 'Title',
@@ -50,6 +51,7 @@ export const useAdminAdminCategoriesTable = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesTableDefaultCategoriesCategoriesListDescriptionFilter',
       attributeName: 'description',
       label: t('edemokracia.admin.Admin.categories.categories.Categories.List.description.Filter', {
         defaultValue: 'Description',

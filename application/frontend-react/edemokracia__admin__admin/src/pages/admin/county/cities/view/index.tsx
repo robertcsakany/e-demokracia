@@ -8,51 +8,45 @@
 // Page DataElement name: cities
 // Page DataElement owner name: edemokracia::admin::County
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Box, Container, Grid, CardContent, Button, TextField, Card, Typography, InputAdornment } from '@mui/material';
 import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Paper,
-  Divider,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from '@mui/material';
-import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
+  DataGrid,
   GridToolbarContainer,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
+  GridColDef,
 } from '@mui/x-data-grid';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
 import {
-  columnsActionCalculator,
   MdiIcon,
   ModeledTabs,
   PageHeader,
   DropdownButton,
   CustomBreadcrumb,
-  TrinaryLogicCombobox,
   useJudoNavigation,
-  useRangeDialog,
-  AggregationInput,
-  useSnackbar,
 } from '../../../../../components';
+import { useConfirmationBeforeChange } from '../../../../../hooks';
+import { columnsActionCalculator } from '../../../../../components/table';
+import { useRangeDialog } from '../../../../../components/dialog';
 import {
-  errorHandling,
+  AggregationInput,
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../components/widgets';
+import {
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -61,6 +55,7 @@ import {
   booleanToStringSelect,
 } from '../../../../../utilities';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   AdminCityQueryCustomizer,
   AdminDistrict,
@@ -109,30 +104,49 @@ export default function AdminCountyCitiesView() {
   const { queryCustomizer, districtsColumns, districtsRangeFilterOptions, districtsInitialQueryCustomizer } =
     useAdminCountyCitiesView();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleUpdateError = useErrorHandler<AdminCityStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminCountyCitiesView))`,
+  );
+  const handleDeleteError = useErrorHandler<AdminCityStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Delete)(component=AdminCountyCitiesView))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<AdminCityStored>({} as unknown as AdminCityStored);
-  const [payloadDiff, setPayloadDiff] = useState<Record<string, any>>({});
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof AdminCityStored, any>>(
+    {} as unknown as Record<keyof AdminCityStored, any>,
+  );
+  const storeDiff: (attributeName: keyof AdminCityStored, value: any) => void = useCallback(
+    (attributeName: keyof AdminCityStored, value: any) => {
       payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminCityStored, string>>(new Map());
   const [districtsSortModel, setDistrictsSortModel] = useState<GridSortModel>([{ field: 'name', sort: 'asc' }]);
 
   const districtsRowActions: TableRowAction<AdminDistrictStored>[] = [
     {
+      id: 'DeleteActionedemokraciaAdminAdminEdemokraciaAdminCountyCitiesViewEdemokraciaAdminAdminEdemokraciaAdminCityDistrictsRowDelete',
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminDistrictStored) => rowDeleteDistrictsAction(data, row, () => fetchData()),
-      disabled: (row: AdminDistrictStored) => !row.__deleteable,
+      disabled: (row: AdminDistrictStored) => editMode || !row.__deleteable,
     },
   ];
   const title: string = data.representation as string;
+
+  useConfirmationBeforeChange(
+    editMode,
+    t('judo.form.navigation.confirmation', {
+      defaultValue: 'You have potential unsaved changes in your form, are you sure you would like to navigate away?',
+    }),
+  );
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -149,9 +163,9 @@ export default function AdminCountyCitiesView() {
         __signedIdentifier: res.__signedIdentifier,
         __version: res.__version,
         __entityType: res.__entityType,
-      });
+      } as Record<keyof AdminCityStored, any>);
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleFetchError(error);
     } finally {
       setIsLoading(false);
     }
@@ -168,7 +182,7 @@ export default function AdminCountyCitiesView() {
         setEditMode(false);
       }
     } catch (error) {
-      errorHandling(error, enqueueSnackbar, { setValidation });
+      handleUpdateError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
@@ -182,7 +196,7 @@ export default function AdminCountyCitiesView() {
 
       back();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleDeleteError(error, undefined, data);
     } finally {
       setIsLoading(false);
     }
@@ -193,39 +207,16 @@ export default function AdminCountyCitiesView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<string, string>());
+    setValidation(new Map<keyof AdminCityStored, string>());
   }, [editMode]);
 
   return (
     <>
       <PageHeader title={title}>
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
-          </Grid>
-        )}
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
-              <MdiIcon path="delete" />
-              {t('judo.pages.delete', { defaultValue: 'Delete' })}
-            </Button>
-          </Grid>
-        )}
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => setEditMode(true)} disabled={isLoading || !data.__updateable}>
-              <MdiIcon path="pencil" />
-              {t('judo.pages.edit', { defaultValue: 'Edit' })}
-            </Button>
-          </Grid>
-        )}
         {editMode && (
           <Grid item>
             <Button
+              id="page-action-edit-cancel"
               variant="outlined"
               onClick={() => {
                 setEditMode(false);
@@ -240,9 +231,25 @@ export default function AdminCountyCitiesView() {
         )}
         {editMode && (
           <Grid item>
-            <Button onClick={() => saveData()} disabled={isLoading}>
+            <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
               <MdiIcon path="content-save" />
               {t('judo.pages.save', { defaultValue: 'Save' })}
+            </Button>
+          </Grid>
+        )}
+        {!editMode && (
+          <Grid item>
+            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
+              <MdiIcon path="refresh" />
+              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
+            </Button>
+          </Grid>
+        )}
+        {!editMode && (
+          <Grid item>
+            <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
+              <MdiIcon path="delete" />
+              {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
           </Grid>
         )}
@@ -262,16 +269,19 @@ export default function AdminCountyCitiesView() {
               <TextField
                 required
                 name="name"
-                id="TextInput@edemokracia/admin/Admin/edemokracia/admin/County.cities/View/default/City_View/name"
+                id="TextInputedemokraciaAdminAdminEdemokraciaAdminCountyCitiesViewDefaultCityViewName"
                 label={t('edemokracia.admin.County.cities.City.View.name', { defaultValue: 'City name' }) as string}
                 value={data.name}
+                className={!editMode ? 'JUDO-viewMode' : undefined}
+                disabled={false}
                 error={!!validation.get('name')}
                 helperText={validation.get('name')}
-                onChange={(event) => storeDiff('name', event.target.value)}
-                className={false || !editMode ? 'Mui-readOnly' : undefined}
+                onChange={(event) => {
+                  setEditMode(true);
+                  storeDiff('name', event.target.value);
+                }}
                 InputLabelProps={{ shrink: true }}
                 InputProps={{
-                  readOnly: false || !editMode,
                   startAdornment: (
                     <InputAdornment position="start">
                       <MdiIcon path="text_fields" />
@@ -282,11 +292,22 @@ export default function AdminCountyCitiesView() {
             </Grid>
 
             <Grid item xs={12} sm={12}>
-              <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+              <Grid
+                id="FlexedemokraciaAdminAdminEdemokraciaAdminCountyCitiesViewDefaultCityViewDistrictsLabelWrapper"
+                container
+                direction="column"
+                alignItems="stretch"
+                justifyContent="flex-start"
+                spacing={2}
+              >
                 <Grid item xs={12} sm={12}>
                   <Grid container direction="row" alignItems="center" justifyContent="flex-start">
                     <MdiIcon path="home-city" />
-                    <Typography variant="h6" component="h1">
+                    <Typography
+                      id="LabeledemokraciaAdminAdminEdemokraciaAdminCountyCitiesViewDefaultCityViewDistrictsLabelWrapperDistrictsLabel"
+                      variant="h6"
+                      component="h1"
+                    >
                       {t('edemokracia.admin.County.cities.City.View.districts.districts.Label', {
                         defaultValue: 'Districts',
                       })}
@@ -295,7 +316,13 @@ export default function AdminCountyCitiesView() {
                 </Grid>
 
                 <Grid item xs={12} sm={12}>
-                  <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                  <Grid
+                    id="TableedemokraciaAdminAdminEdemokraciaAdminCountyCitiesViewDefaultCityViewDistrictsLabelWrapperDistricts"
+                    container
+                    direction="column"
+                    alignItems="stretch"
+                    justifyContent="flex-start"
+                  >
                     <DataGrid
                       {...baseTableConfig}
                       getRowId={(row: { __identifier: string }) => row.__identifier}
@@ -303,10 +330,18 @@ export default function AdminCountyCitiesView() {
                       rows={data?.districts ?? []}
                       columns={[
                         ...districtsColumns,
-                        ...columnsActionCalculator(districtsRowActions, { shownActions: 2 }),
+                        ...columnsActionCalculator(
+                          'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCityDistricts',
+                          districtsRowActions,
+                          { shownActions: 2 },
+                        ),
                       ]}
                       disableSelectionOnClick
-                      onRowClick={(params: GridRowParams<AdminDistrictStored>) => rowViewDistrictsAction(params.row)}
+                      onRowClick={(params: GridRowParams<AdminDistrictStored>) => {
+                        if (!editMode) {
+                          rowViewDistrictsAction(params.row);
+                        }
+                      }}
                       sortModel={districtsSortModel}
                       onSortModelChange={(newModel: GridSortModel) => {
                         setDistrictsSortModel(newModel);
@@ -315,12 +350,15 @@ export default function AdminCountyCitiesView() {
                         Toolbar: () => (
                           <GridToolbarContainer>
                             <Button
+                              id="CreateActionedemokraciaAdminAdminEdemokraciaAdminCountyCitiesViewEdemokraciaAdminAdminEdemokraciaAdminCityDistrictsTableCreate"
+                              variant="text"
                               onClick={() => tableCreateDistrictsAction(data, () => fetchData())}
-                              disabled={isLoading || editMode}
+                              disabled={isLoading || !true || editMode}
                             >
-                              <MdiIcon path="note_add" />
+                              <MdiIcon path="file_document_plus" />
                               {t('judo.pages.table.create', { defaultValue: 'Create' })}
                             </Button>
+                            <div>{/* Placeholder */}</div>
                           </GridToolbarContainer>
                         ),
                       }}

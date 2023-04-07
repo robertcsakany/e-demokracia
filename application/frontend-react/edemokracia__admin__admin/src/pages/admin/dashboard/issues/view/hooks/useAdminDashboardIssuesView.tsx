@@ -77,6 +77,7 @@ export const useAdminDashboardIssuesView = () => {
       renderCell: (params: GridRenderCellParams<any, AdminIssueAttachmentStored>) => {
         return params.row.file ? (
           <Button
+            id="ColumnedemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherAttachmentsAttachmentsAttachmentsLabelWrapperAttachmentsFile-download"
             size="small"
             variant="contained"
             onClick={(event: any) => {
@@ -119,6 +120,7 @@ export const useAdminDashboardIssuesView = () => {
 
   const attachmentsRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherAttachmentsAttachmentsAttachmentsLabelWrapperAttachmentsLinkFilter',
       attributeName: 'link',
       label: t(
         'edemokracia.admin.Dashboard.issues.Issue.View.other.attachments.attachments.attachments.attachments.link.Filter',
@@ -127,6 +129,7 @@ export const useAdminDashboardIssuesView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherAttachmentsAttachmentsAttachmentsLabelWrapperAttachmentsTypeFilter',
       attributeName: 'type',
       label: t(
         'edemokracia.admin.Dashboard.issues.Issue.View.other.attachments.attachments.attachments.attachments.type.Filter',
@@ -175,6 +178,7 @@ export const useAdminDashboardIssuesView = () => {
 
   const categoriesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherCategoriesCategoriesCategoriesLabelWrapperCategoriesTitleFilter',
       attributeName: 'title',
       label: t(
         'edemokracia.admin.Dashboard.issues.Issue.View.other.categories.categories.categories.categories.title.Filter',
@@ -183,6 +187,7 @@ export const useAdminDashboardIssuesView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherCategoriesCategoriesCategoriesLabelWrapperCategoriesDescriptionFilter',
       attributeName: 'description',
       label: t(
         'edemokracia.admin.Dashboard.issues.Issue.View.other.categories.categories.categories.categories.description.Filter',
@@ -260,6 +265,7 @@ export const useAdminDashboardIssuesView = () => {
 
   const commentsRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsCommentFilter',
       attributeName: 'comment',
       label: t(
         'edemokracia.admin.Dashboard.issues.Issue.View.other.comments.comments.actions.comments.comments.comment.Filter',
@@ -268,6 +274,7 @@ export const useAdminDashboardIssuesView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsCreatedFilter',
       attributeName: 'created',
       label: t(
         'edemokracia.admin.Dashboard.issues.Issue.View.other.comments.comments.actions.comments.comments.created.Filter',
@@ -276,6 +283,7 @@ export const useAdminDashboardIssuesView = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsCreatedByNameFilter',
       attributeName: 'createdByName',
       label: t(
         'edemokracia.admin.Dashboard.issues.Issue.View.other.comments.comments.actions.comments.comments.createdByName.Filter',
@@ -284,6 +292,7 @@ export const useAdminDashboardIssuesView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsUpVotesFilter',
       attributeName: 'upVotes',
       label: t(
         'edemokracia.admin.Dashboard.issues.Issue.View.other.comments.comments.actions.comments.comments.upVotes.Filter',
@@ -292,6 +301,7 @@ export const useAdminDashboardIssuesView = () => {
       filterType: FilterType.numeric,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsDownVotesFilter',
       attributeName: 'downVotes',
       label: t(
         'edemokracia.admin.Dashboard.issues.Issue.View.other.comments.comments.actions.comments.comments.downVotes.Filter',
@@ -359,6 +369,7 @@ export const useAdminDashboardIssuesView = () => {
 
   const debatesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebatesStatusFilter',
       attributeName: 'status',
       label: t('edemokracia.admin.Dashboard.issues.Issue.View.other.debates.debates.debates.debates.status.Filter', {
         defaultValue: 'Status',
@@ -367,6 +378,7 @@ export const useAdminDashboardIssuesView = () => {
       enumValues: ['CREATED', 'PENDING', 'ACTIVE', 'CLOSED'],
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebatesTitleFilter',
       attributeName: 'title',
       label: t('edemokracia.admin.Dashboard.issues.Issue.View.other.debates.debates.debates.debates.title.Filter', {
         defaultValue: 'Title',
@@ -374,6 +386,7 @@ export const useAdminDashboardIssuesView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebatesCloseAtFilter',
       attributeName: 'closeAt',
       label: t('edemokracia.admin.Dashboard.issues.Issue.View.other.debates.debates.debates.debates.closeAt.Filter', {
         defaultValue: 'CloseAt',
@@ -381,6 +394,7 @@ export const useAdminDashboardIssuesView = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebatesDescriptionFilter',
       attributeName: 'description',
       label: t(
         'edemokracia.admin.Dashboard.issues.Issue.View.other.debates.debates.debates.debates.description.Filter',
@@ -417,6 +431,7 @@ export const useAdminDashboardIssuesView = () => {
 
   const ownerRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewIssueLabelWrapperIssueOwnerRepresentationFilter',
       attributeName: 'representation',
       label: t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.owner.representation.Filter', {
         defaultValue: 'Representation',

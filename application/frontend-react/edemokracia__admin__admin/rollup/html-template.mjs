@@ -49,6 +49,7 @@ export const template = async ({ attributes, files, meta, publicPath, title, inv
 <html${makeHtmlAttributes(attributes.html)}>
   <head>
     ${metas}
+    <base href="/">
     <link rel="icon" href="favicon.ico" />
     <link rel="apple-touch-icon" href="logo192.png" />
     <title>${title}</title>

@@ -48,6 +48,7 @@ export const useAdminUserResidentCountyView = () => {
 
   const citiesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminUserResidentCountyViewDefaultCountyViewCitiesLabelWrapperCitiesNameFilter',
       attributeName: 'name',
       label: t('edemokracia.admin.User.residentCounty.County.View.cities.cities.name.Filter', {
         defaultValue: 'Name',

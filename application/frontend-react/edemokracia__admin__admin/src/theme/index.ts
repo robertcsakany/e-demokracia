@@ -80,6 +80,9 @@ const baseTheme = createTheme(paletteTheme, {
             border: '2px solid',
             background: alpha(paletteTheme.palette.primary.main, 0.15),
           },
+          '&:disabled': {
+            border: '2px solid',
+          },
         },
       },
     },
@@ -95,27 +98,6 @@ const baseTheme = createTheme(paletteTheme, {
         },
       },
     },
-    MuiFilledInput: {
-      styleOverrides: {
-        input: {
-          '&:-webkit-autofill': {
-            WebkitBackgroundClip: 'text !important',
-          },
-        },
-        root: {
-          background: 'inherit',
-          '&.Mui-focused': {
-            background: 'inherit',
-          },
-          '&:hover:not(.Mui-disabled):before': {
-            borderBottom: 'none',
-          },
-          '&.Mui-focused .MuiInputAdornment-root .MuiSvgIcon-root': {
-            color: paletteTheme.palette.secondary.main,
-          },
-        },
-      },
-    },
     MuiTextField: {
       defaultProps: {
         fullWidth: true,
@@ -124,18 +106,14 @@ const baseTheme = createTheme(paletteTheme, {
       },
       styleOverrides: {
         root: {
-          background: 'white',
-          '& .MuiFilledInput-underline:before': {
-            borderBottom: 'none',
-          },
-          '&.Mui-readOnly:not(.Mui-disabled):not(.Mui-focused)': {
-            borderBottom: `1px solid ${alpha(paletteTheme.palette.primary.main, 0.2)}`,
+          '&.JUDO-viewMode:not(.Mui-readOnly):not(.Mui-disabled) .MuiInputBase-root': {
             background: 'transparent',
           },
-          '&:not(.Mui-readOnly):not(.Mui-disabled)': {
-            boxShadow: '0px 0px 8px 2px rgba(0,0,0,0.05)',
-            borderRadius: `8px 8px 0 0`,
-            background: paletteTheme.palette.background.default,
+          '.MuiInputBase-root.Mui-readOnly': {
+            background: 'transparent',
+          },
+          '.MuiInputBase-root.Mui-disabled': {
+            background: 'transparent',
           },
         },
       },
@@ -149,7 +127,7 @@ const baseTheme = createTheme(paletteTheme, {
       styleOverrides: {
         filled: {
           '&:focus': {
-            backgroundColor: 'white',
+            backgroundColor: 'transparent',
           },
         },
       },

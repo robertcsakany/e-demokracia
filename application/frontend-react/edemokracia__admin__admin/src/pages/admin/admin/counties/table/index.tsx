@@ -10,9 +10,11 @@
 
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSnackbar } from 'notistack';
 import { Paper, Card, CardContent, Box, Grid, Button, Container } from '@mui/material';
 import type { GridRowModel, GridRowParams, GridSortModel } from '@mui/x-data-grid';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
+import { OBJECTCLASS } from '@pandino/pandino-api';
 import type { JudoIdentifiable } from '@judo/data-api-common';
 import type { Filter } from '../../../../../components-api';
 import {
@@ -21,12 +23,12 @@ import {
   CustomBreadcrumb,
   CustomTablePagination,
   useJudoNavigation,
-  useFilterDialog,
-  columnsActionCalculator,
-  useSnackbar,
 } from '../../../../../components';
+import { columnsActionCalculator } from '../../../../../components/table';
+import { useFilterDialog } from '../../../../../components/dialog';
 import {
-  errorHandling,
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   mapAllFiltersToQueryCustomizerProperties,
   processQueryCustomizer,
@@ -67,7 +69,10 @@ export default function AdminAdminCountiesTable() {
   const rowEditCountiesAction = useRowEditCountiesAction();
   const rowDeleteCountiesAction = useRowDeleteCountiesAction();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [rowCount, setRowCount] = useState<number>(0);
   const [sortModel, setSortModel] = useState<GridSortModel>(
@@ -141,7 +146,7 @@ export default function AdminAdminCountiesTable() {
       setLastItem(res[res.length - 1]);
       setRowCount(res.length || 0);
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleFetchError(error);
     } finally {
       setIsLoading(false);
     }
@@ -170,6 +175,7 @@ export default function AdminAdminCountiesTable() {
 
   const rowActions: TableRowAction<AdminCountyStored>[] = [
     {
+      id: 'DeleteActionedemokraciaAdminAdminEdemokraciaAdminAdminCountiesTableEdemokraciaAdminAdminEdemokraciaAdminAdminCountiesRowDelete',
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminCountyStored) => rowDeleteCountiesAction(row, () => fetchData()),
@@ -182,6 +188,7 @@ export default function AdminAdminCountiesTable() {
       <PageHeader title={title}>
         <Grid item>
           <Button
+            id="page-action-create"
             onClick={() =>
               pageCreateCountiesAction((result: AdminCountyStored) =>
                 navigate(`admin/admin/counties/view/${result.__signedIdentifier}`),
@@ -194,7 +201,11 @@ export default function AdminAdminCountiesTable() {
           </Button>
         </Grid>
         <Grid item>
-          <Button onClick={() => pageRefreshCountiesAction(() => fetchData())} disabled={isLoading}>
+          <Button
+            id="page-action-refresh"
+            onClick={() => pageRefreshCountiesAction(() => fetchData())}
+            disabled={isLoading}
+          >
             <MdiIcon path="refresh" />
             {t('judo.pages.table.refresh', { defaultValue: 'Refresh' })}
           </Button>
@@ -205,7 +216,7 @@ export default function AdminAdminCountiesTable() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Card>
-                <CardContent>
+                <CardContent id="PageDefinitionedemokraciaAdminAdminEdemokraciaAdminAdminCountiesTable-data-grid">
                   <DataGrid
                     {...pageServerTableConfig}
                     getRowId={(row: { __identifier: string }) => row.__identifier}
@@ -214,14 +225,28 @@ export default function AdminAdminCountiesTable() {
                     rowCount={rowCount}
                     sortModel={sortModel}
                     onSortModelChange={handleSortModelChange}
-                    columns={[...columns, ...columnsActionCalculator(rowActions, { shownActions: 2 })]}
+                    columns={[
+                      ...columns,
+                      ...columnsActionCalculator(
+                        'RelationTypeedemokraciaAdminAdminEdemokraciaAdminAdminCounties',
+                        rowActions,
+                        { shownActions: 2 },
+                      ),
+                    ]}
                     onRowClick={(params: GridRowParams<AdminCountyStored>) => rowViewCountiesAction(params.row)}
                     components={{
                       Toolbar: () => (
                         <GridToolbarContainer>
                           <Button
+                            id="FilterActionedemokraciaAdminAdminEdemokraciaAdminAdminCountiesTableEdemokraciaAdminAdminEdemokraciaAdminAdminCountiesPageFilter"
                             variant="outlined"
-                            onClick={async () => pageFilterCountiesAction(filterOptions, filters)}
+                            onClick={async () =>
+                              pageFilterCountiesAction(
+                                'FilterActionedemokraciaAdminAdminEdemokraciaAdminAdminCountiesTableEdemokraciaAdminAdminEdemokraciaAdminAdminCountiesPageFilter-filter',
+                                filterOptions,
+                                filters,
+                              )
+                            }
                             disabled={isLoading}
                           >
                             {t('judo.pages.table.set-filters', { defaultValue: 'Set filters' }) +

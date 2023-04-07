@@ -71,8 +71,14 @@
   "i18next": {
     "dist/umd/i18next.min.js": {"tags": ["importMap", "npm"], "exports": "i18next"}
   },
+  "notistack": {
+    "umd/notistack.min.js": {"tags": ["importMap", "external"], "exports": "notistack"}
+  },
   "oidc-client-ts": {
     "umd/oidc-client-ts.min.js": {"tags": ["importMap", "external"], "exports": "oidc-client-ts"}
+  },
+  "uuid": {
+    "umd/uuid.min.js": {"tags": ["importMap", "external"], "exports": "uuid"}
   },
   "react": {
     "umd/react.production.min.js": {"tags": ["importMap", "npm"], "exports": "react"}
@@ -88,6 +94,9 @@
   },
   "react-is": {
     "umd/react-is.min.js": {"tags": ["importMap", "external"], "exports": "react-is"}
+  },
+  "react-oidc-context": {
+    "umd/react-oidc-context.min.js": {"tags": ["importMap", "external"], "exports": "react-oidc-context"}
   },
   "react-router": {
     "dist/umd/react-router.production.min.js": {"tags": ["importMap", "npm"], "exports": "react-router"}

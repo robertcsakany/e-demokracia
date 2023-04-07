@@ -8,51 +8,43 @@
 // Page DataElement name: owner
 // Page DataElement owner name: edemokracia::IssueCategory
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Box, Container, Grid, CardContent, Button, Card } from '@mui/material';
 import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Paper,
-  Divider,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from '@mui/material';
-import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
-  GridToolbarContainer,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
+  GridColDef,
 } from '@mui/x-data-grid';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
 import {
-  columnsActionCalculator,
   MdiIcon,
   ModeledTabs,
   PageHeader,
   DropdownButton,
   CustomBreadcrumb,
-  TrinaryLogicCombobox,
   useJudoNavigation,
-  useRangeDialog,
-  AggregationInput,
-  useSnackbar,
 } from '../../../../components';
+import { useConfirmationBeforeChange } from '../../../../hooks';
+import { columnsActionCalculator } from '../../../../components/table';
+import { useRangeDialog } from '../../../../components/dialog';
 import {
-  errorHandling,
+  AggregationInput,
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../components/widgets';
+import {
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -61,6 +53,7 @@ import {
   booleanToStringSelect,
 } from '../../../../utilities';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../custom';
 import {
   User,
   IssueCategory,
@@ -90,21 +83,33 @@ export default function IssueCategoryOwnerView() {
   const { downloadFile, uploadFile } = fileHandling();
   const { queryCustomizer } = useIssueCategoryOwnerView();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<UserStored>({} as unknown as UserStored);
-  const [payloadDiff, setPayloadDiff] = useState<Record<string, any>>({});
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof UserStored, any>>(
+    {} as unknown as Record<keyof UserStored, any>,
+  );
+  const storeDiff: (attributeName: keyof UserStored, value: any) => void = useCallback(
+    (attributeName: keyof UserStored, value: any) => {
       payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof UserStored, string>>(new Map());
 
   const title: string = t('edemokracia.IssueCategory.owner.View', { defaultValue: 'Entity View' });
+
+  useConfirmationBeforeChange(
+    editMode,
+    t('judo.form.navigation.confirmation', {
+      defaultValue: 'You have potential unsaved changes in your form, are you sure you would like to navigate away?',
+    }),
+  );
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -121,9 +126,9 @@ export default function IssueCategoryOwnerView() {
         __signedIdentifier: res.__signedIdentifier,
         __version: res.__version,
         __entityType: res.__entityType,
-      });
+      } as Record<keyof UserStored, any>);
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleFetchError(error);
     } finally {
       setIsLoading(false);
     }
@@ -134,7 +139,7 @@ export default function IssueCategoryOwnerView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<string, string>());
+    setValidation(new Map<keyof UserStored, string>());
   }, [editMode]);
 
   return (
@@ -142,7 +147,7 @@ export default function IssueCategoryOwnerView() {
       <PageHeader title={title}>
         {!editMode && (
           <Grid item>
-            <Button onClick={() => fetchData()} disabled={isLoading}>
+            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
               <MdiIcon path="refresh" />
               {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
             </Button>

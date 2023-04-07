@@ -9,10 +9,17 @@
 import type { JudoIdentifiable } from '@judo/data-api-common';
 import { useTranslation } from 'react-i18next';
 import { GridColDef, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid';
-import { useRangeDialog, useSnackbar, MdiIcon } from '../../../../../../components';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { MdiIcon } from '../../../../../../components';
+import { useRangeDialog } from '../../../../../../components/dialog';
 import { FilterOption, FilterType } from '../../../../../../components-api';
 import { baseColumnConfig, toastConfig } from '../../../../../../config';
-import { errorHandling, processQueryCustomizer } from '../../../../../../utilities';
+import {
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
+  processQueryCustomizer,
+} from '../../../../../../utilities';
 import {
   AdminUserStored,
   AdminSimpleVote,
@@ -30,7 +37,10 @@ export type PageAddVotesAction = () => (
 export const usePageAddVotesAction: PageAddVotesAction = () => {
   const { openRangeDialog } = useRangeDialog();
   const { t } = useTranslation();
-  const [enqueueSnackbar] = useSnackbar();
+  const handleActionError = useErrorHandler<JudoIdentifiable<AdminUser>>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=AddAction))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const title: string = t('edemokracia.admin.User.votes.Table.edemokracia.admin.User.votes.PageAdd', {
     defaultValue: 'Add',
   });
@@ -59,11 +69,13 @@ export const usePageAddVotesAction: PageAddVotesAction = () => {
 
     const filterOptions: FilterOption[] = [
       {
+        id: 'FilteredemokraciaAdminAdminEdemokraciaAdminUserVotesTableDefaultVotesVotesListCreatedFilter',
         attributeName: 'created',
         label: t('edemokracia.admin.User.votes.votes.Votes.List.created.Filter', { defaultValue: 'Created' }) as string,
         filterType: FilterType.dateTime,
       },
       {
+        id: 'FilteredemokraciaAdminAdminEdemokraciaAdminUserVotesTableDefaultVotesVotesListTypeFilter',
         attributeName: 'type',
         label: t('edemokracia.admin.User.votes.votes.Votes.List.type.Filter', { defaultValue: 'Type' }) as string,
         filterType: FilterType.enumeration,
@@ -86,6 +98,7 @@ export const usePageAddVotesAction: PageAddVotesAction = () => {
     };
 
     const res = await openRangeDialog<AdminSimpleVoteStored, AdminSimpleVoteQueryCustomizer>({
+      id: 'AddActionedemokraciaAdminAdminEdemokraciaAdminUserVotesTableEdemokraciaAdminAdminEdemokraciaAdminUserVotesPageAdd',
       columns,
       defaultSortField: sortModel[0],
       rangeCall: async (queryCustomizer) =>
@@ -106,7 +119,7 @@ export const usePageAddVotesAction: PageAddVotesAction = () => {
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleActionError(error, undefined, owner);
     }
   };
 };

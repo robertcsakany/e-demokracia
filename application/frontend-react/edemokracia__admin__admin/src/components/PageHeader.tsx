@@ -23,12 +23,12 @@ export const PageHeader = ({ title, children }: PageHeaderProps) => {
 
   return (
     <>
-      <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
+      <AppBar component="div" position="sticky" elevation={0}>
         <Toolbar>
           <Container component="main" maxWidth="xl">
             <Grid container alignItems="center" justifyContent="space-between" spacing={1}>
               <Grid item>
-                <Typography component="span" color="text.primary" variant="h5">
+                <Typography id="application-page-header-title" component="span" color="text.primary" variant="h5">
                   {title}
                 </Typography>
               </Grid>
@@ -40,8 +40,8 @@ export const PageHeader = ({ title, children }: PageHeaderProps) => {
             </Grid>
           </Container>
         </Toolbar>
+        <Divider />
       </AppBar>
-      <Divider />
     </>
   );
 };

@@ -19,14 +19,16 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import type { JudoStored, QueryCustomizer } from '@judo/data-api-common';
 import { useTranslation } from 'react-i18next';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
 import type { Filter, FilterOption } from '../../components-api';
-import { errorHandling, processQueryCustomizer } from '../../utilities';
+import { useErrorHandler, processQueryCustomizer, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../utilities';
 import { serverTableConfig, rangeDialogConfig } from '../../config';
 import { CustomTablePagination } from '../CustomTablePagination';
-import { useSnackbar } from '../../components';
 import { useFilterDialog } from './hooks';
 
 interface RangeDialogProps<T extends JudoStored<T>, U extends QueryCustomizer<T>> {
+  id: string;
   resolve: (value: any) => void;
   open: boolean;
   handleClose: () => void;
@@ -40,6 +42,7 @@ interface RangeDialogProps<T extends JudoStored<T>, U extends QueryCustomizer<T>
 }
 
 export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T>>({
+  id,
   resolve,
   open,
   handleClose,
@@ -54,7 +57,10 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
   const { openFilterDialog } = useFilterDialog();
   const { t } = useTranslation();
   const descriptionElementRef = useRef<HTMLElement>(null);
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [rowCount, setRowCount] = useState<number>(0);
   const [sortModel, setSortModel] = useState<GridSortModel>([defaultSortField]);
@@ -107,7 +113,7 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
       setLastItem(res[res.length - 1]);
       setRowCount(res.length || 0);
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleFetchError(error);
     }
     setIsLoading(false);
   };
@@ -255,11 +261,11 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
   };
 
   return (
-    <Dialog open={open} onClose={cancel} scroll="paper" fullWidth={true} maxWidth={'md'}>
-      <DialogTitle id="scroll-dialog-title">
+    <Dialog id={id} open={open} onClose={cancel} scroll="paper" fullWidth={true} maxWidth={'md'}>
+      <DialogTitle id={`${id}-dialog-title`}>
         {t('judo.modal.range.label', { defaultValue: 'Select' }) as string}
       </DialogTitle>
-      <DialogContent dividers={true}>
+      <DialogContent id={`${id}-data-grid`} dividers={true}>
         <DialogContentText id="scroll-dialog-description" ref={descriptionElementRef} tabIndex={-1}>
           <DataGrid
             sx={
@@ -289,9 +295,10 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
               Toolbar: () => (
                 <GridToolbarContainer>
                   <Button
+                    id={`${id}-set-filters`}
                     variant="outlined"
                     onClick={async () => {
-                      const newFilters = await openFilterDialog(filterOptions, filters);
+                      const newFilters = await openFilterDialog('TODO', filterOptions, filters);
 
                       if (newFilters) {
                         handleFiltersChange(newFilters);
@@ -318,10 +325,10 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button variant="text" onClick={cancel}>
+        <Button id={`${id}-action-cancel`} variant="text" onClick={cancel}>
           {t('judo.modal.range.cancel', { defaultValue: 'Cancel' }) as string}
         </Button>
-        <Button variant="contained" onClick={ok}>
+        <Button id={`${id}-action-submit`} variant="contained" onClick={ok}>
           {t('judo.modal.range.submit', { defaultValue: 'Select' }) as string}
         </Button>
       </DialogActions>

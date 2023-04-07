@@ -8,51 +8,45 @@
 // Page DataElement name: subcategories
 // Page DataElement owner name: edemokracia::admin::IssueCategory
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Box, Container, Grid, CardContent, Button, TextField, Card, Typography, InputAdornment } from '@mui/material';
 import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Paper,
-  Divider,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from '@mui/material';
-import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
+  DataGrid,
   GridToolbarContainer,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
+  GridColDef,
 } from '@mui/x-data-grid';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
 import {
-  columnsActionCalculator,
   MdiIcon,
   ModeledTabs,
   PageHeader,
   DropdownButton,
   CustomBreadcrumb,
-  TrinaryLogicCombobox,
   useJudoNavigation,
-  useRangeDialog,
-  AggregationInput,
-  useSnackbar,
 } from '../../../../../components';
+import { useConfirmationBeforeChange } from '../../../../../hooks';
+import { columnsActionCalculator } from '../../../../../components/table';
+import { useRangeDialog } from '../../../../../components/dialog';
 import {
-  errorHandling,
+  AggregationInput,
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../components/widgets';
+import {
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -61,6 +55,7 @@ import {
   booleanToStringSelect,
 } from '../../../../../utilities';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   AdminIssueCategoryStored,
   AdminIssueCategoryMaskBuilder,
@@ -117,34 +112,53 @@ export default function AdminIssueCategorySubcategoriesView() {
     ownerInitialQueryCustomizer,
   } = useAdminIssueCategorySubcategoriesView();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleUpdateError = useErrorHandler<AdminIssueCategoryStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminIssueCategorySubcategoriesView))`,
+  );
+  const handleDeleteError = useErrorHandler<AdminIssueCategoryStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Delete)(component=AdminIssueCategorySubcategoriesView))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<AdminIssueCategoryStored>({} as unknown as AdminIssueCategoryStored);
-  const [payloadDiff, setPayloadDiff] = useState<Record<string, any>>({});
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof AdminIssueCategoryStored, any>>(
+    {} as unknown as Record<keyof AdminIssueCategoryStored, any>,
+  );
+  const storeDiff: (attributeName: keyof AdminIssueCategoryStored, value: any) => void = useCallback(
+    (attributeName: keyof AdminIssueCategoryStored, value: any) => {
       payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminIssueCategoryStored, string>>(new Map());
   const [subcategoriesSortModel, setSubcategoriesSortModel] = useState<GridSortModel>([
     { field: 'title', sort: 'asc' },
   ]);
 
   const subcategoriesRowActions: TableRowAction<AdminIssueCategoryStored>[] = [
     {
+      id: 'DeleteActionedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewEdemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesRowDelete',
       label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
       icon: <MdiIcon path="delete_forever" />,
       action: async (row: AdminIssueCategoryStored) => rowDeleteSubcategoriesAction(data, row, () => fetchData()),
-      disabled: (row: AdminIssueCategoryStored) => !row.__deleteable,
+      disabled: (row: AdminIssueCategoryStored) => editMode || !row.__deleteable,
     },
   ];
   const title: string = t('edemokracia.admin.IssueCategory.subcategories.View', {
     defaultValue: 'View / Edit Category',
   });
+
+  useConfirmationBeforeChange(
+    editMode,
+    t('judo.form.navigation.confirmation', {
+      defaultValue: 'You have potential unsaved changes in your form, are you sure you would like to navigate away?',
+    }),
+  );
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -161,9 +175,9 @@ export default function AdminIssueCategorySubcategoriesView() {
         __signedIdentifier: res.__signedIdentifier,
         __version: res.__version,
         __entityType: res.__entityType,
-      });
+      } as Record<keyof AdminIssueCategoryStored, any>);
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleFetchError(error);
     } finally {
       setIsLoading(false);
     }
@@ -180,7 +194,7 @@ export default function AdminIssueCategorySubcategoriesView() {
         setEditMode(false);
       }
     } catch (error) {
-      errorHandling(error, enqueueSnackbar, { setValidation });
+      handleUpdateError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
@@ -194,7 +208,7 @@ export default function AdminIssueCategorySubcategoriesView() {
 
       back();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleDeleteError(error, undefined, data);
     } finally {
       setIsLoading(false);
     }
@@ -205,39 +219,16 @@ export default function AdminIssueCategorySubcategoriesView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<string, string>());
+    setValidation(new Map<keyof AdminIssueCategoryStored, string>());
   }, [editMode]);
 
   return (
     <>
       <PageHeader title={title}>
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
-          </Grid>
-        )}
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
-              <MdiIcon path="delete" />
-              {t('judo.pages.delete', { defaultValue: 'Delete' })}
-            </Button>
-          </Grid>
-        )}
-        {!editMode && (
-          <Grid item>
-            <Button onClick={() => setEditMode(true)} disabled={isLoading || !data.__updateable}>
-              <MdiIcon path="pencil" />
-              {t('judo.pages.edit', { defaultValue: 'Edit' })}
-            </Button>
-          </Grid>
-        )}
         {editMode && (
           <Grid item>
             <Button
+              id="page-action-edit-cancel"
               variant="outlined"
               onClick={() => {
                 setEditMode(false);
@@ -252,9 +243,25 @@ export default function AdminIssueCategorySubcategoriesView() {
         )}
         {editMode && (
           <Grid item>
-            <Button onClick={() => saveData()} disabled={isLoading}>
+            <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
               <MdiIcon path="content-save" />
               {t('judo.pages.save', { defaultValue: 'Save' })}
+            </Button>
+          </Grid>
+        )}
+        {!editMode && (
+          <Grid item>
+            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
+              <MdiIcon path="refresh" />
+              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
+            </Button>
+          </Grid>
+        )}
+        {!editMode && (
+          <Grid item>
+            <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
+              <MdiIcon path="delete" />
+              {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
           </Grid>
         )}
@@ -274,18 +281,21 @@ export default function AdminIssueCategorySubcategoriesView() {
               <TextField
                 required
                 name="title"
-                id="TextInput@edemokracia/admin/Admin/edemokracia/admin/IssueCategory.subcategories/View/default/Category/title"
+                id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryTitle"
                 label={
                   t('edemokracia.admin.IssueCategory.subcategories.Category.title', { defaultValue: 'Title' }) as string
                 }
                 value={data.title}
+                className={!editMode ? 'JUDO-viewMode' : undefined}
+                disabled={false}
                 error={!!validation.get('title')}
                 helperText={validation.get('title')}
-                onChange={(event) => storeDiff('title', event.target.value)}
-                className={false || !editMode ? 'Mui-readOnly' : undefined}
+                onChange={(event) => {
+                  setEditMode(true);
+                  storeDiff('title', event.target.value);
+                }}
                 InputLabelProps={{ shrink: true }}
                 InputProps={{
-                  readOnly: false || !editMode,
                   startAdornment: (
                     <InputAdornment position="start">
                       <MdiIcon path="text_fields" />
@@ -299,20 +309,23 @@ export default function AdminIssueCategorySubcategoriesView() {
               <TextField
                 required
                 name="description"
-                id="TextInput@edemokracia/admin/Admin/edemokracia/admin/IssueCategory.subcategories/View/default/Category/description"
+                id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryDescription"
                 label={
                   t('edemokracia.admin.IssueCategory.subcategories.Category.description', {
                     defaultValue: 'Description',
                   }) as string
                 }
                 value={data.description}
+                className={!editMode ? 'JUDO-viewMode' : undefined}
+                disabled={false}
                 error={!!validation.get('description')}
                 helperText={validation.get('description')}
-                onChange={(event) => storeDiff('description', event.target.value)}
-                className={false || !editMode ? 'Mui-readOnly' : undefined}
+                onChange={(event) => {
+                  setEditMode(true);
+                  storeDiff('description', event.target.value);
+                }}
                 InputLabelProps={{ shrink: true }}
                 InputProps={{
-                  readOnly: false || !editMode,
                   startAdornment: (
                     <InputAdornment position="start">
                       <MdiIcon path="text_fields" />
@@ -325,7 +338,7 @@ export default function AdminIssueCategorySubcategoriesView() {
             <Grid item xs={12} sm={12}>
               <AggregationInput
                 name="owner"
-                id="Link@edemokracia/admin/Admin/edemokracia/admin/IssueCategory.subcategories/View/default/Category/owner"
+                id="LinkedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryOwner"
                 label={
                   t('edemokracia.admin.IssueCategory.subcategories.Category.owner', { defaultValue: 'Owner' }) as string
                 }
@@ -334,17 +347,54 @@ export default function AdminIssueCategorySubcategoriesView() {
                 error={!!validation.get('owner')}
                 helperText={validation.get('owner')}
                 icon={<MdiIcon path="account" />}
-                readonly={false || !editMode}
+                disabled={false}
+                editMode={editMode}
                 onView={async () => linkViewOwnerAction(data?.owner!)}
+                onSet={async () => {
+                  const res = await openRangeDialog<AdminUserStored, AdminUserQueryCustomizer>({
+                    id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategoryOwner',
+                    columns: ownerColumns,
+                    defaultSortField: ([{ field: 'representation', sort: 'asc' }] as GridSortItem[])[0],
+                    rangeCall: async (queryCustomizer) =>
+                      await adminIssueCategoryServiceImpl.getRangeForOwner(
+                        data,
+                        processQueryCustomizer(queryCustomizer),
+                      ),
+                    single: true,
+                    alreadySelectedItems: data.owner?.__identifier as GridRowId,
+                    filterOptions: ownerRangeFilterOptions,
+                    initialQueryCustomizer: ownerInitialQueryCustomizer,
+                  });
+
+                  if (res === undefined) return;
+
+                  setEditMode(true);
+                  storeDiff('owner', res as AdminUserStored);
+                }}
+                onUnset={async () => {
+                  setEditMode(true);
+                  storeDiff('owner', null);
+                }}
               />
             </Grid>
 
             <Grid item xs={12} sm={12}>
-              <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+              <Grid
+                id="FlexedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategorySubcategoriesLabelWrapper"
+                container
+                direction="column"
+                alignItems="stretch"
+                justifyContent="flex-start"
+                spacing={2}
+              >
                 <Grid item xs={12} sm={12}>
                   <Grid container direction="row" alignItems="center" justifyContent="flex-start">
                     <MdiIcon path="file-tree" />
-                    <Typography variant="h6" component="h1">
+                    <Typography
+                      id="LabeledemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategorySubcategoriesLabelWrapperSubcategoriesLabel"
+                      variant="h6"
+                      component="h1"
+                    >
                       {t('edemokracia.admin.IssueCategory.subcategories.Category.subcategories.subcategories.Label', {
                         defaultValue: 'Subcategories',
                       })}
@@ -353,7 +403,13 @@ export default function AdminIssueCategorySubcategoriesView() {
                 </Grid>
 
                 <Grid item xs={12} sm={12}>
-                  <Grid container direction="column" alignItems="stretch" justifyContent="flex-start">
+                  <Grid
+                    id="TableedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategorySubcategoriesLabelWrapperSubcategories"
+                    container
+                    direction="column"
+                    alignItems="stretch"
+                    justifyContent="flex-start"
+                  >
                     <DataGrid
                       {...baseTableConfig}
                       getRowId={(row: { __identifier: string }) => row.__identifier}
@@ -361,12 +417,18 @@ export default function AdminIssueCategorySubcategoriesView() {
                       rows={data?.subcategories ?? []}
                       columns={[
                         ...subcategoriesColumns,
-                        ...columnsActionCalculator(subcategoriesRowActions, { shownActions: 2 }),
+                        ...columnsActionCalculator(
+                          'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategories',
+                          subcategoriesRowActions,
+                          { shownActions: 2 },
+                        ),
                       ]}
                       disableSelectionOnClick
-                      onRowClick={(params: GridRowParams<AdminIssueCategoryStored>) =>
-                        rowViewSubcategoriesAction(params.row)
-                      }
+                      onRowClick={(params: GridRowParams<AdminIssueCategoryStored>) => {
+                        if (!editMode) {
+                          rowViewSubcategoriesAction(params.row);
+                        }
+                      }}
                       sortModel={subcategoriesSortModel}
                       onSortModelChange={(newModel: GridSortModel) => {
                         setSubcategoriesSortModel(newModel);
@@ -375,12 +437,15 @@ export default function AdminIssueCategorySubcategoriesView() {
                         Toolbar: () => (
                           <GridToolbarContainer>
                             <Button
+                              id="CreateActionedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewEdemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesTableCreate"
+                              variant="text"
                               onClick={() => tableCreateSubcategoriesAction(data, () => fetchData())}
-                              disabled={isLoading || editMode}
+                              disabled={isLoading || !true || editMode}
                             >
-                              <MdiIcon path="note_add" />
+                              <MdiIcon path="file_document_plus" />
                               {t('judo.pages.table.create', { defaultValue: 'Create' })}
                             </Button>
+                            <div>{/* Placeholder */}</div>
                           </GridToolbarContainer>
                         ),
                       }}

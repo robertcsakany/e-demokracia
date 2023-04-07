@@ -9,10 +9,13 @@
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid } from '@mui/material';
-import type { DialogOption } from '../../../../../../components';
-import { useSnackbar, useDialog } from '../../../../../../components';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { JudoIdentifiable } from '@judo/data-api-common';
+import type { DialogOption } from '../../../../../../components/dialog';
+import { useDialog } from '../../../../../../components/dialog';
 import { FilterOption, FilterType } from '../../../../../../components-api';
-import { errorHandling } from '../../../../../../utilities';
+import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../../../../utilities';
 
 import {
   AdminIssueCategoryStored,
@@ -34,7 +37,7 @@ export type PageCreateCategoriesAction = () => (successCallback: (result: AdminI
 
 export const usePageCreateCategoriesAction: PageCreateCategoriesAction = () => {
   const [createDialog, closeDialog] = useDialog();
-  const [enqueueSnackbar] = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   return function pageCreateCategoriesAction(successCallback: (result: AdminIssueCategoryStored) => void) {
     createDialog({

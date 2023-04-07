@@ -11,33 +11,28 @@
 
 	<properties>
 		<judo-channel>develop</judo-channel>
-		<judo-version>1.0.0.20230305_040726_bbe8242a_develop</judo-version>
+		<judo-version>1.0.0.20230407_092633_c5622891_develop</judo-version>
 
 		<sqlDialects>postgresql,hsqldb</sqlDialects>
 
-
-        <judo-meta-esm-version-defined>1.2.0.20230301_112820_1c86025d_develop</judo-meta-esm-version-defined>
-        <judo-tatami-version-defined>1.1.0.20230302_041736_eedbde9f_develop</judo-tatami-version-defined>
-        <flutter-maven-plugin-version-defined>1.0.2.20220326_002737_efc0629e_develop</flutter-maven-plugin-version-defined>
-        <structured-map-proxy-version-defined>1.2.0</structured-map-proxy-version-defined>
-        <judo-dao-api-version-defined>1.0.4.20230223_142100_ea2fecf6_develop</judo-dao-api-version-defined>
+        <judo-meta-esm-version-defined>1.2.0.20230331_161633_160c4bcb_develop</judo-meta-esm-version-defined>
+        <judo-tatami-version-defined>1.1.0.20230401_042804_fd5aa480_develop</judo-tatami-version-defined>
+        <flutter-maven-plugin-version-defined>1.0.2.20230313_135924_a9319e3a_develop</flutter-maven-plugin-version-defined>
+        <structured-map-proxy-version-defined>2.0.0.20230330_221859_8a965acd_develop</structured-map-proxy-version-defined>
+        <judo-dao-api-version-defined>1.0.4.20230309_120321_78415dc0_develop</judo-dao-api-version-defined>
         <judo-dispatcher-api-version-defined>1.0.2</judo-dispatcher-api-version-defined>
-        <judo-sdk-common-version-defined>1.0.4.20230301_080350_d4f94c18_develop</judo-sdk-common-version-defined>
-        <mapper-version-defined>1.0.3</mapper-version-defined>
-        <judo-platform-version-defined>2.0.1.20230303_044032_c5eefb85_develop</judo-platform-version-defined>
-        <judo-services-version-defined>1.1.0.20230303_043437_1064fbe0_develop</judo-services-version-defined>
-        <judo-rdbms-schema-version-defined>1.0.0.20230301_081440_f8420a07_develop</judo-rdbms-schema-version-defined>
-        <judo-tatami-client-version-defined>1.1.0.20230302_042657_cbb8e035_develop</judo-tatami-client-version-defined>
-        <judo-esm-fullstack-project-template-version-defined>1.0.0.20230307_165052_5e0864e8_develop</judo-esm-fullstack-project-template-version-defined>
-		<judo-meta-ui-version-defined>1.1.0.20230301_040932_6f0a751c_develop</judo-meta-ui-version-defined>
-		<judo-ui-flutter-template-version-defined>1.0.0.20230301_041503_b6c23e8f_develop</judo-ui-flutter-template-version-defined>
-        <judo-tatami-typescript-version-defined>1.0.0.20230222_232625_bb02a632_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-tatami-typescript-version-defined>
-
-        <judo-ui-archetype-version-defined>1.0.0.20221003_142712_453def5b_develop</judo-ui-archetype-version-defined>
+        <judo-sdk-common-version-defined>1.0.4.20230330_222100_3c176073_develop</judo-sdk-common-version-defined>
+        <mapper-version-defined>1.0.4.20230324_115639_e833341e_develop</mapper-version-defined>
+        <judo-platform-version-defined>2.0.1.20230407_075505_0b363f72_develop</judo-platform-version-defined>
+        <judo-services-version-defined>1.1.0.20230406_094321_ff8bcf7a_develop</judo-services-version-defined>
+        <judo-rdbms-schema-version-defined>1.0.0.20230401_042420_18d6a281_develop</judo-rdbms-schema-version-defined>
+        <judo-tatami-client-version-defined>1.1.0.20230401_044011_c4f3fa78_develop</judo-tatami-client-version-defined>
+        <judo-esm-fullstack-project-template-version-defined>1.0.0.20230407_092509_e6d35ba6_develop</judo-esm-fullstack-project-template-version-defined>
+		<judo-meta-ui-version-defined>1.1.0.20230317_164302_8b77760c_develop</judo-meta-ui-version-defined>
+		<judo-ui-flutter-template-version-defined>1.0.0.20230318_040730_04286b3a_develop</judo-ui-flutter-template-version-defined>
+		<judo-ui-typescript-rest-template-version-defined>1.0.0.20230331_164333_67b90d98_develop</judo-ui-typescript-rest-template-version-defined>
+		<judo-ui-react-template-version-defined>1.0.0.20230406_193116_0883083a_develop</judo-ui-react-template-version-defined>
         <frontendType>react</frontendType>
-
-        <judo-ui-react-template-version>1.0.0.20230307_185814_67fe9ab9_develop</judo-ui-react-template-version>
-        <judo-ui-typescript-rest-template-version>1.0.0.20230302_040753_fc1838dc_develop</judo-ui-typescript-rest-template-version>
 
 	</properties>
 
@@ -317,6 +312,16 @@
 									<token><![CDATA[\<judo-ui-flutter-template-version-defined\>([0-9]+.*)<\/judo-ui-flutter-template-version-defined\>]]></token>
 									<value><![CDATA[<judo-ui-flutter-template-version-defined>${judo-ui-flutter-template-version}</judo-ui-flutter-template-version-defined>]]></value>
 								</replacement>
+
+								<replacement>
+									<token><![CDATA[\<judo-ui-typescript-rest-template-version-defined\>([0-9]+.*)<\/judo-ui-typescript-rest-template-version-defined\>]]></token>
+									<value><![CDATA[<judo-ui-typescript-rest-template-version-defined>${judo-ui-typescript-rest-template-version}</judo-ui-typescript-rest-template-version-defined>]]></value>
+								</replacement>
+
+								<replacement>
+									<token><![CDATA[\<judo-ui-react-template-version-defined\>([0-9]+.*)<\/judo-ui-react-template-version-defined\>]]></token>
+									<value><![CDATA[<judo-ui-react-template-version-defined>${judo-ui-react-template-version}</judo-ui-react-template-version-defined>]]></value>
+								</replacement>
 							</replacements>
                             <regex>true</regex>
                         </configuration>
@@ -396,14 +401,8 @@
 
 										<judoMetaUIVersion>${judo-meta-ui-version-defined}</judoMetaUIVersion>
 										<judoUiFlutterTemplateVersion>${judo-ui-flutter-template-version-defined}</judoUiFlutterTemplateVersion>
-
-										<judoUIArchetypeVersion>${judo-ui-archetype-version-defined}</judoUIArchetypeVersion>
-										<judoTatamiUI2WebVersion>${judo-tatami-typescript-version-defined}</judoTatamiUI2WebVersion>
-										<judoTatamiUI2TypeScriptMavenPluginVersion>${judo-tatami-typescript-version-defined}</judoTatamiUI2TypeScriptMavenPluginVersion>
-										<judoTatamiUIExternalPackagesVersion>${judo-tatami-typescript-version-defined}</judoTatamiUIExternalPackagesVersion>
-
-                                        <judoUiReactTemplateVersion>${judo-ui-react-template-version}</judoUiReactTemplateVersion>
-                                        <judoUiTypescriptRestTemplateVersion>${judo-ui-typescript-rest-template-version}</judoUiTypescriptRestTemplateVersion>
+										<judoUiTypescriptRestTemplateVersion>${judo-ui-typescript-rest-template-version-defined}</judoUiTypescriptRestTemplateVersion>
+										<judoUiReactTemplateVersion>${judo-ui-react-template-version-defined}</judoUiReactTemplateVersion>
 
 										<frontendType>${frontendType}</frontendType>
 									</templateParameters>
@@ -413,7 +412,7 @@
 		
 		                <dependencies>
 		                    <dependency>
-		                        <groupId>hu.blackbelt.judo.template</groupId>		                        
+		                        <groupId>hu.blackbelt.judo.template</groupId>
 		                        <artifactId>judo-esm-fullstack-project-template</artifactId>
 		                        <version>${judo-esm-fullstack-project-template-version-defined}</version>
 		                    </dependency>

@@ -7,8 +7,9 @@
 // Action: DeleteAction
 
 import type { JudoIdentifiable } from '@judo/data-api-common';
-import { useSnackbar } from '../../../../../../components';
-import { errorHandling } from '../../../../../../utilities';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../../../../utilities';
 import {
   AdminDistrict,
   AdminDistrictStored,
@@ -25,7 +26,10 @@ export type PageDeleteDistrictsAction = () => (
 ) => Promise<void>;
 
 export const usePageDeleteDistrictsAction: PageDeleteDistrictsAction = () => {
-  const [enqueueSnackbar] = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
+  const handleActionError = useErrorHandler<JudoIdentifiable<AdminCity>>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=RowDeleteAction))`,
+  );
 
   return async function pageDeleteDistrictsAction(
     owner: JudoIdentifiable<AdminCity>,
@@ -33,11 +37,11 @@ export const usePageDeleteDistrictsAction: PageDeleteDistrictsAction = () => {
     successCallback: () => void,
   ) {
     try {
-      await adminCityServiceForDistrictsImpl.deleteDistricts(owner, selected);
+      await adminDistrictServiceImpl.delete(selected);
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleActionError(error);
     }
   };
 };

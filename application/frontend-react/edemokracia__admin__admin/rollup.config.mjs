@@ -4,7 +4,7 @@ import html from '@rollup/plugin-html';
 import clear from 'rollup-plugin-clear';
 import copy from 'rollup-plugin-copy';
 import esbuild from 'rollup-plugin-esbuild';
-import { copyTasks, loadInventory } from './rollup/utils.mjs';
+import { copyTasks, getExternals, loadInventory } from './rollup/utils.mjs';
 import { template } from './rollup/html-template.mjs';
 
 dotenv.config();
@@ -27,6 +27,7 @@ export default {
         format: 'system',
         sourcemap: isProduction,
     },
+    external: [...getExternals(inventory)],
     plugins: [
         clear({
             targets: ['dist'],

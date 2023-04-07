@@ -5,12 +5,12 @@
 // Template name: actor/src/components/CustomBreadcrumb.tsx.hbs
 
 import { Breadcrumbs, Typography } from '@mui/material';
-import { useState, useContext, createContext, useMemo, useEffect } from 'react';
+import { useState, useContext, createContext, useMemo, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { To } from 'react-router-dom';
 import { MdiIcon } from './MdiIcon';
-import { StackableDialogProvider } from './StackableDialogProvider';
+import { StackableDialogProvider } from './dialog/StackableDialogProvider';
 
 interface BreadcrumbProviderProps {
   children: ReactNode;
@@ -29,7 +29,7 @@ interface JudoNavigationProviderContext {
 interface BreadcrumbItem {
   key: string;
   path: To;
-  label: string | null;
+  label?: string | null;
 }
 
 // @ts-ignore
@@ -52,21 +52,55 @@ export const BreadcrumbProvider = ({ children }: BreadcrumbProviderProps) => {
   const location = useLocation();
 
   const [breadcrumbItems, setBreadcrumbItems] = useState<BreadcrumbItem[]>([]);
-  const [nextBreadcrumbItem, setNextBreadcrumbItem] = useState<BreadcrumbItem>({} as unknown as BreadcrumbItem);
+  const [nextBreadcrumbItem, setNextBreadcrumbItem] = useState<BreadcrumbItem>({
+    key: '0.' + location.pathname,
+    path: location.pathname,
+  });
 
   useEffect(() => {
-    setNextBreadcrumbItem((prevNextBreadcrumbItem) => {
-      return {
-        ...prevNextBreadcrumbItem,
-        key: '0.' + location.pathname,
-        path: location.pathname,
-      };
-    });
-  }, []);
+    const listener = (event: PopStateEvent) => {
+      breadCrumbBack();
+    };
+    window.addEventListener('popstate', listener);
+
+    return () => {
+      window.removeEventListener('popstate', listener);
+    };
+  }, [breadcrumbItems]);
 
   const isBackDisabled = useMemo(() => {
     return breadcrumbItems.length === 0;
   }, [breadcrumbItems]);
+
+  const breadCrumbBack = useCallback(
+    (triggerNavigation = false) => {
+      if (breadcrumbItems.length > 0) {
+        const lastItem = breadcrumbItems[breadcrumbItems.length - 1];
+
+        setNextBreadcrumbItem({
+          ...lastItem,
+        });
+        setBreadcrumbItems((prevBreadcrumbItems) => {
+          return [...prevBreadcrumbItems.slice(0, prevBreadcrumbItems.length - 1)];
+        });
+
+        if (triggerNavigation) {
+          navigate(lastItem.path);
+        }
+      } else {
+        setBreadcrumbItems([]);
+        setNextBreadcrumbItem({
+          key: '0.' + '/'.toString(),
+          path: '/',
+        });
+
+        if (triggerNavigation) {
+          navigate('/');
+        }
+      }
+    },
+    [breadcrumbItems, nextBreadcrumbItem],
+  );
 
   const judoNavigationContext = {
     clearNavigate: (to: To, signedId?: string) => {
@@ -75,7 +109,6 @@ export const BreadcrumbProvider = ({ children }: BreadcrumbProviderProps) => {
       setBreadcrumbItems([]);
       setNextBreadcrumbItem({
         key: '0.' + target.toString(),
-        label: null,
         path: target,
       });
 
@@ -85,40 +118,19 @@ export const BreadcrumbProvider = ({ children }: BreadcrumbProviderProps) => {
       const target = signedId ? to.toString().replace(':signedIdentifier', signedId) : to;
 
       if (nextBreadcrumbItem.label === null) {
-        throw Error('Page title has not been set!');
+        console.warn('Page title has not been set!');
       }
 
-      setBreadcrumbItems((prevBreadCrumbItems) => {
-        return [...prevBreadCrumbItems, nextBreadcrumbItem];
-      });
-
+      setBreadcrumbItems([...breadcrumbItems, nextBreadcrumbItem]);
       setNextBreadcrumbItem({
         key: breadcrumbItems.length + '.' + target.toString(),
-        label: null,
         path: target,
       });
 
       navigate(target);
     },
     back: () => {
-      if (breadcrumbItems.length !== 0) {
-        const lastItem = breadcrumbItems[breadcrumbItems.length - 1];
-        setNextBreadcrumbItem(lastItem);
-        setBreadcrumbItems((prevBreadcrumbItems) => {
-          return [...prevBreadcrumbItems.slice(0, prevBreadcrumbItems.length - 1)];
-        });
-        navigate(lastItem.path);
-        return;
-      }
-
-      setBreadcrumbItems([]);
-      setNextBreadcrumbItem({
-        key: '0.' + '/'.toString(),
-        label: null,
-        path: '/',
-      });
-
-      navigate('/');
+      breadCrumbBack(true);
     },
     isBackDisabled: isBackDisabled,
     setTitle: (pageTitle: string) => {
@@ -141,12 +153,12 @@ export const CustomBreadcrumb = () => {
   const breadcrumbItems = useContext(BreadcrumbContextState);
 
   return (
-    <Breadcrumbs maxItems={2} separator=">">
+    <Breadcrumbs id="application-breadcrumb" maxItems={2} separator=">">
       <MdiIcon path="home" />
       {breadcrumbItems.map(({ label, key }, index) => {
         return (
           <Typography color="text.primary" key={key}>
-            {label}
+            {label || ''}
           </Typography>
         );
       })}

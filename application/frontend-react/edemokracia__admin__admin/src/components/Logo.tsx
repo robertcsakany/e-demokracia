@@ -21,6 +21,7 @@ export function Logo(props: LogoProps) {
       }}
     >
       <img
+        id="application-logo"
         src={props.imgSrc}
         alt="logo"
         style={{
@@ -28,7 +29,7 @@ export function Logo(props: LogoProps) {
         }}
       />
       <div style={{ width: '100%', margin: '16px 0 0', textAlign: 'center' }}>
-        <Typography sx={{ fontWeight: 'bold' }}>
+        <Typography id="application-name" sx={{ fontWeight: 'bold' }}>
           {t('applications.Admin', { defaultValue: 'Admin' }) as string}
         </Typography>
       </div>

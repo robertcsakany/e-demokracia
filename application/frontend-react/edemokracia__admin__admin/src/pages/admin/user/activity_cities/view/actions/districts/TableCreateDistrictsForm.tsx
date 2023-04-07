@@ -6,52 +6,45 @@
 // Action name: edemokracia::admin::Admin::edemokracia::admin::City::districts#TableCreate
 // Action: CreateAction
 
-import { useState, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, useCallback, Dispatch, SetStateAction, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Button,
-  IconButton,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Paper,
-  Box,
-  Container,
   Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Card,
+  DialogContent,
+  DialogTitle,
   CardContent,
-  Divider,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
+  IconButton,
+  Button,
+  DialogContentText,
+  TextField,
+  DialogActions,
+  Card,
+  InputAdornment,
 } from '@mui/material';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
 import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
-  GridToolbarContainer,
-  GridRenderCellParams,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
   GridColDef,
 } from '@mui/x-data-grid';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { JudoIdentifiable } from '@judo/data-api-common';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
+import { v1 as uuidv1 } from 'uuid';
+import { MdiIcon, ModeledTabs } from '../../../../../../../components';
+import { columnsActionCalculator } from '../../../../../../../components/table';
+import { useRangeDialog } from '../../../../../../../components/dialog';
 import {
-  MdiIcon,
-  ModeledTabs,
-  TrinaryLogicCombobox,
   AggregationInput,
-  useSnackbar,
-  useRangeDialog,
-  columnsActionCalculator,
-} from '../../../../../../../components';
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../../../components/widgets';
 import { FilterOption, FilterType } from '../../../../../../../components-api';
 import {
   AdminDistrict,
@@ -62,7 +55,8 @@ import {
 } from '../../../../../../../generated/data-api';
 import { adminCityServiceForDistrictsImpl, adminDistrictServiceImpl } from '../../../../../../../generated/data-axios';
 import {
-  errorHandling,
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -71,11 +65,12 @@ import {
   booleanToStringSelect,
 } from '../../../../../../../utilities';
 import { baseTableConfig, baseColumnConfig, toastConfig, dividerHeight } from '../../../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../../../custom';
 
 export interface TableCreateDistrictsFormProps {
   successCallback: (result: AdminDistrictStored) => void;
   cancel: () => void;
-  owner: AdminCityStored;
+  owner: JudoIdentifiable<AdminCity>;
 }
 
 export function TableCreateDistrictsForm({ successCallback, cancel, owner }: TableCreateDistrictsFormProps) {
@@ -83,13 +78,23 @@ export function TableCreateDistrictsForm({ successCallback, cancel, owner }: Tab
   const { openRangeDialog } = useRangeDialog();
   const { downloadFile, uploadFile } = fileHandling();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleCreateError = useErrorHandler<AdminDistrict>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Create)(component=TableCreateDistrictsForm))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [data, setData] = useState<AdminDistrict>({} as unknown as AdminDistrict);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
-  const [editMode] = useState<boolean>(true);
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [data, setData] = useState<AdminDistrict>({
+    __referenceId: uuidv1(),
+  } as unknown as AdminDistrict);
+  const [validation, setValidation] = useState<Map<keyof AdminDistrict, string>>(new Map());
+  const [editMode, setEditMode] = useState<boolean>(true);
+  const [payloadDiff] = useState<Record<keyof AdminDistrict, any>>({} as unknown as Record<keyof AdminDistrict, any>);
+  const storeDiff: (attributeName: keyof AdminDistrict, value: any) => void = useCallback(
+    (attributeName: keyof AdminDistrict, value: any) => {
+      payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -101,9 +106,10 @@ export function TableCreateDistrictsForm({ successCallback, cancel, owner }: Tab
 
     try {
       const res = await adminDistrictServiceImpl.getTemplate();
-      setData(res);
+      setData((prevData) => ({ ...prevData, ...res }));
+    } catch (error) {
+      handleFetchError(error);
     } finally {
-      // ignore potential errors for now
       setIsLoading(false);
     }
   };
@@ -122,7 +128,7 @@ export function TableCreateDistrictsForm({ successCallback, cancel, owner }: Tab
         successCallback(res);
       }
     } catch (error) {
-      errorHandling(error, enqueueSnackbar, { setValidation });
+      handleCreateError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
@@ -133,6 +139,7 @@ export function TableCreateDistrictsForm({ successCallback, cancel, owner }: Tab
       <DialogTitle>
         {title}
         <IconButton
+          id="CreateActionedemokraciaAdminAdminEdemokraciaAdminUserActivityCitiesViewEdemokraciaAdminAdminEdemokraciaAdminCityDistrictsTableCreate-dialog-close"
           aria-label="close"
           onClick={() => cancel()}
           sx={{
@@ -151,16 +158,19 @@ export function TableCreateDistrictsForm({ successCallback, cancel, owner }: Tab
             <TextField
               required
               name="name"
-              id="TextInput@edemokracia/admin/Admin/edemokracia/admin/City.districts/Create/default/District_Form/name"
+              id="TextInputedemokraciaAdminAdminEdemokraciaAdminCityDistrictsCreateDefaultDistrictFormName"
               label={t('edemokracia.admin.City.districts.District.Form.name', { defaultValue: 'Name' }) as string}
               value={data.name}
+              className={!editMode ? 'JUDO-viewMode' : undefined}
+              disabled={false}
               error={!!validation.get('name')}
               helperText={validation.get('name')}
-              onChange={(event) => storeDiff('name', event.target.value)}
-              className={false || !editMode ? 'Mui-readOnly' : undefined}
+              onChange={(event) => {
+                setEditMode(true);
+                storeDiff('name', event.target.value);
+              }}
               InputLabelProps={{ shrink: true }}
               InputProps={{
-                readOnly: false || !editMode,
                 startAdornment: (
                   <InputAdornment position="start">
                     <MdiIcon path="text_fields" />
@@ -172,10 +182,20 @@ export function TableCreateDistrictsForm({ successCallback, cancel, owner }: Tab
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button variant="text" onClick={() => cancel()} disabled={isLoading}>
+        <Button
+          id="CreateActionedemokraciaAdminAdminEdemokraciaAdminUserActivityCitiesViewEdemokraciaAdminAdminEdemokraciaAdminCityDistrictsTableCreate-action-form-action-cancel"
+          variant="text"
+          onClick={() => cancel()}
+          disabled={isLoading}
+        >
           {t('judo.pages.cancel', { defaultValue: 'Cancel' })}
         </Button>
-        <Button variant="contained" onClick={() => saveData()} disabled={isLoading}>
+        <Button
+          id="CreateActionedemokraciaAdminAdminEdemokraciaAdminUserActivityCitiesViewEdemokraciaAdminAdminEdemokraciaAdminCityDistrictsTableCreate-action-form-action-create"
+          variant="contained"
+          onClick={() => saveData()}
+          disabled={isLoading}
+        >
           {t('judo.pages.create', { defaultValue: 'Create' })}
         </Button>
       </DialogActions>

@@ -7,8 +7,9 @@
 // Action: DeleteAction
 
 import type { JudoIdentifiable } from '@judo/data-api-common';
-import { useSnackbar } from '../../../../../../components';
-import { errorHandling } from '../../../../../../utilities';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../../../../utilities';
 import {
   AdminComment,
   AdminSimpleVote,
@@ -25,7 +26,10 @@ export type PageDeleteVotesAction = () => (
 ) => Promise<void>;
 
 export const usePageDeleteVotesAction: PageDeleteVotesAction = () => {
-  const [enqueueSnackbar] = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
+  const handleActionError = useErrorHandler<JudoIdentifiable<AdminComment>>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=RowDeleteAction))`,
+  );
 
   return async function pageDeleteVotesAction(
     owner: JudoIdentifiable<AdminComment>,
@@ -33,11 +37,11 @@ export const usePageDeleteVotesAction: PageDeleteVotesAction = () => {
     successCallback: () => void,
   ) {
     try {
-      await adminCommentServiceForVotesImpl.deleteVotes(owner, selected);
+      await adminSimpleVoteServiceImpl.delete(selected);
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleActionError(error);
     }
   };
 };

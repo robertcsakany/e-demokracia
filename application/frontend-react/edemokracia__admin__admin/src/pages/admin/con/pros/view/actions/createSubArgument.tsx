@@ -14,11 +14,25 @@
 
 import { useTranslation } from 'react-i18next';
 import { Button } from '@mui/material';
-import type { GridColDef, GridRenderCellParams, GridRowParams, GridSortModel } from '@mui/x-data-grid';
-import { useDialog, useSnackbar, useRangeDialog, useJudoNavigation, MdiIcon } from '../../../../../../components';
+import type {
+  GridColDef,
+  GridRenderCellParams,
+  GridRowParams,
+  GridSortModel,
+  GridSelectionModel,
+} from '@mui/x-data-grid';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { useJudoNavigation, MdiIcon } from '../../../../../../components';
+import { useDialog, useRangeDialog } from '../../../../../../components/dialog';
 import { baseColumnConfig, toastConfig } from '../../../../../../config';
 import { FilterOption, FilterType } from '../../../../../../components-api';
-import { errorHandling, fileHandling, processQueryCustomizer } from '../../../../../../utilities';
+import {
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
+  fileHandling,
+  processQueryCustomizer,
+} from '../../../../../../utilities';
 import { CreateSubArgumentForm } from './CreateSubArgumentForm';
 import {
   AdminProStored,
@@ -37,7 +51,10 @@ export type CreateSubArgumentAction = () => (owner: AdminConStored, successCallb
 export const useCreateSubArgumentAction: CreateSubArgumentAction = () => {
   const { t } = useTranslation();
   const { downloadFile, uploadFile } = fileHandling();
-  const [enqueueSnackbar] = useSnackbar();
+  const handleActionError = useErrorHandler<AdminConStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=CallOperation)(component=CreateSubArgumentAction))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const { openRangeDialog } = useRangeDialog();
   const [createDialog, closeDialog] = useDialog();
   const { navigate } = useJudoNavigation();

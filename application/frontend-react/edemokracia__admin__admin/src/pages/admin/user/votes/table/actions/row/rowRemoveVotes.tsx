@@ -7,8 +7,9 @@
 // Action: RemoveAction
 
 import type { JudoIdentifiable } from '@judo/data-api-common';
-import { useSnackbar } from '../../../../../../../components';
-import { errorHandling } from '../../../../../../../utilities';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../../../../../utilities';
 import {
   AdminUserStored,
   AdminSimpleVote,
@@ -25,7 +26,10 @@ export type RowRemoveVotesAction = () => (
 ) => Promise<void>;
 
 export const useRowRemoveVotesAction: RowRemoveVotesAction = () => {
-  const [enqueueSnackbar] = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
+  const handleActionError = useErrorHandler<JudoIdentifiable<AdminUser>>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=RowRemoveAction))`,
+  );
 
   return async function rowRemoveVotesAction(
     owner: JudoIdentifiable<AdminUser>,
@@ -40,7 +44,7 @@ export const useRowRemoveVotesAction: RowRemoveVotesAction = () => {
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleActionError(error);
     }
   };
 };

@@ -6,6 +6,7 @@
 // Action name: edemokracia::admin::Admin::edemokracia::admin::VoteDefinition::debate#ButtonNavigate
 // Action: NavigateToPageAction
 
+import { JudoIdentifiable } from '@judo/data-api-common';
 import { useJudoNavigation } from '../../../../../../../components';
 import {
   AdminVoteDefinitionStored,
@@ -14,17 +15,19 @@ import {
   AdminDebateStored,
   AdminDebateQueryCustomizer,
 } from '../../../../../../../generated/data-api';
-import { adminVoteDefinitionServiceImpl } from '../../../../../../../generated/data-axios';
 
-export type ButtonNavigateDebateAction = () => (owner: AdminVoteDefinitionStored) => Promise<void>;
+export type ButtonNavigateDebateAction = () => (
+  owner: JudoIdentifiable<AdminVoteDefinition>,
+  target: JudoIdentifiable<AdminDebate>,
+) => Promise<void>;
 
 export const useButtonNavigateDebateAction: ButtonNavigateDebateAction = () => {
   const { navigate } = useJudoNavigation();
 
-  return async function (owner: AdminVoteDefinitionStored) {
-    const target = await adminVoteDefinitionServiceImpl.getDebate(owner, {
-      _mask: '{}',
-    });
+  return async function (owner: JudoIdentifiable<AdminVoteDefinition>, target: JudoIdentifiable<AdminDebate>) {
+    /*const target = await adminVoteDefinitionServiceImpl.getDebate(owner, {
+                    _mask: '{}',
+                });*/
     navigate(`admin/vote_definition/debate/view/${target.__signedIdentifier}`);
   };
 };

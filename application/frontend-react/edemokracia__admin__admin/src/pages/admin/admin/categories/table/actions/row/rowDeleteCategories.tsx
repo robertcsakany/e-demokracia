@@ -7,8 +7,9 @@
 // Action: DeleteAction
 
 import type { JudoIdentifiable } from '@judo/data-api-common';
-import { useSnackbar } from '../../../../../../../components';
-import { errorHandling } from '../../../../../../../utilities';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../../../../../utilities';
 import {
   AdminIssueCategoryStored,
   AdminIssueCategory,
@@ -25,7 +26,10 @@ export type RowDeleteCategoriesAction = () => (
 ) => Promise<void>;
 
 export const useRowDeleteCategoriesAction: RowDeleteCategoriesAction = () => {
-  const [enqueueSnackbar] = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
+  const handleActionError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=RowDeleteAction))`,
+  );
 
   return async function rowDeleteCategoriesAction(selected: AdminIssueCategoryStored, successCallback: () => void) {
     try {
@@ -33,7 +37,7 @@ export const useRowDeleteCategoriesAction: RowDeleteCategoriesAction = () => {
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleActionError(error);
     }
   };
 };

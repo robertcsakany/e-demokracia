@@ -1,17 +1,19 @@
 ///////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // ------------------------------
-// Path expression: 'src/components/TrinaryLogicCombobox.tsx'
-// Template name: actor/src/components/TrinaryLogicCombobox.tsx.hbs
+// Path expression: 'src/components/widgets/TrinaryLogicCombobox.tsx'
+// Template name: actor/src/components/widgets/TrinaryLogicCombobox.tsx.hbs
 
 import { TextField, InputAdornment, MenuItem } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import type { ChangeEvent } from 'react';
-import { TRINARY_LOGIC, TrinaryLogicProps } from '../components-api';
-import { MdiIcon } from './MdiIcon';
+import { TRINARY_LOGIC, TrinaryLogicProps } from '../../components-api';
+import { MdiIcon } from '../MdiIcon';
 
 export const TrinaryLogicCombobox = ({
   readOnly = false,
+  disabled = false,
+  editMode = false,
   value = null,
   id,
   label,
@@ -36,12 +38,12 @@ export const TrinaryLogicCombobox = ({
       label={label}
       select
       value={TRINARY_LOGIC.get(value)}
+      className={!editMode ? 'JUDO-viewMode' : undefined}
       onChange={onChangeHandler}
-      className={readOnly ? 'Mui-readOnly' : undefined}
+      disabled={disabled || readOnly}
       error={error}
       helperText={helperText}
       InputProps={{
-        readOnly: readOnly,
         startAdornment: (
           <InputAdornment position="start">
             <MdiIcon path="format-list-bulleted" />
@@ -49,9 +51,13 @@ export const TrinaryLogicCombobox = ({
         ),
       }}
     >
-      <MenuItem value={'Yes'}>{t('judo.component.TrinaryLogic.true', { defaultValue: 'Yes' }) as string}</MenuItem>
-      <MenuItem value={'No'}>{t('judo.component.TrinaryLogic.false', { defaultValue: 'No' }) as string}</MenuItem>
-      <MenuItem value={'Unknown'}>
+      <MenuItem id={`${id}-true`} value={'Yes'}>
+        {t('judo.component.TrinaryLogic.true', { defaultValue: 'Yes' }) as string}
+      </MenuItem>
+      <MenuItem id={`${id}-false`} value={'No'}>
+        {t('judo.component.TrinaryLogic.false', { defaultValue: 'No' }) as string}
+      </MenuItem>
+      <MenuItem id={`${id}-undefined`} value={'Unknown'}>
         {t('judo.component.TrinaryLogic.unknown', { defaultValue: 'Unknown' }) as string}
       </MenuItem>
     </TextField>

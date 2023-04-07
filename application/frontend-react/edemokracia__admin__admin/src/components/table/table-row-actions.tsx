@@ -13,6 +13,7 @@ import { MdiIcon } from '../MdiIcon';
 import { baseColumnConfig } from '../../config';
 
 export const columnsActionCalculator: ColumnActionsProvider<any> = (
+  id: string,
   actions: TableRowAction<any>[],
   options?: ColumnsActionsOptions,
 ): GridColDef[] => {
@@ -26,21 +27,22 @@ export const columnsActionCalculator: ColumnActionsProvider<any> = (
   }
 
   if (shownActionsNumber < 0) {
-    return standaloneActions(actions, options);
+    return standaloneActions(id, actions, options);
   } else if (shownActionsNumber === 0) {
     return [];
   } else if (shownActionsNumber === 1) {
-    return dropdownActions(actions, options);
+    return dropdownActions(id, actions);
   } else {
     const sliceNumber = actions.length === shownActionsNumber ? shownActionsNumber : shownActionsNumber - 1;
     const standaloneRowActions = actions.slice(0, sliceNumber);
     const dropdownRowActions = actions.slice(sliceNumber);
 
-    return [...standaloneActions(standaloneRowActions, options), ...dropdownActions(dropdownRowActions, options)];
+    return [...standaloneActions(id, standaloneRowActions, options), ...dropdownActions(id, dropdownRowActions)];
   }
 };
 
 const standaloneActions: ColumnActionsProvider<unknown> = (
+  id: string,
   actions: TableRowAction<unknown>[],
   options?: ColumnsActionsOptions,
 ): GridColDef[] => {
@@ -54,6 +56,7 @@ const standaloneActions: ColumnActionsProvider<unknown> = (
       renderCell: (params: GridRenderCellParams) => {
         return (
           <Button
+            id={id}
             variant="text"
             disabled={action.disabled ? action.disabled(params.row) : false}
             onClick={() => action.action(params.row)}
@@ -67,7 +70,10 @@ const standaloneActions: ColumnActionsProvider<unknown> = (
   });
 };
 
-const dropdownActions: ColumnActionsProvider<unknown> = (actions: TableRowAction<unknown>[]): GridColDef[] => {
+const dropdownActions: ColumnActionsProvider<unknown> = (
+  id: string,
+  actions: TableRowAction<unknown>[],
+): GridColDef[] => {
   if (actions.length === 0) return [];
 
   return [
@@ -80,10 +86,12 @@ const dropdownActions: ColumnActionsProvider<unknown> = (actions: TableRowAction
       renderCell: (params: GridRenderCellParams) => {
         return (
           <DropdownButton
+            id={id}
             variant="text"
             showDropdownIcon={false}
             menuItems={actions.map((action) => {
               return {
+                id: action.id,
                 label: action.label,
                 startIcon: action.icon,
                 onClick: () => action.action(params.row),

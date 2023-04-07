@@ -6,52 +6,46 @@
 // Action name: edemokracia::admin::Admin::edemokracia::admin::Issue::attachments#TableCreate
 // Action: CreateAction
 
-import { useState, useEffect, useCallback, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, useCallback, Dispatch, SetStateAction, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Button,
-  IconButton,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Paper,
-  Box,
-  Container,
   Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Card,
+  DialogContent,
+  DialogTitle,
   CardContent,
-  Divider,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
+  IconButton,
+  Button,
+  DialogContentText,
+  TextField,
+  DialogActions,
+  MenuItem,
+  InputAdornment,
+  Card,
 } from '@mui/material';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
 import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
-  GridToolbarContainer,
-  GridRenderCellParams,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
   GridColDef,
 } from '@mui/x-data-grid';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { JudoIdentifiable } from '@judo/data-api-common';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
+import { v1 as uuidv1 } from 'uuid';
+import { MdiIcon, ModeledTabs } from '../../../../../../../components';
+import { columnsActionCalculator } from '../../../../../../../components/table';
+import { useRangeDialog } from '../../../../../../../components/dialog';
 import {
-  MdiIcon,
-  ModeledTabs,
-  TrinaryLogicCombobox,
   AggregationInput,
-  useSnackbar,
-  useRangeDialog,
-  columnsActionCalculator,
-} from '../../../../../../../components';
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../../../components/widgets';
 import { FilterOption, FilterType } from '../../../../../../../components-api';
 import {
   EdemokraciaAttachmentType,
@@ -66,7 +60,8 @@ import {
   adminIssueAttachmentServiceImpl,
 } from '../../../../../../../generated/data-axios';
 import {
-  errorHandling,
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -75,11 +70,12 @@ import {
   booleanToStringSelect,
 } from '../../../../../../../utilities';
 import { baseTableConfig, baseColumnConfig, toastConfig, dividerHeight } from '../../../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../../../custom';
 
 export interface TableCreateAttachmentsFormProps {
   successCallback: (result: AdminIssueAttachmentStored) => void;
   cancel: () => void;
-  owner: AdminIssueStored;
+  owner: JudoIdentifiable<AdminIssue>;
 }
 
 export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: TableCreateAttachmentsFormProps) {
@@ -87,13 +83,25 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
   const { openRangeDialog } = useRangeDialog();
   const { downloadFile, uploadFile } = fileHandling();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleCreateError = useErrorHandler<AdminIssueAttachment>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Create)(component=TableCreateAttachmentsForm))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [data, setData] = useState<AdminIssueAttachment>({} as unknown as AdminIssueAttachment);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
-  const [editMode] = useState<boolean>(true);
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [data, setData] = useState<AdminIssueAttachment>({
+    __referenceId: uuidv1(),
+  } as unknown as AdminIssueAttachment);
+  const [validation, setValidation] = useState<Map<keyof AdminIssueAttachment, string>>(new Map());
+  const [editMode, setEditMode] = useState<boolean>(true);
+  const [payloadDiff] = useState<Record<keyof AdminIssueAttachment, any>>(
+    {} as unknown as Record<keyof AdminIssueAttachment, any>,
+  );
+  const storeDiff: (attributeName: keyof AdminIssueAttachment, value: any) => void = useCallback(
+    (attributeName: keyof AdminIssueAttachment, value: any) => {
+      payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -105,9 +113,10 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
 
     try {
       const res = await adminIssueAttachmentServiceImpl.getTemplate();
-      setData(res);
+      setData((prevData) => ({ ...prevData, ...res }));
+    } catch (error) {
+      handleFetchError(error);
     } finally {
-      // ignore potential errors for now
       setIsLoading(false);
     }
   };
@@ -126,7 +135,7 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
         successCallback(res);
       }
     } catch (error) {
-      errorHandling(error, enqueueSnackbar, { setValidation });
+      handleCreateError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
@@ -137,6 +146,7 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
       <DialogTitle>
         {title}
         <IconButton
+          id="CreateActionedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewEdemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsTableCreate-dialog-close"
           aria-label="close"
           onClick={() => cancel()}
           sx={{
@@ -152,25 +162,35 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
       <DialogContent dividers>
         <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
           <Grid item xs={12} sm={12}>
-            <Grid container direction="row" alignItems="flex-start" justifyContent="flex-start" spacing={2}>
+            <Grid
+              id="FlexedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultCreateAttachmentGroup"
+              container
+              direction="row"
+              alignItems="flex-start"
+              justifyContent="flex-start"
+              spacing={2}
+            >
               <Grid item xs={12} sm={12} md={4.0}>
                 <TextField
                   required
                   name="type"
-                  id="EnumerationCombo@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/Create/default/Create_Attachment/group/type"
+                  id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultCreateAttachmentGroupType"
                   label={
                     t('edemokracia.admin.Issue.attachments.Create.Attachment.group.type', {
                       defaultValue: 'Type',
                     }) as string
                   }
                   value={data.type || ''}
+                  className={!editMode ? 'JUDO-viewMode' : undefined}
+                  disabled={false}
                   error={!!validation.get('type')}
                   helperText={validation.get('type')}
-                  onChange={(event) => storeDiff('type', event.target.value as EdemokraciaAttachmentType)}
-                  className={false || !editMode ? 'Mui-readOnly' : undefined}
+                  onChange={(event) => {
+                    setEditMode(true);
+                    storeDiff('type', event.target.value as EdemokraciaAttachmentType);
+                  }}
                   InputLabelProps={{ shrink: true }}
                   InputProps={{
-                    readOnly: false || !editMode,
                     startAdornment: (
                       <InputAdornment position="start">
                         <MdiIcon path="list" />
@@ -179,16 +199,16 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
                   }}
                   select
                 >
-                  <MenuItem value={'LINK'}>
+                  <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaAttachmentTypeLINK" value={'LINK'}>
                     {t('enumerations.EdemokraciaAttachmentType.LINK', { defaultValue: 'LINK' })}
                   </MenuItem>
-                  <MenuItem value={'IMAGE'}>
+                  <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaAttachmentTypeIMAGE" value={'IMAGE'}>
                     {t('enumerations.EdemokraciaAttachmentType.IMAGE', { defaultValue: 'IMAGE' })}
                   </MenuItem>
-                  <MenuItem value={'VIDEO'}>
+                  <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaAttachmentTypeVIDEO" value={'VIDEO'}>
                     {t('enumerations.EdemokraciaAttachmentType.VIDEO', { defaultValue: 'VIDEO' })}
                   </MenuItem>
-                  <MenuItem value={'MAP'}>
+                  <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaAttachmentTypeMAP" value={'MAP'}>
                     {t('enumerations.EdemokraciaAttachmentType.MAP', { defaultValue: 'MAP' })}
                   </MenuItem>
                 </TextField>
@@ -197,20 +217,23 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
               <Grid item xs={12} sm={12} md={4.0}>
                 <TextField
                   name="link"
-                  id="TextInput@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/Create/default/Create_Attachment/group/link"
+                  id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultCreateAttachmentGroupLink"
                   label={
                     t('edemokracia.admin.Issue.attachments.Create.Attachment.group.link', {
                       defaultValue: 'Link',
                     }) as string
                   }
                   value={data.link}
+                  className={!editMode ? 'JUDO-viewMode' : undefined}
+                  disabled={false}
                   error={!!validation.get('link')}
                   helperText={validation.get('link')}
-                  onChange={(event) => storeDiff('link', event.target.value)}
-                  className={false || !editMode ? 'Mui-readOnly' : undefined}
+                  onChange={(event) => {
+                    setEditMode(true);
+                    storeDiff('link', event.target.value);
+                  }}
                   InputLabelProps={{ shrink: true }}
                   InputProps={{
-                    readOnly: false || !editMode,
                     startAdornment: (
                       <InputAdornment position="start">
                         <MdiIcon path="text_fields" />
@@ -224,7 +247,7 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
                 {editMode ? (
                   <TextField
                     name="file"
-                    id="BinaryTypeInput@edemokracia/admin/Admin/edemokracia/admin/Issue.attachments/Create/default/Create_Attachment/group/file"
+                    id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultCreateAttachmentGroupFile"
                     label={
                       t('edemokracia.admin.Issue.attachments.Create.Attachment.group.file', {
                         defaultValue: 'File',
@@ -233,6 +256,8 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
                     type="file"
                     error={!!validation.get('file')}
                     helperText={validation.get('file')}
+                    className={!editMode ? 'JUDO-viewMode' : undefined}
+                    disabled={false}
                     onChange={async (event: any) => {
                       try {
                         const uploadedData = await uploadFile(
@@ -253,6 +278,7 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
                             console.error(uploadedData);
                             return;
                           }
+                          setEditMode(true);
                           storeDiff('file', uploadedData.token);
                           enqueueSnackbar(
                             t('judo.files.upload-success', { defaultValue: 'File uploaded successfully.' }) as string,
@@ -275,10 +301,8 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
                         console.error(err);
                       }
                     }}
-                    className={false || !editMode ? 'Mui-readOnly' : undefined}
                     InputLabelProps={{ shrink: true }}
                     InputProps={{
-                      readOnly: false || !editMode,
                       startAdornment: (
                         <InputAdornment position="start">
                           <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
@@ -287,7 +311,12 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
                     }}
                   />
                 ) : (
-                  <Button variant="contained" disabled={!data?.file} onClick={() => downloadFile(data, 'file')}>
+                  <Button
+                    id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultCreateAttachmentGroupFile-download"
+                    variant="contained"
+                    disabled={!data?.file}
+                    onClick={() => downloadFile(data, 'file')}
+                  >
                     <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
                     {
                       t('edemokracia.admin.Issue.attachments.Create.Attachment.group.file', {
@@ -302,10 +331,20 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button variant="text" onClick={() => cancel()} disabled={isLoading}>
+        <Button
+          id="CreateActionedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewEdemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsTableCreate-action-form-action-cancel"
+          variant="text"
+          onClick={() => cancel()}
+          disabled={isLoading}
+        >
           {t('judo.pages.cancel', { defaultValue: 'Cancel' })}
         </Button>
-        <Button variant="contained" onClick={() => saveData()} disabled={isLoading}>
+        <Button
+          id="CreateActionedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewEdemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsTableCreate-action-form-action-create"
+          variant="contained"
+          onClick={() => saveData()}
+          disabled={isLoading}
+        >
           {t('judo.pages.create', { defaultValue: 'Create' })}
         </Button>
       </DialogActions>

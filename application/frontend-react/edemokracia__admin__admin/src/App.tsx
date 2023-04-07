@@ -5,10 +5,12 @@
 // Template name: actor/src/App.tsx.hbs
 
 import { useEffect, useState } from 'react';
-import { ThemeProvider } from '@mui/material';
+import { IconButton, ThemeProvider } from '@mui/material';
+import { SnackbarProvider, closeSnackbar } from 'notistack';
 import { L10NProvider } from './l10n/l10n-context';
 import { theme } from './theme';
-import { DialogProvider, BreadcrumbProvider, SnackProvider, MdiIcon } from './components';
+import { BreadcrumbProvider, MdiIcon } from './components';
+import { DialogProvider } from './components/dialog';
 import { Layout } from './layout';
 import { menuItems } from './menu-items';
 import { useHeroProps, useLogoProps } from './hooks';
@@ -23,13 +25,20 @@ function App() {
     <L10NProvider>
       <ThemeProvider theme={theme}>
         <PrincipalProvider>
-          <SnackProvider>
+          <SnackbarProvider
+            maxSnack={3}
+            action={(snackbarId) => (
+              <IconButton style={{ color: '#fff' }} onClick={() => closeSnackbar(snackbarId)}>
+                <MdiIcon path="close" />
+              </IconButton>
+            )}
+          >
             <DialogProvider>
               <BreadcrumbProvider>
                 <Layout items={menuItems} drawerWidth={drawerWidth} logo={logoProps} hero={heroProps} />
               </BreadcrumbProvider>
             </DialogProvider>
-          </SnackProvider>
+          </SnackbarProvider>
         </PrincipalProvider>
       </ThemeProvider>
     </L10NProvider>

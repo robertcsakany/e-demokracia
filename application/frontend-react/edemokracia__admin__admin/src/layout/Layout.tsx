@@ -52,7 +52,7 @@ export function Layout({ items, drawerWidth, hero, logo }: LayoutProps) {
           sx={{ display: { sm: 'block', xs: 'none' } }}
         />
       </Box>
-      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <Box id="page-layout-container" sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <Header onDrawerToggle={handleDrawerToggle} />
         <Outlet />
         <Box component="footer" sx={{ p: 2 }}>

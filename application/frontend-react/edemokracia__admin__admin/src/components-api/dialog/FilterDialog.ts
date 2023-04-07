@@ -7,6 +7,7 @@
 import { _BooleanOperation, _EnumerationOperation, _NumericOperation, _StringOperation } from '@judo/data-api-common';
 
 export interface FilterOption {
+  id: string;
   attributeName: string;
   label?: string;
   filterType: FilterType;
@@ -32,12 +33,15 @@ export type FilterBy = {
 };
 
 export interface Filter {
-  id: number;
+  id: string;
+  operationId: string;
+  valueId: string;
   filterOption: FilterOption;
   filterBy: FilterBy;
 }
 
 export interface FilterDialogProps {
+  id: string;
   filters?: Filter[];
   filterOptions: FilterOption[];
   resolve: (value: any) => void;
@@ -46,16 +50,21 @@ export interface FilterDialogProps {
 }
 
 export interface FilterOperatorProps {
+  operatorId: string;
+  valueId: string;
   filter: Filter;
   setFilterOperator: (filter: Filter, newOperator: Operation) => void;
 }
 
 export interface FilterInputProps {
+  operatorId: string;
+  valueId: string;
   filter: Filter;
   setFilterValue: (filter: Filter, newValue: any) => void;
 }
 
 export interface FilterProps {
+  id: string;
   filter: Filter;
   closeHandler: (filter: Filter) => void;
   setFilterValue: (filter: Filter, newValue: any) => void;

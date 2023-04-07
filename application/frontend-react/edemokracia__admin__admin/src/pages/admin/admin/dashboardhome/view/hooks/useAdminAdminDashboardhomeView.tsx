@@ -75,6 +75,7 @@ export const useAdminAdminDashboardhomeView = () => {
 
   const debatesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeViewDefaultDashboardViewTabBarMydebatesMydebatesDebatesLabelWrapperDebatesTitleFilter',
       attributeName: 'title',
       label: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.title.Filter',
@@ -83,6 +84,7 @@ export const useAdminAdminDashboardhomeView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeViewDefaultDashboardViewTabBarMydebatesMydebatesDebatesLabelWrapperDebatesCloseAtFilter',
       attributeName: 'closeAt',
       label: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.closeAt.Filter',
@@ -91,6 +93,7 @@ export const useAdminAdminDashboardhomeView = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeViewDefaultDashboardViewTabBarMydebatesMydebatesDebatesLabelWrapperDebatesStatusFilter',
       attributeName: 'status',
       label: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.status.Filter',
@@ -153,6 +156,7 @@ export const useAdminAdminDashboardhomeView = () => {
 
   const issuesRangeFilterOptions: FilterOption[] = [
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeViewDefaultDashboardViewTabBarMyissuesMyissuesIssuesLabelWrapperIssuesTitleFilter',
       attributeName: 'title',
       label: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.View.tabBar.myissues.myissues.issues.issues.title.Filter',
@@ -161,6 +165,7 @@ export const useAdminAdminDashboardhomeView = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeViewDefaultDashboardViewTabBarMyissuesMyissuesIssuesLabelWrapperIssuesCreatedFilter',
       attributeName: 'created',
       label: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.View.tabBar.myissues.myissues.issues.issues.created.Filter',
@@ -169,6 +174,7 @@ export const useAdminAdminDashboardhomeView = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeViewDefaultDashboardViewTabBarMyissuesMyissuesIssuesLabelWrapperIssuesStatusFilter',
       attributeName: 'status',
       label: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.View.tabBar.myissues.myissues.issues.issues.status.Filter',

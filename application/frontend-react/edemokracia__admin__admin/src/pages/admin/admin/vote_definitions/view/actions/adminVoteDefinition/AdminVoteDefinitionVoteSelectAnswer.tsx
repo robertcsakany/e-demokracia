@@ -14,11 +14,25 @@
 
 import { useTranslation } from 'react-i18next';
 import { Button } from '@mui/material';
-import type { GridColDef, GridRenderCellParams, GridRowParams, GridSortModel } from '@mui/x-data-grid';
-import { useDialog, useSnackbar, useRangeDialog, useJudoNavigation, MdiIcon } from '../../../../../../../components';
+import type {
+  GridColDef,
+  GridRenderCellParams,
+  GridRowParams,
+  GridSortModel,
+  GridSelectionModel,
+} from '@mui/x-data-grid';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { useJudoNavigation, MdiIcon } from '../../../../../../../components';
+import { useDialog, useRangeDialog } from '../../../../../../../components/dialog';
 import { baseColumnConfig, toastConfig } from '../../../../../../../config';
 import { FilterOption, FilterType } from '../../../../../../../components-api';
-import { errorHandling, fileHandling, processQueryCustomizer } from '../../../../../../../utilities';
+import {
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
+  fileHandling,
+  processQueryCustomizer,
+} from '../../../../../../../utilities';
 import {
   SelectAnswerVoteSelectionQueryCustomizer,
   AdminVoteDefinitionQueryCustomizer,
@@ -38,7 +52,10 @@ export type AdminVoteDefinitionVoteSelectAnswerAction = () => (
 export const useAdminVoteDefinitionVoteSelectAnswerAction: AdminVoteDefinitionVoteSelectAnswerAction = () => {
   const { t } = useTranslation();
   const { downloadFile, uploadFile } = fileHandling();
-  const [enqueueSnackbar] = useSnackbar();
+  const handleActionError = useErrorHandler<AdminVoteDefinitionStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=CallOperation)(component=AdminVoteDefinitionVoteSelectAnswerAction))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const { openRangeDialog } = useRangeDialog();
   const [createDialog, closeDialog] = useDialog();
   const { navigate } = useJudoNavigation();
@@ -75,6 +92,7 @@ export const useAdminVoteDefinitionVoteSelectAnswerAction: AdminVoteDefinitionVo
 
     const filterOptions: FilterOption[] = [
       {
+        id: 'FilteredemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteSelectAnswerInputTableDefaultVoteSelectAnswerEntityTableTitleFilter',
         attributeName: 'title',
         label: t('edemokracia.admin.VoteDefinition.voteSelectAnswer.InputvoteSelectAnswer.Entity.Table.title.Filter', {
           defaultValue: 'Title',
@@ -82,6 +100,7 @@ export const useAdminVoteDefinitionVoteSelectAnswerAction: AdminVoteDefinitionVo
         filterType: FilterType.string,
       },
       {
+        id: 'FilteredemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteSelectAnswerInputTableDefaultVoteSelectAnswerEntityTableDescriptionFilter',
         attributeName: 'description',
         label: t(
           'edemokracia.admin.VoteDefinition.voteSelectAnswer.InputvoteSelectAnswer.Entity.Table.description.Filter',
@@ -106,6 +125,7 @@ export const useAdminVoteDefinitionVoteSelectAnswerAction: AdminVoteDefinitionVo
     };
 
     const res = await openRangeDialog<SelectAnswerVoteSelectionStored, SelectAnswerVoteSelectionQueryCustomizer>({
+      id: 'PageDefinitionedemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteSelectAnswerInputTable',
       columns,
       defaultSortField: sortModel[0],
       rangeCall: async (queryCustomizer) =>
@@ -132,7 +152,7 @@ export const useAdminVoteDefinitionVoteSelectAnswerAction: AdminVoteDefinitionVo
         ...toastConfig.success,
       });
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleActionError(error, undefined, owner);
     }
   };
 };

@@ -22,7 +22,7 @@ export function Header(props: HeaderProps) {
         <Toolbar>
           <Grid item>
             <Button variant="text" color="secondary" onClick={() => back()} disabled={isBackDisabled}>
-              <MdiIcon path="arrow_back" />
+              <MdiIcon path="arrow-left" />
             </Button>
           </Grid>
           <Grid container direction="row">
@@ -30,7 +30,7 @@ export function Header(props: HeaderProps) {
           </Grid>
           <Grid container spacing={1} alignItems="center">
             <Grid sx={{ display: { sm: 'none', xs: 'block' } }} item>
-              <IconButton aria-label="open drawer" onClick={onDrawerToggle} edge="start">
+              <IconButton id="header-drawer-toggle" aria-label="open drawer" onClick={onDrawerToggle} edge="start">
                 <MdiIcon path="menu" />
               </IconButton>
             </Grid>

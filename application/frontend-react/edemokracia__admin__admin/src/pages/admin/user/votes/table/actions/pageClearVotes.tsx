@@ -7,8 +7,9 @@
 // Action: ClearAction
 
 import type { JudoIdentifiable } from '@judo/data-api-common';
-import { useSnackbar } from '../../../../../../components';
-import { errorHandling } from '../../../../../../utilities';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../../../../utilities';
 import { AdminUser } from '../../../../../../generated/data-api';
 import { adminUserServiceImpl } from '../../../../../../generated/data-axios';
 
@@ -18,7 +19,10 @@ export type PageClearVotesAction = () => (
 ) => Promise<void>;
 
 export const usePageClearVotesAction: PageClearVotesAction = () => {
-  const [enqueueSnackbar] = useSnackbar();
+  const handleActionError = useErrorHandler<JudoIdentifiable<AdminUser>>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=ClearAction))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
 
   return async function pageClearVotesAction(owner: JudoIdentifiable<AdminUser>, successCallback: () => void) {
     try {
@@ -29,7 +33,7 @@ export const usePageClearVotesAction: PageClearVotesAction = () => {
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleActionError(error);
     }
   };
 };

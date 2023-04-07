@@ -3,7 +3,7 @@ import type { MouseEvent } from 'react';
 import { Typography, Button, Menu, MenuItem } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { MdiIcon } from './MdiIcon';
-import { generateAlternativeApplications, changeApplication } from '../utilities';
+import { generateAlternativeApplications, changeApplication } from '../utilities/application';
 
 export function ApplicationSelector() {
   const { t } = useTranslation();
@@ -27,6 +27,7 @@ export function ApplicationSelector() {
   return (
     <>
       <Button
+        id="application-selector"
         variant="text"
         sx={{ width: '100%' }}
         onClick={handleClickListItem}
@@ -35,7 +36,7 @@ export function ApplicationSelector() {
         <Typography sx={{ fontWeight: 500 }}>{t('applications.Admin', { defaultValue: 'Admin' }) as string}</Typography>
       </Button>
       <Menu
-        id="app-selector-menu"
+        id="application-selector-menu"
         anchorEl={anchorEl}
         open={applicationSelectorOpen}
         onClose={handleClose}
@@ -50,7 +51,7 @@ export function ApplicationSelector() {
           </Typography>
         </MenuItem>
         {Object.keys(alternativeApplications).map((key) => (
-          <MenuItem key={key} onClick={() => handleMenuItemClick(key)}>
+          <MenuItem id={key} key={key} onClick={() => handleMenuItemClick(key)}>
             <Typography>{alternativeApplications[key]}</Typography>
           </MenuItem>
         ))}

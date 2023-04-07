@@ -10,3 +10,4 @@ export * from './FilterDialog';
 export * from './hooks';
 export * from './PageDialog';
 export * from './RangeDialog';
+export * from './StackableDialogProvider';

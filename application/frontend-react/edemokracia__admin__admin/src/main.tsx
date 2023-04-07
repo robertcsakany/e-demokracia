@@ -6,7 +6,7 @@
 
 import { createRoot } from 'react-dom/client';
 import axios from 'axios';
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import Pandino from '@pandino/pandino';
 import loaderConfiguration from '@pandino/loader-configuration-dom';
 import { PandinoProvider } from '@pandino/react-hooks';
@@ -41,6 +41,14 @@ judoAxiosProvider.init({
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 
+const router = createHashRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [...routes.map(({ path, element }) => ({ path, element }))],
+  },
+]);
+
 const meta = await accessServiceImpl.getMetaData();
 const { clientId, defaultScopes, issuer } = meta.security[0];
 storeMeta({ issuer, clientId });
@@ -56,16 +64,7 @@ root.render(
   <PandinoProvider ctx={pandino.getBundleContext()}>
     <AuthProvider {...oidcConfig}>
       <Auth>
-        <HashRouter>
-          <Routes>
-            <Route path="/" element={<App />}>
-              {routes.map((route) => (
-                <Route key={route.path} path={route.path} element={route.element} />
-              ))}
-            </Route>
-          </Routes>
-        </HashRouter>
-        ,
+        <RouterProvider router={router} />
       </Auth>
     </AuthProvider>
   </PandinoProvider>,

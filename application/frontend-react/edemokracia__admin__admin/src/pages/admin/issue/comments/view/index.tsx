@@ -8,51 +8,44 @@
 // Page DataElement name: comments
 // Page DataElement owner name: edemokracia::admin::Issue
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Box, Container, Grid, CardContent, Button, TextField, Card, Typography, InputAdornment } from '@mui/material';
 import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Grid,
-  InputAdornment,
-  TextField,
-  MenuItem,
-  Typography,
-  Paper,
-  Divider,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from '@mui/material';
-import {
-  DataGrid,
   GridRowId,
-  GridSortModel,
-  GridSortItem,
-  GridToolbarContainer,
   GridRowParams,
+  GridRenderCellParams,
+  GridSelectionModel,
+  GridSortItem,
+  GridSortModel,
+  GridColDef,
 } from '@mui/x-data-grid';
-import { DatePicker, DateTimePicker, TimePicker } from '@mui/x-date-pickers';
+import { DateTimePicker } from '@mui/x-date-pickers';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
 import type { Dayjs } from 'dayjs';
+import { useSnackbar } from 'notistack';
 import {
-  columnsActionCalculator,
   MdiIcon,
   ModeledTabs,
   PageHeader,
   DropdownButton,
   CustomBreadcrumb,
-  TrinaryLogicCombobox,
   useJudoNavigation,
-  useRangeDialog,
-  AggregationInput,
-  useSnackbar,
 } from '../../../../../components';
+import { useConfirmationBeforeChange } from '../../../../../hooks';
+import { columnsActionCalculator } from '../../../../../components/table';
+import { useRangeDialog } from '../../../../../components/dialog';
 import {
-  errorHandling,
+  AggregationInput,
+  AssociationButton,
+  CollectionAssociationButton,
+  TrinaryLogicCombobox,
+} from '../../../../../components/widgets';
+import {
+  useErrorHandler,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   processQueryCustomizer,
   TableRowAction,
@@ -61,6 +54,7 @@ import {
   booleanToStringSelect,
 } from '../../../../../utilities';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
+import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   AdminIssue,
   AdminIssueStored,
@@ -104,21 +98,33 @@ export default function AdminIssueCommentsView() {
   const { downloadFile, uploadFile } = fileHandling();
   const { queryCustomizer } = useAdminIssueCommentsView();
 
-  const [enqueueSnackbar] = useSnackbar();
+  const handleFetchError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<AdminCommentStored>({} as unknown as AdminCommentStored);
-  const [payloadDiff, setPayloadDiff] = useState<Record<string, any>>({});
-  const storeDiff: (attributeName: string, value: any) => void = useCallback(
-    (attributeName: string, value: any) => {
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof AdminCommentStored, any>>(
+    {} as unknown as Record<keyof AdminCommentStored, any>,
+  );
+  const storeDiff: (attributeName: keyof AdminCommentStored, value: any) => void = useCallback(
+    (attributeName: keyof AdminCommentStored, value: any) => {
       payloadDiff[attributeName] = value;
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<string, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminCommentStored, string>>(new Map());
 
   const title: string = t('edemokracia.admin.Issue.comments.View', { defaultValue: 'View / Edit Comment' });
+
+  useConfirmationBeforeChange(
+    editMode,
+    t('judo.form.navigation.confirmation', {
+      defaultValue: 'You have potential unsaved changes in your form, are you sure you would like to navigate away?',
+    }),
+  );
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -135,9 +141,9 @@ export default function AdminIssueCommentsView() {
         __signedIdentifier: res.__signedIdentifier,
         __version: res.__version,
         __entityType: res.__entityType,
-      });
+      } as Record<keyof AdminCommentStored, any>);
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleFetchError(error);
     } finally {
       setIsLoading(false);
     }
@@ -148,7 +154,7 @@ export default function AdminIssueCommentsView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<string, string>());
+    setValidation(new Map<keyof AdminCommentStored, string>());
   }, [editMode]);
 
   return (
@@ -156,7 +162,7 @@ export default function AdminIssueCommentsView() {
       <PageHeader title={title}>
         {!editMode && (
           <Grid item>
-            <Button onClick={() => fetchData()} disabled={isLoading}>
+            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
               <MdiIcon path="refresh" />
               {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
             </Button>
@@ -175,13 +181,17 @@ export default function AdminIssueCommentsView() {
             justifyContent="flex-start"
           >
             <Grid item xs={12} sm={12}>
-              <Card>
+              <Card id="FlexedemokraciaAdminAdminEdemokraciaAdminIssueCommentsViewDefaultCommentViewGroupLabelWrapper">
                 <CardContent>
                   <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                     <Grid item xs={12} sm={12}>
                       <Grid container direction="row" alignItems="center" justifyContent="flex-start">
                         <MdiIcon path="comment-text-multiple" />
-                        <Typography variant="h6" component="h1">
+                        <Typography
+                          id="LabeledemokraciaAdminAdminEdemokraciaAdminIssueCommentsViewDefaultCommentViewGroupLabelWrapperGroupLabel"
+                          variant="h6"
+                          component="h1"
+                        >
                           {t('edemokracia.admin.Issue.comments.Comment.View.group.group.Label', {
                             defaultValue: 'Comment',
                           })}
@@ -190,12 +200,23 @@ export default function AdminIssueCommentsView() {
                     </Grid>
 
                     <Grid item xs={12} sm={12}>
-                      <Grid container direction="row" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                      <Grid
+                        id="FlexedemokraciaAdminAdminEdemokraciaAdminIssueCommentsViewDefaultCommentViewGroupLabelWrapperGroup"
+                        container
+                        direction="row"
+                        alignItems="stretch"
+                        justifyContent="flex-start"
+                        spacing={2}
+                      >
                         <Grid item xs={12} sm={12} md={4.0}>
                           <DateTimePicker
+                            ampm={false}
+                            ampmInClock={false}
                             renderInput={(props: any) => (
                               <TextField
                                 {...props}
+                                id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminIssueCommentsViewDefaultCommentViewGroupLabelWrapperGroupCreated"
+                                className={!editMode ? 'JUDO-viewMode' : undefined}
                                 error={!!validation.get('created')}
                                 helperText={validation.get('created')}
                               />
@@ -206,9 +227,11 @@ export default function AdminIssueCommentsView() {
                               }) as string
                             }
                             value={data.created ?? null}
-                            className={true || !editMode ? 'Mui-readOnly' : undefined}
-                            readOnly={true || !editMode}
-                            onChange={(newValue: any) => storeDiff('created', newValue)}
+                            disabled={true}
+                            onChange={(newValue: any) => {
+                              setEditMode(true);
+                              storeDiff('created', newValue);
+                            }}
                             InputProps={{
                               startAdornment: (
                                 <InputAdornment position="start">
@@ -222,7 +245,7 @@ export default function AdminIssueCommentsView() {
                         <Grid item xs={12} sm={12} md={4.0}>
                           <AggregationInput
                             name="createdBy"
-                            id="Link@edemokracia/admin/Admin/edemokracia/admin/Issue.comments/View/default/Comment_View/group/LabelWrapper/group/createdBy"
+                            id="LinkedemokraciaAdminAdminEdemokraciaAdminIssueCommentsViewDefaultCommentViewGroupLabelWrapperGroupCreatedBy"
                             label={
                               t('edemokracia.admin.Issue.comments.Comment.View.group.group.createdBy', {
                                 defaultValue: 'CreatedBy',
@@ -233,7 +256,8 @@ export default function AdminIssueCommentsView() {
                             error={!!validation.get('createdBy')}
                             helperText={validation.get('createdBy')}
                             icon={<MdiIcon path="table_rows" />}
-                            readonly={true || !editMode}
+                            disabled={true}
+                            editMode={editMode}
                             onView={async () => linkViewCreatedByAction(data?.createdBy!)}
                           />
                         </Grid>
@@ -242,22 +266,25 @@ export default function AdminIssueCommentsView() {
                           <TextField
                             required
                             name="comment"
-                            id="TextArea@edemokracia/admin/Admin/edemokracia/admin/Issue.comments/View/default/Comment_View/group/LabelWrapper/group/comment"
+                            id="TextAreaedemokraciaAdminAdminEdemokraciaAdminIssueCommentsViewDefaultCommentViewGroupLabelWrapperGroupComment"
                             label={
                               t('edemokracia.admin.Issue.comments.Comment.View.group.group.comment', {
                                 defaultValue: 'Comment',
                               }) as string
                             }
                             value={data.comment}
+                            className={!editMode ? 'JUDO-viewMode' : undefined}
+                            disabled={false}
                             multiline
                             minRows={4.0}
                             error={!!validation.get('comment')}
                             helperText={validation.get('comment')}
-                            onChange={(event) => storeDiff('comment', event.target.value)}
-                            className={false || !editMode ? 'Mui-readOnly' : undefined}
+                            onChange={(event) => {
+                              setEditMode(true);
+                              storeDiff('comment', event.target.value);
+                            }}
                             InputLabelProps={{ shrink: true }}
                             InputProps={{
-                              readOnly: false || !editMode,
                               startAdornment: (
                                 <InputAdornment position="start">
                                   <MdiIcon path="text_fields" />
@@ -269,6 +296,7 @@ export default function AdminIssueCommentsView() {
 
                         <Grid item xs={12} sm={12} md={1.0}>
                           <Button
+                            id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminIssueCommentsViewEdemokraciaAdminAdminEdemokraciaAdminCommentVoteUpButtonCallOperation"
                             onClick={() => AdminCommentVoteUpAction(data, () => fetchData())}
                             disabled={isLoading || editMode}
                           >
@@ -282,7 +310,7 @@ export default function AdminIssueCommentsView() {
                         <Grid item xs={12} sm={12} md={1.0}>
                           <TextField
                             name="upVotes"
-                            id="NumericInput@edemokracia/admin/Admin/edemokracia/admin/Issue.comments/View/default/Comment_View/group/LabelWrapper/group/upVotes"
+                            id="NumericInputedemokraciaAdminAdminEdemokraciaAdminIssueCommentsViewDefaultCommentViewGroupLabelWrapperGroupUpVotes"
                             label={
                               t('edemokracia.admin.Issue.comments.Comment.View.group.group.upVotes', {
                                 defaultValue: '',
@@ -290,14 +318,16 @@ export default function AdminIssueCommentsView() {
                             }
                             type="number"
                             value={data.upVotes}
+                            className={!editMode ? 'JUDO-viewMode' : undefined}
+                            disabled={true}
                             error={!!validation.get('upVotes')}
                             helperText={validation.get('upVotes')}
-                            onChange={(event) => storeDiff('upVotes', Number(event.target.value))}
-                            className={true || !editMode ? 'Mui-readOnly' : undefined}
-                            InputLabelProps={{ shrink: true }}
-                            InputProps={{
-                              readOnly: true || !editMode,
+                            onChange={(event) => {
+                              setEditMode(true);
+                              storeDiff('upVotes', Number(event.target.value));
                             }}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{}}
                           />
                         </Grid>
 
@@ -307,6 +337,7 @@ export default function AdminIssueCommentsView() {
 
                         <Grid item xs={12} sm={12} md={1.0}>
                           <Button
+                            id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminIssueCommentsViewEdemokraciaAdminAdminEdemokraciaAdminCommentVoteDownButtonCallOperation"
                             onClick={() => AdminCommentVoteDownAction(data, () => fetchData())}
                             disabled={isLoading || editMode}
                           >
@@ -320,7 +351,7 @@ export default function AdminIssueCommentsView() {
                         <Grid item xs={12} sm={12} md={1.0}>
                           <TextField
                             name="downVotes"
-                            id="NumericInput@edemokracia/admin/Admin/edemokracia/admin/Issue.comments/View/default/Comment_View/group/LabelWrapper/group/downVotes"
+                            id="NumericInputedemokraciaAdminAdminEdemokraciaAdminIssueCommentsViewDefaultCommentViewGroupLabelWrapperGroupDownVotes"
                             label={
                               t('edemokracia.admin.Issue.comments.Comment.View.group.group.downVotes', {
                                 defaultValue: '',
@@ -328,14 +359,16 @@ export default function AdminIssueCommentsView() {
                             }
                             type="number"
                             value={data.downVotes}
+                            className={!editMode ? 'JUDO-viewMode' : undefined}
+                            disabled={true}
                             error={!!validation.get('downVotes')}
                             helperText={validation.get('downVotes')}
-                            onChange={(event) => storeDiff('downVotes', Number(event.target.value))}
-                            className={true || !editMode ? 'Mui-readOnly' : undefined}
-                            InputLabelProps={{ shrink: true }}
-                            InputProps={{
-                              readOnly: true || !editMode,
+                            onChange={(event) => {
+                              setEditMode(true);
+                              storeDiff('downVotes', Number(event.target.value));
                             }}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{}}
                           />
                         </Grid>
 
@@ -344,12 +377,16 @@ export default function AdminIssueCommentsView() {
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={2.0}>
-                          <Button onClick={() => buttonNavigateVotesAction(data)} disabled={isLoading || editMode}>
-                            <MdiIcon path="checkbox-multiple-marked" />
+                          <CollectionAssociationButton
+                            id="NavigationToPageActionedemokraciaAdminAdminEdemokraciaAdminIssueCommentsViewEdemokraciaAdminAdminEdemokraciaAdminCommentVotesButtonNavigate"
+                            editMode={editMode}
+                            navigateAction={() => buttonNavigateVotesAction(data)}
+                          >
                             {t('edemokracia.admin.Issue.comments.Comment.View.group.group.votes', {
                               defaultValue: 'Votes',
                             })}
-                          </Button>
+                            <MdiIcon path="arrow-right" />
+                          </CollectionAssociationButton>
                         </Grid>
                       </Grid>
                     </Grid>

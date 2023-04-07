@@ -7,15 +7,19 @@
 // Action: DeleteAction
 
 import type { JudoIdentifiable } from '@judo/data-api-common';
-import { useSnackbar } from '../../../../../../../components';
-import { errorHandling } from '../../../../../../../utilities';
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useSnackbar } from 'notistack';
+import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../../../../../utilities';
 import { AdminCountyQueryCustomizer, AdminCounty, AdminCountyStored } from '../../../../../../../generated/data-api';
 import { adminAdminServiceForCountiesImpl, adminCountyServiceImpl } from '../../../../../../../generated/data-axios';
 
 export type RowDeleteCountiesAction = () => (selected: AdminCountyStored, successCallback: () => void) => Promise<void>;
 
 export const useRowDeleteCountiesAction: RowDeleteCountiesAction = () => {
-  const [enqueueSnackbar] = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
+  const handleActionError = useErrorHandler(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=RowDeleteAction))`,
+  );
 
   return async function rowDeleteCountiesAction(selected: AdminCountyStored, successCallback: () => void) {
     try {
@@ -23,7 +27,7 @@ export const useRowDeleteCountiesAction: RowDeleteCountiesAction = () => {
 
       successCallback();
     } catch (error) {
-      errorHandling(error, enqueueSnackbar);
+      handleActionError(error);
     }
   };
 };
