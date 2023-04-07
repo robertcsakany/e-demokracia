@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<namespace:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:accesspoint="http://blackbelt.hu/judo/meta/esm/accesspoint" xmlns:measure="http://blackbelt.hu/judo/meta/esm/measure" xmlns:namespace="http://blackbelt.hu/judo/meta/esm/namespace" xmlns:structure="http://blackbelt.hu/judo/meta/esm/structure" xmlns:type="http://blackbelt.hu/judo/meta/esm/type" xmlns:ui="http://blackbelt.hu/judo/meta/esm/ui" xsi:schemaLocation="http://blackbelt.hu/judo/meta/esm/accesspoint http://blackbelt.hu/judo/meta/esm#//accesspoint http://blackbelt.hu/judo/meta/esm/measure http://blackbelt.hu/judo/meta/esm#//measure http://blackbelt.hu/judo/meta/esm/namespace http://blackbelt.hu/judo/meta/esm#//namespace http://blackbelt.hu/judo/meta/esm/structure http://blackbelt.hu/judo/meta/esm#//structure http://blackbelt.hu/judo/meta/esm/type http://blackbelt.hu/judo/meta/esm#//type http://blackbelt.hu/judo/meta/esm/ui http://blackbelt.hu/judo/meta/esm#//ui" xmi:id="_7D8NwGkNEe25ONJ3V89cVA" name="edemokracia" metaVersion="1.1.1.20230207_041944_186fd7db_develop" version="1.0.0.20230407_113201_SNAPSHOT">
+<namespace:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:accesspoint="http://blackbelt.hu/judo/meta/esm/accesspoint" xmlns:measure="http://blackbelt.hu/judo/meta/esm/measure" xmlns:namespace="http://blackbelt.hu/judo/meta/esm/namespace" xmlns:structure="http://blackbelt.hu/judo/meta/esm/structure" xmlns:type="http://blackbelt.hu/judo/meta/esm/type" xmlns:ui="http://blackbelt.hu/judo/meta/esm/ui" xsi:schemaLocation="http://blackbelt.hu/judo/meta/esm/accesspoint http://blackbelt.hu/judo/meta/esm#//accesspoint http://blackbelt.hu/judo/meta/esm/measure http://blackbelt.hu/judo/meta/esm#//measure http://blackbelt.hu/judo/meta/esm/namespace http://blackbelt.hu/judo/meta/esm#//namespace http://blackbelt.hu/judo/meta/esm/structure http://blackbelt.hu/judo/meta/esm#//structure http://blackbelt.hu/judo/meta/esm/type http://blackbelt.hu/judo/meta/esm#//type http://blackbelt.hu/judo/meta/esm/ui http://blackbelt.hu/judo/meta/esm#//ui" xmi:id="_7D8NwGkNEe25ONJ3V89cVA" name="edemokracia" version="1.0.0.20230407_163400_SNAPSHOT">
   <elements xsi:type="namespace:Package" xmi:id="_7D8NwWkNEe25ONJ3V89cVA" name="types">
     <elements xsi:type="type:StringType" xmi:id="_7D8NwmkNEe25ONJ3V89cVA" name="String" maxLength="255"/>
     <elements xsi:type="type:NumericType" xmi:id="_7D8Nw2kNEe25ONJ3V89cVA" name="Long" precision="18"/>
@@ -375,19 +375,19 @@
         <inherited xmi:id="_p79BAGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_p5-rEGksEe25ONJ3V89cVA" target="_4hFkkGkPEe25ONJ3V89cVA"/>
-      <form xmi:id="_p5sXMGksEe25ONJ3V89cVA" name="Create_Attachment" label="Create Attachment" iconName="attachment" layout="VERTICAL">
+      <form xmi:id="_p5sXMGksEe25ONJ3V89cVA" name="Attachment_Form" label="Create Attachment" iconName="attachment" layout="VERTICAL">
         <components xsi:type="ui:Group" xmi:id="_jr9sAG5CEe2Q6M99rsfqSQ" name="group" col="12">
           <components xsi:type="ui:DataField" xmi:id="_Rd_fsG5CEe2Q6M99rsfqSQ" name="type" label="Type" iconName="list" dataFeature="_p7lNkGksEe25ONJ3V89cVA"/>
           <components xsi:type="ui:DataField" xmi:id="_Rd7OQG5CEe2Q6M99rsfqSQ" name="link" label="Link" iconName="text_fields" dataFeature="_p6HN8GksEe25ONJ3V89cVA"/>
           <components xsi:type="ui:DataField" xmi:id="_Rd9qgG5CEe2Q6M99rsfqSQ" name="file" label="File" iconName="file-document-outline" dataFeature="_p6zKcGksEe25ONJ3V89cVA"/>
         </components>
       </form>
-      <table xmi:id="_p51hIGksEe25ONJ3V89cVA" name="Attachments_List" label="Attachments" iconName="attachment">
+      <table xmi:id="_p51hIGksEe25ONJ3V89cVA" name="Attachment_Table" label="Attachments" iconName="attachment">
         <columns xsi:type="ui:DataColumn" xmi:id="_Rd71UG5CEe2Q6M99rsfqSQ" name="link" label="Link" iconName="text_fields" dataFeature="_p6HN8GksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_Rd-RkG5CEe2Q6M99rsfqSQ" name="file" label="File" iconName="file-document-outline" dataFeature="_p6zKcGksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_ReAt0G5CEe2Q6M99rsfqSQ" name="type" label="Type" iconName="list" dataFeature="_p7lNkGksEe25ONJ3V89cVA"/>
       </table>
-      <view xmi:id="_p5jNQGksEe25ONJ3V89cVA" name="Attachment" label="View / Edit Attachment" iconName="attachment" layout="VERTICAL">
+      <view xmi:id="_p5jNQGksEe25ONJ3V89cVA" name="Attachment_View" label="View / Edit Attachment" iconName="attachment" layout="VERTICAL">
         <components xsi:type="ui:Group" xmi:id="_XJwIoG5CEe2Q6M99rsfqSQ" name="group" col="12">
           <components xsi:type="ui:DataField" xmi:id="_Rd-4oG5CEe2Q6M99rsfqSQ" name="type" label="Type" iconName="list" dataFeature="_p7lNkGksEe25ONJ3V89cVA"/>
           <components xsi:type="ui:DataField" xmi:id="_Rd8cYG5CEe2Q6M99rsfqSQ" name="file" label="File" iconName="file-document-outline" dataFeature="_p6zKcGksEe25ONJ3V89cVA"/>
@@ -406,18 +406,18 @@
         <inherited xmi:id="_p-eJgGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_p9TE0GksEe25ONJ3V89cVA" target="_H7Q58GkYEe25ONJ3V89cVA"/>
-      <form xmi:id="_p9AJ4GksEe25ONJ3V89cVA" name="Create_Vote" label="Create Vote" iconName="vote" layout="VERTICAL">
+      <form xmi:id="_p9AJ4GksEe25ONJ3V89cVA" name="Vote_Form" label="Create Vote" iconName="vote" layout="VERTICAL">
         <components xsi:type="ui:Group" xmi:id="_5-_pMG5CEe2Q6M99rsfqSQ" name="group" col="12">
           <components xsi:type="ui:DataField" xmi:id="_VQSXUGk5Ee25ONJ3V89cVA" name="created" label="Created" iconName="schedule" dataFeature="_p9bnsGksEe25ONJ3V89cVA"/>
           <components xsi:type="ui:DataField" xmi:id="_VQXP0Gk5Ee25ONJ3V89cVA" name="type" label="Type" iconName="list" dataFeature="_p-OR4GksEe25ONJ3V89cVA"/>
         </components>
         <components xsi:type="ui:Group" xmi:id="_7txfMG5CEe2Q6M99rsfqSQ" name="group_2" col="12"/>
       </form>
-      <table xmi:id="_p9JT0GksEe25ONJ3V89cVA" name="Votes_List" label="Votes" iconName="vote">
+      <table xmi:id="_p9JT0GksEe25ONJ3V89cVA" name="Vote_Table" label="Votes" iconName="vote">
         <columns xsi:type="ui:DataColumn" xmi:id="_VQUMgGk5Ee25ONJ3V89cVA" name="created" label="Created" iconName="schedule" dataFeature="_p9bnsGksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_VQZFAGk5Ee25ONJ3V89cVA" name="type" label="Type" iconName="list" dataFeature="_p-OR4GksEe25ONJ3V89cVA"/>
       </table>
-      <view xmi:id="_p81x0GksEe25ONJ3V89cVA" name="Vote" label="Create / View Vote" iconName="vote" layout="VERTICAL">
+      <view xmi:id="_p81x0GksEe25ONJ3V89cVA" name="Vote_View" label="Create / View Vote" iconName="vote" layout="VERTICAL">
         <components xsi:type="ui:Group" xmi:id="_GLaiwG5DEe2Q6M99rsfqSQ" name="group" col="12">
           <components xsi:type="ui:DataField" xmi:id="_VQQiIGk5Ee25ONJ3V89cVA" name="created" label="Created" iconName="schedule" dataFeature="_p9bnsGksEe25ONJ3V89cVA"/>
           <components xsi:type="ui:DataField" xmi:id="_VQWBsGk5Ee25ONJ3V89cVA" name="type" label="Type" iconName="list" dataFeature="_p-OR4GksEe25ONJ3V89cVA"/>
@@ -454,7 +454,7 @@
       <operations xmi:id="_Fv_yAH2tEe2Z3oDlL3R4tA" name="voteDown" customImplementation="false" body="" operationType="MAPPED" binding="voteDown">
         <inherited xmi:id="_FwAZEH2tEe2Z3oDlL3R4tA"/>
       </operations>
-      <form xmi:id="_p_Je8GksEe25ONJ3V89cVA" name="Create_Comment" label="Create Comment" iconName="comment-text" layout="VERTICAL">
+      <form xmi:id="_p_Je8GksEe25ONJ3V89cVA" name="Comment_Form" label="Create Comment" iconName="comment-text" layout="VERTICAL">
         <components xsi:type="ui:Group" xmi:id="_v1fnoG5YEe2wNaja8kBvcQ" name="group" col="12">
           <components xsi:type="ui:DataField" xmi:id="_BYSQUG5WEe2wNaja8kBvcQ" name="created" label="Created" iconName="schedule" dataFeature="_Hq4FMG5VEe2wNaja8kBvcQ"/>
           <components xsi:type="ui:TabularReferenceField" xmi:id="_IgYHIIfuEe2u0fVmwtP5bA" name="createdBy" label="CreatedBy" iconName="table_rows" col="12" relationFeature="_qbmKYGksEe25ONJ3V89cVA" targetDefinedTabular="false">
@@ -469,7 +469,7 @@
           </components>
         </components>
       </form>
-      <table xmi:id="_p_So4GksEe25ONJ3V89cVA" name="Comments_List" label="Comments" iconName="comment-text">
+      <table xmi:id="_p_So4GksEe25ONJ3V89cVA" name="Comment_Table" label="Comments" iconName="comment-text">
         <columns xsi:type="ui:DataColumn" xmi:id="_xE0lsG5REe2Q6M99rsfqSQ" name="createdByName" label="CreatedByName" iconName="text_fields" dataFeature="_Q31g0G5REe2Q6M99rsfqSQ"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_BYNX0G5WEe2wNaja8kBvcQ" name="comment" label="Comment" iconName="text_fields" dataFeature="_HqzzwG5VEe2wNaja8kBvcQ"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_BYVToG5WEe2wNaja8kBvcQ" name="created" label="Created" iconName="schedule" dataFeature="_Hq4FMG5VEe2wNaja8kBvcQ"/>
@@ -765,11 +765,11 @@
             </components>
           </tabs>
           <tabs xmi:id="_OgpR0Id9Ee2kLcMqsIbMgQ" name="debates" label="Debates" iconName="wechat" col="12" row="10">
-            <components xsi:type="ui:TabularReferenceField" xmi:id="_aOLP8Id9Ee2kLcMqsIbMgQ" name="debates" label="" iconName="" col="12" row="10" relationFeature="_lsxhkId6Ee2kLcMqsIbMgQ" targetDefinedTabular="false" smallTable="true">
-              <columns xsi:type="ui:DataColumn" xmi:id="_aOLP84d9Ee2kLcMqsIbMgQ" name="status" label="Status" iconName="list" dataFeature="_g_hvUId6Ee2kLcMqsIbMgQ"/>
-              <columns xsi:type="ui:DataColumn" xmi:id="_aOL3AId9Ee2kLcMqsIbMgQ" name="title" label="Title" iconName="text_fields" dataFeature="_g_kyoId6Ee2kLcMqsIbMgQ"/>
-              <columns xsi:type="ui:DataColumn" xmi:id="_aOLP8Yd9Ee2kLcMqsIbMgQ" name="closeAt" label="CloseAt" iconName="schedule" dataFeature="_g_bosId6Ee2kLcMqsIbMgQ"/>
-              <columns xsi:type="ui:DataColumn" xmi:id="_aOLP8od9Ee2kLcMqsIbMgQ" name="description" label="Description" iconName="text_fields" dataFeature="_g_esAId6Ee2kLcMqsIbMgQ"/>
+            <components xsi:type="ui:TabularReferenceField" xmi:id="_ma574NU3Ee22ZdUgm7K2dA" name="debates" label="Debates" iconName="wechat" col="12" row="10" relationFeature="_lsxhkId6Ee2kLcMqsIbMgQ" targetDefinedTabular="false" smallTable="true">
+              <columns xsi:type="ui:DataColumn" xmi:id="_ma_bcNU3Ee22ZdUgm7K2dA" name="status" label="Status" iconName="list" dataFeature="_g_hvUId6Ee2kLcMqsIbMgQ"/>
+              <columns xsi:type="ui:DataColumn" xmi:id="_ma_bcdU3Ee22ZdUgm7K2dA" name="title" label="Title" iconName="text_fields" dataFeature="_g_kyoId6Ee2kLcMqsIbMgQ"/>
+              <columns xsi:type="ui:DataColumn" xmi:id="_ma9mQNU3Ee22ZdUgm7K2dA" name="closeAt" label="CloseAt" iconName="schedule" dataFeature="_g_bosId6Ee2kLcMqsIbMgQ"/>
+              <columns xsi:type="ui:DataColumn" xmi:id="_ma-0YNU3Ee22ZdUgm7K2dA" name="description" label="Description" iconName="text_fields" dataFeature="_g_esAId6Ee2kLcMqsIbMgQ"/>
             </components>
           </tabs>
           <tabs xmi:id="__yV9oIybEe2VSOmaAz6G9Q" name="comments" label="Comments" iconName="comment-text-multiple" col="12" row="10">
@@ -966,22 +966,18 @@
         <inherited xmi:id="_qKqLYGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_qJfGsGksEe25ONJ3V89cVA" target="_K7jW8GkfEe25ONJ3V89cVA"/>
-      <form xmi:id="_qJLksGksEe25ONJ3V89cVA" name="Create_Category" label="Create Category" iconName="file-tree" layout="VERTICAL">
+      <form xmi:id="_qJLksGksEe25ONJ3V89cVA" name="Category_Form" label="Create Category" iconName="file-tree" layout="VERTICAL">
         <components xsi:type="ui:DataField" xmi:id="_T0LtQG49Ee2Q6M99rsfqSQ" name="title" label="Title" iconName="text_fields" dataFeature="_qJnCgGksEe25ONJ3V89cVA"/>
         <components xsi:type="ui:DataField" xmi:id="_T0Rz4G49Ee2Q6M99rsfqSQ" name="description" label="Description" iconName="text_fields" dataFeature="_qKOtkGksEe25ONJ3V89cVA"/>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_8svcEIdgEe2kLcMqsIbMgQ" name="owner" label="Owner" iconName="account" col="12" relationFeature="_qUWS4GksEe25ONJ3V89cVA" targetDefinedTabular="false">
           <columns xsi:type="ui:DataColumn" xmi:id="_OLt-8IdiEe2kLcMqsIbMgQ" name="representation" label="Representation" iconName="text_fields" dataFeature="_QrtE4IdhEe2kLcMqsIbMgQ"/>
         </components>
-        <components xsi:type="ui:TabularReferenceField" xmi:id="_8se9YIdgEe2kLcMqsIbMgQ" name="subcategories" label="Subcategories" iconName="file-tree" col="12" row="10" relationFeature="_qT2joGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="true">
-          <columns xsi:type="ui:DataColumn" xmi:id="_8sgLgIdgEe2kLcMqsIbMgQ" name="title" label="Title" iconName="text_fields" dataFeature="_qJnCgGksEe25ONJ3V89cVA"/>
-          <columns xsi:type="ui:DataColumn" xmi:id="_8shZoIdgEe2kLcMqsIbMgQ" name="description" label="Description" iconName="text_fields" dataFeature="_qKOtkGksEe25ONJ3V89cVA"/>
-        </components>
       </form>
-      <table xmi:id="_qJVVsGksEe25ONJ3V89cVA" name="Categories_List" label="Categories" iconName="file-tree">
+      <table xmi:id="_qJVVsGksEe25ONJ3V89cVA" name="Category_Table" label="Categories" iconName="file-tree">
         <columns xsi:type="ui:DataColumn" xmi:id="_T0OJgG49Ee2Q6M99rsfqSQ" name="title" label="Title" iconName="text_fields" dataFeature="_qJnCgGksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_T0TpEG49Ee2Q6M99rsfqSQ" name="description" label="Description" iconName="text_fields" dataFeature="_qKOtkGksEe25ONJ3V89cVA"/>
       </table>
-      <view xmi:id="_qJBzsGksEe25ONJ3V89cVA" name="Category" label="View / Edit Category" iconName="file-tree" layout="VERTICAL">
+      <view xmi:id="_qJBzsGksEe25ONJ3V89cVA" name="Category_View" label="View / Edit Category" iconName="file-tree" layout="VERTICAL">
         <components xsi:type="ui:DataField" xmi:id="_T0J4EG49Ee2Q6M99rsfqSQ" name="title" label="Title" iconName="text_fields" dataFeature="_qJnCgGksEe25ONJ3V89cVA"/>
         <components xsi:type="ui:DataField" xmi:id="_T0QlwG49Ee2Q6M99rsfqSQ" name="description" label="Description" iconName="text_fields" dataFeature="_qKOtkGksEe25ONJ3V89cVA"/>
         <components xsi:type="ui:TabularReferenceField" xmi:id="_8sinwIdgEe2kLcMqsIbMgQ" name="owner" label="Owner" iconName="account" col="12" relationFeature="_qUWS4GksEe25ONJ3V89cVA" targetDefinedTabular="false">
@@ -1168,9 +1164,9 @@
         <inherited xmi:id="_toUoQGkwEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_rus0MGkwEe25ONJ3V89cVA" target="_BuSFMGkWEe25ONJ3V89cVA"/>
-      <form xmi:id="_ndHDMGkwEe25ONJ3V89cVA" name="TransferObject_Form" label="Admin" layout="VERTICAL"/>
-      <table xmi:id="_ndKGgGkwEe25ONJ3V89cVA" name="TransferObject_Table" label="Admins"/>
-      <view xmi:id="_ndEm8GkwEe25ONJ3V89cVA" name="TransferObject_View" label="Admin" layout="VERTICAL"/>
+      <form xmi:id="_ndHDMGkwEe25ONJ3V89cVA" name="AdminPrincipalUser_Form" label="Create User" iconName="account" layout="VERTICAL"/>
+      <table xmi:id="_ndKGgGkwEe25ONJ3V89cVA" name="AdminPrincipalUser_Table" label="Users" iconName="account"/>
+      <view xmi:id="_ndEm8GkwEe25ONJ3V89cVA" name="AdminPrincipalUser_View" label="View / Edit User" iconName="account" layout="VERTICAL"/>
     </elements>
     <elements xsi:type="structure:TransferObjectType" xmi:id="_a0UhYH2iEe2LTNnGda5kaw" name="District">
       <attributes xsi:type="structure:DataMember" xmi:id="_a0UhYX2iEe2LTNnGda5kaw" name="name" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_vOLLIHW6Ee2LTNnGda5kaw" getterExpression="" memberType="MAPPED">
@@ -1517,7 +1513,7 @@
         <input xmi:id="_7fYJ8I4XEe29qs15q2b6yw" lower="1" upper="1" target="_-1U_0HWyEe2LTNnGda5kaw" name="input"/>
         <inherited xmi:id="_7fW70I4XEe29qs15q2b6yw"/>
       </operations>
-      <form xmi:id="_-gL5wH4XEe2cB7_PsKXsHQ" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL">
+      <form xmi:id="_-gL5wH4XEe2cB7_PsKXsHQ" name="VoteDefinitiom_Form" label="Create Vote Definition" iconName="vote" layout="VERTICAL">
         <components xsi:type="ui:DataField" xmi:id="_T5VWYI4jEe29qs15q2b6yw" name="title" label="Title" iconName="text_fields" dataFeature="_-gbxYH4XEe2cB7_PsKXsHQ"/>
         <components xsi:type="ui:DataField" xmi:id="_T5dSMI4jEe29qs15q2b6yw" name="created" label="Created" iconName="schedule" dataFeature="_-gmwgH4XEe2cB7_PsKXsHQ"/>
         <components xsi:type="ui:DataField" xmi:id="_T5l1EI4jEe29qs15q2b6yw" name="description" label="Description" iconName="text_fields" dataFeature="_-gyWsH4XEe2cB7_PsKXsHQ"/>
@@ -1534,7 +1530,7 @@
           <columns xsi:type="ui:DataColumn" xmi:id="_bmQB8I4nEe29qs15q2b6yw" name="title" label="Title" iconName="text_fields" dataFeature="_7FWIEG5UEe2wNaja8kBvcQ"/>
         </components>
       </form>
-      <table xmi:id="_-gSncH4XEe2cB7_PsKXsHQ" name="TransferObject_Table" label="TransferObject Table">
+      <table xmi:id="_-gSncH4XEe2cB7_PsKXsHQ" name="VoteDefinition_Table" label="Vote Definitions" iconName="vote">
         <columns xsi:type="ui:DataColumn" xmi:id="_T5YZsI4jEe29qs15q2b6yw" name="title" label="Title" iconName="text_fields" dataFeature="_-gbxYH4XEe2cB7_PsKXsHQ"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_T5g8kI4jEe29qs15q2b6yw" name="created" label="Created" iconName="schedule" dataFeature="_-gmwgH4XEe2cB7_PsKXsHQ"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_T5o4YI4jEe29qs15q2b6yw" name="description" label="Description" iconName="text_fields" dataFeature="_-gyWsH4XEe2cB7_PsKXsHQ"/>
@@ -1545,7 +1541,7 @@
         <columns xsi:type="ui:DataColumn" xmi:id="_blqMEI4nEe29qs15q2b6yw" name="isYesNoAbstainType" label="IsYesNoAbstainType" iconName="check_box" dataFeature="_nu-rII4jEe29qs15q2b6yw"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_blyu8I4nEe29qs15q2b6yw" name="isYesNoType" label="IsYesNoType" iconName="check_box" dataFeature="_nvFY0I4jEe29qs15q2b6yw"/>
       </table>
-      <view xmi:id="_-gFzIH4XEe2cB7_PsKXsHQ" name="TransferObject_View" label="TransferObject View" layout="VERTICAL">
+      <view xmi:id="_-gFzIH4XEe2cB7_PsKXsHQ" name="VoteDefinition_View" label="View / Edit Vote Definition" iconName="vote" layout="VERTICAL">
         <components xsi:type="ui:Group" xmi:id="_3IYooI4kEe29qs15q2b6yw" name="group" frame="true" col="12">
           <components xsi:type="ui:DataField" xmi:id="_T5STEI4jEe29qs15q2b6yw" name="title" label="Title" iconName="text_fields" col="12" dataFeature="_-gbxYH4XEe2cB7_PsKXsHQ"/>
           <components xsi:type="ui:DataField" xmi:id="_T5260I4jEe29qs15q2b6yw" name="closeAt" label="CloseAt" iconName="schedule" dataFeature="_-hI8AH4XEe2cB7_PsKXsHQ"/>
@@ -1634,10 +1630,10 @@
       <view xmi:id="_oClaAIeIEe2kLcMqsIbMgQ" name="CreateIssueInput_View" label="" layout="VERTICAL"/>
     </elements>
     <elements xsi:type="structure:TransferObjectType" xmi:id="_3MbZEIyNEe2VSOmaAz6G9Q" name="Dashboard">
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_OQ7kkIyQEe2VSOmaAz6G9Q" target="_qCREY2ksEe25ONJ3V89cVA" name="issues" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="DERIVED" getterExpression="edemokracia::Issue!filter(i | i.owner.userName == edemokracia::types::String!getVariable(&quot;ACTOR&quot;, &quot;userName&quot;))">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_OQ7kkIyQEe2VSOmaAz6G9Q" target="_qCREY2ksEe25ONJ3V89cVA" name="issues" updateable="true" deleteable="true" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="DERIVED" getterExpression="edemokracia::Issue!filter(i | i.owner.userName == edemokracia::types::String!getVariable(&quot;ACTOR&quot;, &quot;userName&quot;))">
         <inherited xmi:id="_OQ9ZwIyQEe2VSOmaAz6G9Q"/>
       </relations>
-      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_m2rV0IyREe2VSOmaAz6G9Q" target="_qFjB42ksEe25ONJ3V89cVA" name="debates" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="DERIVED" getterExpression="edemokracia::Debate!filter(i | i.createdBy.userName == edemokracia::types::String!getVariable(&quot;ACTOR&quot;, &quot;userName&quot;))">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_m2rV0IyREe2VSOmaAz6G9Q" target="_qFjB42ksEe25ONJ3V89cVA" name="debates" updateable="true" deleteable="true" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="DERIVED" getterExpression="edemokracia::Debate!filter(i | i.createdBy.userName == edemokracia::types::String!getVariable(&quot;ACTOR&quot;, &quot;userName&quot;))">
         <inherited xmi:id="_m2tLAIyREe2VSOmaAz6G9Q"/>
       </relations>
       <attributes xsi:type="structure:DataMember" xmi:id="_OIqfwIyYEe2VSOmaAz6G9Q" name="welcome" dataType="_7D8NwmkNEe25ONJ3V89cVA" defaultExpression="" getterExpression="&quot;Szia &quot; + self.firstName + &quot;!&quot;" memberType="DERIVED">

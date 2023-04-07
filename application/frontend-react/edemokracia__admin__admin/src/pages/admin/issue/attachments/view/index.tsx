@@ -243,7 +243,7 @@ export default function AdminIssueAttachmentsView() {
           >
             <Grid item xs={12} sm={12}>
               <Grid
-                id="FlexedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentGroup"
+                id="FlexedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentViewGroup"
                 container
                 direction="row"
                 alignItems="flex-start"
@@ -254,9 +254,11 @@ export default function AdminIssueAttachmentsView() {
                   <TextField
                     required
                     name="type"
-                    id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentGroupType"
+                    id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentViewGroupType"
                     label={
-                      t('edemokracia.admin.Issue.attachments.Attachment.group.type', { defaultValue: 'Type' }) as string
+                      t('edemokracia.admin.Issue.attachments.Attachment.View.group.type', {
+                        defaultValue: 'Type',
+                      }) as string
                     }
                     value={data.type || ''}
                     className={!editMode ? 'JUDO-viewMode' : undefined}
@@ -296,9 +298,9 @@ export default function AdminIssueAttachmentsView() {
                   {editMode ? (
                     <TextField
                       name="file"
-                      id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentGroupFile"
+                      id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentViewGroupFile"
                       label={
-                        t('edemokracia.admin.Issue.attachments.Attachment.group.file', {
+                        t('edemokracia.admin.Issue.attachments.Attachment.View.group.file', {
                           defaultValue: 'File',
                         }) as string
                       }
@@ -361,14 +363,14 @@ export default function AdminIssueAttachmentsView() {
                     />
                   ) : (
                     <Button
-                      id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentGroupFile-download"
+                      id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentViewGroupFile-download"
                       variant="contained"
                       disabled={!data?.file}
                       onClick={() => downloadFile(data, 'file')}
                     >
                       <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
                       {
-                        t('edemokracia.admin.Issue.attachments.Attachment.group.file', {
+                        t('edemokracia.admin.Issue.attachments.Attachment.View.group.file', {
                           defaultValue: 'File',
                         }) as string
                       }
@@ -379,9 +381,11 @@ export default function AdminIssueAttachmentsView() {
                 <Grid item xs={12} sm={12} md={4.0}>
                   <TextField
                     name="link"
-                    id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentGroupLink"
+                    id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentViewGroupLink"
                     label={
-                      t('edemokracia.admin.Issue.attachments.Attachment.group.link', { defaultValue: 'Link' }) as string
+                      t('edemokracia.admin.Issue.attachments.Attachment.View.group.link', {
+                        defaultValue: 'Link',
+                      }) as string
                     }
                     value={data.link}
                     className={!editMode ? 'JUDO-viewMode' : undefined}

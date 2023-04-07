@@ -18,14 +18,11 @@ import {
   DialogContentText,
   TextField,
   DialogActions,
-  Card,
-  Typography,
   InputAdornment,
+  Card,
 } from '@mui/material';
 import {
   GridRowId,
-  DataGrid,
-  GridToolbarContainer,
   GridRowParams,
   GridRenderCellParams,
   GridSelectionModel,
@@ -51,7 +48,6 @@ import {
 import { FilterOption, FilterType } from '../../../../../../components-api';
 import {
   AdminIssueCategoryStored,
-  AdminIssueCategoryMaskBuilder,
   AdminIssueCategory,
   AdminUserStored,
   AdminUserQueryCustomizer,
@@ -111,84 +107,13 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
   );
   const title: string = t('edemokracia.admin.Admin.categories.Create', { defaultValue: 'Create Category' });
 
-  const [subcategoriesSortModel, setSubcategoriesSortModel] = useState<GridSortModel>([
-    { field: 'title', sort: 'asc' },
-  ]);
-
-  const subcategoriesColumns: GridColDef<AdminIssueCategoryStored>[] = [
-    {
-      ...baseColumnConfig,
-      field: 'title',
-      headerName: t('edemokracia.admin.Admin.categories.Create.Category.subcategories.subcategories.title', {
-        defaultValue: 'Title',
-      }) as string,
-      width: 230,
-      type: 'string',
-    },
-    {
-      ...baseColumnConfig,
-      field: 'description',
-      headerName: t('edemokracia.admin.Admin.categories.Create.Category.subcategories.subcategories.description', {
-        defaultValue: 'Description',
-      }) as string,
-      width: 230,
-      type: 'string',
-    },
-  ];
-
-  const subcategoriesRangeFilterOptions: FilterOption[] = [
-    {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategorySubcategoriesLabelWrapperSubcategoriesTitleFilter',
-      attributeName: 'title',
-      label: t('edemokracia.admin.Admin.categories.Create.Category.subcategories.subcategories.title.Filter', {
-        defaultValue: 'Title',
-      }) as string,
-      filterType: FilterType.string,
-    },
-    {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategorySubcategoriesLabelWrapperSubcategoriesDescriptionFilter',
-      attributeName: 'description',
-      label: t('edemokracia.admin.Admin.categories.Create.Category.subcategories.subcategories.description.Filter', {
-        defaultValue: 'Description',
-      }) as string,
-      filterType: FilterType.string,
-    },
-  ];
-
-  const subcategoriesInitialQueryCustomizer: AdminIssueCategoryQueryCustomizer = {
-    _mask: '{title,description}',
-    _orderBy: subcategoriesSortModel.length
-      ? [
-          {
-            attribute: subcategoriesSortModel[0].field,
-            descending: subcategoriesSortModel[0].sort === 'desc',
-          },
-        ]
-      : [],
-  };
-  const subcategoriesRangeCall = async () =>
-    openRangeDialog<AdminIssueCategoryStored, AdminIssueCategoryQueryCustomizer>({
-      id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategories',
-      columns: subcategoriesColumns,
-      defaultSortField: subcategoriesSortModel[0],
-      rangeCall: async (queryCustomizer) =>
-        await adminIssueCategoryServiceImpl.getRangeForSubcategories(
-          undefined,
-          processQueryCustomizer(queryCustomizer),
-        ),
-      single: false,
-      alreadySelectedItems: subcategoriesSelectionModel,
-      filterOptions: subcategoriesRangeFilterOptions,
-      initialQueryCustomizer: subcategoriesInitialQueryCustomizer,
-    });
-  const [subcategoriesSelectionModel, setSubcategoriesSelectionModel] = useState<GridSelectionModel>([]);
   const [ownerSortModel, setOwnerSortModel] = useState<GridSortModel>([{ field: 'representation', sort: 'asc' }]);
 
   const ownerColumns: GridColDef<AdminUserStored>[] = [
     {
       ...baseColumnConfig,
       field: 'representation',
-      headerName: t('edemokracia.admin.Admin.categories.Create.Category.owner.representation', {
+      headerName: t('edemokracia.admin.Admin.categories.Category.Form.owner.representation', {
         defaultValue: 'Representation',
       }) as string,
       width: 230,
@@ -198,9 +123,9 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
 
   const ownerRangeFilterOptions: FilterOption[] = [
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategoryOwnerRepresentationFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCategoryFormOwnerRepresentationFilter',
       attributeName: 'representation',
-      label: t('edemokracia.admin.Admin.categories.Create.Category.owner.representation.Filter', {
+      label: t('edemokracia.admin.Admin.categories.Category.Form.owner.representation.Filter', {
         defaultValue: 'Representation',
       }) as string,
       filterType: FilterType.string,
@@ -231,7 +156,6 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
       initialQueryCustomizer: ownerInitialQueryCustomizer,
     });
   const [ownerSelectionModel, setOwnerSelectionModel] = useState<GridSelectionModel>([]);
-  const subcategoriesRowActions: TableRowAction<AdminIssueCategoryStored>[] = [];
   const fetchData = async () => {
     setIsLoading(true);
 
@@ -289,8 +213,8 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
             <TextField
               required
               name="title"
-              id="TextInputedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategoryTitle"
-              label={t('edemokracia.admin.Admin.categories.Create.Category.title', { defaultValue: 'Title' }) as string}
+              id="TextInputedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCategoryFormTitle"
+              label={t('edemokracia.admin.Admin.categories.Category.Form.title', { defaultValue: 'Title' }) as string}
               value={data.title}
               className={!editMode ? 'JUDO-viewMode' : undefined}
               disabled={false}
@@ -315,9 +239,9 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
             <TextField
               required
               name="description"
-              id="TextInputedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategoryDescription"
+              id="TextInputedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCategoryFormDescription"
               label={
-                t('edemokracia.admin.Admin.categories.Create.Category.description', {
+                t('edemokracia.admin.Admin.categories.Category.Form.description', {
                   defaultValue: 'Description',
                 }) as string
               }
@@ -344,8 +268,8 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
           <Grid item xs={12} sm={12}>
             <AggregationInput
               name="owner"
-              id="LinkedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategoryOwner"
-              label={t('edemokracia.admin.Admin.categories.Create.Category.owner', { defaultValue: 'Owner' }) as string}
+              id="LinkedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCategoryFormOwner"
+              label={t('edemokracia.admin.Admin.categories.Category.Form.owner', { defaultValue: 'Owner' }) as string}
               labelList={[data.owner?.representation?.toString() ?? '']}
               value={data.owner}
               error={!!validation.get('owner')}
@@ -376,69 +300,6 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
                 storeDiff('owner', null);
               }}
             />
-          </Grid>
-
-          <Grid item xs={12} sm={12}>
-            <Grid
-              id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategorySubcategoriesLabelWrapper"
-              container
-              direction="column"
-              alignItems="stretch"
-              justifyContent="flex-start"
-              spacing={2}
-            >
-              <Grid item xs={12} sm={12}>
-                <Grid container direction="row" alignItems="center" justifyContent="flex-start">
-                  <MdiIcon path="file-tree" />
-                  <Typography
-                    id="LabeledemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategorySubcategoriesLabelWrapperSubcategoriesLabel"
-                    variant="h6"
-                    component="h1"
-                  >
-                    {t('edemokracia.admin.Admin.categories.Create.Category.subcategories.subcategories.Label', {
-                      defaultValue: 'Subcategories',
-                    })}
-                  </Typography>
-                </Grid>
-              </Grid>
-
-              <Grid item xs={12} sm={12}>
-                <Grid
-                  id="TableedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesCreateDefaultCreateCategorySubcategoriesLabelWrapperSubcategories"
-                  container
-                  direction="column"
-                  alignItems="stretch"
-                  justifyContent="flex-start"
-                >
-                  <DataGrid
-                    {...baseTableConfig}
-                    getRowId={(row: { __identifier: string }) => row.__identifier}
-                    loading={isLoading}
-                    rows={data?.subcategories ?? []}
-                    columns={[
-                      ...subcategoriesColumns,
-                      ...columnsActionCalculator(
-                        'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategories',
-                        subcategoriesRowActions,
-                        { shownActions: 2 },
-                      ),
-                    ]}
-                    disableSelectionOnClick
-                    sortModel={subcategoriesSortModel}
-                    onSortModelChange={(newModel: GridSortModel) => {
-                      setSubcategoriesSortModel(newModel);
-                    }}
-                    components={{
-                      Toolbar: () => (
-                        <GridToolbarContainer>
-                          <div>{/* Placeholder */}</div>
-                        </GridToolbarContainer>
-                      ),
-                    }}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
           </Grid>
         </Grid>
       </DialogContent>

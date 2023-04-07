@@ -75,14 +75,18 @@ import { mainContainerPadding } from '../../../../theme';
 import { useAdminAdminDashboardhomeDashboard } from './hooks/useAdminAdminDashboardhomeDashboard';
 import {
   useRowViewIssuesAction,
+  useAdminDebateCreateArgumentAction,
+  useAdminDebateCreateCommentAction,
+  useRowDeleteDebatesAction,
+  useRowDeleteIssuesAction,
   useAdminDebateCloseDebateAction,
   useAdminIssueCreateDebateAction,
+  useRowEditDebatesAction,
   useAdminIssueCreateCommentAction,
-  useAdminDebateCreateArgumentAction,
   useRowViewDebatesAction,
   useAdminDashboardCreateIssueAction,
   useAdminDashboardCreateUserAction,
-  useAdminDebateCreateCommentAction,
+  useRowEditIssuesAction,
   usePageRefreshDashboardhomeAction,
 } from './actions';
 
@@ -98,14 +102,18 @@ export default function AdminAdminDashboardhomeDashboard() {
   const { navigate, back } = useJudoNavigation();
   const [signedIdentifier, setSignedIdentifier] = useState<string>();
   const rowViewIssuesAction = useRowViewIssuesAction();
+  const AdminDebateCreateArgumentAction = useAdminDebateCreateArgumentAction();
+  const AdminDebateCreateCommentAction = useAdminDebateCreateCommentAction();
+  const rowDeleteDebatesAction = useRowDeleteDebatesAction();
+  const rowDeleteIssuesAction = useRowDeleteIssuesAction();
   const AdminDebateCloseDebateAction = useAdminDebateCloseDebateAction();
   const AdminIssueCreateDebateAction = useAdminIssueCreateDebateAction();
+  const rowEditDebatesAction = useRowEditDebatesAction();
   const AdminIssueCreateCommentAction = useAdminIssueCreateCommentAction();
-  const AdminDebateCreateArgumentAction = useAdminDebateCreateArgumentAction();
   const rowViewDebatesAction = useRowViewDebatesAction();
   const AdminDashboardCreateIssueAction = useAdminDashboardCreateIssueAction();
   const AdminDashboardCreateUserAction = useAdminDashboardCreateUserAction();
-  const AdminDebateCreateCommentAction = useAdminDebateCreateCommentAction();
+  const rowEditIssuesAction = useRowEditIssuesAction();
   const pageRefreshDashboardhomeAction = usePageRefreshDashboardhomeAction();
 
   const { openRangeDialog } = useRangeDialog();
@@ -143,6 +151,13 @@ export default function AdminAdminDashboardhomeDashboard() {
 
   const debatesRowActions: TableRowAction<AdminDebateStored>[] = [
     {
+      id: 'DeleteActionedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardEdemokraciaAdminAdminEdemokraciaAdminDashboardDebatesRowDelete',
+      label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
+      icon: <MdiIcon path="delete_forever" />,
+      action: async (row: AdminDebateStored) => rowDeleteDebatesAction(data, row, () => fetchData()),
+      disabled: (row: AdminDebateStored) => editMode || !row.__deleteable,
+    },
+    {
       id: 'CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardEdemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateButtonCallOperation',
       label: t('edemokracia.admin.Admin.dashboardhome.Dashboard.edemokracia.admin.Debate.closeDebate', {
         defaultValue: 'Close debate',
@@ -171,6 +186,13 @@ export default function AdminAdminDashboardhomeDashboard() {
     },
   ];
   const issuesRowActions: TableRowAction<AdminIssueStored>[] = [
+    {
+      id: 'DeleteActionedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardEdemokraciaAdminAdminEdemokraciaAdminDashboardIssuesRowDelete',
+      label: t('judo.pages.table.delete', { defaultValue: 'Delete' }) as string,
+      icon: <MdiIcon path="delete_forever" />,
+      action: async (row: AdminIssueStored) => rowDeleteIssuesAction(data, row, () => fetchData()),
+      disabled: (row: AdminIssueStored) => editMode || !row.__deleteable,
+    },
     {
       id: 'CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardEdemokraciaAdminAdminEdemokraciaAdminIssueCreateDebateButtonCallOperation',
       label: t('edemokracia.admin.Admin.dashboardhome.Dashboard.edemokracia.admin.Issue.createDebate', {

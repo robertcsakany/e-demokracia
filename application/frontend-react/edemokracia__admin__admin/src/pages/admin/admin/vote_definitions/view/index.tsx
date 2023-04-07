@@ -128,7 +128,9 @@ export default function AdminAdminVoteDefinitionsView() {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [validation, setValidation] = useState<Map<keyof AdminVoteDefinitionStored, string>>(new Map());
 
-  const title: string = t('edemokracia.admin.Admin.voteDefinitions.View', { defaultValue: 'TransferObject View' });
+  const title: string = t('edemokracia.admin.Admin.voteDefinitions.View', {
+    defaultValue: 'View / Edit Vote Definition',
+  });
 
   useConfirmationBeforeChange(
     editMode,
@@ -255,16 +257,16 @@ export default function AdminAdminVoteDefinitionsView() {
             justifyContent="flex-start"
           >
             <Grid item xs={12} sm={12}>
-              <Card id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewGroup">
+              <Card id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewGroup">
                 <CardContent>
                   <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                     <Grid item xs={12} sm={12}>
                       <TextField
                         required
                         name="title"
-                        id="TextInputedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewGroupTitle"
+                        id="TextInputedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewGroupTitle"
                         label={
-                          t('edemokracia.admin.Admin.voteDefinitions.TransferObject.View.group.title', {
+                          t('edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.group.title', {
                             defaultValue: 'Title',
                           }) as string
                         }
@@ -296,14 +298,14 @@ export default function AdminAdminVoteDefinitionsView() {
                           <TextField
                             required
                             {...props}
-                            id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewGroupCloseAt"
+                            id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewGroupCloseAt"
                             className={!editMode ? 'JUDO-viewMode' : undefined}
                             error={!!validation.get('closeAt')}
                             helperText={validation.get('closeAt')}
                           />
                         )}
                         label={
-                          t('edemokracia.admin.Admin.voteDefinitions.TransferObject.View.group.closeAt', {
+                          t('edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.group.closeAt', {
                             defaultValue: 'CloseAt',
                           }) as string
                         }
@@ -327,9 +329,9 @@ export default function AdminAdminVoteDefinitionsView() {
                       <TextField
                         required
                         name="status"
-                        id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewGroupStatus"
+                        id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewGroupStatus"
                         label={
-                          t('edemokracia.admin.Admin.voteDefinitions.TransferObject.View.group.status', {
+                          t('edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.group.status', {
                             defaultValue: 'Status',
                           }) as string
                         }
@@ -390,7 +392,7 @@ export default function AdminAdminVoteDefinitionsView() {
                           })
                         }
                       >
-                        {t('edemokracia.admin.Admin.voteDefinitions.TransferObject.View.group.debate', {
+                        {t('edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.group.debate', {
                           defaultValue: 'Debate',
                         })}
                         <MdiIcon path="arrow-right" />
@@ -405,14 +407,14 @@ export default function AdminAdminVoteDefinitionsView() {
                           <TextField
                             required
                             {...props}
-                            id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewGroupCreated"
+                            id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewGroupCreated"
                             className={!editMode ? 'JUDO-viewMode' : undefined}
                             error={!!validation.get('created')}
                             helperText={validation.get('created')}
                           />
                         )}
                         label={
-                          t('edemokracia.admin.Admin.voteDefinitions.TransferObject.View.group.created', {
+                          t('edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.group.created', {
                             defaultValue: 'Created',
                           }) as string
                         }
@@ -436,9 +438,9 @@ export default function AdminAdminVoteDefinitionsView() {
                       <TextField
                         required
                         name="description"
-                        id="TextAreaedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewGroupDescription"
+                        id="TextAreaedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewGroupDescription"
                         label={
-                          t('edemokracia.admin.Admin.voteDefinitions.TransferObject.View.group.description', {
+                          t('edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.group.description', {
                             defaultValue: 'Description',
                           }) as string
                         }
@@ -470,26 +472,26 @@ export default function AdminAdminVoteDefinitionsView() {
 
             <Grid container item xs={12} sm={12}>
               <ModeledTabs
-                id="TabControlleredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBar"
+                id="TabControlleredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewTabBar"
                 activeIndex={0}
                 childTabs={[
                   {
-                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarYesnovote',
+                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewTabBarYesnovote',
                     name: 'yesnovote',
                     label: 'Yes / No vote',
                   },
                   {
-                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarYesnoabstainvote',
+                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewTabBarYesnoabstainvote',
                     name: 'yesnoabstainvote',
                     label: 'Yes / No / Abstain vote',
                   },
                   {
-                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarSelectanswervote',
+                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewTabBarSelectanswervote',
                     name: 'selectanswervote',
                     label: 'Select answer vote',
                   },
                   {
-                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarRatingvote',
+                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewTabBarRatingvote',
                     name: 'ratingvote',
                     label: 'Rating vote',
                   },
@@ -498,7 +500,7 @@ export default function AdminAdminVoteDefinitionsView() {
                 {!data.isNotYesNoType && (
                   <Grid item xs={12} sm={12}>
                     <Grid
-                      id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarYesnovoteYesnovote"
+                      id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewTabBarYesnovoteYesnovote"
                       container
                       direction="row"
                       alignItems="flex-start"
@@ -513,7 +515,7 @@ export default function AdminAdminVoteDefinitionsView() {
                         >
                           <MdiIcon path="chevron_right" />
                           {t(
-                            'edemokracia.admin.Admin.voteDefinitions.TransferObject.View.tabBar.yesnovote.yesnovote.voteYesNo',
+                            'edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.tabBar.yesnovote.yesnovote.voteYesNo',
                             { defaultValue: 'VoteYesNo' },
                           )}
                         </Button>
@@ -524,7 +526,7 @@ export default function AdminAdminVoteDefinitionsView() {
                 {!data.isNotYesNoAbstainType && (
                   <Grid item xs={12} sm={12}>
                     <Grid
-                      id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarYesnoabstainvoteYesnoabstainvote"
+                      id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewTabBarYesnoabstainvoteYesnoabstainvote"
                       container
                       direction="row"
                       alignItems="flex-start"
@@ -539,7 +541,7 @@ export default function AdminAdminVoteDefinitionsView() {
                         >
                           <MdiIcon path="chevron_right" />
                           {t(
-                            'edemokracia.admin.Admin.voteDefinitions.TransferObject.View.tabBar.yesnoabstainvote.yesnoabstainvote.voteYesNoAbstain',
+                            'edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.tabBar.yesnoabstainvote.yesnoabstainvote.voteYesNoAbstain',
                             { defaultValue: 'VoteYesNoAbstain' },
                           )}
                         </Button>
@@ -550,7 +552,7 @@ export default function AdminAdminVoteDefinitionsView() {
                 {!data.isNotSelectAnswerType && (
                   <Grid item xs={12} sm={12}>
                     <Grid
-                      id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarSelectanswervoteSelectanswervote"
+                      id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewTabBarSelectanswervoteSelectanswervote"
                       container
                       direction="row"
                       alignItems="flex-start"
@@ -565,7 +567,7 @@ export default function AdminAdminVoteDefinitionsView() {
                         >
                           <MdiIcon path="chevron_right" />
                           {t(
-                            'edemokracia.admin.Admin.voteDefinitions.TransferObject.View.tabBar.selectanswervote.selectanswervote.voteSelectAnswer',
+                            'edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.tabBar.selectanswervote.selectanswervote.voteSelectAnswer',
                             { defaultValue: 'VoteSelectAnswer' },
                           )}
                         </Button>
@@ -576,7 +578,7 @@ export default function AdminAdminVoteDefinitionsView() {
                 {!data.isNotRatingType && (
                   <Grid item xs={12} sm={12}>
                     <Grid
-                      id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultTransferObjectViewTabBarRatingvoteRatingvote"
+                      id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewTabBarRatingvoteRatingvote"
                       container
                       direction="row"
                       alignItems="flex-start"
@@ -591,7 +593,7 @@ export default function AdminAdminVoteDefinitionsView() {
                         >
                           <MdiIcon path="chevron_right" />
                           {t(
-                            'edemokracia.admin.Admin.voteDefinitions.TransferObject.View.tabBar.ratingvote.ratingvote.voteRating',
+                            'edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.tabBar.ratingvote.ratingvote.voteRating',
                             { defaultValue: 'VoteRating' },
                           )}
                         </Button>

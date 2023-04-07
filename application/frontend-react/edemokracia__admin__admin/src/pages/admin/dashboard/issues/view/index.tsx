@@ -18,9 +18,9 @@ import {
   Button,
   TextField,
   MenuItem,
+  Typography,
   InputAdornment,
   Card,
-  Typography,
 } from '@mui/material';
 import {
   GridRowId,
@@ -102,43 +102,47 @@ import { mainContainerPadding } from '../../../../../theme';
 import { useAdminDashboardIssuesView } from './hooks/useAdminDashboardIssuesView';
 import {
   usePageRefreshIssuesAction,
-  useRowViewCategoriesAction,
+  usePageDeleteIssuesAction,
   useRowViewCommentsAction,
+  useAdminIssueCreateDebateAction,
+  useAdminCommentVoteDownAction,
+  useTableCreateAttachmentsAction,
+  useAdminIssueCreateCommentAction,
+  useRowViewCategoriesAction,
+  usePageEditIssuesAction,
   useRowViewDebatesAction,
   useLinkViewOwnerAction,
-  useAdminIssueCreateDebateAction,
   useRowViewAttachmentsAction,
-  useAdminCommentVoteDownAction,
   useRowEditAttachmentsAction,
   useAdminCommentVoteUpAction,
-  useTableCreateAttachmentsAction,
   useRowDeleteAttachmentsAction,
-  useAdminIssueCreateCommentAction,
 } from './actions';
 
 /**
  * Name: edemokracia::admin::Dashboard.issues#View
  * Is Access: false
  * Type: View
- * Edit Mode Available: false
+ * Edit Mode Available: true
  **/
 export default function AdminDashboardIssuesView() {
   const { t } = useTranslation();
   const { navigate, back } = useJudoNavigation();
   const { signedIdentifier } = useParams();
   const pageRefreshIssuesAction = usePageRefreshIssuesAction();
-  const rowViewCategoriesAction = useRowViewCategoriesAction();
+  const pageDeleteIssuesAction = usePageDeleteIssuesAction();
   const rowViewCommentsAction = useRowViewCommentsAction();
+  const AdminIssueCreateDebateAction = useAdminIssueCreateDebateAction();
+  const AdminCommentVoteDownAction = useAdminCommentVoteDownAction();
+  const tableCreateAttachmentsAction = useTableCreateAttachmentsAction();
+  const AdminIssueCreateCommentAction = useAdminIssueCreateCommentAction();
+  const rowViewCategoriesAction = useRowViewCategoriesAction();
+  const pageEditIssuesAction = usePageEditIssuesAction();
   const rowViewDebatesAction = useRowViewDebatesAction();
   const linkViewOwnerAction = useLinkViewOwnerAction();
-  const AdminIssueCreateDebateAction = useAdminIssueCreateDebateAction();
   const rowViewAttachmentsAction = useRowViewAttachmentsAction();
-  const AdminCommentVoteDownAction = useAdminCommentVoteDownAction();
   const rowEditAttachmentsAction = useRowEditAttachmentsAction();
   const AdminCommentVoteUpAction = useAdminCommentVoteUpAction();
-  const tableCreateAttachmentsAction = useTableCreateAttachmentsAction();
   const rowDeleteAttachmentsAction = useRowDeleteAttachmentsAction();
-  const AdminIssueCreateCommentAction = useAdminIssueCreateCommentAction();
 
   const { openRangeDialog } = useRangeDialog();
   const { downloadFile, uploadFile } = fileHandling();
@@ -163,6 +167,12 @@ export default function AdminDashboardIssuesView() {
 
   const handleFetchError = useErrorHandler(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleUpdateError = useErrorHandler<AdminIssueStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminDashboardIssuesView))`,
+  );
+  const handleDeleteError = useErrorHandler<AdminIssueStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Delete)(component=AdminDashboardIssuesView))`,
   );
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -274,6 +284,37 @@ export default function AdminDashboardIssuesView() {
     }
   };
 
+  const saveData = async () => {
+    setIsLoading(true);
+
+    try {
+      const res = await adminIssueServiceImpl.update(payloadDiff);
+
+      if (res) {
+        await fetchData();
+        setEditMode(false);
+      }
+    } catch (error) {
+      handleUpdateError(error, { setValidation }, data);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const deleteData = async () => {
+    setIsLoading(true);
+
+    try {
+      await adminIssueServiceImpl.delete(data);
+
+      back();
+    } catch (error) {
+      handleDeleteError(error, undefined, data);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -285,11 +326,43 @@ export default function AdminDashboardIssuesView() {
   return (
     <>
       <PageHeader title={title}>
+        {editMode && (
+          <Grid item>
+            <Button
+              id="page-action-edit-cancel"
+              variant="outlined"
+              onClick={() => {
+                setEditMode(false);
+                fetchData();
+              }}
+              disabled={isLoading}
+            >
+              <MdiIcon path="cancel" />
+              {t('judo.pages.cancel', { defaultValue: 'Cancel' })}
+            </Button>
+          </Grid>
+        )}
+        {editMode && (
+          <Grid item>
+            <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
+              <MdiIcon path="content-save" />
+              {t('judo.pages.save', { defaultValue: 'Save' })}
+            </Button>
+          </Grid>
+        )}
         {!editMode && (
           <Grid item>
             <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
               <MdiIcon path="refresh" />
               {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
+            </Button>
+          </Grid>
+        )}
+        {!editMode && (
+          <Grid item>
+            <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
+              <MdiIcon path="delete" />
+              {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
           </Grid>
         )}
@@ -632,7 +705,7 @@ export default function AdminDashboardIssuesView() {
                                       id="CreateActionedemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewEdemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsTableCreate"
                                       variant="text"
                                       onClick={() => tableCreateAttachmentsAction(data, () => fetchData())}
-                                      disabled={isLoading || !false || editMode}
+                                      disabled={isLoading || !true || editMode}
                                     >
                                       <MdiIcon path="file_document_plus" />
                                       {t('judo.pages.table.create', { defaultValue: 'Create' })}
@@ -712,9 +785,13 @@ export default function AdminDashboardIssuesView() {
                                             ...(data.categories || []),
                                             ...(res as AdminIssueCategoryStored[]),
                                           ]);
+
+                                          if (!editMode) {
+                                            setEditMode(true);
+                                          }
                                         }
                                       }}
-                                      disabled={isLoading || !false}
+                                      disabled={isLoading || !true}
                                     >
                                       <MdiIcon path="attachment-plus" />
                                       {t('judo.pages.table.add', { defaultValue: 'Add' })}
@@ -724,8 +801,12 @@ export default function AdminDashboardIssuesView() {
                                       variant="text"
                                       onClick={async () => {
                                         storeDiff('categories', []);
+
+                                        if (!editMode) {
+                                          setEditMode(true);
+                                        }
                                       }}
-                                      disabled={isLoading || !false}
+                                      disabled={isLoading || !true}
                                     >
                                       <MdiIcon path="link_off" />
                                       {t('judo.pages.table.clear', { defaultValue: 'Clear' })}
@@ -760,6 +841,22 @@ export default function AdminDashboardIssuesView() {
                         justifyContent="flex-start"
                         spacing={2}
                       >
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                            <MdiIcon path="wechat" />
+                            <Typography
+                              id="LabeledemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebatesLabel"
+                              variant="h6"
+                              component="h1"
+                            >
+                              {t(
+                                'edemokracia.admin.Dashboard.issues.Issue.View.other.debates.debates.debates.debates.Label',
+                                { defaultValue: 'Debates' },
+                              )}
+                            </Typography>
+                          </Grid>
+                        </Grid>
+
                         <Grid item xs={12} sm={12}>
                           <Grid
                             id="TableedemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebates"

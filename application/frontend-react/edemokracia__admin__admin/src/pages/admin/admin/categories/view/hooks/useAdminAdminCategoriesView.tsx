@@ -37,7 +37,7 @@ export const useAdminAdminCategoriesView = () => {
     {
       ...baseColumnConfig,
       field: 'title',
-      headerName: t('edemokracia.admin.Admin.categories.Category.subcategories.subcategories.title', {
+      headerName: t('edemokracia.admin.Admin.categories.Category.View.subcategories.subcategories.title', {
         defaultValue: 'Title',
       }) as string,
       width: 230,
@@ -46,7 +46,7 @@ export const useAdminAdminCategoriesView = () => {
     {
       ...baseColumnConfig,
       field: 'description',
-      headerName: t('edemokracia.admin.Admin.categories.Category.subcategories.subcategories.description', {
+      headerName: t('edemokracia.admin.Admin.categories.Category.View.subcategories.subcategories.description', {
         defaultValue: 'Description',
       }) as string,
       width: 230,
@@ -56,17 +56,17 @@ export const useAdminAdminCategoriesView = () => {
 
   const subcategoriesRangeFilterOptions: FilterOption[] = [
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesViewDefaultCategorySubcategoriesLabelWrapperSubcategoriesTitleFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesViewDefaultCategoryViewSubcategoriesLabelWrapperSubcategoriesTitleFilter',
       attributeName: 'title',
-      label: t('edemokracia.admin.Admin.categories.Category.subcategories.subcategories.title.Filter', {
+      label: t('edemokracia.admin.Admin.categories.Category.View.subcategories.subcategories.title.Filter', {
         defaultValue: 'Title',
       }) as string,
       filterType: FilterType.string,
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesViewDefaultCategorySubcategoriesLabelWrapperSubcategoriesDescriptionFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesViewDefaultCategoryViewSubcategoriesLabelWrapperSubcategoriesDescriptionFilter',
       attributeName: 'description',
-      label: t('edemokracia.admin.Admin.categories.Category.subcategories.subcategories.description.Filter', {
+      label: t('edemokracia.admin.Admin.categories.Category.View.subcategories.subcategories.description.Filter', {
         defaultValue: 'Description',
       }) as string,
       filterType: FilterType.string,
@@ -90,7 +90,7 @@ export const useAdminAdminCategoriesView = () => {
     {
       ...baseColumnConfig,
       field: 'representation',
-      headerName: t('edemokracia.admin.Admin.categories.Category.owner.representation', {
+      headerName: t('edemokracia.admin.Admin.categories.Category.View.owner.representation', {
         defaultValue: 'Representation',
       }) as string,
       width: 230,
@@ -100,9 +100,9 @@ export const useAdminAdminCategoriesView = () => {
 
   const ownerRangeFilterOptions: FilterOption[] = [
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesViewDefaultCategoryOwnerRepresentationFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesViewDefaultCategoryViewOwnerRepresentationFilter',
       attributeName: 'representation',
-      label: t('edemokracia.admin.Admin.categories.Category.owner.representation.Filter', {
+      label: t('edemokracia.admin.Admin.categories.Category.View.owner.representation.Filter', {
         defaultValue: 'Representation',
       }) as string,
       filterType: FilterType.string,

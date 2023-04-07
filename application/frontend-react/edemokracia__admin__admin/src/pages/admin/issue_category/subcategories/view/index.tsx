@@ -10,7 +10,7 @@
 
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Container, Grid, CardContent, Button, TextField, Card, Typography, InputAdornment } from '@mui/material';
+import { Box, Container, Grid, CardContent, Button, TextField, Typography, InputAdornment, Card } from '@mui/material';
 import {
   GridRowId,
   DataGrid,
@@ -281,9 +281,11 @@ export default function AdminIssueCategorySubcategoriesView() {
               <TextField
                 required
                 name="title"
-                id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryTitle"
+                id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryViewTitle"
                 label={
-                  t('edemokracia.admin.IssueCategory.subcategories.Category.title', { defaultValue: 'Title' }) as string
+                  t('edemokracia.admin.IssueCategory.subcategories.Category.View.title', {
+                    defaultValue: 'Title',
+                  }) as string
                 }
                 value={data.title}
                 className={!editMode ? 'JUDO-viewMode' : undefined}
@@ -309,9 +311,9 @@ export default function AdminIssueCategorySubcategoriesView() {
               <TextField
                 required
                 name="description"
-                id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryDescription"
+                id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryViewDescription"
                 label={
-                  t('edemokracia.admin.IssueCategory.subcategories.Category.description', {
+                  t('edemokracia.admin.IssueCategory.subcategories.Category.View.description', {
                     defaultValue: 'Description',
                   }) as string
                 }
@@ -338,9 +340,11 @@ export default function AdminIssueCategorySubcategoriesView() {
             <Grid item xs={12} sm={12}>
               <AggregationInput
                 name="owner"
-                id="LinkedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryOwner"
+                id="LinkedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryViewOwner"
                 label={
-                  t('edemokracia.admin.IssueCategory.subcategories.Category.owner', { defaultValue: 'Owner' }) as string
+                  t('edemokracia.admin.IssueCategory.subcategories.Category.View.owner', {
+                    defaultValue: 'Owner',
+                  }) as string
                 }
                 labelList={[data.owner?.representation?.toString() ?? '']}
                 value={data.owner}
@@ -380,7 +384,7 @@ export default function AdminIssueCategorySubcategoriesView() {
 
             <Grid item xs={12} sm={12}>
               <Grid
-                id="FlexedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategorySubcategoriesLabelWrapper"
+                id="FlexedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryViewSubcategoriesLabelWrapper"
                 container
                 direction="column"
                 alignItems="stretch"
@@ -391,20 +395,21 @@ export default function AdminIssueCategorySubcategoriesView() {
                   <Grid container direction="row" alignItems="center" justifyContent="flex-start">
                     <MdiIcon path="file-tree" />
                     <Typography
-                      id="LabeledemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategorySubcategoriesLabelWrapperSubcategoriesLabel"
+                      id="LabeledemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryViewSubcategoriesLabelWrapperSubcategoriesLabel"
                       variant="h6"
                       component="h1"
                     >
-                      {t('edemokracia.admin.IssueCategory.subcategories.Category.subcategories.subcategories.Label', {
-                        defaultValue: 'Subcategories',
-                      })}
+                      {t(
+                        'edemokracia.admin.IssueCategory.subcategories.Category.View.subcategories.subcategories.Label',
+                        { defaultValue: 'Subcategories' },
+                      )}
                     </Typography>
                   </Grid>
                 </Grid>
 
                 <Grid item xs={12} sm={12}>
                   <Grid
-                    id="TableedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategorySubcategoriesLabelWrapperSubcategories"
+                    id="TableedemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryViewSubcategoriesLabelWrapperSubcategories"
                     container
                     direction="column"
                     alignItems="stretch"

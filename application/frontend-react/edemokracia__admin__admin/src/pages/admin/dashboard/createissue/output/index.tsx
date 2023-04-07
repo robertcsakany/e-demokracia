@@ -18,9 +18,9 @@ import {
   Button,
   TextField,
   MenuItem,
+  Typography,
   InputAdornment,
   Card,
-  Typography,
 } from '@mui/material';
 import {
   GridRowId,
@@ -755,6 +755,22 @@ export default function AdminDashboardCreateissueOutput() {
                         justifyContent="flex-start"
                         spacing={2}
                       >
+                        <Grid item xs={12} sm={12}>
+                          <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                            <MdiIcon path="wechat" />
+                            <Typography
+                              id="LabeledemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueOutputDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebatesLabel"
+                              variant="h6"
+                              component="h1"
+                            >
+                              {t(
+                                'edemokracia.admin.Dashboard.createIssue.Issue.View.other.debates.debates.debates.debates.Label',
+                                { defaultValue: 'Debates' },
+                              )}
+                            </Typography>
+                          </Grid>
+                        </Grid>
+
                         <Grid item xs={12} sm={12}>
                           <Grid
                             id="TableedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueOutputDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebates"

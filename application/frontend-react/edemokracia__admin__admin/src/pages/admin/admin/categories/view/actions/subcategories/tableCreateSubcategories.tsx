@@ -19,7 +19,6 @@ import { useErrorHandler, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../../..
 
 import {
   AdminIssueCategoryStored,
-  AdminIssueCategoryMaskBuilder,
   AdminIssueCategory,
   AdminUserStored,
   AdminUserQueryCustomizer,

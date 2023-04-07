@@ -161,7 +161,7 @@ export function PageCreateVotesForm({ successCallback, cancel, owner }: PageCrea
         <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
           <Grid item xs={12} sm={12}>
             <Grid
-              id="FlexedemokraciaAdminAdminEdemokraciaAdminProVotesCreateDefaultCreateVoteGroup"
+              id="FlexedemokraciaAdminAdminEdemokraciaAdminProVotesCreateDefaultVoteFormGroup"
               container
               direction="row"
               alignItems="flex-start"
@@ -176,14 +176,14 @@ export function PageCreateVotesForm({ successCallback, cancel, owner }: PageCrea
                     <TextField
                       required
                       {...props}
-                      id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminProVotesCreateDefaultCreateVoteGroupCreated"
+                      id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminProVotesCreateDefaultVoteFormGroupCreated"
                       className={!editMode ? 'JUDO-viewMode' : undefined}
                       error={!!validation.get('created')}
                       helperText={validation.get('created')}
                     />
                   )}
                   label={
-                    t('edemokracia.admin.Pro.votes.Create.Vote.group.created', { defaultValue: 'Created' }) as string
+                    t('edemokracia.admin.Pro.votes.Vote.Form.group.created', { defaultValue: 'Created' }) as string
                   }
                   value={data.created ?? null}
                   disabled={false}
@@ -205,8 +205,8 @@ export function PageCreateVotesForm({ successCallback, cancel, owner }: PageCrea
                 <TextField
                   required
                   name="type"
-                  id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminProVotesCreateDefaultCreateVoteGroupType"
-                  label={t('edemokracia.admin.Pro.votes.Create.Vote.group.type', { defaultValue: 'Type' }) as string}
+                  id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminProVotesCreateDefaultVoteFormGroupType"
+                  label={t('edemokracia.admin.Pro.votes.Vote.Form.group.type', { defaultValue: 'Type' }) as string}
                   value={data.type || ''}
                   className={!editMode ? 'JUDO-viewMode' : undefined}
                   disabled={false}
@@ -239,7 +239,7 @@ export function PageCreateVotesForm({ successCallback, cancel, owner }: PageCrea
 
           <Grid item xs={12} sm={12}>
             <Grid
-              id="FlexedemokraciaAdminAdminEdemokraciaAdminProVotesCreateDefaultCreateVoteGroup2"
+              id="FlexedemokraciaAdminAdminEdemokraciaAdminProVotesCreateDefaultVoteFormGroup2"
               container
               direction="row"
               alignItems="flex-start"

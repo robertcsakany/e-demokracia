@@ -10,7 +10,7 @@
 
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Container, Grid, CardContent, Button, TextField, Card, Typography, InputAdornment } from '@mui/material';
+import { Box, Container, Grid, CardContent, Button, TextField, Typography, InputAdornment, Card } from '@mui/material';
 import {
   GridRowId,
   DataGrid,
@@ -208,8 +208,8 @@ export default function AdminIssueCategoriesView() {
               <TextField
                 required
                 name="title"
-                id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueCategoriesViewDefaultCategoryTitle"
-                label={t('edemokracia.admin.Issue.categories.Category.title', { defaultValue: 'Title' }) as string}
+                id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueCategoriesViewDefaultCategoryViewTitle"
+                label={t('edemokracia.admin.Issue.categories.Category.View.title', { defaultValue: 'Title' }) as string}
                 value={data.title}
                 className={!editMode ? 'JUDO-viewMode' : undefined}
                 disabled={false}
@@ -234,9 +234,9 @@ export default function AdminIssueCategoriesView() {
               <TextField
                 required
                 name="description"
-                id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueCategoriesViewDefaultCategoryDescription"
+                id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueCategoriesViewDefaultCategoryViewDescription"
                 label={
-                  t('edemokracia.admin.Issue.categories.Category.description', {
+                  t('edemokracia.admin.Issue.categories.Category.View.description', {
                     defaultValue: 'Description',
                   }) as string
                 }
@@ -263,8 +263,8 @@ export default function AdminIssueCategoriesView() {
             <Grid item xs={12} sm={12}>
               <AggregationInput
                 name="owner"
-                id="LinkedemokraciaAdminAdminEdemokraciaAdminIssueCategoriesViewDefaultCategoryOwner"
-                label={t('edemokracia.admin.Issue.categories.Category.owner', { defaultValue: 'Owner' }) as string}
+                id="LinkedemokraciaAdminAdminEdemokraciaAdminIssueCategoriesViewDefaultCategoryViewOwner"
+                label={t('edemokracia.admin.Issue.categories.Category.View.owner', { defaultValue: 'Owner' }) as string}
                 labelList={[data.owner?.representation?.toString() ?? '']}
                 value={data.owner}
                 error={!!validation.get('owner')}
@@ -303,7 +303,7 @@ export default function AdminIssueCategoriesView() {
 
             <Grid item xs={12} sm={12}>
               <Grid
-                id="FlexedemokraciaAdminAdminEdemokraciaAdminIssueCategoriesViewDefaultCategorySubcategoriesLabelWrapper"
+                id="FlexedemokraciaAdminAdminEdemokraciaAdminIssueCategoriesViewDefaultCategoryViewSubcategoriesLabelWrapper"
                 container
                 direction="column"
                 alignItems="stretch"
@@ -314,11 +314,11 @@ export default function AdminIssueCategoriesView() {
                   <Grid container direction="row" alignItems="center" justifyContent="flex-start">
                     <MdiIcon path="file-tree" />
                     <Typography
-                      id="LabeledemokraciaAdminAdminEdemokraciaAdminIssueCategoriesViewDefaultCategorySubcategoriesLabelWrapperSubcategoriesLabel"
+                      id="LabeledemokraciaAdminAdminEdemokraciaAdminIssueCategoriesViewDefaultCategoryViewSubcategoriesLabelWrapperSubcategoriesLabel"
                       variant="h6"
                       component="h1"
                     >
-                      {t('edemokracia.admin.Issue.categories.Category.subcategories.subcategories.Label', {
+                      {t('edemokracia.admin.Issue.categories.Category.View.subcategories.subcategories.Label', {
                         defaultValue: 'Subcategories',
                       })}
                     </Typography>
@@ -327,7 +327,7 @@ export default function AdminIssueCategoriesView() {
 
                 <Grid item xs={12} sm={12}>
                   <Grid
-                    id="TableedemokraciaAdminAdminEdemokraciaAdminIssueCategoriesViewDefaultCategorySubcategoriesLabelWrapperSubcategories"
+                    id="TableedemokraciaAdminAdminEdemokraciaAdminIssueCategoriesViewDefaultCategoryViewSubcategoriesLabelWrapperSubcategories"
                     container
                     direction="column"
                     alignItems="stretch"

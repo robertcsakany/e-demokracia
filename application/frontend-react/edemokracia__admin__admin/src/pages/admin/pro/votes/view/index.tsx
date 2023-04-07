@@ -240,7 +240,7 @@ export default function AdminProVotesView() {
           >
             <Grid item xs={12} sm={12}>
               <Grid
-                id="FlexedemokraciaAdminAdminEdemokraciaAdminProVotesViewDefaultVoteGroup"
+                id="FlexedemokraciaAdminAdminEdemokraciaAdminProVotesViewDefaultVoteViewGroup"
                 container
                 direction="row"
                 alignItems="flex-start"
@@ -255,13 +255,15 @@ export default function AdminProVotesView() {
                       <TextField
                         required
                         {...props}
-                        id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminProVotesViewDefaultVoteGroupCreated"
+                        id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminProVotesViewDefaultVoteViewGroupCreated"
                         className={!editMode ? 'JUDO-viewMode' : undefined}
                         error={!!validation.get('created')}
                         helperText={validation.get('created')}
                       />
                     )}
-                    label={t('edemokracia.admin.Pro.votes.Vote.group.created', { defaultValue: 'Created' }) as string}
+                    label={
+                      t('edemokracia.admin.Pro.votes.Vote.View.group.created', { defaultValue: 'Created' }) as string
+                    }
                     value={data.created ?? null}
                     disabled={false}
                     onChange={(newValue: any) => {
@@ -282,8 +284,8 @@ export default function AdminProVotesView() {
                   <TextField
                     required
                     name="type"
-                    id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminProVotesViewDefaultVoteGroupType"
-                    label={t('edemokracia.admin.Pro.votes.Vote.group.type', { defaultValue: 'Type' }) as string}
+                    id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminProVotesViewDefaultVoteViewGroupType"
+                    label={t('edemokracia.admin.Pro.votes.Vote.View.group.type', { defaultValue: 'Type' }) as string}
                     value={data.type || ''}
                     className={!editMode ? 'JUDO-viewMode' : undefined}
                     disabled={false}
@@ -316,7 +318,7 @@ export default function AdminProVotesView() {
 
             <Grid item xs={12} sm={12}>
               <Grid
-                id="FlexedemokraciaAdminAdminEdemokraciaAdminProVotesViewDefaultVoteGroup2"
+                id="FlexedemokraciaAdminAdminEdemokraciaAdminProVotesViewDefaultVoteViewGroup2"
                 container
                 direction="row"
                 alignItems="flex-start"

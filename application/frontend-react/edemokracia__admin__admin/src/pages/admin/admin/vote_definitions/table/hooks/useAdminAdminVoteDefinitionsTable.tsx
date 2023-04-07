@@ -24,7 +24,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
     {
       ...baseColumnConfig,
       field: 'title',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.title', {
+      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.title', {
         defaultValue: 'Title',
       }) as string,
       width: 230,
@@ -33,7 +33,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
     {
       ...baseColumnConfig,
       field: 'created',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.created', {
+      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.created', {
         defaultValue: 'Created',
       }) as string,
       width: 170,
@@ -42,7 +42,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
     {
       ...baseColumnConfig,
       field: 'description',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.description', {
+      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.description', {
         defaultValue: 'Description',
       }) as string,
       width: 230,
@@ -51,7 +51,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
     {
       ...baseColumnConfig,
       field: 'status',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.status', {
+      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.status', {
         defaultValue: 'Status',
       }) as string,
       width: 170,
@@ -64,7 +64,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
     {
       ...baseColumnConfig,
       field: 'closeAt',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.closeAt', {
+      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.closeAt', {
         defaultValue: 'CloseAt',
       }) as string,
       width: 170,
@@ -73,7 +73,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
     {
       ...baseColumnConfig,
       field: 'isRatingType',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.isRatingType', {
+      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isRatingType', {
         defaultValue: 'IsRatingType',
       }) as string,
       width: 100,
@@ -90,7 +90,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
     {
       ...baseColumnConfig,
       field: 'isSelectAnswerType',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.isSelectAnswerType', {
+      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isSelectAnswerType', {
         defaultValue: 'IsSelectAnswerType',
       }) as string,
       width: 100,
@@ -107,7 +107,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
     {
       ...baseColumnConfig,
       field: 'isYesNoAbstainType',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.isYesNoAbstainType', {
+      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isYesNoAbstainType', {
         defaultValue: 'IsYesNoAbstainType',
       }) as string,
       width: 100,
@@ -124,7 +124,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
     {
       ...baseColumnConfig,
       field: 'isYesNoType',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.isYesNoType', {
+      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isYesNoType', {
         defaultValue: 'IsYesNoType',
       }) as string,
       width: 100,
@@ -142,76 +142,76 @@ export const useAdminAdminVoteDefinitionsTable = () => {
 
   const filterOptions: FilterOption[] = [
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableTitleFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableTitleFilter',
       attributeName: 'title',
-      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.title.Filter', {
+      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.title.Filter', {
         defaultValue: 'Title',
       }) as string,
       filterType: FilterType.string,
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableCreatedFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableCreatedFilter',
       attributeName: 'created',
-      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.created.Filter', {
+      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.created.Filter', {
         defaultValue: 'Created',
       }) as string,
       filterType: FilterType.dateTime,
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableDescriptionFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableDescriptionFilter',
       attributeName: 'description',
-      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.description.Filter', {
+      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.description.Filter', {
         defaultValue: 'Description',
       }) as string,
       filterType: FilterType.string,
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableStatusFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableStatusFilter',
       attributeName: 'status',
-      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.status.Filter', {
+      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.status.Filter', {
         defaultValue: 'Status',
       }) as string,
       filterType: FilterType.enumeration,
       enumValues: ['CREATED', 'PENDING', 'ACTIVE', 'CLOSED'],
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableCloseAtFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableCloseAtFilter',
       attributeName: 'closeAt',
-      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.closeAt.Filter', {
+      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.closeAt.Filter', {
         defaultValue: 'CloseAt',
       }) as string,
       filterType: FilterType.dateTime,
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableIsRatingTypeFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableIsRatingTypeFilter',
       attributeName: 'isRatingType',
-      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.isRatingType.Filter', {
+      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isRatingType.Filter', {
         defaultValue: 'IsRatingType',
       }) as string,
       filterType: FilterType.trinaryLogic,
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableIsSelectAnswerTypeFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableIsSelectAnswerTypeFilter',
       attributeName: 'isSelectAnswerType',
       label: t(
-        'edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.isSelectAnswerType.Filter',
+        'edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isSelectAnswerType.Filter',
         { defaultValue: 'IsSelectAnswerType' },
       ) as string,
       filterType: FilterType.trinaryLogic,
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableIsYesNoAbstainTypeFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableIsYesNoAbstainTypeFilter',
       attributeName: 'isYesNoAbstainType',
       label: t(
-        'edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.isYesNoAbstainType.Filter',
+        'edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isYesNoAbstainType.Filter',
         { defaultValue: 'IsYesNoAbstainType' },
       ) as string,
       filterType: FilterType.trinaryLogic,
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsTransferObjectTableIsYesNoTypeFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableIsYesNoTypeFilter',
       attributeName: 'isYesNoType',
-      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.TransferObject.Table.isYesNoType.Filter', {
+      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isYesNoType.Filter', {
         defaultValue: 'IsYesNoType',
       }) as string,
       filterType: FilterType.trinaryLogic,

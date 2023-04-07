@@ -24,7 +24,7 @@ export const useAdminAdminCategoriesTable = () => {
     {
       ...baseColumnConfig,
       field: 'title',
-      headerName: t('edemokracia.admin.Admin.categories.categories.Categories.List.title', {
+      headerName: t('edemokracia.admin.Admin.categories.categories.Category.Table.title', {
         defaultValue: 'Title',
       }) as string,
       width: 230,
@@ -33,7 +33,7 @@ export const useAdminAdminCategoriesTable = () => {
     {
       ...baseColumnConfig,
       field: 'description',
-      headerName: t('edemokracia.admin.Admin.categories.categories.Categories.List.description', {
+      headerName: t('edemokracia.admin.Admin.categories.categories.Category.Table.description', {
         defaultValue: 'Description',
       }) as string,
       width: 230,
@@ -43,17 +43,17 @@ export const useAdminAdminCategoriesTable = () => {
 
   const filterOptions: FilterOption[] = [
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesTableDefaultCategoriesCategoriesListTitleFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesTableDefaultCategoriesCategoryTableTitleFilter',
       attributeName: 'title',
-      label: t('edemokracia.admin.Admin.categories.categories.Categories.List.title.Filter', {
+      label: t('edemokracia.admin.Admin.categories.categories.Category.Table.title.Filter', {
         defaultValue: 'Title',
       }) as string,
       filterType: FilterType.string,
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesTableDefaultCategoriesCategoriesListDescriptionFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminCategoriesTableDefaultCategoriesCategoryTableDescriptionFilter',
       attributeName: 'description',
-      label: t('edemokracia.admin.Admin.categories.categories.Categories.List.description.Filter', {
+      label: t('edemokracia.admin.Admin.categories.categories.Category.Table.description.Filter', {
         defaultValue: 'Description',
       }) as string,
       filterType: FilterType.string,

@@ -163,7 +163,7 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
         <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
           <Grid item xs={12} sm={12}>
             <Grid
-              id="FlexedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultCreateAttachmentGroup"
+              id="FlexedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultAttachmentFormGroup"
               container
               direction="row"
               alignItems="flex-start"
@@ -174,9 +174,9 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
                 <TextField
                   required
                   name="type"
-                  id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultCreateAttachmentGroupType"
+                  id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultAttachmentFormGroupType"
                   label={
-                    t('edemokracia.admin.Issue.attachments.Create.Attachment.group.type', {
+                    t('edemokracia.admin.Issue.attachments.Attachment.Form.group.type', {
                       defaultValue: 'Type',
                     }) as string
                   }
@@ -217,9 +217,9 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
               <Grid item xs={12} sm={12} md={4.0}>
                 <TextField
                   name="link"
-                  id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultCreateAttachmentGroupLink"
+                  id="TextInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultAttachmentFormGroupLink"
                   label={
-                    t('edemokracia.admin.Issue.attachments.Create.Attachment.group.link', {
+                    t('edemokracia.admin.Issue.attachments.Attachment.Form.group.link', {
                       defaultValue: 'Link',
                     }) as string
                   }
@@ -247,9 +247,9 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
                 {editMode ? (
                   <TextField
                     name="file"
-                    id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultCreateAttachmentGroupFile"
+                    id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultAttachmentFormGroupFile"
                     label={
-                      t('edemokracia.admin.Issue.attachments.Create.Attachment.group.file', {
+                      t('edemokracia.admin.Issue.attachments.Attachment.Form.group.file', {
                         defaultValue: 'File',
                       }) as string
                     }
@@ -312,14 +312,14 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
                   />
                 ) : (
                   <Button
-                    id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultCreateAttachmentGroupFile-download"
+                    id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultAttachmentFormGroupFile-download"
                     variant="contained"
                     disabled={!data?.file}
                     onClick={() => downloadFile(data, 'file')}
                   >
                     <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
                     {
-                      t('edemokracia.admin.Issue.attachments.Create.Attachment.group.file', {
+                      t('edemokracia.admin.Issue.attachments.Attachment.Form.group.file', {
                         defaultValue: 'File',
                       }) as string
                     }

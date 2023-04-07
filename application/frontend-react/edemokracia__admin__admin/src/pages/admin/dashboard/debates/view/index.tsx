@@ -18,9 +18,9 @@ import {
   Button,
   TextField,
   MenuItem,
+  Typography,
   InputAdornment,
   Card,
-  Typography,
 } from '@mui/material';
 import {
   GridRowId,
@@ -109,9 +109,11 @@ import {
   useAdminDebateCreateCommentAction,
   useLinkViewVoteDefinitionAction,
   useRowViewProsAction,
+  usePageDeleteDebatesAction,
   useRowDeleteCommentsAction,
   useRowDeleteConsAction,
   useAdminProCreateSubArgumentAction,
+  usePageEditDebatesAction,
   useLinkViewCreatedByAction,
   usePageRefreshDebatesAction,
   useAdminConCreateCommentAction,
@@ -137,7 +139,7 @@ import {
  * Name: edemokracia::admin::Dashboard.debates#View
  * Is Access: false
  * Type: View
- * Edit Mode Available: false
+ * Edit Mode Available: true
  **/
 export default function AdminDashboardDebatesView() {
   const { t } = useTranslation();
@@ -147,9 +149,11 @@ export default function AdminDashboardDebatesView() {
   const AdminDebateCreateCommentAction = useAdminDebateCreateCommentAction();
   const linkViewVoteDefinitionAction = useLinkViewVoteDefinitionAction();
   const rowViewProsAction = useRowViewProsAction();
+  const pageDeleteDebatesAction = usePageDeleteDebatesAction();
   const rowDeleteCommentsAction = useRowDeleteCommentsAction();
   const rowDeleteConsAction = useRowDeleteConsAction();
   const AdminProCreateSubArgumentAction = useAdminProCreateSubArgumentAction();
+  const pageEditDebatesAction = usePageEditDebatesAction();
   const linkViewCreatedByAction = useLinkViewCreatedByAction();
   const pageRefreshDebatesAction = usePageRefreshDebatesAction();
   const AdminConCreateCommentAction = useAdminConCreateCommentAction();
@@ -187,6 +191,12 @@ export default function AdminDashboardDebatesView() {
 
   const handleFetchError = useErrorHandler(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
+  );
+  const handleUpdateError = useErrorHandler<AdminDebateStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminDashboardDebatesView))`,
+  );
+  const handleDeleteError = useErrorHandler<AdminDebateStored>(
+    `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Delete)(component=AdminDashboardDebatesView))`,
   );
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -352,6 +362,37 @@ export default function AdminDashboardDebatesView() {
     }
   };
 
+  const saveData = async () => {
+    setIsLoading(true);
+
+    try {
+      const res = await adminDebateServiceImpl.update(payloadDiff);
+
+      if (res) {
+        await fetchData();
+        setEditMode(false);
+      }
+    } catch (error) {
+      handleUpdateError(error, { setValidation }, data);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const deleteData = async () => {
+    setIsLoading(true);
+
+    try {
+      await adminDebateServiceImpl.delete(data);
+
+      back();
+    } catch (error) {
+      handleDeleteError(error, undefined, data);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -363,11 +404,43 @@ export default function AdminDashboardDebatesView() {
   return (
     <>
       <PageHeader title={title}>
+        {editMode && (
+          <Grid item>
+            <Button
+              id="page-action-edit-cancel"
+              variant="outlined"
+              onClick={() => {
+                setEditMode(false);
+                fetchData();
+              }}
+              disabled={isLoading}
+            >
+              <MdiIcon path="cancel" />
+              {t('judo.pages.cancel', { defaultValue: 'Cancel' })}
+            </Button>
+          </Grid>
+        )}
+        {editMode && (
+          <Grid item>
+            <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
+              <MdiIcon path="content-save" />
+              {t('judo.pages.save', { defaultValue: 'Save' })}
+            </Button>
+          </Grid>
+        )}
         {!editMode && (
           <Grid item>
             <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
               <MdiIcon path="refresh" />
               {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
+            </Button>
+          </Grid>
+        )}
+        {!editMode && (
+          <Grid item>
+            <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
+              <MdiIcon path="delete" />
+              {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
           </Grid>
         )}

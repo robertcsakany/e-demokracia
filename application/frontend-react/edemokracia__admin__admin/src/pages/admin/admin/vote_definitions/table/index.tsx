@@ -118,7 +118,7 @@ export default function AdminAdminVoteDefinitionsTable() {
       'isYesNoType',
     ),
   });
-  const title: string = t('edemokracia.admin.Admin.voteDefinitions.Table', { defaultValue: 'TransferObject Table' });
+  const title: string = t('edemokracia.admin.Admin.voteDefinitions.Table', { defaultValue: 'Vote Definitions' });
 
   const handleSortModelChange = (newModel: GridSortModel) => {
     setPage(0);

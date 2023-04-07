@@ -24,14 +24,14 @@ export const useAdminProVotesTable = () => {
     {
       ...baseColumnConfig,
       field: 'created',
-      headerName: t('edemokracia.admin.Pro.votes.votes.Votes.List.created', { defaultValue: 'Created' }) as string,
+      headerName: t('edemokracia.admin.Pro.votes.votes.Vote.Table.created', { defaultValue: 'Created' }) as string,
       width: 170,
       type: 'dateTime',
     },
     {
       ...baseColumnConfig,
       field: 'type',
-      headerName: t('edemokracia.admin.Pro.votes.votes.Votes.List.type', { defaultValue: 'Type' }) as string,
+      headerName: t('edemokracia.admin.Pro.votes.votes.Vote.Table.type', { defaultValue: 'Type' }) as string,
       width: 170,
       type: 'string',
       sortable: false,
@@ -43,15 +43,15 @@ export const useAdminProVotesTable = () => {
 
   const filterOptions: FilterOption[] = [
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProVotesTableDefaultVotesVotesListCreatedFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProVotesTableDefaultVotesVoteTableCreatedFilter',
       attributeName: 'created',
-      label: t('edemokracia.admin.Pro.votes.votes.Votes.List.created.Filter', { defaultValue: 'Created' }) as string,
+      label: t('edemokracia.admin.Pro.votes.votes.Vote.Table.created.Filter', { defaultValue: 'Created' }) as string,
       filterType: FilterType.dateTime,
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProVotesTableDefaultVotesVotesListTypeFilter',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProVotesTableDefaultVotesVoteTableTypeFilter',
       attributeName: 'type',
-      label: t('edemokracia.admin.Pro.votes.votes.Votes.List.type.Filter', { defaultValue: 'Type' }) as string,
+      label: t('edemokracia.admin.Pro.votes.votes.Vote.Table.type.Filter', { defaultValue: 'Type' }) as string,
       filterType: FilterType.enumeration,
       enumValues: ['UP', 'DOWN'],
     },

@@ -240,7 +240,7 @@ export default function AdminCommentVotesView() {
           >
             <Grid item xs={12} sm={12}>
               <Grid
-                id="FlexedemokraciaAdminAdminEdemokraciaAdminCommentVotesViewDefaultVoteGroup"
+                id="FlexedemokraciaAdminAdminEdemokraciaAdminCommentVotesViewDefaultVoteViewGroup"
                 container
                 direction="row"
                 alignItems="flex-start"
@@ -255,14 +255,16 @@ export default function AdminCommentVotesView() {
                       <TextField
                         required
                         {...props}
-                        id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminCommentVotesViewDefaultVoteGroupCreated"
+                        id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminCommentVotesViewDefaultVoteViewGroupCreated"
                         className={!editMode ? 'JUDO-viewMode' : undefined}
                         error={!!validation.get('created')}
                         helperText={validation.get('created')}
                       />
                     )}
                     label={
-                      t('edemokracia.admin.Comment.votes.Vote.group.created', { defaultValue: 'Created' }) as string
+                      t('edemokracia.admin.Comment.votes.Vote.View.group.created', {
+                        defaultValue: 'Created',
+                      }) as string
                     }
                     value={data.created ?? null}
                     disabled={false}
@@ -284,8 +286,10 @@ export default function AdminCommentVotesView() {
                   <TextField
                     required
                     name="type"
-                    id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminCommentVotesViewDefaultVoteGroupType"
-                    label={t('edemokracia.admin.Comment.votes.Vote.group.type', { defaultValue: 'Type' }) as string}
+                    id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminCommentVotesViewDefaultVoteViewGroupType"
+                    label={
+                      t('edemokracia.admin.Comment.votes.Vote.View.group.type', { defaultValue: 'Type' }) as string
+                    }
                     value={data.type || ''}
                     className={!editMode ? 'JUDO-viewMode' : undefined}
                     disabled={false}
@@ -318,7 +322,7 @@ export default function AdminCommentVotesView() {
 
             <Grid item xs={12} sm={12}>
               <Grid
-                id="FlexedemokraciaAdminAdminEdemokraciaAdminCommentVotesViewDefaultVoteGroup2"
+                id="FlexedemokraciaAdminAdminEdemokraciaAdminCommentVotesViewDefaultVoteViewGroup2"
                 container
                 direction="row"
                 alignItems="flex-start"
