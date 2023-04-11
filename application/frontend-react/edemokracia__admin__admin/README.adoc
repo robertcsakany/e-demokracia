@@ -1,0 +1,25 @@
+﻿## How use in dev mode
+
+
+# Set backend API URL
+
+export API_DEFAULT_BASE_URL="http://localhost:8181"
+export FILE_DEFAULT_BASE_URL="http://localhost:8181"
+
+# Install nvme
+
+# Install node version
+
+nvm install 18.15.0
+
+
+# Run dev server
+
+1. Open a new terminal
+2. npm run preview
+
+# Run build and watch
+
+1. Open a new terminal
+2. npm run build:dev
+3. npm run watch

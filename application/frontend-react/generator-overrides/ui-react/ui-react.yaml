@@ -1,0 +1,13 @@
+templates:
+  
+  - name: actor/public/logo192.png
+    exclude: true
+  
+  - name: actor/public/logo512.png
+    exclude: true
+  
+  - name: actor/public/judo-color-logo.png
+    pathExpression: "'public/mkkp-logo.png'"
+    templateName: actor/public/mkkp-logo.png
+    applicationBased: true
+    copy: true

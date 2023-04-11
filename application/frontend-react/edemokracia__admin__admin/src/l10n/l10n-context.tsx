@@ -1,3 +1,4 @@
+import 'dayjs/locale/hu';
 import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -26,7 +27,7 @@ export interface L10NTranslationProvider {
   provideTranslations(locale: string): Promise<L10NTranslations>;
 }
 export const L10NProvider = ({ children }: { children: ReactNode }) => {
-  const defaultLocale = '' || 'default';
+  const defaultLocale = 'hu-HU' || 'default';
   const [locale, setLocale] = useState<string>(defaultLocale);
   const [translation, setTranslation] = useState<any>(null);
   const [filter, setFilter] = useState<string>(`(${OBJECTCLASS}=${L10N_TRANSLATION_PROVIDER_INTERFACE_KEY})`);

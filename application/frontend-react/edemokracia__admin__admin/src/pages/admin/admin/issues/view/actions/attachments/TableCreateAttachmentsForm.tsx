@@ -10,8 +10,8 @@ import { useState, useEffect, useCallback, Dispatch, SetStateAction, FC } from '
 import { useTranslation } from 'react-i18next';
 import {
   Grid,
-  DialogContent,
   DialogTitle,
+  DialogContent,
   CardContent,
   IconButton,
   Button,
