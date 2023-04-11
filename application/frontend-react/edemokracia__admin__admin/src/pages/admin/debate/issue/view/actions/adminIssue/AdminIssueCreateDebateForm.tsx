@@ -10,32 +10,31 @@ import { useState, useEffect, useCallback, Dispatch, SetStateAction, FC } from '
 import { useTranslation } from 'react-i18next';
 import {
   Grid,
-  DialogTitle,
-  DialogContent,
-  CardContent,
-  IconButton,
   Button,
-  DialogContentText,
-  TextField,
-  DialogActions,
   Card,
+  CardContent,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
   InputAdornment,
+  TextField,
   Typography,
 } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import {
+  GridColDef,
+  GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridRenderCellParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { JudoIdentifiable } from '@judo/data-api-common';
-import type { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import { MdiIcon, ModeledTabs } from '../../../../../../../components';
 import { columnsActionCalculator } from '../../../../../../../components/table';
@@ -68,6 +67,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../../../utilities';
@@ -239,7 +239,7 @@ export function AdminIssueCreateDebateForm({ successCallback, cancel, owner }: A
                               defaultValue: 'Close at',
                             }) as string
                           }
-                          value={data.closeAt ?? null}
+                          value={serviceDateToUiDate(data.closeAt ?? null)}
                           disabled={false}
                           onChange={(newValue: any) => {
                             setEditMode(true);

@@ -1,5 +1,10 @@
-import type { Dayjs } from 'dayjs';
+export const uiDateToServiceDate = (date?: any | null): string | null => {
+  return date;
+};
 
-export const uiDateToServiceDate = (date?: Dayjs | null): string | null => {
-  return date ? date.format().substring(0, 10) : null;
+export const serviceDateToUiDate = (dateStr?: any) => {
+  if (typeof dateStr === 'string') {
+    return dateStr.endsWith('Z') ? dateStr : dateStr + 'Z';
+  }
+  return dateStr;
 };

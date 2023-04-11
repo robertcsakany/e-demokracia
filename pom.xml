@@ -27,11 +27,11 @@
         <judo-services-version-defined>1.1.0.20230406_094321_ff8bcf7a_develop</judo-services-version-defined>
         <judo-rdbms-schema-version-defined>1.0.0.20230401_042420_18d6a281_develop</judo-rdbms-schema-version-defined>
         <judo-tatami-client-version-defined>1.1.0.20230401_044011_c4f3fa78_develop</judo-tatami-client-version-defined>
-        <judo-esm-fullstack-project-template-version-defined>1.0.0.20230407_092509_e6d35ba6_develop</judo-esm-fullstack-project-template-version-defined>
+        <judo-esm-fullstack-project-template-version-defined>1.0.0.20230411_092500_69945c19_develop</judo-esm-fullstack-project-template-version-defined>
 		<judo-meta-ui-version-defined>1.1.0.20230317_164302_8b77760c_develop</judo-meta-ui-version-defined>
 		<judo-ui-flutter-template-version-defined>1.0.0.20230318_040730_04286b3a_develop</judo-ui-flutter-template-version-defined>
 		<judo-ui-typescript-rest-template-version-defined>1.0.0.20230331_164333_67b90d98_develop</judo-ui-typescript-rest-template-version-defined>
-		<judo-ui-react-template-version-defined>1.0.0.20230406_193116_0883083a_develop</judo-ui-react-template-version-defined>
+		<judo-ui-react-template-version-defined>1.0.0.20230411_154838_4f51c1b8_bugfix_JNG_4734_fix_react_issues</judo-ui-react-template-version-defined>
         <frontendType>react</frontendType>
 
 	</properties>

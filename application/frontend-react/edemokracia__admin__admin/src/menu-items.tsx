@@ -29,13 +29,13 @@ export const menuItems: MenuItem[] = [
       {
         id: 'NavigationItemedemokraciaAdminAdminEdemokraciaAdminAdminNavigationControllerEdemokraciaAdminAdminMenuItemGroupBasicDataMenu',
         to: 'admin/admin/categories/table',
-        icon: 'toy-brick',
+        icon: 'file-tree',
         label: 'Categories',
       },
       {
         id: 'NavigationItemedemokraciaAdminAdminEdemokraciaAdminAdminNavigationControllerEdemokraciaAdminAdminMenuItemGroupBasicDataMenu',
         to: 'admin/admin/counties/table',
-        icon: 'toy-brick',
+        icon: 'map',
         label: 'Counties',
       },
     ],
@@ -48,13 +48,13 @@ export const menuItems: MenuItem[] = [
       {
         id: 'NavigationItemedemokraciaAdminAdminEdemokraciaAdminAdminNavigationControllerEdemokraciaAdminAdminMenuItemGroupIssuesAndDebates',
         to: 'admin/admin/issues/table',
-        icon: 'texture',
+        icon: 'ticket-confirmation',
         label: 'Issues',
       },
       {
         id: 'NavigationItemedemokraciaAdminAdminEdemokraciaAdminAdminNavigationControllerEdemokraciaAdminAdminMenuItemGroupIssuesAndDebates',
         to: 'admin/admin/debates/table',
-        icon: 'texture',
+        icon: 'wechat',
         label: 'Debates',
       },
     ],

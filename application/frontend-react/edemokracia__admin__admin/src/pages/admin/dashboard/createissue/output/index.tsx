@@ -14,30 +14,29 @@ import {
   Box,
   Container,
   Grid,
-  CardContent,
   Button,
-  TextField,
-  MenuItem,
   Card,
+  CardContent,
   InputAdornment,
+  MenuItem,
+  TextField,
   Typography,
 } from '@mui/material';
 import {
-  GridRowId,
   DataGrid,
-  GridToolbarContainer,
-  GridRowParams,
+  GridColDef,
   GridRenderCellParams,
+  GridRowId,
+  GridRowParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
+  GridToolbarContainer,
 } from '@mui/x-data-grid';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
-import type { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import {
   MdiIcon,
@@ -63,6 +62,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   booleanToStringSelect,
   stringToBooleanSelect,
 } from '../../../../../utilities';
@@ -432,7 +432,7 @@ export default function AdminDashboardCreateissueOutput() {
                                 defaultValue: 'Created',
                               }) as string
                             }
-                            value={data.created ?? null}
+                            value={serviceDateToUiDate(data.created ?? null)}
                             disabled={true}
                             onChange={(newValue: any) => {
                               setEditMode(true);

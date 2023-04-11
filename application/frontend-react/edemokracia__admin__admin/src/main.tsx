@@ -4,6 +4,12 @@
 // Path expression: 'src/main.tsx'
 // Template name: actor/src/main.tsx.hbs
 
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import '@mdi/font/css/materialdesignicons.css';
+
 import { createRoot } from 'react-dom/client';
 import axios from 'axios';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
@@ -19,53 +25,55 @@ import { routes } from './routes';
 
 axios.interceptors.request.use(axiosRequestInterceptor);
 
-const API_DEFAULT_BASE_URL: string = process.env.API_DEFAULT_BASE_URL || window.location.origin;
-const API_RELATIVE_PATH: string = process.env.API_RELATIVE_PATH || '/api';
+const API_DEFAULT_BASE_URL: string = import.meta.env.VITE_API_DEFAULT_BASE_URL || window.location.origin;
+const API_RELATIVE_PATH: string = import.meta.env.VITE_API_RELATIVE_PATH || '/api';
 // precedence: explicit file -> explicit api -> window.location.origin
-const FILE_DEFAULT_BASE_URL: string = process.env.FILE_DEFAULT_BASE_URL || API_DEFAULT_BASE_URL;
+const FILE_DEFAULT_BASE_URL: string = import.meta.env.VITE_FILE_DEFAULT_BASE_URL || API_DEFAULT_BASE_URL;
 
-const pandino = new Pandino({
-  ...loaderConfiguration,
-});
+(async () => {
+  const pandino = new Pandino({
+    ...loaderConfiguration,
+  });
 
-await pandino.init();
-await pandino.start();
+  await pandino.init();
+  await pandino.start();
 
-await applicationCustomizer.customize(pandino.getBundleContext());
+  await applicationCustomizer.customize(pandino.getBundleContext());
 
-judoAxiosProvider.init({
-  axios,
-  basePathFactory: () => API_DEFAULT_BASE_URL + API_RELATIVE_PATH,
-  filePathFactory: () => FILE_DEFAULT_BASE_URL + '/Edemokracia',
-});
+  judoAxiosProvider.init({
+    axios,
+    basePathFactory: () => API_DEFAULT_BASE_URL + API_RELATIVE_PATH,
+    filePathFactory: () => FILE_DEFAULT_BASE_URL + '/Edemokracia',
+  });
 
-const root = createRoot(document.getElementById('root') as HTMLElement);
+  const root = createRoot(document.getElementById('root') as HTMLElement);
 
-const router = createHashRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [...routes.map(({ path, element }) => ({ path, element }))],
-  },
-]);
+  const router = createHashRouter([
+    {
+      path: '/',
+      element: <App />,
+      children: [...routes.map(({ path, element }) => ({ path, element }))],
+    },
+  ]);
 
-const meta = await accessServiceImpl.getMetaData();
-const { clientId, defaultScopes, issuer } = meta.security[0];
-storeMeta({ issuer, clientId });
+  const meta = await accessServiceImpl.getMetaData();
+  const { clientId, defaultScopes, issuer } = meta.security[0];
+  storeMeta({ issuer, clientId });
 
-const oidcConfig = {
-  authority: issuer,
-  client_id: clientId,
-  redirect_uri: appBaseUri,
-  automaticSilentRenew: true,
-};
+  const oidcConfig = {
+    authority: issuer,
+    client_id: clientId,
+    redirect_uri: appBaseUri,
+    automaticSilentRenew: true,
+  };
 
-root.render(
-  <PandinoProvider ctx={pandino.getBundleContext()}>
-    <AuthProvider {...oidcConfig}>
-      <Auth>
-        <RouterProvider router={router} />
-      </Auth>
-    </AuthProvider>
-  </PandinoProvider>,
-);
+  root.render(
+    <PandinoProvider ctx={pandino.getBundleContext()}>
+      <AuthProvider {...oidcConfig}>
+        <Auth>
+          <RouterProvider router={router} />
+        </Auth>
+      </AuthProvider>
+    </PandinoProvider>,
+  );
+})();

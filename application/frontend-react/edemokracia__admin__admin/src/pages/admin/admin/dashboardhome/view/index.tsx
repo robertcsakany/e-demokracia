@@ -10,23 +10,22 @@
 
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Container, Grid, CardContent, Button, Typography, Card } from '@mui/material';
+import { Box, Container, Grid, Button, Card, CardContent, Typography } from '@mui/material';
 import {
-  GridRowId,
   DataGrid,
-  GridToolbarContainer,
-  GridRowParams,
+  GridColDef,
   GridRenderCellParams,
+  GridRowId,
+  GridRowParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
+  GridToolbarContainer,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { useSnackbar } from 'notistack';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
-import type { Dayjs } from 'dayjs';
 import {
   MdiIcon,
   ModeledTabs,
@@ -50,6 +49,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../utilities';

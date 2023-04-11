@@ -10,30 +10,29 @@ import { useState, useEffect, useCallback, Dispatch, SetStateAction, FC } from '
 import { useTranslation } from 'react-i18next';
 import {
   Grid,
-  DialogTitle,
-  DialogContent,
-  CardContent,
-  IconButton,
   Button,
-  DialogContentText,
-  TextField,
-  DialogActions,
   Card,
+  CardContent,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
   InputAdornment,
+  TextField,
 } from '@mui/material';
 import {
+  GridColDef,
+  GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridRenderCellParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { JudoIdentifiable } from '@judo/data-api-common';
-import type { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import { v1 as uuidv1 } from 'uuid';
 import { MdiIcon, ModeledTabs } from '../../../../../../../components';
@@ -61,6 +60,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../../../utilities';

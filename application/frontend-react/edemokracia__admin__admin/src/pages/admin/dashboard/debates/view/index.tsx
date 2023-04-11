@@ -14,30 +14,29 @@ import {
   Box,
   Container,
   Grid,
-  CardContent,
   Button,
-  TextField,
-  MenuItem,
   Card,
+  CardContent,
   InputAdornment,
+  MenuItem,
+  TextField,
   Typography,
 } from '@mui/material';
 import {
-  GridRowId,
   DataGrid,
-  GridToolbarContainer,
-  GridRowParams,
+  GridColDef,
   GridRenderCellParams,
+  GridRowId,
+  GridRowParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
+  GridToolbarContainer,
 } from '@mui/x-data-grid';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
-import type { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import {
   MdiIcon,
@@ -63,6 +62,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../utilities';
@@ -589,7 +589,7 @@ export default function AdminDashboardDebatesView() {
                                 defaultValue: 'Close at',
                               }) as string
                             }
-                            value={data.closeAt ?? null}
+                            value={serviceDateToUiDate(data.closeAt ?? null)}
                             disabled={false}
                             onChange={(newValue: any) => {
                               setEditMode(true);

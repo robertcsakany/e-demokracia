@@ -10,21 +10,20 @@
 
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Container, Grid, CardContent, Button, TextField, MenuItem, Card, InputAdornment } from '@mui/material';
+import { Box, Container, Grid, Button, Card, CardContent, InputAdornment, MenuItem, TextField } from '@mui/material';
 import {
+  GridColDef,
+  GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridRenderCellParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
 } from '@mui/x-data-grid';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
-import type { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import {
   MdiIcon,
@@ -50,6 +49,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../utilities';
@@ -264,7 +264,7 @@ export default function AdminProVotesView() {
                     label={
                       t('edemokracia.admin.Pro.votes.Vote.View.group.created', { defaultValue: 'Created' }) as string
                     }
-                    value={data.created ?? null}
+                    value={serviceDateToUiDate(data.created ?? null)}
                     disabled={false}
                     onChange={(newValue: any) => {
                       setEditMode(true);

@@ -14,34 +14,33 @@ import {
   Box,
   Container,
   Grid,
-  CardContent,
   Button,
-  FormGroup,
+  Card,
+  CardContent,
   Checkbox,
   FormControlLabel,
-  TextField,
-  MenuItem,
-  Card,
+  FormGroup,
   InputAdornment,
+  MenuItem,
+  TextField,
   Typography,
 } from '@mui/material';
 import {
-  GridRowId,
   DataGrid,
-  GridToolbarContainer,
-  GridRowParams,
+  GridColDef,
   GridRenderCellParams,
+  GridRowId,
+  GridRowParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
+  GridToolbarContainer,
 } from '@mui/x-data-grid';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { useSnackbar } from 'notistack';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
-import type { Dayjs } from 'dayjs';
 import {
   MdiIcon,
   ModeledTabs,
@@ -65,6 +64,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../utilities';
@@ -507,7 +507,7 @@ export default function AdminAdminUsersView() {
                                 defaultValue: 'Created',
                               }) as string
                             }
-                            value={data.created ?? null}
+                            value={serviceDateToUiDate(data.created ?? null)}
                             disabled={false}
                             onChange={(newValue: any) => {
                               setEditMode(true);
