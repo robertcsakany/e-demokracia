@@ -1,3 +1,12 @@
+//////////////////////////////////////////////////////////////////////////////
+// G E N E R A T E D    S O U R C E
+// --------------------------------
+// Factory expression: <actor>
+// Path expression: 'src/auth/Auth.tsx'
+// Template name: actor/src/auth/Auth.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/auth/Auth.tsx.hbs
+
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';
 import { useAuth, hasAuthParams } from 'react-oidc-context';

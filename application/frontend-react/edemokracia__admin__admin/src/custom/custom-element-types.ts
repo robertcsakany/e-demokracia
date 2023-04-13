@@ -1,3 +1,12 @@
+//////////////////////////////////////////////////////////////////////////////
+// G E N E R A T E D    S O U R C E
+// --------------------------------
+// Factory expression: <actor>
+// Path expression: 'src/custom/custom-element-types.ts'
+// Template name: actor/src/custom/custom-element-types.ts
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/custom/custom-element-types.ts.hbs
+
 import type { FC } from 'react';
 
 export const CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY = 'CustomVisualElement';

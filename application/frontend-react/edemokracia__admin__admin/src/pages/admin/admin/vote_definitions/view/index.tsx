@@ -1,8 +1,11 @@
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
-// ------------------------------
+// --------------------------------
+// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
-// Template name: actor/src/pages/index.tsx.hbs
+// Template name: actor/src/pages/index.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.voteDefinitions#View
 // Page owner name: edemokracia::admin::Admin
 // Page DataElement name: voteDefinitions
@@ -10,22 +13,21 @@
 
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Container, Grid, CardContent, Button, TextField, MenuItem, Card, InputAdornment } from '@mui/material';
+import { Box, Container, Grid, Button, Card, CardContent, InputAdornment, MenuItem, TextField } from '@mui/material';
 import {
+  GridColDef,
+  GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridRenderCellParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
 } from '@mui/x-data-grid';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { useSnackbar } from 'notistack';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
-import type { Dayjs } from 'dayjs';
 import {
   MdiIcon,
   ModeledTabs,
@@ -49,6 +51,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../utilities';
@@ -132,6 +135,14 @@ export default function AdminAdminVoteDefinitionsView() {
     defaultValue: 'View / Edit Vote Definition',
   });
 
+  const isFormUpdateable = useCallback(() => {
+    return true && typeof data?.__updateable === 'boolean' && data?.__updateable;
+  }, [data]);
+
+  const isFormDeleteable = useCallback(() => {
+    return true && typeof data?.__deleteable === 'boolean' && data?.__deleteable;
+  }, [data]);
+
   useConfirmationBeforeChange(
     editMode,
     t('judo.form.navigation.confirmation', {
@@ -204,7 +215,7 @@ export default function AdminAdminVoteDefinitionsView() {
   return (
     <>
       <PageHeader title={title}>
-        {editMode && (
+        {editMode && isFormUpdateable() && (
           <Grid item>
             <Button
               id="page-action-edit-cancel"
@@ -220,7 +231,7 @@ export default function AdminAdminVoteDefinitionsView() {
             </Button>
           </Grid>
         )}
-        {editMode && (
+        {editMode && isFormUpdateable() && (
           <Grid item>
             <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
               <MdiIcon path="content-save" />
@@ -236,7 +247,7 @@ export default function AdminAdminVoteDefinitionsView() {
             </Button>
           </Grid>
         )}
-        {!editMode && (
+        {!editMode && isFormDeleteable() && (
           <Grid item>
             <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
               <MdiIcon path="delete" />
@@ -272,7 +283,7 @@ export default function AdminAdminVoteDefinitionsView() {
                         }
                         value={data.title}
                         className={!editMode ? 'JUDO-viewMode' : undefined}
-                        disabled={false}
+                        disabled={false || !isFormUpdateable()}
                         error={!!validation.get('title')}
                         helperText={validation.get('title')}
                         onChange={(event) => {
@@ -309,8 +320,8 @@ export default function AdminAdminVoteDefinitionsView() {
                             defaultValue: 'CloseAt',
                           }) as string
                         }
-                        value={data.closeAt ?? null}
-                        disabled={false}
+                        value={serviceDateToUiDate(data.closeAt ?? null)}
+                        disabled={false || !isFormUpdateable()}
                         onChange={(newValue: any) => {
                           setEditMode(true);
                           storeDiff('closeAt', newValue);
@@ -337,7 +348,7 @@ export default function AdminAdminVoteDefinitionsView() {
                         }
                         value={data.status || ''}
                         className={!editMode ? 'JUDO-viewMode' : undefined}
-                        disabled={false}
+                        disabled={false || !isFormUpdateable()}
                         error={!!validation.get('status')}
                         helperText={validation.get('status')}
                         onChange={(event) => {
@@ -386,8 +397,9 @@ export default function AdminAdminVoteDefinitionsView() {
                         id="NavigationToPageActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionDebateButtonNavigate"
                         editMode={editMode}
                         navigateAction={(target) => buttonNavigateDebateAction(data, target)}
-                        fetchCall={async () =>
-                          await adminVoteDefinitionServiceImpl.getDebate(data, {
+                        owner={data}
+                        fetchCall={async (owner: JudoIdentifiable<any>) =>
+                          adminVoteDefinitionServiceImpl.getDebate(owner, {
                             _mask: '{}',
                           })
                         }
@@ -418,8 +430,8 @@ export default function AdminAdminVoteDefinitionsView() {
                             defaultValue: 'Created',
                           }) as string
                         }
-                        value={data.created ?? null}
-                        disabled={false}
+                        value={serviceDateToUiDate(data.created ?? null)}
+                        disabled={false || !isFormUpdateable()}
                         onChange={(newValue: any) => {
                           setEditMode(true);
                           storeDiff('created', newValue);
@@ -446,7 +458,7 @@ export default function AdminAdminVoteDefinitionsView() {
                         }
                         value={data.description}
                         className={!editMode ? 'JUDO-viewMode' : undefined}
-                        disabled={false}
+                        disabled={false || !isFormUpdateable()}
                         multiline
                         minRows={4.0}
                         error={!!validation.get('description')}

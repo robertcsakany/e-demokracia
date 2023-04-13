@@ -1,39 +1,48 @@
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
-// ------------------------------
+// --------------------------------
+// Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
-// Template name: actor/src/pages/actions/actionForm.tsx.hbs
-// Action name: edemokracia::admin::Admin::edemokracia::admin::IssueCategory::subcategories#TableCreate
+// Template name: actor/src/pages/actions/actionForm.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/pages/actions/actionForm.tsx.hbs
+//////////////////////////////////////////////////////////////////////////////
+// G E N E R A T E D    S O U R C E
+// --------------------------------
+// Factory expression: #getActionFormsForPages(#application)
+// Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
+// Template name: actor/src/pages/actions/actionForm.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CreateAction
 
 import { useState, useEffect, useCallback, Dispatch, SetStateAction, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Grid,
-  DialogTitle,
-  DialogContent,
-  CardContent,
-  IconButton,
   Button,
-  DialogContentText,
-  TextField,
-  DialogActions,
   Card,
+  CardContent,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
   InputAdornment,
+  TextField,
 } from '@mui/material';
 import {
+  GridColDef,
+  GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridRenderCellParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { JudoIdentifiable } from '@judo/data-api-common';
-import type { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import { v1 as uuidv1 } from 'uuid';
 import { MdiIcon, ModeledTabs } from '../../../../../../components';
@@ -66,6 +75,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../../utilities';
@@ -157,6 +167,15 @@ export function TableCreateSubcategoriesForm({ successCallback, cancel, owner }:
       initialQueryCustomizer: ownerInitialQueryCustomizer,
     });
   const [ownerSelectionModel, setOwnerSelectionModel] = useState<GridSelectionModel>([]);
+
+  const isFormUpdateable = useCallback(() => {
+    return true;
+  }, [data]);
+
+  const isFormDeleteable = useCallback(() => {
+    return false;
+  }, [data]);
+
   const fetchData = async () => {
     setIsLoading(true);
 
@@ -222,7 +241,7 @@ export function TableCreateSubcategoriesForm({ successCallback, cancel, owner }:
               }
               value={data.title}
               className={!editMode ? 'JUDO-viewMode' : undefined}
-              disabled={false}
+              disabled={false || !isFormUpdateable()}
               error={!!validation.get('title')}
               helperText={validation.get('title')}
               onChange={(event) => {
@@ -252,7 +271,7 @@ export function TableCreateSubcategoriesForm({ successCallback, cancel, owner }:
               }
               value={data.description}
               className={!editMode ? 'JUDO-viewMode' : undefined}
-              disabled={false}
+              disabled={false || !isFormUpdateable()}
               error={!!validation.get('description')}
               helperText={validation.get('description')}
               onChange={(event) => {
@@ -284,7 +303,7 @@ export function TableCreateSubcategoriesForm({ successCallback, cancel, owner }:
               error={!!validation.get('owner')}
               helperText={validation.get('owner')}
               icon={<MdiIcon path="account" />}
-              disabled={false}
+              disabled={false || !isFormUpdateable()}
               editMode={editMode}
               onSet={async () => {
                 const res = await openRangeDialog<AdminUserStored, AdminUserQueryCustomizer>({

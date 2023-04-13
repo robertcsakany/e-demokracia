@@ -1,3 +1,12 @@
+//////////////////////////////////////////////////////////////////////////////
+// G E N E R A T E D    S O U R C E
+// --------------------------------
+// Factory expression: <actor>
+// Path expression: 'src/components/widgets/AssociationButton.tsx'
+// Template name: actor/src/components/widgets/AssociationButton.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/components/widgets/AssociationButton.tsx.hbs
+
 import { ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@mui/material';
@@ -11,12 +20,20 @@ export interface AssociationBaseProps {
 }
 
 export interface AssociationButtonProps<T> extends AssociationBaseProps {
-  fetchCall: () => Promise<JudoIdentifiable<T>>;
+  owner: JudoIdentifiable<any>;
+  fetchCall: (owner: JudoIdentifiable<any>) => Promise<JudoIdentifiable<T>>;
   navigateAction: (target: JudoIdentifiable<T>) => void;
   children?: ReactNode;
 }
 
-export function AssociationButton<T>({ id, editMode, fetchCall, navigateAction, children }: AssociationButtonProps<T>) {
+export function AssociationButton<T>({
+  id,
+  editMode,
+  owner,
+  fetchCall,
+  navigateAction,
+  children,
+}: AssociationButtonProps<T>) {
   const { t } = useTranslation();
   const [data, setData] = useState<JudoIdentifiable<T> | undefined>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -24,18 +41,24 @@ export function AssociationButton<T>({ id, editMode, fetchCall, navigateAction, 
 
   useEffect(() => {
     (async () => {
-      try {
-        setIsLoading(true);
-        const res: JudoIdentifiable<T> | undefined = await fetchCall();
+      if (owner.__signedIdentifier) {
+        try {
+          setIsLoading(true);
+          const res: JudoIdentifiable<T> | undefined = await fetchCall(owner);
 
-        setData(res);
-      } catch (e) {
-        console.error(e);
-      } finally {
+          setData(res);
+        } catch (e) {
+          setData(undefined);
+          console.error(e);
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        setData(undefined);
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [owner]);
 
   return (
     <Button

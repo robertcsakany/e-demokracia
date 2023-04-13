@@ -1,3 +1,12 @@
+//////////////////////////////////////////////////////////////////////////////
+// G E N E R A T E D    S O U R C E
+// --------------------------------
+// Factory expression: <actor>
+// Path expression: 'src/hooks/useNavigationConfirmation.ts'
+// Template name: actor/src/hooks/useNavigationConfirmation.ts
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/hooks/useNavigationConfirmation.ts.hbs
+
 import { useEffect } from 'react';
 import { unstable_usePrompt as usePrompt } from 'react-router-dom';
 

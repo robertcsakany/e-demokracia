@@ -1,8 +1,11 @@
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
-// ------------------------------
+// --------------------------------
+// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
-// Template name: actor/src/pages/index.tsx.hbs
+// Template name: actor/src/pages/index.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.users#View
 // Page owner name: edemokracia::admin::Admin
 // Page DataElement name: users
@@ -14,34 +17,33 @@ import {
   Box,
   Container,
   Grid,
-  CardContent,
   Button,
-  FormGroup,
+  Card,
+  CardContent,
   Checkbox,
   FormControlLabel,
-  TextField,
-  MenuItem,
-  Card,
+  FormGroup,
   InputAdornment,
+  MenuItem,
+  TextField,
   Typography,
 } from '@mui/material';
 import {
-  GridRowId,
   DataGrid,
-  GridToolbarContainer,
-  GridRowParams,
+  GridColDef,
   GridRenderCellParams,
+  GridRowId,
+  GridRowParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
+  GridToolbarContainer,
 } from '@mui/x-data-grid';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { useSnackbar } from 'notistack';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
-import type { Dayjs } from 'dayjs';
 import {
   MdiIcon,
   ModeledTabs,
@@ -65,6 +67,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../utilities';
@@ -284,6 +287,14 @@ export default function AdminAdminUsersView() {
 
   const title: string = t('edemokracia.admin.Admin.users.View', { defaultValue: 'View / Edit User' });
 
+  const isFormUpdateable = useCallback(() => {
+    return true && typeof data?.__updateable === 'boolean' && data?.__updateable;
+  }, [data]);
+
+  const isFormDeleteable = useCallback(() => {
+    return true && typeof data?.__deleteable === 'boolean' && data?.__deleteable;
+  }, [data]);
+
   useConfirmationBeforeChange(
     editMode,
     t('judo.form.navigation.confirmation', {
@@ -356,7 +367,7 @@ export default function AdminAdminUsersView() {
   return (
     <>
       <PageHeader title={title}>
-        {editMode && (
+        {editMode && isFormUpdateable() && (
           <Grid item>
             <Button
               id="page-action-edit-cancel"
@@ -372,7 +383,7 @@ export default function AdminAdminUsersView() {
             </Button>
           </Grid>
         )}
-        {editMode && (
+        {editMode && isFormUpdateable() && (
           <Grid item>
             <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
               <MdiIcon path="content-save" />
@@ -388,7 +399,7 @@ export default function AdminAdminUsersView() {
             </Button>
           </Grid>
         )}
-        {!editMode && (
+        {!editMode && isFormDeleteable() && (
           <Grid item>
             <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
               <MdiIcon path="delete" />
@@ -448,7 +459,7 @@ export default function AdminAdminUsersView() {
                             }
                             value={data.userName}
                             className={!editMode ? 'JUDO-viewMode' : undefined}
-                            disabled={false}
+                            disabled={false || !isFormUpdateable()}
                             error={!!validation.get('userName')}
                             helperText={validation.get('userName')}
                             onChange={(event) => {
@@ -507,8 +518,8 @@ export default function AdminAdminUsersView() {
                                 defaultValue: 'Created',
                               }) as string
                             }
-                            value={data.created ?? null}
-                            disabled={false}
+                            value={serviceDateToUiDate(data.created ?? null)}
+                            disabled={false || !isFormUpdateable()}
                             onChange={(newValue: any) => {
                               setEditMode(true);
                               storeDiff('created', newValue);
@@ -578,7 +589,7 @@ export default function AdminAdminUsersView() {
                                 }
                                 value={data.firstName}
                                 className={!editMode ? 'JUDO-viewMode' : undefined}
-                                disabled={false}
+                                disabled={false || !isFormUpdateable()}
                                 error={!!validation.get('firstName')}
                                 helperText={validation.get('firstName')}
                                 onChange={(event) => {
@@ -608,7 +619,7 @@ export default function AdminAdminUsersView() {
                                 }
                                 value={data.lastName}
                                 className={!editMode ? 'JUDO-viewMode' : undefined}
-                                disabled={false}
+                                disabled={false || !isFormUpdateable()}
                                 error={!!validation.get('lastName')}
                                 helperText={validation.get('lastName')}
                                 onChange={(event) => {
@@ -649,7 +660,7 @@ export default function AdminAdminUsersView() {
                                 }
                                 value={data.email}
                                 className={!editMode ? 'JUDO-viewMode' : undefined}
-                                disabled={false}
+                                disabled={false || !isFormUpdateable()}
                                 error={!!validation.get('email')}
                                 helperText={validation.get('email')}
                                 onChange={(event) => {
@@ -678,7 +689,7 @@ export default function AdminAdminUsersView() {
                                 }
                                 value={data.phone}
                                 className={!editMode ? 'JUDO-viewMode' : undefined}
-                                disabled={false}
+                                disabled={false || !isFormUpdateable()}
                                 error={!!validation.get('phone')}
                                 helperText={validation.get('phone')}
                                 onChange={(event) => {
@@ -766,7 +777,7 @@ export default function AdminAdminUsersView() {
                                 error={!!validation.get('residentCounty')}
                                 helperText={validation.get('residentCounty')}
                                 icon={<MdiIcon path="map" />}
-                                disabled={false}
+                                disabled={false || !isFormUpdateable()}
                                 editMode={editMode}
                                 onView={async () => linkViewResidentCountyAction(data?.residentCounty!)}
                                 onSet={async () => {
@@ -811,7 +822,7 @@ export default function AdminAdminUsersView() {
                                 error={!!validation.get('residentCity')}
                                 helperText={validation.get('residentCity')}
                                 icon={<MdiIcon path="city" />}
-                                disabled={false}
+                                disabled={false || !isFormUpdateable()}
                                 editMode={editMode}
                                 onView={async () => linkViewResidentCityAction(data?.residentCity!)}
                                 onSet={async () => {
@@ -856,7 +867,7 @@ export default function AdminAdminUsersView() {
                                 error={!!validation.get('residentDistrict')}
                                 helperText={validation.get('residentDistrict')}
                                 icon={<MdiIcon path="home-city" />}
-                                disabled={false}
+                                disabled={false || !isFormUpdateable()}
                                 editMode={editMode}
                                 onView={async () => linkViewResidentDistrictAction(data?.residentDistrict!)}
                                 onSet={async () => {
@@ -898,16 +909,19 @@ export default function AdminAdminUsersView() {
                                 id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminUsersViewDefaultUserViewAreasLabelWrapperAreasActivityTabActivityCounties',
                                 name: 'tab_activity_counties',
                                 label: 'Activity counties',
+                                icon: 'map',
                               },
                               {
                                 id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminUsersViewDefaultUserViewAreasLabelWrapperAreasActivityActivityCities',
                                 name: 'activity_cities',
                                 label: 'Activity cities',
+                                icon: 'city',
                               },
                               {
                                 id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminUsersViewDefaultUserViewAreasLabelWrapperAreasActivityActivityDistricts',
                                 name: 'activity_districts',
                                 label: 'Activity districts',
+                                icon: 'home-city',
                               },
                             ]}
                           >
@@ -980,7 +994,7 @@ export default function AdminAdminUsersView() {
                                                       }
                                                     }
                                                   }}
-                                                  disabled={isLoading || !true}
+                                                  disabled={isLoading || !true || !isFormUpdateable()}
                                                 >
                                                   <MdiIcon path="attachment-plus" />
                                                   {t('judo.pages.table.add', { defaultValue: 'Add' })}
@@ -995,7 +1009,7 @@ export default function AdminAdminUsersView() {
                                                       setEditMode(true);
                                                     }
                                                   }}
-                                                  disabled={isLoading || !true}
+                                                  disabled={isLoading || !true || !isFormUpdateable()}
                                                 >
                                                   <MdiIcon path="link_off" />
                                                   {t('judo.pages.table.clear', { defaultValue: 'Clear' })}
@@ -1081,7 +1095,7 @@ export default function AdminAdminUsersView() {
                                                       }
                                                     }
                                                   }}
-                                                  disabled={isLoading || !true}
+                                                  disabled={isLoading || !true || !isFormUpdateable()}
                                                 >
                                                   <MdiIcon path="attachment-plus" />
                                                   {t('judo.pages.table.add', { defaultValue: 'Add' })}
@@ -1096,7 +1110,7 @@ export default function AdminAdminUsersView() {
                                                       setEditMode(true);
                                                     }
                                                   }}
-                                                  disabled={isLoading || !true}
+                                                  disabled={isLoading || !true || !isFormUpdateable()}
                                                 >
                                                   <MdiIcon path="link_off" />
                                                   {t('judo.pages.table.clear', { defaultValue: 'Clear' })}
@@ -1182,7 +1196,7 @@ export default function AdminAdminUsersView() {
                                                       }
                                                     }
                                                   }}
-                                                  disabled={isLoading || !true}
+                                                  disabled={isLoading || !true || !isFormUpdateable()}
                                                 >
                                                   <MdiIcon path="attachment-plus" />
                                                   {t('judo.pages.table.add', { defaultValue: 'Add' })}
@@ -1197,7 +1211,7 @@ export default function AdminAdminUsersView() {
                                                       setEditMode(true);
                                                     }
                                                   }}
-                                                  disabled={isLoading || !true}
+                                                  disabled={isLoading || !true || !isFormUpdateable()}
                                                 >
                                                   <MdiIcon path="link_off" />
                                                   {t('judo.pages.table.clear', { defaultValue: 'Clear' })}

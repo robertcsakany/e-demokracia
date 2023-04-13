@@ -1,41 +1,50 @@
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
-// ------------------------------
+// --------------------------------
+// Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
-// Template name: actor/src/pages/actions/actionForm.tsx.hbs
-// Action name: edemokracia::admin::Admin::edemokracia::admin::Pro::createSubArgument#ButtonCallOperation
+// Template name: actor/src/pages/actions/actionForm.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/pages/actions/actionForm.tsx.hbs
+//////////////////////////////////////////////////////////////////////////////
+// G E N E R A T E D    S O U R C E
+// --------------------------------
+// Factory expression: #getActionFormsForPages(#application)
+// Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
+// Template name: actor/src/pages/actions/actionForm.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CallOperationAction
 
 import { useState, useEffect, useCallback, Dispatch, SetStateAction, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Grid,
-  DialogTitle,
-  DialogContent,
-  CardContent,
-  IconButton,
   Button,
-  DialogContentText,
-  TextField,
-  DialogActions,
-  MenuItem,
   Card,
+  CardContent,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
   InputAdornment,
+  MenuItem,
+  TextField,
   Typography,
 } from '@mui/material';
 import {
+  GridColDef,
+  GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridRenderCellParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { JudoIdentifiable } from '@judo/data-api-common';
-import type { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import { MdiIcon, ModeledTabs } from '../../../../../../../components';
 import { columnsActionCalculator } from '../../../../../../../components/table';
@@ -67,6 +76,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../../../utilities';
@@ -106,6 +116,14 @@ export function AdminProCreateSubArgumentForm({ successCallback, cancel, owner }
     [data],
   );
   const title: string = t('edemokracia.admin.Pro.createSubArgument.Input', { defaultValue: 'Add argument' });
+
+  const isFormUpdateable = useCallback(() => {
+    return true;
+  }, [data]);
+
+  const isFormDeleteable = useCallback(() => {
+    return false;
+  }, [data]);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -199,7 +217,7 @@ export function AdminProCreateSubArgumentForm({ successCallback, cancel, owner }
                           }
                           value={data.title}
                           className={!editMode ? 'JUDO-viewMode' : undefined}
-                          disabled={false}
+                          disabled={false || !isFormUpdateable()}
                           error={!!validation.get('title')}
                           helperText={validation.get('title')}
                           onChange={(event) => {
@@ -229,7 +247,7 @@ export function AdminProCreateSubArgumentForm({ successCallback, cancel, owner }
                           }
                           value={data.type || ''}
                           className={!editMode ? 'JUDO-viewMode' : undefined}
-                          disabled={false}
+                          disabled={false || !isFormUpdateable()}
                           error={!!validation.get('type')}
                           helperText={validation.get('type')}
                           onChange={(event) => {
@@ -274,7 +292,7 @@ export function AdminProCreateSubArgumentForm({ successCallback, cancel, owner }
                           }
                           value={data.description}
                           className={!editMode ? 'JUDO-viewMode' : undefined}
-                          disabled={false}
+                          disabled={false || !isFormUpdateable()}
                           multiline
                           minRows={4.0}
                           error={!!validation.get('description')}

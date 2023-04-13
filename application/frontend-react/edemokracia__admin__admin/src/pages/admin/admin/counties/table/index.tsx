@@ -1,8 +1,11 @@
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
-// ------------------------------
+// --------------------------------
+// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
-// Template name: actor/src/pages/index.tsx.hbs
+// Template name: actor/src/pages/index.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.counties#Table
 // Page owner name: edemokracia::admin::Admin
 // Page DataElement name: counties

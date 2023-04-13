@@ -1,8 +1,11 @@
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
-// ------------------------------
+// --------------------------------
+// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
-// Template name: actor/src/pages/index.tsx.hbs
+// Template name: actor/src/pages/index.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.categories#View
 // Page owner name: edemokracia::admin::Admin
 // Page DataElement name: categories
@@ -10,23 +13,22 @@
 
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Container, Grid, CardContent, Button, TextField, Card, InputAdornment, Typography } from '@mui/material';
+import { Box, Container, Grid, Button, Card, CardContent, InputAdornment, TextField, Typography } from '@mui/material';
 import {
-  GridRowId,
   DataGrid,
-  GridToolbarContainer,
-  GridRowParams,
+  GridColDef,
   GridRenderCellParams,
+  GridRowId,
+  GridRowParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
+  GridToolbarContainer,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { useSnackbar } from 'notistack';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
-import type { Dayjs } from 'dayjs';
 import {
   MdiIcon,
   ModeledTabs,
@@ -50,6 +52,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../utilities';
@@ -153,6 +156,14 @@ export default function AdminAdminCategoriesView() {
 
   const title: string = t('edemokracia.admin.Admin.categories.View', { defaultValue: 'View / Edit Category' });
 
+  const isFormUpdateable = useCallback(() => {
+    return true && typeof data?.__updateable === 'boolean' && data?.__updateable;
+  }, [data]);
+
+  const isFormDeleteable = useCallback(() => {
+    return true && typeof data?.__deleteable === 'boolean' && data?.__deleteable;
+  }, [data]);
+
   useConfirmationBeforeChange(
     editMode,
     t('judo.form.navigation.confirmation', {
@@ -225,7 +236,7 @@ export default function AdminAdminCategoriesView() {
   return (
     <>
       <PageHeader title={title}>
-        {editMode && (
+        {editMode && isFormUpdateable() && (
           <Grid item>
             <Button
               id="page-action-edit-cancel"
@@ -241,7 +252,7 @@ export default function AdminAdminCategoriesView() {
             </Button>
           </Grid>
         )}
-        {editMode && (
+        {editMode && isFormUpdateable() && (
           <Grid item>
             <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
               <MdiIcon path="content-save" />
@@ -257,7 +268,7 @@ export default function AdminAdminCategoriesView() {
             </Button>
           </Grid>
         )}
-        {!editMode && (
+        {!editMode && isFormDeleteable() && (
           <Grid item>
             <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
               <MdiIcon path="delete" />
@@ -285,7 +296,7 @@ export default function AdminAdminCategoriesView() {
                 label={t('edemokracia.admin.Admin.categories.Category.View.title', { defaultValue: 'Title' }) as string}
                 value={data.title}
                 className={!editMode ? 'JUDO-viewMode' : undefined}
-                disabled={false}
+                disabled={false || !isFormUpdateable()}
                 error={!!validation.get('title')}
                 helperText={validation.get('title')}
                 onChange={(event) => {
@@ -315,7 +326,7 @@ export default function AdminAdminCategoriesView() {
                 }
                 value={data.description}
                 className={!editMode ? 'JUDO-viewMode' : undefined}
-                disabled={false}
+                disabled={false || !isFormUpdateable()}
                 error={!!validation.get('description')}
                 helperText={validation.get('description')}
                 onChange={(event) => {
@@ -343,7 +354,7 @@ export default function AdminAdminCategoriesView() {
                 error={!!validation.get('owner')}
                 helperText={validation.get('owner')}
                 icon={<MdiIcon path="account" />}
-                disabled={false}
+                disabled={false || !isFormUpdateable()}
                 editMode={editMode}
                 onView={async () => linkViewOwnerAction(data?.owner!)}
                 onSet={async () => {
@@ -436,7 +447,7 @@ export default function AdminAdminCategoriesView() {
                               id="CreateActionedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesViewEdemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesTableCreate"
                               variant="text"
                               onClick={() => tableCreateSubcategoriesAction(data, () => fetchData())}
-                              disabled={isLoading || !true || editMode}
+                              disabled={isLoading || !true || editMode || !isFormUpdateable()}
                             >
                               <MdiIcon path="file_document_plus" />
                               {t('judo.pages.table.create', { defaultValue: 'Create' })}

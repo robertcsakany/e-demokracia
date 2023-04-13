@@ -1,8 +1,11 @@
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
-// ------------------------------
+// --------------------------------
+// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
-// Template name: actor/src/pages/index.tsx.hbs
+// Template name: actor/src/pages/index.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Con.cons#View
 // Page owner name: edemokracia::admin::Admin
 // Page DataElement name: cons
@@ -10,23 +13,22 @@
 
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Container, Grid, CardContent, Button, TextField, Card, InputAdornment, Typography } from '@mui/material';
+import { Box, Container, Grid, Button, Card, CardContent, InputAdornment, TextField, Typography } from '@mui/material';
 import {
-  GridRowId,
   DataGrid,
-  GridToolbarContainer,
-  GridRowParams,
+  GridColDef,
   GridRenderCellParams,
+  GridRowId,
+  GridRowParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
+  GridToolbarContainer,
 } from '@mui/x-data-grid';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
-import type { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import {
   MdiIcon,
@@ -52,6 +54,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../utilities';
@@ -280,6 +283,14 @@ export default function AdminConConsView() {
   ];
   const title: string = t('edemokracia.admin.Con.cons.View', { defaultValue: 'View / Edit Con' });
 
+  const isFormUpdateable = useCallback(() => {
+    return true && typeof data?.__updateable === 'boolean' && data?.__updateable;
+  }, [data]);
+
+  const isFormDeleteable = useCallback(() => {
+    return true && typeof data?.__deleteable === 'boolean' && data?.__deleteable;
+  }, [data]);
+
   useConfirmationBeforeChange(
     editMode,
     t('judo.form.navigation.confirmation', {
@@ -352,7 +363,7 @@ export default function AdminConConsView() {
   return (
     <>
       <PageHeader title={title}>
-        {editMode && (
+        {editMode && isFormUpdateable() && (
           <Grid item>
             <Button
               id="page-action-edit-cancel"
@@ -368,7 +379,7 @@ export default function AdminConConsView() {
             </Button>
           </Grid>
         )}
-        {editMode && (
+        {editMode && isFormUpdateable() && (
           <Grid item>
             <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
               <MdiIcon path="content-save" />
@@ -384,7 +395,7 @@ export default function AdminConConsView() {
             </Button>
           </Grid>
         )}
-        {!editMode && (
+        {!editMode && isFormDeleteable() && (
           <Grid item>
             <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
               <MdiIcon path="delete" />
@@ -442,7 +453,7 @@ export default function AdminConConsView() {
                             }
                             value={data.title}
                             className={!editMode ? 'JUDO-viewMode' : undefined}
-                            disabled={false}
+                            disabled={false || !isFormUpdateable()}
                             error={!!validation.get('title')}
                             helperText={validation.get('title')}
                             onChange={(event) => {
@@ -479,8 +490,8 @@ export default function AdminConConsView() {
                                 defaultValue: 'Created',
                               }) as string
                             }
-                            value={data.created ?? null}
-                            disabled={false}
+                            value={serviceDateToUiDate(data.created ?? null)}
+                            disabled={false || !isFormUpdateable()}
                             onChange={(newValue: any) => {
                               setEditMode(true);
                               storeDiff('created', newValue);
@@ -509,7 +520,7 @@ export default function AdminConConsView() {
                             error={!!validation.get('createdBy')}
                             helperText={validation.get('createdBy')}
                             icon={<MdiIcon path="table_rows" />}
-                            disabled={true}
+                            disabled={true || !isFormUpdateable()}
                             editMode={editMode}
                             onView={async () => linkViewCreatedByAction(data?.createdBy!)}
                           />
@@ -527,7 +538,7 @@ export default function AdminConConsView() {
                             }
                             value={data.description}
                             className={!editMode ? 'JUDO-viewMode' : undefined}
-                            disabled={false}
+                            disabled={false || !isFormUpdateable()}
                             multiline
                             minRows={4.0}
                             error={!!validation.get('description')}
@@ -568,7 +579,7 @@ export default function AdminConConsView() {
                             type="number"
                             value={data.upVotes}
                             className={!editMode ? 'JUDO-viewMode' : undefined}
-                            disabled={true}
+                            disabled={true || !isFormUpdateable()}
                             error={!!validation.get('upVotes')}
                             helperText={validation.get('upVotes')}
                             onChange={(event) => {
@@ -605,7 +616,7 @@ export default function AdminConConsView() {
                             type="number"
                             value={data.downVotes}
                             className={!editMode ? 'JUDO-viewMode' : undefined}
-                            disabled={true}
+                            disabled={true || !isFormUpdateable()}
                             error={!!validation.get('downVotes')}
                             helperText={validation.get('downVotes')}
                             onChange={(event) => {
@@ -647,11 +658,13 @@ export default function AdminConConsView() {
                     id: 'TabedemokraciaAdminAdminEdemokraciaAdminConConsViewDefaultConViewTabBarArguments',
                     name: 'arguments',
                     label: 'Arguments',
+                    icon: 'account-voice',
                   },
                   {
                     id: 'TabedemokraciaAdminAdminEdemokraciaAdminConConsViewDefaultConViewTabBarComments',
                     name: 'comments',
                     label: 'Comments',
+                    icon: 'comment-text-multiple',
                   },
                 ]}
               >

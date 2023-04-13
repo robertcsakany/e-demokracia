@@ -1,8 +1,11 @@
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
-// ------------------------------
+// --------------------------------
+// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
-// Template name: actor/src/pages/index.tsx.hbs
+// Template name: actor/src/pages/index.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Dashboard.createIssue#Output
 // Page owner name: edemokracia::admin::Admin
 // Page DataElement name: output
@@ -14,30 +17,29 @@ import {
   Box,
   Container,
   Grid,
-  CardContent,
   Button,
-  TextField,
-  MenuItem,
   Card,
+  CardContent,
   InputAdornment,
+  MenuItem,
+  TextField,
   Typography,
 } from '@mui/material';
 import {
-  GridRowId,
   DataGrid,
-  GridToolbarContainer,
-  GridRowParams,
+  GridColDef,
   GridRenderCellParams,
+  GridRowId,
+  GridRowParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
+  GridToolbarContainer,
 } from '@mui/x-data-grid';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
-import type { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import {
   MdiIcon,
@@ -63,6 +65,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   booleanToStringSelect,
   stringToBooleanSelect,
 } from '../../../../../utilities';
@@ -239,6 +242,14 @@ export default function AdminDashboardCreateissueOutput() {
 
   const title: string = t('edemokracia.admin.Dashboard.createIssue.Output', { defaultValue: 'View / Edit Issue' });
 
+  const isFormUpdateable = useCallback(() => {
+    return false && typeof data?.__updateable === 'boolean' && data?.__updateable;
+  }, [data]);
+
+  const isFormDeleteable = useCallback(() => {
+    return false && typeof data?.__deleteable === 'boolean' && data?.__deleteable;
+  }, [data]);
+
   useConfirmationBeforeChange(
     editMode,
     t('judo.form.navigation.confirmation', {
@@ -340,7 +351,7 @@ export default function AdminDashboardCreateissueOutput() {
                             }
                             value={data.title}
                             className={!editMode ? 'JUDO-viewMode' : undefined}
-                            disabled={false}
+                            disabled={false || !isFormUpdateable()}
                             error={!!validation.get('title')}
                             helperText={validation.get('title')}
                             onChange={(event) => {
@@ -370,7 +381,7 @@ export default function AdminDashboardCreateissueOutput() {
                             }
                             value={data.status || ''}
                             className={!editMode ? 'JUDO-viewMode' : undefined}
-                            disabled={false}
+                            disabled={false || !isFormUpdateable()}
                             error={!!validation.get('status')}
                             helperText={validation.get('status')}
                             onChange={(event) => {
@@ -432,8 +443,8 @@ export default function AdminDashboardCreateissueOutput() {
                                 defaultValue: 'Created',
                               }) as string
                             }
-                            value={data.created ?? null}
-                            disabled={true}
+                            value={serviceDateToUiDate(data.created ?? null)}
+                            disabled={true || !isFormUpdateable()}
                             onChange={(newValue: any) => {
                               setEditMode(true);
                               storeDiff('created', newValue);
@@ -460,7 +471,7 @@ export default function AdminDashboardCreateissueOutput() {
                             }
                             value={data.description}
                             className={!editMode ? 'JUDO-viewMode' : undefined}
-                            disabled={false}
+                            disabled={false || !isFormUpdateable()}
                             multiline
                             minRows={4.0}
                             error={!!validation.get('description')}
@@ -507,7 +518,7 @@ export default function AdminDashboardCreateissueOutput() {
                             error={!!validation.get('owner')}
                             helperText={validation.get('owner')}
                             icon={<MdiIcon path="account" />}
-                            disabled={false}
+                            disabled={false || !isFormUpdateable()}
                             editMode={editMode}
                             onView={async () => linkViewOwnerAction(data?.owner!)}
                             onSet={async () => {
@@ -553,21 +564,25 @@ export default function AdminDashboardCreateissueOutput() {
                     id: 'TabedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueOutputDefaultIssueViewOtherAttachments',
                     name: 'attachments',
                     label: 'Attachments',
+                    icon: 'paperclip',
                   },
                   {
                     id: 'TabedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueOutputDefaultIssueViewOtherCategories',
                     name: 'categories',
                     label: 'Categories',
+                    icon: 'file-tree',
                   },
                   {
                     id: 'TabedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueOutputDefaultIssueViewOtherDebates',
                     name: 'debates',
                     label: 'Debates',
+                    icon: 'wechat',
                   },
                   {
                     id: 'TabedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueOutputDefaultIssueViewOtherComments',
                     name: 'comments',
                     label: 'Comments',
+                    icon: 'comment-text-multiple',
                   },
                 ]}
               >
@@ -627,7 +642,7 @@ export default function AdminDashboardCreateissueOutput() {
                                       id="CreateActionedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueOutputEdemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsTableCreate"
                                       variant="text"
                                       onClick={() => tableCreateAttachmentsAction(data, () => fetchData())}
-                                      disabled={isLoading || !false || editMode}
+                                      disabled={isLoading || !false || editMode || !isFormUpdateable()}
                                     >
                                       <MdiIcon path="file_document_plus" />
                                       {t('judo.pages.table.create', { defaultValue: 'Create' })}
@@ -709,7 +724,7 @@ export default function AdminDashboardCreateissueOutput() {
                                           ]);
                                         }
                                       }}
-                                      disabled={isLoading || !false}
+                                      disabled={isLoading || !false || !isFormUpdateable()}
                                     >
                                       <MdiIcon path="attachment-plus" />
                                       {t('judo.pages.table.add', { defaultValue: 'Add' })}
@@ -720,7 +735,7 @@ export default function AdminDashboardCreateissueOutput() {
                                       onClick={async () => {
                                         storeDiff('categories', []);
                                       }}
-                                      disabled={isLoading || !false}
+                                      disabled={isLoading || !false || !isFormUpdateable()}
                                     >
                                       <MdiIcon path="link_off" />
                                       {t('judo.pages.table.clear', { defaultValue: 'Clear' })}

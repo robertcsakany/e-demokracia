@@ -1,8 +1,11 @@
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
-// ------------------------------
+// --------------------------------
+// Factory expression: <actor>
 // Path expression: 'src/components-api/dialog/DialogContext.ts'
-// Template name: actor/src/components-api/dialog/DialogContext.ts.hbs
+// Template name: actor/src/components-api/dialog/DialogContext.ts
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/components-api/dialog/DialogContext.ts.hbs
 
 import { ReactNode } from 'react';
 import { JudoStored, QueryCustomizer } from '@judo/data-api-common';

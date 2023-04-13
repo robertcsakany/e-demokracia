@@ -20,12 +20,12 @@
     <packaging>pom</packaging>
 
     <properties>
-        <judo-meta-ui-version>1.1.0.20230317_164302_8b77760c_develop</judo-meta-ui-version>
+        <judo-meta-ui-version>1.1.0.20230413_041639_c6d25c2d_develop</judo-meta-ui-version>
         <frontend-maven-plugin-version>1.12.1</frontend-maven-plugin-version>
         <ui-model>${basedir}/model/edemokracia-ui.model</ui-model>
 
-        <judo-ui-react-template-version>1.0.0.20230406_193116_0883083a_develop</judo-ui-react-template-version>
-        <judo-ui-typescript-rest-template-version>1.0.0.20230331_164333_67b90d98_develop</judo-ui-typescript-rest-template-version>
+        <judo-ui-react-template-version>1.0.0.20230413_041932_3a0d360a_develop</judo-ui-react-template-version>
+        <judo-ui-typescript-rest-template-version>1.0.0.20230413_041936_2652d3f8_develop</judo-ui-typescript-rest-template-version>
 
         <node-version>16.15.1</node-version>
         <pnpm-version>7.13.1</pnpm-version>
@@ -45,11 +45,6 @@
         <dependency>
             <groupId>hu.blackbelt.judo.generator</groupId>
             <artifactId>judo-ui-react</artifactId>
-            <version>${judo-ui-react-template-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>hu.blackbelt.judo.generator</groupId>
-            <artifactId>judo-ui-react-external-packages</artifactId>
             <version>${judo-ui-react-template-version}</version>
         </dependency>
     </dependencies>

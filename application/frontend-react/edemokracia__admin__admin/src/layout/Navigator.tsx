@@ -1,8 +1,11 @@
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
-// ------------------------------
+// --------------------------------
+// Factory expression: <actor>
 // Path expression: 'src/layout/Navigator.tsx'
-// Template name: actor/src/layout/Navigator.tsx.hbs
+// Template name: actor/src/layout/Navigator.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/layout/Navigator.tsx.hbs
 
 import { useCallback } from 'react';
 import {
@@ -49,9 +52,11 @@ function ActionItem(props: MenuItem) {
 export function Navigator(props: DrawerProps & NavigatorProps) {
   const { items, heroProps, logoProps, ...other } = props;
   const { t } = useTranslation();
-  const { removeUser, isAuthenticated } = useAuth();
+  const { signoutRedirect, isAuthenticated } = useAuth();
   const doLogout = useCallback(() => {
-    removeUser();
+    signoutRedirect({
+      post_logout_redirect_uri: window.location.href,
+    });
   }, [isAuthenticated]);
   const { principal } = usePrincipal();
 

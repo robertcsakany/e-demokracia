@@ -1,8 +1,11 @@
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
-// ------------------------------
+// --------------------------------
+// Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
-// Template name: actor/src/pages/index.tsx.hbs
+// Template name: actor/src/pages/index.tsx
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Con.votes#View
 // Page owner name: edemokracia::admin::Admin
 // Page DataElement name: votes
@@ -10,21 +13,20 @@
 
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Container, Grid, CardContent, Button, TextField, MenuItem, Card, InputAdornment } from '@mui/material';
+import { Box, Container, Grid, Button, Card, CardContent, InputAdornment, MenuItem, TextField } from '@mui/material';
 import {
+  GridColDef,
+  GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridRenderCellParams,
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
-  GridColDef,
 } from '@mui/x-data-grid';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
-import type { Dayjs } from 'dayjs';
 import { useSnackbar } from 'notistack';
 import {
   MdiIcon,
@@ -50,6 +52,7 @@ import {
   processQueryCustomizer,
   TableRowAction,
   uiDateToServiceDate,
+  serviceDateToUiDate,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../utilities';
@@ -105,6 +108,14 @@ export default function AdminConVotesView() {
   const [validation, setValidation] = useState<Map<keyof AdminSimpleVoteStored, string>>(new Map());
 
   const title: string = t('edemokracia.admin.Con.votes.View', { defaultValue: 'Create / View Vote' });
+
+  const isFormUpdateable = useCallback(() => {
+    return false && typeof data?.__updateable === 'boolean' && data?.__updateable;
+  }, [data]);
+
+  const isFormDeleteable = useCallback(() => {
+    return false && typeof data?.__deleteable === 'boolean' && data?.__deleteable;
+  }, [data]);
 
   useConfirmationBeforeChange(
     editMode,
@@ -193,8 +204,8 @@ export default function AdminConVotesView() {
                     label={
                       t('edemokracia.admin.Con.votes.Vote.View.group.created', { defaultValue: 'Created' }) as string
                     }
-                    value={data.created ?? null}
-                    disabled={false}
+                    value={serviceDateToUiDate(data.created ?? null)}
+                    disabled={false || !isFormUpdateable()}
                     onChange={(newValue: any) => {
                       setEditMode(true);
                       storeDiff('created', newValue);
@@ -217,7 +228,7 @@ export default function AdminConVotesView() {
                     label={t('edemokracia.admin.Con.votes.Vote.View.group.type', { defaultValue: 'Type' }) as string}
                     value={data.type || ''}
                     className={!editMode ? 'JUDO-viewMode' : undefined}
-                    disabled={false}
+                    disabled={false || !isFormUpdateable()}
                     error={!!validation.get('type')}
                     helperText={validation.get('type')}
                     onChange={(event) => {
