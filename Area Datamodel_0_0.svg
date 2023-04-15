@@ -100,39 +100,33 @@
                 <path d="M143 189 L345 189 L345 231 L143 231 L143 189 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath33">
-                <path d="M147 191 L210 191 L210 209 L147 209 L147 191 Z"/>
-            </clipPath>
-            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath34">
-                <path d="M147 191 L211 191 L211 209 L147 209 L147 191 Z"/>
-            </clipPath>
-            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath35">
                 <path d="M143 148 L345 148 L345 231 L143 231 L143 148 Z"/>
             </clipPath>
-            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath36">
+            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath34">
                 <path d="M327 213 L345 213 L345 231 L327 231 L327 213 Z"/>
             </clipPath>
-            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath37">
+            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath35">
                 <path d="M-1 -1 L1063 -1 L1063 245 L-1 245 L-1 -1 Z"/>
             </clipPath>
-            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath38">
+            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath36">
                 <path d="M665 47 L1033 47 L1033 104 L665 104 L665 47 Z"/>
             </clipPath>
-            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath39">
+            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath37">
                 <path d="M793 177 L829 177 L829 199 L793 199 L793 177 Z"/>
             </clipPath>
-            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath40">
+            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath38">
                 <path d="M696 162 L713 162 L713 173 L696 173 L696 162 Z"/>
             </clipPath>
-            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath41">
+            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath39">
                 <path d="M837 162 L849 162 L849 173 L837 173 L837 162 Z"/>
             </clipPath>
-            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath42">
+            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath40">
                 <path d="M445 182 L470 182 L470 204 L445 204 L445 182 Z"/>
             </clipPath>
-            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath43">
+            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath41">
                 <path d="M344 165 L361 165 L361 176 L344 176 L344 165 Z"/>
             </clipPath>
-            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath44">
+            <clipPath clipPathUnits="userSpaceOnUse" id="clipPath42">
                 <path d="M485 165 L497 165 L497 176 L485 176 L485 165 Z"/>
             </clipPath>
         </defs>
@@ -223,48 +217,45 @@
             <rect x="144" y="190" clip-path="url(#clipPath32)" width="200" rx="5" ry="5" height="40" stroke="none"/>
             <rect x="144" y="190" clip-path="url(#clipPath32)" width="101" rx="0" ry="0" height="21" stroke="none"/>
             <rect x="244" y="190" clip-path="url(#clipPath32)" width="101" rx="0" ry="0" height="21" stroke="none"/>
-            <image x="148" y="192" clip-path="url(#clipPath33)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABM0lEQVR4Xq2TIXOE&#10;MBCF76ecwp3CxcXFIXFIbGQqI2Ox0Vj0zZxrbas6c762v2Ivb2FTEnruduYNsG/3&#10;Y0nC6fTquP/caVwcqdBR4zUL98jBq+uLQFEbDPmvhhXfA81J4eppnMcMqvs4YJip&#10;T8WOmxG4Tle7ybFQc4BgNH7zYhPA0u37xgCBILcXaovPAbGLPdl5YO0BAhFPVEwB&#10;4pAAohogEPHdtlYFwPg/LZ9L3c/x8fvGPgDYnQw4p4fWqaz/AJhK/CFaQk8GgHbx&#10;bVYNwLN4Ok3bpzUoJsCC6KlLW7RqD8C95E3seLF1vZXYkkvQm6kzAFcVcBI15wHA&#10;21F7OJV8fKd1PDRCbVCpWZGOyPfsoeZwkCRggG7iWjymgwXhHjl4T5sl5Gdqwvoj&#10;sbbGw9iviAcmqsgopj6HQgAAAABJRU5ErkJggg==" xlink:type="simple" font-style="normal" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
-            <text x="167" y="203" clip-path="url(#clipPath34)" fill="black" font-style="normal" stroke="none" xml:space="preserve">initAreas()</text>
-            <line clip-path="url(#clipPath33)" fill="none" x1="167" x2="209" y1="204" y2="204" stroke="black"/>
             <line clip-path="url(#clipPath32)" fill="none" x1="144" x2="344" y1="190" y2="190" stroke="rgb(136,138,133)"/>
         </g>
         <g stroke-linecap="butt" font-size="10px" fill="rgb(136,138,133)" font-family="'.AppleSystemUIFont'" stroke="rgb(136,138,133)" font-weight="bold" stroke-width="1.1">
-            <line y2="149" fill="none" x1="144" clip-path="url(#clipPath35)" x2="344" y1="149"/>
+            <line y2="149" fill="none" x1="144" clip-path="url(#clipPath33)" x2="344" y1="149"/>
         </g>
         <g fill="white" font-size="11px" stroke-width="1.1" font-family="'.AppleSystemUIFont'" stroke-linecap="butt" stroke="white">
-            <rect x="328" width="16" height="16" y="214" clip-path="url(#clipPath36)" stroke="none"/>
-            <rect x="328" y="214" clip-path="url(#clipPath36)" fill="none" width="15" height="15" stroke="black"/>
-            <text fill="black" x="331" xml:space="preserve" y="217" clip-path="url(#clipPath36)" stroke="none">...</text>
-            <path fill="rgb(255,255,203)" d="M658 42 L658 42 L1037 42 L1049 54 L1049 108 L658 108 L658 42 ZM658 42" fill-rule="evenodd" clip-path="url(#clipPath37)" stroke="none"/>
-            <text x="666" font-size="9px" y="57" clip-path="url(#clipPath38)" fill="black" stroke="none" xml:space="preserve">A district Budapesten keruletet, videki varosban korzetet jelent. A kerdes, a videki</text>
-            <text x="666" font-size="9px" y="68" clip-path="url(#clipPath38)" fill="black" stroke="none" xml:space="preserve">keruletek ez alapjan keruljenek kiosztasra? https://www.ksh.hu/nepszamlalas/docs/</text>
-            <text x="666" font-size="9px" y="79" clip-path="url(#clipPath38)" fill="black" stroke="none" xml:space="preserve">tablak/vkerulet/oevk.pdf. Ha igen, akkor ez feladat, hogy valaki excel-be atvezesse,</text>
-            <text x="666" font-size="9px" y="90" clip-path="url(#clipPath38)" fill="black" stroke="none" xml:space="preserve">hogy migralhato formaban legyen. A varosok migracioja az alabbiak szerint: https://</text>
-            <text x="666" font-size="9px" y="101" clip-path="url(#clipPath38)" fill="black" stroke="none" xml:space="preserve">github.com/tamas-ferenci/IrszHnk</text>
-            <line clip-path="url(#clipPath37)" fill="none" x1="658" x2="1037" y1="42" y2="42" stroke="rgb(255,204,102)"/>
-            <line clip-path="url(#clipPath37)" fill="none" x1="1037" x2="1049" y1="42" y2="54" stroke="rgb(255,204,102)"/>
-            <line clip-path="url(#clipPath37)" fill="none" x1="1049" x2="1049" y1="54" y2="108" stroke="rgb(255,204,102)"/>
-            <line clip-path="url(#clipPath37)" fill="none" x1="1049" x2="658" y1="108" y2="108" stroke="rgb(255,204,102)"/>
-            <line clip-path="url(#clipPath37)" fill="none" x1="658" x2="658" y1="108" y2="42" stroke="rgb(255,204,102)"/>
-            <line clip-path="url(#clipPath37)" fill="none" x1="658" x2="658" y1="42" y2="42" stroke="rgb(255,204,102)"/>
-            <line clip-path="url(#clipPath37)" fill="none" x1="1037" x2="1037" y1="42" y2="54" stroke="rgb(255,204,102)"/>
-            <line clip-path="url(#clipPath37)" fill="none" x1="1037" x2="1050" y1="54" y2="54" stroke="rgb(255,204,102)"/>
+            <rect x="328" width="16" height="16" y="214" clip-path="url(#clipPath34)" stroke="none"/>
+            <rect x="328" y="214" clip-path="url(#clipPath34)" fill="none" width="15" height="15" stroke="black"/>
+            <text fill="black" x="331" xml:space="preserve" y="217" clip-path="url(#clipPath34)" stroke="none">...</text>
+            <path fill="rgb(255,255,203)" d="M658 42 L658 42 L1037 42 L1049 54 L1049 108 L658 108 L658 42 ZM658 42" fill-rule="evenodd" clip-path="url(#clipPath35)" stroke="none"/>
+            <text x="666" font-size="9px" y="57" clip-path="url(#clipPath36)" fill="black" stroke="none" xml:space="preserve">A district Budapesten keruletet, videki varosban korzetet jelent. A kerdes, a videki</text>
+            <text x="666" font-size="9px" y="68" clip-path="url(#clipPath36)" fill="black" stroke="none" xml:space="preserve">keruletek ez alapjan keruljenek kiosztasra? https://www.ksh.hu/nepszamlalas/docs/</text>
+            <text x="666" font-size="9px" y="79" clip-path="url(#clipPath36)" fill="black" stroke="none" xml:space="preserve">tablak/vkerulet/oevk.pdf. Ha igen, akkor ez feladat, hogy valaki excel-be atvezesse,</text>
+            <text x="666" font-size="9px" y="90" clip-path="url(#clipPath36)" fill="black" stroke="none" xml:space="preserve">hogy migralhato formaban legyen. A varosok migracioja az alabbiak szerint: https://</text>
+            <text x="666" font-size="9px" y="101" clip-path="url(#clipPath36)" fill="black" stroke="none" xml:space="preserve">github.com/tamas-ferenci/IrszHnk</text>
+            <line clip-path="url(#clipPath35)" fill="none" x1="658" x2="1037" y1="42" y2="42" stroke="rgb(255,204,102)"/>
+            <line clip-path="url(#clipPath35)" fill="none" x1="1037" x2="1049" y1="42" y2="54" stroke="rgb(255,204,102)"/>
+            <line clip-path="url(#clipPath35)" fill="none" x1="1049" x2="1049" y1="54" y2="108" stroke="rgb(255,204,102)"/>
+            <line clip-path="url(#clipPath35)" fill="none" x1="1049" x2="658" y1="108" y2="108" stroke="rgb(255,204,102)"/>
+            <line clip-path="url(#clipPath35)" fill="none" x1="658" x2="658" y1="108" y2="42" stroke="rgb(255,204,102)"/>
+            <line clip-path="url(#clipPath35)" fill="none" x1="658" x2="658" y1="42" y2="42" stroke="rgb(255,204,102)"/>
+            <line clip-path="url(#clipPath35)" fill="none" x1="1037" x2="1037" y1="42" y2="54" stroke="rgb(255,204,102)"/>
+            <line clip-path="url(#clipPath35)" fill="none" x1="1037" x2="1050" y1="54" y2="54" stroke="rgb(255,204,102)"/>
         </g>
         <g fill="rgb(114,159,207)" font-size="8px" stroke-width="2.1" font-family="'.AppleSystemUIFont'" stroke-linecap="butt" stroke="rgb(114,159,207)">
-            <line y2="167" fill="none" x1="698" clip-path="url(#clipPath37)" x2="846" y1="167"/>
-            <text fill="rgb(69,70,67)" x="800" xml:space="preserve" y="186" clip-path="url(#clipPath39)" stroke="none">[0..*]</text>
-            <text fill="rgb(69,70,67)" x="794" xml:space="preserve" y="196" clip-path="url(#clipPath39)" stroke="none">districts</text>
-            <polygon points=" 698 167 704 164 710 167 704 170" clip-path="url(#clipPath40)" stroke="none"/>
-            <polygon fill="none" points=" 698 167 704 164 710 167 704 170" clip-path="url(#clipPath40)"/>
-            <line y2="167" fill="none" x1="839" clip-path="url(#clipPath41)" x2="846" y1="170"/>
-            <line y2="164" fill="none" x1="846" clip-path="url(#clipPath41)" x2="839" y1="167"/>
-            <line y2="170" fill="none" x1="346" clip-path="url(#clipPath37)" x2="494" y1="170"/>
-            <text fill="rgb(69,70,67)" x="447" xml:space="preserve" y="191" clip-path="url(#clipPath42)" stroke="none">[0..*]</text>
-            <text fill="rgb(69,70,67)" x="446" xml:space="preserve" y="201" clip-path="url(#clipPath42)" stroke="none">cities</text>
-            <polygon points=" 346 170 352 167 358 170 352 173" clip-path="url(#clipPath43)" stroke="none"/>
-            <polygon fill="none" points=" 346 170 352 167 358 170 352 173" clip-path="url(#clipPath43)"/>
-            <line y2="170" fill="none" x1="487" clip-path="url(#clipPath44)" x2="494" y1="173"/>
-            <line y2="167" fill="none" x1="494" clip-path="url(#clipPath44)" x2="487" y1="170"/>
+            <line y2="167" fill="none" x1="698" clip-path="url(#clipPath35)" x2="846" y1="167"/>
+            <text fill="rgb(69,70,67)" x="800" xml:space="preserve" y="186" clip-path="url(#clipPath37)" stroke="none">[0..*]</text>
+            <text fill="rgb(69,70,67)" x="794" xml:space="preserve" y="196" clip-path="url(#clipPath37)" stroke="none">districts</text>
+            <polygon points=" 698 167 704 164 710 167 704 170" clip-path="url(#clipPath38)" stroke="none"/>
+            <polygon fill="none" points=" 698 167 704 164 710 167 704 170" clip-path="url(#clipPath38)"/>
+            <line y2="167" fill="none" x1="839" clip-path="url(#clipPath39)" x2="846" y1="170"/>
+            <line y2="164" fill="none" x1="846" clip-path="url(#clipPath39)" x2="839" y1="167"/>
+            <line y2="170" fill="none" x1="346" clip-path="url(#clipPath35)" x2="494" y1="170"/>
+            <text fill="rgb(69,70,67)" x="447" xml:space="preserve" y="191" clip-path="url(#clipPath40)" stroke="none">[0..*]</text>
+            <text fill="rgb(69,70,67)" x="446" xml:space="preserve" y="201" clip-path="url(#clipPath40)" stroke="none">cities</text>
+            <polygon points=" 346 170 352 167 358 170 352 173" clip-path="url(#clipPath41)" stroke="none"/>
+            <polygon fill="none" points=" 346 170 352 167 358 170 352 173" clip-path="url(#clipPath41)"/>
+            <line y2="170" fill="none" x1="487" clip-path="url(#clipPath42)" x2="494" y1="173"/>
+            <line y2="167" fill="none" x1="494" clip-path="url(#clipPath42)" x2="487" y1="170"/>
         </g>
     </g>
 </svg>
