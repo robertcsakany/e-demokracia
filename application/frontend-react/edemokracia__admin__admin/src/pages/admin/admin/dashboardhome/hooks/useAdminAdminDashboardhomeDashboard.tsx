@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Access View
 
@@ -34,7 +34,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
   const { downloadFile, uploadFile } = fileHandling();
 
   const queryCustomizer: AdminDashboardQueryCustomizer = {
-    _mask: '{welcome,issues{title,created,status},debates{title,closeAt,status}}',
+    _mask: '{welcome,issues{title,created,status,numberOfDebates},debates{title,issueTitle,closeAt,status}}',
   };
 
   const debatesSortModel: GridSortModel = [{ field: 'title', sort: 'asc' }];
@@ -46,6 +46,16 @@ export const useAdminAdminDashboardhomeDashboard = () => {
       headerName: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.title',
         { defaultValue: 'Title' },
+      ) as string,
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'issueTitle',
+      headerName: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.issueTitle',
+        { defaultValue: 'Issue' },
       ) as string,
       width: 230,
       type: 'string',
@@ -87,6 +97,15 @@ export const useAdminAdminDashboardhomeDashboard = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMydebatesMydebatesDebatesLabelWrapperDebatesIssueTitleFilter',
+      attributeName: 'issueTitle',
+      label: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.issueTitle.Filter',
+        { defaultValue: 'Issue' },
+      ) as string,
+      filterType: FilterType.string,
+    },
+    {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMydebatesMydebatesDebatesLabelWrapperDebatesCloseAtFilter',
       attributeName: 'closeAt',
       label: t(
@@ -108,7 +127,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
   ];
 
   const debatesInitialQueryCustomizer: AdminDebateQueryCustomizer = {
-    _mask: '{title,closeAt,status}',
+    _mask: '{title,issueTitle,closeAt,status}',
     _orderBy: debatesSortModel.length
       ? [
           {
@@ -155,6 +174,16 @@ export const useAdminAdminDashboardhomeDashboard = () => {
         defaultValue: 'This column is not sortable.',
       }) as string,
     },
+    {
+      ...baseColumnConfig,
+      field: 'numberOfDebates',
+      headerName: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myissues.myissues.issues.issues.numberOfDebates',
+        { defaultValue: 'Debates' },
+      ) as string,
+      width: 100,
+      type: 'number',
+    },
   ];
 
   const issuesRangeFilterOptions: FilterOption[] = [
@@ -186,10 +215,19 @@ export const useAdminAdminDashboardhomeDashboard = () => {
       filterType: FilterType.enumeration,
       enumValues: ['CREATED', 'PENDING', 'ACTIVE', 'CLOSED'],
     },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMyissuesMyissuesIssuesLabelWrapperIssuesNumberOfDebatesFilter',
+      attributeName: 'numberOfDebates',
+      label: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myissues.myissues.issues.issues.numberOfDebates.Filter',
+        { defaultValue: 'Debates' },
+      ) as string,
+      filterType: FilterType.numeric,
+    },
   ];
 
   const issuesInitialQueryCustomizer: AdminIssueQueryCustomizer = {
-    _mask: '{title,created,status}',
+    _mask: '{title,created,status,numberOfDebates}',
     _orderBy: issuesSortModel.length
       ? [
           {

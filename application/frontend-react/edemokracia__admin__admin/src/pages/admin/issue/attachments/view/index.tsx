@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Issue.attachments#View
 // Page owner name: edemokracia::admin::Admin
@@ -13,7 +13,18 @@
 
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Container, Grid, Button, Card, CardContent, InputAdornment, MenuItem, TextField } from '@mui/material';
+import {
+  Box,
+  Container,
+  Grid,
+  Button,
+  ButtonGroup,
+  Card,
+  CardContent,
+  InputAdornment,
+  MenuItem,
+  TextField,
+} from '@mui/material';
 import {
   GridColDef,
   GridRenderCellParams,
@@ -234,7 +245,19 @@ export default function AdminIssueAttachmentsView() {
         )}
         {!editMode && isFormDeleteable() && (
           <Grid item>
-            <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
+            <Button
+              id="page-action-delete"
+              onClick={() =>
+                pageDeleteAttachmentsAction(
+                  { __signedIdentifier: signedIdentifier } as JudoIdentifiable<AdminIssue>,
+                  data,
+                  () => {
+                    back();
+                  },
+                )
+              }
+              disabled={isLoading || !data.__deleteable}
+            >
               <MdiIcon path="delete" />
               {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
@@ -326,7 +349,7 @@ export default function AdminIssueAttachmentsView() {
                             data,
                             'file',
                             event.target.files,
-                            '/admin/IssueAttachment/file',
+                            'admin/IssueAttachment/file',
                           );
                           if (uploadedData) {
                             if (uploadedData.error) {
@@ -373,19 +396,29 @@ export default function AdminIssueAttachmentsView() {
                       }}
                     />
                   ) : (
-                    <Button
-                      id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentViewGroupFile-download"
-                      variant="contained"
-                      disabled={!data?.file}
-                      onClick={() => downloadFile(data, 'file')}
-                    >
-                      <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
-                      {
-                        t('edemokracia.admin.Issue.attachments.Attachment.View.group.file', {
-                          defaultValue: 'File',
-                        }) as string
-                      }
-                    </Button>
+                    <ButtonGroup>
+                      <Button
+                        id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentViewGroupFile-download"
+                        variant="contained"
+                        disabled={!data?.file}
+                        onClick={() => downloadFile(data, 'file')}
+                      >
+                        <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
+                        {
+                          t('edemokracia.admin.Issue.attachments.Attachment.View.group.file', {
+                            defaultValue: 'File',
+                          }) as string
+                        }
+                      </Button>
+                      <Button
+                        id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentViewGroupFile-toggleEditMode"
+                        variant="contained"
+                        disabled={false || !isFormUpdateable()}
+                        onClick={() => setEditMode(true)}
+                      >
+                        <MdiIcon path="upload" />
+                      </Button>
+                    </ButtonGroup>
                   )}
                 </Grid>
 

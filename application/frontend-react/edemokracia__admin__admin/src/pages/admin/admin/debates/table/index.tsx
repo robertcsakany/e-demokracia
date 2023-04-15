@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.debates#Table
 // Page owner name: edemokracia::admin::Admin
@@ -83,7 +83,7 @@ export default function AdminAdminDebatesTable() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [rowCount, setRowCount] = useState<number>(0);
   const [sortModel, setSortModel] = useState<GridSortModel>(
-    persistedTableData.sortModel || [{ field: 'closeAt', sort: 'asc' }],
+    persistedTableData.sortModel || [{ field: 'issueTitle', sort: 'asc' }],
   );
   const [lastItem, setLastItem] = useState<AdminDebateStored>();
   const [firstItem, setFirstItem] = useState<AdminDebateStored>();
@@ -92,7 +92,7 @@ export default function AdminAdminDebatesTable() {
   const [data, setData] = useState<GridRowModel<AdminDebateStored>[]>([]);
   const [filters, setFilters] = useState<Filter[]>(persistedTableData.filters || []);
   const [queryCustomizer, setQueryCustomizer] = useState<AdminDebateQueryCustomizer>({
-    _mask: '{closeAt,description,status,title}',
+    _mask: '{issueTitle,title,status,closeAt,description}',
     _seek: {
       limit: 10 + 1,
     },
@@ -102,7 +102,7 @@ export default function AdminAdminDebatesTable() {
         descending: sortModel[0].sort === 'desc',
       },
     ],
-    ...mapAllFiltersToQueryCustomizerProperties(filters, 'closeAt', 'description', 'status', 'title'),
+    ...mapAllFiltersToQueryCustomizerProperties(filters, 'issueTitle', 'title', 'status', 'closeAt', 'description'),
   });
   const title: string = t('edemokracia.admin.Admin.debates.Table', { defaultValue: 'Debates' });
 

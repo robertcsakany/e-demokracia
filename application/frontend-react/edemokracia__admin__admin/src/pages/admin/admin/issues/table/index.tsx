@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.issues#Table
 // Page owner name: edemokracia::admin::Admin
@@ -90,7 +90,7 @@ export default function AdminAdminIssuesTable() {
   const [data, setData] = useState<GridRowModel<AdminIssueStored>[]>([]);
   const [filters, setFilters] = useState<Filter[]>(persistedTableData.filters || []);
   const [queryCustomizer, setQueryCustomizer] = useState<AdminIssueQueryCustomizer>({
-    _mask: '{title,status,created,description,representation}',
+    _mask: '{title,status,created,numberOfDebates,description}',
     _seek: {
       limit: 10 + 1,
     },
@@ -100,7 +100,14 @@ export default function AdminAdminIssuesTable() {
         descending: sortModel[0].sort === 'desc',
       },
     ],
-    ...mapAllFiltersToQueryCustomizerProperties(filters, 'title', 'status', 'created', 'description', 'representation'),
+    ...mapAllFiltersToQueryCustomizerProperties(
+      filters,
+      'title',
+      'status',
+      'created',
+      'numberOfDebates',
+      'description',
+    ),
   });
   const title: string = t('edemokracia.admin.Admin.issues.Table', { defaultValue: 'Issues' });
 

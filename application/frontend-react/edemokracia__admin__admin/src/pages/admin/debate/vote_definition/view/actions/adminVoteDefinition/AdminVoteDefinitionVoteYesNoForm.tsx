@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,7 +12,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CallOperationAction
 
@@ -181,6 +181,7 @@ export function AdminVoteDefinitionVoteYesNoForm({
             <TextField
               name="value"
               id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoInputDefaultTransferObjectFormValue"
+              autoFocus
               label={
                 t('edemokracia.admin.VoteDefinition.voteYesNo.TransferObject.Form.value', {
                   defaultValue: 'Value',

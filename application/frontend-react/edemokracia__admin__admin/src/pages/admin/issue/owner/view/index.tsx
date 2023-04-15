@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Issue.owner#View
 // Page owner name: edemokracia::admin::Admin
@@ -414,7 +414,7 @@ export default function AdminIssueOwnerView() {
                                   value={data.isAdmin}
                                   onChange={(event) => {
                                     setEditMode(true);
-                                    storeDiff('isAdmin', event.target.value);
+                                    storeDiff('isAdmin', String(event.target.value).toLowerCase() === 'true');
                                   }}
                                 />
                               }

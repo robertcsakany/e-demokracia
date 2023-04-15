@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Relation View
 
@@ -14,11 +14,17 @@ import { Button } from '@mui/material';
 import { MdiIcon } from '../../../../../../components';
 import { FilterOption, FilterType } from '../../../../../../components-api';
 import {
+  AdminIssueTypeMaskBuilder,
   AdminIssueDebateMaskBuilder,
   AdminIssueDebate,
+  AdminCityQueryCustomizer,
   AdminIssueStored,
+  AdminDistrictStored,
   AdminCommentQueryCustomizer,
+  AdminCounty,
+  AdminCity,
   AdminUserMaskBuilder,
+  AdminDistrictQueryCustomizer,
   AdminIssueDebateQueryCustomizer,
   AdminIssueQueryCustomizer,
   AdminIssueCategoryStored,
@@ -28,16 +34,26 @@ import {
   AdminComment,
   AdminDebateStored,
   AdminUser,
+  AdminCityStored,
+  AdminCountyStored,
   EdemokraciaIssueStatus,
+  AdminIssueTypeStored,
   AdminIssueCategoryMaskBuilder,
   AdminUserStored,
   AdminUserQueryCustomizer,
   AdminIssueAttachmentStored,
+  AdminCountyQueryCustomizer,
   AdminIssueDebateStored,
   AdminIssueAttachmentQueryCustomizer,
   AdminIssueAttachment,
   AdminDebate,
+  AdminCountyMaskBuilder,
   AdminIssue,
+  AdminIssueType,
+  AdminIssueTypeQueryCustomizer,
+  AdminCityMaskBuilder,
+  AdminDistrict,
+  AdminDistrictMaskBuilder,
   AdminIssueCategoryQueryCustomizer,
   AdminCommentStored,
 } from '../../../../../../generated/data-api';
@@ -50,7 +66,7 @@ export const useAdminDebateIssueView = () => {
 
   const queryCustomizer: AdminIssueQueryCustomizer = {
     _mask:
-      '{title,status,created,description,owner{representation},attachments{link,file,type},categories{title,description},debates{status,title,closeAt,description},comments{comment,created,createdByName,upVotes,downVotes}}',
+      '{title,status,created,description,issueType{title,description},owner{representation},county{representation},city{representation},district{representation},attachments{link,file,type},categories{title,description},debates{status,title,closeAt,description},comments{comment,created,createdByName,upVotes,downVotes}}',
   };
 
   const attachmentsSortModel: GridSortModel = [{ field: 'link', sort: 'asc' }];
@@ -417,6 +433,59 @@ export const useAdminDebateIssueView = () => {
         ]
       : [],
   };
+  const issueTypeSortModel: GridSortModel = [{ field: 'title', sort: 'asc' }];
+
+  const issueTypeColumns: GridColDef<AdminIssueTypeStored>[] = [
+    {
+      ...baseColumnConfig,
+      field: 'title',
+      headerName: t('edemokracia.admin.Debate.issue.Issue.View.issue.issue.issueType.title', {
+        defaultValue: 'Title',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'description',
+      headerName: t('edemokracia.admin.Debate.issue.Issue.View.issue.issue.issueType.description', {
+        defaultValue: 'Description',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+  ];
+
+  const issueTypeRangeFilterOptions: FilterOption[] = [
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewIssueLabelWrapperIssueIssueTypeTitleFilter',
+      attributeName: 'title',
+      label: t('edemokracia.admin.Debate.issue.Issue.View.issue.issue.issueType.title.Filter', {
+        defaultValue: 'Title',
+      }) as string,
+      filterType: FilterType.string,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewIssueLabelWrapperIssueIssueTypeDescriptionFilter',
+      attributeName: 'description',
+      label: t('edemokracia.admin.Debate.issue.Issue.View.issue.issue.issueType.description.Filter', {
+        defaultValue: 'Description',
+      }) as string,
+      filterType: FilterType.string,
+    },
+  ];
+
+  const issueTypeInitialQueryCustomizer: AdminIssueTypeQueryCustomizer = {
+    _mask: '{title,description}',
+    _orderBy: issueTypeSortModel.length
+      ? [
+          {
+            attribute: issueTypeSortModel[0].field,
+            descending: issueTypeSortModel[0].sort === 'desc',
+          },
+        ]
+      : [],
+  };
   const ownerSortModel: GridSortModel = [{ field: 'representation', sort: 'asc' }];
 
   const ownerColumns: GridColDef<AdminUserStored>[] = [
@@ -453,6 +522,114 @@ export const useAdminDebateIssueView = () => {
         ]
       : [],
   };
+  const citySortModel: GridSortModel = [{ field: 'representation', sort: 'asc' }];
+
+  const cityColumns: GridColDef<AdminCityStored>[] = [
+    {
+      ...baseColumnConfig,
+      field: 'representation',
+      headerName: t('edemokracia.admin.Debate.issue.Issue.View.other.area.area.city.representation', {
+        defaultValue: 'Representation',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+  ];
+
+  const cityRangeFilterOptions: FilterOption[] = [
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherAreaAreaCityRepresentationFilter',
+      attributeName: 'representation',
+      label: t('edemokracia.admin.Debate.issue.Issue.View.other.area.area.city.representation.Filter', {
+        defaultValue: 'Representation',
+      }) as string,
+      filterType: FilterType.string,
+    },
+  ];
+
+  const cityInitialQueryCustomizer: AdminCityQueryCustomizer = {
+    _mask: '{representation}',
+    _orderBy: citySortModel.length
+      ? [
+          {
+            attribute: citySortModel[0].field,
+            descending: citySortModel[0].sort === 'desc',
+          },
+        ]
+      : [],
+  };
+  const countySortModel: GridSortModel = [{ field: 'representation', sort: 'asc' }];
+
+  const countyColumns: GridColDef<AdminCountyStored>[] = [
+    {
+      ...baseColumnConfig,
+      field: 'representation',
+      headerName: t('edemokracia.admin.Debate.issue.Issue.View.other.area.area.county.representation', {
+        defaultValue: 'Representation',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+  ];
+
+  const countyRangeFilterOptions: FilterOption[] = [
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherAreaAreaCountyRepresentationFilter',
+      attributeName: 'representation',
+      label: t('edemokracia.admin.Debate.issue.Issue.View.other.area.area.county.representation.Filter', {
+        defaultValue: 'Representation',
+      }) as string,
+      filterType: FilterType.string,
+    },
+  ];
+
+  const countyInitialQueryCustomizer: AdminCountyQueryCustomizer = {
+    _mask: '{representation}',
+    _orderBy: countySortModel.length
+      ? [
+          {
+            attribute: countySortModel[0].field,
+            descending: countySortModel[0].sort === 'desc',
+          },
+        ]
+      : [],
+  };
+  const districtSortModel: GridSortModel = [{ field: 'representation', sort: 'asc' }];
+
+  const districtColumns: GridColDef<AdminDistrictStored>[] = [
+    {
+      ...baseColumnConfig,
+      field: 'representation',
+      headerName: t('edemokracia.admin.Debate.issue.Issue.View.other.area.area.district.representation', {
+        defaultValue: 'Representation',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+  ];
+
+  const districtRangeFilterOptions: FilterOption[] = [
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherAreaAreaDistrictRepresentationFilter',
+      attributeName: 'representation',
+      label: t('edemokracia.admin.Debate.issue.Issue.View.other.area.area.district.representation.Filter', {
+        defaultValue: 'Representation',
+      }) as string,
+      filterType: FilterType.string,
+    },
+  ];
+
+  const districtInitialQueryCustomizer: AdminDistrictQueryCustomizer = {
+    _mask: '{representation}',
+    _orderBy: districtSortModel.length
+      ? [
+          {
+            attribute: districtSortModel[0].field,
+            descending: districtSortModel[0].sort === 'desc',
+          },
+        ]
+      : [],
+  };
 
   return {
     queryCustomizer,
@@ -468,8 +645,20 @@ export const useAdminDebateIssueView = () => {
     debatesColumns,
     debatesRangeFilterOptions,
     debatesInitialQueryCustomizer,
+    issueTypeColumns,
+    issueTypeRangeFilterOptions,
+    issueTypeInitialQueryCustomizer,
     ownerColumns,
     ownerRangeFilterOptions,
     ownerInitialQueryCustomizer,
+    cityColumns,
+    cityRangeFilterOptions,
+    cityInitialQueryCustomizer,
+    countyColumns,
+    countyRangeFilterOptions,
+    countyInitialQueryCustomizer,
+    districtColumns,
+    districtRangeFilterOptions,
+    districtInitialQueryCustomizer,
   };
 };

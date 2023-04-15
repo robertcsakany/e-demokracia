@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/components/widgets/TrinaryLogicCombobox.tsx'
 // Template name: actor/src/components/widgets/TrinaryLogicCombobox.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/components/widgets/TrinaryLogicCombobox.tsx.hbs
 
 import { TextField, InputAdornment, MenuItem } from '@mui/material';
@@ -14,6 +14,7 @@ import { TRINARY_LOGIC, TrinaryLogicProps } from '../../components-api';
 import { MdiIcon } from '../MdiIcon';
 
 export const TrinaryLogicCombobox = ({
+  autoFocus = false,
   readOnly = false,
   disabled = false,
   editMode = false,
@@ -38,6 +39,7 @@ export const TrinaryLogicCombobox = ({
     <TextField
       name={name}
       id={id}
+      autoFocus={autoFocus}
       label={label}
       select
       value={TRINARY_LOGIC.get(value)}

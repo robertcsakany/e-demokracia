@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.issues#View
 // Page owner name: edemokracia::admin::Admin
@@ -72,30 +72,46 @@ import { useConfirmationBeforeChange } from '../../../../../hooks';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
 import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
+  AdminIssueTypeMaskBuilder,
   AdminIssueDebateMaskBuilder,
   AdminIssueDebate,
+  AdminCityQueryCustomizer,
   AdminIssueStored,
-  AdminIssueCategoryMaskBuilder,
-  AdminUserStored,
-  AdminUserQueryCustomizer,
-  AdminIssueAttachmentStored,
+  AdminDistrictStored,
   AdminCommentQueryCustomizer,
+  AdminCounty,
+  AdminCity,
   AdminUserMaskBuilder,
-  AdminIssueDebateStored,
-  AdminIssueAttachmentQueryCustomizer,
+  AdminDistrictQueryCustomizer,
   AdminIssueDebateQueryCustomizer,
   AdminIssueQueryCustomizer,
-  AdminIssueAttachment,
   AdminIssueCategoryStored,
   AdminCommentMaskBuilder,
-  AdminIssue,
   AdminIssueAttachmentMaskBuilder,
   AdminIssueCategory,
   AdminComment,
   AdminUser,
+  AdminCityStored,
+  AdminCountyStored,
+  EdemokraciaIssueStatus,
+  AdminIssueTypeStored,
+  AdminIssueCategoryMaskBuilder,
+  AdminUserStored,
+  AdminUserQueryCustomizer,
+  AdminIssueAttachmentStored,
+  AdminCountyQueryCustomizer,
+  AdminIssueDebateStored,
+  AdminIssueAttachmentQueryCustomizer,
+  AdminIssueAttachment,
+  AdminCountyMaskBuilder,
+  AdminIssue,
+  AdminIssueType,
+  AdminIssueTypeQueryCustomizer,
+  AdminCityMaskBuilder,
+  AdminDistrict,
+  AdminDistrictMaskBuilder,
   AdminIssueCategoryQueryCustomizer,
   AdminCommentStored,
-  EdemokraciaIssueStatus,
 } from '../../../../../generated/data-api';
 import { adminAdminServiceForIssuesImpl, adminIssueServiceImpl } from '../../../../../generated/data-axios';
 import { JudoIdentifiable } from '@judo/data-api-common';
@@ -104,18 +120,22 @@ import { useAdminAdminIssuesView } from './hooks/useAdminAdminIssuesView';
 import {
   useRowDeleteAttachmentsAction,
   useAdminIssueCreateCommentAction,
+  useLinkViewCountyAction,
   useRowViewCommentsAction,
   usePageDeleteIssuesAction,
   useRowViewDebatesAction,
   usePageRefreshIssuesAction,
   useLinkViewOwnerAction,
+  useLinkViewDistrictAction,
   usePageEditIssuesAction,
   useAdminCommentVoteUpAction,
   useTableCreateAttachmentsAction,
   useRowViewCategoriesAction,
   useRowEditAttachmentsAction,
+  useLinkViewIssueTypeAction,
   useRowViewAttachmentsAction,
   useAdminIssueCreateDebateAction,
+  useLinkViewCityAction,
   useAdminCommentVoteDownAction,
 } from './actions';
 
@@ -132,18 +152,22 @@ export default function AdminAdminIssuesView() {
   const { signedIdentifier } = useParams();
   const rowDeleteAttachmentsAction = useRowDeleteAttachmentsAction();
   const AdminIssueCreateCommentAction = useAdminIssueCreateCommentAction();
+  const linkViewCountyAction = useLinkViewCountyAction();
   const rowViewCommentsAction = useRowViewCommentsAction();
   const pageDeleteIssuesAction = usePageDeleteIssuesAction();
   const rowViewDebatesAction = useRowViewDebatesAction();
   const pageRefreshIssuesAction = usePageRefreshIssuesAction();
   const linkViewOwnerAction = useLinkViewOwnerAction();
+  const linkViewDistrictAction = useLinkViewDistrictAction();
   const pageEditIssuesAction = usePageEditIssuesAction();
   const AdminCommentVoteUpAction = useAdminCommentVoteUpAction();
   const tableCreateAttachmentsAction = useTableCreateAttachmentsAction();
   const rowViewCategoriesAction = useRowViewCategoriesAction();
   const rowEditAttachmentsAction = useRowEditAttachmentsAction();
+  const linkViewIssueTypeAction = useLinkViewIssueTypeAction();
   const rowViewAttachmentsAction = useRowViewAttachmentsAction();
   const AdminIssueCreateDebateAction = useAdminIssueCreateDebateAction();
+  const linkViewCityAction = useLinkViewCityAction();
   const AdminCommentVoteDownAction = useAdminCommentVoteDownAction();
 
   const { openRangeDialog } = useRangeDialog();
@@ -162,9 +186,21 @@ export default function AdminAdminIssuesView() {
     debatesColumns,
     debatesRangeFilterOptions,
     debatesInitialQueryCustomizer,
+    issueTypeColumns,
+    issueTypeRangeFilterOptions,
+    issueTypeInitialQueryCustomizer,
     ownerColumns,
     ownerRangeFilterOptions,
     ownerInitialQueryCustomizer,
+    cityColumns,
+    cityRangeFilterOptions,
+    cityInitialQueryCustomizer,
+    countyColumns,
+    countyRangeFilterOptions,
+    countyInitialQueryCustomizer,
+    districtColumns,
+    districtRangeFilterOptions,
+    districtInitialQueryCustomizer,
   } = useAdminAdminIssuesView();
 
   const handleFetchError = useErrorHandler(
@@ -369,7 +405,15 @@ export default function AdminAdminIssuesView() {
         )}
         {!editMode && isFormDeleteable() && (
           <Grid item>
-            <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
+            <Button
+              id="page-action-delete"
+              onClick={() =>
+                pageDeleteIssuesAction(data, () => {
+                  back();
+                })
+              }
+              disabled={isLoading || !data.__deleteable}
+            >
               <MdiIcon path="delete" />
               {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>
@@ -413,6 +457,54 @@ export default function AdminAdminIssuesView() {
                         justifyContent="flex-start"
                         spacing={2}
                       >
+                        <Grid item xs={12} sm={12}>
+                          <AggregationInput
+                            name="issueType"
+                            id="LinkedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewDefaultIssueViewIssueLabelWrapperIssueIssueType"
+                            label={
+                              t('edemokracia.admin.Admin.issues.Issue.View.issue.issue.issueType', {
+                                defaultValue: 'IssueType',
+                              }) as string
+                            }
+                            labelList={[
+                              data.issueType?.title?.toString() ?? '',
+                              data.issueType?.description?.toString() ?? '',
+                            ]}
+                            value={data.issueType}
+                            error={!!validation.get('issueType')}
+                            helperText={validation.get('issueType')}
+                            icon={<MdiIcon path="folder-open" />}
+                            disabled={false || !isFormUpdateable()}
+                            editMode={editMode}
+                            onView={async () => linkViewIssueTypeAction(data?.issueType!)}
+                            onSet={async () => {
+                              const res = await openRangeDialog<AdminIssueTypeStored, AdminIssueTypeQueryCustomizer>({
+                                id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueIssueType',
+                                columns: issueTypeColumns,
+                                defaultSortField: ([{ field: 'title', sort: 'asc' }] as GridSortItem[])[0],
+                                rangeCall: async (queryCustomizer) =>
+                                  await adminIssueServiceImpl.getRangeForIssueType(
+                                    data,
+                                    processQueryCustomizer(queryCustomizer),
+                                  ),
+                                single: true,
+                                alreadySelectedItems: data.issueType?.__identifier as GridRowId,
+                                filterOptions: issueTypeRangeFilterOptions,
+                                initialQueryCustomizer: issueTypeInitialQueryCustomizer,
+                              });
+
+                              if (res === undefined) return;
+
+                              setEditMode(true);
+                              storeDiff('issueType', res as AdminIssueTypeStored);
+                            }}
+                            onUnset={async () => {
+                              setEditMode(true);
+                              storeDiff('issueType', null);
+                            }}
+                          />
+                        </Grid>
+
                         <Grid item xs={12} sm={12} md={4.0}>
                           <TextField
                             required
@@ -635,6 +727,12 @@ export default function AdminAdminIssuesView() {
                 activeIndex={0}
                 childTabs={[
                   {
+                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewDefaultIssueViewOtherArea',
+                    name: 'area',
+                    label: 'Area',
+                    icon: 'map',
+                  },
+                  {
                     id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewDefaultIssueViewOtherAttachments',
                     name: 'attachments',
                     label: 'Attachments',
@@ -660,6 +758,152 @@ export default function AdminAdminIssuesView() {
                   },
                 ]}
               >
+                <Grid item xs={12} sm={12}>
+                  <Grid
+                    id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewDefaultIssueViewOtherAreaArea"
+                    container
+                    direction="row"
+                    alignItems="flex-start"
+                    justifyContent="flex-start"
+                    spacing={2}
+                  >
+                    <Grid item xs={12} sm={12} md={4.0}>
+                      <AggregationInput
+                        name="county"
+                        id="LinkedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewDefaultIssueViewOtherAreaAreaCounty"
+                        label={
+                          t('edemokracia.admin.Admin.issues.Issue.View.other.area.area.county', {
+                            defaultValue: 'County',
+                          }) as string
+                        }
+                        labelList={[data.county?.representation?.toString() ?? '']}
+                        value={data.county}
+                        error={!!validation.get('county')}
+                        helperText={validation.get('county')}
+                        icon={<MdiIcon path="map" />}
+                        disabled={false || !isFormUpdateable()}
+                        editMode={editMode}
+                        onView={async () => linkViewCountyAction(data?.county!)}
+                        onSet={async () => {
+                          const res = await openRangeDialog<AdminCountyStored, AdminCountyQueryCustomizer>({
+                            id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCounty',
+                            columns: countyColumns,
+                            defaultSortField: ([{ field: 'representation', sort: 'asc' }] as GridSortItem[])[0],
+                            rangeCall: async (queryCustomizer) =>
+                              await adminIssueServiceImpl.getRangeForCounty(
+                                data,
+                                processQueryCustomizer(queryCustomizer),
+                              ),
+                            single: true,
+                            alreadySelectedItems: data.county?.__identifier as GridRowId,
+                            filterOptions: countyRangeFilterOptions,
+                            initialQueryCustomizer: countyInitialQueryCustomizer,
+                          });
+
+                          if (res === undefined) return;
+
+                          setEditMode(true);
+                          storeDiff('county', res as AdminCountyStored);
+                        }}
+                        onUnset={async () => {
+                          setEditMode(true);
+                          storeDiff('county', null);
+                        }}
+                      />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12} md={4.0}>
+                      <AggregationInput
+                        name="city"
+                        id="LinkedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewDefaultIssueViewOtherAreaAreaCity"
+                        label={
+                          t('edemokracia.admin.Admin.issues.Issue.View.other.area.area.city', {
+                            defaultValue: 'City',
+                          }) as string
+                        }
+                        labelList={[data.city?.representation?.toString() ?? '']}
+                        value={data.city}
+                        error={!!validation.get('city')}
+                        helperText={validation.get('city')}
+                        icon={<MdiIcon path="city" />}
+                        disabled={false || !isFormUpdateable()}
+                        editMode={editMode}
+                        onView={async () => linkViewCityAction(data?.city!)}
+                        onSet={async () => {
+                          const res = await openRangeDialog<AdminCityStored, AdminCityQueryCustomizer>({
+                            id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCity',
+                            columns: cityColumns,
+                            defaultSortField: ([{ field: 'representation', sort: 'asc' }] as GridSortItem[])[0],
+                            rangeCall: async (queryCustomizer) =>
+                              await adminIssueServiceImpl.getRangeForCity(
+                                data,
+                                processQueryCustomizer(queryCustomizer),
+                              ),
+                            single: true,
+                            alreadySelectedItems: data.city?.__identifier as GridRowId,
+                            filterOptions: cityRangeFilterOptions,
+                            initialQueryCustomizer: cityInitialQueryCustomizer,
+                          });
+
+                          if (res === undefined) return;
+
+                          setEditMode(true);
+                          storeDiff('city', res as AdminCityStored);
+                        }}
+                        onUnset={async () => {
+                          setEditMode(true);
+                          storeDiff('city', null);
+                        }}
+                      />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12} md={4.0}>
+                      <AggregationInput
+                        name="district"
+                        id="LinkedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewDefaultIssueViewOtherAreaAreaDistrict"
+                        label={
+                          t('edemokracia.admin.Admin.issues.Issue.View.other.area.area.district', {
+                            defaultValue: 'District',
+                          }) as string
+                        }
+                        labelList={[data.district?.representation?.toString() ?? '']}
+                        value={data.district}
+                        error={!!validation.get('district')}
+                        helperText={validation.get('district')}
+                        icon={<MdiIcon path="home-city" />}
+                        disabled={false || !isFormUpdateable()}
+                        editMode={editMode}
+                        onView={async () => linkViewDistrictAction(data?.district!)}
+                        onSet={async () => {
+                          const res = await openRangeDialog<AdminDistrictStored, AdminDistrictQueryCustomizer>({
+                            id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueDistrict',
+                            columns: districtColumns,
+                            defaultSortField: ([{ field: 'representation', sort: 'asc' }] as GridSortItem[])[0],
+                            rangeCall: async (queryCustomizer) =>
+                              await adminIssueServiceImpl.getRangeForDistrict(
+                                data,
+                                processQueryCustomizer(queryCustomizer),
+                              ),
+                            single: true,
+                            alreadySelectedItems: data.district?.__identifier as GridRowId,
+                            filterOptions: districtRangeFilterOptions,
+                            initialQueryCustomizer: districtInitialQueryCustomizer,
+                          });
+
+                          if (res === undefined) return;
+
+                          setEditMode(true);
+                          storeDiff('district', res as AdminDistrictStored);
+                        }}
+                        onUnset={async () => {
+                          setEditMode(true);
+                          storeDiff('district', null);
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+
                 <Grid item xs={12} sm={12}>
                   <Grid
                     id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewDefaultIssueViewOtherAttachmentsAttachments"

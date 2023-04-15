@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<namespace:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:accesspoint="http://blackbelt.hu/judo/meta/esm/accesspoint" xmlns:measure="http://blackbelt.hu/judo/meta/esm/measure" xmlns:namespace="http://blackbelt.hu/judo/meta/esm/namespace" xmlns:structure="http://blackbelt.hu/judo/meta/esm/structure" xmlns:type="http://blackbelt.hu/judo/meta/esm/type" xmlns:ui="http://blackbelt.hu/judo/meta/esm/ui" xsi:schemaLocation="http://blackbelt.hu/judo/meta/esm/accesspoint http://blackbelt.hu/judo/meta/esm#//accesspoint http://blackbelt.hu/judo/meta/esm/measure http://blackbelt.hu/judo/meta/esm#//measure http://blackbelt.hu/judo/meta/esm/namespace http://blackbelt.hu/judo/meta/esm#//namespace http://blackbelt.hu/judo/meta/esm/structure http://blackbelt.hu/judo/meta/esm#//structure http://blackbelt.hu/judo/meta/esm/type http://blackbelt.hu/judo/meta/esm#//type http://blackbelt.hu/judo/meta/esm/ui http://blackbelt.hu/judo/meta/esm#//ui" xmi:id="_7D8NwGkNEe25ONJ3V89cVA" name="edemokracia" metaVersion="1.2.0.20230331_161633_160c4bcb_develop" version="1.0.0.20230413_192036_SNAPSHOT">
+<namespace:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:accesspoint="http://blackbelt.hu/judo/meta/esm/accesspoint" xmlns:measure="http://blackbelt.hu/judo/meta/esm/measure" xmlns:namespace="http://blackbelt.hu/judo/meta/esm/namespace" xmlns:structure="http://blackbelt.hu/judo/meta/esm/structure" xmlns:type="http://blackbelt.hu/judo/meta/esm/type" xmlns:ui="http://blackbelt.hu/judo/meta/esm/ui" xsi:schemaLocation="http://blackbelt.hu/judo/meta/esm/accesspoint http://blackbelt.hu/judo/meta/esm#//accesspoint http://blackbelt.hu/judo/meta/esm/measure http://blackbelt.hu/judo/meta/esm#//measure http://blackbelt.hu/judo/meta/esm/namespace http://blackbelt.hu/judo/meta/esm#//namespace http://blackbelt.hu/judo/meta/esm/structure http://blackbelt.hu/judo/meta/esm#//structure http://blackbelt.hu/judo/meta/esm/type http://blackbelt.hu/judo/meta/esm#//type http://blackbelt.hu/judo/meta/esm/ui http://blackbelt.hu/judo/meta/esm#//ui" xmi:id="_7D8NwGkNEe25ONJ3V89cVA" name="edemokracia" version="1.0.0.20230416_004522_SNAPSHOT">
   <elements xsi:type="namespace:Package" xmi:id="_7D8NwWkNEe25ONJ3V89cVA" name="types">
     <elements xsi:type="type:StringType" xmi:id="_7D8NwmkNEe25ONJ3V89cVA" name="String" maxLength="255"/>
     <elements xsi:type="type:NumericType" xmi:id="_7D8Nw2kNEe25ONJ3V89cVA" name="Long" precision="18"/>
@@ -199,12 +199,14 @@
       <accesses xmi:id="___A0kIehEe2kLcMqsIbMgQ" target="_qFjB42ksEe25ONJ3V89cVA" name="debates" updateable="true" deleteable="true"/>
       <accesses xmi:id="_GgaEAIyPEe2VSOmaAz6G9Q" upper="1" target="_3MbZEIyNEe2VSOmaAz6G9Q" name="dashboardhome" appliedAnnotations="_7D81XmkNEe25ONJ3V89cVA" getterExpression="edemokracia::User!filter(u | u.userName == edemokracia::types::String!getVariable(&quot;ACTOR&quot;, &quot;userName&quot;))!any()" accessType="DERIVED"/>
       <accesses xmi:id="_l9Zh4JEaEe29qs15q2b6yw" target="_-f-eY34XEe2cB7_PsKXsHQ" name="voteDefinitions" updateable="true" deleteable="true"/>
+      <accesses xmi:id="_-T3OwNu-Ee2Bgcx6em3jZg" target="_J4ArkNu4Ee2Bgcx6em3jZg" name="issueTypes" createable="true" updateable="true" deleteable="true"/>
       <menuItems xsi:type="ui:MenuItemAccess" xmi:id="_GgcgQIyPEe2VSOmaAz6G9Q" name="dashboard" label="Dashboard" iconName="home" access="_GgaEAIyPEe2VSOmaAz6G9Q"/>
       <menuItems xsi:type="ui:MenuItemAccess" xmi:id="_hvYWQGkuEe25ONJ3V89cVA" name="Users_Menu" label="Users" iconName="account" access="_hvVS8GkuEe25ONJ3V89cVA"/>
       <menuItems xsi:type="ui:MenuItemAccess" xmi:id="_vW3EUG4rEe2siJt-xjHAyw" name="Categories_Menu" label="Categories" iconName="file-tree" menuGroup="_oIKpIId-Ee2kLcMqsIbMgQ" access="_vWzZ8G4rEe2siJt-xjHAyw"/>
       <menuItems xsi:type="ui:MenuItemAccess" xmi:id="_8Do7MIXgEe2kLcMqsIbMgQ" name="Counties_Menu" label="Counties" iconName="map" menuGroup="_oIKpIId-Ee2kLcMqsIbMgQ" access="_8DntEIXgEe2kLcMqsIbMgQ"/>
-      <menuItems xsi:type="ui:MenuItemGroup" xmi:id="_oIKpIId-Ee2kLcMqsIbMgQ" name="BasicData_Menu" label="Basic data" iconName="toy-brick" menuItems="_vW3EUG4rEe2siJt-xjHAyw _8Do7MIXgEe2kLcMqsIbMgQ"/>
+      <menuItems xsi:type="ui:MenuItemGroup" xmi:id="_oIKpIId-Ee2kLcMqsIbMgQ" name="BasicData_Menu" label="Basic data" iconName="toy-brick" menuItems="_vW3EUG4rEe2siJt-xjHAyw _8Do7MIXgEe2kLcMqsIbMgQ _-T8HQNu-Ee2Bgcx6em3jZg"/>
       <menuItems xsi:type="ui:MenuItemAccess" xmi:id="_iuDUYId_Ee2kLcMqsIbMgQ" name="Issues_Menu" label="Issues" iconName="ticket-confirmation" menuGroup="_KI3mAIeNEe2kLcMqsIbMgQ" access="_iuCGQId_Ee2kLcMqsIbMgQ"/>
+      <menuItems xsi:type="ui:MenuItemAccess" xmi:id="_-T8HQNu-Ee2Bgcx6em3jZg" name="IssueType_Menu" label="Issue Types" iconName="folder-open" menuGroup="_oIKpIId-Ee2kLcMqsIbMgQ" access="_-T3OwNu-Ee2Bgcx6em3jZg"/>
       <menuItems xsi:type="ui:MenuItemGroup" xmi:id="_KI3mAIeNEe2kLcMqsIbMgQ" name="Issues_and_Debates" label="Issues, Debates" menuItems="_iuDUYId_Ee2kLcMqsIbMgQ ___DQ0IehEe2kLcMqsIbMgQ"/>
       <menuItems xsi:type="ui:MenuItemAccess" xmi:id="___DQ0IehEe2kLcMqsIbMgQ" name="Debate_Menu" label="Debates" iconName="wechat" menuGroup="_KI3mAIeNEe2kLcMqsIbMgQ" access="___A0kIehEe2kLcMqsIbMgQ"/>
       <menuItems xsi:type="ui:MenuItemAccess" xmi:id="_l9dMQJEaEe29qs15q2b6yw" name="Vote_Menu" label="Votes" iconName="vote" access="_l9Zh4JEaEe29qs15q2b6yw"/>
@@ -667,6 +669,18 @@
       <relations xsi:type="structure:OneWayRelationMember" xmi:id="_rZFZ4I1pEe29qs15q2b6yw" upper="1" target="_p1aUIGksEe25ONJ3V89cVA" name="createdBy" targetDefinedCRUD="true" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="DERIVED" getterExpression="self.createdBy">
         <inherited xmi:id="_rZH2II1pEe29qs15q2b6yw"/>
       </relations>
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_V_8twNu4Ee2Bgcx6em3jZg" upper="1" target="_J4ArkNu4Ee2Bgcx6em3jZg" name="issueType" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" binding="_ePR8INu3Ee2Bgcx6em3jZg" getterExpression="">
+        <inherited xmi:id="_V__xENu4Ee2Bgcx6em3jZg"/>
+      </relations>
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_286p0NvTEe2Bgcx6em3jZg" upper="1" target="_a0aoAH2iEe2LTNnGda5kaw" name="county" targetDefinedCRUD="true" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" binding="_xl814Nu3Ee2Bgcx6em3jZg" getterExpression="">
+        <inherited xmi:id="_288fANvTEe2Bgcx6em3jZg"/>
+      </relations>
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="__tg8wNvTEe2Bgcx6em3jZg" upper="1" target="_a0XksH2iEe2LTNnGda5kaw" name="city" targetDefinedCRUD="true" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" binding="_AX_t4Nu4Ee2Bgcx6em3jZg" getterExpression="">
+        <inherited xmi:id="__tjZANvTEe2Bgcx6em3jZg"/>
+      </relations>
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_ZTn0QNvUEe2Bgcx6em3jZg" upper="1" target="_a0UhYH2iEe2LTNnGda5kaw" name="district" targetDefinedCRUD="true" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="MAPPED" binding="_5cX_kNu3Ee2Bgcx6em3jZg" getterExpression="">
+        <inherited xmi:id="_ZTppcNvUEe2Bgcx6em3jZg"/>
+      </relations>
       <attributes xsi:type="structure:DataMember" xmi:id="_qC-PAGksEe25ONJ3V89cVA" name="created" dataType="_7D8NyWkNEe25ONJ3V89cVA" defaultExpression="edemokracia::types::Timestamp!now()&#xA;" binding="_Tp72oGkPEe25ONJ3V89cVA" getterExpression="self.created" memberType="DERIVED">
         <inherited xmi:id="_qDNfkGksEe25ONJ3V89cVA"/>
       </attributes>
@@ -681,6 +695,9 @@
       </attributes>
       <attributes xsi:type="structure:DataMember" xmi:id="_eaGVoIewEe2kLcMqsIbMgQ" name="representation" dataType="_7D8NwmkNEe25ONJ3V89cVA" defaultExpression="" getterExpression="self.title" memberType="DERIVED">
         <inherited xmi:id="_eaKAAIewEe2kLcMqsIbMgQ"/>
+      </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_mz8yQNu_Ee2Bgcx6em3jZg" name="numberOfDebates" dataType="_7D8NxGkNEe25ONJ3V89cVA" defaultExpression="" getterExpression="self.debates!count()" memberType="DERIVED">
+        <inherited xmi:id="_mz_1kNu_Ee2Bgcx6em3jZg"/>
       </attributes>
       <mapping xmi:id="_qC2TMGksEe25ONJ3V89cVA" target="_GDYW0GkOEe25ONJ3V89cVA"/>
       <operations xmi:id="_DhsGkIehEe2kLcMqsIbMgQ" name="createDebate" customImplementation="false" body="" operationType="MAPPED" binding="createDebate">
@@ -736,11 +753,15 @@
         <columns xsi:type="ui:DataColumn" xmi:id="_BwJHkGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" dataFeature="_qDkr8GksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_BxQh4GkwEe25ONJ3V89cVA" name="status" label="Status" iconName="list" dataFeature="_qE5hoGksEe25ONJ3V89cVA"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_Bvkf0GkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" dataFeature="_qC-PAGksEe25ONJ3V89cVA"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_xJ-K4Nu_Ee2Bgcx6em3jZg" name="numberOfDebates" label="Debates" iconName="wechat" dataFeature="_mz8yQNu_Ee2Bgcx6em3jZg"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_27dsIG5VEe2wNaja8kBvcQ" name="description" label="Description" iconName="text_fields" dataFeature="_qEQBYGksEe25ONJ3V89cVA"/>
-        <columns xsi:type="ui:DataColumn" xmi:id="_mvlDwIybEe2VSOmaAz6G9Q" name="representation" label="Representation" iconName="text_fields" dataFeature="_eaGVoIewEe2kLcMqsIbMgQ"/>
       </table>
       <view xmi:id="_qCa1YGksEe25ONJ3V89cVA" name="Issue_View" label="View / Edit Issue" iconName="ticket-confirmation" layout="VERTICAL">
         <components xsi:type="ui:Group" xmi:id="_wB_RsG47Ee2siJt-xjHAyw" name="issue" label="Issue" iconName="clipboard" frame="true" col="12">
+          <components xsi:type="ui:TabularReferenceField" xmi:id="_FHpVENvSEe2Bgcx6em3jZg" name="issueType" label="IssueType" iconName="folder-open" col="12" relationFeature="_V_8twNu4Ee2Bgcx6em3jZg" targetDefinedTabular="false">
+            <columns xsi:type="ui:DataColumn" xmi:id="_FHp8IdvSEe2Bgcx6em3jZg" name="title" label="Title" iconName="text_fields" dataFeature="_R2-tQNu4Ee2Bgcx6em3jZg"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_FHp8INvSEe2Bgcx6em3jZg" name="description" label="Description" iconName="text_fields" dataFeature="_R2x48Nu4Ee2Bgcx6em3jZg"/>
+          </components>
           <components xsi:type="ui:DataField" xmi:id="_BvyiQGkwEe25ONJ3V89cVA" name="title" label="Title" iconName="text_fields" dataFeature="_qDkr8GksEe25ONJ3V89cVA"/>
           <components xsi:type="ui:DataField" xmi:id="_Bw7xwGkwEe25ONJ3V89cVA" name="status" label="Status" iconName="list" dataFeature="_qE5hoGksEe25ONJ3V89cVA"/>
           <components xsi:type="ui:DataField" xmi:id="_BvJpEGkwEe25ONJ3V89cVA" name="created" label="Created" iconName="schedule" dataFeature="_qC-PAGksEe25ONJ3V89cVA"/>
@@ -751,6 +772,17 @@
           </components>
         </components>
         <components xsi:type="ui:TabBar" xmi:id="_hZfckId8Ee2kLcMqsIbMgQ" name="other" label="" col="12" row="11">
+          <tabs xmi:id="_yCDu0NvSEe2Bgcx6em3jZg" name="area" label="Area" iconName="map" col="12">
+            <components xsi:type="ui:TabularReferenceField" xmi:id="_pPQxkdvUEe2Bgcx6em3jZg" name="county" label="County" iconName="map" relationFeature="_286p0NvTEe2Bgcx6em3jZg" targetDefinedTabular="false">
+              <columns xsi:type="ui:DataColumn" xmi:id="_pPRYoNvUEe2Bgcx6em3jZg" name="representation" label="Representation" iconName="text_fields" dataFeature="_NdiWgIXyEe2kLcMqsIbMgQ"/>
+            </components>
+            <components xsi:type="ui:TabularReferenceField" xmi:id="_pPQKgNvUEe2Bgcx6em3jZg" name="city" label="City" iconName="city" relationFeature="__tg8wNvTEe2Bgcx6em3jZg" targetDefinedTabular="false">
+              <columns xsi:type="ui:DataColumn" xmi:id="_pPQxkNvUEe2Bgcx6em3jZg" name="representation" label="Representation" iconName="text_fields" dataFeature="_0F3joIXxEe2kLcMqsIbMgQ"/>
+            </components>
+            <components xsi:type="ui:TabularReferenceField" xmi:id="_pPRYodvUEe2Bgcx6em3jZg" name="district" label="District" iconName="home-city" relationFeature="_ZTn0QNvUEe2Bgcx6em3jZg" targetDefinedTabular="false">
+              <columns xsi:type="ui:DataColumn" xmi:id="_pPR_stvUEe2Bgcx6em3jZg" name="representation" label="Representation" iconName="text_fields" dataFeature="_AHgwkIXyEe2kLcMqsIbMgQ"/>
+            </components>
+          </tabs>
           <tabs xmi:id="_x23N8Id8Ee2kLcMqsIbMgQ" name="attachments" label="Attachments" iconName="paperclip" col="12" row="10">
             <components xsi:type="ui:TabularReferenceField" xmi:id="_6kmaIId8Ee2kLcMqsIbMgQ" name="attachments" label="" iconName="" col="12" row="10" relationFeature="_qXz2kGksEe25ONJ3V89cVA" targetDefinedTabular="false" smallTable="true">
               <columns xsi:type="ui:DataColumn" xmi:id="_6kmaIYd8Ee2kLcMqsIbMgQ" name="link" label="Link" iconName="text_fields" dataFeature="_p6HN8GksEe25ONJ3V89cVA"/>
@@ -817,6 +849,9 @@
       </attributes>
       <attributes xsi:type="structure:DataMember" xmi:id="_7FWIEG5UEe2wNaja8kBvcQ" name="title" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_XZg4AGkVEe25ONJ3V89cVA" getterExpression="" memberType="MAPPED">
         <inherited xmi:id="_7FX9QG5UEe2wNaja8kBvcQ"/>
+      </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_a6olcNvAEe2Bgcx6em3jZg" name="issueTitle" dataType="_7D8NwmkNEe25ONJ3V89cVA" defaultExpression="" getterExpression="self.issue.title" memberType="DERIVED">
+        <inherited xmi:id="_a6td8NvAEe2Bgcx6em3jZg"/>
       </attributes>
       <mapping xmi:id="_qGIQsGksEe25ONJ3V89cVA" target="_jjCdUGkPEe25ONJ3V89cVA"/>
       <operations xmi:id="_VLAoUIeOEe2kLcMqsIbMgQ" name="closeDebate" customImplementation="false" body="" operationType="MAPPED" binding="closeDebate">
@@ -896,10 +931,11 @@
         </components>
       </form>
       <table xmi:id="_qF_GwGksEe25ONJ3V89cVA" name="Debate_Table" label="Debates" iconName="wechat">
-        <columns xsi:type="ui:DataColumn" xmi:id="_4ROlMG5VEe2wNaja8kBvcQ" name="closeAt" label="CloseAt" iconName="schedule" dataFeature="_7FHekG5UEe2wNaja8kBvcQ"/>
-        <columns xsi:type="ui:DataColumn" xmi:id="_4RV58G5VEe2wNaja8kBvcQ" name="description" label="Description" iconName="text_fields" dataFeature="_7FMXEG5UEe2wNaja8kBvcQ"/>
-        <columns xsi:type="ui:DataColumn" xmi:id="_4RdOsG5VEe2wNaja8kBvcQ" name="status" label="Status" iconName="list" dataFeature="_7FRPkG5UEe2wNaja8kBvcQ"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_lHHAgNvAEe2Bgcx6em3jZg" name="issueTitle" label="Issue" iconName="ticket-confirmation" dataFeature="_a6olcNvAEe2Bgcx6em3jZg"/>
         <columns xsi:type="ui:DataColumn" xmi:id="_4RlKgG5VEe2wNaja8kBvcQ" name="title" label="Title" iconName="text_fields" dataFeature="_7FWIEG5UEe2wNaja8kBvcQ"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_4RdOsG5VEe2wNaja8kBvcQ" name="status" label="Status" iconName="list" dataFeature="_7FRPkG5UEe2wNaja8kBvcQ"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_4ROlMG5VEe2wNaja8kBvcQ" name="closeAt" label="Close at" iconName="schedule" dataFeature="_7FHekG5UEe2wNaja8kBvcQ"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_4RV58G5VEe2wNaja8kBvcQ" name="description" label="Description" iconName="text_fields" dataFeature="_7FMXEG5UEe2wNaja8kBvcQ"/>
       </table>
       <view xmi:id="_qFsy4GksEe25ONJ3V89cVA" name="Debate_View" label="View / Edit Debate" iconName="wechat" layout="VERTICAL">
         <components xsi:type="ui:Group" xmi:id="_cKg3IGk8Ee25ONJ3V89cVA" name="debate" label="Debate" iconName="wechat" frame="true" col="12">
@@ -962,7 +998,7 @@
       <attributes xsi:type="structure:DataMember" xmi:id="_qJnCgGksEe25ONJ3V89cVA" name="title" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_NyMz8GkfEe25ONJ3V89cVA" getterExpression="" memberType="MAPPED">
         <inherited xmi:id="_qJ26IGksEe25ONJ3V89cVA"/>
       </attributes>
-      <attributes xsi:type="structure:DataMember" xmi:id="_qKOtkGksEe25ONJ3V89cVA" name="description" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_PfYugGkfEe25ONJ3V89cVA" getterExpression="" memberType="MAPPED">
+      <attributes xsi:type="structure:DataMember" xmi:id="_qKOtkGksEe25ONJ3V89cVA" name="description" dataType="_7D8NzGkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_PfYugGkfEe25ONJ3V89cVA" getterExpression="" memberType="MAPPED">
         <inherited xmi:id="_qKqLYGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_qJfGsGksEe25ONJ3V89cVA" target="_K7jW8GkfEe25ONJ3V89cVA"/>
@@ -1607,6 +1643,18 @@
       <view xmi:id="_TDTsEId6Ee2kLcMqsIbMgQ" name="TransferObject_View" label="TransferObject View" layout="VERTICAL"/>
     </elements>
     <elements xsi:type="structure:TransferObjectType" xmi:id="_oCghgIeIEe2kLcMqsIbMgQ" name="CreateIssueInput">
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_I14DsNu5Ee2Bgcx6em3jZg" upper="1" target="_J4ArkNu4Ee2Bgcx6em3jZg" name="issueType" targetDefinedCRUD="true" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="TRANSIENT" getterExpression="">
+        <inherited xmi:id="_I18VINu5Ee2Bgcx6em3jZg"/>
+      </relations>
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_7lJ44NvWEe2Bgcx6em3jZg" upper="1" target="_a0aoAH2iEe2LTNnGda5kaw" name="county" targetDefinedCRUD="true" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="TRANSIENT" getterExpression="">
+        <inherited xmi:id="_7lLuENvWEe2Bgcx6em3jZg"/>
+      </relations>
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_AFpBgNvXEe2Bgcx6em3jZg" upper="1" target="_a0XksH2iEe2LTNnGda5kaw" name="city" targetDefinedCRUD="true" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="TRANSIENT" getterExpression="">
+        <inherited xmi:id="_AFq2sNvXEe2Bgcx6em3jZg"/>
+      </relations>
+      <relations xsi:type="structure:OneWayRelationMember" xmi:id="_D9mKgNvXEe2Bgcx6em3jZg" upper="1" target="_a0UhYH2iEe2LTNnGda5kaw" name="district" targetDefinedCRUD="true" defaultExpression="" rangeExpression="" relationKind="AGGREGATION" memberType="TRANSIENT" getterExpression="">
+        <inherited xmi:id="_D9n_sNvXEe2Bgcx6em3jZg"/>
+      </relations>
       <attributes xsi:type="structure:DataMember" xmi:id="_E2dOAIeJEe2kLcMqsIbMgQ" name="description" dataType="_7D8NzGkNEe25ONJ3V89cVA" required="true" defaultExpression="" getterExpression="" memberType="TRANSIENT">
         <inherited xmi:id="_E2dOAYeJEe2kLcMqsIbMgQ"/>
       </attributes>
@@ -1615,8 +1663,28 @@
       </attributes>
       <form xmi:id="_oCqSgIeIEe2kLcMqsIbMgQ" name="CreateIssueInput_Form" label="Create issue" layout="VERTICAL">
         <components xsi:type="ui:Group" xmi:id="_RqJLwI1DEe2VSOmaAz6G9Q" name="issue" label="Create issue" iconName="clipboard" frame="true" col="12">
+          <components xsi:type="ui:TabularReferenceField" xmi:id="_WNovANu5Ee2Bgcx6em3jZg" name="issueType" label="Issue type" iconName="folder-open" col="12" relationFeature="_I14DsNu5Ee2Bgcx6em3jZg" targetDefinedTabular="false">
+            <columns xsi:type="ui:DataColumn" xmi:id="_XfjHMNvXEe2Bgcx6em3jZg" name="representation" label="Representation" iconName="text_fields" dataFeature="_vOHLENvTEe2Bgcx6em3jZg"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_WNsZYNu5Ee2Bgcx6em3jZg" name="title" label="Title" iconName="text_fields" dataFeature="_R2-tQNu4Ee2Bgcx6em3jZg"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_QaOqUNvXEe2Bgcx6em3jZg" name="description" label="Description" iconName="text_fields" dataFeature="_R2x48Nu4Ee2Bgcx6em3jZg"/>
+          </components>
           <components xsi:type="ui:DataField" xmi:id="_DenhMI1DEe2VSOmaAz6G9Q" name="title" label="Title" iconName="text_fields" dataFeature="_E2fDMIeJEe2kLcMqsIbMgQ"/>
           <components xsi:type="ui:DataField" xmi:id="_Dekd4I1DEe2VSOmaAz6G9Q" name="description" label="Description" iconName="text_fields" col="12" row="4" dataFeature="_E2dOAIeJEe2kLcMqsIbMgQ" textMultiLine="true"/>
+          <components xsi:type="ui:TabularReferenceField" xmi:id="_TXiwANvXEe2Bgcx6em3jZg" name="city" label="City" iconName="map" relationFeature="_AFpBgNvXEe2Bgcx6em3jZg" targetDefinedTabular="false">
+            <columns xsi:type="ui:DataColumn" xmi:id="_TXj-INvXEe2Bgcx6em3jZg" name="representation" label="Representation" iconName="text_fields" dataFeature="_0F3joIXxEe2kLcMqsIbMgQ"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_TXjXENvXEe2Bgcx6em3jZg" name="name" label="Name" iconName="text_fields" dataFeature="_a0Xks32iEe2LTNnGda5kaw"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_TXjXEdvXEe2Bgcx6em3jZg" name="county" label="County" iconName="text_fields" dataFeature="_XCNnMIXxEe2kLcMqsIbMgQ"/>
+          </components>
+          <components xsi:type="ui:TabularReferenceField" xmi:id="_TXj-IdvXEe2Bgcx6em3jZg" name="county" label="County" iconName="city" relationFeature="_7lJ44NvWEe2Bgcx6em3jZg" targetDefinedTabular="false">
+            <columns xsi:type="ui:DataColumn" xmi:id="_TXklMNvXEe2Bgcx6em3jZg" name="representation" label="Representation" iconName="text_fields" dataFeature="_NdiWgIXyEe2kLcMqsIbMgQ"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_TXj-ItvXEe2Bgcx6em3jZg" name="name" label="Name" iconName="text_fields" dataFeature="_a0aoA32iEe2LTNnGda5kaw"/>
+          </components>
+          <components xsi:type="ui:TabularReferenceField" xmi:id="_TXklMdvXEe2Bgcx6em3jZg" name="district" label="District" iconName="home-city" relationFeature="_D9mKgNvXEe2Bgcx6em3jZg" targetDefinedTabular="false">
+            <columns xsi:type="ui:DataColumn" xmi:id="_TXlMQtvXEe2Bgcx6em3jZg" name="representation" label="Representation" iconName="text_fields" dataFeature="_AHgwkIXyEe2kLcMqsIbMgQ"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_TXklMtvXEe2Bgcx6em3jZg" name="name" label="Name" iconName="text_fields" dataFeature="_a0UhYX2iEe2LTNnGda5kaw"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_TXlMQNvXEe2Bgcx6em3jZg" name="county" label="County" iconName="text_fields" dataFeature="_fJB9UIXxEe2kLcMqsIbMgQ"/>
+            <columns xsi:type="ui:DataColumn" xmi:id="_TXlMQdvXEe2Bgcx6em3jZg" name="city" label="City" iconName="text_fields" dataFeature="_pHXOsIXxEe2kLcMqsIbMgQ"/>
+          </components>
         </components>
         <components xsi:type="ui:Group" xmi:id="_dXyFUI1IEe2VSOmaAz6G9Q" name="group" col="12">
           <components xsi:type="ui:ActionButton" xmi:id="_JVkUMI1IEe2VSOmaAz6G9Q" name="ok" label="OK" iconName="check"/>
@@ -1640,7 +1708,7 @@
         <inherited xmi:id="_OIs8AIyYEe2VSOmaAz6G9Q"/>
       </attributes>
       <mapping xmi:id="_oL_DQIyOEe2VSOmaAz6G9Q" target="_BuSFMGkWEe25ONJ3V89cVA"/>
-      <operations xmi:id="_wJkIYIyPEe2VSOmaAz6G9Q" name="createIssue" customImplementation="false" body="var edemokracia::User owner = edemokracia::User!filter(u | u.userName == edemokracia::types::String!getVariable(&quot;ACTOR&quot;, &quot;userName&quot;))!any();&#xA;&#xA;var edemokracia::Issue issue = new edemokracia::Issue(&#xA;&#x9;&#x9;title = input.title,&#xA;&#x9;&#x9;description = input.description,&#xA;&#x9;&#x9;created = edemokracia::types::Timestamp!now(),&#xA;&#x9;&#x9;owner = owner,&#xA;&#x9;&#x9;createdBy = owner,&#xA;&#x9;&#x9;status = edemokracia::IssueStatus#CREATED&#xA;&#x9;);&#xA;&#x9;&#xA;/* &#x9;&#xA;for (attachment in input.attachments) {&#xA;&#x9;issue.attachments += new edemokracia::IssueAttachment(&#xA;&#x9;&#x9;link = attachment.link,&#xA;&#x9;&#x9;file = attachment.file,&#xA;&#x9;&#x9;type = attachment.type&#xA;&#x9;)&#xA;}&#xA;*/&#xA;&#xA;return issue; " operationType="STATIC" binding="">
+      <operations xmi:id="_wJkIYIyPEe2VSOmaAz6G9Q" name="createIssue" customImplementation="false" body="var edemokracia::User owner = edemokracia::User!filter(u | u.userName == edemokracia::types::String!getVariable(&quot;ACTOR&quot;, &quot;userName&quot;))!any();&#xA;&#xA;var edemokracia::IssueType issueType;&#xA;var edemokracia::County county;&#xA;var edemokracia::City city;&#xA;var edemokracia::District district;&#xA;&#xA;//if (input.issueType!isDefined()) {&#xA;//    issueType = mutable input.issueType;&#xA;//}&#xA;//if (input.county!isDefined()) {&#xA;//    county = mutable input.county;&#xA;//}&#xA;//if (input.city!isDefined()) {&#xA;//    city = mutable input.city;&#xA;//}&#xA;//if (input.district!isDefined()) {&#xA;//    district = mutable input.district;&#xA;//}&#xA;&#xA;var edemokracia::Issue issue = new edemokracia::Issue(&#xA;&#x9;&#x9;title = input.title,&#xA;&#x9;&#x9;description = input.description,&#xA;&#x9;&#x9;created = edemokracia::types::Timestamp!now(),&#xA;&#x9;&#x9;owner = owner,&#xA;&#x9;&#x9;createdBy = owner,&#xA;&#x9;&#x9;status = edemokracia::IssueStatus#CREATED,&#xA;&#x9;&#x9;issueType = issueType,&#xA;&#x9;&#x9;county = county,&#xA;&#x9;&#x9;county = county,&#xA;&#x9;&#x9;city = city,&#xA;&#x9;&#x9;district = district&#x9;&#x9;&#xA;&#x9;);&#xA;&#x9;&#xA;/* &#x9;&#xA;for (attachment in input.attachments) {&#xA;&#x9;issue.attachments += new edemokracia::IssueAttachment(&#xA;&#x9;&#x9;link = attachment.link,&#xA;&#x9;&#x9;file = attachment.file,&#xA;&#x9;&#x9;type = attachment.type&#xA;&#x9;)&#xA;}&#xA;*/&#xA;&#xA;return issue; " operationType="STATIC" binding="">
         <input xmi:id="_7puY4IyPEe2VSOmaAz6G9Q" lower="1" upper="1" target="_oCghgIeIEe2kLcMqsIbMgQ" name="input" rangeExpression=""/>
         <output xmi:id="_i0Z0II1KEe2VSOmaAz6G9Q" lower="1" upper="1" target="_qCREY2ksEe25ONJ3V89cVA" name="output" targetDefinedCRUD="true"/>
         <inherited xmi:id="_wJmkoIyPEe2VSOmaAz6G9Q"/>
@@ -1676,16 +1744,18 @@
           <actions xmi:id="_jwsl0I1hEe2J66C5CrhpQw" name="createUser" label="Create user" iconName="account" operation="createUser"/>
         </components>
         <components xsi:type="ui:TabBar" xmi:id="_CR_JgIyUEe2VSOmaAz6G9Q" name="tabBar" col="12" row="20">
-          <tabs xmi:id="_E0b4IIyUEe2VSOmaAz6G9Q" name="myissues" label="My issues" iconName="ticket-account">
-            <components xsi:type="ui:TabularReferenceField" xmi:id="_6XR8wIyTEe2VSOmaAz6G9Q" name="issues" label="" iconName="" col="12" row="4" relationFeature="_OQ7kkIyQEe2VSOmaAz6G9Q" targetDefinedTabular="false">
+          <tabs xmi:id="_E0b4IIyUEe2VSOmaAz6G9Q" name="myissues" label="My issues" iconName="ticket-account" col="12">
+            <components xsi:type="ui:TabularReferenceField" xmi:id="_6XR8wIyTEe2VSOmaAz6G9Q" name="issues" label="" iconName="" col="12" row="10" relationFeature="_OQ7kkIyQEe2VSOmaAz6G9Q" targetDefinedTabular="false">
               <columns xsi:type="ui:DataColumn" xmi:id="_6XXcUIyTEe2VSOmaAz6G9Q" name="title" label="Title" iconName="text_fields" dataFeature="_qDkr8GksEe25ONJ3V89cVA"/>
               <columns xsi:type="ui:DataColumn" xmi:id="_6XUZAIyTEe2VSOmaAz6G9Q" name="created" label="Created" iconName="schedule" dataFeature="_qC-PAGksEe25ONJ3V89cVA"/>
               <columns xsi:type="ui:DataColumn" xmi:id="_6Xdi8IyTEe2VSOmaAz6G9Q" name="status" label="Status" iconName="list" dataFeature="_qE5hoGksEe25ONJ3V89cVA"/>
+              <columns xsi:type="ui:DataColumn" xmi:id="_YD5DANvaEe2Bgcx6em3jZg" name="numberOfDebates" label="Debates" iconName="wechat" dataFeature="_mz8yQNu_Ee2Bgcx6em3jZg"/>
             </components>
           </tabs>
-          <tabs xmi:id="_GhTpoIyUEe2VSOmaAz6G9Q" name="mydebates" label="My debates" iconName="wechat">
-            <components xsi:type="ui:TabularReferenceField" xmi:id="_6XyTEIyTEe2VSOmaAz6G9Q" name="debates" label="" iconName="" col="12" row="4" relationFeature="_m2rV0IyREe2VSOmaAz6G9Q" targetDefinedTabular="false">
+          <tabs xmi:id="_GhTpoIyUEe2VSOmaAz6G9Q" name="mydebates" label="My debates" iconName="wechat" col="12">
+            <components xsi:type="ui:TabularReferenceField" xmi:id="_6XyTEIyTEe2VSOmaAz6G9Q" name="debates" label="" iconName="" col="12" row="10" relationFeature="_m2rV0IyREe2VSOmaAz6G9Q" targetDefinedTabular="false">
               <columns xsi:type="ui:DataColumn" xmi:id="_6X9SMIyTEe2VSOmaAz6G9Q" name="title" label="Title" iconName="text_fields" dataFeature="_7FWIEG5UEe2wNaja8kBvcQ"/>
+              <columns xsi:type="ui:DataColumn" xmi:id="_ez7MYNvaEe2Bgcx6em3jZg" name="issueTitle" label="Issue" iconName="folder-open" dataFeature="_a6olcNvAEe2Bgcx6em3jZg"/>
               <columns xsi:type="ui:DataColumn" xmi:id="_6X1WYIyTEe2VSOmaAz6G9Q" name="closeAt" label="CloseAt" iconName="schedule" dataFeature="_7FHekG5UEe2wNaja8kBvcQ"/>
               <columns xsi:type="ui:DataColumn" xmi:id="_6X618IyTEe2VSOmaAz6G9Q" name="status" label="Status" iconName="list" dataFeature="_7FRPkG5UEe2wNaja8kBvcQ"/>
             </components>
@@ -1745,6 +1815,34 @@
         <components xsi:type="ui:DataField" xmi:id="_kCswQI1rEe29qs15q2b6yw" name="lastName" label="LastName" iconName="text_fields" dataFeature="_e2CeII1rEe29qs15q2b6yw"/>
       </view>
     </elements>
+    <elements xsi:type="structure:TransferObjectType" xmi:id="_J4ArkNu4Ee2Bgcx6em3jZg" name="IssueType">
+      <attributes xsi:type="structure:DataMember" xmi:id="_R2x48Nu4Ee2Bgcx6em3jZg" name="description" dataType="_7D8NzGkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_wigDkNuxEe2Bgcx6em3jZg" getterExpression="" memberType="MAPPED">
+        <inherited xmi:id="_R23YgNu4Ee2Bgcx6em3jZg"/>
+      </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_R2-tQNu4Ee2Bgcx6em3jZg" name="title" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_uCwqsNuxEe2Bgcx6em3jZg" getterExpression="" memberType="MAPPED">
+        <inherited xmi:id="_R3CXoNu4Ee2Bgcx6em3jZg"/>
+      </attributes>
+      <attributes xsi:type="structure:DataMember" xmi:id="_vOHLENvTEe2Bgcx6em3jZg" name="representation" dataType="_7D8NwmkNEe25ONJ3V89cVA" defaultExpression="" getterExpression="self.title" memberType="DERIVED">
+        <inherited xmi:id="_vOIZMNvTEe2Bgcx6em3jZg"/>
+      </attributes>
+      <mapping xmi:id="_PMrqMNu4Ee2Bgcx6em3jZg" target="_q7APkNuxEe2Bgcx6em3jZg"/>
+      <form xmi:id="_J4WCwNu4Ee2Bgcx6em3jZg" name="IssueType_Form" label="Create Issue Type" iconName="folder-open" layout="VERTICAL">
+        <components xsi:type="ui:Group" xmi:id="_19au8NvDEe2Bgcx6em3jZg" name="group" frame="true" col="12">
+          <components xsi:type="ui:DataField" xmi:id="_03iE8dvDEe2Bgcx6em3jZg" name="title" label="Title" iconName="text_fields" dataFeature="_R2-tQNu4Ee2Bgcx6em3jZg"/>
+          <components xsi:type="ui:DataField" xmi:id="_03iE8NvDEe2Bgcx6em3jZg" name="description" label="Description" iconName="text_fields" dataFeature="_R2x48Nu4Ee2Bgcx6em3jZg"/>
+        </components>
+      </form>
+      <table xmi:id="_J4eloNu4Ee2Bgcx6em3jZg" name="IssueType_Table" label="Issue Types" iconName="folder-open">
+        <columns xsi:type="ui:DataColumn" xmi:id="_DaKn8dvEEe2Bgcx6em3jZg" name="title" label="Title" iconName="text_fields" dataFeature="_R2-tQNu4Ee2Bgcx6em3jZg"/>
+        <columns xsi:type="ui:DataColumn" xmi:id="_DaKn8NvEEe2Bgcx6em3jZg" name="description" label="Description" iconName="text_fields" dataFeature="_R2x48Nu4Ee2Bgcx6em3jZg"/>
+      </table>
+      <view xmi:id="_J4MRwNu4Ee2Bgcx6em3jZg" name="IssueType_View" label="Issue Type View/Edit" layout="VERTICAL">
+        <components xsi:type="ui:Group" xmi:id="_m1l0MNvDEe2Bgcx6em3jZg" name="group" frame="true" col="12">
+          <components xsi:type="ui:DataField" xmi:id="_g2oicNvDEe2Bgcx6em3jZg" name="description" label="Description" iconName="text_fields" dataFeature="_R2x48Nu4Ee2Bgcx6em3jZg"/>
+          <components xsi:type="ui:DataField" xmi:id="_g2oicdvDEe2Bgcx6em3jZg" name="title" label="Title" iconName="text_fields" dataFeature="_R2-tQNu4Ee2Bgcx6em3jZg"/>
+        </components>
+      </view>
+    </elements>
   </elements>
   <elements xsi:type="structure:EntityType" xmi:id="_GDYW0GkOEe25ONJ3V89cVA" name="Issue" createable="true" updateable="true" deleteable="true">
     <relations xsi:type="structure:TwoWayRelationMember" xmi:id="_wdeTcGkPEe25ONJ3V89cVA" target="_jjCdUGkPEe25ONJ3V89cVA" name="debates" defaultExpression="" rangeExpression="" partner="_wdgIoGkPEe25ONJ3V89cVA" primary="true">
@@ -1764,6 +1862,18 @@
     </relations>
     <relations xsi:type="structure:OneWayRelationMember" xmi:id="_peAUoI1mEe29qs15q2b6yw" upper="1" target="_BuSFMGkWEe25ONJ3V89cVA" name="createdBy" defaultExpression="" rangeExpression="" binding="_peAUoI1mEe29qs15q2b6yw" getterExpression="">
       <inherited xmi:id="_peEmEI1mEe29qs15q2b6yw"/>
+    </relations>
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_ePR8INu3Ee2Bgcx6em3jZg" upper="1" target="_q7APkNuxEe2Bgcx6em3jZg" name="issueType" defaultExpression="" rangeExpression="" binding="_ePR8INu3Ee2Bgcx6em3jZg" getterExpression="">
+      <inherited xmi:id="_ePZ38Nu3Ee2Bgcx6em3jZg"/>
+    </relations>
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_xl814Nu3Ee2Bgcx6em3jZg" upper="1" target="_uBoOUH2jEe2LTNnGda5kaw" name="county" defaultExpression="" rangeExpression="" binding="_xl814Nu3Ee2Bgcx6em3jZg" getterExpression="">
+      <inherited xmi:id="_xmBHUNu3Ee2Bgcx6em3jZg"/>
+    </relations>
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_5cX_kNu3Ee2Bgcx6em3jZg" upper="1" target="_s7U-wHW6Ee2LTNnGda5kaw" name="district" defaultExpression="" rangeExpression="" binding="_5cX_kNu3Ee2Bgcx6em3jZg" getterExpression="">
+      <inherited xmi:id="_5ceGMNu3Ee2Bgcx6em3jZg"/>
+    </relations>
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_AX_t4Nu4Ee2Bgcx6em3jZg" upper="1" target="_knKwMHW6Ee2LTNnGda5kaw" name="city" defaultExpression="" rangeExpression="" binding="_AX_t4Nu4Ee2Bgcx6em3jZg" getterExpression="">
+      <inherited xmi:id="_AYFNcNu4Ee2Bgcx6em3jZg"/>
     </relations>
     <attributes xsi:type="structure:DataMember" xmi:id="_Tp72oGkPEe25ONJ3V89cVA" name="created" dataType="_7D8NyWkNEe25ONJ3V89cVA" required="true" defaultExpression="edemokracia::types::Timestamp!now()" binding="_Tp72oGkPEe25ONJ3V89cVA" getterExpression="">
       <inherited xmi:id="_Tp-S4GkPEe25ONJ3V89cVA"/>
@@ -1868,7 +1978,7 @@
     <relations xsi:type="structure:OneWayRelationMember" xmi:id="_0D6pkIrYEe2u0fVmwtP5bA" upper="1" target="_BuSFMGkWEe25ONJ3V89cVA" name="createdBy" defaultExpression="" rangeExpression="" binding="_0D6pkIrYEe2u0fVmwtP5bA" getterExpression="">
       <inherited xmi:id="_0D9s4IrYEe2u0fVmwtP5bA"/>
     </relations>
-    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_Ulz8kIrbEe2u0fVmwtP5bA" target="_5yNG0GkSEe25ONJ3V89cVA" name="cons" defaultExpression="" rangeExpression="" binding="_Ulz8kIrbEe2u0fVmwtP5bA" getterExpression="">
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_Ulz8kIrbEe2u0fVmwtP5bA" target="_5yNG0GkSEe25ONJ3V89cVA" name="cons" defaultExpression="" rangeExpression="" relationKind="COMPOSITION" binding="_Ulz8kIrbEe2u0fVmwtP5bA" getterExpression="">
       <inherited xmi:id="_Ul2Y0IrbEe2u0fVmwtP5bA"/>
     </relations>
     <relations xsi:type="structure:OneWayRelationMember" xmi:id="_d9rD0IrbEe2u0fVmwtP5bA" target="_3Z7A0GkSEe25ONJ3V89cVA" name="pros" defaultExpression="" rangeExpression="" relationKind="COMPOSITION" binding="_d9rD0IrbEe2u0fVmwtP5bA" getterExpression="">
@@ -2062,7 +2172,7 @@
     <attributes xsi:type="structure:DataMember" xmi:id="_NyMz8GkfEe25ONJ3V89cVA" name="title" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_NyMz8GkfEe25ONJ3V89cVA" getterExpression="">
       <inherited xmi:id="_NyPQMGkfEe25ONJ3V89cVA"/>
     </attributes>
-    <attributes xsi:type="structure:DataMember" xmi:id="_PfYugGkfEe25ONJ3V89cVA" name="description" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_PfYugGkfEe25ONJ3V89cVA" getterExpression="">
+    <attributes xsi:type="structure:DataMember" xmi:id="_PfYugGkfEe25ONJ3V89cVA" name="description" dataType="_7D8NzGkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_PfYugGkfEe25ONJ3V89cVA" getterExpression="">
       <inherited xmi:id="_PfZVkGkfEe25ONJ3V89cVA"/>
     </attributes>
     <mapping xmi:id="_K7j-AGkfEe25ONJ3V89cVA" target="_K7jW8GkfEe25ONJ3V89cVA"/>
@@ -2449,9 +2559,24 @@
     <operations xmi:id="_AOjOUKoxEe2w1v3ZEBj6HA" name="initAreas" customImplementation="false" body="var edemokracia::County budapest_county = edemokracia::County!filter(c | c.name == &quot;Budapest&quot;)!any();&#xA;if (budapest_county!isUndefined()) {&#xA;&#x9;budapest_county = new edemokracia::County(name = &quot;Budapest&quot;);&#xA;}&#xA;&#xA;var edemokracia::County bacs_kiskun = edemokracia::County!filter(c | c.name == &quot;Bács-Kiskun&quot;)!any();&#xA;if (bacs_kiskun!isUndefined()) {&#xA;&#x9;bacs_kiskun = new edemokracia::County(name = &quot;Bács-Kiskun&quot;);&#xA;}&#xA;&#xA;var edemokracia::City budapest = budapest_county.cities!filter(c | c.name == &quot;Budapest&quot;)!any();&#xA;if (budapest!isUndefined()) {&#xA;&#x9;budapest = new edemokracia::City(name = &quot;Budapest&quot;);&#xA;&#x9;budapest_county.cities += budapest;&#xA;}&#xA;&#xA;var edemokracia::City kecskemet = bacs_kiskun.cities!filter(c | c.name == &quot;Kecskemét&quot;)!any();&#xA;if (kecskemet!isUndefined()) {&#xA;&#x9;kecskemet = new edemokracia::City(name = &quot;Kecskemét&quot;);&#xA;&#x9;bacs_kiskun.cities += kecskemet;&#xA;}&#xA;&#xA;var edemokracia::District budapest_1 = budapest.districts!filter(c | c.name == &quot;I. ker&quot;)!any();&#xA;if (budapest_1!isUndefined()) {&#xA;&#x9;budapest_1 = new edemokracia::District(name = &quot;I. ker&quot;);&#xA;&#x9;budapest.districts += budapest_1;&#xA;}&#xA;&#xA;var edemokracia::District budapest_2 = budapest.districts!filter(c | c.name == &quot;II. ker&quot;)!any();&#xA;if (budapest_2!isUndefined()) {&#xA;&#x9;budapest_2 = new edemokracia::District(name = &quot;II. ker&quot;);&#xA;&#x9;budapest.districts += budapest_2;&#xA;}&#xA;&#xA;var edemokracia::District budapest_3 = budapest.districts!filter(c | c.name == &quot;III. ker&quot;)!any();&#xA;if (budapest_3!isUndefined()) {&#xA;&#x9;budapest_3 = new edemokracia::District(name = &quot;III. ker&quot;);&#xA;&#x9;budapest.districts += budapest_3;&#xA;}&#xA;&#xA;var edemokracia::District budapest_4 = budapest.districts!filter(c | c.name == &quot;IV. ker&quot;)!any();&#xA;if (budapest_4!isUndefined()) {&#xA;&#x9;budapest_4 = new edemokracia::District(name = &quot;IV. ker&quot;);&#xA;&#x9;budapest.districts += budapest_4;&#xA;}&#xA;&#xA;var edemokracia::District budapest_5 = budapest.districts!filter(c | c.name == &quot;V. ker&quot;)!any();&#xA;if (budapest_5!isUndefined()) {&#xA;&#x9;budapest_5 = new edemokracia::District(name = &quot;V. ker&quot;);&#xA;&#x9;budapest.districts += budapest_5;&#xA;}&#xA;&#xA;var edemokracia::District budapest_6 = budapest.districts!filter(c | c.name == &quot;VI. ker&quot;)!any();&#xA;if (budapest_6!isUndefined()) {&#xA;&#x9;budapest_6 = new edemokracia::District(name = &quot;VI. ker&quot;);&#xA;&#x9;budapest.districts += budapest_6;&#xA;}&#xA;&#xA;var edemokracia::District budapest_7 = budapest.districts!filter(c | c.name == &quot;VII. ker&quot;)!any();&#xA;if (budapest_7!isUndefined()) {&#xA;&#x9;budapest_7 = new edemokracia::District(name = &quot;VII. ker&quot;);&#xA;&#x9;budapest.districts += budapest_7;&#xA;}&#xA;&#xA;var edemokracia::District budapest_8 = budapest.districts!filter(c | c.name == &quot;VIII. ker&quot;)!any();&#xA;if (budapest_8!isUndefined()) {&#xA;&#x9;budapest_8 = new edemokracia::District(name = &quot;VIII. ker&quot;);&#xA;&#x9;budapest.districts += budapest_8;&#xA;}&#xA;&#xA;var edemokracia::District budapest_9 = budapest.districts!filter(c | c.name == &quot;IX. ker&quot;)!any();&#xA;if (budapest_9!isUndefined()) {&#xA;&#x9;budapest_9 = new edemokracia::District(name = &quot;IX. ker&quot;);&#xA;&#x9;budapest.districts += budapest_9;&#xA;}&#xA;&#xA;var edemokracia::District budapest_10 = budapest.districts!filter(c | c.name == &quot;X. ker&quot;)!any();&#xA;if (budapest_10!isUndefined()) {&#xA;&#x9;budapest_10 = new edemokracia::District(name = &quot;X. ker&quot;);&#xA;&#x9;budapest.districts += budapest_10;&#xA;}&#xA;&#xA;var edemokracia::District budapest_11 = budapest.districts!filter(c | c.name == &quot;XI. ker&quot;)!any();&#xA;if (budapest_11!isUndefined()) {&#xA;&#x9;budapest_11 = new edemokracia::District(name = &quot;XI. ker&quot;);&#xA;&#x9;budapest.districts += budapest_11;&#xA;}&#xA;&#xA;var edemokracia::District budapest_12 = budapest.districts!filter(c | c.name == &quot;XII. ker&quot;)!any();&#xA;if (budapest_12!isUndefined()) {&#xA;&#x9;budapest_12 = new edemokracia::District(name = &quot;XII. ker&quot;);&#xA;&#x9;budapest.districts += budapest_12;&#xA;}&#xA;&#xA;var edemokracia::District budapest_13 = budapest.districts!filter(c | c.name == &quot;XIII. ker&quot;)!any();&#xA;if (budapest_13!isUndefined()) {&#xA;&#x9;budapest_13 = new edemokracia::District(name = &quot;XIII. ker&quot;);&#xA;&#x9;budapest.districts += budapest_13;&#xA;}&#xA;&#xA;var edemokracia::District budapest_14 = budapest.districts!filter(c | c.name == &quot;XIV. ker&quot;)!any();&#xA;if (budapest_14!isUndefined()) {&#xA;&#x9;budapest_14 = new edemokracia::District(name = &quot;XIV. ker&quot;);&#xA;&#x9;budapest.districts += budapest_14;&#xA;}&#xA;&#xA;var edemokracia::District budapest_15 = budapest.districts!filter(c | c.name == &quot;XV. ker&quot;)!any();&#xA;if (budapest_15!isUndefined()) {&#xA;&#x9;budapest_15 = new edemokracia::District(name = &quot;XV. ker&quot;);&#xA;&#x9;budapest.districts += budapest_15;&#xA;}&#xA;&#xA;var edemokracia::District budapest_16 = budapest.districts!filter(c | c.name == &quot;XVI. ker&quot;)!any();&#xA;if (budapest_16!isUndefined()) {&#xA;&#x9;budapest_16 = new edemokracia::District(name = &quot;XVI. ker&quot;);&#xA;&#x9;budapest.districts += budapest_16;&#xA;}&#xA;&#xA;var edemokracia::District budapest_17 = budapest.districts!filter(c | c.name == &quot;XVII. ker&quot;)!any();&#xA;if (budapest_17!isUndefined()) {&#xA;&#x9;budapest_17 = new edemokracia::District(name = &quot;XVII. ker&quot;);&#xA;&#x9;budapest.districts += budapest_17;&#xA;}&#xA;&#xA;var edemokracia::District budapest_18 = budapest.districts!filter(c | c.name == &quot;XVIII. ker&quot;)!any();&#xA;if (budapest_18!isUndefined()) {&#xA;&#x9;budapest_18 = new edemokracia::District(name = &quot;XVIII. ker&quot;);&#xA;&#x9;budapest.districts += budapest_18;&#xA;}&#xA;&#xA;var edemokracia::District budapest_19 = budapest.districts!filter(c | c.name == &quot;XIX. ker&quot;)!any();&#xA;if (budapest_19!isUndefined()) {&#xA;&#x9;budapest_19 = new edemokracia::District(name = &quot;XIX. ker&quot;);&#xA;&#x9;budapest.districts += budapest_19;&#xA;}&#xA;&#xA;var edemokracia::District budapest_20 = budapest.districts!filter(c | c.name == &quot;XX. ker&quot;)!any();&#xA;if (budapest_20!isUndefined()) {&#xA;&#x9;budapest_20 = new edemokracia::District(name = &quot;XX. ker&quot;);&#xA;&#x9;budapest.districts += budapest_20;&#xA;}&#xA;&#xA;var edemokracia::District budapest_21 = budapest.districts!filter(c | c.name == &quot;XI. ker&quot;)!any();&#xA;if (budapest_21!isUndefined()) {&#xA;&#x9;budapest_21 = new edemokracia::District(name = &quot;XXI. ker&quot;);&#xA;&#x9;budapest.districts += budapest_21;&#xA;}&#xA;&#xA;var edemokracia::District budapest_22 = budapest.districts!filter(c | c.name == &quot;XII. ker&quot;)!any();&#xA;if (budapest_22!isUndefined()) {&#xA;&#x9;budapest_22 = new edemokracia::District(name = &quot;XXII. ker&quot;);&#xA;&#x9;budapest.districts += budapest_22;&#xA;}&#xA;&#xA;var edemokracia::District budapest_23 = budapest.districts!filter(c | c.name == &quot;XXIII. ker&quot;)!any();&#xA;if (budapest_23!isUndefined()) {&#xA;&#x9;budapest_23 = new edemokracia::District(name = &quot;XXIII. ker&quot;);&#xA;&#x9;budapest.districts += budapest_23;&#xA;}&#xA;" operationType="STATIC" binding="" initializer="true">
       <inherited xmi:id="_AOjOUaoxEe2w1v3ZEBj6HA"/>
     </operations>
+    <operations xmi:id="_rP62ANu5Ee2Bgcx6em3jZg" name="initIssueTypes" customImplementation="false" body="&#xA;var edemokracia::IssueType think_about = edemokracia::IssueType!filter(c | c.title == &quot;Gondok gondolkodni&quot;)!any();&#xA;if (think_about!isUndefined()) {&#xA;&#x9;think_about = new edemokracia::IssueType(title = &quot;Gondok gondolkodni&quot;, description = &quot;Gondok gondolkodni&quot;);&#xA;}&#xA;&#xA;var edemokracia::IssueType lets_do_it = edemokracia::IssueType!filter(c | c.title == &quot;Csináljuk meg&quot;)!any();&#xA;if (lets_do_it!isUndefined()) {&#xA;&#x9;lets_do_it = new edemokracia::IssueType(title = &quot;Csináljuk meg&quot;, description = &quot;Csináljuk meg&quot;);&#xA;}&#xA;&#xA;var edemokracia::IssueType help = edemokracia::IssueType!filter(c | c.title == &quot;Segítsünk&quot;)!any();&#xA;if (help!isUndefined()) {&#xA;&#x9;help = new edemokracia::IssueType(title = &quot;Segítsünk&quot;, description = &quot;Segítsünk&quot;);&#xA;}&#xA;&#xA;var edemokracia::IssueType decide = edemokracia::IssueType!filter(c | c.title == &quot;Döntsük el&quot;)!any();&#xA;if (decide!isUndefined()) {&#xA;&#x9;decide = new edemokracia::IssueType(title = &quot;Döntsük el&quot;, description = &quot;Döntsük el&quot;);&#xA;}&#xA;&#xA;var edemokracia::IssueType select = edemokracia::IssueType!filter(c | c.title == &quot;Válasszuk ki&quot;)!any();&#xA;if (select!isUndefined()) {&#xA;&#x9;select = new edemokracia::IssueType(title = &quot;Válasszuk ki&quot;, description = &quot;Válasszuk ki&quot;);&#xA;}&#xA;&#xA;var edemokracia::IssueType bring_together = edemokracia::IssueType!filter(c | c.title == &quot;Hozzuk össze&quot;)!any();&#xA;if (bring_together!isUndefined()) {&#xA;&#x9;bring_together = new edemokracia::IssueType(title = &quot;Hozzuk össze&quot;, description = &quot;Hozzuk össze&quot;);&#xA;}&#xA;&#xA;var edemokracia::IssueType support = edemokracia::IssueType!filter(c | c.title == &quot;Képviseljük / támogassuk&quot;)!any();&#xA;if (support!isUndefined()) {&#xA;&#x9;support = new edemokracia::IssueType(title = &quot;Képviseljük / támogassuk&quot;, description = &quot;Képviseljük / támogassuk&quot;);&#xA;}&#xA;&#xA;var edemokracia::IssueType dont_let = edemokracia::IssueType!filter(c | c.title == &quot;Ne hagyjuk&quot;)!any();&#xA;if (dont_let!isUndefined()) {&#xA;&#x9;dont_let = new edemokracia::IssueType(title = &quot;Ne hagyjuk&quot;, description = &quot;Ne hagyjuk&quot;);&#xA;}&#xA;" operationType="STATIC" binding="" initializer="true">
+      <inherited xmi:id="_rP62Adu5Ee2Bgcx6em3jZg"/>
+    </operations>
     <form xmi:id="_j76scI1jEe2J66C5CrhpQw" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL"/>
     <table xmi:id="_j8BaII1jEe2J66C5CrhpQw" name="TransferObject_Table" label="TransferObject Table"/>
     <view xmi:id="_j7z-wI1jEe2J66C5CrhpQw" name="TransferObject_View" label="TransferObject View" layout="VERTICAL"/>
+  </elements>
+  <elements xsi:type="structure:EntityType" xmi:id="_q7APkNuxEe2Bgcx6em3jZg" name="IssueType" createable="true" updateable="true" deleteable="true">
+    <attributes xsi:type="structure:DataMember" xmi:id="_uCwqsNuxEe2Bgcx6em3jZg" name="title" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_uCwqsNuxEe2Bgcx6em3jZg" getterExpression="">
+      <inherited xmi:id="_uC7CwNuxEe2Bgcx6em3jZg"/>
+    </attributes>
+    <attributes xsi:type="structure:DataMember" xmi:id="_wigDkNuxEe2Bgcx6em3jZg" name="description" dataType="_7D8NzGkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_wigDkNuxEe2Bgcx6em3jZg" getterExpression="">
+      <inherited xmi:id="_wijt8NuxEe2Bgcx6em3jZg"/>
+    </attributes>
+    <mapping xmi:id="_q7KAkNuxEe2Bgcx6em3jZg" target="_q7APkNuxEe2Bgcx6em3jZg"/>
+    <form xmi:id="_q70u8NuxEe2Bgcx6em3jZg" name="Entity_Form" label="Entity Form" layout="VERTICAL"/>
+    <table xmi:id="_q8AVINuxEe2Bgcx6em3jZg" name="Entity_Table" label="Entity Table"/>
+    <view xmi:id="_q7jpMNuxEe2Bgcx6em3jZg" name="Entity_View" label="Entity View" layout="VERTICAL"/>
   </elements>
   <annotations xmi:id="_7D81XmkNEe25ONJ3V89cVA" name="dashboard" className="hu.blackbelt.judo.meta.esm.accesspoint.Access" elements="_GgaEAIyPEe2VSOmaAz6G9Q"/>
   <annotations xmi:id="_7D81X2kNEe25ONJ3V89cVA" name="profile" className="hu.blackbelt.judo.meta.esm.accesspoint.Access"/>

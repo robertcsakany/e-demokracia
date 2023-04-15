@@ -31,6 +31,8 @@
         "judo.modal.filter.clear-all": "Összes törlése",
         "judo.modal.confirm.confirm": "Igen",
         "judo.modal.confirm.cancel": "Nem",
+        "judo.modal.confirm.confirm-title": "Megerősítés szükséges",
+        "judo.modal.confirm.confirm-delete": "Biztosan törölni szeretné a kiválasztott elemet?",
         "judo.modal.close": "Bezárás",
         "judo.modal.range.label": "Kiválasztás",
         "judo.modal.range.set-filters": "Szűrő beállítása",

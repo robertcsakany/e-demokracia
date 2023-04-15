@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/menu-items.tsx'
 // Template name: actor/src/menu-items.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/menu-items.tsx.hbs
 
 import type { MenuItem } from './components-api';
@@ -40,6 +40,12 @@ export const menuItems: MenuItem[] = [
         to: 'admin/admin/counties/table',
         icon: 'map',
         label: 'Counties',
+      },
+      {
+        id: 'NavigationItemedemokraciaAdminAdminEdemokraciaAdminAdminNavigationControllerEdemokraciaAdminAdminMenuItemGroupBasicDataMenu',
+        to: 'admin/admin/issue_types/table',
+        icon: 'folder-open',
+        label: 'Issue Types',
       },
     ],
   },

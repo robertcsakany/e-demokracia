@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Access Table
 
@@ -26,19 +26,17 @@ export const useAdminAdminDebatesTable = () => {
   const columns: GridColDef<AdminDebateStored>[] = [
     {
       ...baseColumnConfig,
-      field: 'closeAt',
-      headerName: t('edemokracia.admin.Admin.debates.debates.Debate.Table.closeAt', {
-        defaultValue: 'CloseAt',
+      field: 'issueTitle',
+      headerName: t('edemokracia.admin.Admin.debates.debates.Debate.Table.issueTitle', {
+        defaultValue: 'Issue',
       }) as string,
-      width: 170,
-      type: 'dateTime',
+      width: 230,
+      type: 'string',
     },
     {
       ...baseColumnConfig,
-      field: 'description',
-      headerName: t('edemokracia.admin.Admin.debates.debates.Debate.Table.description', {
-        defaultValue: 'Description',
-      }) as string,
+      field: 'title',
+      headerName: t('edemokracia.admin.Admin.debates.debates.Debate.Table.title', { defaultValue: 'Title' }) as string,
       width: 230,
       type: 'string',
     },
@@ -57,8 +55,19 @@ export const useAdminAdminDebatesTable = () => {
     },
     {
       ...baseColumnConfig,
-      field: 'title',
-      headerName: t('edemokracia.admin.Admin.debates.debates.Debate.Table.title', { defaultValue: 'Title' }) as string,
+      field: 'closeAt',
+      headerName: t('edemokracia.admin.Admin.debates.debates.Debate.Table.closeAt', {
+        defaultValue: 'Close at',
+      }) as string,
+      width: 170,
+      type: 'dateTime',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'description',
+      headerName: t('edemokracia.admin.Admin.debates.debates.Debate.Table.description', {
+        defaultValue: 'Description',
+      }) as string,
       width: 230,
       type: 'string',
     },
@@ -66,18 +75,18 @@ export const useAdminAdminDebatesTable = () => {
 
   const filterOptions: FilterOption[] = [
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableCloseAtFilter',
-      attributeName: 'closeAt',
-      label: t('edemokracia.admin.Admin.debates.debates.Debate.Table.closeAt.Filter', {
-        defaultValue: 'CloseAt',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableIssueTitleFilter',
+      attributeName: 'issueTitle',
+      label: t('edemokracia.admin.Admin.debates.debates.Debate.Table.issueTitle.Filter', {
+        defaultValue: 'Issue',
       }) as string,
-      filterType: FilterType.dateTime,
+      filterType: FilterType.string,
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableDescriptionFilter',
-      attributeName: 'description',
-      label: t('edemokracia.admin.Admin.debates.debates.Debate.Table.description.Filter', {
-        defaultValue: 'Description',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableTitleFilter',
+      attributeName: 'title',
+      label: t('edemokracia.admin.Admin.debates.debates.Debate.Table.title.Filter', {
+        defaultValue: 'Title',
       }) as string,
       filterType: FilterType.string,
     },
@@ -91,10 +100,18 @@ export const useAdminAdminDebatesTable = () => {
       enumValues: ['CREATED', 'PENDING', 'ACTIVE', 'CLOSED'],
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableTitleFilter',
-      attributeName: 'title',
-      label: t('edemokracia.admin.Admin.debates.debates.Debate.Table.title.Filter', {
-        defaultValue: 'Title',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableCloseAtFilter',
+      attributeName: 'closeAt',
+      label: t('edemokracia.admin.Admin.debates.debates.Debate.Table.closeAt.Filter', {
+        defaultValue: 'Close at',
+      }) as string,
+      filterType: FilterType.dateTime,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableDescriptionFilter',
+      attributeName: 'description',
+      label: t('edemokracia.admin.Admin.debates.debates.Debate.Table.description.Filter', {
+        defaultValue: 'Description',
       }) as string,
       filterType: FilterType.string,
     },

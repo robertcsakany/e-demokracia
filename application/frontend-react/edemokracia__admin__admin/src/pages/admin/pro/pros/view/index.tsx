@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Pro.pros#View
 // Page owner name: edemokracia::admin::Admin
@@ -397,7 +397,19 @@ export default function AdminProProsView() {
         )}
         {!editMode && isFormDeleteable() && (
           <Grid item>
-            <Button id="page-action-delete" onClick={() => deleteData()} disabled={isLoading || !data.__deleteable}>
+            <Button
+              id="page-action-delete"
+              onClick={() =>
+                pageDeleteProsAction(
+                  { __signedIdentifier: signedIdentifier } as JudoIdentifiable<AdminPro>,
+                  data,
+                  () => {
+                    back();
+                  },
+                )
+              }
+              disabled={isLoading || !data.__deleteable}
+            >
               <MdiIcon path="delete" />
               {t('judo.pages.delete', { defaultValue: 'Delete' })}
             </Button>

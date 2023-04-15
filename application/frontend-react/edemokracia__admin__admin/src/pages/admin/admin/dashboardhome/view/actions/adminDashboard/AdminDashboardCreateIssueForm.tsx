@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,7 +12,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CallOperationAction
 
@@ -56,15 +56,31 @@ import {
 } from '../../../../../../../components/widgets';
 import { FilterOption, FilterType } from '../../../../../../../components-api';
 import {
+  AdminIssueTypeMaskBuilder,
+  AdminCityQueryCustomizer,
+  AdminIssueStored,
+  AdminDistrictStored,
+  AdminCounty,
+  AdminCity,
+  AdminCreateIssueInputStored,
+  AdminDistrictQueryCustomizer,
   AdminDashboardQueryCustomizer,
   AdminIssueQueryCustomizer,
   AdminCreateIssueInput,
-  AdminCreateIssueInputQueryCustomizer,
-  AdminIssue,
-  AdminIssueStored,
+  AdminCityStored,
+  AdminCountyStored,
   AdminDashboardStored,
-  AdminCreateIssueInputStored,
+  AdminIssueTypeStored,
   AdminDashboard,
+  AdminCreateIssueInputQueryCustomizer,
+  AdminCountyQueryCustomizer,
+  AdminCountyMaskBuilder,
+  AdminIssue,
+  AdminIssueType,
+  AdminIssueTypeQueryCustomizer,
+  AdminCityMaskBuilder,
+  AdminDistrict,
+  AdminDistrictMaskBuilder,
 } from '../../../../../../../generated/data-api';
 import { adminCreateIssueInputServiceImpl, adminDashboardServiceImpl } from '../../../../../../../generated/data-axios';
 import {
@@ -113,6 +129,347 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
     [data],
   );
   const title: string = t('edemokracia.admin.Dashboard.createIssue.Input', { defaultValue: 'Create issue' });
+
+  const [citySortModel, setCitySortModel] = useState<GridSortModel>([{ field: 'representation', sort: 'asc' }]);
+
+  const cityColumns: GridColDef<AdminCityStored>[] = [
+    {
+      ...baseColumnConfig,
+      field: 'representation',
+      headerName: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.city.representation', {
+        defaultValue: 'Representation',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'name',
+      headerName: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.city.name', {
+        defaultValue: 'Name',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'county',
+      headerName: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.city.county', {
+        defaultValue: 'County',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+  ];
+
+  const cityRangeFilterOptions: FilterOption[] = [
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueCityRepresentationFilter',
+      attributeName: 'representation',
+      label: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.city.representation.Filter', {
+        defaultValue: 'Representation',
+      }) as string,
+      filterType: FilterType.string,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueCityNameFilter',
+      attributeName: 'name',
+      label: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.city.name.Filter', {
+        defaultValue: 'Name',
+      }) as string,
+      filterType: FilterType.string,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueCityCountyFilter',
+      attributeName: 'county',
+      label: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.city.county.Filter', {
+        defaultValue: 'County',
+      }) as string,
+      filterType: FilterType.string,
+    },
+  ];
+
+  const cityInitialQueryCustomizer: AdminCityQueryCustomizer = {
+    _mask: '{representation,name,county}',
+    _orderBy: citySortModel.length
+      ? [
+          {
+            attribute: citySortModel[0].field,
+            descending: citySortModel[0].sort === 'desc',
+          },
+        ]
+      : [],
+  };
+  const cityRangeCall = async () =>
+    openRangeDialog<AdminCityStored, AdminCityQueryCustomizer>({
+      id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputCity',
+      columns: cityColumns,
+      defaultSortField: citySortModel[0],
+      rangeCall: async (queryCustomizer) =>
+        await adminCreateIssueInputServiceImpl.getRangeForCity(undefined, processQueryCustomizer(queryCustomizer)),
+      single: false,
+      alreadySelectedItems: citySelectionModel,
+      filterOptions: cityRangeFilterOptions,
+      initialQueryCustomizer: cityInitialQueryCustomizer,
+    });
+  const [citySelectionModel, setCitySelectionModel] = useState<GridSelectionModel>([]);
+  const [countySortModel, setCountySortModel] = useState<GridSortModel>([{ field: 'representation', sort: 'asc' }]);
+
+  const countyColumns: GridColDef<AdminCountyStored>[] = [
+    {
+      ...baseColumnConfig,
+      field: 'representation',
+      headerName: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.county.representation', {
+        defaultValue: 'Representation',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'name',
+      headerName: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.county.name', {
+        defaultValue: 'Name',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+  ];
+
+  const countyRangeFilterOptions: FilterOption[] = [
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueCountyRepresentationFilter',
+      attributeName: 'representation',
+      label: t(
+        'edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.county.representation.Filter',
+        { defaultValue: 'Representation' },
+      ) as string,
+      filterType: FilterType.string,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueCountyNameFilter',
+      attributeName: 'name',
+      label: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.county.name.Filter', {
+        defaultValue: 'Name',
+      }) as string,
+      filterType: FilterType.string,
+    },
+  ];
+
+  const countyInitialQueryCustomizer: AdminCountyQueryCustomizer = {
+    _mask: '{representation,name}',
+    _orderBy: countySortModel.length
+      ? [
+          {
+            attribute: countySortModel[0].field,
+            descending: countySortModel[0].sort === 'desc',
+          },
+        ]
+      : [],
+  };
+  const countyRangeCall = async () =>
+    openRangeDialog<AdminCountyStored, AdminCountyQueryCustomizer>({
+      id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputCounty',
+      columns: countyColumns,
+      defaultSortField: countySortModel[0],
+      rangeCall: async (queryCustomizer) =>
+        await adminCreateIssueInputServiceImpl.getRangeForCounty(undefined, processQueryCustomizer(queryCustomizer)),
+      single: false,
+      alreadySelectedItems: countySelectionModel,
+      filterOptions: countyRangeFilterOptions,
+      initialQueryCustomizer: countyInitialQueryCustomizer,
+    });
+  const [countySelectionModel, setCountySelectionModel] = useState<GridSelectionModel>([]);
+  const [districtSortModel, setDistrictSortModel] = useState<GridSortModel>([{ field: 'representation', sort: 'asc' }]);
+
+  const districtColumns: GridColDef<AdminDistrictStored>[] = [
+    {
+      ...baseColumnConfig,
+      field: 'representation',
+      headerName: t(
+        'edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.district.representation',
+        { defaultValue: 'Representation' },
+      ) as string,
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'name',
+      headerName: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.district.name', {
+        defaultValue: 'Name',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'county',
+      headerName: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.district.county', {
+        defaultValue: 'County',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'city',
+      headerName: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.district.city', {
+        defaultValue: 'City',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+  ];
+
+  const districtRangeFilterOptions: FilterOption[] = [
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueDistrictRepresentationFilter',
+      attributeName: 'representation',
+      label: t(
+        'edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.district.representation.Filter',
+        { defaultValue: 'Representation' },
+      ) as string,
+      filterType: FilterType.string,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueDistrictNameFilter',
+      attributeName: 'name',
+      label: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.district.name.Filter', {
+        defaultValue: 'Name',
+      }) as string,
+      filterType: FilterType.string,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueDistrictCountyFilter',
+      attributeName: 'county',
+      label: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.district.county.Filter', {
+        defaultValue: 'County',
+      }) as string,
+      filterType: FilterType.string,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueDistrictCityFilter',
+      attributeName: 'city',
+      label: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.district.city.Filter', {
+        defaultValue: 'City',
+      }) as string,
+      filterType: FilterType.string,
+    },
+  ];
+
+  const districtInitialQueryCustomizer: AdminDistrictQueryCustomizer = {
+    _mask: '{representation,name,county,city}',
+    _orderBy: districtSortModel.length
+      ? [
+          {
+            attribute: districtSortModel[0].field,
+            descending: districtSortModel[0].sort === 'desc',
+          },
+        ]
+      : [],
+  };
+  const districtRangeCall = async () =>
+    openRangeDialog<AdminDistrictStored, AdminDistrictQueryCustomizer>({
+      id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputDistrict',
+      columns: districtColumns,
+      defaultSortField: districtSortModel[0],
+      rangeCall: async (queryCustomizer) =>
+        await adminCreateIssueInputServiceImpl.getRangeForDistrict(undefined, processQueryCustomizer(queryCustomizer)),
+      single: false,
+      alreadySelectedItems: districtSelectionModel,
+      filterOptions: districtRangeFilterOptions,
+      initialQueryCustomizer: districtInitialQueryCustomizer,
+    });
+  const [districtSelectionModel, setDistrictSelectionModel] = useState<GridSelectionModel>([]);
+  const [issueTypeSortModel, setIssueTypeSortModel] = useState<GridSortModel>([
+    { field: 'representation', sort: 'asc' },
+  ]);
+
+  const issueTypeColumns: GridColDef<AdminIssueTypeStored>[] = [
+    {
+      ...baseColumnConfig,
+      field: 'representation',
+      headerName: t(
+        'edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.issueType.representation',
+        { defaultValue: 'Representation' },
+      ) as string,
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'title',
+      headerName: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.issueType.title', {
+        defaultValue: 'Title',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'description',
+      headerName: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.issueType.description', {
+        defaultValue: 'Description',
+      }) as string,
+      width: 230,
+      type: 'string',
+    },
+  ];
+
+  const issueTypeRangeFilterOptions: FilterOption[] = [
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueIssueTypeRepresentationFilter',
+      attributeName: 'representation',
+      label: t(
+        'edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.issueType.representation.Filter',
+        { defaultValue: 'Representation' },
+      ) as string,
+      filterType: FilterType.string,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueIssueTypeTitleFilter',
+      attributeName: 'title',
+      label: t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.issueType.title.Filter', {
+        defaultValue: 'Title',
+      }) as string,
+      filterType: FilterType.string,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueIssueTypeDescriptionFilter',
+      attributeName: 'description',
+      label: t(
+        'edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.issueType.description.Filter',
+        { defaultValue: 'Description' },
+      ) as string,
+      filterType: FilterType.string,
+    },
+  ];
+
+  const issueTypeInitialQueryCustomizer: AdminIssueTypeQueryCustomizer = {
+    _mask: '{representation,title,description}',
+    _orderBy: issueTypeSortModel.length
+      ? [
+          {
+            attribute: issueTypeSortModel[0].field,
+            descending: issueTypeSortModel[0].sort === 'desc',
+          },
+        ]
+      : [],
+  };
+  const issueTypeRangeCall = async () =>
+    openRangeDialog<AdminIssueTypeStored, AdminIssueTypeQueryCustomizer>({
+      id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputIssueType',
+      columns: issueTypeColumns,
+      defaultSortField: issueTypeSortModel[0],
+      rangeCall: async (queryCustomizer) =>
+        await adminCreateIssueInputServiceImpl.getRangeForIssueType(undefined, processQueryCustomizer(queryCustomizer)),
+      single: false,
+      alreadySelectedItems: issueTypeSelectionModel,
+      filterOptions: issueTypeRangeFilterOptions,
+      initialQueryCustomizer: issueTypeInitialQueryCustomizer,
+    });
+  const [issueTypeSelectionModel, setIssueTypeSelectionModel] = useState<GridSelectionModel>([]);
 
   const isFormUpdateable = useCallback(() => {
     return true;
@@ -204,11 +561,35 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
                       justifyContent="flex-start"
                       spacing={2}
                     >
+                      <Grid item xs={12} sm={12}>
+                        <AggregationInput
+                          name="issueType"
+                          id="LinkedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueIssueType"
+                          label={
+                            t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.issueType', {
+                              defaultValue: 'Issue type',
+                            }) as string
+                          }
+                          labelList={[
+                            data.issueType?.representation?.toString() ?? '',
+                            data.issueType?.title?.toString() ?? '',
+                            data.issueType?.description?.toString() ?? '',
+                          ]}
+                          value={data.issueType}
+                          error={!!validation.get('issueType')}
+                          helperText={validation.get('issueType')}
+                          icon={<MdiIcon path="folder-open" />}
+                          disabled={false || !isFormUpdateable()}
+                          editMode={editMode}
+                        />
+                      </Grid>
+
                       <Grid item xs={12} sm={12} md={4.0}>
                         <TextField
                           required
                           name="title"
                           id="TextInputedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueTitle"
+                          autoFocus
                           label={
                             t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.title', {
                               defaultValue: 'Title',
@@ -263,6 +644,75 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
                               </InputAdornment>
                             ),
                           }}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={12} md={4.0}>
+                        <AggregationInput
+                          name="city"
+                          id="LinkedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueCity"
+                          label={
+                            t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.city', {
+                              defaultValue: 'City',
+                            }) as string
+                          }
+                          labelList={[
+                            data.city?.representation?.toString() ?? '',
+                            data.city?.name?.toString() ?? '',
+                            data.city?.county?.toString() ?? '',
+                          ]}
+                          value={data.city}
+                          error={!!validation.get('city')}
+                          helperText={validation.get('city')}
+                          icon={<MdiIcon path="map" />}
+                          disabled={false || !isFormUpdateable()}
+                          editMode={editMode}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={12} md={4.0}>
+                        <AggregationInput
+                          name="county"
+                          id="LinkedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueCounty"
+                          label={
+                            t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.county', {
+                              defaultValue: 'County',
+                            }) as string
+                          }
+                          labelList={[
+                            data.county?.representation?.toString() ?? '',
+                            data.county?.name?.toString() ?? '',
+                          ]}
+                          value={data.county}
+                          error={!!validation.get('county')}
+                          helperText={validation.get('county')}
+                          icon={<MdiIcon path="city" />}
+                          disabled={false || !isFormUpdateable()}
+                          editMode={editMode}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={12} md={4.0}>
+                        <AggregationInput
+                          name="district"
+                          id="LinkedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueDistrict"
+                          label={
+                            t('edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.district', {
+                              defaultValue: 'District',
+                            }) as string
+                          }
+                          labelList={[
+                            data.district?.representation?.toString() ?? '',
+                            data.district?.name?.toString() ?? '',
+                            data.district?.county?.toString() ?? '',
+                            data.district?.city?.toString() ?? '',
+                          ]}
+                          value={data.district}
+                          error={!!validation.get('district')}
+                          helperText={validation.get('district')}
+                          icon={<MdiIcon path="home-city" />}
+                          disabled={false || !isFormUpdateable()}
+                          editMode={editMode}
                         />
                       </Grid>
                     </Grid>

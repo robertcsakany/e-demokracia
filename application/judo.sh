@@ -204,7 +204,7 @@ upgrade_postgresql_schema () {
 
 install_maven_wrapper () {
     mvn wrapper:wrapper -Dmaven=3.8.6 || exit $?
-    sed $(get_sed_edit_option) 's/https:\/\/nexus\.judo\.technology\/repository\/maven-judong\//https:\/\/repo\.maven\.apache\.org\/maven2/g' ${APP_DIR}/.mvn/wrapper/maven-wrapper.properties
+    sed $(get_sed_edit_option) 's/https:\/\/nexus\.judo\.technology\/repository\/maven-judong\//https:\/\/repo\.maven\.apache\.org\/maven2\//g' ${APP_DIR}/.mvn/wrapper/maven-wrapper.properties
 }
 
 prune_frontend () {
@@ -368,9 +368,6 @@ start_karaf () {
     if [ "$DB_TYPE" = "postgresql" ]; then
         export JUDO_PLATFORM_RDBMS_DB_HOST=localhost
         export JUDO_PLATFORM_RDBMS_DB_PORT=$POSTGRES_PORT
-        export JUDO_PLATFORM_RDBMS_DB_USER=$APP_NAME
-        export JUDO_PLATFORM_RDBMS_DB_PASSWORD=$APP_NAME
-        export JUDO_PLATFORM_RDBMS_DB_DATABASE=$APP_NAME
     fi
 
     export EXTRA_JAVA_OPTS="-Dfile.encoding=UTF-8"
@@ -713,8 +710,8 @@ elif [ $clean -eq 1 ]; then
 fi
 
 if [ $update -eq 1 ]; then
-    ${APP_DIR}/mvnw clean install -DupdateJudoVersions=true -DskipModels -f ${MODEL_DIR} && \
-    ${APP_DIR}/mvnw clean install -DupdateJudoModuleVersions=true -DskipModels -f ${MODEL_DIR} || exit
+    ${APP_DIR}/mvnw validate -DupdateJudoVersions=true -f ${MODEL_DIR} && \
+    ${APP_DIR}/mvnw validate -DupdateJudoModuleVersions=true -f ${MODEL_DIR} || exit
 fi
 
 if [ $generate -eq 1 ]; then

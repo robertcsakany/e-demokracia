@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Access Table
 
@@ -51,18 +51,18 @@ export const useAdminAdminIssuesTable = () => {
     },
     {
       ...baseColumnConfig,
-      field: 'description',
-      headerName: t('edemokracia.admin.Admin.issues.issues.Issue.Table.description', {
-        defaultValue: 'Description',
+      field: 'numberOfDebates',
+      headerName: t('edemokracia.admin.Admin.issues.issues.Issue.Table.numberOfDebates', {
+        defaultValue: 'Debates',
       }) as string,
-      width: 230,
-      type: 'string',
+      width: 100,
+      type: 'number',
     },
     {
       ...baseColumnConfig,
-      field: 'representation',
-      headerName: t('edemokracia.admin.Admin.issues.issues.Issue.Table.representation', {
-        defaultValue: 'Representation',
+      field: 'description',
+      headerName: t('edemokracia.admin.Admin.issues.issues.Issue.Table.description', {
+        defaultValue: 'Description',
       }) as string,
       width: 230,
       type: 'string',
@@ -92,18 +92,18 @@ export const useAdminAdminIssuesTable = () => {
       filterType: FilterType.dateTime,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableDefaultIssuesIssueTableNumberOfDebatesFilter',
+      attributeName: 'numberOfDebates',
+      label: t('edemokracia.admin.Admin.issues.issues.Issue.Table.numberOfDebates.Filter', {
+        defaultValue: 'Debates',
+      }) as string,
+      filterType: FilterType.numeric,
+    },
+    {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableDefaultIssuesIssueTableDescriptionFilter',
       attributeName: 'description',
       label: t('edemokracia.admin.Admin.issues.issues.Issue.Table.description.Filter', {
         defaultValue: 'Description',
-      }) as string,
-      filterType: FilterType.string,
-    },
-    {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableDefaultIssuesIssueTableRepresentationFilter',
-      attributeName: 'representation',
-      label: t('edemokracia.admin.Admin.issues.issues.Issue.Table.representation.Filter', {
-        defaultValue: 'Representation',
       }) as string,
       filterType: FilterType.string,
     },

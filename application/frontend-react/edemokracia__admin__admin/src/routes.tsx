@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/routes.tsx'
 // Template name: actor/src/routes.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/routes.tsx.hbs
 
 import { Navigate, Route } from 'react-router-dom';
@@ -235,6 +235,19 @@ routes.push({
     </Suspense>
   ),
 });
+export const ROUTE_ISSUE_CITY_VIEW_INTERFACE_KEY = 'IssueCityViewRoute';
+const IssueCityView = lazy(() => import('./pages/issue/city/view/index'));
+
+routes.push({
+  path: 'issue/city/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ISSUE_CITY_VIEW_INTERFACE_KEY})`}>
+        <IssueCityView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
 export const ROUTE_ISSUE_COMMENTS_VIEW_INTERFACE_KEY = 'IssueCommentsViewRoute';
 const IssueCommentsView = lazy(() => import('./pages/issue/comments/view/index'));
 
@@ -244,6 +257,19 @@ routes.push({
     <Suspense>
       <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ISSUE_COMMENTS_VIEW_INTERFACE_KEY})`}>
         <IssueCommentsView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
+export const ROUTE_ISSUE_COUNTY_VIEW_INTERFACE_KEY = 'IssueCountyViewRoute';
+const IssueCountyView = lazy(() => import('./pages/issue/county/view/index'));
+
+routes.push({
+  path: 'issue/county/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ISSUE_COUNTY_VIEW_INTERFACE_KEY})`}>
+        <IssueCountyView />
       </ComponentProxy>
     </Suspense>
   ),
@@ -270,6 +296,32 @@ routes.push({
     <Suspense>
       <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ISSUE_DEBATES_VIEW_INTERFACE_KEY})`}>
         <IssueDebatesView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
+export const ROUTE_ISSUE_DISTRICT_VIEW_INTERFACE_KEY = 'IssueDistrictViewRoute';
+const IssueDistrictView = lazy(() => import('./pages/issue/district/view/index'));
+
+routes.push({
+  path: 'issue/district/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ISSUE_DISTRICT_VIEW_INTERFACE_KEY})`}>
+        <IssueDistrictView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
+export const ROUTE_ISSUE_ISSUE_TYPE_VIEW_INTERFACE_KEY = 'IssueIssueTypeViewRoute';
+const IssueIssueTypeView = lazy(() => import('./pages/issue/issue_type/view/index'));
+
+routes.push({
+  path: 'issue/issue_type/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ISSUE_ISSUE_TYPE_VIEW_INTERFACE_KEY})`}>
+        <IssueIssueTypeView />
       </ComponentProxy>
     </Suspense>
   ),
@@ -626,6 +678,32 @@ routes.push({
     </Suspense>
   ),
 });
+export const ROUTE_ADMIN_ADMIN_ISSUE_TYPES_TABLE_INTERFACE_KEY = 'AdminAdminIssueTypesTableRoute';
+const AdminAdminIssueTypesTable = lazy(() => import('./pages/admin/admin/issue_types/table/index'));
+
+routes.push({
+  path: 'admin/admin/issue_types/table',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_ADMIN_ISSUE_TYPES_TABLE_INTERFACE_KEY})`}>
+        <AdminAdminIssueTypesTable />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
+export const ROUTE_ADMIN_ADMIN_ISSUE_TYPES_VIEW_INTERFACE_KEY = 'AdminAdminIssueTypesViewRoute';
+const AdminAdminIssueTypesView = lazy(() => import('./pages/admin/admin/issue_types/view/index'));
+
+routes.push({
+  path: 'admin/admin/issue_types/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_ADMIN_ISSUE_TYPES_VIEW_INTERFACE_KEY})`}>
+        <AdminAdminIssueTypesView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
 export const ROUTE_ADMIN_ADMIN_ISSUES_TABLE_INTERFACE_KEY = 'AdminAdminIssuesTableRoute';
 const AdminAdminIssuesTable = lazy(() => import('./pages/admin/admin/issues/table/index'));
 
@@ -847,6 +925,58 @@ routes.push({
     </Suspense>
   ),
 });
+export const ROUTE_ADMIN_CREATE_ISSUE_INPUT_CITY_VIEW_INTERFACE_KEY = 'AdminCreateIssueInputCityViewRoute';
+const AdminCreateIssueInputCityView = lazy(() => import('./pages/admin/create_issue_input/city/view/index'));
+
+routes.push({
+  path: 'admin/create_issue_input/city/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_CREATE_ISSUE_INPUT_CITY_VIEW_INTERFACE_KEY})`}>
+        <AdminCreateIssueInputCityView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
+export const ROUTE_ADMIN_CREATE_ISSUE_INPUT_COUNTY_VIEW_INTERFACE_KEY = 'AdminCreateIssueInputCountyViewRoute';
+const AdminCreateIssueInputCountyView = lazy(() => import('./pages/admin/create_issue_input/county/view/index'));
+
+routes.push({
+  path: 'admin/create_issue_input/county/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_CREATE_ISSUE_INPUT_COUNTY_VIEW_INTERFACE_KEY})`}>
+        <AdminCreateIssueInputCountyView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
+export const ROUTE_ADMIN_CREATE_ISSUE_INPUT_DISTRICT_VIEW_INTERFACE_KEY = 'AdminCreateIssueInputDistrictViewRoute';
+const AdminCreateIssueInputDistrictView = lazy(() => import('./pages/admin/create_issue_input/district/view/index'));
+
+routes.push({
+  path: 'admin/create_issue_input/district/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_CREATE_ISSUE_INPUT_DISTRICT_VIEW_INTERFACE_KEY})`}>
+        <AdminCreateIssueInputDistrictView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
+export const ROUTE_ADMIN_CREATE_ISSUE_INPUT_ISSUE_TYPE_VIEW_INTERFACE_KEY = 'AdminCreateIssueInputIssueTypeViewRoute';
+const AdminCreateIssueInputIssueTypeView = lazy(() => import('./pages/admin/create_issue_input/issue_type/view/index'));
+
+routes.push({
+  path: 'admin/create_issue_input/issue_type/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_CREATE_ISSUE_INPUT_ISSUE_TYPE_VIEW_INTERFACE_KEY})`}>
+        <AdminCreateIssueInputIssueTypeView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
 export const ROUTE_ADMIN_DASHBOARD_CREATEISSUE_OUTPUT_INTERFACE_KEY = 'AdminDashboardCreateissueOutputRoute';
 const AdminDashboardCreateissueOutput = lazy(() => import('./pages/admin/dashboard/createissue/output/index'));
 
@@ -1016,6 +1146,19 @@ routes.push({
     </Suspense>
   ),
 });
+export const ROUTE_ADMIN_ISSUE_CITY_VIEW_INTERFACE_KEY = 'AdminIssueCityViewRoute';
+const AdminIssueCityView = lazy(() => import('./pages/admin/issue/city/view/index'));
+
+routes.push({
+  path: 'admin/issue/city/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_ISSUE_CITY_VIEW_INTERFACE_KEY})`}>
+        <AdminIssueCityView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
 export const ROUTE_ADMIN_ISSUE_COMMENTS_VIEW_INTERFACE_KEY = 'AdminIssueCommentsViewRoute';
 const AdminIssueCommentsView = lazy(() => import('./pages/admin/issue/comments/view/index'));
 
@@ -1025,6 +1168,19 @@ routes.push({
     <Suspense>
       <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_ISSUE_COMMENTS_VIEW_INTERFACE_KEY})`}>
         <AdminIssueCommentsView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
+export const ROUTE_ADMIN_ISSUE_COUNTY_VIEW_INTERFACE_KEY = 'AdminIssueCountyViewRoute';
+const AdminIssueCountyView = lazy(() => import('./pages/admin/issue/county/view/index'));
+
+routes.push({
+  path: 'admin/issue/county/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_ISSUE_COUNTY_VIEW_INTERFACE_KEY})`}>
+        <AdminIssueCountyView />
       </ComponentProxy>
     </Suspense>
   ),
@@ -1064,6 +1220,32 @@ routes.push({
     <Suspense>
       <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_ISSUE_DEBATES_VIEW_INTERFACE_KEY})`}>
         <AdminIssueDebatesView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
+export const ROUTE_ADMIN_ISSUE_DISTRICT_VIEW_INTERFACE_KEY = 'AdminIssueDistrictViewRoute';
+const AdminIssueDistrictView = lazy(() => import('./pages/admin/issue/district/view/index'));
+
+routes.push({
+  path: 'admin/issue/district/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_ISSUE_DISTRICT_VIEW_INTERFACE_KEY})`}>
+        <AdminIssueDistrictView />
+      </ComponentProxy>
+    </Suspense>
+  ),
+});
+export const ROUTE_ADMIN_ISSUE_ISSUE_TYPE_VIEW_INTERFACE_KEY = 'AdminIssueIssueTypeViewRoute';
+const AdminIssueIssueTypeView = lazy(() => import('./pages/admin/issue/issue_type/view/index'));
+
+routes.push({
+  path: 'admin/issue/issue_type/view/:signedIdentifier',
+  element: (
+    <Suspense>
+      <ComponentProxy filter={`(${OBJECTCLASS}=${ROUTE_ADMIN_ISSUE_ISSUE_TYPE_VIEW_INTERFACE_KEY})`}>
+        <AdminIssueIssueTypeView />
       </ComponentProxy>
     </Suspense>
   ),

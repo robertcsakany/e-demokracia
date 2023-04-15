@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,7 +12,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CreateAction
 
@@ -21,6 +21,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Grid,
   Button,
+  ButtonGroup,
   Card,
   CardContent,
   DialogActions,
@@ -193,6 +194,7 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
                   required
                   name="type"
                   id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultAttachmentFormGroupType"
+                  autoFocus
                   label={
                     t('edemokracia.admin.Issue.attachments.Attachment.Form.group.type', {
                       defaultValue: 'Type',
@@ -282,7 +284,7 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
                           data,
                           'file',
                           event.target.files,
-                          '/admin/IssueAttachment/file',
+                          'admin/IssueAttachment/file',
                         );
                         if (uploadedData) {
                           if (uploadedData.error) {
@@ -329,19 +331,29 @@ export function TableCreateAttachmentsForm({ successCallback, cancel, owner }: T
                     }}
                   />
                 ) : (
-                  <Button
-                    id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultAttachmentFormGroupFile-download"
-                    variant="contained"
-                    disabled={!data?.file}
-                    onClick={() => downloadFile(data, 'file')}
-                  >
-                    <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
-                    {
-                      t('edemokracia.admin.Issue.attachments.Attachment.Form.group.file', {
-                        defaultValue: 'File',
-                      }) as string
-                    }
-                  </Button>
+                  <ButtonGroup>
+                    <Button
+                      id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultAttachmentFormGroupFile-download"
+                      variant="contained"
+                      disabled={!data?.file}
+                      onClick={() => downloadFile(data, 'file')}
+                    >
+                      <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
+                      {
+                        t('edemokracia.admin.Issue.attachments.Attachment.Form.group.file', {
+                          defaultValue: 'File',
+                        }) as string
+                      }
+                    </Button>
+                    <Button
+                      id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsCreateDefaultAttachmentFormGroupFile-toggleEditMode"
+                      variant="contained"
+                      disabled={false || !isFormUpdateable()}
+                      onClick={() => setEditMode(true)}
+                    >
+                      <MdiIcon path="upload" />
+                    </Button>
+                  </ButtonGroup>
                 )}
               </Grid>
             </Grid>

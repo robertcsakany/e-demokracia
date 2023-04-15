@@ -31,6 +31,8 @@
         "judo.modal.filter.clear-all": "Clear all",
         "judo.modal.confirm.confirm": "Yes",
         "judo.modal.confirm.cancel": "No",
+        "judo.modal.confirm.confirm-title": "Confirm action",
+        "judo.modal.confirm.confirm-delete": "Are you sure you would like to delete the selected element?",
         "judo.modal.close": "Close",
         "judo.modal.range.label": "Select",
         "judo.modal.range.set-filters": "Set filters",

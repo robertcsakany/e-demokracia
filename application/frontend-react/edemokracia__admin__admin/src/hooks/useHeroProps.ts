@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/hooks/useHeroProps.ts'
 // Template name: actor/src/hooks/useHeroProps.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_041932_3a0d360a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
 // Template file: actor/src/hooks/useHeroProps.ts.hbs
 
 import type { HeroProps } from '../components-api';
