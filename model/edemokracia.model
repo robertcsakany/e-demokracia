@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<namespace:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:accesspoint="http://blackbelt.hu/judo/meta/esm/accesspoint" xmlns:measure="http://blackbelt.hu/judo/meta/esm/measure" xmlns:namespace="http://blackbelt.hu/judo/meta/esm/namespace" xmlns:structure="http://blackbelt.hu/judo/meta/esm/structure" xmlns:type="http://blackbelt.hu/judo/meta/esm/type" xmlns:ui="http://blackbelt.hu/judo/meta/esm/ui" xsi:schemaLocation="http://blackbelt.hu/judo/meta/esm/accesspoint http://blackbelt.hu/judo/meta/esm#//accesspoint http://blackbelt.hu/judo/meta/esm/measure http://blackbelt.hu/judo/meta/esm#//measure http://blackbelt.hu/judo/meta/esm/namespace http://blackbelt.hu/judo/meta/esm#//namespace http://blackbelt.hu/judo/meta/esm/structure http://blackbelt.hu/judo/meta/esm#//structure http://blackbelt.hu/judo/meta/esm/type http://blackbelt.hu/judo/meta/esm#//type http://blackbelt.hu/judo/meta/esm/ui http://blackbelt.hu/judo/meta/esm#//ui" xmi:id="_7D8NwGkNEe25ONJ3V89cVA" name="edemokracia" metaVersion="1.2.0.20230331_161633_160c4bcb_develop" advanced="true" version="$MODEL_VERSION_PLACEHOLDER$">
+<namespace:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:accesspoint="http://blackbelt.hu/judo/meta/esm/accesspoint" xmlns:measure="http://blackbelt.hu/judo/meta/esm/measure" xmlns:namespace="http://blackbelt.hu/judo/meta/esm/namespace" xmlns:structure="http://blackbelt.hu/judo/meta/esm/structure" xmlns:type="http://blackbelt.hu/judo/meta/esm/type" xmlns:ui="http://blackbelt.hu/judo/meta/esm/ui" xsi:schemaLocation="http://blackbelt.hu/judo/meta/esm/accesspoint http://blackbelt.hu/judo/meta/esm#//accesspoint http://blackbelt.hu/judo/meta/esm/measure http://blackbelt.hu/judo/meta/esm#//measure http://blackbelt.hu/judo/meta/esm/namespace http://blackbelt.hu/judo/meta/esm#//namespace http://blackbelt.hu/judo/meta/esm/structure http://blackbelt.hu/judo/meta/esm#//structure http://blackbelt.hu/judo/meta/esm/type http://blackbelt.hu/judo/meta/esm#//type http://blackbelt.hu/judo/meta/esm/ui http://blackbelt.hu/judo/meta/esm#//ui" xmi:id="_7D8NwGkNEe25ONJ3V89cVA" name="edemokracia" metaVersion="1.2.0.20230413_041635_f3d55a1e_develop" advanced="true" version="$MODEL_VERSION_PLACEHOLDER$">
   <elements xsi:type="namespace:Package" xmi:id="_7D8NwWkNEe25ONJ3V89cVA" name="types">
     <elements xsi:type="type:StringType" xmi:id="_7D8NwmkNEe25ONJ3V89cVA" name="String" maxLength="255"/>
     <elements xsi:type="type:NumericType" xmi:id="_7D8Nw2kNEe25ONJ3V89cVA" name="Long" precision="18"/>
@@ -962,7 +962,7 @@
       <attributes xsi:type="structure:DataMember" xmi:id="_qJnCgGksEe25ONJ3V89cVA" name="title" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_NyMz8GkfEe25ONJ3V89cVA" getterExpression="" identifier="false" memberType="MAPPED">
         <inherited xmi:id="_qJ26IGksEe25ONJ3V89cVA"/>
       </attributes>
-      <attributes xsi:type="structure:DataMember" xmi:id="_qKOtkGksEe25ONJ3V89cVA" name="description" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_PfYugGkfEe25ONJ3V89cVA" getterExpression="" identifier="false" memberType="MAPPED">
+      <attributes xsi:type="structure:DataMember" xmi:id="_qKOtkGksEe25ONJ3V89cVA" name="description" dataType="_7D8NzGkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_PfYugGkfEe25ONJ3V89cVA" getterExpression="" identifier="false" memberType="MAPPED">
         <inherited xmi:id="_qKqLYGksEe25ONJ3V89cVA"/>
       </attributes>
       <mapping xmi:id="_qJfGsGksEe25ONJ3V89cVA" target="_K7jW8GkfEe25ONJ3V89cVA"/>
@@ -1868,7 +1868,7 @@
     <relations xsi:type="structure:OneWayRelationMember" xmi:id="_0D6pkIrYEe2u0fVmwtP5bA" lower="0" upper="1" target="_BuSFMGkWEe25ONJ3V89cVA" name="createdBy" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="STORED" rangeType="ANY" binding="_0D6pkIrYEe2u0fVmwtP5bA" getterExpression="">
       <inherited xmi:id="_0D9s4IrYEe2u0fVmwtP5bA"/>
     </relations>
-    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_Ulz8kIrbEe2u0fVmwtP5bA" lower="0" upper="-1" target="_5yNG0GkSEe25ONJ3V89cVA" name="cons" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="ASSOCIATION" memberType="STORED" rangeType="ANY" binding="_Ulz8kIrbEe2u0fVmwtP5bA" getterExpression="">
+    <relations xsi:type="structure:OneWayRelationMember" xmi:id="_Ulz8kIrbEe2u0fVmwtP5bA" lower="0" upper="-1" target="_5yNG0GkSEe25ONJ3V89cVA" name="cons" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="COMPOSITION" memberType="STORED" rangeType="ANY" binding="_Ulz8kIrbEe2u0fVmwtP5bA" getterExpression="">
       <inherited xmi:id="_Ul2Y0IrbEe2u0fVmwtP5bA"/>
     </relations>
     <relations xsi:type="structure:OneWayRelationMember" xmi:id="_d9rD0IrbEe2u0fVmwtP5bA" lower="0" upper="-1" target="_3Z7A0GkSEe25ONJ3V89cVA" name="pros" createable="false" updateable="false" deleteable="false" targetDefinedCRUD="false" reverseCascadeDelete="false" defaultExpression="" rangeExpression="" relationKind="COMPOSITION" memberType="STORED" rangeType="ANY" binding="_d9rD0IrbEe2u0fVmwtP5bA" getterExpression="">
@@ -2062,7 +2062,7 @@
     <attributes xsi:type="structure:DataMember" xmi:id="_NyMz8GkfEe25ONJ3V89cVA" name="title" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_NyMz8GkfEe25ONJ3V89cVA" getterExpression="" identifier="false" memberType="STORED">
       <inherited xmi:id="_NyPQMGkfEe25ONJ3V89cVA"/>
     </attributes>
-    <attributes xsi:type="structure:DataMember" xmi:id="_PfYugGkfEe25ONJ3V89cVA" name="description" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_PfYugGkfEe25ONJ3V89cVA" getterExpression="" identifier="false" memberType="STORED">
+    <attributes xsi:type="structure:DataMember" xmi:id="_PfYugGkfEe25ONJ3V89cVA" name="description" dataType="_7D8NzGkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_PfYugGkfEe25ONJ3V89cVA" getterExpression="" identifier="false" memberType="STORED">
       <inherited xmi:id="_PfZVkGkfEe25ONJ3V89cVA"/>
     </attributes>
     <mapping xmi:id="_K7j-AGkfEe25ONJ3V89cVA" target="_K7jW8GkfEe25ONJ3V89cVA"/>
@@ -2452,6 +2452,18 @@
     <form xmi:id="_j76scI1jEe2J66C5CrhpQw" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
     <table xmi:id="_j8BaII1jEe2J66C5CrhpQw" name="TransferObject_Table" label="TransferObject Table"/>
     <view xmi:id="_j7z-wI1jEe2J66C5CrhpQw" name="TransferObject_View" label="TransferObject View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
+  </elements>
+  <elements xsi:type="structure:EntityType" xmi:id="_q7APkNuxEe2Bgcx6em3jZg" name="IssueType" createable="true" updateable="true" deleteable="true">
+    <attributes xsi:type="structure:DataMember" xmi:id="_uCwqsNuxEe2Bgcx6em3jZg" name="title" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_uCwqsNuxEe2Bgcx6em3jZg" getterExpression="" identifier="false" memberType="STORED">
+      <inherited xmi:id="_uC7CwNuxEe2Bgcx6em3jZg"/>
+    </attributes>
+    <attributes xsi:type="structure:DataMember" xmi:id="_wigDkNuxEe2Bgcx6em3jZg" name="description" dataType="_7D8NzGkNEe25ONJ3V89cVA" required="true" defaultExpression="" binding="_wigDkNuxEe2Bgcx6em3jZg" getterExpression="" identifier="false" memberType="STORED">
+      <inherited xmi:id="_wijt8NuxEe2Bgcx6em3jZg"/>
+    </attributes>
+    <mapping xmi:id="_q7KAkNuxEe2Bgcx6em3jZg" target="_q7APkNuxEe2Bgcx6em3jZg"/>
+    <form xmi:id="_q70u8NuxEe2Bgcx6em3jZg" name="Entity_Form" label="Entity Form" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false"/>
+    <table xmi:id="_q8AVINuxEe2Bgcx6em3jZg" name="Entity_Table" label="Entity Table"/>
+    <view xmi:id="_q7jpMNuxEe2Bgcx6em3jZg" name="Entity_View" label="Entity View" layout="VERTICAL" horizontal="LEFT" vertical="TOP" frame="false" titleFrom="LABEL"/>
   </elements>
   <annotations xmi:id="_7D81XmkNEe25ONJ3V89cVA" name="dashboard" className="hu.blackbelt.judo.meta.esm.accesspoint.Access" elements="_GgaEAIyPEe2VSOmaAz6G9Q"/>
   <annotations xmi:id="_7D81X2kNEe25ONJ3V89cVA" name="profile" className="hu.blackbelt.judo.meta.esm.accesspoint.Access"/>
