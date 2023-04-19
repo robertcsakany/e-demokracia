@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/components/dialog/RangeDialog.tsx'
 // Template name: actor/src/components/dialog/RangeDialog.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/components/dialog/RangeDialog.tsx.hbs
 
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material';
@@ -25,7 +25,12 @@ import { useTranslation } from 'react-i18next';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { useSnackbar } from 'notistack';
 import type { Filter, FilterOption } from '../../components-api';
-import { useErrorHandler, processQueryCustomizer, ERROR_PROCESSOR_HOOK_INTERFACE_KEY } from '../../utilities';
+import {
+  useErrorHandler,
+  processQueryCustomizer,
+  ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
+  mapFiltersToQueryCustomizerProperty,
+} from '../../utilities';
 import { serverTableConfig, rangeDialogConfig } from '../../config';
 import { CustomTablePagination } from '../CustomTablePagination';
 import { useFilterDialog } from './hooks';
@@ -125,18 +130,15 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
     setPage(0);
     setFilters(newFilters);
 
-    // @ts-ignore
     setQueryCustomizer((prevQueryCustomizer) => {
-      const tempQueryCustomizer = { ...prevQueryCustomizer };
+      const tempQueryCustomizer: any = { ...prevQueryCustomizer };
 
-      filterOptions.forEach(
-        (filter) =>
-          // @ts-ignore
-          (tempQueryCustomizer[filter.attributeName] = mapFiltersToQueryCustomizerProperty(
-            newFilters,
-            filter.attributeName,
-          )),
-      );
+      filterOptions.forEach((filter) => {
+        tempQueryCustomizer[filter.attributeName] = mapFiltersToQueryCustomizerProperty(
+          newFilters,
+          filter.attributeName,
+        );
+      });
 
       return {
         ...prevQueryCustomizer,

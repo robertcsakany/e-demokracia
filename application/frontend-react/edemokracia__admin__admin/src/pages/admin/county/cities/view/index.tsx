@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::County.cities#View
 // Page owner name: edemokracia::admin::Admin
@@ -24,6 +24,7 @@ import {
   GridSortItem,
   GridSortModel,
   GridToolbarContainer,
+  GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
@@ -43,6 +44,7 @@ import { useRangeDialog } from '../../../../../components/dialog';
 import {
   AggregationInput,
   AssociationButton,
+  BinaryInput,
   CollectionAssociationButton,
   TrinaryLogicCombobox,
 } from '../../../../../components/widgets';
@@ -58,6 +60,7 @@ import {
   booleanToStringSelect,
 } from '../../../../../utilities';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
+import { useL10N } from '../../../../../l10n/l10n-context';
 import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   AdminCityQueryCustomizer,
@@ -103,7 +106,8 @@ export default function AdminCountyCitiesView() {
   const rowEditDistrictsAction = useRowEditDistrictsAction();
 
   const { openRangeDialog } = useRangeDialog();
-  const { downloadFile, uploadFile } = fileHandling();
+  const { downloadFile, extractFileNameFromToken, uploadFile } = fileHandling();
+  const { locale: l10nLocale } = useL10N();
   const { queryCustomizer, districtsColumns, districtsRangeFilterOptions, districtsInitialQueryCustomizer } =
     useAdminCountyCitiesView();
 
@@ -362,7 +366,7 @@ export default function AdminCountyCitiesView() {
                       disableSelectionOnClick
                       onRowClick={(params: GridRowParams<AdminDistrictStored>) => {
                         if (!editMode) {
-                          rowViewDistrictsAction(params.row);
+                          rowViewDistrictsAction(data, params.row);
                         }
                       }}
                       sortModel={districtsSortModel}
@@ -376,7 +380,7 @@ export default function AdminCountyCitiesView() {
                               id="CreateActionedemokraciaAdminAdminEdemokraciaAdminCountyCitiesViewEdemokraciaAdminAdminEdemokraciaAdminCityDistrictsTableCreate"
                               variant="text"
                               onClick={() => tableCreateDistrictsAction(data, () => fetchData())}
-                              disabled={isLoading || !true || editMode || !isFormUpdateable()}
+                              disabled={false || !isFormUpdateable()}
                             >
                               <MdiIcon path="file_document_plus" />
                               {t('judo.pages.table.create', { defaultValue: 'Create' })}

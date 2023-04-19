@@ -4,23 +4,31 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: AddAction
 
 import type { JudoIdentifiable } from '@judo/data-api-common';
 import { useTranslation } from 'react-i18next';
-import { GridColDef, GridRenderCellParams, GridSortModel } from '@mui/x-data-grid';
+import type {
+  GridColDef,
+  GridRenderCellParams,
+  GridRowParams,
+  GridSortModel,
+  GridValueFormatterParams,
+} from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { useSnackbar } from 'notistack';
 import { MdiIcon } from '../../../../../../components';
 import { useRangeDialog } from '../../../../../../components/dialog';
 import { FilterOption, FilterType } from '../../../../../../components-api';
 import { baseColumnConfig, toastConfig } from '../../../../../../config';
+import { useL10N } from '../../../../../../l10n/l10n-context';
 import {
   useErrorHandler,
   ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   processQueryCustomizer,
+  serviceDateToUiDate,
 } from '../../../../../../utilities';
 import {
   AdminUserStored,
@@ -43,6 +51,7 @@ export const usePageAddVotesAction: PageAddVotesAction = () => {
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=AddAction))`,
   );
   const { enqueueSnackbar } = useSnackbar();
+  const { locale: l10nLocale } = useL10N();
   const title: string = t('edemokracia.admin.User.votes.Table.edemokracia.admin.User.votes.PageAdd', {
     defaultValue: 'Add',
   });
@@ -55,6 +64,21 @@ export const usePageAddVotesAction: PageAddVotesAction = () => {
         headerName: t('edemokracia.admin.User.votes.votes.Vote.Table.created', { defaultValue: 'Created' }) as string,
         width: 170,
         type: 'dateTime',
+        valueGetter: ({ value }) => value && new Date(serviceDateToUiDate(value)),
+        valueFormatter: ({ value }: GridValueFormatterParams<Date>) => {
+          return (
+            value &&
+            new Intl.DateTimeFormat(l10nLocale, {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              hour12: false,
+            }).format(value)
+          );
+        },
       },
       {
         ...baseColumnConfig,

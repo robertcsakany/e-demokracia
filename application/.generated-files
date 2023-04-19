@@ -1,0 +1,39 @@
+.gitignore,d73e83288a59920239552055d9028ced
+.mvn/jvm.config,940053639b55d27c502d48dcc824bdaf
+README.adoc,fcdd78949baa00a60cd178c6b37412cd
+app/pom.xml,40db2a0da6219960c07545d9242092b0
+app/src/main/java/gitkeep,68b329da9893e34099c7d8ad5cb9c940
+app/src/main/resources/gitkeep,68b329da9893e34099c7d8ad5cb9c940
+app/src/test/java/gitkeep,68b329da9893e34099c7d8ad5cb9c940
+app/src/test/resources/gitkeep,68b329da9893e34099c7d8ad5cb9c940
+compose-dev.properties,00d57ea4a95bd81737ffeea932214846
+compose-full.properties,c56464d83f5580050b763f714832b88e
+docker/compose-develop/docker-compose.yml,ef6e87e78392d117ad009d5840914d33
+docker/compose-postgresql-https/docker-compose.yml,3702139cd38da96819e841eaf248c946
+docker/compose-postgresql-https/tls.yml,3e33ab503071f15d06b03da5e179778f
+docker/compose-postgresql-https/traefik.yml,e2486da30d84fc05074097818d2fca6e
+docker/overrided/bin/setenv,9bce3d5543f2207999dd5e0b06d864e5
+docker/pom.xml,424fdf54a3a9ed8ecd8e7159b39bc4a8
+frontend-flutter/.gitignore,d73e83288a59920239552055d9028ced
+frontend-flutter/README.adoc,148d521e8352ea9fec11402e4e787a84
+frontend-flutter/model/pom.xml,88271e50637120f366e3916b7042255e
+frontend-flutter/pom.xml,7c547f2df77e65b6681e91dfe785e86e
+frontend-react/.gitignore,bc016d72289e275fd01f618658001a95
+frontend-react/README.adoc,d444054c34deafa82e300e986847c41b
+frontend-react/model/pom.xml,765492fc083dadd74014f78a4230637f
+frontend-react/pom.xml,c3819ecd1f263cdccdbf909bbb13a79f
+judo.properties,9e50a015d78737c49302671b85206c68
+judo.sh,33cfe6aa248b1e4c54eeb76ad1a7ff46
+karaf-features/pom.xml,da15a44194ceb0d41889e8c3f377783e
+karaf-features/src/main/feature/feature.xml,103ebb0ac90cb713c9f58692a0bc51cb
+karaf-offline/pom.xml,1d67857b399844e09a12f0ac48e3b566
+launcher/Build edemokracia Application without frontend.launch,2ca0a0d87271f846936274c63d068638
+launcher/Build edemokracia Application.launch,06425f6a35aa82b149a92af8ee309827
+launcher/Compile edemokracia Custom Application.launch,589057793117e366005ba03dcbcfe284
+launcher/Run edemokracia Application.launch,c9b310d6660114eb63440620e9fa0173
+model/pom.xml,50efd55998203458fd6d55e1097d8294
+pom.xml,b2246dfcd389fcfd0f6bffd0bc56b2ad
+schema/README.adoc,8371838b901d34b8026d10bf3399c83d
+schema/migration/gitkeep,68b329da9893e34099c7d8ad5cb9c940
+schema/pom.xml,376bbfaeea566d9754ebc5238e05e3b3
+sdk/pom.xml,2fab384892ab49d5f208cad27c2dbd1a

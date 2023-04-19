@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.categories#View
 // Page owner name: edemokracia::admin::Admin
@@ -24,6 +24,7 @@ import {
   GridSortItem,
   GridSortModel,
   GridToolbarContainer,
+  GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { useSnackbar } from 'notistack';
@@ -42,6 +43,7 @@ import { useRangeDialog } from '../../../../../components/dialog';
 import {
   AggregationInput,
   AssociationButton,
+  BinaryInput,
   CollectionAssociationButton,
   TrinaryLogicCombobox,
 } from '../../../../../components/widgets';
@@ -58,6 +60,7 @@ import {
 } from '../../../../../utilities';
 import { useConfirmationBeforeChange } from '../../../../../hooks';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
+import { useL10N } from '../../../../../l10n/l10n-context';
 import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   AdminIssueCategoryStored,
@@ -105,7 +108,8 @@ export default function AdminAdminCategoriesView() {
   const pageRefreshCategoriesAction = usePageRefreshCategoriesAction();
 
   const { openRangeDialog } = useRangeDialog();
-  const { downloadFile, uploadFile } = fileHandling();
+  const { downloadFile, extractFileNameFromToken, uploadFile } = fileHandling();
+  const { locale: l10nLocale } = useL10N();
   const {
     queryCustomizer,
     subcategoriesColumns,
@@ -364,7 +368,11 @@ export default function AdminAdminCategoriesView() {
                 icon={<MdiIcon path="account" />}
                 disabled={false || !isFormUpdateable()}
                 editMode={editMode}
-                onView={async () => linkViewOwnerAction(data?.owner!)}
+                onView={async () => linkViewOwnerAction(data, data?.owner!)}
+                onUnset={async () => {
+                  setEditMode(true);
+                  storeDiff('owner', null);
+                }}
                 onSet={async () => {
                   const res = await openRangeDialog<AdminUserStored, AdminUserQueryCustomizer>({
                     id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategoryOwner',
@@ -385,10 +393,6 @@ export default function AdminAdminCategoriesView() {
 
                   setEditMode(true);
                   storeDiff('owner', res as AdminUserStored);
-                }}
-                onUnset={async () => {
-                  setEditMode(true);
-                  storeDiff('owner', null);
                 }}
               />
             </Grid>
@@ -441,7 +445,7 @@ export default function AdminAdminCategoriesView() {
                       disableSelectionOnClick
                       onRowClick={(params: GridRowParams<AdminIssueCategoryStored>) => {
                         if (!editMode) {
-                          rowViewSubcategoriesAction(params.row);
+                          rowViewSubcategoriesAction(data, params.row);
                         }
                       }}
                       sortModel={subcategoriesSortModel}
@@ -455,7 +459,7 @@ export default function AdminAdminCategoriesView() {
                               id="CreateActionedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesViewEdemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesTableCreate"
                               variant="text"
                               onClick={() => tableCreateSubcategoriesAction(data, () => fetchData())}
-                              disabled={isLoading || !true || editMode || !isFormUpdateable()}
+                              disabled={false || !isFormUpdateable()}
                             >
                               <MdiIcon path="file_document_plus" />
                               {t('judo.pages.table.create', { defaultValue: 'Create' })}

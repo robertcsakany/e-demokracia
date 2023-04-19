@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.issues#Table
 // Page owner name: edemokracia::admin::Admin
@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSnackbar } from 'notistack';
 import { Paper, Card, CardContent, Box, Grid, Button, Container } from '@mui/material';
-import type { GridRowModel, GridRowParams, GridSortModel } from '@mui/x-data-grid';
+import type { GridRowModel, GridRowParams, GridSortModel, GridValueFormatterParams } from '@mui/x-data-grid';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import type { JudoIdentifiable } from '@judo/data-api-common';
@@ -35,9 +35,11 @@ import {
   fileHandling,
   mapAllFiltersToQueryCustomizerProperties,
   processQueryCustomizer,
+  serviceDateToUiDate,
 } from '../../../../../utilities';
 import type { PersistedTableData, TableRowAction } from '../../../../../utilities';
 import { pageServerTableConfig, toastConfig } from '../../../../../config';
+import { useL10N } from '../../../../../l10n/l10n-context';
 import { useAdminAdminIssuesTable } from './hooks/useAdminAdminIssuesTable';
 import { AdminIssueQueryCustomizer, AdminIssue, AdminIssueStored } from '../../../../../generated/data-api';
 import { adminAdminServiceForIssuesImpl } from '../../../../../generated/data-axios';
@@ -65,7 +67,8 @@ export default function AdminAdminIssuesTable() {
   const { t } = useTranslation();
   const { navigate } = useJudoNavigation();
   const { openFilterDialog } = useFilterDialog();
-  const { downloadFile, uploadFile } = fileHandling();
+  const { downloadFile, extractFileNameFromToken, uploadFile } = fileHandling();
+  const { locale: l10nLocale } = useL10N();
   const { columns, filterOptions } = useAdminAdminIssuesTable();
   const AdminIssueCreateDebateAction = useAdminIssueCreateDebateAction();
   const AdminIssueCreateCommentAction = useAdminIssueCreateCommentAction();

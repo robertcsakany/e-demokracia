@@ -4,10 +4,12 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: ViewAction
 
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useTrackService } from '@pandino/react-hooks';
 import type { JudoIdentifiable } from '@judo/data-api-common';
 import type {
   AdminCountyQueryCustomizer,
@@ -16,12 +18,21 @@ import type {
 } from '../../../../../../../generated/data-api';
 import { useJudoNavigation } from '../../../../../../../components';
 
-export type RowViewCountiesAction = () => (entry: JudoIdentifiable<AdminCounty>) => Promise<void>;
+export const ROW_VIEW_COUNTIES_ACTION_INTERFACE_KEY = 'RowViewCountiesAction';
+export type RowViewCountiesAction = () => (entry: AdminCountyStored) => Promise<void>;
 
 export const useRowViewCountiesAction: RowViewCountiesAction = () => {
   const { navigate } = useJudoNavigation();
+  const { service: useCustomNavigation } = useTrackService<RowViewCountiesAction>(
+    `(${OBJECTCLASS}=${ROW_VIEW_COUNTIES_ACTION_INTERFACE_KEY})`,
+  );
 
-  return async function (entry: JudoIdentifiable<AdminCounty>) {
+  if (useCustomNavigation) {
+    const customNavigation = useCustomNavigation();
+    return customNavigation;
+  }
+
+  return async function (entry: AdminCountyStored) {
     navigate(`admin/admin/counties/view/${entry.__signedIdentifier}`);
   };
 };

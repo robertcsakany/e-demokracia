@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Debate.closeDebate#Output
 // Page owner name: edemokracia::admin::Admin
@@ -22,6 +22,7 @@ import {
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
+  GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
@@ -38,9 +39,11 @@ import {
 import { useConfirmationBeforeChange } from '../../../../../hooks';
 import { columnsActionCalculator } from '../../../../../components/table';
 import { useRangeDialog } from '../../../../../components/dialog';
+import { useL10N } from '../../../../../l10n/l10n-context';
 import {
   AggregationInput,
   AssociationButton,
+  BinaryInput,
   CollectionAssociationButton,
   TrinaryLogicCombobox,
 } from '../../../../../components/widgets';
@@ -97,7 +100,8 @@ export default function AdminDebateClosedebateOutput() {
     },
     [data],
   );
-  const { downloadFile, uploadFile } = fileHandling();
+  const { downloadFile, extractFileNameFromToken, uploadFile } = fileHandling();
+  const { locale: l10nLocale } = useL10N();
   const { queryCustomizer } = useAdminDebateClosedebateOutput();
   const pageRefreshOutputAction = usePageRefreshOutputAction();
 

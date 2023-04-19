@@ -4,14 +4,16 @@
 // Factory expression: <actor>
 // Path expression: 'src/utilities/file-handling.ts'
 // Template name: actor/src/utilities/file-handling.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/utilities/file-handling.ts.hbs
 
+import jwt_decode from 'jwt-decode';
 import { JudoStored, QueryCustomizer } from '@judo/data-api-common';
 import { accessServiceImpl } from '../generated/data-axios';
 
 export type FileHandlingHook = () => {
   downloadFile: (data: any, attributeName: string) => Promise<void>;
+  extractFileNameFromToken: (token?: string | null, fallbackText?: string) => string;
   uploadFile: (data: any, attributeName: string, files: any[], path: string) => Promise<any | void>;
 };
 
@@ -47,8 +49,23 @@ export const fileHandling: FileHandlingHook = () => {
     }
   };
 
+  const extractFileNameFromToken = (token?: string | null, fallbackText?: string): string => {
+    if (!token) {
+      return fallbackText ?? '';
+    }
+
+    try {
+      const decoded: { fileName: string } = jwt_decode(token);
+      return decoded.fileName;
+    } catch (error) {
+      console.error(`Decoding of jwt token failed for: ${token}`);
+      return fallbackText ?? '';
+    }
+  };
+
   return {
     downloadFile,
+    extractFileNameFromToken,
     uploadFile,
   };
 };

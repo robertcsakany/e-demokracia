@@ -4,10 +4,12 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: ViewAction
 
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useTrackService } from '@pandino/react-hooks';
 import type { JudoIdentifiable } from '@judo/data-api-common';
 import type {
   AdminIssueQueryCustomizer,
@@ -18,12 +20,24 @@ import type {
 } from '../../../../../../../generated/data-api';
 import { useJudoNavigation } from '../../../../../../../components';
 
-export type LinkViewIssueAction = () => (entry: JudoIdentifiable<AdminIssue>) => Promise<void>;
+export const LINK_VIEW_ISSUE_ACTION_INTERFACE_KEY = 'LinkViewIssueAction';
+export type LinkViewIssueAction = () => (
+  owner: JudoIdentifiable<AdminDebate>,
+  entry: AdminIssueStored,
+) => Promise<void>;
 
 export const useLinkViewIssueAction: LinkViewIssueAction = () => {
   const { navigate } = useJudoNavigation();
+  const { service: useCustomNavigation } = useTrackService<LinkViewIssueAction>(
+    `(${OBJECTCLASS}=${LINK_VIEW_ISSUE_ACTION_INTERFACE_KEY})`,
+  );
 
-  return async function (entry: JudoIdentifiable<AdminIssue>) {
+  if (useCustomNavigation) {
+    const customNavigation = useCustomNavigation();
+    return customNavigation;
+  }
+
+  return async function (owner: JudoIdentifiable<AdminDebate>, entry: AdminIssueStored) {
     navigate(`admin/debate/issue/view/${entry.__signedIdentifier}`);
   };
 };

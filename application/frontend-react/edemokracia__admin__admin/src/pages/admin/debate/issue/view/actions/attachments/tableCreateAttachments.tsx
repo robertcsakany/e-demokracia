@@ -4,7 +4,7 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: CreateAction
 
@@ -34,7 +34,7 @@ import {
 import { TableCreateAttachmentsForm } from './TableCreateAttachmentsForm';
 
 export type TableCreateAttachmentsAction = () => (
-  owner: JudoIdentifiable<AdminIssue>,
+  owner: JudoIdentifiable<AdminIssueAttachment>,
   successCallback: (result: AdminIssueAttachmentStored) => void,
 ) => void;
 
@@ -43,7 +43,7 @@ export const useTableCreateAttachmentsAction: TableCreateAttachmentsAction = () 
   const { enqueueSnackbar } = useSnackbar();
 
   return function tableCreateAttachmentsAction(
-    owner: JudoIdentifiable<AdminIssue>,
+    owner: JudoIdentifiable<AdminIssueAttachment>,
     successCallback: (result: AdminIssueAttachmentStored) => void,
   ) {
     createDialog({

@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Pro.votes#Table
 // Page owner name: edemokracia::admin::Admin
@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Paper, Card, CardContent, Box, Grid, Button, Container } from '@mui/material';
-import type { GridRowModel, GridRowParams, GridSortModel } from '@mui/x-data-grid';
+import type { GridRowModel, GridRowParams, GridSortModel, GridValueFormatterParams } from '@mui/x-data-grid';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { JudoIdentifiable } from '@judo/data-api-common';
@@ -32,10 +32,12 @@ import { useFilterDialog } from '../../../../../components/dialog';
 import type { Filter } from '../../../../../components-api';
 import type { PersistedTableData, TableRowAction } from '../../../../../utilities';
 import { pageServerTableConfig, toastConfig } from '../../../../../config';
+import { useL10N } from '../../../../../l10n/l10n-context';
 import {
   useErrorHandler,
   ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
+  serviceDateToUiDate,
   mapAllFiltersToQueryCustomizerProperties,
   processQueryCustomizer,
 } from '../../../../../utilities';
@@ -71,7 +73,8 @@ export default function AdminProVotesTable() {
   const { signedIdentifier } = useParams();
   const { navigate } = useJudoNavigation();
   const { openFilterDialog } = useFilterDialog();
-  const { downloadFile, uploadFile } = fileHandling();
+  const { downloadFile, extractFileNameFromToken, uploadFile } = fileHandling();
+  const { locale: l10nLocale } = useL10N();
   const { columns, filterOptions } = useAdminProVotesTable();
   const rowDeleteVotesAction = useRowDeleteVotesAction();
   const pageCreateVotesAction = usePageCreateVotesAction();
@@ -244,7 +247,12 @@ export default function AdminProVotesTable() {
                         { shownActions: 2 },
                       ),
                     ]}
-                    onRowClick={(params: GridRowParams<AdminSimpleVoteStored>) => rowViewVotesAction(params.row)}
+                    onRowClick={(params: GridRowParams<AdminSimpleVoteStored>) =>
+                      rowViewVotesAction(
+                        { __signedIdentifier: signedIdentifier } as JudoIdentifiable<AdminPro>,
+                        params.row,
+                      )
+                    }
                     components={{
                       Toolbar: () => (
                         <GridToolbarContainer>

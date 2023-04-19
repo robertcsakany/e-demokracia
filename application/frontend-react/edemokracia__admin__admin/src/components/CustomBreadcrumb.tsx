@@ -4,10 +4,10 @@
 // Factory expression: <actor>
 // Path expression: 'src/components/CustomBreadcrumb.tsx'
 // Template name: actor/src/components/CustomBreadcrumb.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/components/CustomBreadcrumb.tsx.hbs
 
-import { Breadcrumbs, Typography } from '@mui/material';
+import { Breadcrumbs, Typography, Link } from '@mui/material';
 import { useState, useContext, createContext, useMemo, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -157,7 +157,9 @@ export const CustomBreadcrumb = () => {
 
   return (
     <Breadcrumbs id="application-breadcrumb" maxItems={2} separator=">">
-      <MdiIcon path="home" />
+      <Link href="">
+        <MdiIcon path="home" />
+      </Link>
       {breadcrumbItems.map(({ label, key }, index) => {
         return (
           <Typography color="text.primary" key={key}>

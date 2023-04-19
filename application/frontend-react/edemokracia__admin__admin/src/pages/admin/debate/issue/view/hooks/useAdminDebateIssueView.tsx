@@ -4,12 +4,18 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Relation View
 
 import { useTranslation } from 'react-i18next';
-import { GridColDef, GridSortModel, GridRowParams, GridRenderCellParams } from '@mui/x-data-grid';
+import type {
+  GridColDef,
+  GridRenderCellParams,
+  GridRowParams,
+  GridSortModel,
+  GridValueFormatterParams,
+} from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import { MdiIcon } from '../../../../../../components';
 import { FilterOption, FilterType } from '../../../../../../components-api';
@@ -58,11 +64,13 @@ import {
   AdminCommentStored,
 } from '../../../../../../generated/data-api';
 import { baseColumnConfig, toastConfig } from '../../../../../../config';
-import { fileHandling } from '../../../../../../utilities';
+import { fileHandling, serviceDateToUiDate } from '../../../../../../utilities';
+import { useL10N } from '../../../../../../l10n/l10n-context';
 
 export const useAdminDebateIssueView = () => {
   const { t } = useTranslation();
-  const { downloadFile, uploadFile } = fileHandling();
+  const { downloadFile, extractFileNameFromToken, uploadFile } = fileHandling();
+  const { locale: l10nLocale } = useL10N();
 
   const queryCustomizer: AdminIssueQueryCustomizer = {
     _mask:
@@ -98,7 +106,7 @@ export const useAdminDebateIssueView = () => {
           <Button
             id="ColumnedemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherAttachmentsAttachmentsAttachmentsLabelWrapperAttachmentsFile-download"
             size="small"
-            variant="contained"
+            variant="text"
             onClick={(event: any) => {
               event.preventDefault();
               event.stopPropagation();
@@ -106,12 +114,7 @@ export const useAdminDebateIssueView = () => {
             }}
           >
             <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
-            {
-              t(
-                'edemokracia.admin.Debate.issue.Issue.View.other.attachments.attachments.attachments.attachments.file',
-                { defaultValue: 'File' },
-              ) as string
-            }
+            {extractFileNameFromToken(params.row.file)}
           </Button>
         ) : (
           <MdiIcon path="minus" />
@@ -249,6 +252,21 @@ export const useAdminDebateIssueView = () => {
       ) as string,
       width: 170,
       type: 'dateTime',
+      valueGetter: ({ value }) => value && new Date(serviceDateToUiDate(value)),
+      valueFormatter: ({ value }: GridValueFormatterParams<Date>) => {
+        return (
+          value &&
+          new Intl.DateTimeFormat(l10nLocale, {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+          }).format(value)
+        );
+      },
     },
     {
       ...baseColumnConfig,
@@ -269,6 +287,9 @@ export const useAdminDebateIssueView = () => {
       ) as string,
       width: 100,
       type: 'number',
+      valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
+        return value && new Intl.NumberFormat(l10nLocale).format(value);
+      },
     },
     {
       ...baseColumnConfig,
@@ -279,6 +300,9 @@ export const useAdminDebateIssueView = () => {
       ) as string,
       width: 100,
       type: 'number',
+      valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
+        return value && new Intl.NumberFormat(l10nLocale).format(value);
+      },
     },
   ];
 
@@ -374,6 +398,21 @@ export const useAdminDebateIssueView = () => {
       }) as string,
       width: 170,
       type: 'dateTime',
+      valueGetter: ({ value }) => value && new Date(serviceDateToUiDate(value)),
+      valueFormatter: ({ value }: GridValueFormatterParams<Date>) => {
+        return (
+          value &&
+          new Intl.DateTimeFormat(l10nLocale, {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+          }).format(value)
+        );
+      },
     },
     {
       ...baseColumnConfig,

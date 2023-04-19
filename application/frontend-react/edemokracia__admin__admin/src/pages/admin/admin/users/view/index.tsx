@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.users#View
 // Page owner name: edemokracia::admin::Admin
@@ -38,6 +38,7 @@ import {
   GridSortItem,
   GridSortModel,
   GridToolbarContainer,
+  GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
@@ -57,6 +58,7 @@ import { useRangeDialog } from '../../../../../components/dialog';
 import {
   AggregationInput,
   AssociationButton,
+  BinaryInput,
   CollectionAssociationButton,
   TrinaryLogicCombobox,
 } from '../../../../../components/widgets';
@@ -73,6 +75,7 @@ import {
 } from '../../../../../utilities';
 import { useConfirmationBeforeChange } from '../../../../../hooks';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
+import { useL10N } from '../../../../../l10n/l10n-context';
 import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   AdminCityQueryCustomizer,
@@ -143,7 +146,8 @@ export default function AdminAdminUsersView() {
   const linkViewResidentCountyAction = useLinkViewResidentCountyAction();
 
   const { openRangeDialog } = useRangeDialog();
-  const { downloadFile, uploadFile } = fileHandling();
+  const { downloadFile, extractFileNameFromToken, uploadFile } = fileHandling();
+  const { locale: l10nLocale } = useL10N();
   const {
     queryCustomizer,
     activityCitiesColumns,
@@ -489,7 +493,7 @@ export default function AdminAdminUsersView() {
                           <FormGroup>
                             <FormControlLabel
                               sx={{ marginTop: '6px' }}
-                              disabled={false}
+                              disabled={false || !isFormUpdateable()}
                               control={
                                 <Checkbox
                                   value={data.isAdmin}
@@ -787,7 +791,11 @@ export default function AdminAdminUsersView() {
                                 icon={<MdiIcon path="map" />}
                                 disabled={false || !isFormUpdateable()}
                                 editMode={editMode}
-                                onView={async () => linkViewResidentCountyAction(data?.residentCounty!)}
+                                onView={async () => linkViewResidentCountyAction(data, data?.residentCounty!)}
+                                onUnset={async () => {
+                                  setEditMode(true);
+                                  storeDiff('residentCounty', null);
+                                }}
                                 onSet={async () => {
                                   const res = await openRangeDialog<AdminCountyStored, AdminCountyQueryCustomizer>({
                                     id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserResidentCounty',
@@ -809,10 +817,6 @@ export default function AdminAdminUsersView() {
                                   setEditMode(true);
                                   storeDiff('residentCounty', res as AdminCountyStored);
                                 }}
-                                onUnset={async () => {
-                                  setEditMode(true);
-                                  storeDiff('residentCounty', null);
-                                }}
                               />
                             </Grid>
 
@@ -832,7 +836,11 @@ export default function AdminAdminUsersView() {
                                 icon={<MdiIcon path="city" />}
                                 disabled={false || !isFormUpdateable()}
                                 editMode={editMode}
-                                onView={async () => linkViewResidentCityAction(data?.residentCity!)}
+                                onView={async () => linkViewResidentCityAction(data, data?.residentCity!)}
+                                onUnset={async () => {
+                                  setEditMode(true);
+                                  storeDiff('residentCity', null);
+                                }}
                                 onSet={async () => {
                                   const res = await openRangeDialog<AdminCityStored, AdminCityQueryCustomizer>({
                                     id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserResidentCity',
@@ -854,10 +862,6 @@ export default function AdminAdminUsersView() {
                                   setEditMode(true);
                                   storeDiff('residentCity', res as AdminCityStored);
                                 }}
-                                onUnset={async () => {
-                                  setEditMode(true);
-                                  storeDiff('residentCity', null);
-                                }}
                               />
                             </Grid>
 
@@ -877,7 +881,11 @@ export default function AdminAdminUsersView() {
                                 icon={<MdiIcon path="home-city" />}
                                 disabled={false || !isFormUpdateable()}
                                 editMode={editMode}
-                                onView={async () => linkViewResidentDistrictAction(data?.residentDistrict!)}
+                                onView={async () => linkViewResidentDistrictAction(data, data?.residentDistrict!)}
+                                onUnset={async () => {
+                                  setEditMode(true);
+                                  storeDiff('residentDistrict', null);
+                                }}
                                 onSet={async () => {
                                   const res = await openRangeDialog<AdminDistrictStored, AdminDistrictQueryCustomizer>({
                                     id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserResidentDistrict',
@@ -898,10 +906,6 @@ export default function AdminAdminUsersView() {
 
                                   setEditMode(true);
                                   storeDiff('residentDistrict', res as AdminDistrictStored);
-                                }}
-                                onUnset={async () => {
-                                  setEditMode(true);
-                                  storeDiff('residentDistrict', null);
                                 }}
                               />
                             </Grid>
@@ -975,7 +979,7 @@ export default function AdminAdminUsersView() {
                                           disableSelectionOnClick
                                           onRowClick={(params: GridRowParams<AdminCountyStored>) => {
                                             if (!editMode) {
-                                              rowViewActivityCountiesAction(params.row);
+                                              rowViewActivityCountiesAction(data, params.row);
                                             }
                                           }}
                                           sortModel={activityCountiesSortModel}
@@ -985,6 +989,21 @@ export default function AdminAdminUsersView() {
                                           components={{
                                             Toolbar: () => (
                                               <GridToolbarContainer>
+                                                <Button
+                                                  id="RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserActivityCounties-clear"
+                                                  variant="text"
+                                                  onClick={async () => {
+                                                    storeDiff('activityCounties', []);
+
+                                                    if (!editMode) {
+                                                      setEditMode(true);
+                                                    }
+                                                  }}
+                                                  disabled={isLoading || false || !isFormUpdateable()}
+                                                >
+                                                  <MdiIcon path="link_off" />
+                                                  {t('judo.pages.table.clear', { defaultValue: 'Clear' })}
+                                                </Button>
                                                 <Button
                                                   id="RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserActivityCounties-add"
                                                   variant="text"
@@ -1002,25 +1021,10 @@ export default function AdminAdminUsersView() {
                                                       }
                                                     }
                                                   }}
-                                                  disabled={isLoading || !true || !isFormUpdateable()}
+                                                  disabled={isLoading || false || !isFormUpdateable()}
                                                 >
                                                   <MdiIcon path="attachment-plus" />
                                                   {t('judo.pages.table.add', { defaultValue: 'Add' })}
-                                                </Button>
-                                                <Button
-                                                  id="RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserActivityCounties-clear"
-                                                  variant="text"
-                                                  onClick={async () => {
-                                                    storeDiff('activityCounties', []);
-
-                                                    if (!editMode) {
-                                                      setEditMode(true);
-                                                    }
-                                                  }}
-                                                  disabled={isLoading || !true || !isFormUpdateable()}
-                                                >
-                                                  <MdiIcon path="link_off" />
-                                                  {t('judo.pages.table.clear', { defaultValue: 'Clear' })}
                                                 </Button>
                                                 <div>{/* Placeholder */}</div>
                                               </GridToolbarContainer>
@@ -1076,7 +1080,7 @@ export default function AdminAdminUsersView() {
                                           disableSelectionOnClick
                                           onRowClick={(params: GridRowParams<AdminCityStored>) => {
                                             if (!editMode) {
-                                              rowViewActivityCitiesAction(params.row);
+                                              rowViewActivityCitiesAction(data, params.row);
                                             }
                                           }}
                                           sortModel={activityCitiesSortModel}
@@ -1086,6 +1090,21 @@ export default function AdminAdminUsersView() {
                                           components={{
                                             Toolbar: () => (
                                               <GridToolbarContainer>
+                                                <Button
+                                                  id="RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserActivityCities-clear"
+                                                  variant="text"
+                                                  onClick={async () => {
+                                                    storeDiff('activityCities', []);
+
+                                                    if (!editMode) {
+                                                      setEditMode(true);
+                                                    }
+                                                  }}
+                                                  disabled={isLoading || false || !isFormUpdateable()}
+                                                >
+                                                  <MdiIcon path="link_off" />
+                                                  {t('judo.pages.table.clear', { defaultValue: 'Clear' })}
+                                                </Button>
                                                 <Button
                                                   id="RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserActivityCities-add"
                                                   variant="text"
@@ -1103,25 +1122,10 @@ export default function AdminAdminUsersView() {
                                                       }
                                                     }
                                                   }}
-                                                  disabled={isLoading || !true || !isFormUpdateable()}
+                                                  disabled={isLoading || false || !isFormUpdateable()}
                                                 >
                                                   <MdiIcon path="attachment-plus" />
                                                   {t('judo.pages.table.add', { defaultValue: 'Add' })}
-                                                </Button>
-                                                <Button
-                                                  id="RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserActivityCities-clear"
-                                                  variant="text"
-                                                  onClick={async () => {
-                                                    storeDiff('activityCities', []);
-
-                                                    if (!editMode) {
-                                                      setEditMode(true);
-                                                    }
-                                                  }}
-                                                  disabled={isLoading || !true || !isFormUpdateable()}
-                                                >
-                                                  <MdiIcon path="link_off" />
-                                                  {t('judo.pages.table.clear', { defaultValue: 'Clear' })}
                                                 </Button>
                                                 <div>{/* Placeholder */}</div>
                                               </GridToolbarContainer>
@@ -1177,7 +1181,7 @@ export default function AdminAdminUsersView() {
                                           disableSelectionOnClick
                                           onRowClick={(params: GridRowParams<AdminDistrictStored>) => {
                                             if (!editMode) {
-                                              rowViewActivityDistrictsAction(params.row);
+                                              rowViewActivityDistrictsAction(data, params.row);
                                             }
                                           }}
                                           sortModel={activityDistrictsSortModel}
@@ -1187,6 +1191,21 @@ export default function AdminAdminUsersView() {
                                           components={{
                                             Toolbar: () => (
                                               <GridToolbarContainer>
+                                                <Button
+                                                  id="RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserActivityDistricts-clear"
+                                                  variant="text"
+                                                  onClick={async () => {
+                                                    storeDiff('activityDistricts', []);
+
+                                                    if (!editMode) {
+                                                      setEditMode(true);
+                                                    }
+                                                  }}
+                                                  disabled={isLoading || false || !isFormUpdateable()}
+                                                >
+                                                  <MdiIcon path="link_off" />
+                                                  {t('judo.pages.table.clear', { defaultValue: 'Clear' })}
+                                                </Button>
                                                 <Button
                                                   id="RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserActivityDistricts-add"
                                                   variant="text"
@@ -1204,25 +1223,10 @@ export default function AdminAdminUsersView() {
                                                       }
                                                     }
                                                   }}
-                                                  disabled={isLoading || !true || !isFormUpdateable()}
+                                                  disabled={isLoading || false || !isFormUpdateable()}
                                                 >
                                                   <MdiIcon path="attachment-plus" />
                                                   {t('judo.pages.table.add', { defaultValue: 'Add' })}
-                                                </Button>
-                                                <Button
-                                                  id="RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserActivityDistricts-clear"
-                                                  variant="text"
-                                                  onClick={async () => {
-                                                    storeDiff('activityDistricts', []);
-
-                                                    if (!editMode) {
-                                                      setEditMode(true);
-                                                    }
-                                                  }}
-                                                  disabled={isLoading || !true || !isFormUpdateable()}
-                                                >
-                                                  <MdiIcon path="link_off" />
-                                                  {t('judo.pages.table.clear', { defaultValue: 'Clear' })}
                                                 </Button>
                                                 <div>{/* Placeholder */}</div>
                                               </GridToolbarContainer>

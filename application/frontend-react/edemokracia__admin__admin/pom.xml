@@ -195,7 +195,7 @@
                                 <goals>
                                     <goal>pnpm</goal>
                                 </goals>
-                                <phase>generate-sources</phase>
+                                <phase>compile</phase>
                                 <configuration>
                                     <arguments>install</arguments>
                                 </configuration>
@@ -206,7 +206,7 @@
                                 <goals>
                                     <goal>pnpm</goal>
                                 </goals>
-                                <phase>generate-sources</phase>
+                                <phase>compile</phase>
                                 <configuration>
                                     <arguments>run format</arguments>
                                 </configuration>
@@ -217,7 +217,7 @@
                                 <goals>
                                     <goal>pnpm</goal>
                                 </goals>
-                                <phase>generate-sources</phase>
+                                <phase>compile</phase>
                                 <configuration>
                                     <arguments>run build:ci</arguments>
                                 </configuration>
@@ -227,6 +227,42 @@
                             <installDirectory>${node-install-dir}</installDirectory>
                             <workingDirectory>${basedir}</workingDirectory>
                         </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>hu.blackbelt.judo.meta</groupId>
+                        <artifactId>judo-ui-generator-maven-plugin</artifactId>
+                        <version>${judo-meta-ui-version}</version>
+                        <configuration>
+                            <applications>
+                                ${actor-fq-name}
+                            </applications>
+                            <ui>${ui-model}</ui>
+                            <destination>${basedir}/src/generated</destination>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>execute-ui-service-checksum</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>checksum</goal>
+                                </goals>
+                                <configuration>
+                                    <destination>${basedir}/src/generated</destination>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>execute-ui-react-checksum</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>checksum</goal>
+                                </goals>
+                                <configuration>
+                                    <destination>${basedir}</destination>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>

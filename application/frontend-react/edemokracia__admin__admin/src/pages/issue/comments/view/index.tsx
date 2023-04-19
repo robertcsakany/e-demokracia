@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::Issue.comments#View
 // Page owner name: edemokracia::admin::Admin
@@ -22,6 +22,7 @@ import {
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
+  GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
@@ -41,6 +42,7 @@ import { useRangeDialog } from '../../../../components/dialog';
 import {
   AggregationInput,
   AssociationButton,
+  BinaryInput,
   CollectionAssociationButton,
   TrinaryLogicCombobox,
 } from '../../../../components/widgets';
@@ -56,6 +58,7 @@ import {
   booleanToStringSelect,
 } from '../../../../utilities';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../config';
+import { useL10N } from '../../../../l10n/l10n-context';
 import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../custom';
 import { Comment, CommentStored, Issue, CommentQueryCustomizer, IssueStored } from '../../../../generated/data-api';
 import { issueServiceImpl, commentServiceImpl } from '../../../../generated/data-axios';
@@ -77,7 +80,8 @@ export default function IssueCommentsView() {
   const pageRefreshCommentsAction = usePageRefreshCommentsAction();
 
   const { openRangeDialog } = useRangeDialog();
-  const { downloadFile, uploadFile } = fileHandling();
+  const { downloadFile, extractFileNameFromToken, uploadFile } = fileHandling();
+  const { locale: l10nLocale } = useL10N();
   const { queryCustomizer } = useIssueCommentsView();
 
   const handleFetchError = useErrorHandler(

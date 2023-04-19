@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Issue.attachments#View
 // Page owner name: edemokracia::admin::Admin
@@ -33,6 +33,7 @@ import {
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
+  GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
@@ -52,6 +53,7 @@ import { useRangeDialog } from '../../../../../components/dialog';
 import {
   AggregationInput,
   AssociationButton,
+  BinaryInput,
   CollectionAssociationButton,
   TrinaryLogicCombobox,
 } from '../../../../../components/widgets';
@@ -67,6 +69,7 @@ import {
   booleanToStringSelect,
 } from '../../../../../utilities';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
+import { useL10N } from '../../../../../l10n/l10n-context';
 import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   EdemokraciaAttachmentType,
@@ -101,7 +104,8 @@ export default function AdminIssueAttachmentsView() {
   const pageDeleteAttachmentsAction = usePageDeleteAttachmentsAction();
 
   const { openRangeDialog } = useRangeDialog();
-  const { downloadFile, uploadFile } = fileHandling();
+  const { downloadFile, extractFileNameFromToken, uploadFile } = fileHandling();
+  const { locale: l10nLocale } = useL10N();
   const { queryCustomizer } = useAdminIssueAttachmentsView();
 
   const handleFetchError = useErrorHandler(
@@ -329,97 +333,31 @@ export default function AdminIssueAttachmentsView() {
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={4.0}>
-                  {editMode ? (
-                    <TextField
-                      name="file"
-                      id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentViewGroupFile"
-                      label={
-                        t('edemokracia.admin.Issue.attachments.Attachment.View.group.file', {
-                          defaultValue: 'File',
-                        }) as string
-                      }
-                      type="file"
-                      error={!!validation.get('file')}
-                      helperText={validation.get('file')}
-                      className={!editMode ? 'JUDO-viewMode' : undefined}
-                      disabled={false || !isFormUpdateable()}
-                      onChange={async (event: any) => {
-                        try {
-                          const uploadedData = await uploadFile(
-                            data,
-                            'file',
-                            event.target.files,
-                            'admin/IssueAttachment/file',
-                          );
-                          if (uploadedData) {
-                            if (uploadedData.error) {
-                              enqueueSnackbar(
-                                t('judo.files.upload-error', { defaultValue: uploadedData.error }) as string,
-                                {
-                                  variant: 'error',
-                                  ...toastConfig.error,
-                                },
-                              );
-                              console.error(uploadedData);
-                              return;
-                            }
-                            setEditMode(true);
-                            storeDiff('file', uploadedData.token);
-                            enqueueSnackbar(
-                              t('judo.files.upload-success', { defaultValue: 'File uploaded successfully.' }) as string,
-                              {
-                                variant: 'success',
-                                ...toastConfig.success,
-                              },
-                            );
-                          }
-                        } catch (err) {
-                          enqueueSnackbar(
-                            t('judo.files.upload-error', {
-                              defaultValue: 'An error occurred during file upload!',
-                            }) as string,
-                            {
-                              variant: 'error',
-                              ...toastConfig.error,
-                            },
-                          );
-                          console.error(err);
-                        }
-                      }}
-                      InputLabelProps={{ shrink: true }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  ) : (
-                    <ButtonGroup>
-                      <Button
-                        id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentViewGroupFile-download"
-                        variant="contained"
-                        disabled={!data?.file}
-                        onClick={() => downloadFile(data, 'file')}
-                      >
-                        <MdiIcon path="file-document-outline" mimeType={{ type: 'image', subType: '*' }} />
-                        {
-                          t('edemokracia.admin.Issue.attachments.Attachment.View.group.file', {
-                            defaultValue: 'File',
-                          }) as string
-                        }
-                      </Button>
-                      <Button
-                        id="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentViewGroupFile-toggleEditMode"
-                        variant="contained"
-                        disabled={false || !isFormUpdateable()}
-                        onClick={() => setEditMode(true)}
-                      >
-                        <MdiIcon path="upload" />
-                      </Button>
-                    </ButtonGroup>
-                  )}
+                  <BinaryInput
+                    downloadId="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentViewGroupFile-download"
+                    label={
+                      t('edemokracia.admin.Issue.attachments.Attachment.View.group.file', {
+                        defaultValue: 'File',
+                      }) as string
+                    }
+                    icon="file-document-outline"
+                    mimeType={{
+                      type: 'image',
+                      subType: '*',
+                    }}
+                    editMode={editMode}
+                    validation={validation}
+                    data={data}
+                    attributeName="file"
+                    attributePath="admin/IssueAttachment/file"
+                    disabled={false || !isFormUpdateable()}
+                    readonly={false}
+                    uploadId="BinaryTypeInputedemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsViewDefaultAttachmentViewGroupFile-upload"
+                    uploadCallback={async (uploadedData: { token: string }) => {
+                      setEditMode(true);
+                      storeDiff('file', uploadedData.token);
+                    }}
+                  />
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={4.0}>

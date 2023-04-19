@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.debates#View
 // Page owner name: edemokracia::admin::Admin
@@ -35,6 +35,7 @@ import {
   GridSortItem,
   GridSortModel,
   GridToolbarContainer,
+  GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
@@ -54,6 +55,7 @@ import { useRangeDialog } from '../../../../../components/dialog';
 import {
   AggregationInput,
   AssociationButton,
+  BinaryInput,
   CollectionAssociationButton,
   TrinaryLogicCombobox,
 } from '../../../../../components/widgets';
@@ -70,6 +72,7 @@ import {
 } from '../../../../../utilities';
 import { useConfirmationBeforeChange } from '../../../../../hooks';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
+import { useL10N } from '../../../../../l10n/l10n-context';
 import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   AdminCon,
@@ -177,7 +180,8 @@ export default function AdminAdminDebatesView() {
   const AdminDebateCreateCommentAction = useAdminDebateCreateCommentAction();
 
   const { openRangeDialog } = useRangeDialog();
-  const { downloadFile, uploadFile } = fileHandling();
+  const { downloadFile, extractFileNameFromToken, uploadFile } = fileHandling();
+  const { locale: l10nLocale } = useL10N();
   const {
     queryCustomizer,
     consColumns,
@@ -634,7 +638,7 @@ export default function AdminAdminDebatesView() {
                             icon={<MdiIcon path="file-document" />}
                             disabled={true || !isFormUpdateable()}
                             editMode={editMode}
-                            onView={async () => linkViewIssueAction(data?.issue!)}
+                            onView={async () => linkViewIssueAction(data, data?.issue!)}
                           />
                         </Grid>
 
@@ -654,7 +658,7 @@ export default function AdminAdminDebatesView() {
                             icon={<MdiIcon path="account" />}
                             disabled={true || !isFormUpdateable()}
                             editMode={editMode}
-                            onView={async () => linkViewCreatedByAction(data?.createdBy!)}
+                            onView={async () => linkViewCreatedByAction(data, data?.createdBy!)}
                           />
                         </Grid>
 
@@ -711,7 +715,7 @@ export default function AdminAdminDebatesView() {
                             icon={<MdiIcon path="table_rows" />}
                             disabled={true || !isFormUpdateable()}
                             editMode={editMode}
-                            onView={async () => linkViewVoteDefinitionAction(data?.voteDefinition!)}
+                            onView={async () => linkViewVoteDefinitionAction(data, data?.voteDefinition!)}
                           />
                         </Grid>
 
@@ -836,7 +840,7 @@ export default function AdminAdminDebatesView() {
                               disableSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminProStored>) => {
                                 if (!editMode) {
-                                  rowViewProsAction(params.row);
+                                  rowViewProsAction(data, params.row);
                                 }
                               }}
                               sortModel={prosSortModel}
@@ -905,7 +909,7 @@ export default function AdminAdminDebatesView() {
                               disableSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminConStored>) => {
                                 if (!editMode) {
-                                  rowViewConsAction(params.row);
+                                  rowViewConsAction(data, params.row);
                                 }
                               }}
                               sortModel={consSortModel}
@@ -994,7 +998,7 @@ export default function AdminAdminDebatesView() {
                               disableSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminCommentStored>) => {
                                 if (!editMode) {
-                                  rowViewCommentsAction(params.row);
+                                  rowViewCommentsAction(data, params.row);
                                 }
                               }}
                               sortModel={commentsSortModel}

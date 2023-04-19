@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.issues#View
 // Page owner name: edemokracia::admin::Admin
@@ -35,6 +35,7 @@ import {
   GridSortItem,
   GridSortModel,
   GridToolbarContainer,
+  GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
@@ -54,6 +55,7 @@ import { useRangeDialog } from '../../../../../components/dialog';
 import {
   AggregationInput,
   AssociationButton,
+  BinaryInput,
   CollectionAssociationButton,
   TrinaryLogicCombobox,
 } from '../../../../../components/widgets';
@@ -70,6 +72,7 @@ import {
 } from '../../../../../utilities';
 import { useConfirmationBeforeChange } from '../../../../../hooks';
 import { baseTableConfig, toastConfig, dividerHeight } from '../../../../../config';
+import { useL10N } from '../../../../../l10n/l10n-context';
 import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   AdminIssueTypeMaskBuilder,
@@ -171,7 +174,8 @@ export default function AdminAdminIssuesView() {
   const AdminCommentVoteDownAction = useAdminCommentVoteDownAction();
 
   const { openRangeDialog } = useRangeDialog();
-  const { downloadFile, uploadFile } = fileHandling();
+  const { downloadFile, extractFileNameFromToken, uploadFile } = fileHandling();
+  const { locale: l10nLocale } = useL10N();
   const {
     queryCustomizer,
     attachmentsColumns,
@@ -476,7 +480,11 @@ export default function AdminAdminIssuesView() {
                             icon={<MdiIcon path="folder-open" />}
                             disabled={false || !isFormUpdateable()}
                             editMode={editMode}
-                            onView={async () => linkViewIssueTypeAction(data?.issueType!)}
+                            onView={async () => linkViewIssueTypeAction(data, data?.issueType!)}
+                            onUnset={async () => {
+                              setEditMode(true);
+                              storeDiff('issueType', null);
+                            }}
                             onSet={async () => {
                               const res = await openRangeDialog<AdminIssueTypeStored, AdminIssueTypeQueryCustomizer>({
                                 id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueIssueType',
@@ -497,10 +505,6 @@ export default function AdminAdminIssuesView() {
 
                               setEditMode(true);
                               storeDiff('issueType', res as AdminIssueTypeStored);
-                            }}
-                            onUnset={async () => {
-                              setEditMode(true);
-                              storeDiff('issueType', null);
                             }}
                           />
                         </Grid>
@@ -686,7 +690,11 @@ export default function AdminAdminIssuesView() {
                             icon={<MdiIcon path="account" />}
                             disabled={false || !isFormUpdateable()}
                             editMode={editMode}
-                            onView={async () => linkViewOwnerAction(data?.owner!)}
+                            onView={async () => linkViewOwnerAction(data, data?.owner!)}
+                            onUnset={async () => {
+                              setEditMode(true);
+                              storeDiff('owner', null);
+                            }}
                             onSet={async () => {
                               const res = await openRangeDialog<AdminUserStored, AdminUserQueryCustomizer>({
                                 id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueOwner',
@@ -707,10 +715,6 @@ export default function AdminAdminIssuesView() {
 
                               setEditMode(true);
                               storeDiff('owner', res as AdminUserStored);
-                            }}
-                            onUnset={async () => {
-                              setEditMode(true);
-                              storeDiff('owner', null);
                             }}
                           />
                         </Grid>
@@ -783,7 +787,11 @@ export default function AdminAdminIssuesView() {
                         icon={<MdiIcon path="map" />}
                         disabled={false || !isFormUpdateable()}
                         editMode={editMode}
-                        onView={async () => linkViewCountyAction(data?.county!)}
+                        onView={async () => linkViewCountyAction(data, data?.county!)}
+                        onUnset={async () => {
+                          setEditMode(true);
+                          storeDiff('county', null);
+                        }}
                         onSet={async () => {
                           const res = await openRangeDialog<AdminCountyStored, AdminCountyQueryCustomizer>({
                             id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCounty',
@@ -805,10 +813,6 @@ export default function AdminAdminIssuesView() {
                           setEditMode(true);
                           storeDiff('county', res as AdminCountyStored);
                         }}
-                        onUnset={async () => {
-                          setEditMode(true);
-                          storeDiff('county', null);
-                        }}
                       />
                     </Grid>
 
@@ -828,7 +832,11 @@ export default function AdminAdminIssuesView() {
                         icon={<MdiIcon path="city" />}
                         disabled={false || !isFormUpdateable()}
                         editMode={editMode}
-                        onView={async () => linkViewCityAction(data?.city!)}
+                        onView={async () => linkViewCityAction(data, data?.city!)}
+                        onUnset={async () => {
+                          setEditMode(true);
+                          storeDiff('city', null);
+                        }}
                         onSet={async () => {
                           const res = await openRangeDialog<AdminCityStored, AdminCityQueryCustomizer>({
                             id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCity',
@@ -850,10 +858,6 @@ export default function AdminAdminIssuesView() {
                           setEditMode(true);
                           storeDiff('city', res as AdminCityStored);
                         }}
-                        onUnset={async () => {
-                          setEditMode(true);
-                          storeDiff('city', null);
-                        }}
                       />
                     </Grid>
 
@@ -873,7 +877,11 @@ export default function AdminAdminIssuesView() {
                         icon={<MdiIcon path="home-city" />}
                         disabled={false || !isFormUpdateable()}
                         editMode={editMode}
-                        onView={async () => linkViewDistrictAction(data?.district!)}
+                        onView={async () => linkViewDistrictAction(data, data?.district!)}
+                        onUnset={async () => {
+                          setEditMode(true);
+                          storeDiff('district', null);
+                        }}
                         onSet={async () => {
                           const res = await openRangeDialog<AdminDistrictStored, AdminDistrictQueryCustomizer>({
                             id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueDistrict',
@@ -894,10 +902,6 @@ export default function AdminAdminIssuesView() {
 
                           setEditMode(true);
                           storeDiff('district', res as AdminDistrictStored);
-                        }}
-                        onUnset={async () => {
-                          setEditMode(true);
-                          storeDiff('district', null);
                         }}
                       />
                     </Grid>
@@ -946,7 +950,7 @@ export default function AdminAdminIssuesView() {
                               disableSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminIssueAttachmentStored>) => {
                                 if (!editMode) {
-                                  rowViewAttachmentsAction(params.row);
+                                  rowViewAttachmentsAction(data, params.row);
                                 }
                               }}
                               sortModel={attachmentsSortModel}
@@ -960,7 +964,7 @@ export default function AdminAdminIssuesView() {
                                       id="CreateActionedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewEdemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsTableCreate"
                                       variant="text"
                                       onClick={() => tableCreateAttachmentsAction(data, () => fetchData())}
-                                      disabled={isLoading || !true || editMode || !isFormUpdateable()}
+                                      disabled={false || !isFormUpdateable()}
                                     >
                                       <MdiIcon path="file_document_plus" />
                                       {t('judo.pages.table.create', { defaultValue: 'Create' })}
@@ -1019,7 +1023,7 @@ export default function AdminAdminIssuesView() {
                               disableSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminIssueCategoryStored>) => {
                                 if (!editMode) {
-                                  rowViewCategoriesAction(params.row);
+                                  rowViewCategoriesAction(data, params.row);
                                 }
                               }}
                               sortModel={categoriesSortModel}
@@ -1029,6 +1033,21 @@ export default function AdminAdminIssuesView() {
                               components={{
                                 Toolbar: () => (
                                   <GridToolbarContainer>
+                                    <Button
+                                      id="RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategories-clear"
+                                      variant="text"
+                                      onClick={async () => {
+                                        storeDiff('categories', []);
+
+                                        if (!editMode) {
+                                          setEditMode(true);
+                                        }
+                                      }}
+                                      disabled={isLoading || false || !isFormUpdateable()}
+                                    >
+                                      <MdiIcon path="link_off" />
+                                      {t('judo.pages.table.clear', { defaultValue: 'Clear' })}
+                                    </Button>
                                     <Button
                                       id="RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategories-add"
                                       variant="text"
@@ -1046,25 +1065,10 @@ export default function AdminAdminIssuesView() {
                                           }
                                         }
                                       }}
-                                      disabled={isLoading || !true || !isFormUpdateable()}
+                                      disabled={isLoading || false || !isFormUpdateable()}
                                     >
                                       <MdiIcon path="attachment-plus" />
                                       {t('judo.pages.table.add', { defaultValue: 'Add' })}
-                                    </Button>
-                                    <Button
-                                      id="RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategories-clear"
-                                      variant="text"
-                                      onClick={async () => {
-                                        storeDiff('categories', []);
-
-                                        if (!editMode) {
-                                          setEditMode(true);
-                                        }
-                                      }}
-                                      disabled={isLoading || !true || !isFormUpdateable()}
-                                    >
-                                      <MdiIcon path="link_off" />
-                                      {t('judo.pages.table.clear', { defaultValue: 'Clear' })}
                                     </Button>
                                     <div>{/* Placeholder */}</div>
                                   </GridToolbarContainer>
@@ -1136,7 +1140,7 @@ export default function AdminAdminIssuesView() {
                               disableSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminIssueDebateStored>) => {
                                 if (!editMode) {
-                                  rowViewDebatesAction(params.row);
+                                  rowViewDebatesAction(data, params.row);
                                 }
                               }}
                               sortModel={debatesSortModel}
@@ -1223,7 +1227,7 @@ export default function AdminAdminIssuesView() {
                                   disableSelectionOnClick
                                   onRowClick={(params: GridRowParams<AdminCommentStored>) => {
                                     if (!editMode) {
-                                      rowViewCommentsAction(params.row);
+                                      rowViewCommentsAction(data, params.row);
                                     }
                                   }}
                                   sortModel={commentsSortModel}

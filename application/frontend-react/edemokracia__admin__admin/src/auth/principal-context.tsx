@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/auth/principal-context.tsx'
 // Template name: actor/src/auth/principal-context.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/auth/principal-context.tsx.hbs
 
 import { createContext, useContext, useState, useEffect } from 'react';

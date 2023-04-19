@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,7 +12,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CallOperationAction
 
@@ -40,6 +40,7 @@ import {
   GridSelectionModel,
   GridSortItem,
   GridSortModel,
+  GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
@@ -51,6 +52,7 @@ import { useRangeDialog } from '../../../../../../../components/dialog';
 import {
   AggregationInput,
   AssociationButton,
+  BinaryInput,
   CollectionAssociationButton,
   TrinaryLogicCombobox,
 } from '../../../../../../../components/widgets';
@@ -96,6 +98,7 @@ import {
 } from '../../../../../../../utilities';
 import { baseTableConfig, baseColumnConfig, toastConfig } from '../../../../../../../config';
 import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../../../custom';
+import { useL10N } from '../../../../../../../l10n/l10n-context';
 
 export interface AdminDashboardCreateIssueFormProps {
   successCallback: (result?: AdminIssueStored) => void;
@@ -105,7 +108,8 @@ export interface AdminDashboardCreateIssueFormProps {
 export function AdminDashboardCreateIssueForm({ successCallback, cancel }: AdminDashboardCreateIssueFormProps) {
   const { t } = useTranslation();
   const { openRangeDialog } = useRangeDialog();
-  const { downloadFile, uploadFile } = fileHandling();
+  const { downloadFile, extractFileNameFromToken, uploadFile } = fileHandling();
+  const { locale: l10nLocale } = useL10N();
 
   const handleFetchError = useErrorHandler(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
@@ -581,6 +585,31 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
                           icon={<MdiIcon path="folder-open" />}
                           disabled={false || !isFormUpdateable()}
                           editMode={editMode}
+                          onSet={async () => {
+                            const res = await openRangeDialog<AdminIssueTypeStored, AdminIssueTypeQueryCustomizer>({
+                              id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputIssueType',
+                              columns: issueTypeColumns,
+                              defaultSortField: ([{ field: 'representation', sort: 'asc' }] as GridSortItem[])[0],
+                              rangeCall: async (queryCustomizer) =>
+                                await adminCreateIssueInputServiceImpl.getRangeForIssueType(
+                                  data,
+                                  processQueryCustomizer(queryCustomizer),
+                                ),
+                              single: true,
+                              alreadySelectedItems: data.issueType?.__identifier as GridRowId,
+                              filterOptions: issueTypeRangeFilterOptions,
+                              initialQueryCustomizer: issueTypeInitialQueryCustomizer,
+                            });
+
+                            if (res === undefined) return;
+
+                            setEditMode(true);
+                            storeDiff('issueType', res as AdminIssueTypeStored);
+                          }}
+                          onUnset={async () => {
+                            setEditMode(true);
+                            storeDiff('issueType', null);
+                          }}
                         />
                       </Grid>
 
@@ -667,6 +696,31 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
                           icon={<MdiIcon path="map" />}
                           disabled={false || !isFormUpdateable()}
                           editMode={editMode}
+                          onSet={async () => {
+                            const res = await openRangeDialog<AdminCityStored, AdminCityQueryCustomizer>({
+                              id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputCity',
+                              columns: cityColumns,
+                              defaultSortField: ([{ field: 'representation', sort: 'asc' }] as GridSortItem[])[0],
+                              rangeCall: async (queryCustomizer) =>
+                                await adminCreateIssueInputServiceImpl.getRangeForCity(
+                                  data,
+                                  processQueryCustomizer(queryCustomizer),
+                                ),
+                              single: true,
+                              alreadySelectedItems: data.city?.__identifier as GridRowId,
+                              filterOptions: cityRangeFilterOptions,
+                              initialQueryCustomizer: cityInitialQueryCustomizer,
+                            });
+
+                            if (res === undefined) return;
+
+                            setEditMode(true);
+                            storeDiff('city', res as AdminCityStored);
+                          }}
+                          onUnset={async () => {
+                            setEditMode(true);
+                            storeDiff('city', null);
+                          }}
                         />
                       </Grid>
 
@@ -689,6 +743,31 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
                           icon={<MdiIcon path="city" />}
                           disabled={false || !isFormUpdateable()}
                           editMode={editMode}
+                          onSet={async () => {
+                            const res = await openRangeDialog<AdminCountyStored, AdminCountyQueryCustomizer>({
+                              id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputCounty',
+                              columns: countyColumns,
+                              defaultSortField: ([{ field: 'representation', sort: 'asc' }] as GridSortItem[])[0],
+                              rangeCall: async (queryCustomizer) =>
+                                await adminCreateIssueInputServiceImpl.getRangeForCounty(
+                                  data,
+                                  processQueryCustomizer(queryCustomizer),
+                                ),
+                              single: true,
+                              alreadySelectedItems: data.county?.__identifier as GridRowId,
+                              filterOptions: countyRangeFilterOptions,
+                              initialQueryCustomizer: countyInitialQueryCustomizer,
+                            });
+
+                            if (res === undefined) return;
+
+                            setEditMode(true);
+                            storeDiff('county', res as AdminCountyStored);
+                          }}
+                          onUnset={async () => {
+                            setEditMode(true);
+                            storeDiff('county', null);
+                          }}
                         />
                       </Grid>
 
@@ -713,6 +792,31 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
                           icon={<MdiIcon path="home-city" />}
                           disabled={false || !isFormUpdateable()}
                           editMode={editMode}
+                          onSet={async () => {
+                            const res = await openRangeDialog<AdminDistrictStored, AdminDistrictQueryCustomizer>({
+                              id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputDistrict',
+                              columns: districtColumns,
+                              defaultSortField: ([{ field: 'representation', sort: 'asc' }] as GridSortItem[])[0],
+                              rangeCall: async (queryCustomizer) =>
+                                await adminCreateIssueInputServiceImpl.getRangeForDistrict(
+                                  data,
+                                  processQueryCustomizer(queryCustomizer),
+                                ),
+                              single: true,
+                              alreadySelectedItems: data.district?.__identifier as GridRowId,
+                              filterOptions: districtRangeFilterOptions,
+                              initialQueryCustomizer: districtInitialQueryCustomizer,
+                            });
+
+                            if (res === undefined) return;
+
+                            setEditMode(true);
+                            storeDiff('district', res as AdminDistrictStored);
+                          }}
+                          onUnset={async () => {
+                            setEditMode(true);
+                            storeDiff('district', null);
+                          }}
                         />
                       </Grid>
                     </Grid>

@@ -4,10 +4,12 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230413_174054_1b98627b_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: NavigateToPageAction
 
+import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useTrackService } from '@pandino/react-hooks';
 import { JudoIdentifiable } from '@judo/data-api-common';
 import { useJudoNavigation } from '../../../../../../../components';
 import {
@@ -18,6 +20,7 @@ import {
   AdminDebateQueryCustomizer,
 } from '../../../../../../../generated/data-api';
 
+export const BUTTON_NAVIGATE_DEBATE_ACTION_INTERFACE_KEY = 'ButtonNavigateDebateAction';
 export type ButtonNavigateDebateAction = () => (
   owner: JudoIdentifiable<AdminVoteDefinition>,
   target: JudoIdentifiable<AdminDebate>,
@@ -25,11 +28,16 @@ export type ButtonNavigateDebateAction = () => (
 
 export const useButtonNavigateDebateAction: ButtonNavigateDebateAction = () => {
   const { navigate } = useJudoNavigation();
+  const { service: useCustomNavigation } = useTrackService<ButtonNavigateDebateAction>(
+    `(${OBJECTCLASS}=${BUTTON_NAVIGATE_DEBATE_ACTION_INTERFACE_KEY})`,
+  );
+
+  if (useCustomNavigation) {
+    const customNavigation = useCustomNavigation();
+    return customNavigation;
+  }
 
   return async function (owner: JudoIdentifiable<AdminVoteDefinition>, target: JudoIdentifiable<AdminDebate>) {
-    /*const target = await adminVoteDefinitionServiceImpl.getDebate(owner, {
-                    _mask: '{}',
-                });*/
     navigate(`admin/vote_definition/debate/view/${target.__signedIdentifier}`);
   };
 };
