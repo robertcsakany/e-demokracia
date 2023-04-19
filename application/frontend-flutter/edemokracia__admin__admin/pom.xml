@@ -220,7 +220,7 @@
                         <version>${judo-meta-ui-version}</version>
                         <executions>
                             <execution>
-                                <id>execute-ui-test</id>
+                                <id>execute-ui-generation</id>
                                 <phase>compile</phase>
                                 <goals>
                                     <goal>generate</goal>
@@ -236,6 +236,18 @@
                                     <applications>${actor-fqname}</applications>
                                 </configuration>
                             </execution>
+                            <execution>
+                                <id>execute-ui-checksum</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>checksum</goal>
+                                </goals>
+                                <configuration>
+                                    <ui>${project.parent.basedir}/model/${model-name}-ui.model</ui>
+                                    <destination>${basedir}</destination>
+                                    <applications>${actor-fqname}</applications>
+                                </configuration>
+                            </execution>
                         </executions>
                         <dependencies>
                             <dependency>
@@ -245,7 +257,7 @@
                             </dependency>
                         </dependencies>
                     </plugin>
-                    
+
                     <plugin>
                         <groupId>hu.blackbelt</groupId>
                         <artifactId>flutter-maven-plugin</artifactId>
