@@ -4,10 +4,12 @@
 // Factory expression: <actor>
 // Path expression: 'src/utilities/filter-helper.ts'
 // Template name: actor/src/utilities/filter-helper.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/utilities/filter-helper.ts.hbs
 
 import type { Filter, Operation } from '../components-api';
+import { FilterType } from '../components-api';
+import { dateToJudoDateString } from './helper';
 
 type FilterBy = {
   value: any;
@@ -17,11 +19,20 @@ type FilterBy = {
 export const mapFiltersToQueryCustomizerProperty = (filters: Filter[], property: string): FilterBy[] | undefined => {
   if (!filters.some((filter) => filter.filterOption.attributeName === property)) return undefined;
 
+  const convertFilterValue = (filter: Filter): any => {
+    if (filter.filterOption.filterType === FilterType.dateTime && filter.filterBy.value instanceof Date) {
+      return filter.filterBy.value.toISOString();
+    } else if (filter.filterOption.filterType === FilterType.date && filter.filterBy.value instanceof Date) {
+      return dateToJudoDateString(filter.filterBy.value);
+    }
+    return filter.filterBy.value;
+  };
+
   return filters
     .filter((filter) => filter.filterOption.attributeName === property && filter.filterBy.value)
     .map((filter) => {
       return {
-        value: filter.filterBy.value,
+        value: convertFilterValue(filter),
         operator: filter.filterBy.operator,
       };
     });

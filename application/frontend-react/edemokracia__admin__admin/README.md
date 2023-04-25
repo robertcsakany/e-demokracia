@@ -45,8 +45,8 @@ npm i -g pnpm
 In order for our frontend application to be able to find our running backend, we need to export the following variables:
 
 ```
-export VITE_API_DEFAULT_BASE_URL="YOUR_BACKEND_URL_HERE"
-export VITE_FILE_DEFAULT_BASE_URL="YOUR_BACKEND_URL_HERE"
+export VITE_API_DEFAULT_BASE_URL=YOUR_BACKEND_URL_HERE
+export VITE_FILE_DEFAULT_BASE_URL=YOUR_BACKEND_URL_HERE
 ```
 
 For further details, please consult with [Vite](https://vitejs.dev/)'s official docs: [Env Variables and Modes](https://vitejs.dev/guide/env-and-mode.html)

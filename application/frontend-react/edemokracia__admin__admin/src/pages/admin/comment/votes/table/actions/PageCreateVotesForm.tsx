@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,7 +12,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CreateAction
 
@@ -32,13 +32,13 @@ import {
   MenuItem,
   TextField,
 } from '@mui/material';
-import { DateTimePicker } from '@mui/x-date-pickers';
+import { DateTimePicker, DateTimeValidationError } from '@mui/x-date-pickers';
 import {
   GridColDef,
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridValueFormatterParams,
@@ -108,12 +108,20 @@ export function PageCreateVotesForm({ successCallback, cancel, owner }: PageCrea
   } as unknown as AdminSimpleVote);
   const [validation, setValidation] = useState<Map<keyof AdminSimpleVote, string>>(new Map());
   const [editMode, setEditMode] = useState<boolean>(true);
-  const [payloadDiff] = useState<Record<keyof AdminSimpleVote, any>>(
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof AdminSimpleVote, any>>(
     {} as unknown as Record<keyof AdminSimpleVote, any>,
   );
   const storeDiff: (attributeName: keyof AdminSimpleVote, value: any) => void = useCallback(
     (attributeName: keyof AdminSimpleVote, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = ['created'];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -134,6 +142,9 @@ export function PageCreateVotesForm({ successCallback, cancel, owner }: PageCrea
     try {
       const res = await adminSimpleVoteServiceImpl.getTemplate();
       setData((prevData) => ({ ...prevData, ...res }));
+      setPayloadDiff({
+        ...res,
+      } as Record<keyof AdminSimpleVote, any>);
     } catch (error) {
       handleFetchError(error);
     } finally {
@@ -149,7 +160,7 @@ export function PageCreateVotesForm({ successCallback, cancel, owner }: PageCrea
     setIsLoading(true);
 
     try {
-      const res = await adminCommentServiceForVotesImpl.createVotes(owner, data);
+      const res = await adminCommentServiceForVotesImpl.createVotes(owner, payloadDiff);
 
       if (res) {
         successCallback(res);
@@ -194,32 +205,46 @@ export function PageCreateVotesForm({ successCallback, cancel, owner }: PageCrea
                 <DateTimePicker
                   ampm={false}
                   ampmInClock={false}
-                  renderInput={(props: any) => (
-                    <TextField
-                      required
-                      {...props}
-                      id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminCommentVotesCreateDefaultVoteFormGroupCreated"
-                      className={!editMode ? 'JUDO-viewMode' : undefined}
-                      error={!!validation.get('created')}
-                      helperText={validation.get('created')}
-                    />
-                  )}
+                  className={!editMode ? 'JUDO-viewMode' : undefined}
                   autoFocus
+                  slotProps={{
+                    textField: {
+                      id: 'DateTimeInputedemokraciaAdminAdminEdemokraciaAdminCommentVotesCreateDefaultVoteFormGroupCreated',
+                      helperText: validation.get('created'),
+                      error: !!validation.get('created'),
+                      InputProps: {
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <MdiIcon path="schedule" />
+                          </InputAdornment>
+                        ),
+                      },
+                    },
+                  }}
+                  onError={(newError: DateTimeValidationError, value: any) => {
+                    // https://mui.com/x/react-date-pickers/validation/#show-the-error
+                    setValidation((prevValidation) => {
+                      const copy = new Map<keyof AdminSimpleVote, string>(prevValidation);
+                      copy.set(
+                        'created',
+                        newError === 'invalidDate'
+                          ? (t('judo.error.validation-failed.PATTERN_VALIDATION_FAILED', {
+                              defaultValue: 'Value does not match the pattern requirements.',
+                            }) as string)
+                          : '',
+                      );
+                      return copy;
+                    });
+                  }}
+                  views={['year', 'month', 'day', 'hours', 'minutes', 'seconds']}
                   label={
                     t('edemokracia.admin.Comment.votes.Vote.Form.group.created', { defaultValue: 'Created' }) as string
                   }
                   value={serviceDateToUiDate(data.created ?? null)}
                   disabled={false || !isFormUpdateable()}
-                  onChange={(newValue: any) => {
+                  onChange={(newValue: Date) => {
                     setEditMode(true);
                     storeDiff('created', newValue);
-                  }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <MdiIcon path="schedule" />
-                      </InputAdornment>
-                    ),
                   }}
                 />
               </Grid>

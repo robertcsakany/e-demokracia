@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Issue.createDebate#Output
 // Page owner name: edemokracia::admin::Admin
@@ -19,7 +19,7 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridValueFormatterParams,
@@ -87,7 +87,7 @@ export default function AdminIssueCreatedebateOutput() {
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<keyof DebateStored, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof Debate, string>>(new Map());
   const { signedIdentifier } = useParams();
   const [data, setData] = useState<DebateStored>({} as unknown as DebateStored);
   const [payloadDiff, setPayloadDiff] = useState<Record<keyof DebateStored, any>>(
@@ -95,7 +95,15 @@ export default function AdminIssueCreatedebateOutput() {
   );
   const storeDiff: (attributeName: keyof DebateStored, value: any) => void = useCallback(
     (attributeName: keyof DebateStored, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = ['closeAt'];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -150,7 +158,7 @@ export default function AdminIssueCreatedebateOutput() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<keyof DebateStored, string>());
+    setValidation(new Map<keyof Debate, string>());
   }, [editMode]);
 
   return (

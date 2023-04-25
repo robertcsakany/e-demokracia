@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/config/table.ts'
 // Template name: actor/src/config/table.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/config/table.ts.hbs
 
 import type { DataGridProps, GridColDef } from '@mui/x-data-grid';
@@ -27,7 +27,7 @@ export const serverTableConfig: Partial<DataGridProps<any>> = {
 
 export const pageServerTableConfig: Partial<DataGridProps<any>> = {
   ...serverTableConfig,
-  disableSelectionOnClick: true,
+  disableRowSelectionOnClick: true,
   filterMode: 'server',
 };
 

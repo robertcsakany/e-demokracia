@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/utilities/interfaces.ts'
 // Template name: actor/src/utilities/interfaces.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/utilities/interfaces.ts.hbs
 
 import type { GridColDef } from '@mui/x-data-grid';

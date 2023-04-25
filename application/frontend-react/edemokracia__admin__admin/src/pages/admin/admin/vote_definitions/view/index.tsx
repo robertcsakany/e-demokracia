@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.voteDefinitions#View
 // Page owner name: edemokracia::admin::Admin
@@ -19,12 +19,12 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
-import { DateTimePicker } from '@mui/x-date-pickers';
+import { DateTimePicker, DateTimeValidationError } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { useSnackbar } from 'notistack';
 import { ComponentProxy } from '@pandino/react-hooks';
@@ -113,10 +113,10 @@ export default function AdminAdminVoteDefinitionsView() {
   const handleFetchError = useErrorHandler(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
   );
-  const handleUpdateError = useErrorHandler<AdminVoteDefinitionStored>(
+  const handleUpdateError = useErrorHandler<AdminVoteDefinition>(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminAdminVoteDefinitionsView))`,
   );
-  const handleDeleteError = useErrorHandler<AdminVoteDefinitionStored>(
+  const handleDeleteError = useErrorHandler<AdminVoteDefinition>(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Delete)(component=AdminAdminVoteDefinitionsView))`,
   );
   const { enqueueSnackbar } = useSnackbar();
@@ -127,13 +127,21 @@ export default function AdminAdminVoteDefinitionsView() {
   );
   const storeDiff: (attributeName: keyof AdminVoteDefinitionStored, value: any) => void = useCallback(
     (attributeName: keyof AdminVoteDefinitionStored, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = ['closeAt', 'created'];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<keyof AdminVoteDefinitionStored, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminVoteDefinition, string>>(new Map());
 
   const title: string = t('edemokracia.admin.Admin.voteDefinitions.View', {
     defaultValue: 'View / Edit Vote Definition',
@@ -213,7 +221,7 @@ export default function AdminAdminVoteDefinitionsView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<keyof AdminVoteDefinitionStored, string>());
+    setValidation(new Map<keyof AdminVoteDefinition, string>());
   }, [editMode]);
 
   return (
@@ -317,16 +325,37 @@ export default function AdminAdminVoteDefinitionsView() {
                       <DateTimePicker
                         ampm={false}
                         ampmInClock={false}
-                        renderInput={(props: any) => (
-                          <TextField
-                            required
-                            {...props}
-                            id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewGroupCloseAt"
-                            className={!editMode ? 'JUDO-viewMode' : undefined}
-                            error={!!validation.get('closeAt')}
-                            helperText={validation.get('closeAt')}
-                          />
-                        )}
+                        className={!editMode ? 'JUDO-viewMode' : undefined}
+                        slotProps={{
+                          textField: {
+                            id: 'DateTimeInputedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewGroupCloseAt',
+                            helperText: validation.get('closeAt'),
+                            error: !!validation.get('closeAt'),
+                            InputProps: {
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="schedule" />
+                                </InputAdornment>
+                              ),
+                            },
+                          },
+                        }}
+                        onError={(newError: DateTimeValidationError, value: any) => {
+                          // https://mui.com/x/react-date-pickers/validation/#show-the-error
+                          setValidation((prevValidation) => {
+                            const copy = new Map<keyof AdminVoteDefinition, string>(prevValidation);
+                            copy.set(
+                              'closeAt',
+                              newError === 'invalidDate'
+                                ? (t('judo.error.validation-failed.PATTERN_VALIDATION_FAILED', {
+                                    defaultValue: 'Value does not match the pattern requirements.',
+                                  }) as string)
+                                : '',
+                            );
+                            return copy;
+                          });
+                        }}
+                        views={['year', 'month', 'day', 'hours', 'minutes', 'seconds']}
                         label={
                           t('edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.group.closeAt', {
                             defaultValue: 'CloseAt',
@@ -334,16 +363,9 @@ export default function AdminAdminVoteDefinitionsView() {
                         }
                         value={serviceDateToUiDate(data.closeAt ?? null)}
                         disabled={false || !isFormUpdateable()}
-                        onChange={(newValue: any) => {
+                        onChange={(newValue: Date) => {
                           setEditMode(true);
                           storeDiff('closeAt', newValue);
-                        }}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <MdiIcon path="schedule" />
-                            </InputAdornment>
-                          ),
                         }}
                       />
                     </Grid>
@@ -427,16 +449,37 @@ export default function AdminAdminVoteDefinitionsView() {
                       <DateTimePicker
                         ampm={false}
                         ampmInClock={false}
-                        renderInput={(props: any) => (
-                          <TextField
-                            required
-                            {...props}
-                            id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewGroupCreated"
-                            className={!editMode ? 'JUDO-viewMode' : undefined}
-                            error={!!validation.get('created')}
-                            helperText={validation.get('created')}
-                          />
-                        )}
+                        className={!editMode ? 'JUDO-viewMode' : undefined}
+                        slotProps={{
+                          textField: {
+                            id: 'DateTimeInputedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewDefaultVoteDefinitionViewGroupCreated',
+                            helperText: validation.get('created'),
+                            error: !!validation.get('created'),
+                            InputProps: {
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="schedule" />
+                                </InputAdornment>
+                              ),
+                            },
+                          },
+                        }}
+                        onError={(newError: DateTimeValidationError, value: any) => {
+                          // https://mui.com/x/react-date-pickers/validation/#show-the-error
+                          setValidation((prevValidation) => {
+                            const copy = new Map<keyof AdminVoteDefinition, string>(prevValidation);
+                            copy.set(
+                              'created',
+                              newError === 'invalidDate'
+                                ? (t('judo.error.validation-failed.PATTERN_VALIDATION_FAILED', {
+                                    defaultValue: 'Value does not match the pattern requirements.',
+                                  }) as string)
+                                : '',
+                            );
+                            return copy;
+                          });
+                        }}
+                        views={['year', 'month', 'day', 'hours', 'minutes', 'seconds']}
                         label={
                           t('edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.group.created', {
                             defaultValue: 'Created',
@@ -444,16 +487,9 @@ export default function AdminAdminVoteDefinitionsView() {
                         }
                         value={serviceDateToUiDate(data.created ?? null)}
                         disabled={false || !isFormUpdateable()}
-                        onChange={(newValue: any) => {
+                        onChange={(newValue: Date) => {
                           setEditMode(true);
                           storeDiff('created', newValue);
-                        }}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <MdiIcon path="schedule" />
-                            </InputAdornment>
-                          ),
                         }}
                       />
                     </Grid>

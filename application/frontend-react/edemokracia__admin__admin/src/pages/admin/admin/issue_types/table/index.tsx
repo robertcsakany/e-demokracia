@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.issueTypes#Table
 // Page owner name: edemokracia::admin::Admin
@@ -91,7 +91,7 @@ export default function AdminAdminIssueTypesTable() {
   const [data, setData] = useState<GridRowModel<AdminIssueTypeStored>[]>([]);
   const [filters, setFilters] = useState<Filter[]>(persistedTableData.filters || []);
   const [queryCustomizer, setQueryCustomizer] = useState<AdminIssueTypeQueryCustomizer>({
-    _mask: '{title,description}',
+    _mask: '{title,voteType,description}',
     _seek: {
       limit: 10 + 1,
     },
@@ -101,7 +101,7 @@ export default function AdminAdminIssueTypesTable() {
         descending: sortModel[0].sort === 'desc',
       },
     ],
-    ...mapAllFiltersToQueryCustomizerProperties(filters, 'title', 'description'),
+    ...mapAllFiltersToQueryCustomizerProperties(filters, 'title', 'voteType', 'description'),
   });
   const title: string = t('edemokracia.admin.Admin.issueTypes.Table', { defaultValue: 'Issue Types' });
 
@@ -225,6 +225,10 @@ export default function AdminAdminIssueTypesTable() {
                 <CardContent id="PageDefinitionedemokraciaAdminAdminEdemokraciaAdminAdminIssueTypesTable-data-grid">
                   <DataGrid
                     {...pageServerTableConfig}
+                    sx={{
+                      // overflow: 'hidden',
+                      display: 'grid',
+                    }}
                     getRowId={(row: { __identifier: string }) => row.__identifier}
                     loading={isLoading}
                     rows={data}

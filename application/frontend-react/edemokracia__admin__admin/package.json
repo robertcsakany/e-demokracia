@@ -11,13 +11,13 @@
     "format": "prettier --config .prettierrc \"src/**/*.{js,jsx,ts,tsx}\" --write --loglevel error"
   },
   "dependencies": {
-    "@emotion/react": "11.10.5",
-    "@emotion/styled": "11.10.5",
+    "@emotion/react": "11.10.6",
+    "@emotion/styled": "11.10.6",
     "@fontsource/roboto": "4.5.8",
     "@mdi/font": "7.1.96",
-    "@mui/material": "5.11.16",
-    "@mui/x-data-grid": "5.17.26",
-    "@mui/x-date-pickers": "5.0.20",
+    "@mui/material": "5.12.1",
+    "@mui/x-data-grid": "6.2.1",
+    "@mui/x-date-pickers": "6.2.1",
     "@pandino/loader-configuration-dom": "0.8.27",
     "@pandino/pandino": "0.8.27",
     "@pandino/react-hooks": "0.8.27",

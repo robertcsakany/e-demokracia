@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::IssueCategory.subcategories#View
 // Page owner name: edemokracia::admin::Admin
@@ -20,7 +20,7 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridToolbarContainer,
@@ -122,10 +122,10 @@ export default function AdminIssueCategorySubcategoriesView() {
   const handleFetchError = useErrorHandler(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
   );
-  const handleUpdateError = useErrorHandler<AdminIssueCategoryStored>(
+  const handleUpdateError = useErrorHandler<AdminIssueCategory>(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminIssueCategorySubcategoriesView))`,
   );
-  const handleDeleteError = useErrorHandler<AdminIssueCategoryStored>(
+  const handleDeleteError = useErrorHandler<AdminIssueCategory>(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Delete)(component=AdminIssueCategorySubcategoriesView))`,
   );
   const { enqueueSnackbar } = useSnackbar();
@@ -136,13 +136,21 @@ export default function AdminIssueCategorySubcategoriesView() {
   );
   const storeDiff: (attributeName: keyof AdminIssueCategoryStored, value: any) => void = useCallback(
     (attributeName: keyof AdminIssueCategoryStored, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = [];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<keyof AdminIssueCategoryStored, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminIssueCategory, string>>(new Map());
   const [subcategoriesSortModel, setSubcategoriesSortModel] = useState<GridSortModel>([
     { field: 'title', sort: 'asc' },
   ]);
@@ -234,7 +242,7 @@ export default function AdminIssueCategorySubcategoriesView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<keyof AdminIssueCategoryStored, string>());
+    setValidation(new Map<keyof AdminIssueCategory, string>());
   }, [editMode]);
 
   return (
@@ -444,6 +452,10 @@ export default function AdminIssueCategorySubcategoriesView() {
                   >
                     <DataGrid
                       {...baseTableConfig}
+                      sx={{
+                        // overflow: 'hidden',
+                        display: 'grid',
+                      }}
                       getRowId={(row: { __identifier: string }) => row.__identifier}
                       loading={isLoading}
                       rows={data?.subcategories ?? []}
@@ -455,7 +467,7 @@ export default function AdminIssueCategorySubcategoriesView() {
                           { shownActions: 2 },
                         ),
                       ]}
-                      disableSelectionOnClick
+                      disableRowSelectionOnClick
                       onRowClick={(params: GridRowParams<AdminIssueCategoryStored>) => {
                         if (!editMode) {
                           rowViewSubcategoriesAction(data, params.row);

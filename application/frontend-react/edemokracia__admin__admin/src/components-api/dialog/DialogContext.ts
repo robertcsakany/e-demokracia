@@ -4,12 +4,12 @@
 // Factory expression: <actor>
 // Path expression: 'src/components-api/dialog/DialogContext.ts'
 // Template name: actor/src/components-api/dialog/DialogContext.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/components-api/dialog/DialogContext.ts.hbs
 
 import { ReactNode } from 'react';
 import { JudoStored, QueryCustomizer } from '@judo/data-api-common';
-import { GridColumns, GridRowId, GridSelectionModel, GridSortItem } from '@mui/x-data-grid';
+import { GridColDef, GridRowId, GridRowSelectionModel, GridSortItem } from '@mui/x-data-grid';
 import { Filter, FilterOption } from './FilterDialog';
 
 export interface DialogProviderProps {
@@ -30,11 +30,11 @@ export interface ConfirmDialogProviderContext {
 
 export interface OpenRangeDialogProps<T extends JudoStored<T>, U extends QueryCustomizer<T>> {
   id: string;
-  columns: GridColumns<T>;
+  columns: GridColDef<T>[];
   defaultSortField: GridSortItem;
   rangeCall: (queryCustomizer: U) => Promise<Array<T>>;
   single?: boolean;
-  alreadySelectedItems: GridSelectionModel | GridRowId;
+  alreadySelectedItems: GridRowSelectionModel | GridRowId;
   initialQueryCustomizer: U;
   filterOptions: FilterOption[];
 }

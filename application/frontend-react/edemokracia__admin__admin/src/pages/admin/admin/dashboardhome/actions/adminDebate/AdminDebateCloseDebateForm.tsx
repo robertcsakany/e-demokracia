@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,7 +12,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CallOperationAction
 
@@ -33,13 +33,13 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { DateTimePicker } from '@mui/x-date-pickers';
+import { DateTimePicker, DateTimeValidationError } from '@mui/x-date-pickers';
 import {
   GridColDef,
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridValueFormatterParams,
@@ -62,6 +62,7 @@ import { FilterOption, FilterType } from '../../../../../../components-api';
 import {
   CloseDebateInputQueryCustomizer,
   AdminDashboardQueryCustomizer,
+  AdminDebate,
   VoteDefinitionQueryCustomizer,
   AdminDebateStored,
   CloseDebateInputStored,
@@ -111,12 +112,20 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
   const [data, setData] = useState<CloseDebateInput>({} as unknown as CloseDebateInput);
   const [validation, setValidation] = useState<Map<keyof CloseDebateInput, string>>(new Map());
   const [editMode, setEditMode] = useState<boolean>(true);
-  const [payloadDiff] = useState<Record<keyof CloseDebateInput, any>>(
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof CloseDebateInput, any>>(
     {} as unknown as Record<keyof CloseDebateInput, any>,
   );
   const storeDiff: (attributeName: keyof CloseDebateInput, value: any) => void = useCallback(
     (attributeName: keyof CloseDebateInput, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = ['closeAt'];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -137,6 +146,9 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
     try {
       const res = await closeDebateInputServiceImpl.getTemplate();
       setData(res);
+      setPayloadDiff({
+        ...res,
+      } as Record<keyof CloseDebateInput, any>);
     } catch (e) {
       handleFetchError(e);
     } finally {
@@ -153,7 +165,7 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
     setIsLoading(true);
 
     try {
-      const res = await adminDebateServiceImpl.closeDebate(owner, data);
+      const res = await adminDebateServiceImpl.closeDebate(owner, payloadDiff);
 
       if (res) {
         successCallback(res);
@@ -284,16 +296,37 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
                         <DateTimePicker
                           ampm={false}
                           ampmInClock={false}
-                          renderInput={(props: any) => (
-                            <TextField
-                              required
-                              {...props}
-                              id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultTransferObjectFormDebateLabelWrapperDebateCloseAt"
-                              className={!editMode ? 'JUDO-viewMode' : undefined}
-                              error={!!validation.get('closeAt')}
-                              helperText={validation.get('closeAt')}
-                            />
-                          )}
+                          className={!editMode ? 'JUDO-viewMode' : undefined}
+                          slotProps={{
+                            textField: {
+                              id: 'DateTimeInputedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultTransferObjectFormDebateLabelWrapperDebateCloseAt',
+                              helperText: validation.get('closeAt'),
+                              error: !!validation.get('closeAt'),
+                              InputProps: {
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <MdiIcon path="schedule" />
+                                  </InputAdornment>
+                                ),
+                              },
+                            },
+                          }}
+                          onError={(newError: DateTimeValidationError, value: any) => {
+                            // https://mui.com/x/react-date-pickers/validation/#show-the-error
+                            setValidation((prevValidation) => {
+                              const copy = new Map<keyof CloseDebateInput, string>(prevValidation);
+                              copy.set(
+                                'closeAt',
+                                newError === 'invalidDate'
+                                  ? (t('judo.error.validation-failed.PATTERN_VALIDATION_FAILED', {
+                                      defaultValue: 'Value does not match the pattern requirements.',
+                                    }) as string)
+                                  : '',
+                              );
+                              return copy;
+                            });
+                          }}
+                          views={['year', 'month', 'day', 'hours', 'minutes', 'seconds']}
                           label={
                             t('edemokracia.admin.Debate.closeDebate.TransferObject.Form.debate.debate.closeAt', {
                               defaultValue: 'Vote close at',
@@ -301,16 +334,9 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
                           }
                           value={serviceDateToUiDate(data.closeAt ?? null)}
                           disabled={false || !isFormUpdateable()}
-                          onChange={(newValue: any) => {
+                          onChange={(newValue: Date) => {
                             setEditMode(true);
                             storeDiff('closeAt', newValue);
-                          }}
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <MdiIcon path="schedule" />
-                              </InputAdornment>
-                            ),
                           }}
                         />
                       </Grid>

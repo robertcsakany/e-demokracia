@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.dashboardhome#Dashboard
 // Page owner name: edemokracia::admin::Admin
@@ -20,7 +20,7 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridToolbarContainer,
@@ -146,13 +146,21 @@ export default function AdminAdminDashboardhomeDashboard() {
   );
   const storeDiff: (attributeName: keyof AdminDashboardStored, value: any) => void = useCallback(
     (attributeName: keyof AdminDashboardStored, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = [];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<keyof AdminDashboardStored, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminDashboard, string>>(new Map());
   const [debatesSortModel, setDebatesSortModel] = useState<GridSortModel>([{ field: 'title', sort: 'asc' }]);
   const [issuesSortModel, setIssuesSortModel] = useState<GridSortModel>([{ field: 'title', sort: 'asc' }]);
 
@@ -292,7 +300,7 @@ export default function AdminAdminDashboardhomeDashboard() {
   }, [signedIdentifier]);
 
   useEffect(() => {
-    setValidation(new Map<keyof AdminDashboardStored, string>());
+    setValidation(new Map<keyof AdminDashboard, string>());
   }, [editMode]);
 
   return (
@@ -319,9 +327,11 @@ export default function AdminAdminDashboardhomeDashboard() {
             justifyContent="flex-start"
           >
             <Grid item xs={12} sm={12}>
-              <Typography id="FormattededemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewWelcome">
-                {data.welcome}
-              </Typography>
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <Typography id="FormattededemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewWelcome"></Typography>
+                </Grid>
+              </Grid>
             </Grid>
 
             <Grid item xs={12}>
@@ -403,6 +413,10 @@ export default function AdminAdminDashboardhomeDashboard() {
                           >
                             <DataGrid
                               {...baseTableConfig}
+                              sx={{
+                                // overflow: 'hidden',
+                                display: 'grid',
+                              }}
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.issues ?? []}
@@ -414,7 +428,7 @@ export default function AdminAdminDashboardhomeDashboard() {
                                   { shownActions: 2 },
                                 ),
                               ]}
-                              disableSelectionOnClick
+                              disableRowSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminIssueStored>) => {
                                 if (!editMode) {
                                   rowViewIssuesAction(data, params.row);
@@ -467,6 +481,10 @@ export default function AdminAdminDashboardhomeDashboard() {
                           >
                             <DataGrid
                               {...baseTableConfig}
+                              sx={{
+                                // overflow: 'hidden',
+                                display: 'grid',
+                              }}
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.debates ?? []}
@@ -478,7 +496,7 @@ export default function AdminAdminDashboardhomeDashboard() {
                                   { shownActions: 2 },
                                 ),
                               ]}
-                              disableSelectionOnClick
+                              disableRowSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminDebateStored>) => {
                                 if (!editMode) {
                                   rowViewDebatesAction(data, params.row);

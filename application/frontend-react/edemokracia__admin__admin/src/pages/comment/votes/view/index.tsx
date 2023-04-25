@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::Comment.votes#View
 // Page owner name: edemokracia::admin::Admin
@@ -19,7 +19,7 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridValueFormatterParams,
@@ -102,13 +102,21 @@ export default function CommentVotesView() {
   );
   const storeDiff: (attributeName: keyof SimpleVoteStored, value: any) => void = useCallback(
     (attributeName: keyof SimpleVoteStored, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = ['created'];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<keyof SimpleVoteStored, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof SimpleVote, string>>(new Map());
 
   const title: string = t('edemokracia.Comment.votes.View', { defaultValue: 'Entity View' });
 
@@ -155,7 +163,7 @@ export default function CommentVotesView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<keyof SimpleVoteStored, string>());
+    setValidation(new Map<keyof SimpleVote, string>());
   }, [editMode]);
 
   return (

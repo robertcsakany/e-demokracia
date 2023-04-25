@@ -512,7 +512,7 @@ load_application_image () {
 
 build () {
     echo "Building version ${FULL_VERSION_NUMBER}"
-    [ $skipModel -eq 1 ] || ${APP_DIR}/mvnw clean install -f $MODEL_DIR|| exit
+    [ $skipModel -eq 1 ] || ${APP_DIR}/mvnw install -f $MODEL_DIR|| exit
 
     if [ $skipBackend -eq 1 -a $skipFrontend -eq 0 ]; then
         [ $skipReact -eq 1 ] || ${APP_DIR}/mvnw install -f ${APP_DIR}/frontend-react || exit

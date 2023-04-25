@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::County.cities#View
 // Page owner name: edemokracia::admin::Admin
@@ -20,7 +20,7 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridToolbarContainer,
@@ -114,10 +114,10 @@ export default function AdminCountyCitiesView() {
   const handleFetchError = useErrorHandler(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
   );
-  const handleUpdateError = useErrorHandler<AdminCityStored>(
+  const handleUpdateError = useErrorHandler<AdminCity>(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminCountyCitiesView))`,
   );
-  const handleDeleteError = useErrorHandler<AdminCityStored>(
+  const handleDeleteError = useErrorHandler<AdminCity>(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Delete)(component=AdminCountyCitiesView))`,
   );
   const { enqueueSnackbar } = useSnackbar();
@@ -128,13 +128,21 @@ export default function AdminCountyCitiesView() {
   );
   const storeDiff: (attributeName: keyof AdminCityStored, value: any) => void = useCallback(
     (attributeName: keyof AdminCityStored, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = [];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<keyof AdminCityStored, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminCity, string>>(new Map());
   const [districtsSortModel, setDistrictsSortModel] = useState<GridSortModel>([{ field: 'name', sort: 'asc' }]);
 
   const districtsRowActions: TableRowAction<AdminDistrictStored>[] = [
@@ -222,7 +230,7 @@ export default function AdminCountyCitiesView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<keyof AdminCityStored, string>());
+    setValidation(new Map<keyof AdminCity, string>());
   }, [editMode]);
 
   return (
@@ -352,6 +360,10 @@ export default function AdminCountyCitiesView() {
                   >
                     <DataGrid
                       {...baseTableConfig}
+                      sx={{
+                        // overflow: 'hidden',
+                        display: 'grid',
+                      }}
                       getRowId={(row: { __identifier: string }) => row.__identifier}
                       loading={isLoading}
                       rows={data?.districts ?? []}
@@ -363,7 +375,7 @@ export default function AdminCountyCitiesView() {
                           { shownActions: 2 },
                         ),
                       ]}
-                      disableSelectionOnClick
+                      disableRowSelectionOnClick
                       onRowClick={(params: GridRowParams<AdminDistrictStored>) => {
                         if (!editMode) {
                           rowViewDistrictsAction(data, params.row);

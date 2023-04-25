@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::CreateIssueInput.issueType#View
 // Page owner name: edemokracia::admin::Admin
@@ -13,13 +13,13 @@
 
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Container, Grid, Button, Card, CardContent, InputAdornment, TextField } from '@mui/material';
+import { Box, Container, Grid, Button, Card, CardContent, InputAdornment, MenuItem, TextField } from '@mui/material';
 import {
   GridColDef,
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridValueFormatterParams,
@@ -62,6 +62,7 @@ import { useL10N } from '../../../../../l10n/l10n-context';
 import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../../custom';
 import {
   AdminCreateIssueInput,
+  EdemokraciaVoteType,
   AdminIssueType,
   AdminIssueTypeQueryCustomizer,
   AdminIssueTypeStored,
@@ -101,13 +102,21 @@ export default function AdminCreateIssueInputIssueTypeView() {
   );
   const storeDiff: (attributeName: keyof AdminIssueTypeStored, value: any) => void = useCallback(
     (attributeName: keyof AdminIssueTypeStored, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = [];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<keyof AdminIssueTypeStored, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminIssueType, string>>(new Map());
 
   const title: string = t('edemokracia.admin.CreateIssueInput.issueType.View', {
     defaultValue: 'Issue Type View/Edit',
@@ -156,7 +165,7 @@ export default function AdminCreateIssueInputIssueTypeView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<keyof AdminIssueTypeStored, string>());
+    setValidation(new Map<keyof AdminIssueType, string>());
   }, [editMode]);
 
   return (
@@ -189,36 +198,6 @@ export default function AdminCreateIssueInputIssueTypeView() {
                     <Grid item xs={12} sm={12}>
                       <TextField
                         required
-                        name="description"
-                        id="TextInputedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputIssueTypeViewDefaultIssueTypeViewGroupDescription"
-                        label={
-                          t('edemokracia.admin.CreateIssueInput.issueType.IssueType.View.group.description', {
-                            defaultValue: 'Description',
-                          }) as string
-                        }
-                        value={data.description}
-                        className={!editMode ? 'JUDO-viewMode' : undefined}
-                        disabled={false || !isFormUpdateable()}
-                        error={!!validation.get('description')}
-                        helperText={validation.get('description')}
-                        onChange={(event) => {
-                          setEditMode(true);
-                          storeDiff('description', event.target.value);
-                        }}
-                        InputLabelProps={{ shrink: true }}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <MdiIcon path="text_fields" />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    </Grid>
-
-                    <Grid item xs={12} sm={12}>
-                      <TextField
-                        required
                         name="title"
                         id="TextInputedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputIssueTypeViewDefaultIssueTypeViewGroupTitle"
                         label={
@@ -234,6 +213,93 @@ export default function AdminCreateIssueInputIssueTypeView() {
                         onChange={(event) => {
                           setEditMode(true);
                           storeDiff('title', event.target.value);
+                        }}
+                        InputLabelProps={{ shrink: true }}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <MdiIcon path="text_fields" />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                      <TextField
+                        name="voteType"
+                        id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputIssueTypeViewDefaultIssueTypeViewGroupVoteType"
+                        label={
+                          t('edemokracia.admin.CreateIssueInput.issueType.IssueType.View.group.voteType', {
+                            defaultValue: 'VoteType',
+                          }) as string
+                        }
+                        value={data.voteType || ''}
+                        className={!editMode ? 'JUDO-viewMode' : undefined}
+                        disabled={false || !isFormUpdateable()}
+                        error={!!validation.get('voteType')}
+                        helperText={validation.get('voteType')}
+                        onChange={(event) => {
+                          setEditMode(true);
+                          storeDiff('voteType', event.target.value as EdemokraciaVoteType);
+                        }}
+                        InputLabelProps={{ shrink: true }}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <MdiIcon path="list" />
+                            </InputAdornment>
+                          ),
+                        }}
+                        select
+                      >
+                        <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeYESNO" value={'YES_NO'}>
+                          {t('enumerations.EdemokraciaVoteType.YES_NO', { defaultValue: 'YES_NO' })}
+                        </MenuItem>
+                        <MenuItem
+                          id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeYESNOABSTAIN"
+                          value={'YES_NO_ABSTAIN'}
+                        >
+                          {t('enumerations.EdemokraciaVoteType.YES_NO_ABSTAIN', { defaultValue: 'YES_NO_ABSTAIN' })}
+                        </MenuItem>
+                        <MenuItem
+                          id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeSELECTANSWER"
+                          value={'SELECT_ANSWER'}
+                        >
+                          {t('enumerations.EdemokraciaVoteType.SELECT_ANSWER', { defaultValue: 'SELECT_ANSWER' })}
+                        </MenuItem>
+                        <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeRATE" value={'RATE'}>
+                          {t('enumerations.EdemokraciaVoteType.RATE', { defaultValue: 'RATE' })}
+                        </MenuItem>
+                        <MenuItem
+                          id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeNOVOTE"
+                          value={'NO_VOTE'}
+                        >
+                          {t('enumerations.EdemokraciaVoteType.NO_VOTE', { defaultValue: 'NO_VOTE' })}
+                        </MenuItem>
+                      </TextField>
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                      <TextField
+                        required
+                        name="description"
+                        id="TextAreaedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputIssueTypeViewDefaultIssueTypeViewGroupDescription"
+                        label={
+                          t('edemokracia.admin.CreateIssueInput.issueType.IssueType.View.group.description', {
+                            defaultValue: 'Description',
+                          }) as string
+                        }
+                        value={data.description}
+                        className={!editMode ? 'JUDO-viewMode' : undefined}
+                        disabled={false || !isFormUpdateable()}
+                        multiline
+                        minRows={4.0}
+                        error={!!validation.get('description')}
+                        helperText={validation.get('description')}
+                        onChange={(event) => {
+                          setEditMode(true);
+                          storeDiff('description', event.target.value);
                         }}
                         InputLabelProps={{ shrink: true }}
                         InputProps={{

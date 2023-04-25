@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::User.activityDistricts#View
 // Page owner name: edemokracia::admin::Admin
@@ -19,7 +19,7 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridValueFormatterParams,
@@ -94,7 +94,7 @@ export default function AdminUserActivityDistrictsView() {
   const handleFetchError = useErrorHandler(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
   );
-  const handleUpdateError = useErrorHandler<AdminDistrictStored>(
+  const handleUpdateError = useErrorHandler<AdminDistrict>(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminUserActivityDistrictsView))`,
   );
   const { enqueueSnackbar } = useSnackbar();
@@ -105,13 +105,21 @@ export default function AdminUserActivityDistrictsView() {
   );
   const storeDiff: (attributeName: keyof AdminDistrictStored, value: any) => void = useCallback(
     (attributeName: keyof AdminDistrictStored, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = [];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<keyof AdminDistrictStored, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminDistrict, string>>(new Map());
 
   const title: string = data.representation as string;
 
@@ -175,7 +183,7 @@ export default function AdminUserActivityDistrictsView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<keyof AdminDistrictStored, string>());
+    setValidation(new Map<keyof AdminDistrict, string>());
   }, [editMode]);
 
   return (

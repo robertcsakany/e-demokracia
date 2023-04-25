@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Dashboard.createUser#Output
 // Page owner name: edemokracia::admin::Admin
@@ -34,13 +34,13 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridToolbarContainer,
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
-import { DateTimePicker } from '@mui/x-date-pickers';
+import { DateTimePicker, DateTimeValidationError } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
@@ -130,7 +130,7 @@ export default function AdminDashboardCreateuserOutput() {
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<keyof AdminUserStored, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminUser, string>>(new Map());
   const { signedIdentifier } = useParams();
   const [data, setData] = useState<AdminUserStored>({} as unknown as AdminUserStored);
   const [payloadDiff, setPayloadDiff] = useState<Record<keyof AdminUserStored, any>>(
@@ -138,7 +138,15 @@ export default function AdminDashboardCreateuserOutput() {
   );
   const storeDiff: (attributeName: keyof AdminUserStored, value: any) => void = useCallback(
     (attributeName: keyof AdminUserStored, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = ['created'];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -195,7 +203,7 @@ export default function AdminDashboardCreateuserOutput() {
       filterOptions: activityCitiesRangeFilterOptions,
       initialQueryCustomizer: activityCitiesInitialQueryCustomizer,
     });
-  const [activityCitiesSelectionModel, setActivityCitiesSelectionModel] = useState<GridSelectionModel>([]);
+  const [activityCitiesSelectionModel, setActivityCitiesSelectionModel] = useState<GridRowSelectionModel>([]);
   const [activityDistrictsSortModel, setActivityDistrictsSortModel] = useState<GridSortModel>([
     { field: 'representation', sort: 'asc' },
   ]);
@@ -211,7 +219,7 @@ export default function AdminDashboardCreateuserOutput() {
       filterOptions: activityDistrictsRangeFilterOptions,
       initialQueryCustomizer: activityDistrictsInitialQueryCustomizer,
     });
-  const [activityDistrictsSelectionModel, setActivityDistrictsSelectionModel] = useState<GridSelectionModel>([]);
+  const [activityDistrictsSelectionModel, setActivityDistrictsSelectionModel] = useState<GridRowSelectionModel>([]);
   const [activityCountiesSortModel, setActivityCountiesSortModel] = useState<GridSortModel>([
     { field: 'representation', sort: 'asc' },
   ]);
@@ -227,7 +235,7 @@ export default function AdminDashboardCreateuserOutput() {
       filterOptions: activityCountiesRangeFilterOptions,
       initialQueryCustomizer: activityCountiesInitialQueryCustomizer,
     });
-  const [activityCountiesSelectionModel, setActivityCountiesSelectionModel] = useState<GridSelectionModel>([]);
+  const [activityCountiesSelectionModel, setActivityCountiesSelectionModel] = useState<GridRowSelectionModel>([]);
   const activityCitiesRowActions: TableRowAction<AdminCityStored>[] = [
     {
       id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserActivityCities-remove',
@@ -319,7 +327,7 @@ export default function AdminDashboardCreateuserOutput() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<keyof AdminUserStored, string>());
+    setValidation(new Map<keyof AdminUser, string>());
   }, [editMode]);
 
   return (
@@ -430,15 +438,37 @@ export default function AdminDashboardCreateuserOutput() {
                           <DateTimePicker
                             ampm={false}
                             ampmInClock={false}
-                            renderInput={(props: any) => (
-                              <TextField
-                                {...props}
-                                id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserOutputDefaultUserViewSecurityLabelWrapperSecurityCreated"
-                                className={!editMode ? 'JUDO-viewMode' : undefined}
-                                error={!!validation.get('created')}
-                                helperText={validation.get('created')}
-                              />
-                            )}
+                            className={!editMode ? 'JUDO-viewMode' : undefined}
+                            slotProps={{
+                              textField: {
+                                id: 'DateTimeInputedemokraciaAdminAdminEdemokraciaAdminDashboardCreateUserOutputDefaultUserViewSecurityLabelWrapperSecurityCreated',
+                                helperText: validation.get('created'),
+                                error: !!validation.get('created'),
+                                InputProps: {
+                                  startAdornment: (
+                                    <InputAdornment position="start">
+                                      <MdiIcon path="schedule" />
+                                    </InputAdornment>
+                                  ),
+                                },
+                              },
+                            }}
+                            onError={(newError: DateTimeValidationError, value: any) => {
+                              // https://mui.com/x/react-date-pickers/validation/#show-the-error
+                              setValidation((prevValidation) => {
+                                const copy = new Map<keyof AdminUser, string>(prevValidation);
+                                copy.set(
+                                  'created',
+                                  newError === 'invalidDate'
+                                    ? (t('judo.error.validation-failed.PATTERN_VALIDATION_FAILED', {
+                                        defaultValue: 'Value does not match the pattern requirements.',
+                                      }) as string)
+                                    : '',
+                                );
+                                return copy;
+                              });
+                            }}
+                            views={['year', 'month', 'day', 'hours', 'minutes', 'seconds']}
                             label={
                               t('edemokracia.admin.Dashboard.createUser.User.View.Security.Security.created', {
                                 defaultValue: 'Created',
@@ -446,16 +476,9 @@ export default function AdminDashboardCreateuserOutput() {
                             }
                             value={serviceDateToUiDate(data.created ?? null)}
                             disabled={false || !isFormUpdateable()}
-                            onChange={(newValue: any) => {
+                            onChange={(newValue: Date) => {
                               setEditMode(true);
                               storeDiff('created', newValue);
-                            }}
-                            InputProps={{
-                              startAdornment: (
-                                <InputAdornment position="start">
-                                  <MdiIcon path="schedule" />
-                                </InputAdornment>
-                              ),
                             }}
                           />
                         </Grid>
@@ -813,6 +836,10 @@ export default function AdminDashboardCreateuserOutput() {
                                       >
                                         <DataGrid
                                           {...baseTableConfig}
+                                          sx={{
+                                            // overflow: 'hidden',
+                                            display: 'grid',
+                                          }}
                                           getRowId={(row: { __identifier: string }) => row.__identifier}
                                           loading={isLoading}
                                           rows={data?.activityCounties ?? []}
@@ -824,7 +851,7 @@ export default function AdminDashboardCreateuserOutput() {
                                               { shownActions: 2 },
                                             ),
                                           ]}
-                                          disableSelectionOnClick
+                                          disableRowSelectionOnClick
                                           onRowClick={(params: GridRowParams<AdminCountyStored>) => {
                                             if (!editMode) {
                                               rowViewActivityCountiesAction(data, params.row);
@@ -877,6 +904,10 @@ export default function AdminDashboardCreateuserOutput() {
                                       >
                                         <DataGrid
                                           {...baseTableConfig}
+                                          sx={{
+                                            // overflow: 'hidden',
+                                            display: 'grid',
+                                          }}
                                           getRowId={(row: { __identifier: string }) => row.__identifier}
                                           loading={isLoading}
                                           rows={data?.activityCities ?? []}
@@ -888,7 +919,7 @@ export default function AdminDashboardCreateuserOutput() {
                                               { shownActions: 2 },
                                             ),
                                           ]}
-                                          disableSelectionOnClick
+                                          disableRowSelectionOnClick
                                           onRowClick={(params: GridRowParams<AdminCityStored>) => {
                                             if (!editMode) {
                                               rowViewActivityCitiesAction(data, params.row);
@@ -941,6 +972,10 @@ export default function AdminDashboardCreateuserOutput() {
                                       >
                                         <DataGrid
                                           {...baseTableConfig}
+                                          sx={{
+                                            // overflow: 'hidden',
+                                            display: 'grid',
+                                          }}
                                           getRowId={(row: { __identifier: string }) => row.__identifier}
                                           loading={isLoading}
                                           rows={data?.activityDistricts ?? []}
@@ -952,7 +987,7 @@ export default function AdminDashboardCreateuserOutput() {
                                               { shownActions: 2 },
                                             ),
                                           ]}
-                                          disableSelectionOnClick
+                                          disableRowSelectionOnClick
                                           onRowClick={(params: GridRowParams<AdminDistrictStored>) => {
                                             if (!editMode) {
                                               rowViewActivityDistrictsAction(data, params.row);

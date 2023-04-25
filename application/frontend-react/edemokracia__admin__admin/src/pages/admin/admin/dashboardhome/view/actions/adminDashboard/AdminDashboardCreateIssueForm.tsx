@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,7 +12,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CallOperationAction
 
@@ -32,12 +32,13 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { DateTimePicker, DateTimeValidationError } from '@mui/x-date-pickers';
 import {
   GridColDef,
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridValueFormatterParams,
@@ -122,12 +123,20 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
   const [data, setData] = useState<AdminCreateIssueInput>({} as unknown as AdminCreateIssueInput);
   const [validation, setValidation] = useState<Map<keyof AdminCreateIssueInput, string>>(new Map());
   const [editMode, setEditMode] = useState<boolean>(true);
-  const [payloadDiff] = useState<Record<keyof AdminCreateIssueInput, any>>(
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof AdminCreateIssueInput, any>>(
     {} as unknown as Record<keyof AdminCreateIssueInput, any>,
   );
   const storeDiff: (attributeName: keyof AdminCreateIssueInput, value: any) => void = useCallback(
     (attributeName: keyof AdminCreateIssueInput, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = ['debateCloseAt'];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -216,7 +225,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       filterOptions: cityRangeFilterOptions,
       initialQueryCustomizer: cityInitialQueryCustomizer,
     });
-  const [citySelectionModel, setCitySelectionModel] = useState<GridSelectionModel>([]);
+  const [citySelectionModel, setCitySelectionModel] = useState<GridRowSelectionModel>([]);
   const [countySortModel, setCountySortModel] = useState<GridSortModel>([{ field: 'representation', sort: 'asc' }]);
 
   const countyColumns: GridColDef<AdminCountyStored>[] = [
@@ -283,7 +292,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       filterOptions: countyRangeFilterOptions,
       initialQueryCustomizer: countyInitialQueryCustomizer,
     });
-  const [countySelectionModel, setCountySelectionModel] = useState<GridSelectionModel>([]);
+  const [countySelectionModel, setCountySelectionModel] = useState<GridRowSelectionModel>([]);
   const [districtSortModel, setDistrictSortModel] = useState<GridSortModel>([{ field: 'representation', sort: 'asc' }]);
 
   const districtColumns: GridColDef<AdminDistrictStored>[] = [
@@ -385,7 +394,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       filterOptions: districtRangeFilterOptions,
       initialQueryCustomizer: districtInitialQueryCustomizer,
     });
-  const [districtSelectionModel, setDistrictSelectionModel] = useState<GridSelectionModel>([]);
+  const [districtSelectionModel, setDistrictSelectionModel] = useState<GridRowSelectionModel>([]);
   const [issueTypeSortModel, setIssueTypeSortModel] = useState<GridSortModel>([
     { field: 'representation', sort: 'asc' },
   ]);
@@ -473,7 +482,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       filterOptions: issueTypeRangeFilterOptions,
       initialQueryCustomizer: issueTypeInitialQueryCustomizer,
     });
-  const [issueTypeSelectionModel, setIssueTypeSelectionModel] = useState<GridSelectionModel>([]);
+  const [issueTypeSelectionModel, setIssueTypeSelectionModel] = useState<GridRowSelectionModel>([]);
 
   const isFormUpdateable = useCallback(() => {
     return true;
@@ -489,6 +498,9 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
     try {
       const res = await adminCreateIssueInputServiceImpl.getTemplate();
       setData(res);
+      setPayloadDiff({
+        ...res,
+      } as Record<keyof AdminCreateIssueInput, any>);
     } catch (e) {
       handleFetchError(e);
     } finally {
@@ -505,7 +517,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
     setIsLoading(true);
 
     try {
-      const res = await adminDashboardServiceImpl.createIssue(data);
+      const res = await adminDashboardServiceImpl.createIssue(payloadDiff);
 
       if (res) {
         successCallback(res);
@@ -640,6 +652,56 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
                                 <MdiIcon path="text_fields" />
                               </InputAdornment>
                             ),
+                          }}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} sm={12} md={4.0}>
+                        <DateTimePicker
+                          ampm={false}
+                          ampmInClock={false}
+                          className={!editMode ? 'JUDO-viewMode' : undefined}
+                          slotProps={{
+                            textField: {
+                              id: 'DateTimeInputedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueDebateCloseAt',
+                              helperText: validation.get('debateCloseAt'),
+                              error: !!validation.get('debateCloseAt'),
+                              InputProps: {
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <MdiIcon path="schedule" />
+                                  </InputAdornment>
+                                ),
+                              },
+                            },
+                          }}
+                          onError={(newError: DateTimeValidationError, value: any) => {
+                            // https://mui.com/x/react-date-pickers/validation/#show-the-error
+                            setValidation((prevValidation) => {
+                              const copy = new Map<keyof AdminCreateIssueInput, string>(prevValidation);
+                              copy.set(
+                                'debateCloseAt',
+                                newError === 'invalidDate'
+                                  ? (t('judo.error.validation-failed.PATTERN_VALIDATION_FAILED', {
+                                      defaultValue: 'Value does not match the pattern requirements.',
+                                    }) as string)
+                                  : '',
+                              );
+                              return copy;
+                            });
+                          }}
+                          views={['year', 'month', 'day', 'hours', 'minutes', 'seconds']}
+                          label={
+                            t(
+                              'edemokracia.admin.Dashboard.createIssue.CreateIssueInput.Form.issue.issue.debateCloseAt',
+                              { defaultValue: 'Debate close at' },
+                            ) as string
+                          }
+                          value={serviceDateToUiDate(data.debateCloseAt ?? null)}
+                          disabled={false || !isFormUpdateable()}
+                          onChange={(newValue: Date) => {
+                            setEditMode(true);
+                            storeDiff('debateCloseAt', newValue);
                           }}
                         />
                       </Grid>

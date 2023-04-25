@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,7 +12,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CallOperationAction
 
@@ -34,7 +34,7 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridValueFormatterParams,
@@ -105,12 +105,20 @@ export function AdminVoteDefinitionVoteRatingForm({
   const [data, setData] = useState<RatingVoteInput>({} as unknown as RatingVoteInput);
   const [validation, setValidation] = useState<Map<keyof RatingVoteInput, string>>(new Map());
   const [editMode, setEditMode] = useState<boolean>(true);
-  const [payloadDiff] = useState<Record<keyof RatingVoteInput, any>>(
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof RatingVoteInput, any>>(
     {} as unknown as Record<keyof RatingVoteInput, any>,
   );
   const storeDiff: (attributeName: keyof RatingVoteInput, value: any) => void = useCallback(
     (attributeName: keyof RatingVoteInput, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = [];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -131,6 +139,9 @@ export function AdminVoteDefinitionVoteRatingForm({
     try {
       const res = await ratingVoteInputServiceImpl.getTemplate();
       setData(res);
+      setPayloadDiff({
+        ...res,
+      } as Record<keyof RatingVoteInput, any>);
     } catch (e) {
       handleFetchError(e);
     } finally {
@@ -147,7 +158,7 @@ export function AdminVoteDefinitionVoteRatingForm({
     setIsLoading(true);
 
     try {
-      await adminVoteDefinitionServiceImpl.voteRating(owner, data);
+      await adminVoteDefinitionServiceImpl.voteRating(owner, payloadDiff);
 
       successCallback();
     } catch (error) {

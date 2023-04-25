@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,7 +12,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CreateAction
 
@@ -29,6 +29,7 @@ import {
   DialogTitle,
   IconButton,
   InputAdornment,
+  MenuItem,
   TextField,
 } from '@mui/material';
 import {
@@ -36,7 +37,7 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridValueFormatterParams,
@@ -58,6 +59,7 @@ import {
 } from '../../../../../../components/widgets';
 import { FilterOption, FilterType } from '../../../../../../components-api';
 import {
+  EdemokraciaVoteType,
   AdminIssueType,
   AdminIssueTypeQueryCustomizer,
   AdminIssueTypeStored,
@@ -102,10 +104,20 @@ export function PageCreateIssueTypesForm({ successCallback, cancel }: PageCreate
   } as unknown as AdminIssueType);
   const [validation, setValidation] = useState<Map<keyof AdminIssueType, string>>(new Map());
   const [editMode, setEditMode] = useState<boolean>(true);
-  const [payloadDiff] = useState<Record<keyof AdminIssueType, any>>({} as unknown as Record<keyof AdminIssueType, any>);
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof AdminIssueType, any>>(
+    {} as unknown as Record<keyof AdminIssueType, any>,
+  );
   const storeDiff: (attributeName: keyof AdminIssueType, value: any) => void = useCallback(
     (attributeName: keyof AdminIssueType, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = [];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -126,6 +138,9 @@ export function PageCreateIssueTypesForm({ successCallback, cancel }: PageCreate
     try {
       const res = await adminIssueTypeServiceImpl.getTemplate();
       setData((prevData) => ({ ...prevData, ...res }));
+      setPayloadDiff({
+        ...res,
+      } as Record<keyof AdminIssueType, any>);
     } catch (error) {
       handleFetchError(error);
     } finally {
@@ -141,7 +156,7 @@ export function PageCreateIssueTypesForm({ successCallback, cancel }: PageCreate
     setIsLoading(true);
 
     try {
-      const res = await adminAdminServiceForIssueTypesImpl.createIssueTypes(data);
+      const res = await adminAdminServiceForIssueTypesImpl.createIssueTypes(payloadDiff);
 
       if (res) {
         successCallback(res);
@@ -210,9 +225,61 @@ export function PageCreateIssueTypesForm({ successCallback, cancel }: PageCreate
 
                   <Grid item xs={12} sm={12}>
                     <TextField
+                      name="voteType"
+                      id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminAdminIssueTypesCreateDefaultIssueTypeFormGroupVoteType"
+                      label={
+                        t('edemokracia.admin.Admin.issueTypes.IssueType.Form.group.voteType', {
+                          defaultValue: 'VoteType',
+                        }) as string
+                      }
+                      value={data.voteType || ''}
+                      className={!editMode ? 'JUDO-viewMode' : undefined}
+                      disabled={false || !isFormUpdateable()}
+                      error={!!validation.get('voteType')}
+                      helperText={validation.get('voteType')}
+                      onChange={(event) => {
+                        setEditMode(true);
+                        storeDiff('voteType', event.target.value as EdemokraciaVoteType);
+                      }}
+                      InputLabelProps={{ shrink: true }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <MdiIcon path="list" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      select
+                    >
+                      <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeYESNO" value={'YES_NO'}>
+                        {t('enumerations.EdemokraciaVoteType.YES_NO', { defaultValue: 'YES_NO' })}
+                      </MenuItem>
+                      <MenuItem
+                        id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeYESNOABSTAIN"
+                        value={'YES_NO_ABSTAIN'}
+                      >
+                        {t('enumerations.EdemokraciaVoteType.YES_NO_ABSTAIN', { defaultValue: 'YES_NO_ABSTAIN' })}
+                      </MenuItem>
+                      <MenuItem
+                        id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeSELECTANSWER"
+                        value={'SELECT_ANSWER'}
+                      >
+                        {t('enumerations.EdemokraciaVoteType.SELECT_ANSWER', { defaultValue: 'SELECT_ANSWER' })}
+                      </MenuItem>
+                      <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeRATE" value={'RATE'}>
+                        {t('enumerations.EdemokraciaVoteType.RATE', { defaultValue: 'RATE' })}
+                      </MenuItem>
+                      <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeNOVOTE" value={'NO_VOTE'}>
+                        {t('enumerations.EdemokraciaVoteType.NO_VOTE', { defaultValue: 'NO_VOTE' })}
+                      </MenuItem>
+                    </TextField>
+                  </Grid>
+
+                  <Grid item xs={12} sm={12}>
+                    <TextField
                       required
                       name="description"
-                      id="TextInputedemokraciaAdminAdminEdemokraciaAdminAdminIssueTypesCreateDefaultIssueTypeFormGroupDescription"
+                      id="TextAreaedemokraciaAdminAdminEdemokraciaAdminAdminIssueTypesCreateDefaultIssueTypeFormGroupDescription"
                       label={
                         t('edemokracia.admin.Admin.issueTypes.IssueType.Form.group.description', {
                           defaultValue: 'Description',
@@ -221,6 +288,8 @@ export function PageCreateIssueTypesForm({ successCallback, cancel }: PageCreate
                       value={data.description}
                       className={!editMode ? 'JUDO-viewMode' : undefined}
                       disabled={false || !isFormUpdateable()}
+                      multiline
+                      minRows={4.0}
                       error={!!validation.get('description')}
                       helperText={validation.get('description')}
                       onChange={(event) => {

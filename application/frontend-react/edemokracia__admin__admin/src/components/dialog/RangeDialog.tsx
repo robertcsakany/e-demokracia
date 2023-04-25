@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/components/dialog/RangeDialog.tsx'
 // Template name: actor/src/components/dialog/RangeDialog.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/components/dialog/RangeDialog.tsx.hbs
 
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material';
@@ -13,9 +13,9 @@ import {
   GridRowModel,
   DataGrid,
   GridRowParams,
-  GridColumns,
+  GridColDef,
   GridSortItem,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridToolbarContainer,
   GridRowId,
 } from '@mui/x-data-grid';
@@ -41,10 +41,10 @@ interface RangeDialogProps<T extends JudoStored<T>, U extends QueryCustomizer<T>
   open: boolean;
   handleClose: () => void;
   single?: boolean;
-  columns: GridColumns<T>;
+  columns: GridColDef<T>[];
   defaultSortField: GridSortItem;
   rangeCall: (queryCustomizer: U) => Promise<Array<T>>;
-  alreadySelectedItems: GridSelectionModel | GridRowId;
+  alreadySelectedItems: GridRowSelectionModel | GridRowId;
   initalQueryCustomizer: U;
   filterOptions: FilterOption[];
 }
@@ -77,7 +77,7 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
   const [isNextButtonEnabled, setIsNextButtonEnabled] = useState<boolean>(true);
   const [page, setPage] = useState<number>(0);
   const [data, setData] = useState<GridRowModel<T>[]>([]);
-  const [selectionModel, setSelectionModel] = useState<GridSelectionModel | GridRowId | undefined>(
+  const [selectionModel, setSelectionModel] = useState<GridRowSelectionModel | GridRowId | undefined>(
     single ? undefined : [],
   );
   const [selectedItems, setSelectedItems] = useState<T[] | T | undefined>([]);
@@ -218,7 +218,7 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
     resolve(selectedItems);
   };
 
-  const handleOnSelection = (newSelectionModel: GridSelectionModel) => {
+  const handleOnSelection = (newSelectionModel: GridRowSelectionModel) => {
     if (!Array.isArray(selectionModel)) return;
 
     // added new items
@@ -246,7 +246,7 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
     setSelectionModel(newSelectionModel);
   };
 
-  const handleSingleOnSelection = (newSelectionModel: GridSelectionModel) => {
+  const handleSingleOnSelection = (newSelectionModel: GridRowSelectionModel) => {
     if (Array.isArray(selectionModel)) return;
 
     if (newSelectionModel.length === 0) {
@@ -276,11 +276,16 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
             sx={
               single
                 ? {
+                    // overflow: 'hidden',
+                    display: 'grid',
                     '.MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer': {
                       display: 'none',
                     },
                   }
-                : {}
+                : {
+                    // overflow: 'hidden',
+                    display: 'grid',
+                  }
             }
             {...serverTableConfig}
             getRowId={(row: T) => row.__identifier as GridRowId}
@@ -290,9 +295,9 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
             sortModel={sortModel}
             onSortModelChange={handleSortModelChange}
             checkboxSelection
-            onSelectionModelChange={!single ? handleOnSelection : handleSingleOnSelection}
+            onRowSelectionModelChange={!single ? handleOnSelection : handleSingleOnSelection}
             isRowSelectable={!single ? handleIsRowSelectable : undefined}
-            selectionModel={selectionModel}
+            rowSelectionModel={selectionModel}
             hideFooterSelectedRowCount={single}
             columns={columns}
             keepNonExistentRowsSelected

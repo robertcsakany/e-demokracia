@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,7 +12,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CreateAction
 
@@ -36,7 +36,7 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridValueFormatterParams,
@@ -98,10 +98,20 @@ export function PageCreateCountiesForm({ successCallback, cancel }: PageCreateCo
   } as unknown as AdminCounty);
   const [validation, setValidation] = useState<Map<keyof AdminCounty, string>>(new Map());
   const [editMode, setEditMode] = useState<boolean>(true);
-  const [payloadDiff] = useState<Record<keyof AdminCounty, any>>({} as unknown as Record<keyof AdminCounty, any>);
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof AdminCounty, any>>(
+    {} as unknown as Record<keyof AdminCounty, any>,
+  );
   const storeDiff: (attributeName: keyof AdminCounty, value: any) => void = useCallback(
     (attributeName: keyof AdminCounty, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = [];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -122,6 +132,9 @@ export function PageCreateCountiesForm({ successCallback, cancel }: PageCreateCo
     try {
       const res = await adminCountyServiceImpl.getTemplate();
       setData((prevData) => ({ ...prevData, ...res }));
+      setPayloadDiff({
+        ...res,
+      } as Record<keyof AdminCounty, any>);
     } catch (error) {
       handleFetchError(error);
     } finally {
@@ -137,7 +150,7 @@ export function PageCreateCountiesForm({ successCallback, cancel }: PageCreateCo
     setIsLoading(true);
 
     try {
-      const res = await adminAdminServiceForCountiesImpl.createCounties(data);
+      const res = await adminAdminServiceForCountiesImpl.createCounties(payloadDiff);
 
       if (res) {
         successCallback(res);

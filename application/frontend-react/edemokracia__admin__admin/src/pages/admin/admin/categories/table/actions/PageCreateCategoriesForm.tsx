@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,7 +12,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CreateAction
 
@@ -36,7 +36,7 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridValueFormatterParams,
@@ -109,12 +109,20 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
   } as unknown as AdminIssueCategory);
   const [validation, setValidation] = useState<Map<keyof AdminIssueCategory, string>>(new Map());
   const [editMode, setEditMode] = useState<boolean>(true);
-  const [payloadDiff] = useState<Record<keyof AdminIssueCategory, any>>(
+  const [payloadDiff, setPayloadDiff] = useState<Record<keyof AdminIssueCategory, any>>(
     {} as unknown as Record<keyof AdminIssueCategory, any>,
   );
   const storeDiff: (attributeName: keyof AdminIssueCategory, value: any) => void = useCallback(
     (attributeName: keyof AdminIssueCategory, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = [];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
@@ -169,7 +177,7 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
       filterOptions: ownerRangeFilterOptions,
       initialQueryCustomizer: ownerInitialQueryCustomizer,
     });
-  const [ownerSelectionModel, setOwnerSelectionModel] = useState<GridSelectionModel>([]);
+  const [ownerSelectionModel, setOwnerSelectionModel] = useState<GridRowSelectionModel>([]);
 
   const isFormUpdateable = useCallback(() => {
     return true;
@@ -185,6 +193,9 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
     try {
       const res = await adminIssueCategoryServiceImpl.getTemplate();
       setData((prevData) => ({ ...prevData, ...res }));
+      setPayloadDiff({
+        ...res,
+      } as Record<keyof AdminIssueCategory, any>);
     } catch (error) {
       handleFetchError(error);
     } finally {
@@ -200,7 +211,7 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
     setIsLoading(true);
 
     try {
-      const res = await adminAdminServiceForCategoriesImpl.createCategories(data);
+      const res = await adminAdminServiceForCategoriesImpl.createCategories(payloadDiff);
 
       if (res) {
         successCallback(res);

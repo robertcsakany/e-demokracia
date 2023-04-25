@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.debates#View
 // Page owner name: edemokracia::admin::Admin
@@ -31,13 +31,13 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridToolbarContainer,
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
-import { DateTimePicker } from '@mui/x-date-pickers';
+import { DateTimePicker, DateTimeValidationError } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { useSnackbar } from 'notistack';
 import { ComponentProxy } from '@pandino/react-hooks';
@@ -198,10 +198,10 @@ export default function AdminAdminDebatesView() {
   const handleFetchError = useErrorHandler(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
   );
-  const handleUpdateError = useErrorHandler<AdminDebateStored>(
+  const handleUpdateError = useErrorHandler<AdminDebate>(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminAdminDebatesView))`,
   );
-  const handleDeleteError = useErrorHandler<AdminDebateStored>(
+  const handleDeleteError = useErrorHandler<AdminDebate>(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Delete)(component=AdminAdminDebatesView))`,
   );
   const { enqueueSnackbar } = useSnackbar();
@@ -212,13 +212,21 @@ export default function AdminAdminDebatesView() {
   );
   const storeDiff: (attributeName: keyof AdminDebateStored, value: any) => void = useCallback(
     (attributeName: keyof AdminDebateStored, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = ['closeAt'];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<keyof AdminDebateStored, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminDebate, string>>(new Map());
   const [consSortModel, setConsSortModel] = useState<GridSortModel>([{ field: 'title', sort: 'asc' }]);
   const [prosSortModel, setProsSortModel] = useState<GridSortModel>([{ field: 'title', sort: 'asc' }]);
   const [commentsSortModel, setCommentsSortModel] = useState<GridSortModel>([{ field: 'created', sort: 'asc' }]);
@@ -407,7 +415,7 @@ export default function AdminAdminDebatesView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<keyof AdminDebateStored, string>());
+    setValidation(new Map<keyof AdminDebate, string>());
   }, [editMode]);
 
   return (
@@ -591,16 +599,37 @@ export default function AdminAdminDebatesView() {
                           <DateTimePicker
                             ampm={false}
                             ampmInClock={false}
-                            renderInput={(props: any) => (
-                              <TextField
-                                required
-                                {...props}
-                                id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminAdminDebatesViewDefaultDebateViewDebateLabelWrapperDebateCloseAt"
-                                className={!editMode ? 'JUDO-viewMode' : undefined}
-                                error={!!validation.get('closeAt')}
-                                helperText={validation.get('closeAt')}
-                              />
-                            )}
+                            className={!editMode ? 'JUDO-viewMode' : undefined}
+                            slotProps={{
+                              textField: {
+                                id: 'DateTimeInputedemokraciaAdminAdminEdemokraciaAdminAdminDebatesViewDefaultDebateViewDebateLabelWrapperDebateCloseAt',
+                                helperText: validation.get('closeAt'),
+                                error: !!validation.get('closeAt'),
+                                InputProps: {
+                                  startAdornment: (
+                                    <InputAdornment position="start">
+                                      <MdiIcon path="schedule" />
+                                    </InputAdornment>
+                                  ),
+                                },
+                              },
+                            }}
+                            onError={(newError: DateTimeValidationError, value: any) => {
+                              // https://mui.com/x/react-date-pickers/validation/#show-the-error
+                              setValidation((prevValidation) => {
+                                const copy = new Map<keyof AdminDebate, string>(prevValidation);
+                                copy.set(
+                                  'closeAt',
+                                  newError === 'invalidDate'
+                                    ? (t('judo.error.validation-failed.PATTERN_VALIDATION_FAILED', {
+                                        defaultValue: 'Value does not match the pattern requirements.',
+                                      }) as string)
+                                    : '',
+                                );
+                                return copy;
+                              });
+                            }}
+                            views={['year', 'month', 'day', 'hours', 'minutes', 'seconds']}
                             label={
                               t('edemokracia.admin.Admin.debates.Debate.View.debate.debate.closeAt', {
                                 defaultValue: 'Close at',
@@ -608,16 +637,9 @@ export default function AdminAdminDebatesView() {
                             }
                             value={serviceDateToUiDate(data.closeAt ?? null)}
                             disabled={false || !isFormUpdateable()}
-                            onChange={(newValue: any) => {
+                            onChange={(newValue: Date) => {
                               setEditMode(true);
                               storeDiff('closeAt', newValue);
-                            }}
-                            InputProps={{
-                              startAdornment: (
-                                <InputAdornment position="start">
-                                  <MdiIcon path="schedule" />
-                                </InputAdornment>
-                              ),
                             }}
                           />
                         </Grid>
@@ -826,6 +848,10 @@ export default function AdminAdminDebatesView() {
                           >
                             <DataGrid
                               {...baseTableConfig}
+                              sx={{
+                                // overflow: 'hidden',
+                                display: 'grid',
+                              }}
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.pros ?? []}
@@ -837,7 +863,7 @@ export default function AdminAdminDebatesView() {
                                   { shownActions: 2 },
                                 ),
                               ]}
-                              disableSelectionOnClick
+                              disableRowSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminProStored>) => {
                                 if (!editMode) {
                                   rowViewProsAction(data, params.row);
@@ -895,6 +921,10 @@ export default function AdminAdminDebatesView() {
                           >
                             <DataGrid
                               {...baseTableConfig}
+                              sx={{
+                                // overflow: 'hidden',
+                                display: 'grid',
+                              }}
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.cons ?? []}
@@ -906,7 +936,7 @@ export default function AdminAdminDebatesView() {
                                   { shownActions: 2 },
                                 ),
                               ]}
-                              disableSelectionOnClick
+                              disableRowSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminConStored>) => {
                                 if (!editMode) {
                                   rowViewConsAction(data, params.row);
@@ -984,6 +1014,10 @@ export default function AdminAdminDebatesView() {
                           >
                             <DataGrid
                               {...baseTableConfig}
+                              sx={{
+                                // overflow: 'hidden',
+                                display: 'grid',
+                              }}
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.comments ?? []}
@@ -995,7 +1029,7 @@ export default function AdminAdminDebatesView() {
                                   { shownActions: 2 },
                                 ),
                               ]}
-                              disableSelectionOnClick
+                              disableRowSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminCommentStored>) => {
                                 if (!editMode) {
                                   rowViewCommentsAction(data, params.row);

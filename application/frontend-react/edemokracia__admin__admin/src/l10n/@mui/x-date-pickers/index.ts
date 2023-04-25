@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/l10n/@mui/x-date-pickers/index.ts'
 // Template name: actor/src/l10n/@mui/x-date-pickers/index.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/l10n/@mui/x-date-pickers/index.ts.hbs
 
 export * from './huHU';

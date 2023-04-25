@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Dashboard.issues#View
 // Page owner name: edemokracia::admin::Admin
@@ -31,13 +31,13 @@ import {
   GridRenderCellParams,
   GridRowId,
   GridRowParams,
-  GridSelectionModel,
+  GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
   GridToolbarContainer,
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
-import { DateTimePicker } from '@mui/x-date-pickers';
+import { DateTimePicker, DateTimeValidationError } from '@mui/x-date-pickers';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { ComponentProxy } from '@pandino/react-hooks';
 import { useParams } from 'react-router-dom';
@@ -78,6 +78,7 @@ import {
   AdminIssueTypeMaskBuilder,
   AdminIssueDebateMaskBuilder,
   AdminIssueDebate,
+  EdemokraciaVoteType,
   AdminCityQueryCustomizer,
   AdminIssueStored,
   AdminDistrictStored,
@@ -211,10 +212,10 @@ export default function AdminDashboardIssuesView() {
   const handleFetchError = useErrorHandler(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
   );
-  const handleUpdateError = useErrorHandler<AdminIssueStored>(
+  const handleUpdateError = useErrorHandler<AdminIssue>(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Update)(component=AdminDashboardIssuesView))`,
   );
-  const handleDeleteError = useErrorHandler<AdminIssueStored>(
+  const handleDeleteError = useErrorHandler<AdminIssue>(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Delete)(component=AdminDashboardIssuesView))`,
   );
   const { enqueueSnackbar } = useSnackbar();
@@ -225,13 +226,21 @@ export default function AdminDashboardIssuesView() {
   );
   const storeDiff: (attributeName: keyof AdminIssueStored, value: any) => void = useCallback(
     (attributeName: keyof AdminIssueStored, value: any) => {
-      payloadDiff[attributeName] = value;
+      const dateTypes: string[] = [];
+      const dateTimeTypes: string[] = [];
+      if (dateTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiDateToServiceDate(value);
+      } else if (dateTimeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = value;
+      } else {
+        payloadDiff[attributeName] = value;
+      }
       setData({ ...data, [attributeName]: value });
     },
     [data],
   );
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [validation, setValidation] = useState<Map<keyof AdminIssueStored, string>>(new Map());
+  const [validation, setValidation] = useState<Map<keyof AdminIssue, string>>(new Map());
   const [attachmentsSortModel, setAttachmentsSortModel] = useState<GridSortModel>([{ field: 'link', sort: 'asc' }]);
   const [categoriesSortModel, setCategoriesSortModel] = useState<GridSortModel>([{ field: 'title', sort: 'asc' }]);
   const categoriesRangeCall = async () =>
@@ -246,7 +255,7 @@ export default function AdminDashboardIssuesView() {
       filterOptions: categoriesRangeFilterOptions,
       initialQueryCustomizer: categoriesInitialQueryCustomizer,
     });
-  const [categoriesSelectionModel, setCategoriesSelectionModel] = useState<GridSelectionModel>([]);
+  const [categoriesSelectionModel, setCategoriesSelectionModel] = useState<GridRowSelectionModel>([]);
   const [commentsSortModel, setCommentsSortModel] = useState<GridSortModel>([{ field: 'comment', sort: 'asc' }]);
   const [debatesSortModel, setDebatesSortModel] = useState<GridSortModel>([{ field: 'title', sort: 'asc' }]);
 
@@ -371,7 +380,7 @@ export default function AdminDashboardIssuesView() {
   }, []);
 
   useEffect(() => {
-    setValidation(new Map<keyof AdminIssueStored, string>());
+    setValidation(new Map<keyof AdminIssue, string>());
   }, [editMode]);
 
   return (
@@ -469,13 +478,13 @@ export default function AdminDashboardIssuesView() {
                         justifyContent="flex-start"
                         spacing={2}
                       >
-                        <Grid item xs={12} sm={12}>
+                        <Grid item xs={12} sm={12} md={8.0}>
                           <AggregationInput
                             name="issueType"
                             id="LinkedemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewIssueLabelWrapperIssueIssueType"
                             label={
                               t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.issueType', {
-                                defaultValue: 'IssueType',
+                                defaultValue: 'Issue Type',
                               }) as string
                             }
                             labelList={[
@@ -515,6 +524,64 @@ export default function AdminDashboardIssuesView() {
                               storeDiff('issueType', res as AdminIssueTypeStored);
                             }}
                           />
+                        </Grid>
+
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <TextField
+                            name="defaultVoteType"
+                            id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewIssueLabelWrapperIssueDefaultVoteType"
+                            label={
+                              t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.defaultVoteType', {
+                                defaultValue: 'Default Vote Type',
+                              }) as string
+                            }
+                            value={data.defaultVoteType || ''}
+                            className={!editMode ? 'JUDO-viewMode' : undefined}
+                            disabled={false || !isFormUpdateable()}
+                            error={!!validation.get('defaultVoteType')}
+                            helperText={validation.get('defaultVoteType')}
+                            onChange={(event) => {
+                              setEditMode(true);
+                              storeDiff('defaultVoteType', event.target.value as EdemokraciaVoteType);
+                            }}
+                            InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              startAdornment: (
+                                <InputAdornment position="start">
+                                  <MdiIcon path="list" />
+                                </InputAdornment>
+                              ),
+                            }}
+                            select
+                          >
+                            <MenuItem
+                              id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeYESNO"
+                              value={'YES_NO'}
+                            >
+                              {t('enumerations.EdemokraciaVoteType.YES_NO', { defaultValue: 'YES_NO' })}
+                            </MenuItem>
+                            <MenuItem
+                              id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeYESNOABSTAIN"
+                              value={'YES_NO_ABSTAIN'}
+                            >
+                              {t('enumerations.EdemokraciaVoteType.YES_NO_ABSTAIN', { defaultValue: 'YES_NO_ABSTAIN' })}
+                            </MenuItem>
+                            <MenuItem
+                              id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeSELECTANSWER"
+                              value={'SELECT_ANSWER'}
+                            >
+                              {t('enumerations.EdemokraciaVoteType.SELECT_ANSWER', { defaultValue: 'SELECT_ANSWER' })}
+                            </MenuItem>
+                            <MenuItem id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeRATE" value={'RATE'}>
+                              {t('enumerations.EdemokraciaVoteType.RATE', { defaultValue: 'RATE' })}
+                            </MenuItem>
+                            <MenuItem
+                              id="EnumerationMemberedemokraciaAdminAdminEdemokraciaVoteTypeNOVOTE"
+                              value={'NO_VOTE'}
+                            >
+                              {t('enumerations.EdemokraciaVoteType.NO_VOTE', { defaultValue: 'NO_VOTE' })}
+                            </MenuItem>
+                          </TextField>
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={4.0}>
@@ -607,15 +674,37 @@ export default function AdminDashboardIssuesView() {
                           <DateTimePicker
                             ampm={false}
                             ampmInClock={false}
-                            renderInput={(props: any) => (
-                              <TextField
-                                {...props}
-                                id="DateTimeInputedemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewIssueLabelWrapperIssueCreated"
-                                className={!editMode ? 'JUDO-viewMode' : undefined}
-                                error={!!validation.get('created')}
-                                helperText={validation.get('created')}
-                              />
-                            )}
+                            className={!editMode ? 'JUDO-viewMode' : undefined}
+                            slotProps={{
+                              textField: {
+                                id: 'DateTimeInputedemokraciaAdminAdminEdemokraciaAdminDashboardIssuesViewDefaultIssueViewIssueLabelWrapperIssueCreated',
+                                helperText: validation.get('created'),
+                                error: !!validation.get('created'),
+                                InputProps: {
+                                  startAdornment: (
+                                    <InputAdornment position="start">
+                                      <MdiIcon path="schedule" />
+                                    </InputAdornment>
+                                  ),
+                                },
+                              },
+                            }}
+                            onError={(newError: DateTimeValidationError, value: any) => {
+                              // https://mui.com/x/react-date-pickers/validation/#show-the-error
+                              setValidation((prevValidation) => {
+                                const copy = new Map<keyof AdminIssue, string>(prevValidation);
+                                copy.set(
+                                  'created',
+                                  newError === 'invalidDate'
+                                    ? (t('judo.error.validation-failed.PATTERN_VALIDATION_FAILED', {
+                                        defaultValue: 'Value does not match the pattern requirements.',
+                                      }) as string)
+                                    : '',
+                                );
+                                return copy;
+                              });
+                            }}
+                            views={['year', 'month', 'day', 'hours', 'minutes', 'seconds']}
                             label={
                               t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.created', {
                                 defaultValue: 'Created',
@@ -623,16 +712,9 @@ export default function AdminDashboardIssuesView() {
                             }
                             value={serviceDateToUiDate(data.created ?? null)}
                             disabled={true || !isFormUpdateable()}
-                            onChange={(newValue: any) => {
+                            onChange={(newValue: Date) => {
                               setEditMode(true);
                               storeDiff('created', newValue);
-                            }}
-                            InputProps={{
-                              startAdornment: (
-                                <InputAdornment position="start">
-                                  <MdiIcon path="schedule" />
-                                </InputAdornment>
-                              ),
                             }}
                           />
                         </Grid>
@@ -944,6 +1026,10 @@ export default function AdminDashboardIssuesView() {
                           >
                             <DataGrid
                               {...baseTableConfig}
+                              sx={{
+                                // overflow: 'hidden',
+                                display: 'grid',
+                              }}
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.attachments ?? []}
@@ -955,7 +1041,7 @@ export default function AdminDashboardIssuesView() {
                                   { shownActions: 2 },
                                 ),
                               ]}
-                              disableSelectionOnClick
+                              disableRowSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminIssueAttachmentStored>) => {
                                 if (!editMode) {
                                   rowViewAttachmentsAction(data, params.row);
@@ -1017,6 +1103,10 @@ export default function AdminDashboardIssuesView() {
                           >
                             <DataGrid
                               {...baseTableConfig}
+                              sx={{
+                                // overflow: 'hidden',
+                                display: 'grid',
+                              }}
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.categories ?? []}
@@ -1028,7 +1118,7 @@ export default function AdminDashboardIssuesView() {
                                   { shownActions: 2 },
                                 ),
                               ]}
-                              disableSelectionOnClick
+                              disableRowSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminIssueCategoryStored>) => {
                                 if (!editMode) {
                                   rowViewCategoriesAction(data, params.row);
@@ -1134,6 +1224,10 @@ export default function AdminDashboardIssuesView() {
                           >
                             <DataGrid
                               {...baseTableConfig}
+                              sx={{
+                                // overflow: 'hidden',
+                                display: 'grid',
+                              }}
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.debates ?? []}
@@ -1145,7 +1239,7 @@ export default function AdminDashboardIssuesView() {
                                   { shownActions: 2 },
                                 ),
                               ]}
-                              disableSelectionOnClick
+                              disableRowSelectionOnClick
                               onRowClick={(params: GridRowParams<AdminIssueDebateStored>) => {
                                 if (!editMode) {
                                   rowViewDebatesAction(data, params.row);
@@ -1221,6 +1315,10 @@ export default function AdminDashboardIssuesView() {
                               >
                                 <DataGrid
                                   {...baseTableConfig}
+                                  sx={{
+                                    // overflow: 'hidden',
+                                    display: 'grid',
+                                  }}
                                   getRowId={(row: { __identifier: string }) => row.__identifier}
                                   loading={isLoading}
                                   rows={data?.comments ?? []}
@@ -1232,7 +1330,7 @@ export default function AdminDashboardIssuesView() {
                                       { shownActions: 2 },
                                     ),
                                   ]}
-                                  disableSelectionOnClick
+                                  disableRowSelectionOnClick
                                   onRowClick={(params: GridRowParams<AdminCommentStored>) => {
                                     if (!editMode) {
                                       rowViewCommentsAction(data, params.row);

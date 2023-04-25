@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Relation View
 
@@ -21,6 +21,7 @@ import { MdiIcon } from '../../../../../../components';
 import { FilterOption, FilterType } from '../../../../../../components-api';
 import {
   AdminIssue,
+  EdemokraciaVoteType,
   AdminIssueStored,
   AdminIssueType,
   AdminIssueTypeQueryCustomizer,
@@ -36,7 +37,7 @@ export const useAdminIssueIssueTypeView = () => {
   const { locale: l10nLocale } = useL10N();
 
   const queryCustomizer: AdminIssueTypeQueryCustomizer = {
-    _mask: '{description,title}',
+    _mask: '{title,voteType,description}',
   };
 
   return {

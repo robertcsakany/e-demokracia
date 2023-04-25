@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/components/widgets/AssociationButton.tsx'
 // Template name: actor/src/components/widgets/AssociationButton.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230419_114141_e53c8a6f_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
 // Template file: actor/src/components/widgets/AssociationButton.tsx.hbs
 
 import { ReactNode, useEffect, useState } from 'react';
@@ -41,24 +41,28 @@ export function AssociationButton<T>({
 
   useEffect(() => {
     (async () => {
-      if (owner.__signedIdentifier) {
-        try {
-          setIsLoading(true);
-          const res: JudoIdentifiable<T> | undefined = await fetchCall(owner);
+      // `owner` can change due to all sorts of changes on the form, therefore we only fetch info if an actual
+      // page refresh has been triggered (which can only happen in view mode).
+      if (!editMode) {
+        if (owner.__signedIdentifier) {
+          try {
+            setIsLoading(true);
+            const res: JudoIdentifiable<T> | undefined = await fetchCall(owner);
 
-          setData(res);
-        } catch (e) {
+            setData(res);
+          } catch (e) {
+            setData(undefined);
+            console.error(e);
+          } finally {
+            setIsLoading(false);
+          }
+        } else {
           setData(undefined);
-          console.error(e);
-        } finally {
           setIsLoading(false);
         }
-      } else {
-        setData(undefined);
-        setIsLoading(false);
       }
     })();
-  }, [owner]);
+  }, [owner, editMode]);
 
   return (
     <Button
