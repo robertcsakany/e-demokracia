@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # JUDO data and service related sources
-src/generated
+# src/generated
