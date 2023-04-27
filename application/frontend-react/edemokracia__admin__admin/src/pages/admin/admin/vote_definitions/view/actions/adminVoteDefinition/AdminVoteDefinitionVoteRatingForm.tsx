@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,7 +12,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CallOperationAction
 
@@ -21,13 +21,22 @@ import { useTranslation } from 'react-i18next';
 import {
   Grid,
   Button,
+  ButtonGroup,
   Card,
   CardContent,
+  ClickAwayListener,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Grow,
   IconButton,
+  InputAdornment,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
+  TextField,
 } from '@mui/material';
 import {
   GridColDef,
@@ -123,7 +132,7 @@ export function AdminVoteDefinitionVoteRatingForm({
     },
     [data],
   );
-  const title: string = t('edemokracia.admin.VoteDefinition.voteRating.Input', { defaultValue: 'TransferObject Form' });
+  const title: string = t('edemokracia.admin.VoteDefinition.voteRating.Input', { defaultValue: 'Select Rate' });
 
   const isFormUpdateable = useCallback(() => {
     return true;
@@ -187,15 +196,38 @@ export function AdminVoteDefinitionVoteRatingForm({
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>
-        <Grid
-          container
-          xs={12}
-          sm={12}
-          spacing={2}
-          direction="column"
-          alignItems="stretch"
-          justifyContent="flex-start"
-        ></Grid>
+        <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
+          <Grid item xs={12} sm={12}>
+            <TextField
+              name="value"
+              id="NumericInputedemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteRatingInputDefaultRatingVoteInputFormValue"
+              autoFocus
+              label={
+                t('edemokracia.admin.VoteDefinition.voteRating.RatingVoteInput.Form.value', {
+                  defaultValue: 'Vote rate',
+                }) as string
+              }
+              type="number"
+              value={data.value}
+              className={!editMode ? 'JUDO-viewMode' : undefined}
+              disabled={false || !isFormUpdateable()}
+              error={!!validation.get('value')}
+              helperText={validation.get('value')}
+              onChange={(event) => {
+                setEditMode(true);
+                storeDiff('value', Number(event.target.value));
+              }}
+              InputLabelProps={{ shrink: true }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <MdiIcon path="dialpad" />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+        </Grid>
       </DialogContent>
       <DialogActions>
         <Button

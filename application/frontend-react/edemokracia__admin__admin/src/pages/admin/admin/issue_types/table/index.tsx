@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.issueTypes#Table
 // Page owner name: edemokracia::admin::Admin
@@ -192,21 +192,17 @@ export default function AdminAdminIssueTypesTable() {
   return (
     <>
       <PageHeader title={title}>
-        <Grid item>
+        <Grid className="page-action" item>
           <Button
             id="page-action-create"
-            onClick={() =>
-              pageCreateIssueTypesAction((result: AdminIssueTypeStored) =>
-                navigate(`admin/admin/issue_types/view/${result.__signedIdentifier}`),
-              )
-            }
+            onClick={() => pageCreateIssueTypesAction(() => fetchData())}
             disabled={isLoading}
           >
             <MdiIcon path="file_document_plus" />
             {t('judo.pages.table.create', { defaultValue: 'Create' })}
           </Button>
         </Grid>
-        <Grid item>
+        <Grid className="page-action" item>
           <Button
             id="page-action-refresh"
             onClick={() => pageRefreshIssueTypesAction(() => fetchData())}
@@ -233,6 +229,8 @@ export default function AdminAdminIssueTypesTable() {
                     loading={isLoading}
                     rows={data}
                     rowCount={rowCount}
+                    getRowClassName={() => 'data-grid-row'}
+                    getCellClassName={() => 'data-grid-cell'}
                     sortModel={sortModel}
                     onSortModelChange={handleSortModelChange}
                     columns={[

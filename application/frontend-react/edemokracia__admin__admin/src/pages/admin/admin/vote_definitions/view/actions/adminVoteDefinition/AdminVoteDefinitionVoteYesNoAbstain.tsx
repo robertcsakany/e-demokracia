@@ -4,7 +4,7 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: CallOperationAction
 // Is Access: yes
@@ -25,6 +25,7 @@ import type {
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useTrackService } from '@pandino/react-hooks';
 import { useSnackbar } from 'notistack';
 import { useJudoNavigation, MdiIcon } from '../../../../../../../components';
 import { useDialog, useRangeDialog } from '../../../../../../../components/dialog';
@@ -49,6 +50,13 @@ import {
   YesNoAbstainVoteInputQueryCustomizer,
 } from '../../../../../../../generated/data-api';
 
+export type AdminVoteDefinitionVoteYesNoAbstainActionPostHandler = (ownerCallback: () => void) => Promise<void>;
+
+export const ADMIN_VOTE_DEFINITION_VOTE_YES_NO_ABSTAIN_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY =
+  'AdminVoteDefinitionVoteYesNoAbstainActionPostHandlerHook';
+export type AdminVoteDefinitionVoteYesNoAbstainActionPostHandlerHook =
+  () => AdminVoteDefinitionVoteYesNoAbstainActionPostHandler;
+
 export type AdminVoteDefinitionVoteYesNoAbstainAction = () => (
   owner: AdminVoteDefinitionStored,
   successCallback: () => void,
@@ -69,6 +77,11 @@ export const useAdminVoteDefinitionVoteYesNoAbstainAction: AdminVoteDefinitionVo
     'edemokracia.admin.Admin.voteDefinitions.View.edemokracia.admin.VoteDefinition.voteYesNoAbstain',
     { defaultValue: 'VoteYesNoAbstain' },
   );
+  const { service: customPostHandler } = useTrackService<AdminVoteDefinitionVoteYesNoAbstainActionPostHandlerHook>(
+    `(${OBJECTCLASS}=${ADMIN_VOTE_DEFINITION_VOTE_YES_NO_ABSTAIN_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY})`,
+  );
+  const postHandler: AdminVoteDefinitionVoteYesNoAbstainActionPostHandler | undefined =
+    customPostHandler && customPostHandler();
 
   return async function AdminVoteDefinitionVoteYesNoAbstainAction(
     owner: AdminVoteDefinitionStored,
@@ -86,6 +99,10 @@ export const useAdminVoteDefinitionVoteYesNoAbstainAction: AdminVoteDefinitionVo
         <AdminVoteDefinitionVoteYesNoAbstainForm
           successCallback={() => {
             closeDialog();
+            if (postHandler) {
+              postHandler(successCallback);
+              return;
+            }
             enqueueSnackbar(title, {
               variant: 'success',
               ...toastConfig.success,

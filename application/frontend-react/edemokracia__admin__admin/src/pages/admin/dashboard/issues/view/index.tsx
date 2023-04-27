@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Dashboard.issues#View
 // Page owner name: edemokracia::admin::Admin
@@ -135,7 +135,6 @@ import {
   useRowViewCategoriesAction,
   usePageEditIssuesAction,
   useLinkViewCityAction,
-  useRowViewDebatesAction,
   useLinkViewOwnerAction,
   useLinkViewCountyAction,
   useLinkViewDistrictAction,
@@ -166,7 +165,6 @@ export default function AdminDashboardIssuesView() {
   const rowViewCategoriesAction = useRowViewCategoriesAction();
   const pageEditIssuesAction = usePageEditIssuesAction();
   const linkViewCityAction = useLinkViewCityAction();
-  const rowViewDebatesAction = useRowViewDebatesAction();
   const linkViewOwnerAction = useLinkViewOwnerAction();
   const linkViewCountyAction = useLinkViewCountyAction();
   const linkViewDistrictAction = useLinkViewDistrictAction();
@@ -387,7 +385,7 @@ export default function AdminDashboardIssuesView() {
     <>
       <PageHeader title={title}>
         {editMode && isFormUpdateable() && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button
               id="page-action-edit-cancel"
               variant="outlined"
@@ -403,7 +401,7 @@ export default function AdminDashboardIssuesView() {
           </Grid>
         )}
         {editMode && isFormUpdateable() && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
               <MdiIcon path="content-save" />
               {t('judo.pages.save', { defaultValue: 'Save' })}
@@ -411,7 +409,7 @@ export default function AdminDashboardIssuesView() {
           </Grid>
         )}
         {!editMode && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
               <MdiIcon path="refresh" />
               {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
@@ -419,7 +417,7 @@ export default function AdminDashboardIssuesView() {
           </Grid>
         )}
         {!editMode && isFormDeleteable() && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button
               id="page-action-delete"
               onClick={() =>
@@ -442,6 +440,7 @@ export default function AdminDashboardIssuesView() {
       <Container component="main" maxWidth="xl">
         <Box sx={mainContainerPadding}>
           <Grid
+            className="relation-page-data"
             container
             xs={12}
             sm={12}
@@ -1033,6 +1032,8 @@ export default function AdminDashboardIssuesView() {
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.attachments ?? []}
+                              getRowClassName={() => 'data-grid-row'}
+                              getCellClassName={() => 'data-grid-cell'}
                               columns={[
                                 ...attachmentsColumns,
                                 ...columnsActionCalculator(
@@ -1110,6 +1111,8 @@ export default function AdminDashboardIssuesView() {
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.categories ?? []}
+                              getRowClassName={() => 'data-grid-row'}
+                              getCellClassName={() => 'data-grid-cell'}
                               columns={[
                                 ...categoriesColumns,
                                 ...columnsActionCalculator(
@@ -1231,6 +1234,8 @@ export default function AdminDashboardIssuesView() {
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.debates ?? []}
+                              getRowClassName={() => 'data-grid-row'}
+                              getCellClassName={() => 'data-grid-cell'}
                               columns={[
                                 ...debatesColumns,
                                 ...columnsActionCalculator(
@@ -1240,11 +1245,6 @@ export default function AdminDashboardIssuesView() {
                                 ),
                               ]}
                               disableRowSelectionOnClick
-                              onRowClick={(params: GridRowParams<AdminIssueDebateStored>) => {
-                                if (!editMode) {
-                                  rowViewDebatesAction(data, params.row);
-                                }
-                              }}
                               sortModel={debatesSortModel}
                               onSortModelChange={(newModel: GridSortModel) => {
                                 setDebatesSortModel(newModel);
@@ -1322,6 +1322,8 @@ export default function AdminDashboardIssuesView() {
                                   getRowId={(row: { __identifier: string }) => row.__identifier}
                                   loading={isLoading}
                                   rows={data?.comments ?? []}
+                                  getRowClassName={() => 'data-grid-row'}
+                                  getCellClassName={() => 'data-grid-cell'}
                                   columns={[
                                     ...commentsColumns,
                                     ...columnsActionCalculator(

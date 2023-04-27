@@ -4,7 +4,7 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: CallOperationAction
 // Is Access: no
@@ -25,6 +25,7 @@ import type {
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useTrackService } from '@pandino/react-hooks';
 import { useSnackbar } from 'notistack';
 import { useJudoNavigation, MdiIcon } from '../../../../../../../components';
 import { useDialog, useRangeDialog } from '../../../../../../../components/dialog';
@@ -47,6 +48,11 @@ import {
 } from '../../../../../../../generated/data-api';
 import { adminIssueServiceImpl, adminCommentServiceImpl } from '../../../../../../../generated/data-axios';
 
+export type AdminCommentVoteUpActionPostHandler = (ownerCallback: () => void) => Promise<void>;
+
+export const ADMIN_COMMENT_VOTE_UP_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY = 'AdminCommentVoteUpActionPostHandlerHook';
+export type AdminCommentVoteUpActionPostHandlerHook = () => AdminCommentVoteUpActionPostHandler;
+
 export type AdminCommentVoteUpAction = () => (owner: AdminCommentStored, successCallback: () => void) => Promise<void>;
 
 export const useAdminCommentVoteUpAction: AdminCommentVoteUpAction = () => {
@@ -63,10 +69,18 @@ export const useAdminCommentVoteUpAction: AdminCommentVoteUpAction = () => {
   const title: string = t('edemokracia.admin.Dashboard.createIssue.Output.edemokracia.admin.Comment.voteUp', {
     defaultValue: '',
   });
+  const { service: customPostHandler } = useTrackService<AdminCommentVoteUpActionPostHandlerHook>(
+    `(${OBJECTCLASS}=${ADMIN_COMMENT_VOTE_UP_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY})`,
+  );
+  const postHandler: AdminCommentVoteUpActionPostHandler | undefined = customPostHandler && customPostHandler();
 
   return async function AdminCommentVoteUpAction(owner: AdminCommentStored, successCallback: () => void) {
     try {
       const result = await adminCommentServiceImpl.voteUp(owner);
+      if (postHandler) {
+        postHandler(successCallback);
+        return;
+      }
       successCallback();
       enqueueSnackbar(title, {
         variant: 'success',

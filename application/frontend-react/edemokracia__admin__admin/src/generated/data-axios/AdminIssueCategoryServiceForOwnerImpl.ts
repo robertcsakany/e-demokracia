@@ -23,10 +23,7 @@ import { AdminIssueCategoryServiceForOwner } from '../data-service';
 /**
  * Relation Service Implementation for AdminIssueCategory.owner
  */
-export class AdminIssueCategoryServiceForOwnerImpl
-  extends JudoAxiosService
-  implements AdminIssueCategoryServiceForOwner
-{
+export class AdminIssueCategoryServiceForOwnerImpl extends JudoAxiosService implements AdminIssueCategoryServiceForOwner {
   /**
    * @throws {AxiosError} With data containing {@link Array<FeedbackItem>} for status codes: 401, 403.
    */

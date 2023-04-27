@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Relation View
 
@@ -53,6 +53,7 @@ export const useAdminIssueCategoriesView = () => {
       headerName: t('edemokracia.admin.Issue.categories.Category.View.subcategories.subcategories.title', {
         defaultValue: 'Title',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -62,6 +63,7 @@ export const useAdminIssueCategoriesView = () => {
       headerName: t('edemokracia.admin.Issue.categories.Category.View.subcategories.subcategories.description', {
         defaultValue: 'Description',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -106,6 +108,7 @@ export const useAdminIssueCategoriesView = () => {
       headerName: t('edemokracia.admin.Issue.categories.Category.View.owner.representation', {
         defaultValue: 'Representation',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },

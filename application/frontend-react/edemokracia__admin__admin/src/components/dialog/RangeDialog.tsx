@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/components/dialog/RangeDialog.tsx'
 // Template name: actor/src/components/dialog/RangeDialog.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/components/dialog/RangeDialog.tsx.hbs
 
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material';
@@ -292,6 +292,8 @@ export const RangeDialog = <T extends JudoStored<T>, U extends QueryCustomizer<T
             loading={isLoading}
             rows={data}
             rowCount={rowCount}
+            getRowClassName={() => 'data-grid-row'}
+            getCellClassName={() => 'data-grid-cell'}
             sortModel={sortModel}
             onSortModelChange={handleSortModelChange}
             checkboxSelection

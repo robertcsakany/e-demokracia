@@ -1,14 +1,11 @@
 import { MaskBuilder, RelationMaskBuilder } from './MaskBuilder';
-import { AdminIssueAttributes, AdminDebateAttributes, AdminDashboardAttributes } from '../model';
-
 import {
-  AdminDebateIssueMaskBuilder,
-  AdminDebateCommentsMaskBuilder,
-  AdminDebateCreatedByMaskBuilder,
-  AdminDebateConsMaskBuilder,
-  AdminDebateProsMaskBuilder,
-  AdminDebateVoteDefinitionMaskBuilder,
-} from './AdminDebateMaskBuilder';
+  AdminVoteEntryAttributes,
+  AdminIssueAttributes,
+  AdminDebateAttributes,
+  AdminDashboardAttributes,
+} from '../model';
+
 import {
   AdminIssueAttachmentsMaskBuilder,
   AdminIssueOwnerMaskBuilder,
@@ -21,6 +18,15 @@ import {
   AdminIssueCityMaskBuilder,
   AdminIssueDistrictMaskBuilder,
 } from './AdminIssueMaskBuilder';
+import {} from './AdminVoteEntryMaskBuilder';
+import {
+  AdminDebateIssueMaskBuilder,
+  AdminDebateCommentsMaskBuilder,
+  AdminDebateCreatedByMaskBuilder,
+  AdminDebateConsMaskBuilder,
+  AdminDebateProsMaskBuilder,
+  AdminDebateVoteDefinitionMaskBuilder,
+} from './AdminDebateMaskBuilder';
 
 export class AdminDashboardIssuesMaskBuilder extends RelationMaskBuilder {
   constructor(
@@ -56,11 +62,19 @@ export class AdminDashboardDebatesMaskBuilder extends RelationMaskBuilder {
     super('debates', props);
   }
 }
+export class AdminDashboardVoteEntriesMaskBuilder extends RelationMaskBuilder {
+  constructor(protected props: Array<AdminVoteEntryAttributes>) {
+    super('voteEntries', props);
+  }
+}
 
 export class AdminDashboardMaskBuilder extends MaskBuilder {
   constructor(
     protected props: Array<
-      AdminDashboardAttributes | AdminDashboardIssuesMaskBuilder | AdminDashboardDebatesMaskBuilder
+      | AdminDashboardAttributes
+      | AdminDashboardIssuesMaskBuilder
+      | AdminDashboardDebatesMaskBuilder
+      | AdminDashboardVoteEntriesMaskBuilder
     >,
   ) {
     super(props);

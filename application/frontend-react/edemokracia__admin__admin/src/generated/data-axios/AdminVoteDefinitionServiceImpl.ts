@@ -2,16 +2,19 @@ import { JudoIdentifiable } from '@judo/data-api-common';
 import { JudoAxiosService } from './JudoAxiosService';
 import {
   AdminVoteDefinitionQueryCustomizer,
+  RatingVoteInput,
+  AdminIssueStored,
+  YesNoAbstainVoteInput,
+  SelectAnswerVoteSelection,
   SelectAnswerVoteSelectionQueryCustomizer,
   AdminVoteDefinitionStored,
-  RatingVoteInput,
+  AdminIssueQueryCustomizer,
   SelectAnswerVoteSelectionStored,
   AdminDebate,
-  YesNoAbstainVoteInput,
+  AdminIssue,
   AdminVoteDefinition,
   AdminDebateStored,
   YesNoVoteInput,
-  SelectAnswerVoteSelection,
   AdminDebateQueryCustomizer,
 } from '../data-api';
 import { AdminVoteDefinitionService } from '../data-service';
@@ -88,6 +91,39 @@ export class AdminVoteDefinitionServiceImpl extends JudoAxiosService implements 
     queryCustomizer?: AdminDebateQueryCustomizer,
   ): Promise<Array<AdminDebateStored>> {
     const path = '/admin/VoteDefinition/debate/~range';
+    const response = await this.axios.post(this.getPathForActor(path), {
+      owner: owner ?? {},
+      queryCustomizer: queryCustomizer ?? {},
+    });
+
+    return response.data;
+  }
+
+  /**
+   * @throws {AxiosError} With data containing {@link Array<FeedbackItem>} for status codes: 401, 403.
+   */
+  async getIssue(
+    target: JudoIdentifiable<AdminVoteDefinition>,
+    queryCustomizer?: AdminIssueQueryCustomizer,
+  ): Promise<AdminIssueStored> {
+    const path = '/admin/VoteDefinition/issue/~get';
+    const response = await this.axios.post(this.getPathForActor(path), queryCustomizer ?? {}, {
+      headers: {
+        'X-Judo-SignedIdentifier': target.__signedIdentifier!,
+      },
+    });
+
+    return response.data;
+  }
+
+  /**
+   * @throws {AxiosError} With data containing {@link Array<FeedbackItem>} for status codes: 401, 403.
+   */
+  async getRangeForIssue(
+    owner?: JudoIdentifiable<AdminVoteDefinition> | AdminVoteDefinition,
+    queryCustomizer?: AdminIssueQueryCustomizer,
+  ): Promise<Array<AdminIssueStored>> {
+    const path = '/admin/VoteDefinition/issue/~range';
     const response = await this.axios.post(this.getPathForActor(path), {
       owner: owner ?? {},
       queryCustomizer: queryCustomizer ?? {},

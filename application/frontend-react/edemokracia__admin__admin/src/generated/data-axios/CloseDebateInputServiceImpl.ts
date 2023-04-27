@@ -1,6 +1,12 @@
 import { JudoIdentifiable } from '@judo/data-api-common';
 import { JudoAxiosService } from './JudoAxiosService';
-import { CloseDebateInputStored, CloseDebateInput } from '../data-api';
+import {
+  SelectAnswerInputStored,
+  CloseDebateInputStored,
+  SelectAnswerInput,
+  CloseDebateInput,
+  SelectAnswerInputQueryCustomizer,
+} from '../data-api';
 import { CloseDebateInputService } from '../data-service';
 
 /**
@@ -13,6 +19,22 @@ export class CloseDebateInputServiceImpl extends JudoAxiosService implements Clo
   async getTemplate(): Promise<CloseDebateInput> {
     const path = '/CloseDebateInput/~template';
     const response = await this.axios.get(this.getPathForActor(path));
+
+    return response.data;
+  }
+
+  /**
+   * @throws {AxiosError} With data containing {@link Array<FeedbackItem>} for status codes: 401, 403.
+   */
+  async getRangeForAnswers(
+    owner?: JudoIdentifiable<CloseDebateInput> | CloseDebateInput,
+    queryCustomizer?: SelectAnswerInputQueryCustomizer,
+  ): Promise<Array<SelectAnswerInputStored>> {
+    const path = '/CloseDebateInput/answers/~range';
+    const response = await this.axios.post(this.getPathForActor(path), {
+      owner: owner ?? {},
+      queryCustomizer: queryCustomizer ?? {},
+    });
 
     return response.data;
   }

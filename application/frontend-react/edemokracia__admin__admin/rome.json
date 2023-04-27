@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/rome/configuration_schema.json",
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentSize": 2,
+    "lineWidth": 120,
+    "ignore": []
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingComma": "all"
+    }
+  },
+  "linter": {
+    "enabled": false
+  }
+}

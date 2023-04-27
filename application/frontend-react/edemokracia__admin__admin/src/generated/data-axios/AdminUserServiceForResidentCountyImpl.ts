@@ -14,10 +14,7 @@ import { AdminUserServiceForResidentCounty } from '../data-service';
 /**
  * Relation Service Implementation for AdminUser.residentCounty
  */
-export class AdminUserServiceForResidentCountyImpl
-  extends JudoAxiosService
-  implements AdminUserServiceForResidentCounty
-{
+export class AdminUserServiceForResidentCountyImpl extends JudoAxiosService implements AdminUserServiceForResidentCounty {
   /**
    * @throws {AxiosError} With data containing {@link Array<FeedbackItem>} for status codes: 401, 403.
    */

@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/components/widgets/TrinaryLogicCombobox.tsx'
 // Template name: actor/src/components/widgets/TrinaryLogicCombobox.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/components/widgets/TrinaryLogicCombobox.tsx.hbs
 
 import { TextField, InputAdornment, MenuItem } from '@mui/material';
@@ -56,13 +56,13 @@ export const TrinaryLogicCombobox = ({
         ),
       }}
     >
-      <MenuItem id={`${id}-true`} value={'Yes'}>
+      <MenuItem className="trinary-logic-combobox-item" id={`${id}-true`} value={'Yes'}>
         {t('judo.component.TrinaryLogic.true', { defaultValue: 'Yes' }) as string}
       </MenuItem>
-      <MenuItem id={`${id}-false`} value={'No'}>
+      <MenuItem className="trinary-logic-combobox-item" id={`${id}-false`} value={'No'}>
         {t('judo.component.TrinaryLogic.false', { defaultValue: 'No' }) as string}
       </MenuItem>
-      <MenuItem id={`${id}-undefined`} value={'Unknown'}>
+      <MenuItem className="trinary-logic-combobox-item" id={`${id}-undefined`} value={'Unknown'}>
         {t('judo.component.TrinaryLogic.unknown', { defaultValue: 'Unknown' }) as string}
       </MenuItem>
     </TextField>

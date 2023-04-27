@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/components/widgets/AggregationInput.tsx'
 // Template name: actor/src/components/widgets/AggregationInput.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/components/widgets/AggregationInput.tsx.hbs
 
 import { ButtonBase, Grid, IconButton, InputAdornment, TextField } from '@mui/material';
@@ -88,7 +88,7 @@ export const AggregationInput = ({
         />
       </ButtonBase>
       {exists(value) && onView && (
-        <IconButton disabled={disabled || editMode} onClick={onView}>
+        <IconButton className="astronomer-edit" disabled={disabled || editMode} onClick={onView}>
           <MdiIcon path="eye" />
         </IconButton>
       )}

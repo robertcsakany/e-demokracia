@@ -1,15 +1,18 @@
 import { JudoIdentifiable } from '@judo/data-api-common';
 import { JudoAxiosService } from './JudoAxiosService';
 import {
+  AdminVoteEntryQueryCustomizer,
+  AdminIssueStored,
+  AdminUserStored,
+  AdminCreateUserInput,
+  AdminVoteEntryStored,
   AdminDashboardQueryCustomizer,
   AdminIssueQueryCustomizer,
+  AdminVoteEntry,
   AdminCreateIssueInput,
   AdminDebate,
   AdminIssue,
-  AdminIssueStored,
-  AdminUserStored,
   AdminDebateStored,
-  AdminCreateUserInput,
   AdminDashboardStored,
   AdminDashboard,
   AdminDebateQueryCustomizer,
@@ -95,6 +98,39 @@ export class AdminDashboardServiceImpl extends JudoAxiosService implements Admin
     queryCustomizer?: AdminDebateQueryCustomizer,
   ): Promise<Array<AdminDebateStored>> {
     const path = '/admin/Dashboard/debates/~range';
+    const response = await this.axios.post(this.getPathForActor(path), {
+      owner: owner ?? {},
+      queryCustomizer: queryCustomizer ?? {},
+    });
+
+    return response.data;
+  }
+
+  /**
+   * @throws {AxiosError} With data containing {@link Array<FeedbackItem>} for status codes: 401, 403.
+   */
+  async getVoteEntries(
+    target: JudoIdentifiable<AdminDashboard>,
+    queryCustomizer?: AdminVoteEntryQueryCustomizer,
+  ): Promise<Array<AdminVoteEntryStored>> {
+    const path = '/admin/Dashboard/voteEntries/~list';
+    const response = await this.axios.post(this.getPathForActor(path), queryCustomizer ?? {}, {
+      headers: {
+        'X-Judo-SignedIdentifier': target.__signedIdentifier!,
+      },
+    });
+
+    return response.data;
+  }
+
+  /**
+   * @throws {AxiosError} With data containing {@link Array<FeedbackItem>} for status codes: 401, 403.
+   */
+  async getRangeForVoteEntries(
+    owner?: JudoIdentifiable<AdminDashboard> | AdminDashboard,
+    queryCustomizer?: AdminVoteEntryQueryCustomizer,
+  ): Promise<Array<AdminVoteEntryStored>> {
+    const path = '/admin/Dashboard/voteEntries/~range';
     const response = await this.axios.post(this.getPathForActor(path), {
       owner: owner ?? {},
       queryCustomizer: queryCustomizer ?? {},

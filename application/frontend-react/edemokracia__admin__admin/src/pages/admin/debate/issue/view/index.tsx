@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Debate.issue#View
 // Page owner name: edemokracia::admin::Admin
@@ -132,7 +132,6 @@ import {
   useRowViewAttachmentsAction,
   useLinkViewCountyAction,
   useRowEditAttachmentsAction,
-  useRowViewDebatesAction,
   useAdminIssueCreateCommentAction,
   useLinkViewIssueTypeAction,
   usePageRefreshIssueAction,
@@ -161,7 +160,6 @@ export default function AdminDebateIssueView() {
   const rowViewAttachmentsAction = useRowViewAttachmentsAction();
   const linkViewCountyAction = useLinkViewCountyAction();
   const rowEditAttachmentsAction = useRowEditAttachmentsAction();
-  const rowViewDebatesAction = useRowViewDebatesAction();
   const AdminIssueCreateCommentAction = useAdminIssueCreateCommentAction();
   const linkViewIssueTypeAction = useLinkViewIssueTypeAction();
   const pageRefreshIssueAction = usePageRefreshIssueAction();
@@ -344,7 +342,7 @@ export default function AdminDebateIssueView() {
     <>
       <PageHeader title={title}>
         {!editMode && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
               <MdiIcon path="refresh" />
               {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
@@ -355,6 +353,7 @@ export default function AdminDebateIssueView() {
       <Container component="main" maxWidth="xl">
         <Box sx={mainContainerPadding}>
           <Grid
+            className="relation-page-data"
             container
             xs={12}
             sm={12}
@@ -819,6 +818,8 @@ export default function AdminDebateIssueView() {
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.attachments ?? []}
+                              getRowClassName={() => 'data-grid-row'}
+                              getCellClassName={() => 'data-grid-cell'}
                               columns={[
                                 ...attachmentsColumns,
                                 ...columnsActionCalculator(
@@ -896,6 +897,8 @@ export default function AdminDebateIssueView() {
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.categories ?? []}
+                              getRowClassName={() => 'data-grid-row'}
+                              getCellClassName={() => 'data-grid-cell'}
                               columns={[
                                 ...categoriesColumns,
                                 ...columnsActionCalculator(
@@ -980,6 +983,8 @@ export default function AdminDebateIssueView() {
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.debates ?? []}
+                              getRowClassName={() => 'data-grid-row'}
+                              getCellClassName={() => 'data-grid-cell'}
                               columns={[
                                 ...debatesColumns,
                                 ...columnsActionCalculator(
@@ -989,11 +994,6 @@ export default function AdminDebateIssueView() {
                                 ),
                               ]}
                               disableRowSelectionOnClick
-                              onRowClick={(params: GridRowParams<AdminIssueDebateStored>) => {
-                                if (!editMode) {
-                                  rowViewDebatesAction(data, params.row);
-                                }
-                              }}
                               sortModel={debatesSortModel}
                               onSortModelChange={(newModel: GridSortModel) => {
                                 setDebatesSortModel(newModel);
@@ -1071,6 +1071,8 @@ export default function AdminDebateIssueView() {
                                   getRowId={(row: { __identifier: string }) => row.__identifier}
                                   loading={isLoading}
                                   rows={data?.comments ?? []}
+                                  getRowClassName={() => 'data-grid-row'}
+                                  getCellClassName={() => 'data-grid-cell'}
                                   columns={[
                                     ...commentsColumns,
                                     ...columnsActionCalculator(

@@ -14,10 +14,7 @@ import { AdminUserServiceForActivityCities } from '../data-service';
 /**
  * Relation Service Implementation for AdminUser.activityCities
  */
-export class AdminUserServiceForActivityCitiesImpl
-  extends JudoAxiosService
-  implements AdminUserServiceForActivityCities
-{
+export class AdminUserServiceForActivityCitiesImpl extends JudoAxiosService implements AdminUserServiceForActivityCities {
   /**
    * @throws {AxiosError} With data containing {@link Array<FeedbackItem>} for status codes: 401, 403.
    */

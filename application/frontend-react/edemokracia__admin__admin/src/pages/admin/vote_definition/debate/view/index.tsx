@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::VoteDefinition.debate#View
 // Page owner name: edemokracia::admin::Admin
@@ -389,7 +389,7 @@ export default function AdminVoteDefinitionDebateView() {
     <>
       <PageHeader title={title}>
         {!editMode && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
               <MdiIcon path="refresh" />
               {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
@@ -400,6 +400,7 @@ export default function AdminVoteDefinitionDebateView() {
       <Container component="main" maxWidth="xl">
         <Box sx={mainContainerPadding}>
           <Grid
+            className="relation-page-data"
             container
             xs={12}
             sm={12}
@@ -782,6 +783,8 @@ export default function AdminVoteDefinitionDebateView() {
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.pros ?? []}
+                              getRowClassName={() => 'data-grid-row'}
+                              getCellClassName={() => 'data-grid-cell'}
                               columns={[
                                 ...prosColumns,
                                 ...columnsActionCalculator(
@@ -855,6 +858,8 @@ export default function AdminVoteDefinitionDebateView() {
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.cons ?? []}
+                              getRowClassName={() => 'data-grid-row'}
+                              getCellClassName={() => 'data-grid-cell'}
                               columns={[
                                 ...consColumns,
                                 ...columnsActionCalculator(
@@ -948,6 +953,8 @@ export default function AdminVoteDefinitionDebateView() {
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.comments ?? []}
+                              getRowClassName={() => 'data-grid-row'}
+                              getCellClassName={() => 'data-grid-cell'}
                               columns={[
                                 ...commentsColumns,
                                 ...columnsActionCalculator(

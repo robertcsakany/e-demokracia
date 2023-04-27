@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.dashboardhome#Dashboard
 // Page owner name: edemokracia::admin::Admin
@@ -63,15 +63,19 @@ import { baseTableConfig, toastConfig, dividerHeight } from '../../../../config'
 import { useL10N } from '../../../../l10n/l10n-context';
 import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } from '../../../../custom';
 import {
-  AdminDashboardQueryCustomizer,
   AdminIssueMaskBuilder,
-  AdminIssueQueryCustomizer,
   AdminDebateMaskBuilder,
+  AdminVoteEntryQueryCustomizer,
+  AdminIssueStored,
+  AdminVoteEntryStored,
+  AdminDashboardQueryCustomizer,
+  AdminIssueQueryCustomizer,
+  AdminVoteEntry,
   AdminDebate,
   AdminIssue,
-  AdminIssueStored,
   AdminDebateStored,
   AdminDashboardStored,
+  AdminVoteEntryMaskBuilder,
   AdminDashboard,
   AdminDebateQueryCustomizer,
 } from '../../../../generated/data-api';
@@ -133,6 +137,9 @@ export default function AdminAdminDashboardhomeDashboard() {
     issuesColumns,
     issuesRangeFilterOptions,
     issuesInitialQueryCustomizer,
+    voteEntriesColumns,
+    voteEntriesRangeFilterOptions,
+    voteEntriesInitialQueryCustomizer,
   } = useAdminAdminDashboardhomeDashboard();
 
   const handleFetchError = useErrorHandler(
@@ -163,6 +170,7 @@ export default function AdminAdminDashboardhomeDashboard() {
   const [validation, setValidation] = useState<Map<keyof AdminDashboard, string>>(new Map());
   const [debatesSortModel, setDebatesSortModel] = useState<GridSortModel>([{ field: 'title', sort: 'asc' }]);
   const [issuesSortModel, setIssuesSortModel] = useState<GridSortModel>([{ field: 'title', sort: 'asc' }]);
+  const [voteEntriesSortModel, setVoteEntriesSortModel] = useState<GridSortModel>([{ field: 'created', sort: 'asc' }]);
 
   const debatesRowActions: TableRowAction<AdminDebateStored>[] = [
     {
@@ -227,6 +235,7 @@ export default function AdminAdminDashboardhomeDashboard() {
       disabled: (row: AdminIssueStored) => editMode,
     },
   ];
+  const voteEntriesRowActions: TableRowAction<AdminVoteEntryStored>[] = [];
 
   const title: string = t('edemokracia.admin.Admin.dashboardhome.Dashboard', { defaultValue: 'Dashboard' });
 
@@ -307,7 +316,7 @@ export default function AdminAdminDashboardhomeDashboard() {
     <>
       <PageHeader title={title}>
         {!editMode && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
               <MdiIcon path="refresh" />
               {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
@@ -383,6 +392,12 @@ export default function AdminAdminDashboardhomeDashboard() {
                     label: 'My debates',
                     icon: 'wechat',
                   },
+                  {
+                    id: 'TabedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMyvotes',
+                    name: 'myvotes',
+                    label: 'My votes',
+                    icon: 'vote-outline',
+                  },
                 ]}
               >
                 <Grid item xs={12} sm={12}>
@@ -420,6 +435,8 @@ export default function AdminAdminDashboardhomeDashboard() {
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.issues ?? []}
+                              getRowClassName={() => 'data-grid-row'}
+                              getCellClassName={() => 'data-grid-cell'}
                               columns={[
                                 ...issuesColumns,
                                 ...columnsActionCalculator(
@@ -488,6 +505,8 @@ export default function AdminAdminDashboardhomeDashboard() {
                               getRowId={(row: { __identifier: string }) => row.__identifier}
                               loading={isLoading}
                               rows={data?.debates ?? []}
+                              getRowClassName={() => 'data-grid-row'}
+                              getCellClassName={() => 'data-grid-cell'}
                               columns={[
                                 ...debatesColumns,
                                 ...columnsActionCalculator(
@@ -505,6 +524,71 @@ export default function AdminAdminDashboardhomeDashboard() {
                               sortModel={debatesSortModel}
                               onSortModelChange={(newModel: GridSortModel) => {
                                 setDebatesSortModel(newModel);
+                              }}
+                              components={{
+                                Toolbar: () => (
+                                  <GridToolbarContainer>
+                                    <div>{/* Placeholder */}</div>
+                                  </GridToolbarContainer>
+                                ),
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+
+                <Grid item xs={12} sm={12}>
+                  <Grid
+                    id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMyvotesMyvotes"
+                    container
+                    direction="row"
+                    alignItems="flex-start"
+                    justifyContent="flex-start"
+                    spacing={2}
+                  >
+                    <Grid item xs={12} sm={12}>
+                      <Grid
+                        id="FlexedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMyvotesMyvotesVoteEntriesLabelWrapper"
+                        container
+                        direction="column"
+                        alignItems="stretch"
+                        justifyContent="flex-start"
+                        spacing={2}
+                      >
+                        <Grid item xs={12} sm={12}>
+                          <Grid
+                            id="TableedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMyvotesMyvotesVoteEntriesLabelWrapperVoteEntries"
+                            container
+                            direction="column"
+                            alignItems="stretch"
+                            justifyContent="flex-start"
+                          >
+                            <DataGrid
+                              {...baseTableConfig}
+                              sx={{
+                                // overflow: 'hidden',
+                                display: 'grid',
+                              }}
+                              getRowId={(row: { __identifier: string }) => row.__identifier}
+                              loading={isLoading}
+                              rows={data?.voteEntries ?? []}
+                              getRowClassName={() => 'data-grid-row'}
+                              getCellClassName={() => 'data-grid-cell'}
+                              columns={[
+                                ...voteEntriesColumns,
+                                ...columnsActionCalculator(
+                                  'RelationTypeedemokraciaAdminAdminEdemokraciaAdminDashboardVoteEntries',
+                                  voteEntriesRowActions,
+                                  { shownActions: 2 },
+                                ),
+                              ]}
+                              disableRowSelectionOnClick
+                              sortModel={voteEntriesSortModel}
+                              onSortModelChange={(newModel: GridSortModel) => {
+                                setVoteEntriesSortModel(newModel);
                               }}
                               components={{
                                 Toolbar: () => (

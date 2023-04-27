@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Access View
 
@@ -72,6 +72,7 @@ export const useAdminAdminDebatesView = () => {
       headerName: t('edemokracia.admin.Admin.debates.Debate.View.tabBar.arguments.arguments.cons.cons.title', {
         defaultValue: 'Title',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -81,6 +82,7 @@ export const useAdminAdminDebatesView = () => {
       headerName: t('edemokracia.admin.Admin.debates.Debate.View.tabBar.arguments.arguments.cons.cons.upVotes', {
         defaultValue: 'up',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -93,6 +95,7 @@ export const useAdminAdminDebatesView = () => {
       headerName: t('edemokracia.admin.Admin.debates.Debate.View.tabBar.arguments.arguments.cons.cons.downVotes', {
         defaultValue: 'down',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -148,6 +151,7 @@ export const useAdminAdminDebatesView = () => {
       headerName: t('edemokracia.admin.Admin.debates.Debate.View.tabBar.arguments.arguments.pros.pros.title', {
         defaultValue: 'Title',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -157,6 +161,7 @@ export const useAdminAdminDebatesView = () => {
       headerName: t('edemokracia.admin.Admin.debates.Debate.View.tabBar.arguments.arguments.pros.pros.upVotes', {
         defaultValue: 'up',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -169,6 +174,7 @@ export const useAdminAdminDebatesView = () => {
       headerName: t('edemokracia.admin.Admin.debates.Debate.View.tabBar.arguments.arguments.pros.pros.downVotes', {
         defaultValue: 'down',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -224,6 +230,7 @@ export const useAdminAdminDebatesView = () => {
       headerName: t('edemokracia.admin.Admin.debates.Debate.View.tabBar.comments.comments.comments.comments.created', {
         defaultValue: 'Created',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -248,6 +255,7 @@ export const useAdminAdminDebatesView = () => {
       headerName: t('edemokracia.admin.Admin.debates.Debate.View.tabBar.comments.comments.comments.comments.comment', {
         defaultValue: 'Comment',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -258,6 +266,7 @@ export const useAdminAdminDebatesView = () => {
         'edemokracia.admin.Admin.debates.Debate.View.tabBar.comments.comments.comments.comments.createdByName',
         { defaultValue: 'Created by' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -267,6 +276,7 @@ export const useAdminAdminDebatesView = () => {
       headerName: t('edemokracia.admin.Admin.debates.Debate.View.tabBar.comments.comments.comments.comments.upVotes', {
         defaultValue: 'up',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -280,6 +290,7 @@ export const useAdminAdminDebatesView = () => {
         'edemokracia.admin.Admin.debates.Debate.View.tabBar.comments.comments.comments.comments.downVotes',
         { defaultValue: 'down' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {

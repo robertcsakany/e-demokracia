@@ -4,7 +4,7 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: CallOperationAction
 // Is Access: yes
@@ -25,6 +25,7 @@ import type {
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useTrackService } from '@pandino/react-hooks';
 import { useSnackbar } from 'notistack';
 import { useJudoNavigation, MdiIcon } from '../../../../../../../components';
 import { useDialog, useRangeDialog } from '../../../../../../../components/dialog';
@@ -49,6 +50,13 @@ import {
 } from '../../../../../../../generated/data-api';
 import { adminVoteDefinitionServiceImpl } from '../../../../../../../generated/data-axios';
 
+export type AdminVoteDefinitionVoteSelectAnswerActionPostHandler = (ownerCallback: () => void) => Promise<void>;
+
+export const ADMIN_VOTE_DEFINITION_VOTE_SELECT_ANSWER_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY =
+  'AdminVoteDefinitionVoteSelectAnswerActionPostHandlerHook';
+export type AdminVoteDefinitionVoteSelectAnswerActionPostHandlerHook =
+  () => AdminVoteDefinitionVoteSelectAnswerActionPostHandler;
+
 export type AdminVoteDefinitionVoteSelectAnswerAction = () => (
   owner: AdminVoteDefinitionStored,
   successCallback: () => void,
@@ -69,6 +77,11 @@ export const useAdminVoteDefinitionVoteSelectAnswerAction: AdminVoteDefinitionVo
     'edemokracia.admin.Admin.voteDefinitions.View.edemokracia.admin.VoteDefinition.voteSelectAnswer',
     { defaultValue: 'VoteSelectAnswer' },
   );
+  const { service: customPostHandler } = useTrackService<AdminVoteDefinitionVoteSelectAnswerActionPostHandlerHook>(
+    `(${OBJECTCLASS}=${ADMIN_VOTE_DEFINITION_VOTE_SELECT_ANSWER_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY})`,
+  );
+  const postHandler: AdminVoteDefinitionVoteSelectAnswerActionPostHandler | undefined =
+    customPostHandler && customPostHandler();
 
   return async function AdminVoteDefinitionVoteSelectAnswerAction(
     owner: AdminVoteDefinitionStored,
@@ -152,6 +165,10 @@ export const useAdminVoteDefinitionVoteSelectAnswerAction: AdminVoteDefinitionVo
         owner,
         res as SelectAnswerVoteSelectionStored,
       );
+      if (postHandler) {
+        postHandler(successCallback);
+        return;
+      }
       successCallback();
       enqueueSnackbar(title, {
         variant: 'success',

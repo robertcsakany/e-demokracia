@@ -1,16 +1,19 @@
 import { JudoIdentifiable } from '@judo/data-api-common';
 import {
   AdminVoteDefinitionQueryCustomizer,
+  RatingVoteInput,
+  AdminIssueStored,
+  YesNoAbstainVoteInput,
+  SelectAnswerVoteSelection,
   SelectAnswerVoteSelectionQueryCustomizer,
   AdminVoteDefinitionStored,
-  RatingVoteInput,
+  AdminIssueQueryCustomizer,
   SelectAnswerVoteSelectionStored,
   AdminDebate,
-  YesNoAbstainVoteInput,
+  AdminIssue,
   AdminVoteDefinition,
   AdminDebateStored,
   YesNoVoteInput,
-  SelectAnswerVoteSelection,
   AdminDebateQueryCustomizer,
 } from '../data-api';
 
@@ -36,6 +39,16 @@ export interface AdminVoteDefinitionService {
     owner?: JudoIdentifiable<AdminVoteDefinition> | AdminVoteDefinition,
     queryCustomizer?: AdminDebateQueryCustomizer,
   ): Promise<Array<AdminDebateStored>>;
+
+  getIssue(
+    target: JudoIdentifiable<AdminVoteDefinition>,
+    queryCustomizer?: AdminIssueQueryCustomizer,
+  ): Promise<AdminIssueStored>;
+
+  getRangeForIssue(
+    owner?: JudoIdentifiable<AdminVoteDefinition> | AdminVoteDefinition,
+    queryCustomizer?: AdminIssueQueryCustomizer,
+  ): Promise<Array<AdminIssueStored>>;
 
   voteRating(owner: JudoIdentifiable<AdminVoteDefinition>, target: RatingVoteInput): Promise<void>;
 

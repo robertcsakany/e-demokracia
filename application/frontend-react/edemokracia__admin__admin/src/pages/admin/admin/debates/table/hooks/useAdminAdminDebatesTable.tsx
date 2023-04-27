@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Access Table
 
@@ -38,6 +38,7 @@ export const useAdminAdminDebatesTable = () => {
       headerName: t('edemokracia.admin.Admin.debates.debates.Debate.Table.issueTitle', {
         defaultValue: 'Issue',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -45,6 +46,7 @@ export const useAdminAdminDebatesTable = () => {
       ...baseColumnConfig,
       field: 'title',
       headerName: t('edemokracia.admin.Admin.debates.debates.Debate.Table.title', { defaultValue: 'Title' }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -54,6 +56,7 @@ export const useAdminAdminDebatesTable = () => {
       headerName: t('edemokracia.admin.Admin.debates.debates.Debate.Table.status', {
         defaultValue: 'Status',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 170,
       type: 'string',
       sortable: false,
@@ -67,6 +70,7 @@ export const useAdminAdminDebatesTable = () => {
       headerName: t('edemokracia.admin.Admin.debates.debates.Debate.Table.closeAt', {
         defaultValue: 'Close at',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -91,6 +95,7 @@ export const useAdminAdminDebatesTable = () => {
       headerName: t('edemokracia.admin.Admin.debates.debates.Debate.Table.description', {
         defaultValue: 'Description',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },

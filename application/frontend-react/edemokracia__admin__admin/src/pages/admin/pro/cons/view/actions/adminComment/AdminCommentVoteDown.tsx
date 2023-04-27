@@ -4,7 +4,7 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: CallOperationAction
 // Is Access: no
@@ -25,6 +25,7 @@ import type {
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useTrackService } from '@pandino/react-hooks';
 import { useSnackbar } from 'notistack';
 import { useJudoNavigation, MdiIcon } from '../../../../../../../components';
 import { useDialog, useRangeDialog } from '../../../../../../../components/dialog';
@@ -49,6 +50,12 @@ import {
 } from '../../../../../../../generated/data-api';
 import { adminConServiceImpl, adminCommentServiceImpl } from '../../../../../../../generated/data-axios';
 
+export type AdminCommentVoteDownActionPostHandler = (ownerCallback: () => void) => Promise<void>;
+
+export const ADMIN_COMMENT_VOTE_DOWN_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY =
+  'AdminCommentVoteDownActionPostHandlerHook';
+export type AdminCommentVoteDownActionPostHandlerHook = () => AdminCommentVoteDownActionPostHandler;
+
 export type AdminCommentVoteDownAction = () => (
   owner: AdminCommentStored,
   successCallback: () => void,
@@ -66,10 +73,18 @@ export const useAdminCommentVoteDownAction: AdminCommentVoteDownAction = () => {
   const [createDialog, closeDialog] = useDialog();
   const { navigate } = useJudoNavigation();
   const title: string = t('edemokracia.admin.Pro.cons.View.edemokracia.admin.Comment.voteDown', { defaultValue: '' });
+  const { service: customPostHandler } = useTrackService<AdminCommentVoteDownActionPostHandlerHook>(
+    `(${OBJECTCLASS}=${ADMIN_COMMENT_VOTE_DOWN_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY})`,
+  );
+  const postHandler: AdminCommentVoteDownActionPostHandler | undefined = customPostHandler && customPostHandler();
 
   return async function AdminCommentVoteDownAction(owner: AdminCommentStored, successCallback: () => void) {
     try {
       const result = await adminCommentServiceImpl.voteDown(owner);
+      if (postHandler) {
+        postHandler(successCallback);
+        return;
+      }
       successCallback();
       enqueueSnackbar(title, {
         variant: 'success',

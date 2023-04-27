@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.voteDefinitions#View
 // Page owner name: edemokracia::admin::Admin
@@ -64,6 +64,7 @@ import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } fro
 import {
   AdminVoteDefinitionQueryCustomizer,
   AdminVoteDefinitionStored,
+  EdemokraciaVoteType,
   AdminVoteDefinition,
   EdemokraciaVoteStatus,
 } from '../../../../../generated/data-api';
@@ -128,7 +129,11 @@ export default function AdminAdminVoteDefinitionsView() {
   const storeDiff: (attributeName: keyof AdminVoteDefinitionStored, value: any) => void = useCallback(
     (attributeName: keyof AdminVoteDefinitionStored, value: any) => {
       const dateTypes: string[] = [];
-      const dateTimeTypes: string[] = ['closeAt', 'created'];
+      const dateTimeTypes: string[] = [
+        'closeAt',
+
+        'created',
+      ];
       if (dateTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = uiDateToServiceDate(value);
       } else if (dateTimeTypes.includes(attributeName as string)) {
@@ -228,7 +233,7 @@ export default function AdminAdminVoteDefinitionsView() {
     <>
       <PageHeader title={title}>
         {editMode && isFormUpdateable() && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button
               id="page-action-edit-cancel"
               variant="outlined"
@@ -244,7 +249,7 @@ export default function AdminAdminVoteDefinitionsView() {
           </Grid>
         )}
         {editMode && isFormUpdateable() && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
               <MdiIcon path="content-save" />
               {t('judo.pages.save', { defaultValue: 'Save' })}
@@ -252,7 +257,7 @@ export default function AdminAdminVoteDefinitionsView() {
           </Grid>
         )}
         {!editMode && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
               <MdiIcon path="refresh" />
               {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
@@ -260,7 +265,7 @@ export default function AdminAdminVoteDefinitionsView() {
           </Grid>
         )}
         {!editMode && isFormDeleteable() && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button
               id="page-action-delete"
               onClick={() =>
@@ -567,19 +572,21 @@ export default function AdminAdminVoteDefinitionsView() {
                       justifyContent="flex-start"
                       spacing={2}
                     >
-                      <Grid item xs={12} sm={12} md={4.0}>
-                        <Button
-                          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoButtonCallOperation"
-                          onClick={() => AdminVoteDefinitionVoteYesNoAction(data, () => fetchData())}
-                          disabled={isLoading || editMode}
-                        >
-                          <MdiIcon path="chevron_right" />
-                          {t(
-                            'edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.tabBar.yesnovote.yesnovote.voteYesNo',
-                            { defaultValue: 'VoteYesNo' },
-                          )}
-                        </Button>
-                      </Grid>
+                      {!data.isNotYesNoType && (
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <Button
+                            id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoButtonCallOperation"
+                            onClick={() => AdminVoteDefinitionVoteYesNoAction(data, () => fetchData())}
+                            disabled={!data.isYesNoType || isLoading || editMode}
+                          >
+                            <MdiIcon path="chevron_right" />
+                            {t(
+                              'edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.tabBar.yesnovote.yesnovote.voteYesNo',
+                              { defaultValue: 'Vote' },
+                            )}
+                          </Button>
+                        </Grid>
+                      )}
                     </Grid>
                   </Grid>
                 )}
@@ -593,19 +600,21 @@ export default function AdminAdminVoteDefinitionsView() {
                       justifyContent="flex-start"
                       spacing={2}
                     >
-                      <Grid item xs={12} sm={12} md={4.0}>
-                        <Button
-                          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoAbstainButtonCallOperation"
-                          onClick={() => AdminVoteDefinitionVoteYesNoAbstainAction(data, () => fetchData())}
-                          disabled={isLoading || editMode}
-                        >
-                          <MdiIcon path="chevron_right" />
-                          {t(
-                            'edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.tabBar.yesnoabstainvote.yesnoabstainvote.voteYesNoAbstain',
-                            { defaultValue: 'VoteYesNoAbstain' },
-                          )}
-                        </Button>
-                      </Grid>
+                      {!data.isNotYesNoAbstainType && (
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <Button
+                            id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoAbstainButtonCallOperation"
+                            onClick={() => AdminVoteDefinitionVoteYesNoAbstainAction(data, () => fetchData())}
+                            disabled={!data.isYesNoAbstainType || isLoading || editMode}
+                          >
+                            <MdiIcon path="chevron_right" />
+                            {t(
+                              'edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.tabBar.yesnoabstainvote.yesnoabstainvote.voteYesNoAbstain',
+                              { defaultValue: 'VoteYesNoAbstain' },
+                            )}
+                          </Button>
+                        </Grid>
+                      )}
                     </Grid>
                   </Grid>
                 )}
@@ -619,19 +628,21 @@ export default function AdminAdminVoteDefinitionsView() {
                       justifyContent="flex-start"
                       spacing={2}
                     >
-                      <Grid item xs={12} sm={12} md={4.0}>
-                        <Button
-                          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteSelectAnswerButtonCallOperation"
-                          onClick={() => AdminVoteDefinitionVoteSelectAnswerAction(data, () => fetchData())}
-                          disabled={isLoading || editMode}
-                        >
-                          <MdiIcon path="chevron_right" />
-                          {t(
-                            'edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.tabBar.selectanswervote.selectanswervote.voteSelectAnswer',
-                            { defaultValue: 'VoteSelectAnswer' },
-                          )}
-                        </Button>
-                      </Grid>
+                      {!data.isNotSelectAnswerType && (
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <Button
+                            id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteSelectAnswerButtonCallOperation"
+                            onClick={() => AdminVoteDefinitionVoteSelectAnswerAction(data, () => fetchData())}
+                            disabled={!data.isSelectAnswerType || isLoading || editMode}
+                          >
+                            <MdiIcon path="chevron_right" />
+                            {t(
+                              'edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.tabBar.selectanswervote.selectanswervote.voteSelectAnswer',
+                              { defaultValue: 'VoteSelectAnswer' },
+                            )}
+                          </Button>
+                        </Grid>
+                      )}
                     </Grid>
                   </Grid>
                 )}
@@ -645,19 +656,21 @@ export default function AdminAdminVoteDefinitionsView() {
                       justifyContent="flex-start"
                       spacing={2}
                     >
-                      <Grid item xs={12} sm={12} md={4.0}>
-                        <Button
-                          id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteRatingButtonCallOperation"
-                          onClick={() => AdminVoteDefinitionVoteRatingAction(data, () => fetchData())}
-                          disabled={isLoading || editMode}
-                        >
-                          <MdiIcon path="chevron_right" />
-                          {t(
-                            'edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.tabBar.ratingvote.ratingvote.voteRating',
-                            { defaultValue: 'VoteRating' },
-                          )}
-                        </Button>
-                      </Grid>
+                      {!data.isNotRatingType && (
+                        <Grid item xs={12} sm={12} md={4.0}>
+                          <Button
+                            id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteRatingButtonCallOperation"
+                            onClick={() => AdminVoteDefinitionVoteRatingAction(data, () => fetchData())}
+                            disabled={!data.isRatingType || isLoading || editMode}
+                          >
+                            <MdiIcon path="chevron_right" />
+                            {t(
+                              'edemokracia.admin.Admin.voteDefinitions.VoteDefinition.View.tabBar.ratingvote.ratingvote.voteRating',
+                              { defaultValue: 'VoteRating' },
+                            )}
+                          </Button>
+                        </Grid>
+                      )}
                     </Grid>
                   </Grid>
                 )}

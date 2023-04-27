@@ -4,7 +4,7 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: CallOperationAction
 // Is Access: yes
@@ -25,6 +25,7 @@ import type {
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useTrackService } from '@pandino/react-hooks';
 import { useSnackbar } from 'notistack';
 import { useJudoNavigation, MdiIcon } from '../../../../../../../components';
 import { useDialog, useRangeDialog } from '../../../../../../../components/dialog';
@@ -48,6 +49,12 @@ import {
   RatingVoteInputStored,
 } from '../../../../../../../generated/data-api';
 
+export type AdminVoteDefinitionVoteRatingActionPostHandler = (ownerCallback: () => void) => Promise<void>;
+
+export const ADMIN_VOTE_DEFINITION_VOTE_RATING_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY =
+  'AdminVoteDefinitionVoteRatingActionPostHandlerHook';
+export type AdminVoteDefinitionVoteRatingActionPostHandlerHook = () => AdminVoteDefinitionVoteRatingActionPostHandler;
+
 export type AdminVoteDefinitionVoteRatingAction = () => (
   owner: AdminVoteDefinitionStored,
   successCallback: () => void,
@@ -67,6 +74,11 @@ export const useAdminVoteDefinitionVoteRatingAction: AdminVoteDefinitionVoteRati
   const title: string = t('edemokracia.admin.Admin.voteDefinitions.View.edemokracia.admin.VoteDefinition.voteRating', {
     defaultValue: 'VoteRating',
   });
+  const { service: customPostHandler } = useTrackService<AdminVoteDefinitionVoteRatingActionPostHandlerHook>(
+    `(${OBJECTCLASS}=${ADMIN_VOTE_DEFINITION_VOTE_RATING_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY})`,
+  );
+  const postHandler: AdminVoteDefinitionVoteRatingActionPostHandler | undefined =
+    customPostHandler && customPostHandler();
 
   return async function AdminVoteDefinitionVoteRatingAction(
     owner: AdminVoteDefinitionStored,
@@ -84,6 +96,10 @@ export const useAdminVoteDefinitionVoteRatingAction: AdminVoteDefinitionVoteRati
         <AdminVoteDefinitionVoteRatingForm
           successCallback={() => {
             closeDialog();
+            if (postHandler) {
+              postHandler(successCallback);
+              return;
+            }
             enqueueSnackbar(title, {
               variant: 'success',
               ...toastConfig.success,

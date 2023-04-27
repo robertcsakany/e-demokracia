@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/utilities/icons/icon-mapping.ts'
 // Template name: actor/src/utilities/icons/icon-mapping.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/utilities/icons/icon-mapping.ts.hbs
 
 // If defining dashed and underscored versions of a path becomes cumbersome, we can modify the `mapIcon` function

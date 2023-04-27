@@ -1,14 +1,17 @@
 import { JudoIdentifiable } from '@judo/data-api-common';
 import {
+  AdminVoteEntryQueryCustomizer,
+  AdminIssueStored,
+  AdminUserStored,
+  AdminCreateUserInput,
+  AdminVoteEntryStored,
   AdminDashboardQueryCustomizer,
   AdminIssueQueryCustomizer,
+  AdminVoteEntry,
   AdminCreateIssueInput,
   AdminDebate,
   AdminIssue,
-  AdminIssueStored,
-  AdminUserStored,
   AdminDebateStored,
-  AdminCreateUserInput,
   AdminDashboardStored,
   AdminDashboard,
   AdminDebateQueryCustomizer,
@@ -42,6 +45,16 @@ export interface AdminDashboardService {
     owner?: JudoIdentifiable<AdminDashboard> | AdminDashboard,
     queryCustomizer?: AdminDebateQueryCustomizer,
   ): Promise<Array<AdminDebateStored>>;
+
+  getVoteEntries(
+    target: JudoIdentifiable<AdminDashboard>,
+    queryCustomizer?: AdminVoteEntryQueryCustomizer,
+  ): Promise<Array<AdminVoteEntryStored>>;
+
+  getRangeForVoteEntries(
+    owner?: JudoIdentifiable<AdminDashboard> | AdminDashboard,
+    queryCustomizer?: AdminVoteEntryQueryCustomizer,
+  ): Promise<Array<AdminVoteEntryStored>>;
 
   createIssue(target: AdminCreateIssueInput): Promise<AdminIssueStored>;
 

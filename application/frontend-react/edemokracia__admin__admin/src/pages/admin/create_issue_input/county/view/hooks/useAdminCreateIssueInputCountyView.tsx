@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Relation View
 
@@ -52,6 +52,7 @@ export const useAdminCreateIssueInputCountyView = () => {
       headerName: t('edemokracia.admin.CreateIssueInput.county.County.View.cities.cities.name', {
         defaultValue: 'Name',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },

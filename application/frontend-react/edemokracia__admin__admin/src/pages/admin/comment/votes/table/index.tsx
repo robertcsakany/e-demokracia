@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Comment.votes#Table
 // Page owner name: edemokracia::admin::Admin
@@ -200,7 +200,7 @@ export default function AdminCommentVotesTable() {
   return (
     <>
       <PageHeader title={title}>
-        <Grid item>
+        <Grid className="page-action" item>
           <Button
             id="page-action-create"
             onClick={() =>
@@ -214,7 +214,7 @@ export default function AdminCommentVotesTable() {
             {t('judo.pages.table.create', { defaultValue: 'Create' })}
           </Button>
         </Grid>
-        <Grid item>
+        <Grid className="page-action" item>
           <Button
             id="page-action-refresh"
             onClick={() => pageRefreshVotesAction(() => fetchData())}
@@ -241,6 +241,8 @@ export default function AdminCommentVotesTable() {
                     loading={isLoading}
                     rows={data}
                     rowCount={rowCount}
+                    getRowClassName={() => 'data-grid-row'}
+                    getCellClassName={() => 'data-grid-cell'}
                     sortModel={sortModel}
                     onSortModelChange={handleSortModelChange}
                     columns={[

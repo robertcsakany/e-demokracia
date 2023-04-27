@@ -46,14 +46,14 @@
         <judo-sdk-common-version>1.0.4.20230330_222100_3c176073_develop</judo-sdk-common-version>
         <mapper-version>1.0.4.20230324_115639_e833341e_develop</mapper-version>
         
-        <judo-tatami-version>1.1.0.20230420_043107_6bd87586_develop </judo-tatami-version>
-        <judo-platform-version>2.0.1-SNAPSHOT</judo-platform-version>
-        <judo-services-version>1.1.0-SNAPSHOT</judo-services-version>
-        <judo-rdbms-schema-version>1.0.0.20230420_042422_1bacc6ba_develop</judo-rdbms-schema-version>
-        <judo-tatami-client-version>1.1.0.20230420_044944_52a64a4a_develop</judo-tatami-client-version>
+        <judo-tatami-version>1.1.0.20230425_042248_79ecc3a6_develop </judo-tatami-version>
+        <judo-platform-version>2.0.1.20230426_040744_4b31e53e_develop</judo-platform-version>
+        <judo-services-version>1.1.0.20230425_145751_010fcd90_develop</judo-services-version>
+        <judo-rdbms-schema-version>1.0.0.20230425_041925_d5ce5945_develop</judo-rdbms-schema-version>
+        <judo-tatami-client-version>1.1.0.20230425_043242_f2e8fda8_develop</judo-tatami-client-version>
         
-        <judo-meta-ui-version>1.1.0.20230420_040825_011d8ab6_develop</judo-meta-ui-version>
-        <judo-ui-flutter-template-version>1.0.0.20230420_041235_51576416_develop</judo-ui-flutter-template-version>
+        <judo-meta-ui-version>1.1.0.20230425_040719_403b7660_develop</judo-meta-ui-version>
+        <judo-ui-flutter-template-version>1.0.0.20230425_041055_a65309d9_develop</judo-ui-flutter-template-version>
         <!-- End of 'pom.xml.judo-properties-definition.fragment.hbs' -->
 
         <!-- To define create 'pom.xml.properties-definition.fragment.hbs' file -->

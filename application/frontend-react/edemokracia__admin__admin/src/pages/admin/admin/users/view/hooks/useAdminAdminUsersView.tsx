@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Access View
 
@@ -60,6 +60,7 @@ export const useAdminAdminUsersView = () => {
         'edemokracia.admin.Admin.users.User.View.Areas.Areas.activity.activity.cities.activity.cities.activityCities.activityCities.representation',
         { defaultValue: 'City' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -98,6 +99,7 @@ export const useAdminAdminUsersView = () => {
         'edemokracia.admin.Admin.users.User.View.Areas.Areas.activity.activity.districts.activity.districts.activityDistricts.activityDistricts.representation',
         { defaultValue: 'District' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -136,6 +138,7 @@ export const useAdminAdminUsersView = () => {
         'edemokracia.admin.Admin.users.User.View.Areas.Areas.activity.tab.activity.counties.tab.activity.counties.activityCounties.activityCounties.representation',
         { defaultValue: 'County' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -173,6 +176,7 @@ export const useAdminAdminUsersView = () => {
       headerName: t('edemokracia.admin.Admin.users.User.View.Areas.Areas.Residency.residentCity.representation', {
         defaultValue: 'City',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -209,6 +213,7 @@ export const useAdminAdminUsersView = () => {
       headerName: t('edemokracia.admin.Admin.users.User.View.Areas.Areas.Residency.residentCounty.representation', {
         defaultValue: 'County',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -245,6 +250,7 @@ export const useAdminAdminUsersView = () => {
       headerName: t('edemokracia.admin.Admin.users.User.View.Areas.Areas.Residency.residentDistrict.representation', {
         defaultValue: 'District',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },

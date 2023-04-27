@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #actionsIndexPath(#self)
 // Template name: actor/src/pages/actions/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/index.tsx.hbs
 export * from './pageRefreshIssues';
 export * from './pageDeleteIssues';
@@ -20,7 +20,6 @@ export * from './issueType/linkViewIssueType';
 export * from './categories/rowViewCategories';
 export * from './pageEditIssues';
 export * from './city/linkViewCity';
-export * from './debates/rowViewDebates';
 export * from './owner/linkViewOwner';
 export * from './county/linkViewCounty';
 export * from './district/linkViewDistrict';

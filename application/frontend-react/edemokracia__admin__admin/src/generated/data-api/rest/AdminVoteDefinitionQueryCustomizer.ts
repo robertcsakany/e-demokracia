@@ -3,8 +3,10 @@ import { AdminVoteDefinition } from '../model/AdminVoteDefinition';
 
 import { FilterByText } from './FilterByText';
 import { FilterByString } from './FilterByString';
+import { FilterByInteger } from './FilterByInteger';
 import { FilterByVoteStatus } from './FilterByVoteStatus';
 import { FilterByBoolean } from './FilterByBoolean';
+import { FilterByVoteType } from './FilterByVoteType';
 import { FilterByTimestamp } from './FilterByTimestamp';
 
 export interface AdminVoteDefinitionQueryCustomizer extends QueryCustomizer<AdminVoteDefinition> {
@@ -21,4 +23,6 @@ export interface AdminVoteDefinitionQueryCustomizer extends QueryCustomizer<Admi
   isNotSelectAnswerType?: Array<FilterByBoolean>;
   isNotYesNoAbstainType?: Array<FilterByBoolean>;
   isNotYesNoType?: Array<FilterByBoolean>;
+  numberOfVotes?: Array<FilterByInteger>;
+  voteType?: Array<FilterByVoteType>;
 }

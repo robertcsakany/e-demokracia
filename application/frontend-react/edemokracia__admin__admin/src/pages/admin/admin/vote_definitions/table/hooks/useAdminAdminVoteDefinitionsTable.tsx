@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Access Table
 
@@ -34,12 +34,40 @@ export const useAdminAdminVoteDefinitionsTable = () => {
   const columns: GridColDef<AdminVoteDefinitionStored>[] = [
     {
       ...baseColumnConfig,
+      field: 'voteType',
+      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.voteType', {
+        defaultValue: 'VoteType',
+      }) as string,
+      headerClassName: 'data-grid-column-header',
+      width: 170,
+      type: 'string',
+      sortable: false,
+      description: t('judo.pages.table.column.not-sortable', {
+        defaultValue: 'This column is not sortable.',
+      }) as string,
+    },
+    {
+      ...baseColumnConfig,
       field: 'title',
       headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.title', {
         defaultValue: 'Title',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'numberOfVotes',
+      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.numberOfVotes', {
+        defaultValue: 'NumberOfVotes',
+      }) as string,
+      headerClassName: 'data-grid-column-header',
+      width: 100,
+      type: 'number',
+      valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
+        return value && new Intl.NumberFormat(l10nLocale).format(value);
+      },
     },
     {
       ...baseColumnConfig,
@@ -47,6 +75,46 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.created', {
         defaultValue: 'Created',
       }) as string,
+      headerClassName: 'data-grid-column-header',
+      width: 170,
+      type: 'dateTime',
+      valueGetter: ({ value }) => value && serviceDateToUiDate(value),
+      valueFormatter: ({ value }: GridValueFormatterParams<Date>) => {
+        return (
+          value &&
+          new Intl.DateTimeFormat(l10nLocale, {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+          }).format(value)
+        );
+      },
+    },
+    {
+      ...baseColumnConfig,
+      field: 'status',
+      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.status', {
+        defaultValue: 'Status',
+      }) as string,
+      headerClassName: 'data-grid-column-header',
+      width: 170,
+      type: 'string',
+      sortable: false,
+      description: t('judo.pages.table.column.not-sortable', {
+        defaultValue: 'This column is not sortable.',
+      }) as string,
+    },
+    {
+      ...baseColumnConfig,
+      field: 'closeAt',
+      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.closeAt', {
+        defaultValue: 'CloseAt',
+      }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -71,117 +139,22 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.description', {
         defaultValue: 'Description',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
-    },
-    {
-      ...baseColumnConfig,
-      field: 'status',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.status', {
-        defaultValue: 'Status',
-      }) as string,
-      width: 170,
-      type: 'string',
-      sortable: false,
-      description: t('judo.pages.table.column.not-sortable', {
-        defaultValue: 'This column is not sortable.',
-      }) as string,
-    },
-    {
-      ...baseColumnConfig,
-      field: 'closeAt',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.closeAt', {
-        defaultValue: 'CloseAt',
-      }) as string,
-      width: 170,
-      type: 'dateTime',
-      valueGetter: ({ value }) => value && serviceDateToUiDate(value),
-      valueFormatter: ({ value }: GridValueFormatterParams<Date>) => {
-        return (
-          value &&
-          new Intl.DateTimeFormat(l10nLocale, {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false,
-          }).format(value)
-        );
-      },
-    },
-    {
-      ...baseColumnConfig,
-      field: 'isRatingType',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isRatingType', {
-        defaultValue: 'IsRatingType',
-      }) as string,
-      width: 100,
-      type: 'boolean',
-      align: 'center',
-      renderCell: (params: GridRenderCellParams<any, AdminVoteDefinitionStored>) => {
-        return params.row.isRatingType ? (
-          <MdiIcon path="check-circle" color="green" />
-        ) : (
-          <MdiIcon path="close-circle" color="red" />
-        );
-      },
-    },
-    {
-      ...baseColumnConfig,
-      field: 'isSelectAnswerType',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isSelectAnswerType', {
-        defaultValue: 'IsSelectAnswerType',
-      }) as string,
-      width: 100,
-      type: 'boolean',
-      align: 'center',
-      renderCell: (params: GridRenderCellParams<any, AdminVoteDefinitionStored>) => {
-        return params.row.isSelectAnswerType ? (
-          <MdiIcon path="check-circle" color="green" />
-        ) : (
-          <MdiIcon path="close-circle" color="red" />
-        );
-      },
-    },
-    {
-      ...baseColumnConfig,
-      field: 'isYesNoAbstainType',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isYesNoAbstainType', {
-        defaultValue: 'IsYesNoAbstainType',
-      }) as string,
-      width: 100,
-      type: 'boolean',
-      align: 'center',
-      renderCell: (params: GridRenderCellParams<any, AdminVoteDefinitionStored>) => {
-        return params.row.isYesNoAbstainType ? (
-          <MdiIcon path="check-circle" color="green" />
-        ) : (
-          <MdiIcon path="close-circle" color="red" />
-        );
-      },
-    },
-    {
-      ...baseColumnConfig,
-      field: 'isYesNoType',
-      headerName: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isYesNoType', {
-        defaultValue: 'IsYesNoType',
-      }) as string,
-      width: 100,
-      type: 'boolean',
-      align: 'center',
-      renderCell: (params: GridRenderCellParams<any, AdminVoteDefinitionStored>) => {
-        return params.row.isYesNoType ? (
-          <MdiIcon path="check-circle" color="green" />
-        ) : (
-          <MdiIcon path="close-circle" color="red" />
-        );
-      },
     },
   ];
 
   const filterOptions: FilterOption[] = [
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableVoteTypeFilter',
+      attributeName: 'voteType',
+      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.voteType.Filter', {
+        defaultValue: 'VoteType',
+      }) as string,
+      filterType: FilterType.enumeration,
+      enumValues: ['YES_NO', 'YES_NO_ABSTAIN', 'SELECT_ANSWER', 'RATE', 'NO_VOTE'],
+    },
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableTitleFilter',
       attributeName: 'title',
@@ -191,20 +164,20 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       filterType: FilterType.string,
     },
     {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableNumberOfVotesFilter',
+      attributeName: 'numberOfVotes',
+      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.numberOfVotes.Filter', {
+        defaultValue: 'NumberOfVotes',
+      }) as string,
+      filterType: FilterType.numeric,
+    },
+    {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableCreatedFilter',
       attributeName: 'created',
       label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.created.Filter', {
         defaultValue: 'Created',
       }) as string,
       filterType: FilterType.dateTime,
-    },
-    {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableDescriptionFilter',
-      attributeName: 'description',
-      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.description.Filter', {
-        defaultValue: 'Description',
-      }) as string,
-      filterType: FilterType.string,
     },
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableStatusFilter',
@@ -224,38 +197,12 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       filterType: FilterType.dateTime,
     },
     {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableIsRatingTypeFilter',
-      attributeName: 'isRatingType',
-      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isRatingType.Filter', {
-        defaultValue: 'IsRatingType',
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableDescriptionFilter',
+      attributeName: 'description',
+      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.description.Filter', {
+        defaultValue: 'Description',
       }) as string,
-      filterType: FilterType.trinaryLogic,
-    },
-    {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableIsSelectAnswerTypeFilter',
-      attributeName: 'isSelectAnswerType',
-      label: t(
-        'edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isSelectAnswerType.Filter',
-        { defaultValue: 'IsSelectAnswerType' },
-      ) as string,
-      filterType: FilterType.trinaryLogic,
-    },
-    {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableIsYesNoAbstainTypeFilter',
-      attributeName: 'isYesNoAbstainType',
-      label: t(
-        'edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isYesNoAbstainType.Filter',
-        { defaultValue: 'IsYesNoAbstainType' },
-      ) as string,
-      filterType: FilterType.trinaryLogic,
-    },
-    {
-      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableIsYesNoTypeFilter',
-      attributeName: 'isYesNoType',
-      label: t('edemokracia.admin.Admin.voteDefinitions.voteDefinitions.VoteDefinition.Table.isYesNoType.Filter', {
-        defaultValue: 'IsYesNoType',
-      }) as string,
-      filterType: FilterType.trinaryLogic,
+      filterType: FilterType.string,
     },
   ];
 

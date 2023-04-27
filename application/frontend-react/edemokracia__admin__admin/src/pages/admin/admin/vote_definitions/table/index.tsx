@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.voteDefinitions#Table
 // Page owner name: edemokracia::admin::Admin
@@ -101,7 +101,8 @@ export default function AdminAdminVoteDefinitionsTable() {
   const [data, setData] = useState<GridRowModel<AdminVoteDefinitionStored>[]>([]);
   const [filters, setFilters] = useState<Filter[]>(persistedTableData.filters || []);
   const [queryCustomizer, setQueryCustomizer] = useState<AdminVoteDefinitionQueryCustomizer>({
-    _mask: '{title,created,description,status,closeAt,isRatingType,isSelectAnswerType,isYesNoAbstainType,isYesNoType}',
+    _mask:
+      '{voteType,title,numberOfVotes,created,status,closeAt,description,isYesNoType,isNotYesNoType,isYesNoAbstainType,isNotYesNoAbstainType,isSelectAnswerType,isNotSelectAnswerType,isRatingType,isNotRatingType}',
     _seek: {
       limit: 10 + 1,
     },
@@ -113,15 +114,13 @@ export default function AdminAdminVoteDefinitionsTable() {
     ],
     ...mapAllFiltersToQueryCustomizerProperties(
       filters,
+      'voteType',
       'title',
+      'numberOfVotes',
       'created',
-      'description',
       'status',
       'closeAt',
-      'isRatingType',
-      'isSelectAnswerType',
-      'isYesNoAbstainType',
-      'isYesNoType',
+      'description',
     ),
   });
   const title: string = t('edemokracia.admin.Admin.voteDefinitions.Table', { defaultValue: 'Vote Definitions' });
@@ -213,7 +212,7 @@ export default function AdminAdminVoteDefinitionsTable() {
     {
       id: 'CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoButtonCallOperation',
       label: t('edemokracia.admin.Admin.voteDefinitions.Table.edemokracia.admin.VoteDefinition.voteYesNo', {
-        defaultValue: 'VoteYesNo',
+        defaultValue: 'Vote',
       }) as string,
       icon: <MdiIcon path="chevron_right" />,
       action: async (row: AdminVoteDefinitionStored) => AdminVoteDefinitionVoteYesNoAction(row, () => fetchData()),
@@ -249,7 +248,7 @@ export default function AdminAdminVoteDefinitionsTable() {
   return (
     <>
       <PageHeader title={title}>
-        <Grid item>
+        <Grid className="page-action" item>
           <Button
             id="page-action-refresh"
             onClick={() => pageRefreshVoteDefinitionsAction(() => fetchData())}
@@ -276,6 +275,8 @@ export default function AdminAdminVoteDefinitionsTable() {
                     loading={isLoading}
                     rows={data}
                     rowCount={rowCount}
+                    getRowClassName={() => 'data-grid-row'}
+                    getCellClassName={() => 'data-grid-cell'}
                     sortModel={sortModel}
                     onSortModelChange={handleSortModelChange}
                     columns={[

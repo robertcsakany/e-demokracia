@@ -4,7 +4,7 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: CallOperationAction
 // Is Access: yes
@@ -25,6 +25,7 @@ import type {
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useTrackService } from '@pandino/react-hooks';
 import { useSnackbar } from 'notistack';
 import { useJudoNavigation, MdiIcon } from '../../../../../../../components';
 import { useDialog, useRangeDialog } from '../../../../../../../components/dialog';
@@ -49,6 +50,12 @@ import {
   YesNoVoteInputStored,
 } from '../../../../../../../generated/data-api';
 
+export type AdminVoteDefinitionVoteYesNoActionPostHandler = (ownerCallback: () => void) => Promise<void>;
+
+export const ADMIN_VOTE_DEFINITION_VOTE_YES_NO_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY =
+  'AdminVoteDefinitionVoteYesNoActionPostHandlerHook';
+export type AdminVoteDefinitionVoteYesNoActionPostHandlerHook = () => AdminVoteDefinitionVoteYesNoActionPostHandler;
+
 export type AdminVoteDefinitionVoteYesNoAction = () => (
   owner: AdminVoteDefinitionStored,
   successCallback: () => void,
@@ -66,8 +73,13 @@ export const useAdminVoteDefinitionVoteYesNoAction: AdminVoteDefinitionVoteYesNo
   const [createDialog, closeDialog] = useDialog();
   const { navigate } = useJudoNavigation();
   const title: string = t('edemokracia.admin.Admin.voteDefinitions.View.edemokracia.admin.VoteDefinition.voteYesNo', {
-    defaultValue: 'VoteYesNo',
+    defaultValue: 'Vote',
   });
+  const { service: customPostHandler } = useTrackService<AdminVoteDefinitionVoteYesNoActionPostHandlerHook>(
+    `(${OBJECTCLASS}=${ADMIN_VOTE_DEFINITION_VOTE_YES_NO_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY})`,
+  );
+  const postHandler: AdminVoteDefinitionVoteYesNoActionPostHandler | undefined =
+    customPostHandler && customPostHandler();
 
   return async function AdminVoteDefinitionVoteYesNoAction(
     owner: AdminVoteDefinitionStored,
@@ -85,6 +97,10 @@ export const useAdminVoteDefinitionVoteYesNoAction: AdminVoteDefinitionVoteYesNo
         <AdminVoteDefinitionVoteYesNoForm
           successCallback={() => {
             closeDialog();
+            if (postHandler) {
+              postHandler(successCallback);
+              return;
+            }
             enqueueSnackbar(title, {
               variant: 'success',
               ...toastConfig.success,

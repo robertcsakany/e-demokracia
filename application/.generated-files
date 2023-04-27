@@ -21,7 +21,7 @@ frontend-flutter/pom.xml,7c547f2df77e65b6681e91dfe785e86e
 frontend-react/.gitignore,bc016d72289e275fd01f618658001a95
 frontend-react/README.adoc,d444054c34deafa82e300e986847c41b
 frontend-react/model/pom.xml,765492fc083dadd74014f78a4230637f
-frontend-react/pom.xml,bc92b516e351d4ab084230ee1c97109a
+frontend-react/pom.xml,84a54873d3e3b481a96bae34be13e531
 judo.properties,9e50a015d78737c49302671b85206c68
 judo.sh,01b1e6a5ee740949a38f0f58aad344d4
 karaf-features/pom.xml,da15a44194ceb0d41889e8c3f377783e
@@ -32,7 +32,7 @@ launcher/Build edemokracia Application.launch,06425f6a35aa82b149a92af8ee309827
 launcher/Compile edemokracia Custom Application.launch,589057793117e366005ba03dcbcfe284
 launcher/Run edemokracia Application.launch,c9b310d6660114eb63440620e9fa0173
 model/pom.xml,50efd55998203458fd6d55e1097d8294
-pom.xml,f4ab7203f62257e24d927fd5803287f6
+pom.xml,3081e21968d15aa070ca62787a183847
 schema/README.adoc,8371838b901d34b8026d10bf3399c83d
 schema/migration/gitkeep,68b329da9893e34099c7d8ad5cb9c940
 schema/pom.xml,376bbfaeea566d9754ebc5238e05e3b3

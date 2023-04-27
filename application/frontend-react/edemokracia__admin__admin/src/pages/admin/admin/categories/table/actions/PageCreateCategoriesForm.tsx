@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,23 +12,30 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CreateAction
 
-import { useState, useEffect, useCallback, Dispatch, SetStateAction, FC } from 'react';
+import { useState, useEffect, useRef, useCallback, Dispatch, SetStateAction, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Grid,
   Button,
+  ButtonGroup,
   Card,
   CardContent,
+  ClickAwayListener,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Grow,
   IconButton,
   InputAdornment,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
   TextField,
 } from '@mui/material';
 import {
@@ -46,7 +53,7 @@ import { ComponentProxy } from '@pandino/react-hooks';
 import { JudoIdentifiable } from '@judo/data-api-common';
 import { useSnackbar } from 'notistack';
 import { v1 as uuidv1 } from 'uuid';
-import { MdiIcon, ModeledTabs } from '../../../../../../components';
+import { useJudoNavigation, MdiIcon, ModeledTabs } from '../../../../../../components';
 import { columnsActionCalculator } from '../../../../../../components/table';
 import { useRangeDialog } from '../../../../../../components/dialog';
 import {
@@ -86,7 +93,7 @@ import { CUSTOM_VISUAL_ELEMENT_INTERFACE_KEY, CustomFormVisualElementProps } fro
 import { useL10N } from '../../../../../../l10n/l10n-context';
 
 export interface PageCreateCategoriesFormProps {
-  successCallback: (result: AdminIssueCategoryStored) => void;
+  successCallback: () => void;
   cancel: () => void;
 }
 
@@ -95,6 +102,9 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
   const { openRangeDialog } = useRangeDialog();
   const { downloadFile, extractFileNameFromToken, uploadFile } = fileHandling();
   const { locale: l10nLocale } = useL10N();
+  const anchorRef = useRef<HTMLDivElement>(null);
+  const { navigate } = useJudoNavigation();
+  const [open, setOpen] = useState(false);
 
   const handleFetchError = useErrorHandler(
     `(&(${OBJECTCLASS}=${ERROR_PROCESSOR_HOOK_INTERFACE_KEY})(operation=Fetch))`,
@@ -138,6 +148,7 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
       headerName: t('edemokracia.admin.Admin.categories.Category.Form.owner.representation', {
         defaultValue: 'Representation',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -213,14 +224,24 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
     try {
       const res = await adminAdminServiceForCategoriesImpl.createCategories(payloadDiff);
 
-      if (res) {
-        successCallback(res);
-      }
+      return res;
     } catch (error) {
       handleCreateError(error, { setValidation }, data);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event: Event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -347,14 +368,53 @@ export function PageCreateCategoriesForm({ successCallback, cancel }: PageCreate
         >
           {t('judo.pages.cancel', { defaultValue: 'Cancel' })}
         </Button>
-        <Button
-          id="CreateActionedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesTableEdemokraciaAdminAdminEdemokraciaAdminAdminCategoriesPageCreate-action-form-action-create"
-          variant="contained"
-          onClick={() => saveData()}
-          disabled={isLoading}
-        >
-          {t('judo.pages.create', { defaultValue: 'Create' })}
-        </Button>
+        <ButtonGroup size="small" ref={anchorRef} aria-label="split button" disabled={isLoading}>
+          <Button
+            id="CreateActionedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesTableEdemokraciaAdminAdminEdemokraciaAdminAdminCategoriesPageCreate-action-form-action-create"
+            variant="contained"
+            onClick={async () => {
+              const result = await saveData();
+              if (result) {
+                successCallback();
+              }
+            }}
+            disabled={isLoading}
+          >
+            {t('judo.pages.create', { defaultValue: 'Create' })}
+          </Button>
+          <Button variant="contained" size="small" onClick={handleToggle}>
+            <MdiIcon path="menu-down" />
+          </Button>
+        </ButtonGroup>
+        <Popper sx={{ zIndex: 1 }} open={open} anchorEl={anchorRef.current} transition disablePortal>
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList id="split-button-menu" autoFocusItem>
+                    <MenuItem
+                      key="create-and-navigate"
+                      onClick={async (event: any) => {
+                        const result: { __signedIdentifier: string } | undefined = await saveData();
+
+                        if (result) {
+                          successCallback();
+                          navigate(`admin/admin/categories/view/${result.__signedIdentifier}`);
+                        }
+                      }}
+                      disabled={isLoading}
+                    >
+                      {t('judo.pages.create-and-navigate', { defaultValue: 'Create and navigate' })}
+                    </MenuItem>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
       </DialogActions>
     </>
   );

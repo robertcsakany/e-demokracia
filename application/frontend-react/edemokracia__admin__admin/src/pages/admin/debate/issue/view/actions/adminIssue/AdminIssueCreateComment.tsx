@@ -4,7 +4,7 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: CallOperationAction
 // Is Access: no
@@ -25,6 +25,7 @@ import type {
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useTrackService } from '@pandino/react-hooks';
 import { useSnackbar } from 'notistack';
 import { useJudoNavigation, MdiIcon } from '../../../../../../../components';
 import { useDialog, useRangeDialog } from '../../../../../../../components/dialog';
@@ -50,6 +51,12 @@ import {
   AdminDebateStored,
 } from '../../../../../../../generated/data-api';
 
+export type AdminIssueCreateCommentActionPostHandler = (ownerCallback: () => void) => Promise<void>;
+
+export const ADMIN_ISSUE_CREATE_COMMENT_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY =
+  'AdminIssueCreateCommentActionPostHandlerHook';
+export type AdminIssueCreateCommentActionPostHandlerHook = () => AdminIssueCreateCommentActionPostHandler;
+
 export type AdminIssueCreateCommentAction = () => (
   owner: AdminIssueStored,
   successCallback: () => void,
@@ -69,6 +76,10 @@ export const useAdminIssueCreateCommentAction: AdminIssueCreateCommentAction = (
   const title: string = t('edemokracia.admin.Debate.issue.View.edemokracia.admin.Issue.createComment', {
     defaultValue: 'Add comment',
   });
+  const { service: customPostHandler } = useTrackService<AdminIssueCreateCommentActionPostHandlerHook>(
+    `(${OBJECTCLASS}=${ADMIN_ISSUE_CREATE_COMMENT_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY})`,
+  );
+  const postHandler: AdminIssueCreateCommentActionPostHandler | undefined = customPostHandler && customPostHandler();
 
   return async function AdminIssueCreateCommentAction(owner: AdminIssueStored, successCallback: () => void) {
     createDialog({
@@ -83,6 +94,10 @@ export const useAdminIssueCreateCommentAction: AdminIssueCreateCommentAction = (
         <AdminIssueCreateCommentForm
           successCallback={() => {
             closeDialog();
+            if (postHandler) {
+              postHandler(successCallback);
+              return;
+            }
             enqueueSnackbar(title, {
               variant: 'success',
               ...toastConfig.success,

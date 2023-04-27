@@ -11,6 +11,12 @@ import {
 
 import {} from './AdminVoteDefinitionMaskBuilder';
 import {
+  AdminConCreatedByMaskBuilder,
+  AdminConConsMaskBuilder,
+  AdminConProsMaskBuilder,
+  AdminConCommentsMaskBuilder,
+} from './AdminConMaskBuilder';
+import {
   AdminUserActivityCountiesMaskBuilder,
   AdminUserResidentCountyMaskBuilder,
   AdminUserActivityCitiesMaskBuilder,
@@ -19,6 +25,12 @@ import {
   AdminUserResidentDistrictMaskBuilder,
 } from './AdminUserMaskBuilder';
 import { AdminCommentCreatedByMaskBuilder } from './AdminCommentMaskBuilder';
+import {
+  AdminProCreatedByMaskBuilder,
+  AdminProProsMaskBuilder,
+  AdminProConsMaskBuilder,
+  AdminProCommentsMaskBuilder,
+} from './AdminProMaskBuilder';
 import {
   AdminIssueAttachmentsMaskBuilder,
   AdminIssueOwnerMaskBuilder,
@@ -31,18 +43,6 @@ import {
   AdminIssueCityMaskBuilder,
   AdminIssueDistrictMaskBuilder,
 } from './AdminIssueMaskBuilder';
-import {
-  AdminConCreatedByMaskBuilder,
-  AdminConConsMaskBuilder,
-  AdminConProsMaskBuilder,
-  AdminConCommentsMaskBuilder,
-} from './AdminConMaskBuilder';
-import {
-  AdminProCreatedByMaskBuilder,
-  AdminProProsMaskBuilder,
-  AdminProConsMaskBuilder,
-  AdminProCommentsMaskBuilder,
-} from './AdminProMaskBuilder';
 
 export class AdminDebateIssueMaskBuilder extends RelationMaskBuilder {
   constructor(

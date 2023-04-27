@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/components/ApplicationSelector.tsx'
 // Template name: actor/src/components/ApplicationSelector.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/components/ApplicationSelector.tsx.hbs
 
 import { useState } from 'react';

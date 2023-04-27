@@ -4,7 +4,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
@@ -12,7 +12,7 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CallOperationAction
 
@@ -21,20 +21,27 @@ import { useTranslation } from 'react-i18next';
 import {
   Grid,
   Button,
+  ButtonGroup,
   Card,
   CardContent,
+  ClickAwayListener,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Grow,
   IconButton,
   InputAdornment,
   MenuItem,
+  MenuList,
+  Paper,
+  Popper,
   TextField,
   Typography,
 } from '@mui/material';
 import { DateTimePicker, DateTimeValidationError } from '@mui/x-date-pickers';
 import {
+  DataGrid,
   GridColDef,
   GridRenderCellParams,
   GridRowId,
@@ -42,6 +49,7 @@ import {
   GridRowSelectionModel,
   GridSortItem,
   GridSortModel,
+  GridToolbarContainer,
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
@@ -61,16 +69,20 @@ import {
 import { FilterOption, FilterType } from '../../../../../../../components-api';
 import {
   CloseDebateInputQueryCustomizer,
-  AdminVoteDefinitionStored,
-  AdminDebate,
   VoteDefinitionQueryCustomizer,
+  SelectAnswerInputMaskBuilder,
+  SelectAnswerInput,
+  VoteDefinitionStored,
+  SelectAnswerInputQueryCustomizer,
+  EdemokraciaVoteTypeOnCloseDebate,
+  AdminVoteDefinitionStored,
+  SelectAnswerInputStored,
+  AdminDebate,
   AdminVoteDefinition,
   AdminDebateStored,
   CloseDebateInputStored,
   VoteDefinition,
   CloseDebateInput,
-  VoteDefinitionStored,
-  EdemokraciaVoteTypeOnCloseDebate,
   AdminDebateQueryCustomizer,
 } from '../../../../../../../generated/data-api';
 import { closeDebateInputServiceImpl, adminDebateServiceImpl } from '../../../../../../../generated/data-axios';
@@ -130,7 +142,84 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
     },
     [data],
   );
-  const title: string = t('edemokracia.admin.Debate.closeDebate.Input', { defaultValue: 'TransferObject Form' });
+  const title: string = t('edemokracia.admin.Debate.closeDebate.Input', { defaultValue: 'Close debate' });
+
+  const [answersSortModel, setAnswersSortModel] = useState<GridSortModel>([]);
+
+  const answersColumns: GridColDef<SelectAnswerInputStored>[] = [
+    {
+      ...baseColumnConfig,
+      field: 'title',
+      headerName: t('edemokracia.admin.Debate.closeDebate.CloseDebate.Form.group.group.answers.answers.title', {
+        defaultValue: 'Title',
+      }) as string,
+      headerClassName: 'data-grid-column-header',
+      width: 230,
+      type: 'string',
+      sortable: false,
+      description: t('judo.pages.table.column.not-sortable', {
+        defaultValue: 'This column is not sortable.',
+      }) as string,
+    },
+    {
+      ...baseColumnConfig,
+      field: 'description',
+      headerName: t('edemokracia.admin.Debate.closeDebate.CloseDebate.Form.group.group.answers.answers.description', {
+        defaultValue: 'Description',
+      }) as string,
+      headerClassName: 'data-grid-column-header',
+      width: 230,
+      type: 'string',
+      sortable: false,
+      description: t('judo.pages.table.column.not-sortable', {
+        defaultValue: 'This column is not sortable.',
+      }) as string,
+    },
+  ];
+
+  const answersRangeFilterOptions: FilterOption[] = [];
+
+  const answersInitialQueryCustomizer: SelectAnswerInputQueryCustomizer = {
+    _mask: '{title,description}',
+    _orderBy: answersSortModel.length
+      ? [
+          {
+            attribute: answersSortModel[0].field,
+            descending: answersSortModel[0].sort === 'desc',
+          },
+        ]
+      : [],
+  };
+  const answersRangeCall = async () =>
+    openRangeDialog<SelectAnswerInputStored, SelectAnswerInputQueryCustomizer>({
+      id: 'RelationTypeedemokraciaAdminAdminEdemokraciaCloseDebateInputAnswers',
+      columns: answersColumns,
+      defaultSortField: answersSortModel[0],
+      rangeCall: async (queryCustomizer) =>
+        await closeDebateInputServiceImpl.getRangeForAnswers(undefined, processQueryCustomizer(queryCustomizer)),
+      single: false,
+      alreadySelectedItems: answersSelectionModel,
+      filterOptions: answersRangeFilterOptions,
+      initialQueryCustomizer: answersInitialQueryCustomizer,
+    });
+  const [answersSelectionModel, setAnswersSelectionModel] = useState<GridRowSelectionModel>([]);
+  const answersRowActions: TableRowAction<SelectAnswerInputStored>[] = [
+    {
+      id: 'RemoveActionedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputEdemokraciaAdminAdminEdemokraciaCloseDebateInputAnswersRowRemove',
+      label: t('judo.pages.table.remove', { defaultValue: 'Remove' }) as string,
+      icon: <MdiIcon path="link_off" />,
+      action: async (row: SelectAnswerInputStored) => {
+        setData({
+          ...data,
+          ['answers']: [
+            ...(data.answers || []).filter(
+              (e: SelectAnswerInputStored) => e.__signedIdentifier !== row.__signedIdentifier,
+            ),
+          ],
+        });
+      },
+    },
+  ];
 
   const isFormUpdateable = useCallback(() => {
     return true;
@@ -198,18 +287,18 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
       <DialogContent dividers>
         <Grid container xs={12} sm={12} spacing={2} direction="column" alignItems="stretch" justifyContent="flex-start">
           <Grid item xs={12} sm={12}>
-            <Card id="FlexedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultTransferObjectFormDebateLabelWrapper">
+            <Card id="FlexedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultCloseDebateFormDebateLabelWrapper">
               <CardContent>
                 <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
                   <Grid item xs={12} sm={12}>
                     <Grid container direction="row" alignItems="center" justifyContent="flex-start">
                       <MdiIcon path="wechat" />
                       <Typography
-                        id="LabeledemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultTransferObjectFormDebateLabelWrapperDebateLabel"
+                        id="LabeledemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultCloseDebateFormDebateLabelWrapperDebateLabel"
                         variant="h6"
                         component="h1"
                       >
-                        {t('edemokracia.admin.Debate.closeDebate.TransferObject.Form.debate.debate.Label', {
+                        {t('edemokracia.admin.Debate.closeDebate.CloseDebate.Form.debate.debate.Label', {
                           defaultValue: 'Close debate',
                         })}
                       </Typography>
@@ -218,7 +307,7 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
 
                   <Grid item xs={12} sm={12}>
                     <Grid
-                      id="FlexedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultTransferObjectFormDebateLabelWrapperDebate"
+                      id="FlexedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultCloseDebateFormDebateLabelWrapperDebate"
                       container
                       direction="row"
                       alignItems="stretch"
@@ -229,10 +318,10 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
                         <TextField
                           required
                           name="voteType"
-                          id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultTransferObjectFormDebateLabelWrapperDebateVoteType"
+                          id="EnumerationComboedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultCloseDebateFormDebateLabelWrapperDebateVoteType"
                           autoFocus
                           label={
-                            t('edemokracia.admin.Debate.closeDebate.TransferObject.Form.debate.debate.voteType', {
+                            t('edemokracia.admin.Debate.closeDebate.CloseDebate.Form.debate.debate.voteType', {
                               defaultValue: 'VoteType',
                             }) as string
                           }
@@ -299,7 +388,7 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
                           className={!editMode ? 'JUDO-viewMode' : undefined}
                           slotProps={{
                             textField: {
-                              id: 'DateTimeInputedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultTransferObjectFormDebateLabelWrapperDebateCloseAt',
+                              id: 'DateTimeInputedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultCloseDebateFormDebateLabelWrapperDebateCloseAt',
                               helperText: validation.get('closeAt'),
                               error: !!validation.get('closeAt'),
                               InputProps: {
@@ -328,7 +417,7 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
                           }}
                           views={['year', 'month', 'day', 'hours', 'minutes', 'seconds']}
                           label={
-                            t('edemokracia.admin.Debate.closeDebate.TransferObject.Form.debate.debate.closeAt', {
+                            t('edemokracia.admin.Debate.closeDebate.CloseDebate.Form.debate.debate.closeAt', {
                               defaultValue: 'Vote close at',
                             }) as string
                           }
@@ -345,9 +434,9 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
                         <TextField
                           required
                           name="title"
-                          id="TextInputedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultTransferObjectFormDebateLabelWrapperDebateTitle"
+                          id="TextInputedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultCloseDebateFormDebateLabelWrapperDebateTitle"
                           label={
-                            t('edemokracia.admin.Debate.closeDebate.TransferObject.Form.debate.debate.title', {
+                            t('edemokracia.admin.Debate.closeDebate.CloseDebate.Form.debate.debate.title', {
                               defaultValue: 'Vote title',
                             }) as string
                           }
@@ -375,9 +464,9 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
                         <TextField
                           required
                           name="description"
-                          id="TextAreaedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultTransferObjectFormDebateLabelWrapperDebateDescription"
+                          id="TextAreaedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultCloseDebateFormDebateLabelWrapperDebateDescription"
                           label={
-                            t('edemokracia.admin.Debate.closeDebate.TransferObject.Form.debate.debate.description', {
+                            t('edemokracia.admin.Debate.closeDebate.CloseDebate.Form.debate.debate.description', {
                               defaultValue: 'Vote description',
                             }) as string
                           }
@@ -410,43 +499,120 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
           </Grid>
 
           <Grid item xs={12} sm={12}>
-            <Grid
-              id="FlexedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultTransferObjectFormButtonsLabelWrapper"
-              container
-              direction="column"
-              alignItems="flex-start"
-              justifyContent="flex-start"
-              spacing={2}
-            >
-              <Grid item xs={12} sm={12}>
-                <Grid container direction="row" alignItems="center" justifyContent="flex-start">
-                  <Typography
-                    id="LabeledemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultTransferObjectFormButtonsLabelWrapperButtonsLabel"
-                    variant="h6"
-                    component="h1"
-                  >
-                    {t('edemokracia.admin.Debate.closeDebate.TransferObject.Form.buttons.buttons.Label', {
-                      defaultValue: 'Buttons',
-                    })}
-                  </Typography>
-                </Grid>
-              </Grid>
+            <Card id="FlexedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultCloseDebateFormGroupLabelWrapper">
+              <CardContent>
+                <Grid container direction="column" alignItems="stretch" justifyContent="flex-start" spacing={2}>
+                  <Grid item xs={12} sm={12}>
+                    <Grid container direction="row" alignItems="center" justifyContent="flex-start">
+                      <MdiIcon path="clipboard-list-outline" />
+                      <Typography
+                        id="LabeledemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultCloseDebateFormGroupLabelWrapperGroupLabel"
+                        variant="h6"
+                        component="h1"
+                      >
+                        {t('edemokracia.admin.Debate.closeDebate.CloseDebate.Form.group.group.Label', {
+                          defaultValue: 'Seletable answers',
+                        })}
+                      </Typography>
+                    </Grid>
+                  </Grid>
 
-              <Grid item xs={12} sm={12}>
-                <Grid
-                  id="FlexedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultTransferObjectFormButtonsLabelWrapperButtons"
-                  container
-                  direction="row"
-                  alignItems="stretch"
-                  justifyContent="flex-start"
-                  spacing={2}
-                >
-                  <Grid item xs={12} sm={12} md={4.0}></Grid>
+                  <Grid item xs={12} sm={12}>
+                    <Grid
+                      id="FlexedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultCloseDebateFormGroupLabelWrapperGroup"
+                      container
+                      direction="row"
+                      alignItems="stretch"
+                      justifyContent="flex-start"
+                      spacing={2}
+                    >
+                      <Grid item xs={12} sm={12}>
+                        <Grid
+                          id="FlexedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultCloseDebateFormGroupLabelWrapperGroupAnswersLabelWrapper"
+                          container
+                          direction="column"
+                          alignItems="stretch"
+                          justifyContent="flex-start"
+                          spacing={2}
+                        >
+                          <Grid item xs={12} sm={12}>
+                            <Grid
+                              id="TableedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputDefaultCloseDebateFormGroupLabelWrapperGroupAnswersLabelWrapperAnswers"
+                              container
+                              direction="column"
+                              alignItems="stretch"
+                              justifyContent="flex-start"
+                            >
+                              <DataGrid
+                                {...baseTableConfig}
+                                sx={{
+                                  // overflow: 'hidden',
+                                  display: 'grid',
+                                }}
+                                getRowId={(row: { __identifier: string }) => row.__identifier}
+                                loading={isLoading}
+                                rows={data?.answers ?? []}
+                                getRowClassName={() => 'data-grid-row'}
+                                getCellClassName={() => 'data-grid-cell'}
+                                columns={[
+                                  ...answersColumns,
+                                  ...columnsActionCalculator(
+                                    'RelationTypeedemokraciaAdminAdminEdemokraciaCloseDebateInputAnswers',
+                                    answersRowActions,
+                                    { shownActions: 2 },
+                                  ),
+                                ]}
+                                disableRowSelectionOnClick
+                                sortModel={answersSortModel}
+                                onSortModelChange={(newModel: GridSortModel) => {
+                                  setAnswersSortModel(newModel);
+                                }}
+                                components={{
+                                  Toolbar: () => (
+                                    <GridToolbarContainer>
+                                      <Button
+                                        id="RelationTypeedemokraciaAdminAdminEdemokraciaCloseDebateInputAnswers-clear"
+                                        variant="text"
+                                        onClick={async () => {
+                                          storeDiff('answers', []);
+                                        }}
+                                        disabled={isLoading || false || !isFormUpdateable()}
+                                      >
+                                        <MdiIcon path="link_off" />
+                                        {t('judo.pages.table.clear', { defaultValue: 'Clear' })}
+                                      </Button>
+                                      <Button
+                                        id="RelationTypeedemokraciaAdminAdminEdemokraciaCloseDebateInputAnswers-add"
+                                        variant="text"
+                                        onClick={async () => {
+                                          const res = await answersRangeCall();
 
-                  <Grid item xs={12} sm={12} md={4.0}></Grid>
+                                          if (res) {
+                                            storeDiff('answers', [
+                                              ...(data.answers || []),
+                                              ...(res as SelectAnswerInputStored[]),
+                                            ]);
+                                          }
+                                        }}
+                                        disabled={isLoading || false || !isFormUpdateable()}
+                                      >
+                                        <MdiIcon path="attachment-plus" />
+                                        {t('judo.pages.table.add', { defaultValue: 'Add' })}
+                                      </Button>
+                                      <div>{/* Placeholder */}</div>
+                                    </GridToolbarContainer>
+                                  ),
+                                }}
+                              />
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Grid>
+              </CardContent>
+            </Card>
           </Grid>
         </Grid>
       </DialogContent>
@@ -457,11 +623,7 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
           onClick={() => cancel()}
           disabled={isLoading}
         >
-          {
-            t('edemokracia.admin.Debate.closeDebate.Input.edemokracia.admin.Debate.closeDebate.input.ButtonBack', {
-              defaultValue: 'Cancel',
-            }) as string
-          }
+          {t('judo.pages.cancel', { defaultValue: 'Cancel' }) as string}
         </Button>
         <Button
           id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminVoteDefinitionDebateViewEdemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateButtonCallOperation-action-form-action-submit"
@@ -469,11 +631,7 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
           onClick={() => submit()}
           disabled={isLoading}
         >
-          {
-            t('edemokracia.admin.Debate.closeDebate.Input.edemokracia.admin.Debate.closeDebate.input.ButtonSaveInput', {
-              defaultValue: 'actionButton',
-            }) as string
-          }
+          {t('judo.pages.submit', { defaultValue: 'Submit' }) as string}
         </Button>
       </DialogActions>
     </>

@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/components/CustomBreadcrumb.tsx'
 // Template name: actor/src/components/CustomBreadcrumb.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/components/CustomBreadcrumb.tsx.hbs
 
 import { Breadcrumbs, Typography, Link } from '@mui/material';
@@ -35,8 +35,7 @@ interface BreadcrumbItem {
   label?: string | null;
 }
 
-// @ts-ignore
-const JudoNavigationContextState = createContext<JudoNavigationProviderContext>();
+const JudoNavigationContextState = createContext<JudoNavigationProviderContext>(undefined as any);
 
 const BreadcrumbContextState = createContext<BreadcrumbItem[]>([]);
 

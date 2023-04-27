@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/layout/Header.tsx'
 // Template name: actor/src/layout/Header.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/layout/Header.tsx.hbs
 
 import { Fragment } from 'react';
@@ -24,7 +24,13 @@ export function Header(props: HeaderProps) {
       <AppBar position="sticky" elevation={0}>
         <Toolbar>
           <Grid item>
-            <Button variant="text" color="secondary" onClick={() => back()} disabled={isBackDisabled}>
+            <Button
+              id="navigate-back-button"
+              variant="text"
+              color="secondary"
+              onClick={() => back()}
+              disabled={isBackDisabled}
+            >
               <MdiIcon path="arrow-left" />
             </Button>
           </Grid>

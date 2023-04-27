@@ -16,10 +16,7 @@ import { VoteEntryServiceForVoteDefinition } from '../data-service';
 /**
  * Relation Service Implementation for VoteEntry.voteDefinition
  */
-export class VoteEntryServiceForVoteDefinitionImpl
-  extends JudoAxiosService
-  implements VoteEntryServiceForVoteDefinition
-{
+export class VoteEntryServiceForVoteDefinitionImpl extends JudoAxiosService implements VoteEntryServiceForVoteDefinition {
   /**
    * @throws {AxiosError} With data containing {@link Array<FeedbackItem>} for status codes: 401, 403.
    */

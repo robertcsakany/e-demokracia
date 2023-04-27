@@ -4,7 +4,7 @@
 // Factory expression: <actor>
 // Path expression: 'src/layout/Navigator.tsx'
 // Template name: actor/src/layout/Navigator.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/layout/Navigator.tsx.hbs
 
 import { useCallback } from 'react';
@@ -38,13 +38,16 @@ function ActionItem(props: MenuItem) {
   const { id, label, to, icon } = props;
 
   return (
-    <ListItemButton id={id} onClick={() => to && clearNavigate(to)}>
+    <ListItemButton className="navigation-item" id={id} onClick={() => to && clearNavigate(to)}>
       {icon ? (
-        <ListItemIcon>
+        <ListItemIcon className="navigation-item-icon">
           <MdiIcon path={icon} />
         </ListItemIcon>
       ) : null}
-      <ListItemText primary={t(`menuTree.${label}`, { defaultValue: label })} />
+      <ListItemText
+        classes={{ primary: 'navigation-item-label' }}
+        primary={t(`menuTree.${label}`, { defaultValue: label })}
+      />
     </ListItemButton>
   );
 }

@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Relation View
 
@@ -88,6 +88,7 @@ export const useAdminDashboardIssuesView = () => {
         'edemokracia.admin.Dashboard.issues.Issue.View.other.attachments.attachments.attachments.attachments.link',
         { defaultValue: 'Link' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -98,6 +99,7 @@ export const useAdminDashboardIssuesView = () => {
         'edemokracia.admin.Dashboard.issues.Issue.View.other.attachments.attachments.attachments.attachments.file',
         { defaultValue: 'File' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
       sortable: false,
@@ -132,6 +134,7 @@ export const useAdminDashboardIssuesView = () => {
         'edemokracia.admin.Dashboard.issues.Issue.View.other.attachments.attachments.attachments.attachments.type',
         { defaultValue: 'Type' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 170,
       type: 'string',
       sortable: false,
@@ -184,6 +187,7 @@ export const useAdminDashboardIssuesView = () => {
         'edemokracia.admin.Dashboard.issues.Issue.View.other.categories.categories.categories.categories.title',
         { defaultValue: 'Title' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -194,6 +198,7 @@ export const useAdminDashboardIssuesView = () => {
         'edemokracia.admin.Dashboard.issues.Issue.View.other.categories.categories.categories.categories.description',
         { defaultValue: 'Description' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -241,6 +246,7 @@ export const useAdminDashboardIssuesView = () => {
         'edemokracia.admin.Dashboard.issues.Issue.View.other.comments.comments.actions.comments.comments.comment',
         { defaultValue: 'Comment' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -251,6 +257,7 @@ export const useAdminDashboardIssuesView = () => {
         'edemokracia.admin.Dashboard.issues.Issue.View.other.comments.comments.actions.comments.comments.created',
         { defaultValue: 'Created' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -276,6 +283,7 @@ export const useAdminDashboardIssuesView = () => {
         'edemokracia.admin.Dashboard.issues.Issue.View.other.comments.comments.actions.comments.comments.createdByName',
         { defaultValue: 'CreatedByName' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -286,6 +294,7 @@ export const useAdminDashboardIssuesView = () => {
         'edemokracia.admin.Dashboard.issues.Issue.View.other.comments.comments.actions.comments.comments.upVotes',
         { defaultValue: 'up' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -299,6 +308,7 @@ export const useAdminDashboardIssuesView = () => {
         'edemokracia.admin.Dashboard.issues.Issue.View.other.comments.comments.actions.comments.comments.downVotes',
         { defaultValue: 'down' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -375,6 +385,7 @@ export const useAdminDashboardIssuesView = () => {
       headerName: t('edemokracia.admin.Dashboard.issues.Issue.View.other.debates.debates.debates.debates.status', {
         defaultValue: 'Status',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 170,
       type: 'string',
       sortable: false,
@@ -388,6 +399,7 @@ export const useAdminDashboardIssuesView = () => {
       headerName: t('edemokracia.admin.Dashboard.issues.Issue.View.other.debates.debates.debates.debates.title', {
         defaultValue: 'Title',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -397,6 +409,7 @@ export const useAdminDashboardIssuesView = () => {
       headerName: t('edemokracia.admin.Dashboard.issues.Issue.View.other.debates.debates.debates.debates.closeAt', {
         defaultValue: 'CloseAt',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -421,6 +434,7 @@ export const useAdminDashboardIssuesView = () => {
       headerName: t('edemokracia.admin.Dashboard.issues.Issue.View.other.debates.debates.debates.debates.description', {
         defaultValue: 'Description',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -483,6 +497,7 @@ export const useAdminDashboardIssuesView = () => {
       headerName: t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.issueType.title', {
         defaultValue: 'Title',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -492,6 +507,7 @@ export const useAdminDashboardIssuesView = () => {
       headerName: t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.issueType.description', {
         defaultValue: 'Description',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -536,6 +552,7 @@ export const useAdminDashboardIssuesView = () => {
       headerName: t('edemokracia.admin.Dashboard.issues.Issue.View.issue.issue.owner.representation', {
         defaultValue: 'Representation',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -572,6 +589,7 @@ export const useAdminDashboardIssuesView = () => {
       headerName: t('edemokracia.admin.Dashboard.issues.Issue.View.other.area.area.city.representation', {
         defaultValue: 'Representation',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -608,6 +626,7 @@ export const useAdminDashboardIssuesView = () => {
       headerName: t('edemokracia.admin.Dashboard.issues.Issue.View.other.area.area.county.representation', {
         defaultValue: 'Representation',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -644,6 +663,7 @@ export const useAdminDashboardIssuesView = () => {
       headerName: t('edemokracia.admin.Dashboard.issues.Issue.View.other.area.area.district.representation', {
         defaultValue: 'Representation',
       }) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },

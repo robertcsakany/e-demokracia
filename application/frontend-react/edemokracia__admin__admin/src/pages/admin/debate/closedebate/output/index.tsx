@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Debate.closeDebate#Output
 // Page owner name: edemokracia::admin::Admin
@@ -96,7 +96,11 @@ export default function AdminDebateClosedebateOutput() {
   const storeDiff: (attributeName: keyof VoteDefinitionStored, value: any) => void = useCallback(
     (attributeName: keyof VoteDefinitionStored, value: any) => {
       const dateTypes: string[] = [];
-      const dateTimeTypes: string[] = ['closeAt', 'created'];
+      const dateTimeTypes: string[] = [
+        'closeAt',
+
+        'created',
+      ];
       if (dateTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = uiDateToServiceDate(value);
       } else if (dateTimeTypes.includes(attributeName as string)) {
@@ -165,7 +169,7 @@ export default function AdminDebateClosedebateOutput() {
     <>
       <PageHeader title={title}>
         {!editMode && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
               <MdiIcon path="refresh" />
               {t('judo.pages.refresh', { defaultValue: 'Refresh' })}

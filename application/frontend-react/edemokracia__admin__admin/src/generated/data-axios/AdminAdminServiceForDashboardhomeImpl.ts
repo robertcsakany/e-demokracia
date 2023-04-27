@@ -5,10 +5,7 @@ import { AdminAdminServiceForDashboardhome } from '../data-service';
 /**
  * Access Relation Service Implementation for AdminAdmin.dashboardhome
  */
-export class AdminAdminServiceForDashboardhomeImpl
-  extends JudoAxiosService
-  implements AdminAdminServiceForDashboardhome
-{
+export class AdminAdminServiceForDashboardhomeImpl extends JudoAxiosService implements AdminAdminServiceForDashboardhome {
   /**
    * @throws {AxiosError} With data containing {@link Array<FeedbackItem>} for status codes: 401, 403.
    */

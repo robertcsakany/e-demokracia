@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.issueTypes#View
 // Page owner name: edemokracia::admin::Admin
@@ -208,7 +208,7 @@ export default function AdminAdminIssueTypesView() {
     <>
       <PageHeader title={title}>
         {editMode && isFormUpdateable() && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button
               id="page-action-edit-cancel"
               variant="outlined"
@@ -224,7 +224,7 @@ export default function AdminAdminIssueTypesView() {
           </Grid>
         )}
         {editMode && isFormUpdateable() && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
               <MdiIcon path="content-save" />
               {t('judo.pages.save', { defaultValue: 'Save' })}
@@ -232,7 +232,7 @@ export default function AdminAdminIssueTypesView() {
           </Grid>
         )}
         {!editMode && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
               <MdiIcon path="refresh" />
               {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
@@ -240,7 +240,7 @@ export default function AdminAdminIssueTypesView() {
           </Grid>
         )}
         {!editMode && isFormDeleteable() && (
-          <Grid item>
+          <Grid className="page-action" item>
             <Button
               id="page-action-delete"
               onClick={() =>

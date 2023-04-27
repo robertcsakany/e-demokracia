@@ -4,7 +4,7 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Access View
 
@@ -20,15 +20,19 @@ import { Button } from '@mui/material';
 import { MdiIcon } from '../../../../../components';
 import { FilterOption, FilterType } from '../../../../../components-api';
 import {
-  AdminDashboardQueryCustomizer,
   AdminIssueMaskBuilder,
-  AdminIssueQueryCustomizer,
   AdminDebateMaskBuilder,
+  AdminVoteEntryQueryCustomizer,
+  AdminIssueStored,
+  AdminVoteEntryStored,
+  AdminDashboardQueryCustomizer,
+  AdminIssueQueryCustomizer,
+  AdminVoteEntry,
   AdminDebate,
   AdminIssue,
-  AdminIssueStored,
   AdminDebateStored,
   AdminDashboardStored,
+  AdminVoteEntryMaskBuilder,
   AdminDashboard,
   AdminDebateQueryCustomizer,
 } from '../../../../../generated/data-api';
@@ -42,7 +46,8 @@ export const useAdminAdminDashboardhomeDashboard = () => {
   const { locale: l10nLocale } = useL10N();
 
   const queryCustomizer: AdminDashboardQueryCustomizer = {
-    _mask: '{welcome,issues{title,created,status,numberOfDebates},debates{title,issueTitle,closeAt,status}}',
+    _mask:
+      '{welcome,issues{title,created,status,numberOfDebates},debates{title,issueTitle,closeAt,status},voteEntries{created,issueTitle,debateTitle,voteTitle,voteStatus}}',
   };
 
   const debatesSortModel: GridSortModel = [{ field: 'title', sort: 'asc' }];
@@ -55,6 +60,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.title',
         { defaultValue: 'Title' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -65,6 +71,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.issueTitle',
         { defaultValue: 'Issue' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -73,8 +80,9 @@ export const useAdminAdminDashboardhomeDashboard = () => {
       field: 'closeAt',
       headerName: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.closeAt',
-        { defaultValue: 'CloseAt' },
+        { defaultValue: 'Close At' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -100,6 +108,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.status',
         { defaultValue: 'Status' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 170,
       type: 'string',
       sortable: false,
@@ -133,7 +142,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
       attributeName: 'closeAt',
       label: t(
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.mydebates.mydebates.debates.debates.closeAt.Filter',
-        { defaultValue: 'CloseAt' },
+        { defaultValue: 'Close At' },
       ) as string,
       filterType: FilterType.dateTime,
     },
@@ -170,6 +179,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myissues.myissues.issues.issues.title',
         { defaultValue: 'Title' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 230,
       type: 'string',
     },
@@ -180,6 +190,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myissues.myissues.issues.issues.created',
         { defaultValue: 'Created' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -205,6 +216,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myissues.myissues.issues.issues.status',
         { defaultValue: 'Status' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 170,
       type: 'string',
       sortable: false,
@@ -219,6 +231,7 @@ export const useAdminAdminDashboardhomeDashboard = () => {
         'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myissues.myissues.issues.issues.numberOfDebates',
         { defaultValue: 'Debates' },
       ) as string,
+      headerClassName: 'data-grid-column-header',
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -278,6 +291,145 @@ export const useAdminAdminDashboardhomeDashboard = () => {
         ]
       : [],
   };
+  const voteEntriesSortModel: GridSortModel = [{ field: 'created', sort: 'asc' }];
+
+  const voteEntriesColumns: GridColDef<AdminVoteEntryStored>[] = [
+    {
+      ...baseColumnConfig,
+      field: 'created',
+      headerName: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myvotes.myvotes.voteEntries.voteEntries.created',
+        { defaultValue: 'Created' },
+      ) as string,
+      headerClassName: 'data-grid-column-header',
+      width: 170,
+      type: 'dateTime',
+      valueGetter: ({ value }) => value && serviceDateToUiDate(value),
+      valueFormatter: ({ value }: GridValueFormatterParams<Date>) => {
+        return (
+          value &&
+          new Intl.DateTimeFormat(l10nLocale, {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+          }).format(value)
+        );
+      },
+    },
+    {
+      ...baseColumnConfig,
+      field: 'issueTitle',
+      headerName: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myvotes.myvotes.voteEntries.voteEntries.issueTitle',
+        { defaultValue: 'Issue Title' },
+      ) as string,
+      headerClassName: 'data-grid-column-header',
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'debateTitle',
+      headerName: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myvotes.myvotes.voteEntries.voteEntries.debateTitle',
+        { defaultValue: 'Debate Title' },
+      ) as string,
+      headerClassName: 'data-grid-column-header',
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'voteTitle',
+      headerName: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myvotes.myvotes.voteEntries.voteEntries.voteTitle',
+        { defaultValue: 'Vote Title' },
+      ) as string,
+      headerClassName: 'data-grid-column-header',
+      width: 230,
+      type: 'string',
+    },
+    {
+      ...baseColumnConfig,
+      field: 'voteStatus',
+      headerName: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myvotes.myvotes.voteEntries.voteEntries.voteStatus',
+        { defaultValue: 'Vote Status' },
+      ) as string,
+      headerClassName: 'data-grid-column-header',
+      width: 170,
+      type: 'string',
+      sortable: false,
+      description: t('judo.pages.table.column.not-sortable', {
+        defaultValue: 'This column is not sortable.',
+      }) as string,
+    },
+  ];
+
+  const voteEntriesRangeFilterOptions: FilterOption[] = [
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMyvotesMyvotesVoteEntriesLabelWrapperVoteEntriesCreatedFilter',
+      attributeName: 'created',
+      label: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myvotes.myvotes.voteEntries.voteEntries.created.Filter',
+        { defaultValue: 'Created' },
+      ) as string,
+      filterType: FilterType.dateTime,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMyvotesMyvotesVoteEntriesLabelWrapperVoteEntriesIssueTitleFilter',
+      attributeName: 'issueTitle',
+      label: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myvotes.myvotes.voteEntries.voteEntries.issueTitle.Filter',
+        { defaultValue: 'Issue Title' },
+      ) as string,
+      filterType: FilterType.string,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMyvotesMyvotesVoteEntriesLabelWrapperVoteEntriesDebateTitleFilter',
+      attributeName: 'debateTitle',
+      label: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myvotes.myvotes.voteEntries.voteEntries.debateTitle.Filter',
+        { defaultValue: 'Debate Title' },
+      ) as string,
+      filterType: FilterType.string,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMyvotesMyvotesVoteEntriesLabelWrapperVoteEntriesVoteTitleFilter',
+      attributeName: 'voteTitle',
+      label: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myvotes.myvotes.voteEntries.voteEntries.voteTitle.Filter',
+        { defaultValue: 'Vote Title' },
+      ) as string,
+      filterType: FilterType.string,
+    },
+    {
+      id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardDefaultDashboardViewTabBarMyvotesMyvotesVoteEntriesLabelWrapperVoteEntriesVoteStatusFilter',
+      attributeName: 'voteStatus',
+      label: t(
+        'edemokracia.admin.Admin.dashboardhome.Dashboard.default.Dashboard.View.tabBar.myvotes.myvotes.voteEntries.voteEntries.voteStatus.Filter',
+        { defaultValue: 'Vote Status' },
+      ) as string,
+      filterType: FilterType.enumeration,
+      enumValues: ['CREATED', 'PENDING', 'ACTIVE', 'CLOSED'],
+    },
+  ];
+
+  const voteEntriesInitialQueryCustomizer: AdminVoteEntryQueryCustomizer = {
+    _mask: '{created,issueTitle,debateTitle,voteTitle,voteStatus}',
+    _orderBy: voteEntriesSortModel.length
+      ? [
+          {
+            attribute: voteEntriesSortModel[0].field,
+            descending: voteEntriesSortModel[0].sort === 'desc',
+          },
+        ]
+      : [],
+  };
 
   return {
     queryCustomizer,
@@ -287,5 +439,8 @@ export const useAdminAdminDashboardhomeDashboard = () => {
     issuesColumns,
     issuesRangeFilterOptions,
     issuesInitialQueryCustomizer,
+    voteEntriesColumns,
+    voteEntriesRangeFilterOptions,
+    voteEntriesInitialQueryCustomizer,
   };
 };

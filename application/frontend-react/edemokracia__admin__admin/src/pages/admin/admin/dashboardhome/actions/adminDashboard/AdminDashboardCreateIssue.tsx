@@ -4,7 +4,7 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: CallOperationAction
 // Is Access: yes
@@ -25,6 +25,7 @@ import type {
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useTrackService } from '@pandino/react-hooks';
 import { useSnackbar } from 'notistack';
 import { useJudoNavigation, MdiIcon } from '../../../../../../components';
 import { useDialog, useRangeDialog } from '../../../../../../components/dialog';
@@ -67,6 +68,15 @@ import {
   AdminDistrictMaskBuilder,
 } from '../../../../../../generated/data-api';
 
+export type AdminDashboardCreateIssueActionPostHandler = (
+  ownerCallback: () => void,
+  result?: AdminIssueStored,
+) => Promise<void>;
+
+export const ADMIN_DASHBOARD_CREATE_ISSUE_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY =
+  'AdminDashboardCreateIssueActionPostHandlerHook';
+export type AdminDashboardCreateIssueActionPostHandlerHook = () => AdminDashboardCreateIssueActionPostHandler;
+
 export type AdminDashboardCreateIssueAction = () => (successCallback: () => void) => Promise<void>;
 
 export const useAdminDashboardCreateIssueAction: AdminDashboardCreateIssueAction = () => {
@@ -83,6 +93,10 @@ export const useAdminDashboardCreateIssueAction: AdminDashboardCreateIssueAction
   const title: string = t('edemokracia.admin.Admin.dashboardhome.Dashboard.edemokracia.admin.Dashboard.createIssue', {
     defaultValue: 'Create issue',
   });
+  const { service: customPostHandler } = useTrackService<AdminDashboardCreateIssueActionPostHandlerHook>(
+    `(${OBJECTCLASS}=${ADMIN_DASHBOARD_CREATE_ISSUE_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY})`,
+  );
+  const postHandler: AdminDashboardCreateIssueActionPostHandler | undefined = customPostHandler && customPostHandler();
 
   return async function AdminDashboardCreateIssueAction(successCallback: () => void) {
     createDialog({
@@ -97,6 +111,10 @@ export const useAdminDashboardCreateIssueAction: AdminDashboardCreateIssueAction
         <AdminDashboardCreateIssueForm
           successCallback={(result?: AdminIssueStored) => {
             closeDialog();
+            if (postHandler) {
+              postHandler(successCallback, result);
+              return;
+            }
             enqueueSnackbar(title, {
               variant: 'success',
               ...toastConfig.success,

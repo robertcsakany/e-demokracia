@@ -1,4 +1,6 @@
 import { JudoStored } from '@judo/data-api-common';
+import { EdemokraciaVoteType } from './EdemokraciaVoteType';
+import { AdminIssueStored } from './AdminIssue';
 import { AdminDebateStored } from './AdminDebate';
 import { EdemokraciaVoteStatus } from './EdemokraciaVoteStatus';
 
@@ -16,8 +18,11 @@ export interface AdminVoteDefinition {
   isNotSelectAnswerType?: null | boolean;
   isNotYesNoAbstainType?: null | boolean;
   isNotYesNoType?: null | boolean;
+  numberOfVotes?: null | number;
+  voteType?: null | EdemokraciaVoteType;
 
   debate?: null | AdminDebateStored;
+  issue?: null | AdminIssueStored;
 }
 export type AdminVoteDefinitionAttributes =
   | 'title'
@@ -32,8 +37,10 @@ export type AdminVoteDefinitionAttributes =
   | 'isNotRatingType'
   | 'isNotSelectAnswerType'
   | 'isNotYesNoAbstainType'
-  | 'isNotYesNoType';
+  | 'isNotYesNoType'
+  | 'numberOfVotes'
+  | 'voteType';
 
-export type AdminVoteDefinitionRelations = 'debate';
+export type AdminVoteDefinitionRelations = 'debate' | 'issue';
 
 export interface AdminVoteDefinitionStored extends JudoStored<AdminVoteDefinition>, AdminVoteDefinition {}

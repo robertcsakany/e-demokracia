@@ -4,7 +4,7 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: CallOperationAction
 // Is Access: no
@@ -25,6 +25,7 @@ import type {
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useTrackService } from '@pandino/react-hooks';
 import { useSnackbar } from 'notistack';
 import { useJudoNavigation, MdiIcon } from '../../../../../../components';
 import { useDialog, useRangeDialog } from '../../../../../../components/dialog';
@@ -41,6 +42,11 @@ import {
 import { AdminProStored, AdminProQueryCustomizer, AdminPro } from '../../../../../../generated/data-api';
 import { adminProServiceImpl } from '../../../../../../generated/data-axios';
 
+export type VoteDownActionPostHandler = (ownerCallback: () => void) => Promise<void>;
+
+export const VOTE_DOWN_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY = 'VoteDownActionPostHandlerHook';
+export type VoteDownActionPostHandlerHook = () => VoteDownActionPostHandler;
+
 export type VoteDownAction = () => (owner: AdminProStored, successCallback: () => void) => Promise<void>;
 
 export const useVoteDownAction: VoteDownAction = () => {
@@ -55,10 +61,18 @@ export const useVoteDownAction: VoteDownAction = () => {
   const [createDialog, closeDialog] = useDialog();
   const { navigate } = useJudoNavigation();
   const title: string = t('edemokracia.admin.Pro.pros.View.edemokracia.admin.Pro.voteDown', { defaultValue: '' });
+  const { service: customPostHandler } = useTrackService<VoteDownActionPostHandlerHook>(
+    `(${OBJECTCLASS}=${VOTE_DOWN_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY})`,
+  );
+  const postHandler: VoteDownActionPostHandler | undefined = customPostHandler && customPostHandler();
 
   return async function voteDownAction(owner: AdminProStored, successCallback: () => void) {
     try {
       const result = await adminProServiceImpl.voteDown(owner);
+      if (postHandler) {
+        postHandler(successCallback);
+        return;
+      }
       successCallback();
       enqueueSnackbar(title, {
         variant: 'success',

@@ -4,7 +4,7 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230421_094714_47f1521a_develop
+// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: CallOperationAction
 // Is Access: no
@@ -25,6 +25,7 @@ import type {
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';
+import { useTrackService } from '@pandino/react-hooks';
 import { useSnackbar } from 'notistack';
 import { useJudoNavigation, MdiIcon } from '../../../../../../../components';
 import { useDialog, useRangeDialog } from '../../../../../../../components/dialog';
@@ -49,6 +50,11 @@ import {
 } from '../../../../../../../generated/data-api';
 import { adminDebateServiceImpl, adminProServiceImpl } from '../../../../../../../generated/data-axios';
 
+export type AdminProVoteUpActionPostHandler = (ownerCallback: () => void) => Promise<void>;
+
+export const ADMIN_PRO_VOTE_UP_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY = 'AdminProVoteUpActionPostHandlerHook';
+export type AdminProVoteUpActionPostHandlerHook = () => AdminProVoteUpActionPostHandler;
+
 export type AdminProVoteUpAction = () => (owner: AdminProStored, successCallback: () => void) => Promise<void>;
 
 export const useAdminProVoteUpAction: AdminProVoteUpAction = () => {
@@ -65,10 +71,18 @@ export const useAdminProVoteUpAction: AdminProVoteUpAction = () => {
   const title: string = t('edemokracia.admin.Dashboard.debates.View.edemokracia.admin.Pro.voteUp', {
     defaultValue: '',
   });
+  const { service: customPostHandler } = useTrackService<AdminProVoteUpActionPostHandlerHook>(
+    `(${OBJECTCLASS}=${ADMIN_PRO_VOTE_UP_ACTION_POST_HANDLER_HOOK_INTERFACE_KEY})`,
+  );
+  const postHandler: AdminProVoteUpActionPostHandler | undefined = customPostHandler && customPostHandler();
 
   return async function AdminProVoteUpAction(owner: AdminProStored, successCallback: () => void) {
     try {
       const result = await adminProServiceImpl.voteUp(owner);
+      if (postHandler) {
+        postHandler(successCallback);
+        return;
+      }
       successCallback();
       enqueueSnackbar(title, {
         variant: 'success',
