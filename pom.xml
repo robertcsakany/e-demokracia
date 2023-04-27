@@ -11,55 +11,32 @@
 
 	<properties>
 		<judo-channel>develop</judo-channel>
-		<judo-version>1.0.0.20230422_040814_b10f3fc8_develop</judo-version>
+		<judo-version>1.0.0.20230426_043121_0f2d70e1_develop</judo-version>
 
 		<sqlDialects>postgresql,hsqldb</sqlDialects>
 
-        <judo-meta-esm-version-defined>1.2.0.20230420_040821_3e975c74_develop</judo-meta-esm-version-defined>
-        <judo-tatami-version-defined>1.1.0.20230420_043107_6bd87586_develop</judo-tatami-version-defined>
+        <judo-meta-esm-version-defined>1.2.0.20230425_040723_5554d156_develop</judo-meta-esm-version-defined>
+        <judo-tatami-version-defined>1.1.0.20230425_042248_79ecc3a6_develop</judo-tatami-version-defined>
         <flutter-maven-plugin-version-defined>1.0.2.20230313_135924_a9319e3a_develop</flutter-maven-plugin-version-defined>
         <structured-map-proxy-version-defined>2.0.0.20230330_221859_8a965acd_develop</structured-map-proxy-version-defined>
         <judo-dao-api-version-defined>1.0.4.20230309_120321_78415dc0_develop</judo-dao-api-version-defined>
         <judo-dispatcher-api-version-defined>1.0.2</judo-dispatcher-api-version-defined>
         <judo-sdk-common-version-defined>1.0.4.20230330_222100_3c176073_develop</judo-sdk-common-version-defined>
         <mapper-version-defined>1.0.4.20230324_115639_e833341e_develop</mapper-version-defined>
-        <judo-platform-version-defined>2.0.1-SNAPSHOT</judo-platform-version-defined>
-        <judo-services-version-defined>1.1.0-SNAPSHOT</judo-services-version-defined>
-        <judo-rdbms-schema-version-defined>1.0.0.20230420_042422_1bacc6ba_develop</judo-rdbms-schema-version-defined>
-        <judo-tatami-client-version-defined>1.1.0.20230420_044944_52a64a4a_develop</judo-tatami-client-version-defined>
-        <judo-esm-fullstack-project-template-version-defined>1.0.0.20230420_044957_8a33a177_develop</judo-esm-fullstack-project-template-version-defined>
-		<judo-meta-ui-version-defined>1.1.0.20230420_040825_011d8ab6_develop</judo-meta-ui-version-defined>
-		<judo-ui-flutter-template-version-defined>1.0.0.20230420_041235_51576416_develop</judo-ui-flutter-template-version-defined>
-		<judo-ui-typescript-rest-template-version-defined>1.0.0.20230420_041238_8b5a8f97_develop</judo-ui-typescript-rest-template-version-defined>
-		<judo-ui-react-template-version-defined>1.0.0.20230421_094714_47f1521a_develop</judo-ui-react-template-version-defined>
+        <judo-platform-version-defined>2.0.1.20230426_040744_4b31e53e_develop</judo-platform-version-defined>
+        <judo-services-version-defined>1.1.0.20230425_145751_010fcd90_develop</judo-services-version-defined>
+        <judo-rdbms-schema-version-defined>1.0.0.20230425_041925_d5ce5945_develop</judo-rdbms-schema-version-defined>
+        <judo-tatami-client-version-defined>1.1.0.20230425_043242_f2e8fda8_develop</judo-tatami-client-version-defined>
+        <judo-esm-fullstack-project-template-version-defined>1.0.0.20230425_043238_13cba7d9_develop</judo-esm-fullstack-project-template-version-defined>
+		<judo-meta-ui-version-defined>1.1.0.20230425_040719_403b7660_develop</judo-meta-ui-version-defined>
+		<judo-ui-flutter-template-version-defined>1.0.0.20230425_041055_a65309d9_develop</judo-ui-flutter-template-version-defined>
+		<judo-ui-typescript-rest-template-version-defined>1.0.0.20230425_041059_3dd6d9fa_develop</judo-ui-typescript-rest-template-version-defined>
+		<judo-ui-react-template-version-defined>1.0.0.20230425_192230_4503f121_develop</judo-ui-react-template-version-defined>
         <frontendType>react</frontendType>
 
 	</properties>
 
 	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-model-resources</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/target/classes/model</outputDirectory>
-							<resources>
-								<resource>
-									<directory>model</directory>
-									<filtering>false</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -113,9 +90,8 @@
                                     <goal>default-workflow</goal>
                                 </goals>
                                 <configuration>
-                                    <modelName>${project.artifactId}</modelName>
                                     <destination>${basedir}/target/classes/model</destination>
-                                    <esm>${basedir}/target/classes/model/${project.artifactId}.model</esm>
+                                    <esm>${basedir}/model/${project.artifactId}.model</esm>
                                     <modelVersion>${project.version}</modelVersion>
                                     <ignorePsm2Measure>false</ignorePsm2Measure>
                                     <ignorePsm2Asm>false</ignorePsm2Asm>
