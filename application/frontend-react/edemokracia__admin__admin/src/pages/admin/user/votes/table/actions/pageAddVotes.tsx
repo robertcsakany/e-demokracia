@@ -4,7 +4,6 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: AddAction
 
@@ -29,6 +28,7 @@ import {
   ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   processQueryCustomizer,
   serviceDateToUiDate,
+  serviceTimeToUiTime,
 } from '../../../../../../utilities';
 import {
   AdminUserStored,
@@ -62,6 +62,7 @@ export const usePageAddVotesAction: PageAddVotesAction = () => {
         ...baseColumnConfig,
         field: 'created',
         headerName: t('edemokracia.admin.User.votes.votes.Vote.Table.created', { defaultValue: 'Created' }) as string,
+
         width: 170,
         type: 'dateTime',
         valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -84,6 +85,7 @@ export const usePageAddVotesAction: PageAddVotesAction = () => {
         ...baseColumnConfig,
         field: 'type',
         headerName: t('edemokracia.admin.User.votes.votes.Vote.Table.type', { defaultValue: 'Type' }) as string,
+
         width: 170,
         type: 'string',
         sortable: false,
@@ -100,6 +102,7 @@ export const usePageAddVotesAction: PageAddVotesAction = () => {
         label: t('edemokracia.admin.User.votes.votes.Vote.Table.created.Filter', { defaultValue: 'Created' }) as string,
         filterType: FilterType.dateTime,
       },
+
       {
         id: 'FilteredemokraciaAdminAdminEdemokraciaAdminUserVotesTableDefaultVotesVoteTableTypeFilter',
         attributeName: 'type',

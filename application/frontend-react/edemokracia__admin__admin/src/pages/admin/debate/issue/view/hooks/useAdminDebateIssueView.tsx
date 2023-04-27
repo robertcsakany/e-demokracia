@@ -4,7 +4,6 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Relation View
 
@@ -65,7 +64,7 @@ import {
   AdminCommentStored,
 } from '../../../../../../generated/data-api';
 import { baseColumnConfig, toastConfig } from '../../../../../../config';
-import { fileHandling, serviceDateToUiDate } from '../../../../../../utilities';
+import { fileHandling, serviceDateToUiDate, serviceTimeToUiTime } from '../../../../../../utilities';
 import { useL10N } from '../../../../../../l10n/l10n-context';
 
 export const useAdminDebateIssueView = () => {
@@ -89,6 +88,7 @@ export const useAdminDebateIssueView = () => {
         { defaultValue: 'Link' },
       ) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -100,6 +100,7 @@ export const useAdminDebateIssueView = () => {
         { defaultValue: 'File' },
       ) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
       sortable: false,
@@ -135,6 +136,7 @@ export const useAdminDebateIssueView = () => {
         { defaultValue: 'Type' },
       ) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'string',
       sortable: false,
@@ -154,6 +156,7 @@ export const useAdminDebateIssueView = () => {
       ) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherAttachmentsAttachmentsAttachmentsLabelWrapperAttachmentsTypeFilter',
       attributeName: 'type',
@@ -177,6 +180,7 @@ export const useAdminDebateIssueView = () => {
         ]
       : [],
   };
+
   const categoriesSortModel: GridSortModel = [{ field: 'title', sort: 'asc' }];
 
   const categoriesColumns: GridColDef<AdminIssueCategoryStored>[] = [
@@ -188,6 +192,7 @@ export const useAdminDebateIssueView = () => {
         { defaultValue: 'Title' },
       ) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -199,6 +204,7 @@ export const useAdminDebateIssueView = () => {
         { defaultValue: 'Description' },
       ) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -214,6 +220,7 @@ export const useAdminDebateIssueView = () => {
       ) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherCategoriesCategoriesCategoriesLabelWrapperCategoriesDescriptionFilter',
       attributeName: 'description',
@@ -236,6 +243,7 @@ export const useAdminDebateIssueView = () => {
         ]
       : [],
   };
+
   const commentsSortModel: GridSortModel = [{ field: 'comment', sort: 'asc' }];
 
   const commentsColumns: GridColDef<AdminCommentStored>[] = [
@@ -247,6 +255,7 @@ export const useAdminDebateIssueView = () => {
         { defaultValue: 'Comment' },
       ) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -258,6 +267,7 @@ export const useAdminDebateIssueView = () => {
         { defaultValue: 'Created' },
       ) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -284,6 +294,7 @@ export const useAdminDebateIssueView = () => {
         { defaultValue: 'CreatedByName' },
       ) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -295,6 +306,7 @@ export const useAdminDebateIssueView = () => {
         { defaultValue: 'up' },
       ) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -309,6 +321,7 @@ export const useAdminDebateIssueView = () => {
         { defaultValue: 'down' },
       ) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -327,6 +340,7 @@ export const useAdminDebateIssueView = () => {
       ) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsCreatedFilter',
       attributeName: 'created',
@@ -336,6 +350,7 @@ export const useAdminDebateIssueView = () => {
       ) as string,
       filterType: FilterType.dateTime,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsCreatedByNameFilter',
       attributeName: 'createdByName',
@@ -345,6 +360,7 @@ export const useAdminDebateIssueView = () => {
       ) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsUpVotesFilter',
       attributeName: 'upVotes',
@@ -354,6 +370,7 @@ export const useAdminDebateIssueView = () => {
       ) as string,
       filterType: FilterType.numeric,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherCommentsCommentsActionsCommentsLabelWrapperCommentsDownVotesFilter',
       attributeName: 'downVotes',
@@ -376,6 +393,7 @@ export const useAdminDebateIssueView = () => {
         ]
       : [],
   };
+
   const debatesSortModel: GridSortModel = [{ field: 'title', sort: 'asc' }];
 
   const debatesColumns: GridColDef<AdminIssueDebateStored>[] = [
@@ -386,6 +404,7 @@ export const useAdminDebateIssueView = () => {
         defaultValue: 'Status',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'string',
       sortable: false,
@@ -400,6 +419,7 @@ export const useAdminDebateIssueView = () => {
         defaultValue: 'Title',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -410,6 +430,7 @@ export const useAdminDebateIssueView = () => {
         defaultValue: 'CloseAt',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -435,6 +456,7 @@ export const useAdminDebateIssueView = () => {
         defaultValue: 'Description',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -450,6 +472,7 @@ export const useAdminDebateIssueView = () => {
       filterType: FilterType.enumeration,
       enumValues: ['CREATED', 'PENDING', 'ACTIVE', 'CLOSED'],
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebatesTitleFilter',
       attributeName: 'title',
@@ -458,6 +481,7 @@ export const useAdminDebateIssueView = () => {
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebatesCloseAtFilter',
       attributeName: 'closeAt',
@@ -466,6 +490,7 @@ export const useAdminDebateIssueView = () => {
       }) as string,
       filterType: FilterType.dateTime,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewOtherDebatesDebatesDebatesLabelWrapperDebatesDescriptionFilter',
       attributeName: 'description',
@@ -487,6 +512,7 @@ export const useAdminDebateIssueView = () => {
         ]
       : [],
   };
+
   const issueTypeSortModel: GridSortModel = [{ field: 'title', sort: 'asc' }];
 
   const issueTypeColumns: GridColDef<AdminIssueTypeStored>[] = [
@@ -497,6 +523,7 @@ export const useAdminDebateIssueView = () => {
         defaultValue: 'Title',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -507,6 +534,7 @@ export const useAdminDebateIssueView = () => {
         defaultValue: 'Description',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -521,6 +549,7 @@ export const useAdminDebateIssueView = () => {
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateIssueViewDefaultIssueViewIssueLabelWrapperIssueIssueTypeDescriptionFilter',
       attributeName: 'description',
@@ -542,6 +571,7 @@ export const useAdminDebateIssueView = () => {
         ]
       : [],
   };
+
   const ownerSortModel: GridSortModel = [{ field: 'representation', sort: 'asc' }];
 
   const ownerColumns: GridColDef<AdminUserStored>[] = [
@@ -552,6 +582,7 @@ export const useAdminDebateIssueView = () => {
         defaultValue: 'Representation',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -579,6 +610,7 @@ export const useAdminDebateIssueView = () => {
         ]
       : [],
   };
+
   const citySortModel: GridSortModel = [{ field: 'representation', sort: 'asc' }];
 
   const cityColumns: GridColDef<AdminCityStored>[] = [
@@ -589,6 +621,7 @@ export const useAdminDebateIssueView = () => {
         defaultValue: 'Representation',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -616,6 +649,7 @@ export const useAdminDebateIssueView = () => {
         ]
       : [],
   };
+
   const countySortModel: GridSortModel = [{ field: 'representation', sort: 'asc' }];
 
   const countyColumns: GridColDef<AdminCountyStored>[] = [
@@ -626,6 +660,7 @@ export const useAdminDebateIssueView = () => {
         defaultValue: 'Representation',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -653,6 +688,7 @@ export const useAdminDebateIssueView = () => {
         ]
       : [],
   };
+
   const districtSortModel: GridSortModel = [{ field: 'representation', sort: 'asc' }];
 
   const districtColumns: GridColDef<AdminDistrictStored>[] = [
@@ -663,6 +699,7 @@ export const useAdminDebateIssueView = () => {
         defaultValue: 'Representation',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },

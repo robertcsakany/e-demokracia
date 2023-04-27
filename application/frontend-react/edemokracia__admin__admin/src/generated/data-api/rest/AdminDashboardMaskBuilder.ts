@@ -7,6 +7,15 @@ import {
 } from '../model';
 
 import {
+  AdminDebateIssueMaskBuilder,
+  AdminDebateCommentsMaskBuilder,
+  AdminDebateCreatedByMaskBuilder,
+  AdminDebateConsMaskBuilder,
+  AdminDebateProsMaskBuilder,
+  AdminDebateVoteDefinitionMaskBuilder,
+} from './AdminDebateMaskBuilder';
+import {} from './AdminVoteEntryMaskBuilder';
+import {
   AdminIssueAttachmentsMaskBuilder,
   AdminIssueOwnerMaskBuilder,
   AdminIssueCategoriesMaskBuilder,
@@ -18,15 +27,6 @@ import {
   AdminIssueCityMaskBuilder,
   AdminIssueDistrictMaskBuilder,
 } from './AdminIssueMaskBuilder';
-import {} from './AdminVoteEntryMaskBuilder';
-import {
-  AdminDebateIssueMaskBuilder,
-  AdminDebateCommentsMaskBuilder,
-  AdminDebateCreatedByMaskBuilder,
-  AdminDebateConsMaskBuilder,
-  AdminDebateProsMaskBuilder,
-  AdminDebateVoteDefinitionMaskBuilder,
-} from './AdminDebateMaskBuilder';
 
 export class AdminDashboardIssuesMaskBuilder extends RelationMaskBuilder {
   constructor(

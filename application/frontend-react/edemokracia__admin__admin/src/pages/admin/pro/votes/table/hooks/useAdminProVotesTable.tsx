@@ -4,7 +4,6 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Relation Table
 
@@ -22,7 +21,7 @@ import type { FilterOption } from '../../../../../../components-api';
 import { useJudoNavigation, MdiIcon } from '../../../../../../components';
 import { AdminSimpleVoteStored } from '../../../../../../generated/data-api';
 import { baseColumnConfig, toastConfig } from '../../../../../../config';
-import { fileHandling, serviceDateToUiDate } from '../../../../../../utilities';
+import { fileHandling, serviceDateToUiDate, serviceTimeToUiTime } from '../../../../../../utilities';
 import { useL10N } from '../../../../../../l10n/l10n-context';
 
 export const useAdminProVotesTable = () => {
@@ -37,6 +36,7 @@ export const useAdminProVotesTable = () => {
       field: 'created',
       headerName: t('edemokracia.admin.Pro.votes.votes.Vote.Table.created', { defaultValue: 'Created' }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -60,6 +60,7 @@ export const useAdminProVotesTable = () => {
       field: 'type',
       headerName: t('edemokracia.admin.Pro.votes.votes.Vote.Table.type', { defaultValue: 'Type' }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'string',
       sortable: false,
@@ -76,6 +77,7 @@ export const useAdminProVotesTable = () => {
       label: t('edemokracia.admin.Pro.votes.votes.Vote.Table.created.Filter', { defaultValue: 'Created' }) as string,
       filterType: FilterType.dateTime,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminProVotesTableDefaultVotesVoteTableTypeFilter',
       attributeName: 'type',

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<namespace:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:accesspoint="http://blackbelt.hu/judo/meta/esm/accesspoint" xmlns:measure="http://blackbelt.hu/judo/meta/esm/measure" xmlns:namespace="http://blackbelt.hu/judo/meta/esm/namespace" xmlns:structure="http://blackbelt.hu/judo/meta/esm/structure" xmlns:type="http://blackbelt.hu/judo/meta/esm/type" xmlns:ui="http://blackbelt.hu/judo/meta/esm/ui" xsi:schemaLocation="http://blackbelt.hu/judo/meta/esm/accesspoint http://blackbelt.hu/judo/meta/esm#//accesspoint http://blackbelt.hu/judo/meta/esm/measure http://blackbelt.hu/judo/meta/esm#//measure http://blackbelt.hu/judo/meta/esm/namespace http://blackbelt.hu/judo/meta/esm#//namespace http://blackbelt.hu/judo/meta/esm/structure http://blackbelt.hu/judo/meta/esm#//structure http://blackbelt.hu/judo/meta/esm/type http://blackbelt.hu/judo/meta/esm#//type http://blackbelt.hu/judo/meta/esm/ui http://blackbelt.hu/judo/meta/esm#//ui" xmi:id="_7D8NwGkNEe25ONJ3V89cVA" name="edemokracia" metaVersion="1.2.0.20230413_041635_f3d55a1e_develop" version="1.0.0.20230427_020257_SNAPSHOT">
+<namespace:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:accesspoint="http://blackbelt.hu/judo/meta/esm/accesspoint" xmlns:measure="http://blackbelt.hu/judo/meta/esm/measure" xmlns:namespace="http://blackbelt.hu/judo/meta/esm/namespace" xmlns:structure="http://blackbelt.hu/judo/meta/esm/structure" xmlns:type="http://blackbelt.hu/judo/meta/esm/type" xmlns:ui="http://blackbelt.hu/judo/meta/esm/ui" xsi:schemaLocation="http://blackbelt.hu/judo/meta/esm/accesspoint http://blackbelt.hu/judo/meta/esm#//accesspoint http://blackbelt.hu/judo/meta/esm/measure http://blackbelt.hu/judo/meta/esm#//measure http://blackbelt.hu/judo/meta/esm/namespace http://blackbelt.hu/judo/meta/esm#//namespace http://blackbelt.hu/judo/meta/esm/structure http://blackbelt.hu/judo/meta/esm#//structure http://blackbelt.hu/judo/meta/esm/type http://blackbelt.hu/judo/meta/esm#//type http://blackbelt.hu/judo/meta/esm/ui http://blackbelt.hu/judo/meta/esm#//ui" xmi:id="_7D8NwGkNEe25ONJ3V89cVA" name="edemokracia" metaVersion="1.2.0.20230416_041745_66cf8803_develop" version="1.0.0.20230427_092511_SNAPSHOT">
   <elements xsi:type="namespace:Package" xmi:id="_7D8NwWkNEe25ONJ3V89cVA" name="types">
     <elements xsi:type="type:StringType" xmi:id="_7D8NwmkNEe25ONJ3V89cVA" name="String" maxLength="255"/>
     <elements xsi:type="type:NumericType" xmi:id="_7D8Nw2kNEe25ONJ3V89cVA" name="Long" precision="18"/>
@@ -2580,9 +2580,22 @@
     <attributes xsi:type="structure:DataMember" xmi:id="_HgIBUOSDEe20cv3f2msZXg" name="description" dataType="_7D8NwmkNEe25ONJ3V89cVA" required="true" defaultExpression="" getterExpression="" memberType="TRANSIENT">
       <inherited xmi:id="_HgJPcOSDEe20cv3f2msZXg"/>
     </attributes>
-    <form xmi:id="_5jaO0OSCEe20cv3f2msZXg" name="TransferObject_Form" label="TransferObject Form" layout="VERTICAL"/>
-    <table xmi:id="_5jhjkOSCEe20cv3f2msZXg" name="TransferObject_Table" label="TransferObject Table"/>
-    <view xmi:id="_5jThIOSCEe20cv3f2msZXg" name="TransferObject_View" label="TransferObject View" layout="VERTICAL"/>
+    <form xmi:id="_5jaO0OSCEe20cv3f2msZXg" name="SelectAnswer_Form" label="Create select answer" iconName="list-box" layout="VERTICAL">
+      <components xsi:type="ui:Group" xmi:id="_bYo5sOTMEe2aFrahRIThWQ" name="group" frame="true" col="12">
+        <components xsi:type="ui:DataField" xmi:id="_d8XasOTMEe2aFrahRIThWQ" name="title" label="Title" iconName="text_fields" col="12" dataFeature="_DOGygOSDEe20cv3f2msZXg"/>
+        <components xsi:type="ui:DataField" xmi:id="_d8WzoOTMEe2aFrahRIThWQ" name="description" label="Description" iconName="text_fields" col="12" row="4" dataFeature="_HgIBUOSDEe20cv3f2msZXg" textMultiLine="true"/>
+      </components>
+    </form>
+    <table xmi:id="_5jhjkOSCEe20cv3f2msZXg" name="SelectAnswerInput_Table" label="Select answers" iconName="list-box">
+      <columns xsi:type="ui:DataColumn" xmi:id="_5ZnPceTLEe2aFrahRIThWQ" name="title" label="Title" iconName="text_fields" dataFeature="_DOGygOSDEe20cv3f2msZXg"/>
+      <columns xsi:type="ui:DataColumn" xmi:id="_5ZnPcOTLEe2aFrahRIThWQ" name="description" label="Description" iconName="text_fields" dataFeature="_HgIBUOSDEe20cv3f2msZXg"/>
+    </table>
+    <view xmi:id="_5jThIOSCEe20cv3f2msZXg" name="SelectAnswers_View" label="View / Edit select answer" iconName="list-box" layout="VERTICAL">
+      <components xsi:type="ui:Group" xmi:id="_-8FZgOTLEe2aFrahRIThWQ" name="group" frame="true" col="12">
+        <components xsi:type="ui:DataField" xmi:id="_LZ6ooOTLEe2aFrahRIThWQ" name="title" label="Title" iconName="text_fields" col="12" dataFeature="_DOGygOSDEe20cv3f2msZXg"/>
+        <components xsi:type="ui:DataField" xmi:id="_LZ6BkOTLEe2aFrahRIThWQ" name="description" label="Description" iconName="text_fields" col="12" row="4" dataFeature="_HgIBUOSDEe20cv3f2msZXg" textMultiLine="true"/>
+      </components>
+    </view>
   </elements>
   <annotations xmi:id="_7D81XmkNEe25ONJ3V89cVA" name="dashboard" className="hu.blackbelt.judo.meta.esm.accesspoint.Access" elements="_GgaEAIyPEe2VSOmaAz6G9Q"/>
   <annotations xmi:id="_7D81X2kNEe25ONJ3V89cVA" name="profile" className="hu.blackbelt.judo.meta.esm.accesspoint.Access"/>

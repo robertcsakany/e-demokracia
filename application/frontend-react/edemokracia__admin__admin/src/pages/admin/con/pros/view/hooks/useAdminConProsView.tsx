@@ -4,7 +4,6 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Relation View
 
@@ -38,7 +37,7 @@ import {
   AdminCommentStored,
 } from '../../../../../../generated/data-api';
 import { baseColumnConfig, toastConfig } from '../../../../../../config';
-import { fileHandling, serviceDateToUiDate } from '../../../../../../utilities';
+import { fileHandling, serviceDateToUiDate, serviceTimeToUiTime } from '../../../../../../utilities';
 import { useL10N } from '../../../../../../l10n/l10n-context';
 
 export const useAdminConProsView = () => {
@@ -61,6 +60,7 @@ export const useAdminConProsView = () => {
         defaultValue: 'Title',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -71,6 +71,7 @@ export const useAdminConProsView = () => {
         defaultValue: 'up',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -84,6 +85,7 @@ export const useAdminConProsView = () => {
         defaultValue: 'down',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -101,6 +103,7 @@ export const useAdminConProsView = () => {
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminConProsViewDefaultProViewTabBarArgumentsArgumentsConsLabelWrapperConsUpVotesFilter',
       attributeName: 'upVotes',
@@ -109,6 +112,7 @@ export const useAdminConProsView = () => {
       }) as string,
       filterType: FilterType.numeric,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminConProsViewDefaultProViewTabBarArgumentsArgumentsConsLabelWrapperConsDownVotesFilter',
       attributeName: 'downVotes',
@@ -130,6 +134,7 @@ export const useAdminConProsView = () => {
         ]
       : [],
   };
+
   const prosSortModel: GridSortModel = [{ field: 'title', sort: 'asc' }];
 
   const prosColumns: GridColDef<AdminProStored>[] = [
@@ -140,6 +145,7 @@ export const useAdminConProsView = () => {
         defaultValue: 'Title',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -150,6 +156,7 @@ export const useAdminConProsView = () => {
         defaultValue: 'up',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -163,6 +170,7 @@ export const useAdminConProsView = () => {
         defaultValue: 'down',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -180,6 +188,7 @@ export const useAdminConProsView = () => {
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminConProsViewDefaultProViewTabBarArgumentsArgumentsProsLabelWrapperProsUpVotesFilter',
       attributeName: 'upVotes',
@@ -188,6 +197,7 @@ export const useAdminConProsView = () => {
       }) as string,
       filterType: FilterType.numeric,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminConProsViewDefaultProViewTabBarArgumentsArgumentsProsLabelWrapperProsDownVotesFilter',
       attributeName: 'downVotes',
@@ -209,6 +219,7 @@ export const useAdminConProsView = () => {
         ]
       : [],
   };
+
   const commentsSortModel: GridSortModel = [{ field: 'created', sort: 'asc' }];
 
   const commentsColumns: GridColDef<AdminCommentStored>[] = [
@@ -219,6 +230,7 @@ export const useAdminConProsView = () => {
         defaultValue: 'Created',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -244,6 +256,7 @@ export const useAdminConProsView = () => {
         defaultValue: 'Comment',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -254,6 +267,7 @@ export const useAdminConProsView = () => {
         defaultValue: 'Created by',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -264,6 +278,7 @@ export const useAdminConProsView = () => {
         defaultValue: 'up',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -277,6 +292,7 @@ export const useAdminConProsView = () => {
         defaultValue: 'down',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -294,6 +310,7 @@ export const useAdminConProsView = () => {
       }) as string,
       filterType: FilterType.dateTime,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminConProsViewDefaultProViewTabBarCommentsCommentsCommentsLabelWrapperCommentsCommentFilter',
       attributeName: 'comment',
@@ -302,6 +319,7 @@ export const useAdminConProsView = () => {
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminConProsViewDefaultProViewTabBarCommentsCommentsCommentsLabelWrapperCommentsCreatedByNameFilter',
       attributeName: 'createdByName',
@@ -310,6 +328,7 @@ export const useAdminConProsView = () => {
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminConProsViewDefaultProViewTabBarCommentsCommentsCommentsLabelWrapperCommentsUpVotesFilter',
       attributeName: 'upVotes',
@@ -318,6 +337,7 @@ export const useAdminConProsView = () => {
       }) as string,
       filterType: FilterType.numeric,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminConProsViewDefaultProViewTabBarCommentsCommentsCommentsLabelWrapperCommentsDownVotesFilter',
       attributeName: 'downVotes',
@@ -339,6 +359,7 @@ export const useAdminConProsView = () => {
         ]
       : [],
   };
+
   const createdBySortModel: GridSortModel = [{ field: 'representation', sort: 'asc' }];
 
   return {

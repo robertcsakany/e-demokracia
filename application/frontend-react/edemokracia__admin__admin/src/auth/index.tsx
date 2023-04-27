@@ -4,7 +4,6 @@
 // Factory expression: <actor>
 // Path expression: 'src/auth/index.tsx'
 // Template name: actor/src/auth/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/auth/index.tsx.hbs
 
 export * from './Auth';

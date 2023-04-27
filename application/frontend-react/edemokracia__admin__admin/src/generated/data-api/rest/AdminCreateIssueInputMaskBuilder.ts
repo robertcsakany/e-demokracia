@@ -7,10 +7,10 @@ import {
   AdminCityAttributes,
 } from '../model';
 
-import {} from './AdminDistrictMaskBuilder';
 import { AdminCountyCitiesMaskBuilder } from './AdminCountyMaskBuilder';
 import {} from './AdminIssueTypeMaskBuilder';
 import { AdminCityDistrictsMaskBuilder } from './AdminCityMaskBuilder';
+import {} from './AdminDistrictMaskBuilder';
 
 export class AdminCreateIssueInputIssueTypeMaskBuilder extends RelationMaskBuilder {
   constructor(protected props: Array<AdminIssueTypeAttributes>) {

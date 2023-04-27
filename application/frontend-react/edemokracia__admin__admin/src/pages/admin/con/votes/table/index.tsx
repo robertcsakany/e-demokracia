@@ -4,7 +4,6 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Con.votes#Table
 // Page owner name: edemokracia::admin::Admin
@@ -38,6 +37,7 @@ import {
   ERROR_PROCESSOR_HOOK_INTERFACE_KEY,
   fileHandling,
   serviceDateToUiDate,
+  serviceTimeToUiTime,
   mapAllFiltersToQueryCustomizerProperties,
   processQueryCustomizer,
 } from '../../../../../utilities';

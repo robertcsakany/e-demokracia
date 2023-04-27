@@ -21,7 +21,7 @@ frontend-flutter/pom.xml,7c547f2df77e65b6681e91dfe785e86e
 frontend-react/.gitignore,bc016d72289e275fd01f618658001a95
 frontend-react/README.adoc,d444054c34deafa82e300e986847c41b
 frontend-react/model/pom.xml,765492fc083dadd74014f78a4230637f
-frontend-react/pom.xml,84a54873d3e3b481a96bae34be13e531
+frontend-react/pom.xml,04f132b1b1869df7bcc653174bc5a11b
 judo.properties,9e50a015d78737c49302671b85206c68
 judo.sh,01b1e6a5ee740949a38f0f58aad344d4
 karaf-features/pom.xml,da15a44194ceb0d41889e8c3f377783e

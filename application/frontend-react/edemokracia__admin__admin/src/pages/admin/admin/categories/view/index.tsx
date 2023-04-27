@@ -4,7 +4,6 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Admin.categories#View
 // Page owner name: edemokracia::admin::Admin
@@ -55,6 +54,8 @@ import {
   TableRowAction,
   uiDateToServiceDate,
   serviceDateToUiDate,
+  uiTimeToServiceTime,
+  serviceTimeToUiTime,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../utilities';
@@ -139,10 +140,13 @@ export default function AdminAdminCategoriesView() {
     (attributeName: keyof AdminIssueCategoryStored, value: any) => {
       const dateTypes: string[] = [];
       const dateTimeTypes: string[] = [];
+      const timeTypes: string[] = [];
       if (dateTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = uiDateToServiceDate(value);
       } else if (dateTimeTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = value;
+      } else if (timeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiTimeToServiceTime(value);
       } else {
         payloadDiff[attributeName] = value;
       }
@@ -152,6 +156,7 @@ export default function AdminAdminCategoriesView() {
   );
   const [editMode, setEditMode] = useState<boolean>(false);
   const [validation, setValidation] = useState<Map<keyof AdminIssueCategory, string>>(new Map());
+
   const [subcategoriesSortModel, setSubcategoriesSortModel] = useState<GridSortModel>([
     { field: 'title', sort: 'asc' },
   ]);

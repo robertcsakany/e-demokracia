@@ -4,7 +4,6 @@
 // Factory expression: <actor>
 // Path expression: 'src/config/general.ts'
 // Template name: actor/src/config/general.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/config/general.ts.hbs
 
 import type { OptionsObject } from 'notistack';

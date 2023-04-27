@@ -4,7 +4,6 @@
 // Factory expression: <actor>
 // Path expression: 'src/components-api/dialog/FilterDialog.ts'
 // Template name: actor/src/components-api/dialog/FilterDialog.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/components-api/dialog/FilterDialog.ts.hbs
 
 import { _BooleanOperation, _EnumerationOperation, _NumericOperation, _StringOperation } from '@judo/data-api-common';

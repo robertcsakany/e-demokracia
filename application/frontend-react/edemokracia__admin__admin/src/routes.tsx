@@ -4,7 +4,6 @@
 // Factory expression: <actor>
 // Path expression: 'src/routes.tsx'
 // Template name: actor/src/routes.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/routes.tsx.hbs
 
 import { Navigate, Route } from 'react-router-dom';

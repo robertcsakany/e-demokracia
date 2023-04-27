@@ -4,7 +4,6 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::VoteDefinition.issue#View
 // Page owner name: edemokracia::admin::Admin
@@ -68,6 +67,8 @@ import {
   TableRowAction,
   uiDateToServiceDate,
   serviceDateToUiDate,
+  uiTimeToServiceTime,
+  serviceTimeToUiTime,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../utilities';
@@ -216,10 +217,13 @@ export default function AdminVoteDefinitionIssueView() {
     (attributeName: keyof AdminIssueStored, value: any) => {
       const dateTypes: string[] = [];
       const dateTimeTypes: string[] = [];
+      const timeTypes: string[] = [];
       if (dateTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = uiDateToServiceDate(value);
       } else if (dateTimeTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = value;
+      } else if (timeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiTimeToServiceTime(value);
       } else {
         payloadDiff[attributeName] = value;
       }
@@ -229,8 +233,11 @@ export default function AdminVoteDefinitionIssueView() {
   );
   const [editMode, setEditMode] = useState<boolean>(false);
   const [validation, setValidation] = useState<Map<keyof AdminIssue, string>>(new Map());
+
   const [attachmentsSortModel, setAttachmentsSortModel] = useState<GridSortModel>([{ field: 'link', sort: 'asc' }]);
+
   const [categoriesSortModel, setCategoriesSortModel] = useState<GridSortModel>([{ field: 'title', sort: 'asc' }]);
+
   const categoriesRangeCall = async () =>
     openRangeDialog<AdminIssueCategoryStored, AdminIssueCategoryQueryCustomizer>({
       id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategories',
@@ -243,8 +250,11 @@ export default function AdminVoteDefinitionIssueView() {
       filterOptions: categoriesRangeFilterOptions,
       initialQueryCustomizer: categoriesInitialQueryCustomizer,
     });
+
   const [categoriesSelectionModel, setCategoriesSelectionModel] = useState<GridRowSelectionModel>([]);
+
   const [commentsSortModel, setCommentsSortModel] = useState<GridSortModel>([{ field: 'comment', sort: 'asc' }]);
+
   const [debatesSortModel, setDebatesSortModel] = useState<GridSortModel>([{ field: 'title', sort: 'asc' }]);
 
   const attachmentsRowActions: TableRowAction<AdminIssueAttachmentStored>[] = [

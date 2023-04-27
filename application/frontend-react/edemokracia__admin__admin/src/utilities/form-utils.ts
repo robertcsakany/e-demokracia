@@ -4,7 +4,6 @@
 // Factory expression: <actor>
 // Path expression: 'src/utilities/form-utils.ts'
 // Template name: actor/src/utilities/form-utils.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/utilities/form-utils.ts.hbs
 
 import { format } from 'date-fns';
@@ -21,10 +20,27 @@ export const uiDateToServiceDate = (date?: any | null): string | null => {
 
 export const serviceDateToUiDate = (dateStr?: any) => {
   if (typeof dateStr === 'string') {
-    if (dateStr.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/)) {
-      return new Date(dateStr);
-    }
-    return new Date(dateStr.endsWith('Z') ? dateStr : dateStr + 'Z');
+    return new Date(dateStr);
   }
   return dateStr;
+};
+
+export const uiTimeToServiceTime = (time?: any | null): string | null => {
+  if (time === undefined || time === null) {
+    return null;
+  }
+  const resolved: Date = typeof time === 'string' ? new Date(time) : time;
+  return (
+    resolved.getUTCHours().toString().padStart(2, '0') + ':' + resolved.getUTCMinutes().toString().padStart(2, '0')
+  );
+};
+
+export const serviceTimeToUiTime = (timeStr?: any) => {
+  if (typeof timeStr === 'string') {
+    let splittedTime = timeStr.split(':');
+    let date: Date = new Date();
+    date.setHours(Number(splittedTime[0]) - date.getTimezoneOffset() / 60, Number(splittedTime[1]));
+    return date;
+  }
+  return timeStr;
 };

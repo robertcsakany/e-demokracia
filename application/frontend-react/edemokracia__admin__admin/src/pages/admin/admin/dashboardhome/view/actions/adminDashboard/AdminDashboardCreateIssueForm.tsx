@@ -4,15 +4,14 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
+
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // --------------------------------
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CallOperationAction
 
@@ -101,6 +100,8 @@ import {
   TableRowAction,
   uiDateToServiceDate,
   serviceDateToUiDate,
+  uiTimeToServiceTime,
+  serviceTimeToUiTime,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../../../utilities';
@@ -137,10 +138,13 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
     (attributeName: keyof AdminCreateIssueInput, value: any) => {
       const dateTypes: string[] = [];
       const dateTimeTypes: string[] = ['debateCloseAt'];
+      const timeTypes: string[] = [];
       if (dateTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = uiDateToServiceDate(value);
       } else if (dateTimeTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = value;
+      } else if (timeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiTimeToServiceTime(value);
       } else {
         payloadDiff[attributeName] = value;
       }
@@ -160,6 +164,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         defaultValue: 'Representation',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -170,6 +175,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         defaultValue: 'Name',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -180,6 +186,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         defaultValue: 'County',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -194,6 +201,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueCityNameFilter',
       attributeName: 'name',
@@ -202,6 +210,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueCityCountyFilter',
       attributeName: 'county',
@@ -223,6 +232,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         ]
       : [],
   };
+
   const cityRangeCall = async () =>
     openRangeDialog<AdminCityStored, AdminCityQueryCustomizer>({
       id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputCity',
@@ -235,7 +245,9 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       filterOptions: cityRangeFilterOptions,
       initialQueryCustomizer: cityInitialQueryCustomizer,
     });
+
   const [citySelectionModel, setCitySelectionModel] = useState<GridRowSelectionModel>([]);
+
   const [countySortModel, setCountySortModel] = useState<GridSortModel>([{ field: 'representation', sort: 'asc' }]);
 
   const countyColumns: GridColDef<AdminCountyStored>[] = [
@@ -246,6 +258,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         defaultValue: 'Representation',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -256,6 +269,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         defaultValue: 'Name',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -271,6 +285,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       ) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueCountyNameFilter',
       attributeName: 'name',
@@ -292,6 +307,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         ]
       : [],
   };
+
   const countyRangeCall = async () =>
     openRangeDialog<AdminCountyStored, AdminCountyQueryCustomizer>({
       id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputCounty',
@@ -304,7 +320,9 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       filterOptions: countyRangeFilterOptions,
       initialQueryCustomizer: countyInitialQueryCustomizer,
     });
+
   const [countySelectionModel, setCountySelectionModel] = useState<GridRowSelectionModel>([]);
+
   const [districtSortModel, setDistrictSortModel] = useState<GridSortModel>([{ field: 'representation', sort: 'asc' }]);
 
   const districtColumns: GridColDef<AdminDistrictStored>[] = [
@@ -316,6 +334,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         { defaultValue: 'Representation' },
       ) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -326,6 +345,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         defaultValue: 'Name',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -336,6 +356,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         defaultValue: 'County',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -346,6 +367,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         defaultValue: 'City',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -361,6 +383,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       ) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueDistrictNameFilter',
       attributeName: 'name',
@@ -369,6 +392,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueDistrictCountyFilter',
       attributeName: 'county',
@@ -377,6 +401,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueDistrictCityFilter',
       attributeName: 'city',
@@ -398,6 +423,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         ]
       : [],
   };
+
   const districtRangeCall = async () =>
     openRangeDialog<AdminDistrictStored, AdminDistrictQueryCustomizer>({
       id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputDistrict',
@@ -410,7 +436,9 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       filterOptions: districtRangeFilterOptions,
       initialQueryCustomizer: districtInitialQueryCustomizer,
     });
+
   const [districtSelectionModel, setDistrictSelectionModel] = useState<GridRowSelectionModel>([]);
+
   const [issueTypeSortModel, setIssueTypeSortModel] = useState<GridSortModel>([
     { field: 'representation', sort: 'asc' },
   ]);
@@ -424,6 +452,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         { defaultValue: 'Representation' },
       ) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -434,6 +463,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         defaultValue: 'Title',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -444,6 +474,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         defaultValue: 'Description',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -459,6 +490,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       ) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueIssueTypeTitleFilter',
       attributeName: 'title',
@@ -467,6 +499,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueInputDefaultCreateIssueInputFormIssueLabelWrapperIssueIssueTypeDescriptionFilter',
       attributeName: 'description',
@@ -489,6 +522,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
         ]
       : [],
   };
+
   const issueTypeRangeCall = async () =>
     openRangeDialog<AdminIssueTypeStored, AdminIssueTypeQueryCustomizer>({
       id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminCreateIssueInputIssueType',
@@ -501,6 +535,7 @@ export function AdminDashboardCreateIssueForm({ successCallback, cancel }: Admin
       filterOptions: issueTypeRangeFilterOptions,
       initialQueryCustomizer: issueTypeInitialQueryCustomizer,
     });
+
   const [issueTypeSelectionModel, setIssueTypeSelectionModel] = useState<GridRowSelectionModel>([]);
 
   const isFormUpdateable = useCallback(() => {

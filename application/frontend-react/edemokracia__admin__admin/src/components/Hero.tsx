@@ -4,7 +4,6 @@
 // Factory expression: <actor>
 // Path expression: 'src/components/Hero.tsx'
 // Template name: actor/src/components/Hero.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/components/Hero.tsx.hbs
 
 import { Box, Typography } from '@mui/material';

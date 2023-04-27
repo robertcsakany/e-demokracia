@@ -4,7 +4,6 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Relation View
 
@@ -40,7 +39,7 @@ import {
   AdminCommentStored,
 } from '../../../../../../generated/data-api';
 import { baseColumnConfig, toastConfig } from '../../../../../../config';
-import { fileHandling, serviceDateToUiDate } from '../../../../../../utilities';
+import { fileHandling, serviceDateToUiDate, serviceTimeToUiTime } from '../../../../../../utilities';
 import { useL10N } from '../../../../../../l10n/l10n-context';
 
 export const useAdminDebateProsView = () => {
@@ -63,6 +62,7 @@ export const useAdminDebateProsView = () => {
         defaultValue: 'Title',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -73,6 +73,7 @@ export const useAdminDebateProsView = () => {
         defaultValue: 'up',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -86,6 +87,7 @@ export const useAdminDebateProsView = () => {
         defaultValue: 'down',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -103,6 +105,7 @@ export const useAdminDebateProsView = () => {
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateProsViewDefaultProViewTabBarArgumentsArgumentsConsLabelWrapperConsUpVotesFilter',
       attributeName: 'upVotes',
@@ -111,6 +114,7 @@ export const useAdminDebateProsView = () => {
       }) as string,
       filterType: FilterType.numeric,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateProsViewDefaultProViewTabBarArgumentsArgumentsConsLabelWrapperConsDownVotesFilter',
       attributeName: 'downVotes',
@@ -132,6 +136,7 @@ export const useAdminDebateProsView = () => {
         ]
       : [],
   };
+
   const prosSortModel: GridSortModel = [{ field: 'title', sort: 'asc' }];
 
   const prosColumns: GridColDef<AdminProStored>[] = [
@@ -142,6 +147,7 @@ export const useAdminDebateProsView = () => {
         defaultValue: 'Title',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -152,6 +158,7 @@ export const useAdminDebateProsView = () => {
         defaultValue: 'up',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -165,6 +172,7 @@ export const useAdminDebateProsView = () => {
         defaultValue: 'down',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -182,6 +190,7 @@ export const useAdminDebateProsView = () => {
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateProsViewDefaultProViewTabBarArgumentsArgumentsProsLabelWrapperProsUpVotesFilter',
       attributeName: 'upVotes',
@@ -190,6 +199,7 @@ export const useAdminDebateProsView = () => {
       }) as string,
       filterType: FilterType.numeric,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateProsViewDefaultProViewTabBarArgumentsArgumentsProsLabelWrapperProsDownVotesFilter',
       attributeName: 'downVotes',
@@ -211,6 +221,7 @@ export const useAdminDebateProsView = () => {
         ]
       : [],
   };
+
   const commentsSortModel: GridSortModel = [{ field: 'created', sort: 'asc' }];
 
   const commentsColumns: GridColDef<AdminCommentStored>[] = [
@@ -221,6 +232,7 @@ export const useAdminDebateProsView = () => {
         defaultValue: 'Created',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -246,6 +258,7 @@ export const useAdminDebateProsView = () => {
         defaultValue: 'Comment',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -256,6 +269,7 @@ export const useAdminDebateProsView = () => {
         defaultValue: 'Created by',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -266,6 +280,7 @@ export const useAdminDebateProsView = () => {
         defaultValue: 'up',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -279,6 +294,7 @@ export const useAdminDebateProsView = () => {
         defaultValue: 'down',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -296,6 +312,7 @@ export const useAdminDebateProsView = () => {
       }) as string,
       filterType: FilterType.dateTime,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateProsViewDefaultProViewTabBarCommentsCommentsCommentsLabelWrapperCommentsCommentFilter',
       attributeName: 'comment',
@@ -304,6 +321,7 @@ export const useAdminDebateProsView = () => {
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateProsViewDefaultProViewTabBarCommentsCommentsCommentsLabelWrapperCommentsCreatedByNameFilter',
       attributeName: 'createdByName',
@@ -313,6 +331,7 @@ export const useAdminDebateProsView = () => {
       ) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateProsViewDefaultProViewTabBarCommentsCommentsCommentsLabelWrapperCommentsUpVotesFilter',
       attributeName: 'upVotes',
@@ -321,6 +340,7 @@ export const useAdminDebateProsView = () => {
       }) as string,
       filterType: FilterType.numeric,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminDebateProsViewDefaultProViewTabBarCommentsCommentsCommentsLabelWrapperCommentsDownVotesFilter',
       attributeName: 'downVotes',
@@ -342,6 +362,7 @@ export const useAdminDebateProsView = () => {
         ]
       : [],
   };
+
   const createdBySortModel: GridSortModel = [{ field: 'representation', sort: 'asc' }];
 
   return {

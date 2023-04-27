@@ -4,7 +4,6 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Relation View
 
@@ -30,7 +29,7 @@ import {
   AdminUserMaskBuilder,
 } from '../../../../../../generated/data-api';
 import { baseColumnConfig, toastConfig } from '../../../../../../config';
-import { fileHandling, serviceDateToUiDate } from '../../../../../../utilities';
+import { fileHandling, serviceDateToUiDate, serviceTimeToUiTime } from '../../../../../../utilities';
 import { useL10N } from '../../../../../../l10n/l10n-context';
 
 export const useAdminIssueCategorySubcategoriesView = () => {
@@ -52,6 +51,7 @@ export const useAdminIssueCategorySubcategoriesView = () => {
         defaultValue: 'Title',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -63,6 +63,7 @@ export const useAdminIssueCategorySubcategoriesView = () => {
         { defaultValue: 'Description' },
       ) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -77,6 +78,7 @@ export const useAdminIssueCategorySubcategoriesView = () => {
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesViewDefaultCategoryViewSubcategoriesLabelWrapperSubcategoriesDescriptionFilter',
       attributeName: 'description',
@@ -99,6 +101,7 @@ export const useAdminIssueCategorySubcategoriesView = () => {
         ]
       : [],
   };
+
   const ownerSortModel: GridSortModel = [{ field: 'representation', sort: 'asc' }];
 
   const ownerColumns: GridColDef<AdminUserStored>[] = [
@@ -109,6 +112,7 @@ export const useAdminIssueCategorySubcategoriesView = () => {
         defaultValue: 'Representation',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },

@@ -11,7 +11,7 @@
 
 	<properties>
 		<judo-channel>develop</judo-channel>
-		<judo-version>1.0.0.20230426_043121_0f2d70e1_develop</judo-version>
+		<judo-version>1.0.0.20230427_063854_cdf2679a_develop</judo-version>
 
 		<sqlDialects>postgresql,hsqldb</sqlDialects>
 
@@ -31,7 +31,7 @@
 		<judo-meta-ui-version-defined>1.1.0.20230425_040719_403b7660_develop</judo-meta-ui-version-defined>
 		<judo-ui-flutter-template-version-defined>1.0.0.20230425_041055_a65309d9_develop</judo-ui-flutter-template-version-defined>
 		<judo-ui-typescript-rest-template-version-defined>1.0.0.20230425_041059_3dd6d9fa_develop</judo-ui-typescript-rest-template-version-defined>
-		<judo-ui-react-template-version-defined>1.0.0.20230425_192230_4503f121_develop</judo-ui-react-template-version-defined>
+		<judo-ui-react-template-version-defined>1.0.0.20230426_233754_595f45ba_develop</judo-ui-react-template-version-defined>
         <frontendType>react</frontendType>
 
 	</properties>

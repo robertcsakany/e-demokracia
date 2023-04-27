@@ -24,7 +24,7 @@
         <frontend-maven-plugin-version>1.12.1</frontend-maven-plugin-version>
         <ui-model>${basedir}/model/edemokracia-ui.model</ui-model>
 
-        <judo-ui-react-template-version>1.0.0.20230425_192230_4503f121_develop</judo-ui-react-template-version>
+        <judo-ui-react-template-version>1.0.0.20230426_233754_595f45ba_develop</judo-ui-react-template-version>
         <judo-ui-typescript-rest-template-version>1.0.0.20230425_041059_3dd6d9fa_develop</judo-ui-typescript-rest-template-version>
 
         <node-version>16.15.1</node-version>

@@ -4,7 +4,6 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Dashboard.createIssue#Output
 // Page owner name: edemokracia::admin::Admin
@@ -69,6 +68,8 @@ import {
   TableRowAction,
   uiDateToServiceDate,
   serviceDateToUiDate,
+  uiTimeToServiceTime,
+  serviceTimeToUiTime,
   booleanToStringSelect,
   stringToBooleanSelect,
 } from '../../../../../utilities';
@@ -165,10 +166,13 @@ export default function AdminDashboardCreateissueOutput() {
     (attributeName: keyof AdminIssueStored, value: any) => {
       const dateTypes: string[] = [];
       const dateTimeTypes: string[] = [];
+      const timeTypes: string[] = [];
       if (dateTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = uiDateToServiceDate(value);
       } else if (dateTimeTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = value;
+      } else if (timeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiTimeToServiceTime(value);
       } else {
         payloadDiff[attributeName] = value;
       }
@@ -224,8 +228,11 @@ export default function AdminDashboardCreateissueOutput() {
   const pageRefreshOutputAction = usePageRefreshOutputAction();
   const linkViewOwnerAction = useLinkViewOwnerAction();
   const AdminCommentVoteUpAction = useAdminCommentVoteUpAction();
+
   const [attachmentsSortModel, setAttachmentsSortModel] = useState<GridSortModel>([{ field: 'link', sort: 'asc' }]);
+
   const [categoriesSortModel, setCategoriesSortModel] = useState<GridSortModel>([{ field: 'title', sort: 'asc' }]);
+
   const categoriesRangeCall = async () =>
     openRangeDialog<AdminIssueCategoryStored, AdminIssueCategoryQueryCustomizer>({
       id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminIssueCategories',
@@ -238,8 +245,11 @@ export default function AdminDashboardCreateissueOutput() {
       filterOptions: categoriesRangeFilterOptions,
       initialQueryCustomizer: categoriesInitialQueryCustomizer,
     });
+
   const [categoriesSelectionModel, setCategoriesSelectionModel] = useState<GridRowSelectionModel>([]);
+
   const [commentsSortModel, setCommentsSortModel] = useState<GridSortModel>([{ field: 'comment', sort: 'asc' }]);
+
   const [debatesSortModel, setDebatesSortModel] = useState<GridSortModel>([{ field: 'title', sort: 'asc' }]);
   const attachmentsRowActions: TableRowAction<AdminIssueAttachmentStored>[] = [
     {

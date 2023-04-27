@@ -4,7 +4,6 @@
 // Factory expression: #getActionsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/action.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/action.tsx.hbs
 // Action: CallOperationAction
 // Is Access: no
@@ -38,6 +37,7 @@ import {
   fileHandling,
   processQueryCustomizer,
   serviceDateToUiDate,
+  serviceTimeToUiTime,
 } from '../../../../../../../utilities';
 import {
   SelectAnswerVoteSelectionQueryCustomizer,
@@ -96,6 +96,7 @@ export const useAdminVoteDefinitionVoteSelectAnswerAction: AdminVoteDefinitionVo
         headerName: t('edemokracia.admin.VoteDefinition.voteSelectAnswer.InputvoteSelectAnswer.Entity.Table.title', {
           defaultValue: 'Title',
         }) as string,
+
         width: 230,
         type: 'string',
       },
@@ -106,6 +107,7 @@ export const useAdminVoteDefinitionVoteSelectAnswerAction: AdminVoteDefinitionVo
           'edemokracia.admin.VoteDefinition.voteSelectAnswer.InputvoteSelectAnswer.Entity.Table.description',
           { defaultValue: 'Description' },
         ) as string,
+
         width: 230,
         type: 'string',
       },
@@ -120,6 +122,7 @@ export const useAdminVoteDefinitionVoteSelectAnswerAction: AdminVoteDefinitionVo
         }) as string,
         filterType: FilterType.string,
       },
+
       {
         id: 'FilteredemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteSelectAnswerInputTableDefaultVoteSelectAnswerEntityTableDescriptionFilter',
         attributeName: 'description',

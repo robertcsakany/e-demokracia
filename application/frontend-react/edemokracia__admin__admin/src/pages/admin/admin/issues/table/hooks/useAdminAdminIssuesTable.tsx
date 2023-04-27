@@ -4,7 +4,6 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Access Table
 
@@ -20,7 +19,7 @@ import { useTranslation } from 'react-i18next';
 import { FilterType } from '../../../../../../components-api';
 import type { FilterOption } from '../../../../../../components-api';
 import { MdiIcon, useJudoNavigation } from '../../../../../../components';
-import { fileHandling, serviceDateToUiDate } from '../../../../../../utilities';
+import { fileHandling, serviceDateToUiDate, serviceTimeToUiTime } from '../../../../../../utilities';
 import { AdminIssueStored } from '../../../../../../generated/data-api';
 import { baseColumnConfig, toastConfig } from '../../../../../../config';
 import { useL10N } from '../../../../../../l10n/l10n-context';
@@ -37,6 +36,7 @@ export const useAdminAdminIssuesTable = () => {
       field: 'title',
       headerName: t('edemokracia.admin.Admin.issues.issues.Issue.Table.title', { defaultValue: 'Title' }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -45,6 +45,7 @@ export const useAdminAdminIssuesTable = () => {
       field: 'status',
       headerName: t('edemokracia.admin.Admin.issues.issues.Issue.Table.status', { defaultValue: 'Status' }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'string',
       sortable: false,
@@ -57,6 +58,7 @@ export const useAdminAdminIssuesTable = () => {
       field: 'created',
       headerName: t('edemokracia.admin.Admin.issues.issues.Issue.Table.created', { defaultValue: 'Created' }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -82,6 +84,7 @@ export const useAdminAdminIssuesTable = () => {
         defaultValue: 'Debates',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -95,6 +98,7 @@ export const useAdminAdminIssuesTable = () => {
         defaultValue: 'Description',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -107,6 +111,7 @@ export const useAdminAdminIssuesTable = () => {
       label: t('edemokracia.admin.Admin.issues.issues.Issue.Table.title.Filter', { defaultValue: 'Title' }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableDefaultIssuesIssueTableStatusFilter',
       attributeName: 'status',
@@ -114,6 +119,7 @@ export const useAdminAdminIssuesTable = () => {
       filterType: FilterType.enumeration,
       enumValues: ['CREATED', 'PENDING', 'ACTIVE', 'CLOSED'],
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableDefaultIssuesIssueTableCreatedFilter',
       attributeName: 'created',
@@ -122,6 +128,7 @@ export const useAdminAdminIssuesTable = () => {
       }) as string,
       filterType: FilterType.dateTime,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableDefaultIssuesIssueTableNumberOfDebatesFilter',
       attributeName: 'numberOfDebates',
@@ -130,6 +137,7 @@ export const useAdminAdminIssuesTable = () => {
       }) as string,
       filterType: FilterType.numeric,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminIssuesTableDefaultIssuesIssueTableDescriptionFilter',
       attributeName: 'description',

@@ -4,7 +4,6 @@
 // Factory expression: <actor>
 // Path expression: 'src/utilities/filter-helper.ts'
 // Template name: actor/src/utilities/filter-helper.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/utilities/filter-helper.ts.hbs
 
 import type { Filter, Operation } from '../components-api';

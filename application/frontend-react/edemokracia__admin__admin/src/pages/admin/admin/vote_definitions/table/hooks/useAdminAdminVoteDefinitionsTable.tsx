@@ -4,7 +4,6 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Access Table
 
@@ -20,7 +19,7 @@ import { useTranslation } from 'react-i18next';
 import { FilterType } from '../../../../../../components-api';
 import type { FilterOption } from '../../../../../../components-api';
 import { MdiIcon, useJudoNavigation } from '../../../../../../components';
-import { fileHandling, serviceDateToUiDate } from '../../../../../../utilities';
+import { fileHandling, serviceDateToUiDate, serviceTimeToUiTime } from '../../../../../../utilities';
 import { AdminVoteDefinitionStored } from '../../../../../../generated/data-api';
 import { baseColumnConfig, toastConfig } from '../../../../../../config';
 import { useL10N } from '../../../../../../l10n/l10n-context';
@@ -39,6 +38,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
         defaultValue: 'VoteType',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'string',
       sortable: false,
@@ -53,6 +53,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
         defaultValue: 'Title',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -63,6 +64,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
         defaultValue: 'NumberOfVotes',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 100,
       type: 'number',
       valueFormatter: ({ value }: GridValueFormatterParams<number>) => {
@@ -76,6 +78,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
         defaultValue: 'Created',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -101,6 +104,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
         defaultValue: 'Status',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'string',
       sortable: false,
@@ -115,6 +119,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
         defaultValue: 'CloseAt',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -140,6 +145,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
         defaultValue: 'Description',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -155,6 +161,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       filterType: FilterType.enumeration,
       enumValues: ['YES_NO', 'YES_NO_ABSTAIN', 'SELECT_ANSWER', 'RATE', 'NO_VOTE'],
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableTitleFilter',
       attributeName: 'title',
@@ -163,6 +170,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableNumberOfVotesFilter',
       attributeName: 'numberOfVotes',
@@ -171,6 +179,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       }) as string,
       filterType: FilterType.numeric,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableCreatedFilter',
       attributeName: 'created',
@@ -179,6 +188,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       }) as string,
       filterType: FilterType.dateTime,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableStatusFilter',
       attributeName: 'status',
@@ -188,6 +198,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       filterType: FilterType.enumeration,
       enumValues: ['CREATED', 'PENDING', 'ACTIVE', 'CLOSED'],
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableCloseAtFilter',
       attributeName: 'closeAt',
@@ -196,6 +207,7 @@ export const useAdminAdminVoteDefinitionsTable = () => {
       }) as string,
       filterType: FilterType.dateTime,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsTableDefaultVoteDefinitionsVoteDefinitionTableDescriptionFilter',
       attributeName: 'description',

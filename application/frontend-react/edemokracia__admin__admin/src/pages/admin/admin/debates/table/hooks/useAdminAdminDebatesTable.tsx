@@ -4,7 +4,6 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pagePath(#self)+'hooks/use'+#pageName(#self)+'.tsx'
 // Template name: actor/src/pages/hooks.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/hooks.tsx.hbs
 // Hook: Access Table
 
@@ -20,7 +19,7 @@ import { useTranslation } from 'react-i18next';
 import { FilterType } from '../../../../../../components-api';
 import type { FilterOption } from '../../../../../../components-api';
 import { MdiIcon, useJudoNavigation } from '../../../../../../components';
-import { fileHandling, serviceDateToUiDate } from '../../../../../../utilities';
+import { fileHandling, serviceDateToUiDate, serviceTimeToUiTime } from '../../../../../../utilities';
 import { AdminDebateStored } from '../../../../../../generated/data-api';
 import { baseColumnConfig, toastConfig } from '../../../../../../config';
 import { useL10N } from '../../../../../../l10n/l10n-context';
@@ -39,6 +38,7 @@ export const useAdminAdminDebatesTable = () => {
         defaultValue: 'Issue',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -47,6 +47,7 @@ export const useAdminAdminDebatesTable = () => {
       field: 'title',
       headerName: t('edemokracia.admin.Admin.debates.debates.Debate.Table.title', { defaultValue: 'Title' }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -57,6 +58,7 @@ export const useAdminAdminDebatesTable = () => {
         defaultValue: 'Status',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'string',
       sortable: false,
@@ -71,6 +73,7 @@ export const useAdminAdminDebatesTable = () => {
         defaultValue: 'Close at',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 170,
       type: 'dateTime',
       valueGetter: ({ value }) => value && serviceDateToUiDate(value),
@@ -96,6 +99,7 @@ export const useAdminAdminDebatesTable = () => {
         defaultValue: 'Description',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
     },
@@ -110,6 +114,7 @@ export const useAdminAdminDebatesTable = () => {
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableTitleFilter',
       attributeName: 'title',
@@ -118,6 +123,7 @@ export const useAdminAdminDebatesTable = () => {
       }) as string,
       filterType: FilterType.string,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableStatusFilter',
       attributeName: 'status',
@@ -127,6 +133,7 @@ export const useAdminAdminDebatesTable = () => {
       filterType: FilterType.enumeration,
       enumValues: ['CREATED', 'PENDING', 'ACTIVE', 'CLOSED'],
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableCloseAtFilter',
       attributeName: 'closeAt',
@@ -135,6 +142,7 @@ export const useAdminAdminDebatesTable = () => {
       }) as string,
       filterType: FilterType.dateTime,
     },
+
     {
       id: 'FilteredemokraciaAdminAdminEdemokraciaAdminAdminDebatesTableDefaultDebatesDebateTableDescriptionFilter',
       attributeName: 'description',

@@ -4,15 +4,14 @@
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
+
 //////////////////////////////////////////////////////////////////////////////
 // G E N E R A T E D    S O U R C E
 // --------------------------------
 // Factory expression: #getActionFormsForPages(#application)
 // Path expression: #pagePath(#self.value)+'actions/'+#pageActionFormPathSuffix(#self.key,#self.value)+'.tsx'
 // Template name: actor/src/pages/actions/actionForm.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/actions/actionForm.tsx.hbs
 // Action: CallOperationAction
 
@@ -94,6 +93,8 @@ import {
   TableRowAction,
   uiDateToServiceDate,
   serviceDateToUiDate,
+  uiTimeToServiceTime,
+  serviceTimeToUiTime,
   stringToBooleanSelect,
   booleanToStringSelect,
 } from '../../../../../../../utilities';
@@ -131,10 +132,13 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
     (attributeName: keyof CloseDebateInput, value: any) => {
       const dateTypes: string[] = [];
       const dateTimeTypes: string[] = ['closeAt'];
+      const timeTypes: string[] = [];
       if (dateTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = uiDateToServiceDate(value);
       } else if (dateTimeTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = value;
+      } else if (timeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiTimeToServiceTime(value);
       } else {
         payloadDiff[attributeName] = value;
       }
@@ -154,6 +158,7 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
         defaultValue: 'Title',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
       sortable: false,
@@ -168,6 +173,7 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
         defaultValue: 'Description',
       }) as string,
       headerClassName: 'data-grid-column-header',
+
       width: 230,
       type: 'string',
       sortable: false,
@@ -190,6 +196,7 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
         ]
       : [],
   };
+
   const answersRangeCall = async () =>
     openRangeDialog<SelectAnswerInputStored, SelectAnswerInputQueryCustomizer>({
       id: 'RelationTypeedemokraciaAdminAdminEdemokraciaCloseDebateInputAnswers',
@@ -202,6 +209,7 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
       filterOptions: answersRangeFilterOptions,
       initialQueryCustomizer: answersInitialQueryCustomizer,
     });
+
   const [answersSelectionModel, setAnswersSelectionModel] = useState<GridRowSelectionModel>([]);
   const answersRowActions: TableRowAction<SelectAnswerInputStored>[] = [
     {

@@ -4,7 +4,6 @@
 // Factory expression: <actor>
 // Path expression: 'src/components-api/components/TrinaryLogic.ts'
 // Template name: actor/src/components-api/components/TrinaryLogic.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/components-api/components/TrinaryLogic.ts.hbs
 
 export const TRINARY_LOGIC = new Map<boolean | null, string>([

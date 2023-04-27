@@ -4,7 +4,6 @@
 // Factory expression: <actor>
 // Path expression: 'src/menu-items.tsx'
 // Template name: actor/src/menu-items.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/menu-items.tsx.hbs
 
 import type { MenuItem } from './components-api';

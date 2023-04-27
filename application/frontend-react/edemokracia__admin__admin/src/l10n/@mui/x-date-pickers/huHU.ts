@@ -4,7 +4,6 @@
 // Factory expression: <actor>
 // Path expression: 'src/l10n/@mui/x-date-pickers/huHU.ts'
 // Template name: actor/src/l10n/@mui/x-date-pickers/huHU.ts
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/l10n/@mui/x-date-pickers/huHU.ts.hbs
 
 // This is a temporary workaround until https://github.com/mui/mui-x/pull/7776 is merged

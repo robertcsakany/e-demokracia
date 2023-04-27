@@ -8,12 +8,6 @@ import {
 } from '../model';
 
 import {
-  AdminConCreatedByMaskBuilder,
-  AdminConConsMaskBuilder,
-  AdminConProsMaskBuilder,
-  AdminConCommentsMaskBuilder,
-} from './AdminConMaskBuilder';
-import {
   AdminUserActivityCountiesMaskBuilder,
   AdminUserResidentCountyMaskBuilder,
   AdminUserActivityCitiesMaskBuilder,
@@ -21,6 +15,12 @@ import {
   AdminUserActivityDistrictsMaskBuilder,
   AdminUserResidentDistrictMaskBuilder,
 } from './AdminUserMaskBuilder';
+import {
+  AdminConCreatedByMaskBuilder,
+  AdminConConsMaskBuilder,
+  AdminConProsMaskBuilder,
+  AdminConCommentsMaskBuilder,
+} from './AdminConMaskBuilder';
 import { AdminCommentCreatedByMaskBuilder } from './AdminCommentMaskBuilder';
 
 export class AdminProCreatedByMaskBuilder extends RelationMaskBuilder {

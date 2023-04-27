@@ -774,8 +774,8 @@ packages:
       react-is: 18.2.0
     dev: false
 
-  /@mui/core-downloads-tracker/5.12.1:
-    resolution: {integrity: sha512-rNiQYHtkXljcvCEnhWrJzie1ifff5O98j3uW7ZlchFgD8HWxEcz/QoxZvo+sCKC9aayAgxi9RsVn2VjCyp5CrA==}
+  /@mui/core-downloads-tracker/5.12.2:
+    resolution: {integrity: sha512-Qn7dy8tql6T0hY6gTFPkpWlnqVVFGu5Z6QzEzUSzzmLZpfAx4kf8sFz0PHiB7gU5yrqcZF9picMx1shpRY/rXw==}
     dev: false
 
   /@mui/material/5.12.1_pte7igy7nwbxlzeccvq7hpzi4q:
@@ -799,7 +799,7 @@ packages:
       '@emotion/react': 11.10.6_kzbn2opkn2327fwg5yzwzya5o4
       '@emotion/styled': 11.10.6_qry7xzgsc55pr5ngbiorqn3fpa
       '@mui/base': 5.0.0-alpha.126_ib3m5ricvtkl2cll7qpr2f6lvq
-      '@mui/core-downloads-tracker': 5.12.1
+      '@mui/core-downloads-tracker': 5.12.2
       '@mui/system': 5.12.1_dhit7hwbxwjs4eberzjw3ibkbi
       '@mui/types': 7.2.4_@types+react@18.0.26
       '@mui/utils': 5.12.0_react@18.2.0

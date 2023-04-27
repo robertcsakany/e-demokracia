@@ -4,7 +4,6 @@
 // Factory expression: #getPagesForRouting(#application)
 // Path expression: #pageIndexPath(#self)
 // Template name: actor/src/pages/index.tsx
-// Base URL: mvn:hu.blackbelt.judo.generator:judo-ui-react:1.0.0.20230425_192230_4503f121_develop
 // Template file: actor/src/pages/index.tsx.hbs
 // Page name: edemokracia::admin::Dashboard.createUser#Output
 // Page owner name: edemokracia::admin::Admin
@@ -72,6 +71,8 @@ import {
   TableRowAction,
   uiDateToServiceDate,
   serviceDateToUiDate,
+  uiTimeToServiceTime,
+  serviceTimeToUiTime,
   booleanToStringSelect,
   stringToBooleanSelect,
 } from '../../../../../utilities';
@@ -140,10 +141,13 @@ export default function AdminDashboardCreateuserOutput() {
     (attributeName: keyof AdminUserStored, value: any) => {
       const dateTypes: string[] = [];
       const dateTimeTypes: string[] = ['created'];
+      const timeTypes: string[] = [];
       if (dateTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = uiDateToServiceDate(value);
       } else if (dateTimeTypes.includes(attributeName as string)) {
         payloadDiff[attributeName] = value;
+      } else if (timeTypes.includes(attributeName as string)) {
+        payloadDiff[attributeName] = uiTimeToServiceTime(value);
       } else {
         payloadDiff[attributeName] = value;
       }
@@ -188,9 +192,11 @@ export default function AdminDashboardCreateuserOutput() {
   const rowEditActivityCitiesAction = useRowEditActivityCitiesAction();
   const linkViewResidentCityAction = useLinkViewResidentCityAction();
   const rowViewActivityDistrictsAction = useRowViewActivityDistrictsAction();
+
   const [activityCitiesSortModel, setActivityCitiesSortModel] = useState<GridSortModel>([
     { field: 'representation', sort: 'asc' },
   ]);
+
   const activityCitiesRangeCall = async () =>
     openRangeDialog<AdminCityStored, AdminCityQueryCustomizer>({
       id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserActivityCities',
@@ -203,10 +209,13 @@ export default function AdminDashboardCreateuserOutput() {
       filterOptions: activityCitiesRangeFilterOptions,
       initialQueryCustomizer: activityCitiesInitialQueryCustomizer,
     });
+
   const [activityCitiesSelectionModel, setActivityCitiesSelectionModel] = useState<GridRowSelectionModel>([]);
+
   const [activityDistrictsSortModel, setActivityDistrictsSortModel] = useState<GridSortModel>([
     { field: 'representation', sort: 'asc' },
   ]);
+
   const activityDistrictsRangeCall = async () =>
     openRangeDialog<AdminDistrictStored, AdminDistrictQueryCustomizer>({
       id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserActivityDistricts',
@@ -219,10 +228,13 @@ export default function AdminDashboardCreateuserOutput() {
       filterOptions: activityDistrictsRangeFilterOptions,
       initialQueryCustomizer: activityDistrictsInitialQueryCustomizer,
     });
+
   const [activityDistrictsSelectionModel, setActivityDistrictsSelectionModel] = useState<GridRowSelectionModel>([]);
+
   const [activityCountiesSortModel, setActivityCountiesSortModel] = useState<GridSortModel>([
     { field: 'representation', sort: 'asc' },
   ]);
+
   const activityCountiesRangeCall = async () =>
     openRangeDialog<AdminCountyStored, AdminCountyQueryCustomizer>({
       id: 'RelationTypeedemokraciaAdminAdminEdemokraciaAdminUserActivityCounties',
@@ -235,6 +247,7 @@ export default function AdminDashboardCreateuserOutput() {
       filterOptions: activityCountiesRangeFilterOptions,
       initialQueryCustomizer: activityCountiesInitialQueryCustomizer,
     });
+
   const [activityCountiesSelectionModel, setActivityCountiesSelectionModel] = useState<GridRowSelectionModel>([]);
   const activityCitiesRowActions: TableRowAction<AdminCityStored>[] = [
     {

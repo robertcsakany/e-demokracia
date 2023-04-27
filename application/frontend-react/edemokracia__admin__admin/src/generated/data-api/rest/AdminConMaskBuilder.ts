@@ -7,6 +7,7 @@ import {
   AdminSimpleVoteAttributes,
 } from '../model';
 
+import { AdminCommentCreatedByMaskBuilder } from './AdminCommentMaskBuilder';
 import {
   AdminUserActivityCountiesMaskBuilder,
   AdminUserResidentCountyMaskBuilder,
@@ -21,7 +22,6 @@ import {
   AdminProConsMaskBuilder,
   AdminProCommentsMaskBuilder,
 } from './AdminProMaskBuilder';
-import { AdminCommentCreatedByMaskBuilder } from './AdminCommentMaskBuilder';
 
 export class AdminConCreatedByMaskBuilder extends RelationMaskBuilder {
   constructor(
