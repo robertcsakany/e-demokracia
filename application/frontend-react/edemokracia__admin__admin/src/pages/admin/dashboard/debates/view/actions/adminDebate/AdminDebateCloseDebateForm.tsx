@@ -38,6 +38,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { DateTimePicker, DateTimeValidationError } from '@mui/x-date-pickers';
 import {
   DataGrid,
@@ -196,21 +197,6 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
         ]
       : [],
   };
-
-  const answersRangeCall = async () =>
-    openRangeDialog<SelectAnswerInputStored, SelectAnswerInputQueryCustomizer>({
-      id: 'RelationTypeedemokraciaAdminAdminEdemokraciaCloseDebateInputAnswers',
-      columns: answersColumns,
-      defaultSortField: answersSortModel[0],
-      rangeCall: async (queryCustomizer) =>
-        await closeDebateInputServiceImpl.getRangeForAnswers(undefined, processQueryCustomizer(queryCustomizer)),
-      single: false,
-      alreadySelectedItems: answersSelectionModel,
-      filterOptions: answersRangeFilterOptions,
-      initialQueryCustomizer: answersInitialQueryCustomizer,
-    });
-
-  const [answersSelectionModel, setAnswersSelectionModel] = useState<GridRowSelectionModel>([]);
   const answersRowActions: TableRowAction<SelectAnswerInputStored>[] = [
     {
       id: 'RemoveActionedemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateInputEdemokraciaAdminAdminEdemokraciaCloseDebateInputAnswersRowRemove',
@@ -578,35 +564,6 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
                                 components={{
                                   Toolbar: () => (
                                     <GridToolbarContainer>
-                                      <Button
-                                        id="RelationTypeedemokraciaAdminAdminEdemokraciaCloseDebateInputAnswers-clear"
-                                        variant="text"
-                                        onClick={async () => {
-                                          storeDiff('answers', []);
-                                        }}
-                                        disabled={isLoading || false || !isFormUpdateable()}
-                                      >
-                                        <MdiIcon path="link_off" />
-                                        {t('judo.pages.table.clear', { defaultValue: 'Clear' })}
-                                      </Button>
-                                      <Button
-                                        id="RelationTypeedemokraciaAdminAdminEdemokraciaCloseDebateInputAnswers-add"
-                                        variant="text"
-                                        onClick={async () => {
-                                          const res = await answersRangeCall();
-
-                                          if (res) {
-                                            storeDiff('answers', [
-                                              ...(data.answers || []),
-                                              ...(res as SelectAnswerInputStored[]),
-                                            ]);
-                                          }
-                                        }}
-                                        disabled={isLoading || false || !isFormUpdateable()}
-                                      >
-                                        <MdiIcon path="attachment-plus" />
-                                        {t('judo.pages.table.add', { defaultValue: 'Add' })}
-                                      </Button>
                                       <div>{/* Placeholder */}</div>
                                     </GridToolbarContainer>
                                   ),
@@ -631,16 +588,19 @@ export function AdminDebateCloseDebateForm({ successCallback, cancel, owner }: A
           onClick={() => cancel()}
           disabled={isLoading}
         >
+          <MdiIcon path="close-thick" />
           {t('judo.pages.cancel', { defaultValue: 'Cancel' }) as string}
         </Button>
-        <Button
+        <LoadingButton
+          loading={isLoading}
+          loadingPosition="start"
           id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminDashboardDebatesViewEdemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateButtonCallOperation-action-form-action-submit"
           variant="contained"
           onClick={() => submit()}
-          disabled={isLoading}
+          startIcon={<MdiIcon path="check-bold" />}
         >
-          {t('judo.pages.submit', { defaultValue: 'Submit' }) as string}
-        </Button>
+          <span>{t('judo.pages.submit', { defaultValue: 'Submit' }) as string}</span>
+        </LoadingButton>
       </DialogActions>
     </>
   );

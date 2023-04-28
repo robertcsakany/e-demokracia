@@ -37,6 +37,7 @@ import {
   Popper,
   TextField,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import {
   GridColDef,
   GridRenderCellParams,
@@ -248,16 +249,19 @@ export function AdminVoteDefinitionVoteYesNoForm({
           onClick={() => cancel()}
           disabled={isLoading}
         >
+          <MdiIcon path="close-thick" />
           {t('judo.pages.cancel', { defaultValue: 'Cancel' }) as string}
         </Button>
-        <Button
+        <LoadingButton
+          loading={isLoading}
+          loadingPosition="start"
           id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminVoteDefinitionsViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoButtonCallOperation-action-form-action-submit"
           variant="contained"
           onClick={() => submit()}
-          disabled={isLoading}
+          startIcon={<MdiIcon path="check-bold" />}
         >
-          {t('judo.pages.submit', { defaultValue: 'Submit' }) as string}
-        </Button>
+          <span>{t('judo.pages.submit', { defaultValue: 'Submit' }) as string}</span>
+        </LoadingButton>
       </DialogActions>
     </>
   );

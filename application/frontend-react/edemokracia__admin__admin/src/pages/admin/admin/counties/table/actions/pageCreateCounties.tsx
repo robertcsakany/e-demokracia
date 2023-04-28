@@ -10,6 +10,7 @@
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { OBJECTCLASS } from '@pandino/pandino-api';
 import { useSnackbar } from 'notistack';
 import { JudoIdentifiable } from '@judo/data-api-common';

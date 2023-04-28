@@ -27,6 +27,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import {
   DataGrid,
   GridColDef,
@@ -410,34 +411,46 @@ export default function AdminAdminUsersView() {
         )}
         {editMode && isFormUpdateable() && (
           <Grid className="page-action" item>
-            <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
-              <MdiIcon path="content-save" />
-              {t('judo.pages.save', { defaultValue: 'Save' })}
-            </Button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              id="page-action-edit-save"
+              startIcon={<MdiIcon path="content-save" />}
+              onClick={() => saveData()}
+            >
+              <span>{t('judo.pages.save', { defaultValue: 'Save' })}</span>
+            </LoadingButton>
           </Grid>
         )}
         {!editMode && (
           <Grid className="page-action" item>
-            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              id="page-action-refresh"
+              startIcon={<MdiIcon path="refresh" />}
+              onClick={() => fetchData()}
+            >
+              <span>{t('judo.pages.refresh', { defaultValue: 'Refresh' })}</span>
+            </LoadingButton>
           </Grid>
         )}
         {!editMode && isFormDeleteable() && (
           <Grid className="page-action" item>
-            <Button
+            <LoadingButton
               id="page-action-delete"
+              loading={isLoading}
+              loadingPosition="start"
+              startIcon={<MdiIcon path="delete" />}
               onClick={() =>
                 pageDeleteUsersAction(data, () => {
                   back();
                 })
               }
-              disabled={isLoading || !data.__deleteable}
+              disabled={!data.__deleteable}
             >
-              <MdiIcon path="delete" />
-              {t('judo.pages.delete', { defaultValue: 'Delete' })}
-            </Button>
+              <span>{t('judo.pages.delete', { defaultValue: 'Delete' })}</span>
+            </LoadingButton>
           </Grid>
         )}
       </PageHeader>

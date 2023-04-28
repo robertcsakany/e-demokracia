@@ -38,6 +38,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import {
   GridColDef,
   GridRenderCellParams,
@@ -366,6 +367,7 @@ export function AdminDebateCreateArgumentForm({ successCallback, cancel, owner }
           onClick={() => cancel()}
           disabled={isLoading}
         >
+          <MdiIcon path="close-circle-outline" />
           {
             t(
               'edemokracia.admin.Debate.createArgument.Input.edemokracia.admin.Debate.createArgument.input.ButtonBack',
@@ -373,19 +375,23 @@ export function AdminDebateCreateArgumentForm({ successCallback, cancel, owner }
             ) as string
           }
         </Button>
-        <Button
+        <LoadingButton
+          loading={isLoading}
+          loadingPosition="start"
           id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardEdemokraciaAdminAdminEdemokraciaAdminDebateCreateArgumentButtonCallOperation-action-form-action-submit"
           variant="contained"
           onClick={() => submit()}
-          disabled={isLoading}
+          startIcon={<MdiIcon path="check" />}
         >
-          {
-            t(
-              'edemokracia.admin.Debate.createArgument.Input.edemokracia.admin.Debate.createArgument.input.ButtonSaveInput',
-              { defaultValue: 'Ok' },
-            ) as string
-          }
-        </Button>
+          <span>
+            {
+              t(
+                'edemokracia.admin.Debate.createArgument.Input.edemokracia.admin.Debate.createArgument.input.ButtonSaveInput',
+                { defaultValue: 'Ok' },
+              ) as string
+            }
+          </span>
+        </LoadingButton>
       </DialogActions>
     </>
   );

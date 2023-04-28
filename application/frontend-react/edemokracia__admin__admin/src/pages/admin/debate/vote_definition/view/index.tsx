@@ -13,6 +13,7 @@
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box, Container, Grid, Button, Card, CardContent, InputAdornment, MenuItem, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import {
   GridColDef,
   GridRenderCellParams,
@@ -195,10 +196,15 @@ export default function AdminDebateVoteDefinitionView() {
       <PageHeader title={title}>
         {!editMode && (
           <Grid className="page-action" item>
-            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              id="page-action-refresh"
+              startIcon={<MdiIcon path="refresh" />}
+              onClick={() => fetchData()}
+            >
+              <span>{t('judo.pages.refresh', { defaultValue: 'Refresh' })}</span>
+            </LoadingButton>
           </Grid>
         )}
       </PageHeader>
@@ -496,17 +502,21 @@ export default function AdminDebateVoteDefinitionView() {
                     >
                       {!data.isNotYesNoType && (
                         <Grid item xs={12} sm={12} md={4.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminDebateVoteDefinitionViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="chevron_right" />}
+                            loadingPosition="start"
                             onClick={() => AdminVoteDefinitionVoteYesNoAction(data, () => fetchData())}
-                            disabled={!data.isYesNoType || isLoading || editMode}
+                            disabled={!data.isYesNoType || editMode}
                           >
-                            <MdiIcon path="chevron_right" />
-                            {t(
-                              'edemokracia.admin.Debate.voteDefinition.VoteDefinition.View.tabBar.yesnovote.yesnovote.voteYesNo',
-                              { defaultValue: 'Vote' },
-                            )}
-                          </Button>
+                            <span>
+                              {t(
+                                'edemokracia.admin.Debate.voteDefinition.VoteDefinition.View.tabBar.yesnovote.yesnovote.voteYesNo',
+                                { defaultValue: 'Vote' },
+                              )}
+                            </span>
+                          </LoadingButton>
                         </Grid>
                       )}
                     </Grid>
@@ -525,17 +535,21 @@ export default function AdminDebateVoteDefinitionView() {
                     >
                       {!data.isNotYesNoAbstainType && (
                         <Grid item xs={12} sm={12} md={4.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminDebateVoteDefinitionViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteYesNoAbstainButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="chevron_right" />}
+                            loadingPosition="start"
                             onClick={() => AdminVoteDefinitionVoteYesNoAbstainAction(data, () => fetchData())}
-                            disabled={!data.isYesNoAbstainType || isLoading || editMode}
+                            disabled={!data.isYesNoAbstainType || editMode}
                           >
-                            <MdiIcon path="chevron_right" />
-                            {t(
-                              'edemokracia.admin.Debate.voteDefinition.VoteDefinition.View.tabBar.yesnoabstainvote.yesnoabstainvote.voteYesNoAbstain',
-                              { defaultValue: 'VoteYesNoAbstain' },
-                            )}
-                          </Button>
+                            <span>
+                              {t(
+                                'edemokracia.admin.Debate.voteDefinition.VoteDefinition.View.tabBar.yesnoabstainvote.yesnoabstainvote.voteYesNoAbstain',
+                                { defaultValue: 'VoteYesNoAbstain' },
+                              )}
+                            </span>
+                          </LoadingButton>
                         </Grid>
                       )}
                     </Grid>
@@ -554,17 +568,21 @@ export default function AdminDebateVoteDefinitionView() {
                     >
                       {!data.isNotSelectAnswerType && (
                         <Grid item xs={12} sm={12} md={4.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminDebateVoteDefinitionViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteSelectAnswerButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="chevron_right" />}
+                            loadingPosition="start"
                             onClick={() => AdminVoteDefinitionVoteSelectAnswerAction(data, () => fetchData())}
-                            disabled={!data.isSelectAnswerType || isLoading || editMode}
+                            disabled={!data.isSelectAnswerType || editMode}
                           >
-                            <MdiIcon path="chevron_right" />
-                            {t(
-                              'edemokracia.admin.Debate.voteDefinition.VoteDefinition.View.tabBar.selectanswervote.selectanswervote.voteSelectAnswer',
-                              { defaultValue: 'VoteSelectAnswer' },
-                            )}
-                          </Button>
+                            <span>
+                              {t(
+                                'edemokracia.admin.Debate.voteDefinition.VoteDefinition.View.tabBar.selectanswervote.selectanswervote.voteSelectAnswer',
+                                { defaultValue: 'VoteSelectAnswer' },
+                              )}
+                            </span>
+                          </LoadingButton>
                         </Grid>
                       )}
                     </Grid>
@@ -583,17 +601,21 @@ export default function AdminDebateVoteDefinitionView() {
                     >
                       {!data.isNotRatingType && (
                         <Grid item xs={12} sm={12} md={4.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminDebateVoteDefinitionViewEdemokraciaAdminAdminEdemokraciaAdminVoteDefinitionVoteRatingButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="chevron_right" />}
+                            loadingPosition="start"
                             onClick={() => AdminVoteDefinitionVoteRatingAction(data, () => fetchData())}
-                            disabled={!data.isRatingType || isLoading || editMode}
+                            disabled={!data.isRatingType || editMode}
                           >
-                            <MdiIcon path="chevron_right" />
-                            {t(
-                              'edemokracia.admin.Debate.voteDefinition.VoteDefinition.View.tabBar.ratingvote.ratingvote.voteRating',
-                              { defaultValue: 'VoteRating' },
-                            )}
-                          </Button>
+                            <span>
+                              {t(
+                                'edemokracia.admin.Debate.voteDefinition.VoteDefinition.View.tabBar.ratingvote.ratingvote.voteRating',
+                                { defaultValue: 'VoteRating' },
+                              )}
+                            </span>
+                          </LoadingButton>
                         </Grid>
                       )}
                     </Grid>

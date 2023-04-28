@@ -24,6 +24,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import {
   DataGrid,
   GridColDef,
@@ -397,10 +398,15 @@ export default function AdminVoteDefinitionDebateView() {
       <PageHeader title={title}>
         {!editMode && (
           <Grid className="page-action" item>
-            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              id="page-action-refresh"
+              startIcon={<MdiIcon path="refresh" />}
+              onClick={() => fetchData()}
+            >
+              <span>{t('judo.pages.refresh', { defaultValue: 'Refresh' })}</span>
+            </LoadingButton>
           </Grid>
         )}
       </PageHeader>
@@ -677,16 +683,20 @@ export default function AdminVoteDefinitionDebateView() {
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={4.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminVoteDefinitionDebateViewEdemokraciaAdminAdminEdemokraciaAdminDebateCloseDebateButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="wechat" />}
+                            loadingPosition="start"
                             onClick={() => AdminDebateCloseDebateAction(data, () => fetchData())}
-                            disabled={isLoading || editMode}
+                            disabled={editMode}
                           >
-                            <MdiIcon path="wechat" />
-                            {t('edemokracia.admin.VoteDefinition.debate.Debate.View.debate.debate.closeDebate', {
-                              defaultValue: 'Close debate',
-                            })}
-                          </Button>
+                            <span>
+                              {t('edemokracia.admin.VoteDefinition.debate.Debate.View.debate.debate.closeDebate', {
+                                defaultValue: 'Close debate',
+                              })}
+                            </span>
+                          </LoadingButton>
                         </Grid>
                       </Grid>
                     </Grid>
@@ -733,17 +743,21 @@ export default function AdminVoteDefinitionDebateView() {
                         spacing={2}
                       >
                         <Grid item xs={12} sm={12} md={4.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminVoteDefinitionDebateViewEdemokraciaAdminAdminEdemokraciaAdminDebateCreateArgumentButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="account-voice" />}
+                            loadingPosition="start"
                             onClick={() => AdminDebateCreateArgumentAction(data, () => fetchData())}
-                            disabled={isLoading || editMode}
+                            disabled={editMode}
                           >
-                            <MdiIcon path="account-voice" />
-                            {t(
-                              'edemokracia.admin.VoteDefinition.debate.Debate.View.tabBar.arguments.arguments.actions.createArgument',
-                              { defaultValue: 'Add argument' },
-                            )}
-                          </Button>
+                            <span>
+                              {t(
+                                'edemokracia.admin.VoteDefinition.debate.Debate.View.tabBar.arguments.arguments.actions.createArgument',
+                                { defaultValue: 'Add argument' },
+                              )}
+                            </span>
+                          </LoadingButton>
                         </Grid>
                       </Grid>
                     </Grid>
@@ -919,17 +933,21 @@ export default function AdminVoteDefinitionDebateView() {
                         spacing={2}
                       >
                         <Grid item xs={12} sm={12} md={4.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminVoteDefinitionDebateViewEdemokraciaAdminAdminEdemokraciaAdminDebateCreateCommentButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="comment-text-multiple" />}
+                            loadingPosition="start"
                             onClick={() => AdminDebateCreateCommentAction(data, () => fetchData())}
-                            disabled={isLoading || editMode}
+                            disabled={editMode}
                           >
-                            <MdiIcon path="comment-text-multiple" />
-                            {t(
-                              'edemokracia.admin.VoteDefinition.debate.Debate.View.tabBar.comments.comments.actions.createComment',
-                              { defaultValue: 'Add comment' },
-                            )}
-                          </Button>
+                            <span>
+                              {t(
+                                'edemokracia.admin.VoteDefinition.debate.Debate.View.tabBar.comments.comments.actions.createComment',
+                                { defaultValue: 'Add comment' },
+                              )}
+                            </span>
+                          </LoadingButton>
                         </Grid>
                       </Grid>
                     </Grid>

@@ -38,6 +38,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import {
   GridColDef,
   GridRenderCellParams,
@@ -366,6 +367,7 @@ export function AdminConCreateSubArgumentForm({ successCallback, cancel, owner }
           onClick={() => cancel()}
           disabled={isLoading}
         >
+          <MdiIcon path="close-circle-outline" />
           {
             t(
               'edemokracia.admin.Con.createSubArgument.Input.edemokracia.admin.Con.createSubArgument.input.ButtonBack',
@@ -373,19 +375,23 @@ export function AdminConCreateSubArgumentForm({ successCallback, cancel, owner }
             ) as string
           }
         </Button>
-        <Button
+        <LoadingButton
+          loading={isLoading}
+          loadingPosition="start"
           id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminProProsViewEdemokraciaAdminAdminEdemokraciaAdminConCreateSubArgumentButtonCallOperation-action-form-action-submit"
           variant="contained"
           onClick={() => submit()}
-          disabled={isLoading}
+          startIcon={<MdiIcon path="check" />}
         >
-          {
-            t(
-              'edemokracia.admin.Con.createSubArgument.Input.edemokracia.admin.Con.createSubArgument.input.ButtonSaveInput',
-              { defaultValue: 'Ok' },
-            ) as string
-          }
-        </Button>
+          <span>
+            {
+              t(
+                'edemokracia.admin.Con.createSubArgument.Input.edemokracia.admin.Con.createSubArgument.input.ButtonSaveInput',
+                { defaultValue: 'Ok' },
+              ) as string
+            }
+          </span>
+        </LoadingButton>
       </DialogActions>
     </>
   );

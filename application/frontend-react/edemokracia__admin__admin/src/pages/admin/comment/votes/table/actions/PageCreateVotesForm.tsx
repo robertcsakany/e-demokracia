@@ -37,6 +37,7 @@ import {
   Popper,
   TextField,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { DateTimePicker, DateTimeValidationError } from '@mui/x-date-pickers';
 import {
   GridColDef,
@@ -330,7 +331,9 @@ export function PageCreateVotesForm({ successCallback, cancel, owner }: PageCrea
           {t('judo.pages.cancel', { defaultValue: 'Cancel' })}
         </Button>
         <ButtonGroup size="small" ref={anchorRef} aria-label="split button" disabled={isLoading}>
-          <Button
+          <LoadingButton
+            loading={isLoading}
+            loadingPosition="start"
             id="CreateActionedemokraciaAdminAdminEdemokraciaAdminCommentVotesTableEdemokraciaAdminAdminEdemokraciaAdminCommentVotesPageCreate-action-form-action-create"
             variant="contained"
             onClick={async () => {
@@ -339,10 +342,9 @@ export function PageCreateVotesForm({ successCallback, cancel, owner }: PageCrea
                 successCallback();
               }
             }}
-            disabled={isLoading}
           >
-            {t('judo.pages.create', { defaultValue: 'Create' })}
-          </Button>
+            <span>{t('judo.pages.create', { defaultValue: 'Create' })}</span>
+          </LoadingButton>
           <Button variant="contained" size="small" onClick={handleToggle}>
             <MdiIcon path="menu-down" />
           </Button>

@@ -7,7 +7,6 @@ import {
   AdminSimpleVoteAttributes,
 } from '../model';
 
-import { AdminCommentCreatedByMaskBuilder } from './AdminCommentMaskBuilder';
 import {
   AdminUserActivityCountiesMaskBuilder,
   AdminUserResidentCountyMaskBuilder,
@@ -16,6 +15,7 @@ import {
   AdminUserActivityDistrictsMaskBuilder,
   AdminUserResidentDistrictMaskBuilder,
 } from './AdminUserMaskBuilder';
+import { AdminCommentCreatedByMaskBuilder } from './AdminCommentMaskBuilder';
 import {
   AdminProCreatedByMaskBuilder,
   AdminProProsMaskBuilder,

@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Paper, Card, CardContent, Box, Grid, Button, Container } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import type { GridRowModel, GridRowParams, GridSortModel, GridValueFormatterParams } from '@mui/x-data-grid';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import { OBJECTCLASS } from '@pandino/pandino-api';

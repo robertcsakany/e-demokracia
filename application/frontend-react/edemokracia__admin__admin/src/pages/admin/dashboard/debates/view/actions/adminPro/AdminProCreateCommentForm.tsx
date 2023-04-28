@@ -38,6 +38,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import {
   GridColDef,
   GridRenderCellParams,
@@ -292,20 +293,25 @@ export function AdminProCreateCommentForm({ successCallback, cancel, owner }: Ad
           onClick={() => cancel()}
           disabled={isLoading}
         >
+          <MdiIcon path="close-thick" />
           {t('judo.pages.cancel', { defaultValue: 'Cancel' }) as string}
         </Button>
-        <Button
+        <LoadingButton
+          loading={isLoading}
+          loadingPosition="start"
           id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminDashboardDebatesViewEdemokraciaAdminAdminEdemokraciaAdminProCreateCommentButtonCallOperation-action-form-action-submit"
           variant="contained"
           onClick={() => submit()}
-          disabled={isLoading}
+          startIcon={<MdiIcon path="check" />}
         >
-          {
-            t('edemokracia.admin.Pro.createComment.Input.edemokracia.admin.Pro.createComment.input.ButtonSaveInput', {
-              defaultValue: 'Ok',
-            }) as string
-          }
-        </Button>
+          <span>
+            {
+              t('edemokracia.admin.Pro.createComment.Input.edemokracia.admin.Pro.createComment.input.ButtonSaveInput', {
+                defaultValue: 'Ok',
+              }) as string
+            }
+          </span>
+        </LoadingButton>
       </DialogActions>
     </>
   );

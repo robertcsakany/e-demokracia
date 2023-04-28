@@ -7,8 +7,8 @@ import {
   AdminCityAttributes,
 } from '../model';
 
-import {} from './AdminDistrictMaskBuilder';
 import { AdminCountyCitiesMaskBuilder } from './AdminCountyMaskBuilder';
+import {} from './AdminDistrictMaskBuilder';
 import { AdminCityDistrictsMaskBuilder } from './AdminCityMaskBuilder';
 
 export class AdminUserActivityCountiesMaskBuilder extends RelationMaskBuilder {

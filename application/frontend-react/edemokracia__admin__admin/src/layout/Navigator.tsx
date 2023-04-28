@@ -19,6 +19,7 @@ import {
   ListSubheader,
   Icon,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from 'react-oidc-context';
 import { usePrincipal } from '../auth';

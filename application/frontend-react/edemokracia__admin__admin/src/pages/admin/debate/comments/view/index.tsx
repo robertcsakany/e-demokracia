@@ -13,6 +13,7 @@
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box, Container, Grid, Button, Card, CardContent, InputAdornment, TextField, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import {
   GridColDef,
   GridRenderCellParams,
@@ -246,24 +247,37 @@ export default function AdminDebateCommentsView() {
         )}
         {editMode && isFormUpdateable() && (
           <Grid className="page-action" item>
-            <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
-              <MdiIcon path="content-save" />
-              {t('judo.pages.save', { defaultValue: 'Save' })}
-            </Button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              id="page-action-edit-save"
+              startIcon={<MdiIcon path="content-save" />}
+              onClick={() => saveData()}
+            >
+              <span>{t('judo.pages.save', { defaultValue: 'Save' })}</span>
+            </LoadingButton>
           </Grid>
         )}
         {!editMode && (
           <Grid className="page-action" item>
-            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              id="page-action-refresh"
+              startIcon={<MdiIcon path="refresh" />}
+              onClick={() => fetchData()}
+            >
+              <span>{t('judo.pages.refresh', { defaultValue: 'Refresh' })}</span>
+            </LoadingButton>
           </Grid>
         )}
         {!editMode && isFormDeleteable() && (
           <Grid className="page-action" item>
-            <Button
+            <LoadingButton
               id="page-action-delete"
+              loading={isLoading}
+              loadingPosition="start"
+              startIcon={<MdiIcon path="delete" />}
               onClick={() =>
                 pageDeleteCommentsAction(
                   { __signedIdentifier: signedIdentifier } as JudoIdentifiable<AdminDebate>,
@@ -273,11 +287,10 @@ export default function AdminDebateCommentsView() {
                   },
                 )
               }
-              disabled={isLoading || !data.__deleteable}
+              disabled={!data.__deleteable}
             >
-              <MdiIcon path="delete" />
-              {t('judo.pages.delete', { defaultValue: 'Delete' })}
-            </Button>
+              <span>{t('judo.pages.delete', { defaultValue: 'Delete' })}</span>
+            </LoadingButton>
           </Grid>
         )}
       </PageHeader>
@@ -423,16 +436,20 @@ export default function AdminDebateCommentsView() {
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={1.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminDebateCommentsViewEdemokraciaAdminAdminEdemokraciaAdminCommentVoteUpButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="thumb-up" />}
+                            loadingPosition="start"
                             onClick={() => AdminCommentVoteUpAction(data, () => fetchData())}
-                            disabled={isLoading || editMode}
+                            disabled={editMode}
                           >
-                            <MdiIcon path="thumb-up" />
-                            {t('edemokracia.admin.Debate.comments.Comment.View.group.group.voteUp', {
-                              defaultValue: '',
-                            })}
-                          </Button>
+                            <span>
+                              {t('edemokracia.admin.Debate.comments.Comment.View.group.group.voteUp', {
+                                defaultValue: '',
+                              })}
+                            </span>
+                          </LoadingButton>
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={1.0}>
@@ -464,16 +481,20 @@ export default function AdminDebateCommentsView() {
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={1.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminDebateCommentsViewEdemokraciaAdminAdminEdemokraciaAdminCommentVoteDownButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="thumb-down" />}
+                            loadingPosition="start"
                             onClick={() => AdminCommentVoteDownAction(data, () => fetchData())}
-                            disabled={isLoading || editMode}
+                            disabled={editMode}
                           >
-                            <MdiIcon path="thumb-down" />
-                            {t('edemokracia.admin.Debate.comments.Comment.View.group.group.voteDown', {
-                              defaultValue: '',
-                            })}
-                          </Button>
+                            <span>
+                              {t('edemokracia.admin.Debate.comments.Comment.View.group.group.voteDown', {
+                                defaultValue: '',
+                              })}
+                            </span>
+                          </LoadingButton>
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={1.0}>

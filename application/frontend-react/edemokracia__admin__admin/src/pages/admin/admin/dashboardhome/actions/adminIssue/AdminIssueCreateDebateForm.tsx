@@ -38,6 +38,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { DateTimePicker, DateTimeValidationError } from '@mui/x-date-pickers';
 import {
   GridColDef,
@@ -375,24 +376,30 @@ export function AdminIssueCreateDebateForm({ successCallback, cancel, owner }: A
           onClick={() => cancel()}
           disabled={isLoading}
         >
+          <MdiIcon path="close-circle-outline" />
           {
             t('edemokracia.admin.Issue.createDebate.Input.edemokracia.admin.Issue.createDebate.input.ButtonBack', {
               defaultValue: 'Cancel',
             }) as string
           }
         </Button>
-        <Button
+        <LoadingButton
+          loading={isLoading}
+          loadingPosition="start"
           id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminDashboardhomeDashboardEdemokraciaAdminAdminEdemokraciaAdminIssueCreateDebateButtonCallOperation-action-form-action-submit"
           variant="contained"
           onClick={() => submit()}
-          disabled={isLoading}
+          startIcon={<MdiIcon path="check" />}
         >
-          {
-            t('edemokracia.admin.Issue.createDebate.Input.edemokracia.admin.Issue.createDebate.input.ButtonSaveInput', {
-              defaultValue: 'OK',
-            }) as string
-          }
-        </Button>
+          <span>
+            {
+              t(
+                'edemokracia.admin.Issue.createDebate.Input.edemokracia.admin.Issue.createDebate.input.ButtonSaveInput',
+                { defaultValue: 'OK' },
+              ) as string
+            }
+          </span>
+        </LoadingButton>
       </DialogActions>
     </>
   );

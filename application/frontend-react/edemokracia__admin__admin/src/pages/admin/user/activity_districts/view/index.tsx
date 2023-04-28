@@ -13,6 +13,7 @@
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box, Container, Grid, Button, Card, CardContent, InputAdornment, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import {
   GridColDef,
   GridRenderCellParams,
@@ -211,18 +212,28 @@ export default function AdminUserActivityDistrictsView() {
         )}
         {editMode && isFormUpdateable() && (
           <Grid className="page-action" item>
-            <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
-              <MdiIcon path="content-save" />
-              {t('judo.pages.save', { defaultValue: 'Save' })}
-            </Button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              id="page-action-edit-save"
+              startIcon={<MdiIcon path="content-save" />}
+              onClick={() => saveData()}
+            >
+              <span>{t('judo.pages.save', { defaultValue: 'Save' })}</span>
+            </LoadingButton>
           </Grid>
         )}
         {!editMode && (
           <Grid className="page-action" item>
-            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              id="page-action-refresh"
+              startIcon={<MdiIcon path="refresh" />}
+              onClick={() => fetchData()}
+            >
+              <span>{t('judo.pages.refresh', { defaultValue: 'Refresh' })}</span>
+            </LoadingButton>
           </Grid>
         )}
       </PageHeader>

@@ -12,8 +12,8 @@ import {
   IssueCategoryAttributes,
 } from '../model';
 
-import {} from './IssueAttachmentMaskBuilder';
 import { CommentVotesMaskBuilder } from './CommentMaskBuilder';
+import {} from './IssueAttachmentMaskBuilder';
 
 export class IssueAttachmentsMaskBuilder extends RelationMaskBuilder {
   constructor(protected props: Array<IssueAttachmentAttributes>) {

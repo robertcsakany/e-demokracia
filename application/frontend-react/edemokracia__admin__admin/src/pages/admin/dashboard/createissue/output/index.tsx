@@ -24,6 +24,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import {
   DataGrid,
   GridColDef,
@@ -350,10 +351,15 @@ export default function AdminDashboardCreateissueOutput() {
       <PageHeader title={title}>
         {!editMode && (
           <Grid className="page-action" item>
-            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              id="page-action-refresh"
+              startIcon={<MdiIcon path="refresh" />}
+              onClick={() => fetchData()}
+            >
+              <span>{t('judo.pages.refresh', { defaultValue: 'Refresh' })}</span>
+            </LoadingButton>
           </Grid>
         )}
       </PageHeader>
@@ -645,16 +651,20 @@ export default function AdminDashboardCreateissueOutput() {
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={4.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueOutputEdemokraciaAdminAdminEdemokraciaAdminIssueCreateDebateButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="wechat" />}
+                            loadingPosition="start"
                             onClick={() => AdminIssueCreateDebateAction(data, () => fetchData())}
-                            disabled={isLoading || editMode}
+                            disabled={editMode}
                           >
-                            <MdiIcon path="wechat" />
-                            {t('edemokracia.admin.Dashboard.createIssue.Issue.View.issue.issue.createDebate', {
-                              defaultValue: 'Create debate',
-                            })}
-                          </Button>
+                            <span>
+                              {t('edemokracia.admin.Dashboard.createIssue.Issue.View.issue.issue.createDebate', {
+                                defaultValue: 'Create debate',
+                              })}
+                            </span>
+                          </LoadingButton>
                         </Grid>
 
                         <Grid item xs={12} sm={12}>
@@ -853,7 +863,7 @@ export default function AdminDashboardCreateissueOutput() {
                                       id="CreateActionedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueOutputEdemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsTableCreate"
                                       variant="text"
                                       onClick={() => tableCreateAttachmentsAction(data, () => fetchData())}
-                                      disabled={false || !isFormUpdateable()}
+                                      disabled={false || editMode || !isFormUpdateable()}
                                     >
                                       <MdiIcon path="file_document_plus" />
                                       {t('judo.pages.table.create', { defaultValue: 'Create' })}
@@ -1040,17 +1050,21 @@ export default function AdminDashboardCreateissueOutput() {
                         spacing={2}
                       >
                         <Grid item xs={12} sm={12} md={4.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminDashboardCreateIssueOutputEdemokraciaAdminAdminEdemokraciaAdminIssueCreateCommentButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="comment-text-multiple" />}
+                            loadingPosition="start"
                             onClick={() => AdminIssueCreateCommentAction(data, () => fetchData())}
-                            disabled={isLoading || editMode}
+                            disabled={editMode}
                           >
-                            <MdiIcon path="comment-text-multiple" />
-                            {t(
-                              'edemokracia.admin.Dashboard.createIssue.Issue.View.other.comments.comments.actions.createComment',
-                              { defaultValue: 'Add comment' },
-                            )}
-                          </Button>
+                            <span>
+                              {t(
+                                'edemokracia.admin.Dashboard.createIssue.Issue.View.other.comments.comments.actions.createComment',
+                                { defaultValue: 'Add comment' },
+                              )}
+                            </span>
+                          </LoadingButton>
                         </Grid>
 
                         <Grid item xs={12} sm={12}>

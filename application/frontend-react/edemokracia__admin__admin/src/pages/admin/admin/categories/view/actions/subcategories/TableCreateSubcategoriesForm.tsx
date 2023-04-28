@@ -37,6 +37,7 @@ import {
   Popper,
   TextField,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import {
   GridColDef,
   GridRenderCellParams,
@@ -385,7 +386,9 @@ export function TableCreateSubcategoriesForm({ successCallback, cancel, owner }:
           {t('judo.pages.cancel', { defaultValue: 'Cancel' })}
         </Button>
         <ButtonGroup size="small" ref={anchorRef} aria-label="split button" disabled={isLoading}>
-          <Button
+          <LoadingButton
+            loading={isLoading}
+            loadingPosition="start"
             id="CreateActionedemokraciaAdminAdminEdemokraciaAdminAdminCategoriesViewEdemokraciaAdminAdminEdemokraciaAdminIssueCategorySubcategoriesTableCreate-action-form-action-create"
             variant="contained"
             onClick={async () => {
@@ -394,10 +397,9 @@ export function TableCreateSubcategoriesForm({ successCallback, cancel, owner }:
                 successCallback();
               }
             }}
-            disabled={isLoading}
           >
-            {t('judo.pages.create', { defaultValue: 'Create' })}
-          </Button>
+            <span>{t('judo.pages.create', { defaultValue: 'Create' })}</span>
+          </LoadingButton>
           <Button variant="contained" size="small" onClick={handleToggle}>
             <MdiIcon path="menu-down" />
           </Button>

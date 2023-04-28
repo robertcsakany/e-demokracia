@@ -9,13 +9,6 @@ import {
   AdminConAttributes,
 } from '../model';
 
-import {
-  AdminConCreatedByMaskBuilder,
-  AdminConConsMaskBuilder,
-  AdminConProsMaskBuilder,
-  AdminConCommentsMaskBuilder,
-} from './AdminConMaskBuilder';
-import {} from './AdminVoteDefinitionMaskBuilder';
 import { AdminCommentCreatedByMaskBuilder } from './AdminCommentMaskBuilder';
 import {
   AdminUserActivityCountiesMaskBuilder,
@@ -25,12 +18,7 @@ import {
   AdminUserActivityDistrictsMaskBuilder,
   AdminUserResidentDistrictMaskBuilder,
 } from './AdminUserMaskBuilder';
-import {
-  AdminProCreatedByMaskBuilder,
-  AdminProProsMaskBuilder,
-  AdminProConsMaskBuilder,
-  AdminProCommentsMaskBuilder,
-} from './AdminProMaskBuilder';
+import {} from './AdminVoteDefinitionMaskBuilder';
 import {
   AdminIssueAttachmentsMaskBuilder,
   AdminIssueOwnerMaskBuilder,
@@ -43,6 +31,18 @@ import {
   AdminIssueCityMaskBuilder,
   AdminIssueDistrictMaskBuilder,
 } from './AdminIssueMaskBuilder';
+import {
+  AdminConCreatedByMaskBuilder,
+  AdminConConsMaskBuilder,
+  AdminConProsMaskBuilder,
+  AdminConCommentsMaskBuilder,
+} from './AdminConMaskBuilder';
+import {
+  AdminProCreatedByMaskBuilder,
+  AdminProProsMaskBuilder,
+  AdminProConsMaskBuilder,
+  AdminProCommentsMaskBuilder,
+} from './AdminProMaskBuilder';
 
 export class AdminDebateIssueMaskBuilder extends RelationMaskBuilder {
   constructor(

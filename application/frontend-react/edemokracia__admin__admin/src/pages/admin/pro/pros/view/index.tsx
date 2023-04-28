@@ -13,6 +13,7 @@
 import { useEffect, useState, useCallback, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box, Container, Grid, Button, Card, CardContent, InputAdornment, TextField, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import {
   DataGrid,
   GridColDef,
@@ -400,24 +401,37 @@ export default function AdminProProsView() {
         )}
         {editMode && isFormUpdateable() && (
           <Grid className="page-action" item>
-            <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
-              <MdiIcon path="content-save" />
-              {t('judo.pages.save', { defaultValue: 'Save' })}
-            </Button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              id="page-action-edit-save"
+              startIcon={<MdiIcon path="content-save" />}
+              onClick={() => saveData()}
+            >
+              <span>{t('judo.pages.save', { defaultValue: 'Save' })}</span>
+            </LoadingButton>
           </Grid>
         )}
         {!editMode && (
           <Grid className="page-action" item>
-            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              id="page-action-refresh"
+              startIcon={<MdiIcon path="refresh" />}
+              onClick={() => fetchData()}
+            >
+              <span>{t('judo.pages.refresh', { defaultValue: 'Refresh' })}</span>
+            </LoadingButton>
           </Grid>
         )}
         {!editMode && isFormDeleteable() && (
           <Grid className="page-action" item>
-            <Button
+            <LoadingButton
               id="page-action-delete"
+              loading={isLoading}
+              loadingPosition="start"
+              startIcon={<MdiIcon path="delete" />}
               onClick={() =>
                 pageDeleteProsAction(
                   { __signedIdentifier: signedIdentifier } as JudoIdentifiable<AdminPro>,
@@ -427,11 +441,10 @@ export default function AdminProProsView() {
                   },
                 )
               }
-              disabled={isLoading || !data.__deleteable}
+              disabled={!data.__deleteable}
             >
-              <MdiIcon path="delete" />
-              {t('judo.pages.delete', { defaultValue: 'Delete' })}
-            </Button>
+              <span>{t('judo.pages.delete', { defaultValue: 'Delete' })}</span>
+            </LoadingButton>
           </Grid>
         )}
       </PageHeader>
@@ -605,14 +618,16 @@ export default function AdminProProsView() {
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={1.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminProProsViewEdemokraciaAdminAdminEdemokraciaAdminProVoteUpButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="thumb-up" />}
+                            loadingPosition="start"
                             onClick={() => voteUpAction(data, () => fetchData())}
-                            disabled={isLoading || editMode}
+                            disabled={editMode}
                           >
-                            <MdiIcon path="thumb-up" />
-                            {t('edemokracia.admin.Pro.pros.Pro.View.pro.pro.voteUp', { defaultValue: '' })}
-                          </Button>
+                            <span>{t('edemokracia.admin.Pro.pros.Pro.View.pro.pro.voteUp', { defaultValue: '' })}</span>
+                          </LoadingButton>
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={1.0}>
@@ -642,14 +657,18 @@ export default function AdminProProsView() {
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={1.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminProProsViewEdemokraciaAdminAdminEdemokraciaAdminProVoteDownButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="thumb-down" />}
+                            loadingPosition="start"
                             onClick={() => voteDownAction(data, () => fetchData())}
-                            disabled={isLoading || editMode}
+                            disabled={editMode}
                           >
-                            <MdiIcon path="thumb-down" />
-                            {t('edemokracia.admin.Pro.pros.Pro.View.pro.pro.voteDown', { defaultValue: '' })}
-                          </Button>
+                            <span>
+                              {t('edemokracia.admin.Pro.pros.Pro.View.pro.pro.voteDown', { defaultValue: '' })}
+                            </span>
+                          </LoadingButton>
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={1.0}>
@@ -733,17 +752,21 @@ export default function AdminProProsView() {
                         spacing={2}
                       >
                         <Grid item xs={12} sm={12} md={4.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminProProsViewEdemokraciaAdminAdminEdemokraciaAdminProCreateSubArgumentButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="account-voice" />}
+                            loadingPosition="start"
                             onClick={() => createSubArgumentAction(data, () => fetchData())}
-                            disabled={isLoading || editMode}
+                            disabled={editMode}
                           >
-                            <MdiIcon path="account-voice" />
-                            {t(
-                              'edemokracia.admin.Pro.pros.Pro.View.tabBar.arguments.arguments.actions.createSubArgument',
-                              { defaultValue: 'Add argument' },
-                            )}
-                          </Button>
+                            <span>
+                              {t(
+                                'edemokracia.admin.Pro.pros.Pro.View.tabBar.arguments.arguments.actions.createSubArgument',
+                                { defaultValue: 'Add argument' },
+                              )}
+                            </span>
+                          </LoadingButton>
                         </Grid>
                       </Grid>
                     </Grid>
@@ -917,16 +940,20 @@ export default function AdminProProsView() {
                         spacing={2}
                       >
                         <Grid item xs={12} sm={12}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminProProsViewEdemokraciaAdminAdminEdemokraciaAdminProCreateCommentButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="comment-text-multiple" />}
+                            loadingPosition="start"
                             onClick={() => createCommentAction(data, () => fetchData())}
-                            disabled={isLoading || editMode}
+                            disabled={editMode}
                           >
-                            <MdiIcon path="comment-text-multiple" />
-                            {t('edemokracia.admin.Pro.pros.Pro.View.tabBar.comments.comments.actions.createComment', {
-                              defaultValue: 'Add comment',
-                            })}
-                          </Button>
+                            <span>
+                              {t('edemokracia.admin.Pro.pros.Pro.View.tabBar.comments.comments.actions.createComment', {
+                                defaultValue: 'Add comment',
+                              })}
+                            </span>
+                          </LoadingButton>
                         </Grid>
                       </Grid>
                     </Grid>

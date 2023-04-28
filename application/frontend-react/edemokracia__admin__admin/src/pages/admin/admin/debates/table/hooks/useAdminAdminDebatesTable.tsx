@@ -15,6 +15,7 @@ import type {
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
 import { FilterType } from '../../../../../../components-api';
 import type { FilterOption } from '../../../../../../components-api';

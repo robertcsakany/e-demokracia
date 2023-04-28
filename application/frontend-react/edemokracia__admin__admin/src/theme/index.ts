@@ -57,6 +57,37 @@ const baseTheme = createTheme(paletteTheme, {
         },
       },
     },
+    MuiLoadingButton: {
+      defaultProps: {
+        variant: 'contained',
+        size: 'small',
+      },
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          borderRadius: '20px 20px 20px 20px',
+          paddingLeft: 15,
+          paddingRight: 15,
+        },
+        contained: {
+          boxShadow: 'none',
+          '&:active': {
+            boxShadow: 'none',
+          },
+        },
+        outlined: {
+          border: '2px solid',
+          fontWeight: 'bold',
+          '&:hover': {
+            border: '2px solid',
+            background: alpha(paletteTheme.palette.primary.main, 0.15),
+          },
+          '&:disabled': {
+            border: '2px solid',
+          },
+        },
+      },
+    },
     MuiButton: {
       defaultProps: {
         variant: 'contained',

@@ -9,10 +9,10 @@ import {
   UserAttributes,
 } from '../model';
 
+import { CommentVotesMaskBuilder } from './CommentMaskBuilder';
+import { ConCommentsMaskBuilder, ConProsMaskBuilder, ConConsMaskBuilder, ConVotesMaskBuilder } from './ConMaskBuilder';
 import { ProCommentsMaskBuilder, ProConsMaskBuilder, ProProsMaskBuilder, ProVotesMaskBuilder } from './ProMaskBuilder';
 import {} from './VoteDefinitionMaskBuilder';
-import { ConCommentsMaskBuilder, ConProsMaskBuilder, ConConsMaskBuilder, ConVotesMaskBuilder } from './ConMaskBuilder';
-import { CommentVotesMaskBuilder } from './CommentMaskBuilder';
 
 export class DebateDebateVoteMaskBuilder extends RelationMaskBuilder {
   constructor(protected props: Array<VoteDefinitionAttributes>) {

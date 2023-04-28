@@ -2,8 +2,8 @@ import { MaskBuilder, RelationMaskBuilder } from './MaskBuilder';
 import { CommentAttributes, ProAttributes, ConAttributes, SimpleVoteAttributes, UserAttributes } from '../model';
 
 import { CommentVotesMaskBuilder } from './CommentMaskBuilder';
-import {} from './SimpleVoteMaskBuilder';
 import { ProCommentsMaskBuilder, ProConsMaskBuilder, ProProsMaskBuilder, ProVotesMaskBuilder } from './ProMaskBuilder';
+import {} from './SimpleVoteMaskBuilder';
 
 export class ConCommentsMaskBuilder extends RelationMaskBuilder {
   constructor(protected props: Array<CommentAttributes | CommentVotesMaskBuilder>) {

@@ -8,6 +8,7 @@
 
 import { useEffect, useState } from 'react';
 import { IconButton, ThemeProvider } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { SnackbarProvider, closeSnackbar } from 'notistack';
 import { L10NProvider } from './l10n/l10n-context';
 import { theme } from './theme';

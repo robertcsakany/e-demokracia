@@ -24,6 +24,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import {
   DataGrid,
   GridColDef,
@@ -410,34 +411,46 @@ export default function AdminAdminIssuesView() {
         )}
         {editMode && isFormUpdateable() && (
           <Grid className="page-action" item>
-            <Button id="page-action-edit-save" onClick={() => saveData()} disabled={isLoading}>
-              <MdiIcon path="content-save" />
-              {t('judo.pages.save', { defaultValue: 'Save' })}
-            </Button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              id="page-action-edit-save"
+              startIcon={<MdiIcon path="content-save" />}
+              onClick={() => saveData()}
+            >
+              <span>{t('judo.pages.save', { defaultValue: 'Save' })}</span>
+            </LoadingButton>
           </Grid>
         )}
         {!editMode && (
           <Grid className="page-action" item>
-            <Button id="page-action-refresh" onClick={() => fetchData()} disabled={isLoading}>
-              <MdiIcon path="refresh" />
-              {t('judo.pages.refresh', { defaultValue: 'Refresh' })}
-            </Button>
+            <LoadingButton
+              loading={isLoading}
+              loadingPosition="start"
+              id="page-action-refresh"
+              startIcon={<MdiIcon path="refresh" />}
+              onClick={() => fetchData()}
+            >
+              <span>{t('judo.pages.refresh', { defaultValue: 'Refresh' })}</span>
+            </LoadingButton>
           </Grid>
         )}
         {!editMode && isFormDeleteable() && (
           <Grid className="page-action" item>
-            <Button
+            <LoadingButton
               id="page-action-delete"
+              loading={isLoading}
+              loadingPosition="start"
+              startIcon={<MdiIcon path="delete" />}
               onClick={() =>
                 pageDeleteIssuesAction(data, () => {
                   back();
                 })
               }
-              disabled={isLoading || !data.__deleteable}
+              disabled={!data.__deleteable}
             >
-              <MdiIcon path="delete" />
-              {t('judo.pages.delete', { defaultValue: 'Delete' })}
-            </Button>
+              <span>{t('judo.pages.delete', { defaultValue: 'Delete' })}</span>
+            </LoadingButton>
           </Grid>
         )}
       </PageHeader>
@@ -752,16 +765,20 @@ export default function AdminAdminIssuesView() {
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={4.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewEdemokraciaAdminAdminEdemokraciaAdminIssueCreateDebateButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="wechat" />}
+                            loadingPosition="start"
                             onClick={() => AdminIssueCreateDebateAction(data, () => fetchData())}
-                            disabled={isLoading || editMode}
+                            disabled={editMode}
                           >
-                            <MdiIcon path="wechat" />
-                            {t('edemokracia.admin.Admin.issues.Issue.View.issue.issue.createDebate', {
-                              defaultValue: 'Create debate',
-                            })}
-                          </Button>
+                            <span>
+                              {t('edemokracia.admin.Admin.issues.Issue.View.issue.issue.createDebate', {
+                                defaultValue: 'Create debate',
+                              })}
+                            </span>
+                          </LoadingButton>
                         </Grid>
 
                         <Grid item xs={12} sm={12}>
@@ -1060,7 +1077,7 @@ export default function AdminAdminIssuesView() {
                                       id="CreateActionedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewEdemokraciaAdminAdminEdemokraciaAdminIssueAttachmentsTableCreate"
                                       variant="text"
                                       onClick={() => tableCreateAttachmentsAction(data, () => fetchData())}
-                                      disabled={false || !isFormUpdateable()}
+                                      disabled={false || editMode || !isFormUpdateable()}
                                     >
                                       <MdiIcon path="file_document_plus" />
                                       {t('judo.pages.table.create', { defaultValue: 'Create' })}
@@ -1284,17 +1301,21 @@ export default function AdminAdminIssuesView() {
                         spacing={2}
                       >
                         <Grid item xs={12} sm={12} md={4.0}>
-                          <Button
+                          <LoadingButton
                             id="CallOperationActionedemokraciaAdminAdminEdemokraciaAdminAdminIssuesViewEdemokraciaAdminAdminEdemokraciaAdminIssueCreateCommentButtonCallOperation"
+                            loading={isLoading}
+                            startIcon={<MdiIcon path="comment-text-multiple" />}
+                            loadingPosition="start"
                             onClick={() => AdminIssueCreateCommentAction(data, () => fetchData())}
-                            disabled={isLoading || editMode}
+                            disabled={editMode}
                           >
-                            <MdiIcon path="comment-text-multiple" />
-                            {t(
-                              'edemokracia.admin.Admin.issues.Issue.View.other.comments.comments.actions.createComment',
-                              { defaultValue: 'Add comment' },
-                            )}
-                          </Button>
+                            <span>
+                              {t(
+                                'edemokracia.admin.Admin.issues.Issue.View.other.comments.comments.actions.createComment',
+                                { defaultValue: 'Add comment' },
+                              )}
+                            </span>
+                          </LoadingButton>
                         </Grid>
 
                         <Grid item xs={12} sm={12}>

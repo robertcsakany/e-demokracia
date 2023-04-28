@@ -12,16 +12,7 @@ import {
   AdminCityAttributes,
 } from '../model';
 
-import { AdminCountyCitiesMaskBuilder } from './AdminCountyMaskBuilder';
-import {} from './AdminIssueTypeMaskBuilder';
-import {
-  AdminIssueCategorySubcategoriesMaskBuilder,
-  AdminIssueCategoryOwnerMaskBuilder,
-} from './AdminIssueCategoryMaskBuilder';
-import {} from './AdminIssueDebateMaskBuilder';
 import {} from './AdminDistrictMaskBuilder';
-import { AdminCityDistrictsMaskBuilder } from './AdminCityMaskBuilder';
-import { AdminCommentCreatedByMaskBuilder } from './AdminCommentMaskBuilder';
 import {
   AdminUserActivityCountiesMaskBuilder,
   AdminUserResidentCountyMaskBuilder,
@@ -30,6 +21,15 @@ import {
   AdminUserActivityDistrictsMaskBuilder,
   AdminUserResidentDistrictMaskBuilder,
 } from './AdminUserMaskBuilder';
+import { AdminCommentCreatedByMaskBuilder } from './AdminCommentMaskBuilder';
+import {
+  AdminIssueCategorySubcategoriesMaskBuilder,
+  AdminIssueCategoryOwnerMaskBuilder,
+} from './AdminIssueCategoryMaskBuilder';
+import {} from './AdminIssueDebateMaskBuilder';
+import { AdminCountyCitiesMaskBuilder } from './AdminCountyMaskBuilder';
+import {} from './AdminIssueTypeMaskBuilder';
+import { AdminCityDistrictsMaskBuilder } from './AdminCityMaskBuilder';
 import {} from './AdminIssueAttachmentMaskBuilder';
 
 export class AdminIssueAttachmentsMaskBuilder extends RelationMaskBuilder {

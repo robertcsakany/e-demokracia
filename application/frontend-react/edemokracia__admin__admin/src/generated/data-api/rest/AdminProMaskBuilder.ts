@@ -7,6 +7,13 @@ import {
   AdminSimpleVoteAttributes,
 } from '../model';
 
+import { AdminCommentCreatedByMaskBuilder } from './AdminCommentMaskBuilder';
+import {
+  AdminConCreatedByMaskBuilder,
+  AdminConConsMaskBuilder,
+  AdminConProsMaskBuilder,
+  AdminConCommentsMaskBuilder,
+} from './AdminConMaskBuilder';
 import {
   AdminUserActivityCountiesMaskBuilder,
   AdminUserResidentCountyMaskBuilder,
@@ -15,13 +22,6 @@ import {
   AdminUserActivityDistrictsMaskBuilder,
   AdminUserResidentDistrictMaskBuilder,
 } from './AdminUserMaskBuilder';
-import {
-  AdminConCreatedByMaskBuilder,
-  AdminConConsMaskBuilder,
-  AdminConProsMaskBuilder,
-  AdminConCommentsMaskBuilder,
-} from './AdminConMaskBuilder';
-import { AdminCommentCreatedByMaskBuilder } from './AdminCommentMaskBuilder';
 
 export class AdminProCreatedByMaskBuilder extends RelationMaskBuilder {
   constructor(
