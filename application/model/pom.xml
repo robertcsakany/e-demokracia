@@ -87,10 +87,7 @@
                                 <configuration>
                                     <esm>mvn:${model-groupId}:${model-artifactId}:${model-version}!model/${model-name}-esm.model</esm>
                                     <psm>mvn:${model-groupId}:${model-artifactId}:${model-version}!model/${model-name}-psm.model</psm>
-                                    <asm>mvn:${model-groupId}:${model-artifactId}:${model-version}!model/${model-name}-asm.model</asm>
-                                    <psm2AsmTrace>mvn:${model-groupId}:${model-artifactId}:${model-version}!model/${model-name}-psm2asm.model</psm2AsmTrace>
                                     <modelVersion>${model-version}</modelVersion>
-                                    <modelName>${model-name}</modelName>
                                     <destination>${project.basedir}/models</destination>
                                     <dialectList>${dialectList}</dialectList>
                                     <validateModels>${validateModels}</validateModels>

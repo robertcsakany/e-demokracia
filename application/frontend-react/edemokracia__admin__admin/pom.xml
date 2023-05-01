@@ -34,6 +34,14 @@
         <ui-model>${project.parent.basedir}/model/${model-name}-ui.model</ui-model>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>party.mkkp.edemokracia</groupId>
+            <artifactId>edemokracia-application-frontend-react-model</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -228,7 +236,52 @@
                             <workingDirectory>${basedir}</workingDirectory>
                         </configuration>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
 
+        <profile>
+            <id>build-frontend-quick</id>
+            <activation>
+                <property>
+                    <name>quick</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>${frontend-maven-plugin-version}</version>
+                        <executions>
+                            <execution>
+                                <id>build</id>
+                                <goals>
+                                    <goal>pnpm</goal>
+                                </goals>
+                                <phase>compile</phase>
+                                <configuration>
+                                    <arguments>run build</arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <installDirectory>${node-install-dir}</installDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>generate-build-checksum</id>
+            <activation>
+                <property>
+                    <name>!skipChecksumGeneraton</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
                     <plugin>
                         <groupId>hu.blackbelt.judo.meta</groupId>
                         <artifactId>judo-ui-generator-maven-plugin</artifactId>
@@ -263,39 +316,6 @@
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>build-frontend-quick</id>
-            <activation>
-                <property>
-                    <name>quick</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.github.eirslett</groupId>
-                        <artifactId>frontend-maven-plugin</artifactId>
-                        <version>${frontend-maven-plugin-version}</version>
-                        <executions>
-                            <execution>
-                                <id>build</id>
-                                <goals>
-                                    <goal>pnpm</goal>
-                                </goals>
-                                <phase>compile</phase>
-                                <configuration>
-                                    <arguments>run build</arguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <installDirectory>${node-install-dir}</installDirectory>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>

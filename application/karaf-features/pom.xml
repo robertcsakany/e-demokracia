@@ -58,7 +58,9 @@
         <profile>
             <id>verify-feature</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>!skipKarafFeature</name>
+                </property>
             </activation>
             <build>
                 <plugins>
@@ -124,6 +126,56 @@
             <classifier>features-sdk</classifier>
             <scope>runtime</scope>
             <version>${judo-platform-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>party.mkkp.edemokracia</groupId>
+            <artifactId>edemokracia-application-model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>party.mkkp.edemokracia</groupId>
+            <artifactId>edemokracia-application-model</artifactId>
+            <version>${project.version}</version>
+            <classifier>sdk</classifier>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>party.mkkp.edemokracia</groupId>
+            <artifactId>edemokracia-application-model</artifactId>
+            <version>${project.version}</version>
+            <classifier>sdk-internal</classifier>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>party.mkkp.edemokracia</groupId>
+            <artifactId>edemokracia-application-model</artifactId>
+            <version>${project.version}</version>
+            <classifier>script2operation</classifier>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>party.mkkp.edemokracia</groupId>
+            <artifactId>edemokracia-application-model</artifactId>
+            <version>${project.version}</version>
+            <classifier>jaxrsapi</classifier>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>party.mkkp.edemokracia</groupId>
+            <artifactId>edemokracia-application-app</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>party.mkkp.edemokracia</groupId>
+            <artifactId>edemokracia-application-frontend-react-edemokracia__admin__admin</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

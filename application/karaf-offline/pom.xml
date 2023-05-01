@@ -41,6 +41,8 @@
                 <artifactId>karaf-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
+                    <archiveTarGz>true</archiveTarGz>
+                    <archiveZip>false</archiveZip>
                     <startupFeatures>
                         <feature>eventadmin</feature>
                     </startupFeatures>

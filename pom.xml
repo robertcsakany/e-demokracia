@@ -14,9 +14,10 @@
 		<judo-version>1.0.0.20230428_050207_3e5a586e_develop</judo-version>
 
 		<sqlDialects>postgresql,hsqldb</sqlDialects>
+		<validateModels>true</validateModels>
 
         <judo-meta-esm-version-defined>1.2.0.20230427_172855_ca9f69cb_develop</judo-meta-esm-version-defined>
-        <judo-tatami-version-defined>1.1.0.20230428_042049_a17d000a_develop</judo-tatami-version-defined>
+        <judo-tatami-version-defined>1.1.0-SNAPSHOT</judo-tatami-version-defined>
         <flutter-maven-plugin-version-defined>1.0.2.20230313_135924_a9319e3a_develop</flutter-maven-plugin-version-defined>
         <structured-map-proxy-version-defined>2.0.0.20230330_221859_8a965acd_develop</structured-map-proxy-version-defined>
         <judo-dao-api-version-defined>1.0.4.20230309_120321_78415dc0_develop</judo-dao-api-version-defined>
@@ -26,13 +27,14 @@
         <judo-platform-version-defined>2.0.1.20230428_043841_0e7d6fbd_develop</judo-platform-version-defined>
         <judo-services-version-defined>1.1.0.20230428_043115_5c1cf3b1_develop</judo-services-version-defined>
         <judo-rdbms-schema-version-defined>1.0.0.20230428_041532_c89ff02b_develop</judo-rdbms-schema-version-defined>
-        <judo-tatami-client-version-defined>1.1.0.20230428_043110_286d8289_develop</judo-tatami-client-version-defined>
+        <judo-tatami-client-version-defined>1.1.0-SNAPSHOT</judo-tatami-client-version-defined>
         <judo-esm-fullstack-project-template-version-defined>1.0.0.20230428_043114_d31dc308_develop</judo-esm-fullstack-project-template-version-defined>
 		<judo-meta-ui-version-defined>1.1.0.20230427_062801_2a69dc9a_develop</judo-meta-ui-version-defined>
 		<judo-ui-flutter-template-version-defined>1.0.0.20230428_040752_25463eac_develop</judo-ui-flutter-template-version-defined>
 		<judo-ui-typescript-rest-template-version-defined>1.0.0.20230428_040735_a2b6e5ab_develop</judo-ui-typescript-rest-template-version-defined>
 		<judo-ui-react-template-version-defined>1.0.0.20230428_040737_42c2be8a_develop</judo-ui-react-template-version-defined>
         <frontendType>react</frontendType>
+
 
 	</properties>
 
@@ -93,15 +95,15 @@
                                     <destination>${basedir}/target/classes/model</destination>
                                     <esm>${basedir}/model/${project.artifactId}.model</esm>
                                     <modelVersion>${project.version}</modelVersion>
-                                    <ignorePsm2Measure>false</ignorePsm2Measure>
-                                    <ignorePsm2Asm>false</ignorePsm2Asm>
+                                    <ignorePsm2Measure>true</ignorePsm2Measure>
+                                    <ignorePsm2Asm>true</ignorePsm2Asm>
                                     <ignoreAsm2Openapi>true</ignoreAsm2Openapi>
                                     <ignoreAsm2Keycloak>true</ignoreAsm2Keycloak>
                                     <ignoreAsm2sdk>true</ignoreAsm2sdk>
                                     <ignoreAsm2jaxrsapi>true</ignoreAsm2jaxrsapi>
                                     <ignoreAsm2Script>true</ignoreAsm2Script>
                                     <dialectList>${sqlDialects}</dialectList>
-                                    <validateModels>true</validateModels>
+                                    <validateModels>${validateModels}</validateModels>
                                 </configuration>
                             </execution>
                         </executions>

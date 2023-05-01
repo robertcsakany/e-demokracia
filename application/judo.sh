@@ -22,6 +22,7 @@ USAGE: judo.sh COMMANDS... [OPTIONS...]
     schema-upgrade                          It can be used with persitent db (postgresql) only. It uses the current running database to
                                             generate the difference and after it applied.
     build                                   Build project.
+        -r --reckless-mode                  Reckless (quick) mode.
         -a --build-app-module               Build app module only.
         -M --skip-model                     Skip model building.
         -B --skip-backend                   Skip backend building.
@@ -512,8 +513,12 @@ load_application_image () {
 
 build () {
     echo "Building version ${FULL_VERSION_NUMBER}"
+    local goal='install'
     [ $skipModel -eq 1 ] || ${APP_DIR}/mvnw install -f $MODEL_DIR|| exit
-
+    if [ $reckless -eq 1 ]; then
+        # goal='package'
+        args="-Dprofile -Dmaven.test.skip=true -Dquick -DdialectList=hsqldb -DvalidateModels=false -DskipKarafFeature=true -T 1C"
+    fi
     if [ $skipBackend -eq 1 -a $skipFrontend -eq 0 ]; then
         [ $skipReact -eq 1 ] || ${APP_DIR}/mvnw install -f ${APP_DIR}/frontend-react || exit
         [ $skipFlutter -eq 1 ] || ${APP_DIR}/mvnw install -f ${APP_DIR}/frontend-flutter || exit
@@ -542,7 +547,7 @@ build () {
         if [ $schemaBuilding -eq 0 ]; then
             args="$args -DskipSchema"
         fi
-        ${APP_DIR}/mvnw install -f $APP_DIR $args || exit
+        ${APP_DIR}/mvnw $goal -f $APP_DIR $args || exit
     fi
 }
 
@@ -558,6 +563,7 @@ export JAVA_HOME=$(get_java_home)
 
 [ $# -eq 0 ] && print-help && exit 0
 
+reckless=0
 run=0
 dump=0
 build=0
@@ -631,6 +637,7 @@ while [ $# -ne 0 ]; do
         -dn | --dump-name)              shift 1; export dumpName=$1; shift 1;;
         schema-upgrade)                 schemaUpgrade=1; shift 1;;
         build)                          build=1; shift 1;;
+        -r | --reckless)                reckless=1; schemaBuilding=0; shift 1;;
         -a | --build-app-module)        buildAppModule=1; skipModel=1; shift 1;;
         -M | --skip-model)              skipModel=1; shift 1;;
         -B | --skip-backend)            skipBackend=1; shift 1;;
