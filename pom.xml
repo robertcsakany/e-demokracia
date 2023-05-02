@@ -16,8 +16,8 @@
 		<sqlDialects>postgresql,hsqldb</sqlDialects>
 		<validateModels>true</validateModels>
 
-        <judo-meta-esm-version-defined>1.2.0.20230427_172855_ca9f69cb_develop</judo-meta-esm-version-defined>
-        <judo-tatami-version-defined>1.1.0-SNAPSHOT</judo-tatami-version-defined>
+        <judo-meta-esm-version-defined>1.2.0.20230502_091935_9a4de3a1_feature_JNG_4805_PerformanceImorivement</judo-meta-esm-version-defined>
+        <judo-tatami-version-defined>1.1.0.20230502_094254_86e0ffc6_feature_JNG_4805_PerformanceImorivement</judo-tatami-version-defined>
         <flutter-maven-plugin-version-defined>1.0.2.20230313_135924_a9319e3a_develop</flutter-maven-plugin-version-defined>
         <structured-map-proxy-version-defined>2.0.0.20230330_221859_8a965acd_develop</structured-map-proxy-version-defined>
         <judo-dao-api-version-defined>1.0.4.20230309_120321_78415dc0_develop</judo-dao-api-version-defined>
@@ -27,12 +27,12 @@
         <judo-platform-version-defined>2.0.1.20230428_043841_0e7d6fbd_develop</judo-platform-version-defined>
         <judo-services-version-defined>1.1.0.20230428_043115_5c1cf3b1_develop</judo-services-version-defined>
         <judo-rdbms-schema-version-defined>1.0.0.20230428_041532_c89ff02b_develop</judo-rdbms-schema-version-defined>
-        <judo-tatami-client-version-defined>1.1.0-SNAPSHOT</judo-tatami-client-version-defined>
-        <judo-esm-fullstack-project-template-version-defined>1.0.0.20230428_043114_d31dc308_develop</judo-esm-fullstack-project-template-version-defined>
-		<judo-meta-ui-version-defined>1.1.0.20230427_062801_2a69dc9a_develop</judo-meta-ui-version-defined>
+        <judo-tatami-client-version-defined>1.1.0.20230502_095232_6212928b_feature_JNG_4805_PerformanceImorivement</judo-tatami-client-version-defined>
+        <judo-esm-fullstack-project-template-version-defined>1.0.0.20230502_151536_03d22926_feature_JNG_4805_PerformanceImorivement</judo-esm-fullstack-project-template-version-defined>
+		<judo-meta-ui-version-defined>1.1.0.20230502_075807_97e538c7_feature_JNG_4805_PerformanceImorivement</judo-meta-ui-version-defined>
 		<judo-ui-flutter-template-version-defined>1.0.0.20230428_040752_25463eac_develop</judo-ui-flutter-template-version-defined>
 		<judo-ui-typescript-rest-template-version-defined>1.0.0.20230428_040735_a2b6e5ab_develop</judo-ui-typescript-rest-template-version-defined>
-		<judo-ui-react-template-version-defined>1.0.0.20230428_040737_42c2be8a_develop</judo-ui-react-template-version-defined>
+		<judo-ui-react-template-version-defined>1.0.0.20230502_093452_b3ada0d9_feature_JNG_4805_PerformanceImorivement</judo-ui-react-template-version-defined>
         <frontendType>react</frontendType>
 
 
